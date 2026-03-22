@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>LLM Tutorial - Course Overview</title>
+    <script src="js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/animations.css"/>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
+        <div class="text-xl font-bold text-on-surface tracking-tighter font-headline">LLM Tutorial</div>
+        <div class="flex items-center gap-6">
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="pages/about.html">About</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area (Centered, No Sidebar) -->
+    <main class="pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+        <!-- Hero Section -->
+        <header class="mb-16 fade-in">
+            <h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface tracking-tight mb-4">
+                Course Overview
+            </h1>
+            <p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                A hands-on journey through Large Language Models. From tokenization to boardroom strategy.
+            </p>
+        </header>
+
+        <!-- Chapter Groups -->
+        <div class="space-y-20">
+            <!-- Group 1: BASICS -->
+            <section>
+                <div class="flex items-baseline gap-4 mb-8">
+                    <h2 class="text-3xl font-headline font-bold text-primary uppercase">Basics</h2>
+                    <span class="h-px flex-1 bg-outline-variant opacity-15"></span>
+                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">Chapters 01—05</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Chapter 1 -->
+                    <a href="pages/chapter-01-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🧠</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 01</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Intuition</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">How LLMs "think" - understanding autocomplete × 999.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </a>
+                    <!-- Chapter 2 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">🔡</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 02</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Tokenization & Embedding</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">How words turn into numbers.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 3 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">🏗️</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 03</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">The Transformer Arch</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Attention is all you need.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 4 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">🎯</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 04</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Inference Basics</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Decoding strategies and temperature settings.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 5 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">💬</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 05</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Hello World Prompt</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Your first interaction with an LLM.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 2: ADVANCED -->
+            <section>
+                <div class="flex items-baseline gap-4 mb-8">
+                    <h2 class="text-3xl font-headline font-bold text-primary uppercase">Advanced</h2>
+                    <span class="h-px flex-1 bg-outline-variant opacity-15"></span>
+                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">Chapters 06—09</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Chapter 6 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">✍️</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 06</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Prompt Engineering</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Few-shot, Chain-of-Thought, and ReAct patterns.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 7 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">🛠️</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 07</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Fine-Tuning & LoRA</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Adapting models to your data.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 8 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">📚</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 08</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">RAG Systems</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Retrieval Augmented Generation.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 9 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">⛓️</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 09</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Agents & Chaining</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Autonomous loops and multi-step reasoning.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 3: BUSINESS -->
+            <section>
+                <div class="flex items-baseline gap-4 mb-8">
+                    <h2 class="text-3xl font-headline font-bold text-primary uppercase">Business</h2>
+                    <span class="h-px flex-1 bg-outline-variant opacity-15"></span>
+                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">Chapters 10—13</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Chapter 10 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">📊</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 10</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">AI ROI & Evaluation</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Measuring success and justifying AI spend.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 11 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">🛡️</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 11</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Ethics & Safety</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Bias, hallucinations, and guardrails.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 12 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">☁️</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 12</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Ops & Deployment</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Scaling from laptop to cloud clusters.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                    <!-- Chapter 13 -->
+                    <div class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden opacity-60">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20">🚀</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 13</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Future Horizons</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Multimodal, World Models, and AGI.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            Coming Soon
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Featured Callout -->
+        <div class="mt-20 p-10 bg-secondary-container rounded-xl flex flex-col md:flex-row gap-8 items-center">
+            <div class="text-6xl">💡</div>
+            <div>
+                <h4 class="text-2xl font-headline font-bold mb-2">Ready to Learn?</h4>
+                <p class="text-on-secondary-container leading-relaxed">
+                    Start with Chapter 1 to build intuition about how LLMs work. No technical background required—just bring your curiosity!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 LLM Tutorial. Built with 🧠.</p>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

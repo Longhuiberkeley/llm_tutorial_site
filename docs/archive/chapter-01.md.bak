@@ -1,0 +1,164 @@
+# Chapter 1: Intuition - How LLMs "Think"
+
+**Chapter Goal:** Build intuitive mental models of how LLMs work by revealing that LLMs are just "autocomplete × 999" - not magic, not intelligence, just prediction.
+
+---
+
+## 1.1 Keyboard Autocomplete vs LLM Completion
+
+**Goals:**
+- Show that LLMs are fundamentally the same as phone autocomplete - just much, much bigger
+- Understand that LLMs predict the next word, they don't "think"
+
+**Visuals / Interactives:**
+- Animated comparison (predefined, not interactive typing)
+- Left side: Phone keyboard with "Roses are..." → suggests "red" (single word)
+- Right side: LLM with "Roses are..." → completes "Roses are red, violets are blue, sugar is sweet, and so are you!"
+- Message: **LLM = autocomplete × 999**
+
+**Text Display:**
+- Bullet points comparing phone autocomplete vs LLM
+- Emphasize the scale difference: phone predicts 1 word, LLM predicts entire sentences
+- Simple analogy: "The same technology, just 999 times bigger"
+
+**Callout Boxes:**
+- **TL;DR**: LLMs are just super-powered autocomplete. They predict what word comes next, nothing more.
+- **Common Error**: LLMs don't "understand" what they're saying - they're just really good at guessing the next word based on patterns.
+
+---
+
+## 1.2 Word Distance - Which Words Are "Close"?
+
+**Goals:**
+- Introduce the concept of "distance" between words
+- Understand that similar words are "close" in meaning-space
+- See how LLMs use this distance to understand relationships
+
+**Visuals / Interactives:**
+- Interactive 2D scatter plot showing emoji words
+- [🦁 lion] is close to [🐯 tiger] but far from [🍌 banana]
+- Hover over any word to see lines connecting to its "neighbors"
+- Thicker lines = closer distance
+- Subtle hint: This "distance" concept is how LLMs know what words are related
+
+**Text Display:**
+- Bullet points explaining the concept of "meaning-space"
+- Examples of word pairs that are "close" vs "far"
+- Brief explanation of how distance is calculated (without math)
+
+**Callout Boxes:**
+- **TL;DR**: Words have "distance" between them based on meaning. Similar words like "lion" and "tiger" are close. Unrelated words like "lion" and "banana" are far.
+- **Did You Know?**: How do you think an LLM would know that "doctor" and "nurse" are related? What patterns might it have seen in training data?
+
+**Quiz:**
+- Question: "Which pair of words is likely closest in meaning-space?"
+  - A) [car] and [banana]
+  - B) [lion] and [tiger]
+  - C) [book] and [running]
+  - D) [happy] and [computer]
+- Correct: B
+- Explanation: Both are big cats, so they appear in similar contexts and are "close" in meaning-space.
+
+---
+
+## 1.3 Context Matters - Distance Can Change
+
+**Goals:**
+- Understand that meaning (and distance) changes based on context
+- See how the same word can be "close" to different words in different situations
+- Learn why LLMs need "attention" to figure out which context applies
+
+**Visuals / Interactives:**
+- Two scenes side-by-side
+- Scene 1: 🌊 river, 🚣 canoe, 🏦 bank → "bank" is closer to "river"
+- Scene 2: 💰 money, 💳 credit, 🏦 bank → "bank" is closer to "money"
+- Click button to toggle scenes, watch the distance lines shift
+
+**Text Display:**
+- Bullet points showing how context changes meaning
+- Examples of words with multiple meanings
+- Explanation of how surrounding words shift the "distance"
+
+**Callout Boxes:**
+- **TL;DR**: The same word can mean different things depending on context. "Bank" is close to "river" in one sentence, but close to "money" in another.
+- **Did You Know?**: What other words have multiple meanings? How does your brain know which meaning is intended? (Hint: You look at context - LLMs do the same thing!)
+
+**Quiz:**
+- Question: "In the sentence 'I went to the bank to deposit money', which words is 'bank' closest to?"
+  - A) [river, water, fish]
+  - B) [money, deposit, cash]
+  - C) [building, park, street]
+  - D) [book, read, page]
+- Correct: B
+- Explanation: The context of "deposit money" tells us this "bank" is a financial institution, not a river bank.
+
+---
+
+## 1.4 Sentence Distance - What Does "Similar" Mean?
+
+**Goals:**
+- Extend the distance concept from words to sentences
+- Understand that whole sentences can be "close" or "far" in meaning
+- See how LLMs know what you mean even when you use different words
+
+**Visuals / Interactives:**
+- Five sentence cards: ["I'm hungry", "Let's eat", "I want food", "The sky is blue", "I'm full"]
+- Click cards to highlight connections
+- Show that "I'm hungry" and "Let's eat" have strong connection (thick line)
+- Show that "I'm hungry" and "The sky is blue" have no connection
+
+**Text Display:**
+- Bullet points explaining sentence distance
+- Examples of sentences that mean similar things with different words
+- Brief explanation of how this enables understanding
+
+**Callout Boxes:**
+- **TL;DR**: Just like words, sentences can be "close" or "far" in meaning. "I'm hungry" and "Let's eat" are close - they mean the same thing even though they use different words.
+- **Common Error**: LLMs don't match sentences word-for-word. They look at the overall meaning. That's why they can understand "I'm hungry" and "I want food" as the same thing.
+
+---
+
+## 1.5 Distance = How LLMs Generate
+
+**Goals:**
+- Tie it all together: distance is how LLMs decide what word comes next
+- See how LLMs find words that are "close" to the context
+- Understand the complete picture: autocomplete → distance → generation
+
+**Visuals / Interactives:**
+- Interactive demo with word buttons
+- Start with "The delicious ___"
+- Show candidate words [cat, 🍕 pizza, 🏃 ran, 📚 book] at different distances
+- Pizza is "close" to delicious → big line
+- Cat is "far" → tiny line
+- Click "Generate" and watch LLM pick the closest match
+
+**Text Display:**
+- Bullet points summarizing how generation works
+- Step-by-step: Context → Distance Calculation → Closest Word → Output
+- Connect back to 1.1: This is how autocomplete × 999 works
+
+**Callout Boxes:**
+- **TL;DR**: LLMs generate text by finding words that are "close" to the context. "The delicious ___" → pizza is close, cat is far → LLM picks pizza.
+- **Common Error**: LLMs don't "choose" words based on understanding. They calculate distances and pick statistically. No thinking, just math.
+
+**Quiz:**
+- Question: "How does an LLM decide what word comes next?"
+  - A) It thinks about what would make sense
+  - B) It finds words that are "close" in meaning-space
+  - C) It randomly picks from a dictionary
+  - D) It searches the internet for answers
+- Correct: B
+- Explanation: LLMs use the concept of distance in meaning-space. Words that are "close" to the context are more likely to be chosen as the next word.
+
+---
+
+## Chapter Summary
+
+**Key Takeaways:**
+- LLMs are just autocomplete × 999 - they predict the next word, nothing magical
+- Words and sentences have "distance" between them based on meaning
+- Context changes what words are "close" to each other
+- LLMs generate text by finding words that are "close" to the context
+
+**Next Chapter:** Under the Hood - Tokenization & Attention (How text becomes tokens, and how "attention" connects words)

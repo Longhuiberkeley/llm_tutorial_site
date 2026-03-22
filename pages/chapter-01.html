@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Chapter 1: Intuition - LLM Tutorial</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="../js/tailwind-config.js"></script>
+    <script src="../js/theme-init.js"></script>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../css/animations.css"/>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
+        <div class="text-xl font-bold text-on-surface tracking-tighter font-headline">LLM Tutorial</div>
+        <div class="flex items-center gap-6">
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="about.html">About</a>
+            <button id="theme-toggle" class="scale-95 active:scale-90 transition-transform text-accent" aria-label="Toggle dark mode">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="flex pt-16 min-h-screen">
+        <!-- SideNavBar -->
+        <aside class="sidebar hidden lg:flex w-64 fixed left-0 top-0 pt-20 bg-surface-container-low flex flex-col gap-2 p-4 z-40">
+            <div class="mb-6 px-2">
+                <h2 class="text-lg font-bold text-on-surface font-headline">Curriculum</h2>
+                <p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">LLM Mastery Series</p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <!-- Chapter 1 Group -->
+                <div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-2 uppercase tracking-widest">Chapter 1: Intuition</div>
+                <a href="chapter-01.html" class="page-item flex items-center gap-3 px-3 py-2 bg-surface-container text-on-surface font-bold rounded-lg translate-x-1 transition-transform group">
+                    <span class="material-symbols-outlined text-accent">school</span>
+                    <span class="text-sm font-medium">1.1 Keyboard vs LLM</span>
+                </a>
+                <a href="#1.2" class="flex items-center gap-3 px-3 py-2 text-on-surface opacity-60 hover:bg-surface-container rounded-lg transition-colors group">
+                    <span class="material-symbols-outlined group-hover:text-accent">arrow_right</span>
+                    <span class="text-sm font-medium">1.2 Word Distance</span>
+                </a>
+                <a href="#1.3" class="flex items-center gap-3 px-3 py-2 text-on-surface opacity-60 hover:bg-surface-container rounded-lg transition-colors group">
+                    <span class="material-symbols-outlined group-hover:text-accent">arrow_right</span>
+                    <span class="text-sm font-medium">1.3 Context Matters</span>
+                </a>
+                <a href="#1.4" class="flex items-center gap-3 px-3 py-2 text-on-surface opacity-60 hover:bg-surface-container rounded-lg transition-colors group">
+                    <span class="material-symbols-outlined group-hover:text-accent">arrow_right</span>
+                    <span class="text-sm font-medium">1.4 Sentence Distance</span>
+                </a>
+                <a href="#1.5" class="flex items-center gap-3 px-3 py-2 text-on-surface opacity-60 hover:bg-surface-container rounded-lg transition-colors group">
+                    <span class="material-symbols-outlined group-hover:text-accent">arrow_right</span>
+                    <span class="text-sm font-medium">1.5 Distance = Generation</span>
+                </a>
+
+                <!-- Chapter 2 Group (Coming Soon) -->
+                <div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest">Chapter 2: Under the Hood</div>
+                <a class="flex items-center gap-3 px-3 py-2 text-on-surface opacity-40 cursor-not-allowed">
+                    <span class="material-symbols-outlined">lock</span>
+                    <span class="text-sm font-medium">Tokenization</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Canvas -->
+        <main class="lg:ml-64 w-full px-6 md:px-12 py-16 max-w-5xl">
+            <header class="mb-12 fade-in">
+                <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
+                    <a href="../index.html" class="hover:underline">Overview</a>
+                    <span class="material-symbols-outlined text-xs">chevron_right</span>
+                    <span>Chapter 1</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
+                    Chapter 1: Intuition — How LLMs "Think"
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
+                    Building intuitive mental models of how LLMs work by revealing that LLMs are just "autocomplete × 999" — not magic, not intelligence, just prediction.
+                </p>
+            </header>
+
+            <!-- Page 1.1: Keyboard vs LLM -->
+            <section id="1.1" class="mb-20 scroll-mt-24">
+                <div class="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-sm border border-outline-variant/10 mb-8">
+                    <h2 class="text-3xl font-headline font-bold mb-6 flex items-center gap-3 text-on-surface">
+                        <span class="text-4xl">📱</span>
+                        1.1 Keyboard vs LLM
+                    </h2>
+
+                    <!-- Comparison Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                        <!-- Phone Keyboard -->
+                        <div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden group border border-outline-variant/10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="text-3xl">📱</span>
+                                <h3 class="text-xl font-bold font-headline text-on-surface">Classic Keyboard</h3>
+                            </div>
+                            <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm min-h-[280px] flex flex-col justify-between border border-outline-variant/10">
+                                <div class="space-y-3">
+                                    <p class="text-lg font-medium border-r-2 border-primary w-fit pr-2 text-on-surface">Roses are...</p>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="bg-surface-container py-3 rounded text-center text-sm font-bold border border-outline-variant/20 text-on-surface">blue</div>
+                                    <div class="bg-primary text-on-primary py-3 rounded text-center text-sm font-bold shadow-md">red</div>
+                                    <div class="bg-surface-container py-3 rounded text-center text-sm font-bold border border-outline-variant/20 text-on-surface">lovely</div>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-sm text-on-surface-variant italic">Predicts the next word based on local frequency.</p>
+                        </div>
+
+                        <!-- LLM -->
+                        <div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden border border-outline-variant/10">
+                            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-3xl translate-x-10 -translate-y-10"></div>
+                            </div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="text-3xl">🤖</span>
+                                <h3 class="text-xl font-bold font-headline text-on-surface">Large Language Model</h3>
+                            </div>
+                            <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm min-h-[280px] border border-primary/20">
+                                <div class="space-y-2">
+                                    <p class="text-lg font-medium text-on-surface">Roses are...</p>
+                                    <div class="space-y-1 text-primary font-bold">
+                                        <p>red, violets are blue,</p>
+                                        <p>I've learned a lot about LLMs,</p>
+                                        <p>and so will you!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-sm text-on-surface-variant italic">Predicts entire distributions of knowledge across contexts.</p>
+                        </div>
+                    </div>
+
+                    <!-- Big Equation -->
+                    <div class="flex justify-center mb-10">
+                        <div class="bg-primary-fixed text-on-primary-fixed px-8 py-4 rounded-full inline-flex items-center gap-4 shadow-lg rotate-[-1deg]">
+                            <span class="text-2xl md:text-3xl font-extrabold font-headline">LLM = autocomplete × 999</span>
+                        </div>
+                    </div>
+
+                    <!-- Callouts -->
+                    <div class="space-y-6">
+                        <div class="bg-secondary-container rounded-xl p-6 flex gap-4 items-start">
+                            <span class="text-3xl leading-none">📝</span>
+                            <div>
+                                <h4 class="font-bold text-on-secondary-container mb-2 uppercase tracking-widest text-xs">TL;DR (Summary)</h4>
+                                <p class="text-on-secondary-container font-medium leading-relaxed">
+                                    While your phone predicts one word at a time based on narrow patterns, an LLM predicts entire sequences by understanding the statistical relationships between millions of concepts simultaneously.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-error-container rounded-xl p-6 flex gap-4 items-start">
+                            <span class="text-3xl leading-none">⚠️</span>
+                            <div>
+                                <h4 class="font-bold text-on-error-container mb-2 uppercase tracking-widest text-xs">Common Error</h4>
+                                <p class="text-on-error-container font-medium leading-relaxed">
+                                    Thinking LLMs "think" or "know" facts. They are actually performing high-dimensional statistical completion. They don't have a database of truths; they have a map of probabilities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 1.2: Word Distance -->
+            <section id="1.2" class="mb-20 scroll-mt-24">
+                <div class="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-sm border border-outline-variant/10">
+                    <h2 class="text-3xl font-headline font-bold mb-6 flex items-center gap-3 text-on-surface">
+                        <span class="text-4xl">🔍</span>
+                        1.2 Word Distance — Which Words Are "Close"?
+                    </h2>
+
+                    <p class="text-lg text-on-surface-variant leading-relaxed mb-8">
+                        Words have "distance" in meaning-space. This is the core intuition of how LLMs process information.
+                    </p>
+
+                    <!-- TL;DR Callout -->
+                    <div class="bg-secondary-container rounded-xl p-6 flex gap-4 items-start mb-8">
+                        <span class="text-3xl leading-none">📝</span>
+                        <div>
+                            <h4 class="font-bold text-on-secondary-container mb-2 uppercase tracking-widest text-xs">TL;DR</h4>
+                            <p class="text-on-secondary-container font-medium leading-relaxed">
+                                Words have "distance" between them based on meaning. Similar words like "lion" and "tiger" are close. Unrelated words like "lion" and "banana" are far.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold font-headline mb-4 text-on-surface">Meaning-Space</h3>
+                    <p class="text-on-surface-variant leading-relaxed mb-6">
+                        Think of it as a giant map where every word has a specific coordinate. Words with similar meanings are located near each other.
+                    </p>
+
+                    <!-- Interactive Placeholder -->
+                    <div class="bg-surface-container rounded-xl p-8 text-center mb-8 border-2 border-dashed border-outline-variant">
+                        <p class="text-on-surface-variant font-medium">🔍 Interactive Word Neighborhood Map</p>
+                        <p class="text-sm text-on-surface-variant opacity-60 mt-2">[Hover over words to see connections]</p>
+                    </div>
+
+                    <!-- Did You Know Callout -->
+                    <div class="bg-tertiary-container rounded-xl p-6 flex gap-4 items-start mb-8">
+                        <span class="text-3xl leading-none">💡</span>
+                        <div>
+                            <h4 class="font-bold text-on-tertiary-container mb-2 uppercase tracking-widest text-xs">Did You Know?</h4>
+                            <p class="text-on-tertiary-container font-medium leading-relaxed">
+                                How do you think an LLM would know that "doctor" and "nurse" are related? What patterns might it have seen in training data?
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quiz -->
+                    <div class="bg-surface-container-low border border-outline-variant/20 rounded-xl p-6 mt-8">
+                        <div class="font-bold mb-4 flex items-center gap-2 text-on-surface">
+                            <span>🧠</span>
+                            <span>QUIZ</span>
+                        </div>
+                        <p class="mb-4 text-on-surface">Which pair of words is likely closest in meaning-space?</p>
+                        <div class="space-y-2" id="quiz-1.2">
+                            <div class="quiz-option bg-surface-container-lowest border border-outline-variant/30 p-3 rounded-lg cursor-pointer hover:border-primary transition-all text-on-surface" data-correct="false">
+                                A) 🚗 car and 🍌 banana
+                            </div>
+                            <div class="quiz-option bg-surface-container-lowest border border-outline-variant/30 p-3 rounded-lg cursor-pointer hover:border-primary transition-all text-on-surface" data-correct="true">
+                                B) 🦁 lion and 🐯 tiger
+                            </div>
+                            <div class="quiz-option bg-surface-container-lowest border border-outline-variant/30 p-3 rounded-lg cursor-pointer hover:border-primary transition-all text-on-surface" data-correct="false">
+                                C) 📚 book and 🏃 running
+                            </div>
+                        </div>
+                        <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <nav class="flex justify-between items-center pt-8 border-t border-outline-variant/20">
+                <a href="../index.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Back to Overview
+                </a>
+                <span class="text-on-surface-variant opacity-60 text-sm">Next: 1.3 Context Matters (Coming Soon)</span>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 LLM Tutorial. Built with 🧠.</p>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/quizzes.js"></script>
+</body>
+</html>

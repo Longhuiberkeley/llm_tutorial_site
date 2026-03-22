@@ -1,0 +1,48 @@
+<!-- Comparison Section (Bento Grid Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 mt-8">
+    <!-- Phone Keyboard Completion -->
+    <div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden group">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl">📱</span>
+            <h3 class="text-xl font-bold font-headline">Classic Keyboard</h3>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm min-h-[300px] flex flex-col justify-between">
+            <div class="space-y-4">
+                <p class="text-lg font-medium border-r-2 border-primary w-fit pr-1">Roses are...</p>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-surface-container py-3 rounded text-center text-sm font-bold border border-outline-variant/20">blue</div>
+                <div class="bg-primary text-on-primary py-3 rounded text-center text-sm font-bold shadow-md">red</div>
+                <div class="bg-surface-container py-3 rounded text-center text-sm font-bold border border-outline-variant/20">lovely</div>
+            </div>
+        </div>
+        <div class="mt-4 text-sm text-on-surface-variant italic">Predicts the next word based on local frequency.</div>
+    </div>
+    <!-- LLM Completion -->
+    <div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-3xl translate-x-10 -translate-y-10"></div>
+        </div>
+        <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl">🤖</span>
+            <h3 class="text-xl font-bold font-headline">Large Language Model</h3>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm min-h-[300px] border border-primary/10">
+            <div class="space-y-3">
+                <p class="text-lg font-medium">Roses are...</p>
+                <div class="space-y-1 animate-pulse">
+                    <p class="text-primary font-bold">red, violets are blue,</p>
+                    <p class="text-primary font-bold">I’ve learned a lot about LLMs,</p>
+                    <p class="text-primary font-bold">and so will you!</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 text-sm text-on-surface-variant italic">Predicts entire distributions of knowledge across contexts.</div>
+    </div>
+</div>
+<!-- The Big Equation Text -->
+<div class="flex justify-center mb-16">
+    <div class="equation-banner px-10 py-6 rounded-full inline-flex items-center gap-6 rotate-[-1deg]">
+        <span class="text-4xl font-extrabold font-headline">LLM = autocomplete × 999</span>
+    </div>
+</div>

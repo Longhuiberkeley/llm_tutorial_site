@@ -18,6 +18,7 @@ Building a lightweight, interactive LLM tutorial website from scratch. The goal 
 | **Contact** | Simple email display on About page (mailto: link) |
 | **Progress** | NO persistence - no LocalStorage, no analytics, no login. Optional: visual scroll progress bar within each page |
 | **Content Format** | Bullet points, max 5-6 in a row - no walls of text |
+| **Callout Boxes** | 3 types of floating card boxes: (1) TL;DR/Summary for key takeaways, (2) Did You Know?/Question to encourage further thinking (no correct answer), (3) Common Error/Misconception to clarify what something is NOT. Floating card style with slight elevation. |
 | **⭐ Interactions** | PREDEFINED EXPERIENCES ONLY - button choices, hover reveals, tap cards, sliders. NO free-typing, NO open-ended input. Think Duolingo, not ChatGPT. This affects entire technical architecture. |
 | **Navigation** | Free navigation - all pages accessible, no unlock logic. TOC sidebar (desktop) or slide-out drawer (mobile) |
 | **Dark Mode** | Manual toggle switch (☀️/🌙) - CSS variables for theming |
@@ -88,24 +89,151 @@ quiz:
 
 ```
 llm_tutorial_site/
-├── index.html              # Landing page / chapter overview
-├── about.html              # About/consulting page
+├── index.html              # Landing page / chapter overview (root for GitHub Pages)
+├── pages/                  # Content pages (subfolder)
+│   ├── about.html
+│   ├── chapter-01.html
+│   └── ...
 ├── css/
 │   ├── main.css           # Core styles
 │   └── animations.css     # CSS animations
 ├── js/
-│   ├── main.js            # Navigation, progress tracking
+│   ├── main.js            # Navigation, theme toggle, progress tracking
 │   ├── quizzes.js         # Quiz logic, instant feedback
-│   └── interactives.js    # Embedding explorer, attention viz
-├── content/
-│   ├── chapter-01/
-│   │   ├── page-01.md
-│   │   ├── page-02.md
-│   │   └── ...
-│   └── chapter-02/
+│   └── interactives/      # Interactive component scripts
+│       ├── word-distance.js
+│       ├── attention-arrows.js
+│       ├── token-cards.js
+│       └── context-toggle.js
+├── scripts/
+│   └── build.js           # Markdown → HTML build script
+├── templates/
+│   └── page-template.html # HTML template for content pages
+├── docs/
+│   └── content/           # Source markdown files
+│       ├── overview.md
+│       ├── chapter-01.md
 │       └── ...
 └── assets/
-    └── illustrations/     # Or use emoji/SVG for simplicity
+    └── components/        # Reusable HTML snippets
+        ├── callout-tldr.html
+        ├── callout-dyk.html
+        ├── callout-error.html
+        ├── quiz-box.html
+        └── (visual components)
+```
+
+---
+
+## Content Authoring Workflow
+
+### Overview
+
+Content is authored in **Markdown** with frontmatter, then converted to **HTML** via a simple build script.
+
+### Why Markdown + Template?
+
+| Benefit | Description |
+|---------|-------------|
+| **Easy to edit** | Content stays in plain markdown, not HTML |
+| **Simple build** | One Node.js script converts MD → HTML |
+| **Full control** | HTML template gives complete layout control |
+| **Component reuse** | Visual components are predefined HTML snippets |
+| **Version control** | Markdown diffs are clean and readable |
+
+### Markdown Format
+
+Each page has a `.md` file with frontmatter:
+
+```markdown
+---
+title: "1.1 Keyboard vs LLM"
+chapter: 1
+page: 1
+goals:
+  - "Show that LLMs are fundamentally the same as phone autocomplete"
+  - "Understand that LLMs predict the next word, they don't think"
+visuals:
+  - "comparison-grid"
+quiz:
+  question: "Which pair is closest in meaning-space?"
+  options:
+    - text: "A) 🚗 car and 🍌 banana"
+      correct: false
+    - text: "B) 🦁 lion and 🐯 tiger"
+      correct: true
+  explanation: "Both are big cats."
+---
+
+# Page Title
+
+Content here in markdown...
+
+## Goal 1
+- Bullet point 1
+- Bullet point 2
+```
+
+### Build Process
+
+```bash
+# Run build script
+node scripts/build.js
+
+# Output: HTML files generated in pages/
+```
+
+### Visual Components
+
+Frontmatter `visuals` field maps to predefined HTML components:
+
+| Visual Type | Component | Description |
+|-------------|-----------|-------------|
+| `comparison-grid` | `assets/components/comparison-grid.html` | Side-by-side comparison cards |
+| `word-distance` | `assets/components/word-distance.html` | Interactive 2D word map |
+| `attention-viz` | `assets/components/attention-viz.html` | Attention arrows visualization |
+| `token-cards` | `assets/components/token-cards.html` | Tap-to-reveal tokenization |
+| `context-toggle` | `assets/components/context-toggle.html` | Scene comparison toggle |
+
+### Dark Mode Style Guide
+
+**Implementation**: Tailwind CSS with `dark:` prefix
+
+**Toggle Method**: Add/remove `dark` class on `<html>` element
+
+**Color Palette**:
+
+| Usage | Light Mode | Dark Mode |
+|-------|------------|-----------|
+| Background | `#fbf9f6` | `#1a1a1a` |
+| Card/Surface | `#ffffff` | `#252525` |
+| Sidebar | `#f5f3f0` | `#1f1f1f` |
+| Text Primary | `#1b1c1a` | `#e8e8e8` |
+| Text Secondary | `#54433e` | `#a8a8a8` |
+| Accent | `#CC785C` | `#E8A88F` |
+
+**Tailwind Config** (in each HTML file):
+```javascript
+tailwind.config = {
+    darkMode: "class",  // Use 'dark' class
+    theme: {
+        extend: {
+            colors: {
+                // Light mode colors
+                "background": "#fbf9f6",
+                "surface-container-lowest": "#ffffff",
+                // ... (see full palette above)
+            }
+        }
+    }
+}
+```
+
+**Usage in HTML**:
+```html
+<body class="dark:bg-background-dark dark:text-on-surface-dark">
+<nav class="dark:bg-surface-container-lowest-dark">
+<div class="dark:bg-surface-container-low dark:text-on-surface-dark">
 ```
 
 ---
@@ -222,49 +350,39 @@ Chapter 2: Under the Hood   ← Chapter heading
 
 ## Dark Mode Implementation
 
-**CSS Variables:**
-```css
-/* Light mode (default) */
-:root {
-  --bg-body: #FAF8F5;
-  --bg-card: #FFFFFF;
-  --bg-sidebar: #F5F3F0;
-  --text-primary: #2D2D2D;
-  --text-secondary: #6B6B6B;
-  --border-color: #E0E0E0;
-  --accent: #CC785C;
-  --accent-light: #E8A88F;
-  --accent-dark: #A55A40;
-  --success: #5FA860;
-  --error: #D65C5C;
-}
+**Framework**: Tailwind CSS with `dark:` prefix
 
-/* Dark mode (activated via data-theme attribute) */
-[data-theme="dark"] {
-  --bg-body: #1A1A1A;
-  --bg-card: #252525;
-  --bg-sidebar: #1F1F1F;
-  --text-primary: #E8E8E8;
-  --text-secondary: #A8A8A8;
-  --border-color: #3A3A3A;
-  --accent: #E8A88F;
-  --accent-light: #F5C4B5;
-  --accent-dark: #CC785C;
-}
-```
+**Activation**: Toggle `dark` class on `<html>` element
 
-**Toggle Button:**
+**Style Guide**: See "Content Authoring Workflow" section above for full color palette
+
+**Toggle Button**:
 ```html
 <button id="theme-toggle" aria-label="Toggle dark mode">
-  <span class="icon-sun">☀️</span>
-  <span class="icon-moon">🌙</span>
+  <span class="material-symbols-outlined">light_mode</span>
 </button>
+```
+
+**JavaScript** (js/main.js):
+```javascript
+themeToggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const icon = themeToggle.querySelector('.material-symbols-outlined');
+
+    if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        icon.textContent = 'light_mode';
+    } else {
+        html.classList.add('dark');
+        icon.textContent = 'dark_mode';
+    }
+});
 ```
 
 **Behavior:**
 - Toggle switches between light and dark modes
 - Theme preference NOT persisted (no localStorage) - resets on reload
-- Alternatively: Use `prefers-color-scheme` media query for auto-detect with manual override
+- All components must include `dark:` variants for proper theming
 
 ---
 
