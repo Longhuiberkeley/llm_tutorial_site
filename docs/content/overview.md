@@ -1,6 +1,6 @@
 # LLM Tutorial Site - Content Overview
 
-**Total: 3 Groups, 13 Chapters, ~70 Pages** (increased from 67 with additions to Chapters 7, 8, 11, 13)
+**Total: 3 Groups, 13 Chapters, ~71 Pages** (increased from 67 with additions to Chapters 7, 8, 11, 13)
 
 ---
 
@@ -255,7 +255,7 @@ COOKING EXAMPLE (more intuitive): BAD: "How do I make pasta carbonara?" (might s
 
 ---
 
-## Chapter 7: RAG & Context Engineering (7 pages)
+## Chapter 7: RAG & Context Engineering (8 pages)
 
 **Chapter Goal:** Learn how Retrieval-Augmented Generation gives LLMs access to your knowledge - solving the hallucination problem. The lawyer case study motivates the whole chapter.
 
@@ -308,6 +308,22 @@ COOKING EXAMPLE (more intuitive): BAD: "How do I make pasta carbonara?" (might s
 **🔬 RESEARCH PROMPT:** "Use Claude App/web to research: What are the current best practices for RAG systems in 2025? What chunking strategies work best? How do teams evaluate RAG quality? What are the common pitfalls and how to avoid them? Look for recent blog posts from companies building RAG at scale."
 
 **+ Quiz:** Check understanding of RAG, vector databases, context poisoning, and when to use RAG.
+
+### 7.9 Data Formats are Destiny - The Formatting Trap ⭐ NEW
+**Page Goal:** Explain that file formats matter immensely when working with LLMs.
+**How:** Visual comparison showing the same document content in different formats:
+- **Markdown (.md) or Plain Text (.txt):** 1KB file, LLM reads directly, perfect formatting control
+- **Word Document (.docx):** 5KB for same content, proprietary XML structure, needs special tool
+- **PowerPoint (.pptx) / Excel (.xlsx):** Same issue - content is buried in complex XML
+- **PDF (.pdf):** Varies wildly - some are text-extractable, others are pure images
+
+**THE FORMATTING TRAP:** Many AI products extract text ONLY from PDFs → tables become garbled, formatting is lost, styling disappears. Example: A financial report with three columns becomes jumbled text; an invoice with line items loses its structure.
+
+**KEY DISTINCTION:** Some LLMs CAN handle PDFs with formatting preserved (Claude with PDF support, Gemini multimodal). These models "see" the document layout, not just extract text. But many tools and cheaper models just extract text.
+
+**Rule of thumb:** Either convert to markdown/plain text before LLM processing OR ensure your LLM has the capability to view/edit those files properly. Don't assume "upload PDF" = "LLM understands the document."
+
+**Visual:** Side-by-side comparison showing: Original PDF → Text-only extraction (garbled tables) vs. Multimodal LLM (preserved layout).
 
 ---
 
@@ -416,7 +432,7 @@ COOKING EXAMPLE (more intuitive): BAD: "How do I make pasta carbonara?" (might s
 
 ---
 
-## Chapter 11: To Automate or Not? (7 pages)
+## Chapter 11: To Automate or Not? (8 pages)
 
 **Chapter Goal:** Learn when to use RPA (rule-based automation), LLMs (flexible AI), or hybrid approaches. Understanding your business is the foundation.
 
@@ -449,26 +465,42 @@ COOKING EXAMPLE (more intuitive): BAD: "How do I make pasta carbonara?" (might s
 **Page Goal:** Show where each shines and where they overlap (hybrid).
 **How:** Interactive Venn diagram. RPA ZONE: High-volume repetitive tasks, rules-based, no exceptions, 100% accuracy required. Examples: Data entry, invoice processing, scheduled reports. AGENTIC ZONE: Variable input, creative output, exception handling, human-like communication. Examples: Customer support, content generation, research. OVERLAP (HYBRID): RPA for routine, LLM for exceptions.
 
-### 11.6 Agentic Architectures - Sync, Hierarchical, Orchestrator ⭐ NEW
-**Page Goal:** Introduce common patterns for multi-agent systems.
-**How:** Three architectures with Simulink-style diagrams:
-1. **Sync Agents**: Agents work in parallel on different aspects. Example: Research agent gathers info, Writing agent drafts, Editing agent reviews - all simultaneously.
-2. **Hierarchical Agents**: Manager agent coordinates worker agents. Example: Project manager breaks task into subtasks, assigns to specialist agents, collects results.
-3. **Orchestrator Agent**: Central router decides which agent handles each request. Example: User asks question → Orchestrator routes to [Code agent] vs [Writing agent] vs [Search agent] based on content.
-**When to use which:** Parallel for speed, hierarchical for complex tasks, orchestrator for routing.
+### 11.6 Automation ROI Matrix - Should You Automate? ⭐ NEW
+**Page Goal:** Business-focused framework for deciding what to automate and how.
+**How:** Three-part interactive framework:
+1. **Verbalizing Human Processes for LLM Replacement:** Interactive UI showing existing process "Communicate with the client" → User clicks to break down into: GOAL of session (what outcome? Resolve issue? Build relationship?), HOW to communicate (tone: professional/friendly/casual, medium: email/phone/chat, timing: immediate/within 24h), TECHNIQUES used (active listening, de-escalation, identifying root cause). Lesson: You can't just hand off a high-level task like "communicate with client" to LLM; you must capture the implicit knowledge humans use.
+2. **Bonus: This Helps Human-in-Loop Too:** Verbalizing reasoning helps humans review AI decisions. Example: "AI approved refund because: customer is VIP (tier 1), first issue in 12 months, under $100" → Human reviewer sees exactly WHY and can approve quickly.
+3. **Frequency vs. Variance Scatter Plot:** Interactive 2D plot. X-axis = Task Frequency (yearly → daily), Y-axis = Task Variance (identical → highly unpredictable). Four quadrants:
+   - High Frequency, Low Variance → RPA territory (payroll processing)
+   - High Frequency, High Variance → Agentic/LLM territory (customer support)
+   - Low Frequency, High Variance → Don't automate; humans do it (strategic planning)
+   - Low Frequency, Low Variance → Maybe automate if cheap (scheduled reports)
+4. **Opportunity Cost/Budget:** Walk through realistic scenario. Company needs invoice processing. Option A: Custom Python automation ($15K upfront, $2K/year maintenance, 3 months to build). Option B: SaaS subscription ($500/month, works immediately, vendor handles updates). Option C: Human admin ($50K/year salary, flexible, can handle exceptions). Slider: adjust volume, see which option makes sense.
+**Key insight:** "We should use AI" is not a strategy. Start with: Can we verbalize the process? What's the frequency/variance profile? What's the ROI?
 
-### 11.7 When to Use RPA vs LLMs - Decision Criteria
+### 11.7 Agentic Architectures - Sync, Hierarchical, Orchestrator ⭐ REVISED
+**Page Goal:** Introduce common patterns for multi-agent systems through a concrete example.
+**How:** Interactive "Invoice Processing System" visualization with Simulink-style diagram:
+**THE SETUP:** Show incoming email containing messy PDF invoice. User clicks "Process Invoice" to start.
+**THE ORCHESTRATOR (The Router):** Central block lights up. Text appears: "I see a PDF attachment. I need to extract text first." Draws arrow to OCR Worker.
+**THE SYNCHRONOUS WORKER (OCR):** This block pulses. Caption: "The system HALTS here. The LLM cannot reason about data that hasn't been extracted yet. We wait for OCR to finish." Animation shows text being extracted.
+**THE DECISION WORKER (Validation):** Extracted text passed to LLM block. It checks against company compliance policy: "Is vendor approved? Is amount within threshold? Are required fields present?" Shows green checkmarks.
+**"SIMULATE EXCEPTION" BUTTON:** User clicks → OCR reads blurry line as "$500,000" instead of "$50.00" → Validation worker catches anomaly (amount > threshold) → Orchestrator halts RPA system → Routes to "Human Review" queue with explanation.
+**LESSON:** Agentic isn't just "tools talking to tools"; it's about state management (knowing where we are in the process), waiting for synchronous tasks to finish (can't reason before data exists), and handling exceptions gracefully (route to human, don't guess).
+**BONUS:** Briefly mention other patterns (Sync, Hierarchical) as variations on this foundation.
+
+### 11.8 When to Use RPA vs LLMs - Decision Criteria
 **Page Goal:** Clear criteria for when each approach is right.
 **How:** Two checklists. USE RPA WHEN: Task is well-defined, rules are clear, no ambiguity, high volume (1000+/day), errors are unacceptable, input format is consistent. EXAMPLES: Payroll processing, data migration, form filling. Cost-benefit: High upfront, near-zero marginal cost.
 USE LLMS WHEN: Input varies widely, creativity needed, exceptions are common, tone/judgment matters, task is fuzzy. EXAMPLES: Customer support, content creation, research. Trade-offs: Higher per-use cost, less predictable.
 
-### 11.8 Full Agentic or Human-in-Loop? ⭐ NEW
+### 11.9 Full Agentic or Human-in-Loop? ⭐ NEW
 **Page Goal:** Discuss the reality: most businesses want human verification, not full autonomy.
 **How:** Two approaches. FULL AGENTIC: AI runs autonomously, makes decisions, takes actions. RISKY for important business decisions. HUMAN-IN-LOOP: AI proposes, human approves. AI drafts, human edits. AI routes, human handles exceptions.
 **TRANSPARENCY & MONITORING:** How do you know what the AI did? Logging every action, traceability (decision → agent → tool → result), dashboards showing agent activity, audit trails for compliance.
 **THE REALITY:** Near future = human-in-loop for most business use cases. Full autonomy = limited to well-contained, low-risk tasks.
 
-### 11.9 Software Transitions - How to Switch from A to B ⭐ NEW
+### 11.10 Software Transitions - How to Switch from A to B ⭐ NEW
 **Page Goal:** Explain how to transition from one software system to another (e.g., ERP providers).
 **How:** The migration challenge. EXAMPLE: Company wants to switch from SAP to Oracle for ERP. Can't just "flip a switch." Migration process: 1) Export data from old system, 2) Clean and transform data, 3) Import to new system, 4) Train users, 5) Run parallel (both systems) for verification, 6) Cutover, 7) Decommission old system.
 **LLM's role in migration:** LLMs can help with data transformation (map old fields to new fields), documentation generation, training material creation, testing new workflows.
@@ -506,6 +538,8 @@ USE LLMS WHEN: Input varies widely, creativity needed, exceptions are common, to
 - What data is involved? (Inputs, outputs, formats)
 
 **Interactive:** Click each question to see why it matters for automation.
+**🔗 SEE ALSO:** For hands-on practice breaking down vague processes into actionable steps, see the "Verbalizing Human Processes" exercise in **Chapter 11.6: Automation ROI Matrix**. This interactive demo shows how to turn "communicate with client" into specific goals, methods, and techniques that an LLM can follow.
+
 
 ### 12.3 The Software Change Flowchart - Repeatable Framework ⭐ EXPANDED
 **Page Goal:** Show how businesses effectively implement software changes - a repeatable framework.
@@ -534,9 +568,15 @@ USE LLMS WHEN: Input varies widely, creativity needed, exceptions are common, to
 
 **Chapter Goal:** Understand how to run AI projects successfully - traceability, technical debt, and why "vibe coding" creates problems that compound over time.
 
-### 13.1 V-Model & Agile for LLM Projects
-**Page Goal:** Introduce development methodologies adapted for AI: iterative testing, continuous evaluation.
+### 13.1 V-Model & Agile for LLM Projects ⭐ EXPANDED
+**Page Goal:** Introduce development methodologies adapted for AI: iterative testing, continuous evaluation, and the challenge of proving non-deterministic systems work.
 **How:** V-Model visualization adapted for LLMs. Left side: Requirements → Design → Implementation. Right side: Testing → Validation → Verification (parallel to each dev stage). Key addition: EVALUATION at each stage - LLMs are non-deterministic, need continuous testing. Agile sprints for prompt refinement, not just features.
+
+**GOLDEN DATASETS - How Do You Know It Works?** The hardest part of an LLM app isn't building it; it's proving it works. Unlike traditional software (pass/fail), LLMs give slightly different answers each time. How do you test that?
+**THE SOLUTION:** Golden Dataset = A list of 100 questions (or more) with their exact correct answers. Before deployment, run the LLM on all 100 questions and grade its outputs. Pass rate = 95%? Deploy. Pass rate = 70%? Keep tuning.
+**EXAMPLE:** Customer support bot. Golden dataset has 50 real customer questions and their approved responses. Each time you change the prompt or system, re-run the golden dataset to ensure nothing broke.
+**CONTINUOUS EVALUATION:** Re-run golden dataset after any change (new prompt, new model, new context source). This is how teams maintain quality over time.
+**BUSINESS RELEVANCE:** This is how you measure AI quality objectively. "It seems to work" is not enough - you need numbers to justify to stakeholders that the system is reliable.
 
 ### 13.2 Requirements-Driven Modeling - Spec Kits, BMAD
 **Page Goal:** Teach clear requirement definition before building - like system design specs.
@@ -544,8 +584,10 @@ USE LLMS WHEN: Input varies widely, creativity needed, exceptions are common, to
 **EXAMPLE:** "As a customer support agent, I need AI to draft email responses, so that I can respond faster. Input: Customer email + company policy. Output: Draft response. Constraints: Must cite policy, must not promise refunds. Success: 80% of drafts usable with minor edits."
 
 ### 13.3 Traceability & Technical Debt - Orders, Linkage, Deliberate Work ⭐ NEW
-**Page Goal:** Introduce traceability - tasks and designs have orders and linkages. Work should be deliberate, not random.
-**How:** The problem with "vibe coding": AI generates code quickly, but without understanding structure. Files grow, functions scatter, similar code appears in multiple places (phantom code), dependencies become unclear.
+**Page Goal:** Introduce traceability and the risks of "vibe coding" - for both business decision-makers and developers.
+**How:** PART 1 - **The Business Risk (Management & Procurement):** When vendors or internal IT teams use AI to build things too fast, the business acquires "invisible debt." Visual scenario: Vendor demos working AI solution (built in 2 weeks!) → Company buys/license → Six months later, needs modification → Turns out code is unmaintainable vibe-coded mess (no documentation, scattered logic, phantom code) → Business stuck with unusable product, expensive rewrite needed.
+**PROCUREMENT WARNING:** "Fast delivery" from AI often means technical debt that will be paid later (often by different contractors at higher cost). Ask vendors: How is the code organized? Is there documentation? What's the testing coverage?
+**PART 2 - **The Developer Reality:** The problem with "vibe coding": AI generates code quickly, but without understanding structure. Files grow, functions scatter, similar code appears in multiple places (phantom code), dependencies become unclear.
 **TRACEABILITY:** Every feature should trace back to a requirement. Every function should have a clear purpose. Every dependency should be documented.
 **THE BORROWED MONEY METAPHOR:** Vibe coding = borrowing money with high interest. Fast at first, but technical debt accumulates. Fixing problems later is 10x harder than building correctly the first time.
 **The AI speed trap:** We run SO MUCH FASTER with AI. If you build on a bad foundation, you're building a skyscraper on quicksand. By the time you realize the foundation is wrong, you've already built 10 floors. Fixing the foundation now means tearing down those 10 floors.
@@ -669,6 +711,7 @@ Integrated throughout relevant chapters with 🔒 markers:
 | 7.5 | NEW: RAG alternatives (keyword, subagent, concat) | Rooted in lawyer example |
 | 7.6 | RAG architecture diagram | Make it concrete |
 | 7.7-7.8 | Added research prompts for future/best practices | Content needs research |
+| 7.9 | NEW: Data Formats are Destiny | File format trap, text extraction issues |
 | 8.3 | Revised - core problem unsolved (relevant info retrieval) | Honest assessment |
 | 8.4 | Added OpenCanvas, vibe coding problems, phantom code | Real-world issues |
 | 9.1 | Clarified understanding ≠ generating images, Gemini Embedding 2 | Accurate multimodal info |
@@ -679,15 +722,17 @@ Integrated throughout relevant chapters with 🔒 markers:
 | 11.1 | NEW: Business understanding first | Foundation for automation |
 | 11.2 | Added RPA types (click-based, programming-based) | More complete picture |
 | 11.4 | NEW: OCR introduction | Common hybrid use case |
-| 11.6 | NEW: Agentic architectures (sync, hierarchical, orchestrator) | Multi-agent patterns |
-| 11.8 | NEW: Human-in-loop, transparency, monitoring | Real-world business needs |
-| 11.9 | NEW: Software transitions (ERP example) | Practical migration knowledge |
+| 11.6 | NEW: Automation ROI Matrix (verbalizing processes, frequency vs variance) | Business decision framework |
+| 11.7 | REVISED: Concrete Invoice Processing visualization for agentic patterns | State management, sync waiting, exception handling |
+| 11.9 | NEW: Human-in-loop, transparency, monitoring | Real-world business needs |
+| 11.10 | NEW: Software transitions (ERP example) | Practical migration knowledge |
 | 12.1 | Added "don't treat AI like a genie" | Important mindset |
-| 12.2 | Added 10-question cheat sheet for process investigation | Practical tool |
-| 13.3 | NEW: Traceability, technical debt, vibe coding metaphor | AI speed trap |
+| 12.2 | Added 10-question cheat sheet + cross-reference to Ch 11.6 | Practical tool with hands-on practice link |
+| 13.1 | EXPANDED: Added Golden Datasets for evaluation | How to test non-deterministic systems |
+| 13.3 | EXPANDED: Added business/procurement risk framing before developer content | Management warning about vibe-coded vendor products |
 | 13.4 | REVISED: AI review for code quality issues | Practical code review |
 | 13.5 | Added "fast but fragile foundation" concept | AI speed compound risk |
 
 ---
 
-**Total: 70 pages (up from 67) - added OCR, agentic architectures, human-in-loop, software transitions, traceability, AI code review.**
+**Total: 71 pages (up from 67) - added OCR, Automation ROI Matrix, Data Formats, concrete Invoice Processing visualization, Golden Datasets, business risk framing for vibe coding.**
