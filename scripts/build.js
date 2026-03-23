@@ -5,10 +5,11 @@ const yaml = require('js-yaml');
 
 const CONTENT_DIR = path.join(__dirname, '../docs/content');
 const PAGES_DIR = path.join(__dirname, '../pages');
-const TEMPLATE_PATH = path.join(__dirname, '../templates/page-template.html');
+const TEMPLATE_PATH = path.join(__dirname, '../assets/page-template.html');
 const COMPONENTS_DIR = path.join(__dirname, '../assets/components');
 const STRUCTURE_PATH = path.join(__dirname, '../docs/course-structure.yaml');
 const INDEX_PATH = path.join(__dirname, '../index.html');
+const INDEX_TEMPLATE_PATH = path.join(__dirname, '../assets/index-template.html');
 
 // Create pages directory if it doesn't exist
 if (!fs.existsSync(PAGES_DIR)) {
@@ -184,7 +185,7 @@ function generateTocHtml(toc, activeId) {
 }
 
 function generateIndex(structure) {
-    let indexHtml = fs.readFileSync(INDEX_PATH, 'utf8');
+    let indexHtml = fs.readFileSync(INDEX_TEMPLATE_PATH, 'utf8');
     
     let groupsHtml = '<div class="space-y-20">\n';
 
@@ -229,9 +230,8 @@ function generateIndex(structure) {
 
     groupsHtml += '</div>';
 
-    // Replace the content inside <div class="space-y-20"> ... </div>
-    const replacementRegex = /<div class="space-y-20">[\s\S]*?<\/div>\s*<\/main>/;
-    indexHtml = indexHtml.replace(replacementRegex, groupsHtml + '\n    </main>');
+    // Replace the placeholder with the generated content
+    indexHtml = indexHtml.replace('<!-- CHAPTER_GROUPS_CONTENT -->', groupsHtml);
 
     fs.writeFileSync(INDEX_PATH, indexHtml);
 }

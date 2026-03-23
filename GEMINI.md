@@ -56,26 +56,26 @@ llm_tutorial_site/
 │   ├── content/           # 📝 Source Markdown files (EDIT THESE)
 │   └── md2html_guide.md   # Detailed guide on Markdown syntax
 ├── assets/
-│   └── components/        # 🧩 Reusable HTML snippets (Callouts, Visuals)
+│   ├── components/        # 🧩 Reusable HTML snippets (Callouts, Visuals)
+│   ├── index-template.html # 🏠 Landing page skeleton (EDIT THIS)
+│   └── page-template.html # 📄 Content page skeleton (EDIT THIS)
 ├── js/
 │   ├── interactives/      # ⚙️ Logic for specific interactive widgets
 │   ├── main.js            # Global logic (sidebar, scrolling)
 │   └── tailwind-config.js # Global color and font definitions
 ├── css/
 │   └── main.css           # Custom styles complementing Tailwind
-├── templates/
-│   └── page-template.html # The master HTML skeleton
 ├── scripts/
 │   └── build.js           # 🚀 The build engine
 ├── pages/                 # 📂 GENERATED HTML (Do not edit directly)
-└── index.html             # The landing page
+└── index.html             # 📂 GENERATED LANDING PAGE (Do not edit directly)
 ```
 
 ## AI Agent / Developer Directives
 
 When modifying this repository, strictly adhere to the following rules:
 
-1. **Never edit `pages/*.html` directly.** Always edit the source `.md` files in `docs/content/` or the `templates/page-template.html` file, then run `npm run build`.
+1. **Never edit `pages/*.html` or `index.html` directly.** Always edit the source `.md` files in `docs/content/` or the template files in `assets/`, then run `npm run build`.
 2. **Preserve the Outline Style.** When generating or editing content, use bullet points, short phrases, and the established headings (`## 🎯 Core Goals`, `## 👁️ Visuals & Interactives`, `## 📝 Key Concepts`). Do not convert the curriculum into long paragraphs of prose.
 3. **Respect the Palette.** Ensure new UI components rely on the CSS variables defined in `css/main.css` and `js/tailwind-config.js` (e.g., `--accent`, `--surface-container`).
 4. **Leverage the `stitch/` Folder.** If complex layouts or new interactive ideas are needed, review the prototypes in the `stitch/` directory. Extract successful UI elements into `assets/components/` and inject them via the `:::visual` tag.
