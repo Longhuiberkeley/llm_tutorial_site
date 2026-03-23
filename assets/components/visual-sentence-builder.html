@@ -1,0 +1,76 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+        <div class="text-2xl font-bold p-6 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm inline-block min-w-[300px]">
+            "My favorite pet is a" <span id="builder-target" class="animate-pulse text-primary border-b-2 border-primary">___</span>
+        </div>
+    </div>
+    
+    <h4 class="font-bold text-center text-on-surface-variant mb-6 uppercase tracking-wider text-sm">Select the next word based on distance</h4>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Dog -->
+        <button onclick="selectWord('🐕 dog', true)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+            <span class="text-4xl mb-2">🐕</span>
+            <span class="font-bold">dog</span>
+            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
+                <div class="h-full bg-primary w-[90%]"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant mt-1 font-bold">90% match</span>
+        </button>
+        
+        <!-- Pizza -->
+        <button onclick="selectWord('🍕 pizza', false)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+            <span class="text-4xl mb-2">🍕</span>
+            <span class="font-bold">pizza</span>
+            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
+                <div class="h-full bg-primary/30 w-[5%]"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant mt-1 font-bold">5% match</span>
+        </button>
+
+        <!-- Car -->
+        <button onclick="selectWord('🚗 car', false)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+            <span class="text-4xl mb-2">🚗</span>
+            <span class="font-bold">car</span>
+            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
+                <div class="h-full bg-primary/20 w-[1%]"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant mt-1 font-bold">1% match</span>
+        </button>
+
+        <!-- Phone -->
+        <button onclick="selectWord('📱 phone', false)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+            <span class="text-4xl mb-2">📱</span>
+            <span class="font-bold">phone</span>
+            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
+                <div class="h-full bg-primary/10 w-[0.1%]"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant mt-1 font-bold">< 1% match</span>
+        </button>
+    </div>
+
+    <div id="builder-feedback" class="mt-8 text-center text-lg font-bold min-h-[30px] opacity-0 transition-opacity">
+        <!-- Feedback text goes here -->
+    </div>
+</div>
+
+<script>
+function selectWord(word, isCorrect) {
+    const target = document.getElementById('builder-target');
+    const feedback = document.getElementById('builder-feedback');
+    
+    target.textContent = word;
+    target.classList.remove('animate-pulse');
+    
+    feedback.style.opacity = '1';
+    if (isCorrect) {
+        target.className = "text-primary font-bold";
+        feedback.innerHTML = `✅ Correct! "Dog" has the closest distance in meaning-space to "pet".`;
+        feedback.className = "mt-8 text-center text-lg font-bold text-green-600 transition-opacity";
+    } else {
+        target.className = "text-on-error font-bold";
+        feedback.innerHTML = `❌ While grammatically possible, "${word}" is far away from "pet" in meaning-space.`;
+        feedback.className = "mt-8 text-center text-lg font-bold text-error transition-opacity";
+    }
+}
+</script>

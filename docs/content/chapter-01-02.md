@@ -16,11 +16,13 @@ Words have "distance" between them based on meaning. Similar words like "lion" a
 
 ## 👁️ Visuals & Interactives
 
-:::interactive{id="word-distance"}
-
-*(Interactive 2D scatter plot showing emoji words. Hover over any word to see lines connecting to its "neighbors". Thicker lines = closer distance.)*
+:::visual{name="visual-iq-test-words"}
 
 ## 📝 Key Concepts
+
+:::callout-error
+Just for the record: "Meaning-space" isn't the proper technical term. Data scientists use jargon like "Semantics", "Vector Embeddings", and "Metric Space". But for our intuition, "Meaning-space" works perfectly! We'll cover the real jargon later.
+:::
 
 - **Meaning-Space:** Think of it as a giant map where every word has a specific coordinate. Words with similar meanings are located near each other.
 - **Contextual Neighbors:** The distance between words is how an LLM can understand that "the doctor walked into the room" and "the nurse walked into the room" are likely talking about a similar situation.

@@ -16,9 +16,7 @@ Just like words, sentences can be "close" or "far" in meaning. "I'm hungry" and 
 
 ## 👁️ Visuals & Interactives
 
-:::interactive{id="attention-arrows"}
-
-*(Sentence cards: "I'm hungry", "Let's eat", "I want food", "The sky is blue". Thick lines connect sentences with strong meaning connections.)*
+:::visual{name="visual-iq-test-sentence"}
 
 ## 📝 Key Concepts
 

@@ -7,6 +7,8 @@ const CONTENT_DIR = path.join(__dirname, '../docs/content');
 const PAGES_DIR = path.join(__dirname, '../pages');
 const TEMPLATE_PATH = path.join(__dirname, '../templates/page-template.html');
 const COMPONENTS_DIR = path.join(__dirname, '../assets/components');
+const STRUCTURE_PATH = path.join(__dirname, '../docs/course-structure.yaml');
+const INDEX_PATH = path.join(__dirname, '../index.html');
 
 // Create pages directory if it doesn't exist
 if (!fs.existsSync(PAGES_DIR)) {
@@ -28,7 +30,12 @@ const components = {
 async function build() {
     console.log('🚀 Starting robust build with component support...');
 
-    const files = fs.readdirSync(CONTENT_DIR).filter(f => f.endsWith('.md'));
+    // 1. Read course structure
+    const structureRaw = fs.readFileSync(STRUCTURE_PATH, 'utf8');
+    const courseStructure = yaml.load(structureRaw);
+
+    // 2. Read all markdown files
+    const files = fs.readdirSync(CONTENT_DIR).filter(f => f.endsWith('.md') && f !== 'overview.md');
     const pages = [];
 
     files.forEach(file => {
@@ -48,8 +55,8 @@ async function build() {
     });
 
     pages.sort((a, b) => {
-        if (a.chapter !== b.chapter) return a.chapter.localeCompare(b.chapter);
-        return a.pageId.localeCompare(b.pageId);
+        if (a.chapter !== b.chapter) return a.chapter.localeCompare(b.chapter, undefined, { numeric: true, sensitivity: 'base' });
+        return a.pageId.localeCompare(b.pageId, undefined, { numeric: true, sensitivity: 'base' });
     });
 
     const toc = [];
@@ -62,13 +69,14 @@ async function build() {
         chapter.pages.push({ id: page.pageId, title: page.title, file: page.outFile });
     });
 
+    // 3. Generate Individual Pages
     pages.forEach((page, index) => {
         let html = template;
         let markdown = page.rawMarkdown;
         const calloutMap = {};
         let calloutIndex = 0;
 
-        // 1. Extract Callouts and replace with placeholders to avoid marked.js interference
+        // 1. Extract Callouts and replace with placeholders
         markdown = markdown.replace(/:::callout-(tldr|error|dyk)\n([\s\S]*?)\n:::/g, (match, type, inner) => {
             const placeholder = `<!-- CALLOUT_${calloutIndex} -->`;
             calloutMap[placeholder] = { type, content: marked.parse(inner.trim()) };
@@ -124,9 +132,6 @@ async function build() {
                     error: '<!-- Your warning content here -->',
                     dyk: '<!-- Your question or fact here -->'
                 };
-                // Remove the wrapping <p> from the template if we're injecting a <p> from marked
-                // Actually, let's just replace the comment. 
-                // To avoid <p><p> nested tags, we can strip the outer <p> from data.content if it exists
                 const cleanContent = data.content.trim().replace(/^<p>|<\/p>$/g, '');
                 componentHtml = compTemplate.replace(placeholderMap[data.type], cleanContent);
             }
@@ -154,6 +159,10 @@ async function build() {
         console.log(`✅ Generated: ${page.outFile}`);
     });
 
+    // 4. Generate index.html from structure
+    generateIndex(courseStructure);
+    console.log('✅ Generated: index.html (Course Overview)');
+
     console.log('✨ Build complete!');
 }
 
@@ -172,6 +181,59 @@ function generateTocHtml(toc, activeId) {
         });
     });
     return html;
+}
+
+function generateIndex(structure) {
+    let indexHtml = fs.readFileSync(INDEX_PATH, 'utf8');
+    
+    let groupsHtml = '<div class="space-y-20">\n';
+
+    structure.groups.forEach(group => {
+        groupsHtml += `
+            <section>
+                <div class="flex items-baseline gap-4 mb-8">
+                    <h2 class="text-3xl font-headline font-bold text-primary uppercase">${group.name.split(': ')[1] || group.name}</h2>
+                    <span class="h-px flex-1 bg-outline-variant opacity-15"></span>
+                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">${group.subtitle}</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        `;
+
+        group.chapters.forEach(chapter => {
+            const isComingSoon = chapter.status !== 'active';
+            const linkTag = isComingSoon ? 'div' : `a href="pages/${chapter.firstPage}"`;
+            const endTag = isComingSoon ? 'div' : 'a';
+            const opacityClass = isComingSoon ? 'opacity-60' : '';
+            const actionHtml = isComingSoon 
+                ? 'Coming Soon' 
+                : 'Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>';
+
+            groupsHtml += `
+                    <${linkTag} class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ${opacityClass}">
+                        <span class="absolute top-4 right-6 text-4xl opacity-20 ${!isComingSoon ? 'group-hover:opacity-100 transition-opacity' : ''}">${chapter.icon}</span>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter ${chapter.id}</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">${chapter.title}</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">${chapter.description}</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            ${actionHtml}
+                        </div>
+                    </${endTag}>
+            `;
+        });
+
+        groupsHtml += `
+                </div>
+            </section>
+        `;
+    });
+
+    groupsHtml += '</div>';
+
+    // Replace the content inside <div class="space-y-20"> ... </div>
+    const replacementRegex = /<div class="space-y-20">[\s\S]*?<\/div>\s*<\/main>/;
+    indexHtml = indexHtml.replace(replacementRegex, groupsHtml + '\n    </main>');
+
+    fs.writeFileSync(INDEX_PATH, indexHtml);
 }
 
 build().catch(err => { console.error('❌ Build failed:', err); });

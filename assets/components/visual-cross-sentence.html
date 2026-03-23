@@ -1,0 +1,54 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 text-center max-w-3xl mx-auto">
+    <div class="flex items-center justify-center gap-3 mb-6">
+        <span class="text-3xl">🔗</span>
+        <h3 class="text-xl font-bold font-headline">Cross-Sentence Attention</h3>
+    </div>
+    
+    <div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant relative">
+        <div class="flex flex-wrap justify-center gap-x-3 gap-y-6 text-2xl font-bold">
+            <!-- Sentence 1 -->
+            <span>Sarah</span>
+            <span>loves</span>
+            <span class="relative z-10">
+                programming.
+                <svg id="lines-cross" class="absolute pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[100px] z-[-1]" style="overflow: visible;">
+                    <!-- Line from She to Sarah -->
+                    <path class="path-animate" d="M 80,40 Q 0,80 -120,0" fill="none" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10,5" />
+                    <!-- Line from codes to programming -->
+                    <path class="path-animate-delay" d="M 160,40 Q 80,70 0,0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" />
+                </svg>
+            </span>
+            <!-- Sentence 2 -->
+            <span class="text-primary ml-4">She</span>
+            <span class="text-accent">codes</span>
+            <span>every</span>
+            <span>day.</span>
+        </div>
+        
+        <div class="mt-8 grid grid-cols-2 gap-4 text-sm font-medium">
+            <div class="bg-primary/10 p-3 rounded-lg border border-primary/20 text-primary">
+                "She" pays strong attention to "Sarah" across the period boundary.
+            </div>
+            <div class="bg-accent/10 p-3 rounded-lg border border-accent/20 text-accent">
+                "codes" looks back at "programming" to establish the context.
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.path-animate {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 2s ease-out forwards infinite alternate;
+}
+.path-animate-delay {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 2s ease-out forwards infinite alternate;
+    animation-delay: 1s;
+}
+@keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+</style>

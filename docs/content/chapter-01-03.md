@@ -16,9 +16,7 @@ The same word can mean different things depending on context. "Bank" is close to
 
 ## 👁️ Visuals & Interactives
 
-:::interactive{id="context-toggle"}
-
-*(Two scenes side-by-side. Scene 1: 🌊 river, 🚣 canoe, 🏦 bank → "bank" is closer to "river". Scene 2: 💰 money, 💳 credit, 🏦 bank → "bank" is closer to "money".)*
+:::visual{name="visual-context-toggle"}
 
 ## 📝 Key Concepts
 

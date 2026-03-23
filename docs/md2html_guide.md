@@ -14,6 +14,13 @@ pageId: "01-01"
 ---
 ```
 
+> ⚠️ **Important:** Never use unescaped double quotes inside the frontmatter values. 
+> 
+> **Wrong:** `description: "The "AI" is smart"`
+> 
+> **Right:** `description: "The 'AI' is smart"` or `description: "The \"AI\" is smart"`
+
+
 ## Custom Components
 We use the `:::` syntax for special UI blocks.
 

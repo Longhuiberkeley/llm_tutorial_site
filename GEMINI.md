@@ -80,3 +80,4 @@ When modifying this repository, strictly adhere to the following rules:
 3. **Respect the Palette.** Ensure new UI components rely on the CSS variables defined in `css/main.css` and `js/tailwind-config.js` (e.g., `--accent`, `--surface-container`).
 4. **Leverage the `stitch/` Folder.** If complex layouts or new interactive ideas are needed, review the prototypes in the `stitch/` directory. Extract successful UI elements into `assets/components/` and inject them via the `:::visual` tag.
 5. **No Live Generation.** Remember that all quizzes and interactives must be hardcoded and function purely on the client side.
+6. **Content Improvement over Rewrite.** If GEMINI helps with content, unless it is factually incorrect, focus on improvements and minor adjustments rather than complete rewrites.

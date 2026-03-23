@@ -1,0 +1,66 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 text-center max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <span class="text-3xl block mb-2">👀</span>
+        <h3 class="text-xl font-bold font-headline">Hover to Reveal Attention</h3>
+        <p class="text-sm text-on-surface-variant italic">See how the same word connects to different neighbors</p>
+    </div>
+    
+    <!-- Sentence 1 -->
+    <div class="mb-12 p-6 bg-surface-container-lowest rounded-xl border border-outline-variant relative group overflow-hidden">
+        <p class="text-[10px] text-left text-on-surface-variant mb-6 font-bold uppercase tracking-widest opacity-50">Context: Nature</p>
+        <div class="flex flex-nowrap justify-center gap-3 sm:gap-6 text-xl sm:text-2xl font-bold whitespace-nowrap">
+            <span class="token-node" data-id="s1-1">The</span>
+            <span class="token-node text-primary" data-id="s1-2">river</span>
+            <span class="token-node relative z-10 cursor-pointer p-1 rounded hover:bg-primary/5" 
+                  onmouseenter="showAttentionLines('s1-bank')" 
+                  onmouseleave="hideAttentionLines('s1-bank')">
+                bank
+                <svg id="s1-bank" class="absolute pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[100px] opacity-0 transition-opacity z-[-1]" style="overflow: visible;">
+                    <!-- To river -->
+                    <path d="M 0,0 Q -40,-50 -100,0" fill="none" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" />
+                    <!-- To flooded -->
+                    <path d="M 0,0 Q 40,-30 80,0" fill="none" stroke="var(--outline-variant)" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </span>
+            <span class="token-node" data-id="s1-4">is</span>
+            <span class="token-node" data-id="s1-5">flooded.</span>
+        </div>
+        <div class="mt-8 text-sm text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+            "Bank" pays 85% attention to "river"
+        </div>
+    </div>
+
+    <!-- Sentence 2 -->
+    <div class="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant relative group overflow-hidden">
+        <p class="text-[10px] text-left text-on-surface-variant mb-6 font-bold uppercase tracking-widest opacity-50">Context: Money</p>
+        <div class="flex flex-nowrap justify-center gap-3 sm:gap-6 text-xl sm:text-2xl font-bold whitespace-nowrap">
+            <span class="token-node" data-id="s2-1">The</span>
+            <span class="token-node text-accent" data-id="s2-2">financial</span>
+            <span class="token-node relative z-10 cursor-pointer p-1 rounded hover:bg-accent/5" 
+                  onmouseenter="showAttentionLines('s2-bank')" 
+                  onmouseleave="hideAttentionLines('s2-bank')">
+                bank
+                <svg id="s2-bank" class="absolute pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[100px] opacity-0 transition-opacity z-[-1]" style="overflow: visible;">
+                    <!-- To financial -->
+                    <path d="M 0,0 Q -60,-50 -130,0" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" />
+                    <!-- To closed -->
+                    <path d="M 0,0 Q 40,-30 80,0" fill="none" stroke="var(--outline-variant)" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </span>
+            <span class="token-node" data-id="s2-4">is</span>
+            <span class="token-node" data-id="s2-5">closed.</span>
+        </div>
+        <div class="mt-8 text-sm text-accent font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+            "Bank" pays 92% attention to "financial"
+        </div>
+    </div>
+</div>
+
+<script>
+function showAttentionLines(id) {
+    document.getElementById(id).style.opacity = '1';
+}
+function hideAttentionLines(id) {
+    document.getElementById(id).style.opacity = '0';
+}
+</script>

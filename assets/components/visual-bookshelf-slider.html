@@ -1,0 +1,88 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-10">
+        <h3 class="text-3xl font-bold font-headline mb-2 text-primary">Context Capacity</h3>
+        <p class="text-lg text-on-surface-variant font-medium">How many "tokens" can the model hold in its head at once?</p>
+    </div>
+    
+    <div class="space-y-12">
+        <!-- Scale Bar -->
+        <div class="space-y-6">
+            <input type="range" id="capacity-slider" min="0" max="3" value="0" step="1" 
+                class="w-full h-3 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary transition-all active:scale-[1.01]"
+                oninput="updateCapacity(this.value)">
+            
+            <div class="flex justify-between px-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.15em] opacity-60">
+                <span>Small (2K)</span>
+                <span>Medium (32K)</span>
+                <span>Large (200K)</span>
+                <span>Giant (1M+)</span>
+            </div>
+        </div>
+
+        <!-- Result Card -->
+        <div id="capacity-card" class="bg-surface-container-lowest rounded-2xl p-8 border-2 border-outline-variant/30 shadow-inner min-h-[280px] flex flex-col items-center justify-center transition-all duration-300">
+            <div id="capacity-visual" class="text-6xl mb-6 animate-fade-in drop-shadow-sm">📄</div>
+            <div class="text-center">
+                <h4 id="capacity-title" class="text-2xl font-bold font-headline text-primary mb-2">2,000 Tokens</h4>
+                <p id="capacity-desc" class="text-on-surface-variant font-medium leading-relaxed max-w-sm mx-auto">
+                    Early LLMs: Equivalent to about <strong>4 pages</strong> of text. Perfect for a quick email or a short article.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const capacityData = [
+    {
+        title: "2,000 Tokens",
+        visual: "📄",
+        desc: "<strong>The Short Article.</strong> About 4 pages of text. Just enough for a few emails or a recipe.",
+        color: "var(--primary)"
+    },
+    {
+        title: "32,000 Tokens",
+        visual: "📑",
+        desc: "<strong>The Product Manual.</strong> Roughly 60 pages. Enough to hold a technical guide or a long legal document.",
+        color: "var(--primary)"
+    },
+    {
+        title: "200,000 Tokens",
+        visual: "📚📚",
+        desc: "<strong>2 Harry Potter Books.</strong> A massive amount of space. You can feed it entire novels or large codebases.",
+        color: "var(--accent)"
+    },
+    {
+        title: "1,000,000+ Tokens",
+        visual: "🏛️🏛️🏛️",
+        desc: "<strong>A Small Library.</strong> Over 10 novels at once. The model can cross-reference ideas across the entire <em>Lord of the Rings</em> trilogy and then some.",
+        color: "var(--on-surface-variant)"
+    }
+];
+
+function updateCapacity(val) {
+    const data = capacityData[parseInt(val)];
+    const card = document.getElementById('capacity-card');
+    const visual = document.getElementById('capacity-visual');
+    const title = document.getElementById('capacity-title');
+    const desc = document.getElementById('capacity-desc');
+    
+    // Animate out
+    visual.style.transform = 'scale(0.8)';
+    visual.style.opacity = '0';
+    
+    setTimeout(() => {
+        visual.innerHTML = data.visual;
+        title.innerHTML = data.title;
+        desc.innerHTML = data.desc;
+        title.style.color = data.color;
+        
+        // Animate in
+        visual.style.transform = 'scale(1.1)';
+        visual.style.opacity = '1';
+        setTimeout(() => {
+            visual.style.transform = 'scale(1)';
+        }, 150);
+    }, 150);
+}
+</script>
