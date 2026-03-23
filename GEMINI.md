@@ -81,3 +81,5 @@ When modifying this repository, strictly adhere to the following rules:
 4. **Leverage the `stitch/` Folder.** If complex layouts or new interactive ideas are needed, review the prototypes in the `stitch/` directory. Extract successful UI elements into `assets/components/` and inject them via the `:::visual` tag.
 5. **No Live Generation.** Remember that all quizzes and interactives must be hardcoded and function purely on the client side.
 6. **Content Improvement over Rewrite.** If GEMINI helps with content, unless it is factually incorrect, focus on improvements and minor adjustments rather than complete rewrites.
+7. **No Chapter Number References.** Content pages must NEVER reference other chapters by number (e.g., "In Chapter 2 we learned..."). Chapter numbers may change. Instead, reference by topic (e.g., "When we explored tokenization...").
+8. **Component Reuse.** When building new interactive components, check if a similar component already exists (e.g., scene-selector buttons from 1.3, quiz options). Reuse existing component styles rather than creating new ones from scratch.
