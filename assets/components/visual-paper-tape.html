@@ -1,0 +1,163 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline">The Receipt Tape</h3>
+        <p class="text-sm text-on-surface-variant">Add messages to fill the context window. What happens when it's full?</p>
+    </div>
+
+    <!-- Tape container -->
+    <div class="relative mb-6">
+        <!-- "Printer" top -->
+        <div class="bg-surface-container-highest rounded-t-xl h-8 flex items-center justify-center border border-outline-variant border-b-0">
+            <div class="w-20 h-1 bg-outline rounded-full opacity-40"></div>
+        </div>
+
+        <!-- Tape scroll area -->
+        <div id="pt-tape" class="bg-white border-l border-r border-outline-variant overflow-hidden" style="max-height: 280px; min-height: 80px; transition: max-height 0.3s;">
+            <div id="pt-entries" class="p-3 space-y-2 text-xs font-mono">
+                <!-- entries added dynamically -->
+            </div>
+        </div>
+
+        <!-- Tear line at bottom -->
+        <div class="h-6 flex items-center justify-center border border-t-0 border-outline-variant rounded-b-xl bg-surface-container-highest">
+            <div class="flex gap-1">
+                <div class="w-2 h-2 bg-outline-variant rounded-full opacity-50"></div>
+                <div class="w-2 h-2 bg-outline-variant rounded-full opacity-50"></div>
+                <div class="w-2 h-2 bg-outline-variant rounded-full opacity-50"></div>
+                <div class="w-2 h-2 bg-outline-variant rounded-full opacity-50"></div>
+                <div class="w-2 h-2 bg-outline-variant rounded-full opacity-50"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Capacity bar -->
+    <div class="mb-6">
+        <div class="flex justify-between text-xs font-bold text-on-surface-variant mb-2">
+            <span>Context window used</span>
+            <span id="pt-pct">0%</span>
+        </div>
+        <div class="h-3 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="pt-bar" class="h-full rounded-full transition-all duration-500" style="width: 0%; background-color: var(--success);"></div>
+        </div>
+    </div>
+
+    <!-- Status message -->
+    <div id="pt-status" class="text-center text-sm text-on-surface-variant mb-6 min-h-[20px]"></div>
+
+    <!-- Controls -->
+    <div class="flex justify-center gap-3 flex-wrap">
+        <button onclick="ptAdd('user')" id="pt-btn-user"
+            class="px-5 py-2 rounded-full font-bold text-sm transition-all active:scale-95"
+            style="background-color: var(--primary); color: var(--on-primary);">
+            👤 Add User Message
+        </button>
+        <button onclick="ptAdd('ai')" id="pt-btn-ai"
+            class="px-5 py-2 rounded-full font-bold text-sm transition-all active:scale-95"
+            style="background-color: var(--accent); color: white;">
+            🤖 Add AI Reply
+        </button>
+        <button onclick="ptReset()"
+            class="px-5 py-2 rounded-full font-bold text-sm transition-all active:scale-95 bg-surface-container-highest text-on-surface-variant">
+            ↩ Reset
+        </button>
+    </div>
+</div>
+
+<script>
+(function() {
+    var MAX_ENTRIES = 8;
+    var userMsgs = [
+        'Hi! My name is Alex.',
+        'I love Italian food.',
+        'What are some good pasta recipes?',
+        'How long should I cook spaghetti?',
+        'What sauce goes with penne?'
+    ];
+    var aiMsgs = [
+        'Nice to meet you, Alex! How can I help?',
+        'Great choice! Italy has incredible cuisine.',
+        'Try carbonara or amatriciana — both classic!',
+        'Al dente is about 8–9 minutes in boiling water.',
+        'Arrabbiata or pesto both pair beautifully with penne!'
+    ];
+
+    var userIdx = 0;
+    var aiIdx = 0;
+    var entries = [];
+
+    function render() {
+        var container = document.getElementById('pt-entries');
+        container.innerHTML = '';
+        entries.forEach(function(e, i) {
+            var div = document.createElement('div');
+            var isTrimmed = i < entries.length - MAX_ENTRIES;
+            // We never actually remove entries; we grey out the oldest ones
+            var isOld = entries.length > MAX_ENTRIES && i < entries.length - MAX_ENTRIES;
+            div.className = 'flex gap-2 items-start rounded px-2 py-1 transition-all';
+            if (isOld) {
+                div.style.opacity = '0.3';
+                div.style.textDecoration = 'line-through';
+            }
+            var label = e.type === 'user'
+                ? '<span style="color:var(--primary);font-weight:bold;">USER:</span>'
+                : '<span style="color:var(--accent);font-weight:bold;">AI:</span>';
+            div.innerHTML = label + ' <span class="text-on-surface">' + e.text + '</span>';
+            container.appendChild(div);
+        });
+
+        // Scroll to bottom
+        var tape = document.getElementById('pt-tape');
+        tape.scrollTop = tape.scrollHeight;
+
+        // Update bar
+        var used = Math.min(entries.length, MAX_ENTRIES);
+        var pct = Math.round((used / MAX_ENTRIES) * 100);
+        var bar = document.getElementById('pt-bar');
+        bar.style.width = pct + '%';
+        document.getElementById('pt-pct').textContent = pct + '%';
+
+        if (pct < 60) {
+            bar.style.backgroundColor = 'var(--success)';
+        } else if (pct < 85) {
+            bar.style.backgroundColor = '#E8B840';
+        } else {
+            bar.style.backgroundColor = 'var(--error)';
+        }
+
+        // Status
+        var status = document.getElementById('pt-status');
+        if (entries.length === 0) {
+            status.textContent = '';
+        } else if (entries.length <= MAX_ENTRIES) {
+            status.textContent = 'The tape is growing. The AI re-reads all of this before each response.';
+            status.style.color = 'var(--on-surface-variant)';
+        } else {
+            var trimmed = entries.length - MAX_ENTRIES;
+            status.textContent = '⚠️ Context window full! The oldest ' + trimmed + ' message' + (trimmed > 1 ? 's have' : ' has') + ' been cut off. The AI has forgotten them.';
+            status.style.color = 'var(--error)';
+        }
+    }
+
+    window.ptAdd = function(type) {
+        var text;
+        if (type === 'user') {
+            text = userMsgs[userIdx % userMsgs.length];
+            userIdx++;
+        } else {
+            text = aiMsgs[aiIdx % aiMsgs.length];
+            aiIdx++;
+        }
+        entries.push({ type: type, text: text });
+        render();
+    };
+
+    window.ptReset = function() {
+        entries = [];
+        userIdx = 0;
+        aiIdx = 0;
+        render();
+    };
+
+    render();
+})();
+</script>

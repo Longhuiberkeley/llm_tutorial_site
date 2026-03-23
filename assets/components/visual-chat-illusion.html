@@ -1,0 +1,117 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline">The AI Re-reads Everything, Every Time</h3>
+        <p class="text-sm text-on-surface-variant">Press "Send" to see what really happens</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <!-- Chat history column -->
+        <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3 opacity-60">Conversation So Far</div>
+            <div id="ci-history" class="space-y-3 text-sm min-h-[220px]">
+                <div class="ci-msg flex justify-end">
+                    <div class="bg-primary text-on-primary rounded-xl rounded-tr-sm px-4 py-2 max-w-[90%]">Hi! My name is Alex.</div>
+                </div>
+                <div class="ci-msg flex justify-start">
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl rounded-tl-sm px-4 py-2 max-w-[90%]">Nice to meet you, Alex! How can I help?</div>
+                </div>
+                <div class="ci-msg flex justify-end">
+                    <div class="bg-primary text-on-primary rounded-xl rounded-tr-sm px-4 py-2 max-w-[90%]">I love Italian food.</div>
+                </div>
+                <div class="ci-msg flex justify-start">
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl rounded-tl-sm px-4 py-2 max-w-[90%]">Great taste! Italy has amazing cuisine.</div>
+                </div>
+            </div>
+
+            <!-- New message input (display only) -->
+            <div class="mt-4 flex gap-2 items-center">
+                <div class="flex-grow bg-surface-container-lowest border border-outline-variant rounded-full px-4 py-2 text-sm text-on-surface-variant italic">
+                    "What's my name again?"
+                </div>
+                <button onclick="ciSend()" id="ci-send-btn"
+                    class="px-5 py-2 rounded-full font-bold text-sm transition-all active:scale-95"
+                    style="background-color: var(--accent); color: white;">
+                    Send →
+                </button>
+            </div>
+        </div>
+
+        <!-- What the AI does column -->
+        <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3 opacity-60">What the AI Does</div>
+            <div id="ci-status" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 min-h-[220px] flex flex-col justify-center">
+                <div class="text-center text-on-surface-variant">
+                    <div class="text-4xl mb-3">💤</div>
+                    <p class="text-sm">Waiting for a message...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ci-result" class="hidden mt-6 rounded-xl p-4 text-center font-bold text-sm" style="background-color: var(--tertiary-container); color: var(--on-tertiary-container);">
+        ✅ "Your name is Alex!" — It re-read everything to find out!
+    </div>
+</div>
+
+<script>
+(function() {
+    var step = 0;
+    var steps = [
+        { icon: '📜', text: 'Reading message 1: "Hi! My name is Alex."', highlight: 0 },
+        { icon: '📜', text: 'Reading message 2: "Nice to meet you, Alex!"', highlight: 1 },
+        { icon: '📜', text: 'Reading message 3: "I love Italian food."', highlight: 2 },
+        { icon: '📜', text: 'Reading message 4: "Great taste! Italy has amazing cuisine."', highlight: 3 },
+        { icon: '💬', text: 'Reading your new message: "What\'s my name again?"', highlight: -1 },
+        { icon: '🧠', text: 'Found it in message 1! Composing reply...', highlight: 0 }
+    ];
+    var timer = null;
+    var msgs = null;
+
+    window.ciSend = function() {
+        if (timer) return;
+        document.getElementById('ci-send-btn').disabled = true;
+        document.getElementById('ci-send-btn').style.opacity = '0.5';
+        document.getElementById('ci-result').classList.add('hidden');
+        msgs = document.querySelectorAll('.ci-msg');
+        step = 0;
+        runStep();
+    };
+
+    function runStep() {
+        if (step >= steps.length) {
+            // Done
+            msgs.forEach(function(m) { m.style.opacity = '1'; m.style.transform = ''; });
+            document.getElementById('ci-status').innerHTML = '<div class="text-center"><div class="text-4xl mb-3">✅</div><p class="text-sm font-bold" style="color:var(--success)">Done! Re-read all 4 messages<br>before answering.</p></div>';
+            document.getElementById('ci-result').classList.remove('hidden');
+            document.getElementById('ci-send-btn').disabled = false;
+            document.getElementById('ci-send-btn').style.opacity = '1';
+            timer = null;
+            return;
+        }
+
+        var s = steps[step];
+        document.getElementById('ci-status').innerHTML =
+            '<div class="text-center">' +
+            '<div class="text-4xl mb-3 animate-bounce">' + s.icon + '</div>' +
+            '<p class="text-sm font-medium text-on-surface">' + s.text + '</p>' +
+            '<p class="text-xs text-on-surface-variant mt-2 opacity-60">Re-read pass ' + (step + 1) + ' of ' + steps.length + '</p>' +
+            '</div>';
+
+        // Highlight the corresponding message
+        msgs.forEach(function(m, i) {
+            if (s.highlight >= 0 && i === s.highlight) {
+                m.style.opacity = '1';
+                m.style.transform = 'scale(1.02)';
+                m.style.transition = 'all 0.3s';
+            } else {
+                m.style.opacity = '0.35';
+                m.style.transform = '';
+                m.style.transition = 'all 0.3s';
+            }
+        });
+
+        step++;
+        timer = setTimeout(runStep, 700);
+    }
+})();
+</script>

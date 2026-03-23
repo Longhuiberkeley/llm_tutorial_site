@@ -14,7 +14,10 @@
 <body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
-        <div class="text-xl font-bold text-on-surface tracking-tighter font-headline">LLM Tutorial</div>
+        <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
+            <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
+            LLM Tutorial
+        </a>
         <div class="flex items-center gap-6">
             <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="pages/about.html">About</a>
         </div>
@@ -39,15 +42,15 @@
                 <div class="flex items-baseline gap-4 mb-8">
                     <h2 class="text-3xl font-headline font-bold text-primary uppercase">Basics</h2>
                     <span class="h-px flex-1 bg-outline-variant opacity-15"></span>
-                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">What are LLMs and what can't they do?</span>
+                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">What are LLMs and how do they work?</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
                     <a href="pages/chapter-01-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ">
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🧠</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 01</p>
-                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Intuition</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">How LLMs 'think' - understanding autocomplete × 999.</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Building Intuition</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">LLMs are just autocomplete at massive scale.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -57,7 +60,7 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🔡</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 02</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Under the Hood</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Tokenization, ELI5 Attention, and the math of context.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Tokenization, attention, context windows, and how models are trained.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -66,8 +69,8 @@
                     <a href="pages/chapter-03-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ">
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🎭</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 03</p>
-                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">The LLM Black Box</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Demystifying the chat illusion and hidden system prompts.</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">How Chat Really Works</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">The chat illusion, the Sandwich, and system prompts.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -77,7 +80,7 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🚧</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 04</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">LLM Limitations</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Why they can't count, and why they hallucinate.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Why they can't count, why they hallucinate, and when to watch out.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -86,8 +89,8 @@
                     <a href="pages/chapter-05-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ">
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">✍️</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 05</p>
-                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Writing Effective Prompts</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">A framework for communicating clearly with LLMs.</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Prompting Best Practices</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Know when to trust it, be explicit, few-shot, chain-of-thought, and learning with LLMs.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -108,7 +111,7 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🛠️</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 06</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Tool Use & Agents</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Giving LLMs calculators, search engines, and agency.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Giving LLMs calculators, search engines, MCP, and agency.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -118,7 +121,7 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">📚</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 07</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">RAG & Context Engineering</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Retrieval Augmented Generation and the Lawyer case study.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Retrieval Augmented Generation, vector embeddings, and the Lawyer case study.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -128,7 +131,7 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🧠</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 08</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Memory & Personalization</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Why they forget, and the 'Jarvis' context problem.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Why LLMs forget, what companies are trying, and privacy trade-offs.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -138,7 +141,7 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🖼️</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 09</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Beyond Text</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Multimodal AI: Understanding vs. Generating.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Multimodal AI, OCR, and document extraction.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -151,7 +154,7 @@
                 <div class="flex items-baseline gap-4 mb-8">
                     <h2 class="text-3xl font-headline font-bold text-primary uppercase">Business</h2>
                     <span class="h-px flex-1 bg-outline-variant opacity-15"></span>
-                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">How do I use this in my business?</span>
+                    <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">Think → Decide → Execute</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
@@ -159,27 +162,27 @@
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🗺️</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 10</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">The LLM Landscape</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Choosing your model: Speed, Truthfulness, and Cost.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Choosing your model: providers, tiers, open vs closed, Web UI vs API.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
                     </a>
             
                     <a href="pages/chapter-11-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ">
-                        <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">⚖️</span>
+                        <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🏢</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 11</p>
-                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">To Automate or Not?</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">RPA vs Agentic AI: The Volume vs Variance Matrix.</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Culture & AI Change</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">The augmentation narrative, AI literacy, readiness, and lessons from past tech shifts.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
                     </a>
             
                     <a href="pages/chapter-12-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ">
-                        <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🏢</span>
+                        <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">⚖️</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 12</p>
-                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">The MBA of AI Change</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Managing workplace change and leadership's role.</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Automation & Implementation</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">RPA vs Agentic AI, the Volume vs Variance Matrix, and ROI.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>
@@ -188,8 +191,8 @@
                     <a href="pages/chapter-13-01.html" class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ">
                         <span class="absolute top-4 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">📊</span>
                         <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter 13</p>
-                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Project Management for AI</h3>
-                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Harness Engineering, Spec-Kits, and Golden Datasets.</p>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Managing AI-Assisted Projects</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-6">SPEC Kits, test sets, traceability, the vibe coding trap, and AI-driven review.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             Start Learning <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </div>

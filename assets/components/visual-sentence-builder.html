@@ -4,12 +4,12 @@
             "My favorite pet is a" <span id="builder-target" class="animate-pulse text-primary border-b-2 border-primary">___</span>
         </div>
     </div>
-    
+
     <h4 class="font-bold text-center text-on-surface-variant mb-6 uppercase tracking-wider text-sm">Select the next word based on distance</h4>
-    
+
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <!-- Dog -->
-        <button onclick="selectWord('🐕 dog', true)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+        <button onclick="selectWord('🐕 dog', true, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
             <span class="text-4xl mb-2">🐕</span>
             <span class="font-bold">dog</span>
             <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
@@ -17,9 +17,9 @@
             </div>
             <span class="text-xs text-on-surface-variant mt-1 font-bold">90% match</span>
         </button>
-        
+
         <!-- Pizza -->
-        <button onclick="selectWord('🍕 pizza', false)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+        <button onclick="selectWord('🍕 pizza', false, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
             <span class="text-4xl mb-2">🍕</span>
             <span class="font-bold">pizza</span>
             <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
@@ -29,7 +29,7 @@
         </button>
 
         <!-- Car -->
-        <button onclick="selectWord('🚗 car', false)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+        <button onclick="selectWord('🚗 car', false, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
             <span class="text-4xl mb-2">🚗</span>
             <span class="font-bold">car</span>
             <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
@@ -39,7 +39,7 @@
         </button>
 
         <!-- Phone -->
-        <button onclick="selectWord('📱 phone', false)" class="group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
+        <button onclick="selectWord('📱 phone', false, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
             <span class="text-4xl mb-2">📱</span>
             <span class="font-bold">phone</span>
             <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
@@ -55,22 +55,32 @@
 </div>
 
 <script>
-function selectWord(word, isCorrect) {
+function selectWord(word, isCorrect, btn) {
     const target = document.getElementById('builder-target');
     const feedback = document.getElementById('builder-feedback');
-    
+
+    // Remove previous states from all buttons
+    btn.closest('.grid').querySelectorAll('.quiz-option').forEach(function(b) {
+        b.classList.remove('correct', 'wrong');
+        b.disabled = true;
+    });
+
+    // Apply correct/wrong class to the clicked button
+    btn.classList.add(isCorrect ? 'correct' : 'wrong');
+
     target.textContent = word;
     target.classList.remove('animate-pulse');
-    
+
     feedback.style.opacity = '1';
     if (isCorrect) {
-        target.className = "text-primary font-bold";
-        feedback.innerHTML = `✅ Correct! "Dog" has the closest distance in meaning-space to "pet".`;
-        feedback.className = "mt-8 text-center text-lg font-bold text-green-600 transition-opacity";
+        target.className = 'text-primary font-bold';
+        feedback.innerHTML = '✅ Correct! "Dog" has the closest distance in meaning-space to "pet".';
+        feedback.className = 'mt-8 text-center text-lg font-bold text-green-600 transition-opacity';
     } else {
-        target.className = "text-on-error font-bold";
-        feedback.innerHTML = `❌ While grammatically possible, "${word}" is far away from "pet" in meaning-space.`;
-        feedback.className = "mt-8 text-center text-lg font-bold text-error transition-opacity";
+        target.className = 'font-bold';
+        feedback.innerHTML = '❌ While grammatically possible, "' + word + '" is far away from "pet" in meaning-space.';
+        feedback.className = 'mt-8 text-center text-lg font-bold transition-opacity';
+        feedback.style.color = 'var(--error)';
     }
 }
 </script>

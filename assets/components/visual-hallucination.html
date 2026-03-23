@@ -1,0 +1,86 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-1">Confident, but Wrong</h3>
+        <p class="text-sm text-on-surface-variant">Click to ask the AI a question. Spot the hallucination.</p>
+    </div>
+
+    <!-- Question buttons -->
+    <div class="grid sm:grid-cols-2 gap-3 mb-8" id="hall-questions">
+        <button onclick="hallAsk(0)" class="quiz-option rounded-xl border-2 border-outline-variant bg-surface-container-lowest px-5 py-4 text-left hover:border-primary hover:shadow transition-all active:scale-95">
+            <div class="font-bold text-sm mb-1">📚 Ask about a book</div>
+            <div class="text-xs text-on-surface-variant">"What happens in Chapter 7 of <em>The Sky Eaters</em>?"</div>
+        </button>
+        <button onclick="hallAsk(1)" class="quiz-option rounded-xl border-2 border-outline-variant bg-surface-container-lowest px-5 py-4 text-left hover:border-primary hover:shadow transition-all active:scale-95">
+            <div class="font-bold text-sm mb-1">📜 Ask for a citation</div>
+            <div class="text-xs text-on-surface-variant">"Give me a study showing coffee improves focus."</div>
+        </button>
+        <button onclick="hallAsk(2)" class="quiz-option rounded-xl border-2 border-outline-variant bg-surface-container-lowest px-5 py-4 text-left hover:border-primary hover:shadow transition-all active:scale-95">
+            <div class="font-bold text-sm mb-1">🧑 Ask about a person</div>
+            <div class="text-xs text-on-surface-variant">"Write a bio of Dr. Marcus Finch, AI researcher."</div>
+        </button>
+        <button onclick="hallAsk(3)" class="quiz-option rounded-xl border-2 border-outline-variant bg-surface-container-lowest px-5 py-4 text-left hover:border-primary hover:shadow transition-all active:scale-95">
+            <div class="font-bold text-sm mb-1">📅 Ask recent news</div>
+            <div class="text-xs text-on-surface-variant">"What did the president announce yesterday?"</div>
+        </button>
+    </div>
+
+    <!-- AI response -->
+    <div id="hall-response" class="hidden rounded-xl border-2 p-6" style="border-color: var(--error); background-color: var(--error-container);">
+        <div class="flex items-start gap-4">
+            <div class="text-3xl">🤖</div>
+            <div>
+                <div class="text-xs font-bold uppercase tracking-widest mb-2 opacity-60" style="color: var(--on-error-container);">AI Response (sounds convincing!)</div>
+                <p id="hall-text" class="text-sm leading-relaxed" style="color: var(--on-error-container);"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Truth reveal -->
+    <div id="hall-truth" class="hidden mt-4 rounded-xl border-2 p-5" style="border-color: var(--success); background-color: var(--success-container);">
+        <div class="flex items-start gap-3">
+            <div class="text-2xl">🔍</div>
+            <div>
+                <div class="text-xs font-bold uppercase tracking-widest mb-1" style="color: var(--on-success-container); opacity: 0.7;">Reality Check</div>
+                <p id="hall-truth-text" class="text-sm font-medium" style="color: var(--on-success-container);"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    var examples = [
+        {
+            response: "In Chapter 7 of <em>The Sky Eaters</em> by R.J. Hollow, protagonist Mara discovers the signal was artificial all along. The chapter opens with her decrypting the final frequency, revealing coordinates pointing to Titan. Critics called it \"the pivot that saved the series.\"",
+            truth: "<em>The Sky Eaters</em> by R.J. Hollow doesn't exist. The AI invented the book, the author, the plot, and the review quote — all plausible-sounding, all fictional."
+        },
+        {
+            response: "A 2021 study published in the <em>Journal of Cognitive Enhancement</em> (Vol. 14, No. 3) by Peterson & Lim found that 200mg of caffeine improved sustained attention by 18% in adults under sleep restriction (n=94, p&lt;0.01).",
+            truth: "This study citation is fabricated. The journal, volume number, authors, and statistics are all invented. The AI recognized the pattern of a real citation and \"completed\" it with plausible-sounding details."
+        },
+        {
+            response: "Dr. Marcus Finch (b. 1974) is an AI researcher at the Oxford Internet Institute known for his work on \"alignment by example\" — a method for training models using curated human feedback loops. He published <em>Shaping Minds: The Ethics of Machine Learning</em> in 2019.",
+            truth: "Dr. Marcus Finch doesn't appear to exist. No such book or affiliation can be verified. The AI filled in a fictional biography using the common patterns of real academic bios."
+        },
+        {
+            response: "Yesterday, the president announced a new $40 billion infrastructure initiative focusing on rural broadband expansion and electric grid modernization, set to create approximately 200,000 jobs over the next five years.",
+            truth: "The AI has no internet access and doesn't know what happened yesterday. It invented a plausible-sounding announcement using patterns from past news. Always verify current events from real sources."
+        }
+    ];
+
+    window.hallAsk = function(idx) {
+        // Mark button states
+        var btns = document.querySelectorAll('#hall-questions .quiz-option');
+        btns.forEach(function(b, i) {
+            b.classList.remove('correct', 'wrong');
+            if (i === idx) b.classList.add('wrong');
+        });
+
+        var e = examples[idx];
+        document.getElementById('hall-text').innerHTML = e.response;
+        document.getElementById('hall-truth-text').innerHTML = e.truth;
+        document.getElementById('hall-response').classList.remove('hidden');
+        document.getElementById('hall-truth').classList.remove('hidden');
+    };
+})();
+</script>

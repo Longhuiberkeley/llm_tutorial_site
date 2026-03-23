@@ -1,0 +1,99 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-1">What's Actually in Every Message You Send?</h3>
+        <p class="text-sm text-on-surface-variant">Click to switch views</p>
+    </div>
+
+    <!-- View toggle -->
+    <div class="flex justify-center gap-3 mb-8">
+        <button id="sp-btn-user" onclick="spSwitch('user')"
+            class="px-6 py-2 rounded-full font-bold text-sm transition-all"
+            style="background-color: var(--primary); color: var(--on-primary);">
+            👤 What you see
+        </button>
+        <button id="sp-btn-real" onclick="spSwitch('real')"
+            class="px-6 py-2 rounded-full font-bold text-sm transition-all bg-surface-container-highest text-on-surface-variant">
+            🔍 What really goes in
+        </button>
+    </div>
+
+    <!-- User view: simple chat -->
+    <div id="sp-view-user">
+        <div class="space-y-4 max-w-md mx-auto">
+            <div class="flex justify-end">
+                <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 max-w-xs text-sm font-medium shadow">
+                    What's the weather like in Paris?
+                </div>
+            </div>
+            <div class="flex justify-start">
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl rounded-tl-sm px-5 py-3 max-w-xs text-sm shadow">
+                    The current weather in Paris is partly cloudy with a temperature of 14°C...
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 max-w-xs text-sm font-medium shadow">
+                    Should I bring an umbrella?
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-xs text-on-surface-variant mt-6 opacity-60 italic">This is what the chat app shows you — clean and simple.</p>
+    </div>
+
+    <!-- Real view: the sandwich -->
+    <div id="sp-view-real" class="hidden">
+        <div class="space-y-2 text-sm font-mono">
+            <!-- System prompt layer -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: color-mix(in srgb, var(--primary) 10%, var(--surface-container-lowest)); border-color: var(--primary);">
+                <div class="font-bold text-xs uppercase tracking-widest mb-1" style="color: var(--primary);">🔒 System Prompt (hidden — set by the app)</div>
+                <div class="text-on-surface-variant text-xs">You are a helpful weather assistant. Always use metric units. Never discuss competitors. Be concise.</div>
+            </div>
+            <!-- Turn 1 user -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest)); border-color: var(--accent);">
+                <div class="font-bold text-xs uppercase tracking-widest mb-1" style="color: var(--accent);">👤 User Turn 1</div>
+                <div class="text-on-surface-variant text-xs">What's the weather like in Paris?</div>
+            </div>
+            <!-- Turn 1 AI -->
+            <div class="rounded-lg px-4 py-3 border-l-4 border-outline-variant bg-surface-container-lowest">
+                <div class="font-bold text-xs uppercase tracking-widest mb-1 text-on-surface-variant">🤖 Assistant Turn 1</div>
+                <div class="text-on-surface-variant text-xs">The current weather in Paris is partly cloudy, 14°C...</div>
+            </div>
+            <!-- Turn 2 user -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest)); border-color: var(--accent);">
+                <div class="font-bold text-xs uppercase tracking-widest mb-1" style="color: var(--accent);">👤 User Turn 2</div>
+                <div class="text-on-surface-variant text-xs">Should I bring an umbrella?</div>
+            </div>
+            <!-- AI is generating -->
+            <div class="rounded-lg px-4 py-3 border-l-4 border-dashed border-outline-variant bg-surface-container-low opacity-70">
+                <div class="font-bold text-xs uppercase tracking-widest mb-1 text-on-surface-variant">🤖 Assistant Turn 2 (generating...)</div>
+                <div class="text-on-surface-variant text-xs animate-pulse">▋</div>
+            </div>
+        </div>
+        <p class="text-center text-xs text-on-surface-variant mt-6 opacity-60 italic">Every single time you send a message, the entire stack above is re-sent to the model.</p>
+    </div>
+</div>
+
+<script>
+function spSwitch(view) {
+    var isUser = (view === 'user');
+    document.getElementById('sp-view-user').classList.toggle('hidden', !isUser);
+    document.getElementById('sp-view-real').classList.toggle('hidden', isUser);
+
+    var activeStyle = 'background-color: var(--primary); color: var(--on-primary);';
+    var inactiveClass = 'bg-surface-container-highest text-on-surface-variant';
+
+    var btnUser = document.getElementById('sp-btn-user');
+    var btnReal = document.getElementById('sp-btn-real');
+
+    if (isUser) {
+        btnUser.setAttribute('style', activeStyle);
+        btnUser.className = 'px-6 py-2 rounded-full font-bold text-sm transition-all';
+        btnReal.setAttribute('style', '');
+        btnReal.className = 'px-6 py-2 rounded-full font-bold text-sm transition-all bg-surface-container-highest text-on-surface-variant';
+    } else {
+        btnReal.setAttribute('style', activeStyle);
+        btnReal.className = 'px-6 py-2 rounded-full font-bold text-sm transition-all';
+        btnUser.setAttribute('style', '');
+        btnUser.className = 'px-6 py-2 rounded-full font-bold text-sm transition-all bg-surface-container-highest text-on-surface-variant';
+    }
+}
+</script>
