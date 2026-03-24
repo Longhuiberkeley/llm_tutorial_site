@@ -27,10 +27,8 @@ Context poisoning occurs when false information, hallucinations, or errors are i
 
 :::callout-error
 **Once it's in, it's in.** Most data quality problems end when you fix the input. Not here. Once bad data is in an LLM's conversation history, it rides along for the rest of the session. When you notice things going off-track — wrong facts, compounding errors — don't try to patch it. Start a fresh conversation with a clean slate.
-:::
-
-:::callout-dyk
 The safest rule: treat each important LLM session like a blank whiteboard. Start fresh, provide the correct information upfront, and you avoid carrying old mistakes forward.
 :::
+
 
 :::quiz{id="04-04"}

@@ -132,6 +132,12 @@
 }
 .callout-error::before { content: "⚠️ Common Error"; font-weight: 600; color: var(--error); display: block; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
 
+.callout-tip {
+    background: #F0FDF4;
+    border-left-color: #4CAF50;
+}
+.callout-tip::before { content: "✅ Pro Tip"; font-weight: 600; color: #4CAF50; display: block; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+
 /* Links inside callout boxes */
 .callout a {
     color: #5C94CC;

@@ -262,7 +262,7 @@
 <li>Learn the strategies (truncation vs. summarization) used to manage full memory.</li>
 </ul>
 <div class="callout callout-tldr">
-    When the AI&#39;s &quot;receipt tape&quot; (Context Window) runs out of space, something has to be deleted. You either chop off the top of the conversation, or you write a tiny summary to replace it.
+    When the LLM's "receipt tape" (Context Window) runs out of space, something has to give. There are three common approaches: brutally chop the oldest messages off the top (Truncation), compress old messages into a tiny summary before dropping them (Summarization), or keep a pinned system prompt plus only the most recent messages (Sliding Window).
 </div>
 
 
@@ -328,19 +328,31 @@
 
     <!-- SECTION 2: LLM TAPE -->
     <div>
-        <div class="text-center mb-8">
+        <div class="text-center mb-6">
             <h3 class="text-xl font-bold font-headline mb-1">2. How the LLM Manages a Full Head</h3>
             <p class="text-sm text-on-surface-variant italic">Same conversation — different strategies for handling a full context window.</p>
         </div>
 
-        <!-- Strategy Buttons -->
-        <div class="flex justify-center gap-2 mb-8">
-            <button onclick="hfSwitch('trunc')" id="hf-btn-trunc" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-primary text-on-primary">✂️ Truncation</button>
-            <button onclick="hfSwitch('sum')" id="hf-btn-sum" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-surface-container-highest text-on-surface">📝 Summarization</button>
-            <button onclick="hfSwitch('slide')" id="hf-btn-slide" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-surface-container-highest text-on-surface">🪟 Sliding Window</button>
+        <!-- Scenario: context meter -->
+        <div class="mb-8 p-4 bg-surface-container-lowest rounded-xl border border-outline-variant">
+            <div class="flex justify-between items-center text-xs font-bold mb-2">
+                <span class="text-on-surface-variant">Context Window Used</span>
+                <span style="color: var(--error);">192,000 / 200,000 tokens ⚠️</span>
+            </div>
+            <div class="h-2.5 bg-surface-container rounded-full overflow-hidden">
+                <div class="h-full rounded-full transition-all" style="width: 96%; background-color: var(--error);"></div>
+            </div>
+            <p class="text-sm text-on-surface-variant mt-3">You've been working in this chat for hours — uploading documents, iterating on analysis, refining drafts. The 200K window is nearly full. <strong class="text-on-surface">The system must act. Which strategy does it use?</strong></p>
         </div>
 
-        <div id="hf-tape-container" class="relative bg-surface-container-lowest border-2 border-outline-variant rounded-xl overflow-hidden max-w-sm mx-auto" style="height: 260px;">
+        <!-- Strategy Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button onclick="hfSwitch('trunc')" id="hf-btn-trunc" class="px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-md bg-primary text-on-primary">✂️ Truncation</button>
+            <button onclick="hfSwitch('sum')" id="hf-btn-sum" class="px-6 py-3 rounded-xl text-sm font-bold transition-all bg-surface-container-highest text-on-surface border-2 border-transparent">📝 Summarization</button>
+            <button onclick="hfSwitch('slide')" id="hf-btn-slide" class="px-6 py-3 rounded-xl text-sm font-bold transition-all bg-surface-container-highest text-on-surface border-2 border-transparent">🪟 Sliding Window</button>
+        </div>
+
+        <div id="hf-tape-container" class="relative bg-surface-container-lowest border-2 border-outline-variant rounded-xl overflow-hidden max-w-sm mx-auto" style="height: 340px;">
             <div id="hf-tape" class="w-full p-3 space-y-1 text-xs font-mono transition-all duration-500">
                 <!-- Content added by JS -->
             </div>
@@ -402,21 +414,23 @@ function hfPhone(btn, correct) {
 }
 
 // Full conversation (same base for all 3 strategies)
+// Scenario: business user uploads two PDFs, asks several analysis questions, then context fills up
 var baseConvo = [
-    { role: 'user', text: 'Hi! My name is Peter. Call me Pete.' },
-    { role: 'llm',  text: 'Hi Pete! Great to meet you.' },
-    { role: 'user', text: 'I\'m working on a marketing brief for Q3.' },
-    { role: 'llm',  text: 'Happy to help! What\'s the target audience?' },
-    { role: 'user', text: 'Millennials in urban areas, age 28-40.' },
-    { role: 'llm',  text: 'Got it. I\'ll keep that in mind.' },
-    { role: 'user', text: 'Also, our budget is $50K for the quarter.' },
-    { role: 'llm',  text: 'Understood — $50K, urban millennials, Q3.' },
-    { role: 'user', text: 'Draft a headline for a social media campaign.' },
-    { role: 'llm',  text: '(Current message — generating now...)' }
+    { role: 'sys',  text: '⚙️ SYSTEM: You are a document analysis assistant. Be precise and cite sources.' },
+    { role: 'user', text: '📎 [Uploaded: Q3_Financial_Report.pdf — 42 pages]' },
+    { role: 'llm',  text: 'Got it. I\'ve read the Q3 Financial Report. What would you like to know?' },
+    { role: 'user', text: '📎 [Uploaded: CompetitorAnalysis_2025.pdf — 28 pages]' },
+    { role: 'llm',  text: 'Both documents loaded. The competitor analysis covers six rivals. Ready when you are.' },
+    { role: 'user', text: 'What was our gross margin in Q3?' },
+    { role: 'llm',  text: 'From the Q3 report: gross margin was 34.2%, up 1.8 pts year-over-year.' },
+    { role: 'user', text: 'How does that compare to our top competitor?' },
+    { role: 'llm',  text: 'Competitor A posted 31.5% gross margin per the competitor analysis — we\'re ahead.' },
+    { role: 'user', text: 'Summarise both documents into a one-page exec brief.' },
+    { role: 'llm',  text: '(Current — generating exec brief now...)' }
 ];
 
 function makeRow(role, text, style) {
-    var prefix = role === 'user' ? '👤 ' : '🤖 ';
+    var prefix = role === 'user' ? '👤 ' : (role === 'sys' ? '' : '🤖 ');
     var base = 'rounded px-2 py-1 text-on-surface-variant';
     var extra = style || '';
     return '<div class="' + base + ' ' + extra + '">' + prefix + text + '</div>';
@@ -426,40 +440,46 @@ var hfContent = {
     trunc: {
         build: function() {
             var rows = [];
-            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-30 line-through">' + '👤 Hi! My name is Peter. Call me Pete.' + '</div>');
-            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-30 line-through">' + '🤖 Hi Pete! Great to meet you.' + '</div>');
-            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-40 line-through">' + '👤 I\'m working on a marketing brief for Q3.' + '</div>');
-            for (var i = 3; i < 9; i++) {
+            // Brute chop: system prompt and both PDF uploads are gone — no structure, no mercy
+            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-25 line-through text-xs">⚙️ SYSTEM: You are a document analysis assistant. Be precise and cite sources.</div>');
+            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-25 line-through text-xs">👤 📎 [Uploaded: Q3_Financial_Report.pdf — 42 pages]</div>');
+            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-25 line-through text-xs">🤖 Got it. I\'ve read the Q3 Financial Report. What would you like to know?</div>');
+            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-25 line-through text-xs">👤 📎 [Uploaded: CompetitorAnalysis_2025.pdf — 28 pages]</div>');
+            for (var i = 4; i < 10; i++) {
                 rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
             }
-            rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating...)</div>');
+            rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating exec brief now...)</div>');
             return rows;
         },
-        desc: '✂️ Truncation: Oldest messages are cut off. "Pete" is gone — the LLM no longer knows the user\'s name.'
+        desc: '✂️ Truncation: The oldest messages are deleted from the top — no structure, no mercy. The system prompt is gone. Both uploaded PDFs are gone. The LLM is now being asked to summarise documents it can no longer see.'
     },
     sum: {
         build: function() {
             var rows = [];
-            rows.push('<div class="rounded px-2 py-1 bg-primary/10 border border-primary/20 text-primary font-bold">📝 SUMMARY: User is Pete. Working on Q3 marketing brief. Audience: urban millennials 28-40. Budget: $50K.</div>');
-            for (var i = 4; i < 9; i++) {
+            rows.push('<div class="rounded px-2 py-1 bg-primary/10 border border-primary/20 text-primary font-bold text-xs">📝 SUMMARY: User uploaded Q3 Financial Report (gross margin 34.2%, +1.8pts YoY) and CompetitorAnalysis_2025 (Competitor A at 31.5%). Requested exec brief.</div>');
+            for (var i = 5; i < 10; i++) {
                 rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
             }
-            rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating...)</div>');
+            rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating exec brief now...)</div>');
             return rows;
         },
-        desc: '📝 Summarization: Old messages are compressed into a brief note. Core context preserved, exact wording lost.'
+        desc: '📝 Summarization: The PDFs and early Q&A are compressed into a brief note before being dropped. Key numbers survive, but the LLM can no longer quote exact passages or page references — detail is permanently lost in translation.'
     },
     slide: {
         build: function() {
             var rows = [];
-            rows.push('<div class="rounded px-2 py-1 bg-primary/5 border border-primary/10 text-xs font-bold opacity-60 text-on-surface-variant">[System prompt always pinned at top]</div>');
-            for (var i = 3; i < 9; i++) {
+            // System prompt always pinned — structured and deliberate
+            rows.push('<div class="rounded px-2 py-1 bg-primary/5 border border-primary/20 text-xs font-bold text-on-surface-variant">📌 PINNED — ⚙️ SYSTEM: You are a document analysis assistant. Be precise and cite sources.</div>');
+            // PDF uploads still fall outside the window — they were early user messages, not system prompt
+            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-25 line-through text-xs">👤 📎 [Uploaded: Q3_Financial_Report.pdf — 42 pages]</div>');
+            rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-25 line-through text-xs">👤 📎 [Uploaded: CompetitorAnalysis_2025.pdf — 28 pages]</div>');
+            for (var i = 4; i < 10; i++) {
                 rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
             }
-            rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating...)</div>');
+            rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating exec brief now...)</div>');
             return rows;
         },
-        desc: '🪟 Sliding Window: System prompt stays pinned; only recent messages kept. Early context like "Pete\'s name" falls away.'
+        desc: '🪟 Sliding Window: The system prompt is always pinned at the top — structured and deliberate. Only the most recent N messages are kept. The PDFs still fall out, but at least the LLM\'s core instructions survive. More predictable than brute Truncation.'
     }
 };
 
@@ -467,11 +487,11 @@ function hfSwitch(type) {
     ['trunc', 'sum', 'slide'].forEach(function(t) {
         var btn = document.getElementById('hf-btn-' + t);
         if (t === type) {
-            btn.classList.add('bg-primary', 'text-on-primary');
-            btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+            btn.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+            btn.classList.remove('bg-surface-container-highest', 'text-on-surface', 'border-transparent');
         } else {
-            btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-            btn.classList.remove('bg-primary', 'text-on-primary');
+            btn.classList.add('bg-surface-container-highest', 'text-on-surface', 'border-transparent');
+            btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
         }
     });
 
@@ -485,13 +505,14 @@ hfSwitch('trunc');
 
 
 <h2>📝 Key Concepts</h2>
+<p class="text-on-surface-variant mb-4">When a context window fills up, there are three common methods for managing it — each with very different trade-offs:</p>
 <ul>
-<li><strong>Strategy 1: Truncation (Chopping):</strong> The system simply deletes your oldest messages. If you told the AI your name in Message 1, and you are now on Message 50, the AI literally no longer has the text where you stated your name. It has been permanently forgotten.</li>
-<li><strong>Strategy 2: Summarization:</strong> Before the top messages fall off, the system asks the AI to write a quick summary (e.g., <em>&quot;User is named Peter, lives in NY&quot;</em>). It then deletes the old messages and pins the summary to the top. You save space, but you lose the exact nuance of the original messages.</li>
-<li><strong>Sliding Window:</strong> Most systems use a &quot;sliding window&quot; where they keep the most recent messages and maybe the very first &quot;System Prompt&quot; instructions, letting everything in the middle fall away.</li>
+<li><strong>✂️ Truncation (Brute Force):</strong> The system deletes the oldest messages with no structure — first in, first out. Your system prompt, your uploaded documents, your initial instructions — all vulnerable. If they sit at the top and enough turns pile on, they are gone. No warning, no summary.</li>
+<li><strong>📝 Summarization (Lossy Compression):</strong> Before old messages are dropped, the LLM writes a brief summary of them (e.g., <em>"User uploaded a Q3 report showing 34.2% gross margin"</em>). The summary is pinned and the originals deleted. You keep the gist, but exact wording, page references, and nuance are lost — it is a lossy process.</li>
+<li><strong>🪟 Sliding Window (Structured Truncation):</strong> This is deliberate, predictable truncation. The system prompt is always pinned at the top. A fixed number of the most recent conversation turns are kept. Everything outside that window is dropped. Unlike brute Truncation, your instructions survive — but document content sent as early messages can still roll out of the window.</li>
 </ul>
 <div class="callout callout-error">
-    Never use a single chat thread as a permanent &quot;workspace&quot; for months. The context will get poisoned, the top will get truncated, and the AI will become slow and confused. Always start fresh chats for new tasks!
+    Never use a single chat thread as a permanent &quot;workspace&quot; for months. The context will get poisoned, old data will be truncated, and the LLM will lose access to documents you uploaded at the start. Always start fresh chats for new tasks!
 </div>
 
 

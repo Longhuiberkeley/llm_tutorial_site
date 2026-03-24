@@ -21,7 +21,7 @@ Context rot is the degradation of an LLM's performance and accuracy as the input
 - **Bigger ≠ Better:** A 1-million token context window is impressive, but filling it all the way doesn't guarantee equal quality across all tokens. Performance measurably drops as context approaches its limit.
 
 :::callout-error
-**A long chat is not a good workspace.** The longer a conversation runs, the worse the LLM performs on complex reasoning tasks. For any important work, start a fresh session rather than extending one conversation for hours or days.
+**A long chat is not a good workspace.** The longer a conversation runs, the worse the LLM performs on complex reasoning tasks. For any important work, start a fresh session rather than extending one conversation for hours or days. Having more context doesn't necessarily mean better. While a smarter model might be able to pick out the important context from the not-so-useful ones, sometimes it doesn't. So not only might you pay more because of the rate, but you might also not get the reply you want.
 :::
 
 :::callout-dyk
