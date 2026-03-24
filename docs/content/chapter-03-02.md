@@ -1,30 +1,30 @@
 ---
-title: "3.2 The Paper Tape Metaphor"
-description: "Visualizing the context window as a literal growing roll of paper."
+title: "3.2 The Sandwich — How Messages Really Stack Up"
+description: "See the full payload structure that gets sent to the LLM on every turn."
 chapter: "Chapter 3"
 pageId: "03-02"
 ---
 
 ## 🎯 Core Goals
-- Conceptualize how the context window limits what an AI can process.
-- Understand the physical limits of current AI models.
+- Show the full "payload" structure sent to the LLM.
+- Understand that the "reply" is just the bottom layer of a huge sandwich.
 
 :::callout-tldr
-Think of the AI's "brain space" as a long roll of receipt paper. Every word you type, and every word it replies, gets printed on this tape. When the tape runs out, the AI can't read anymore!
+Every time you send a message, the AI doesn't just see your words. It sees a giant "sandwich" containing hidden instructions, your past messages, and even documents you've uploaded.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-paper-tape"}
+:::visual{name="visual-sandwich"}
 
 ## 📝 Key Concepts
 
-- **The Endless Receipt:** Every model has a maximum "Context Window" (e.g., 100,000 tokens). This is the absolute length of the paper tape. 
-- **In one ear, out the other:** When your conversation exceeds this limit, the system has to cut off the top of the receipt. The oldest messages are deleted to make room for new ones. 
-- **Reading the whole receipt:** Every time you ask a new question, the AI has to re-read the *entire* roll of paper from top to bottom before it can answer. This is why dragging a single chat thread on for weeks makes the AI sluggish!
-
-:::callout-dyk
-Did you know that modern models like Gemini 1.5 Pro have a "receipt tape" long enough to fit the entire Harry Potter series, twice? But reading that massive receipt still takes time!
-:::
+- **Layered Payload:** Your message is wrapped in several layers:
+    - **System Prompt:** Hidden instructions like "Be concise."
+    - **Pre-prompt / Context:** Injected data like RAG results or files.
+    - **Conversation History:** All previous messages from both you and the AI.
+    - **Thinking Tokens:** (For reasoning models) The model's internal work.
+- **Stateless Re-reading:** Every turn, the LLM processes ALL of this at once to generate its next reply.
+- **The Magic Trick:** What you see as a simple chat is actually a complex stack being replayed every single time you hit enter.
 
 :::quiz{id="03-02"}

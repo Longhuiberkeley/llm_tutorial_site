@@ -1,30 +1,30 @@
 ---
-title: "MCP"
-description: "The Model Context Protocol (USB-C for AI)."
+title: "6.2 MCP — Model Context Protocol"
+description: "USB-C for AI."
 chapter: "Chapter 6"
 pageId: "06-02"
 ---
 
 ## 🎯 Core Goals
-- [Placeholder for core goals]
+- Learn about the industry standard for connecting LLMs to tools.
+- Understand the "USB-C" analogy for AI interoperability.
 
 :::callout-tldr
-This page is a placeholder for the "MCP" topic. Content will be added soon!
+Before MCP, every AI tool needed custom code to talk to every LLM. **MCP** standardizes this, letting any AI model connect to any data source or tool instantly.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="placeholder-visual"}
-
-*(Visual placeholder for MCP)*
+:::visual{name="visual-mcp-usb"}
 
 ## 📝 Key Concepts
 
-- Concept 1: [To be defined]
-- Concept 2: [To be defined]
+- **Standardization:** Just like USB-C replaced dozens of different charging cables, MCP replaces hundreds of custom integrations.
+- **MCP Servers:** Small programs that expose your data or tools (e.g., your GitHub repos or a SQL database).
+- **MCP Clients:** The AI models (like Claude) that "plug into" those servers.
 
 :::callout-dyk
-Did you know that this concept is essential for mastering LLMs?
+MCP is rapidly becoming the industry standard (2025-2026), making it much easier to build complex AI applications.
 :::
 
 :::quiz{id="06-02"}

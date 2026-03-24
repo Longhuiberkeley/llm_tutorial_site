@@ -1,16 +1,16 @@
 ---
-title: "4.2 Hallucination"
-description: "Not a bug, but a feature of statistical guessing."
+title: "4.2 Hallucination — Confident Fabrication"
+description: "Why LLMs lie so confidently — it's a feature of statistical generation, not a bug."
 chapter: "Chapter 4"
 pageId: "04-02"
 ---
 
 ## 🎯 Core Goals
 - Reframe "hallucinations" as natural statistical guesses, not system errors.
-- Learn why AI lies so confidently.
+- Learn why LLMs lie so confidently.
 
 :::callout-tldr
-AI doesn't "lie"—it guesses. Because it is designed to predict the most likely next word, if it doesn't know a fact, it will simply predict a word that *sounds* like a plausible fact.
+LLMs don't "lie" — they guess. Because they are designed to predict the most likely next word, if they don't know a fact, they will simply predict words that *sound* like a plausible fact. The result is confident-sounding nonsense.
 :::
 
 ## 👁️ Visuals & Interactives
@@ -19,12 +19,16 @@ AI doesn't "lie"—it guesses. Because it is designed to predict the most likely
 
 ## 📝 Key Concepts
 
-- **Confident Guesses:** If you ask an AI for a biography of a fake person, it won't just say "I don't know." It sees the pattern of a biography (Born in [Year], attended [University]) and fills in the blanks with the most statistically common words.
-- **It's a Feature:** The exact mechanism that allows an AI to write a beautiful poem about a robot on Mars (creativity) is the same mechanism that makes it invent a fake legal case. It's just pattern-matching!
-- **Grounding:** The best way to prevent hallucinations is to provide the AI with the exact text you want it to reference (e.g., pasting in an article and asking "Summarize *this*").
+- **Confident Guesses:** If you ask an LLM for a specific data point it hasn't seen (like fashion revenue for a future year), it won't just say "I don't know." It recognizes the pattern of a financial report and fills in the blanks with statistically plausible-sounding numbers.
+- **No Internal Fact-Checker:** LLMs generate text based on patterns, not by looking up facts in a database. They have no internal mechanism to verify if a claim is true or false before saying it.
+- **It's a Feature:** The exact mechanism that allows an LLM to write a beautiful poem about a robot on Mars (creativity) is the same mechanism that makes it invent a fake legal case. It's pattern-matching all the way down.
 
 :::callout-dyk
-Did you know that AI engineers actually struggle to make models say "I don't know"? Because AI is built to always output *something*, stopping it from guessing requires intense specialized training.
+For factual data like revenue figures, market statistics, or recent events — use the **Deep Research** or **web search** tool if available. It fetches real, current information from the internet instead of pattern-guessing. When in doubt: look it up, don't ask the LLM to recall it.
+:::
+
+:::callout-dyk
+LLM engineers actually struggle to make models reliably say "I don't know." Because LLMs are built to always output *something*, training them to stop and admit ignorance requires intensive, specialized work.
 :::
 
 :::quiz{id="04-02"}

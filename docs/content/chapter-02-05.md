@@ -1,30 +1,45 @@
 ---
-title: "2.5 Context Window"
-description: "How much text can an LLM remember at once?"
+title: "2.5 How LLMs Are Trained"
+description: "The three stages that turn raw text into a helpful assistant: Pre-training, Fine-Tuning, and RLHF."
 chapter: "Chapter 2"
 pageId: "02-05"
 ---
 
 ## 🎯 Core Goals
-- Make the concept of a "Context Window" concrete.
-- Visualize what 100k or 200k tokens actually looks like.
+- Understand the three-stage training process that creates an LLM.
+- See why pre-training alone produces a chaotic autocomplete, not a helpful assistant.
+- Grasp the "candy reward" intuition behind RLHF.
 
 :::callout-tldr
-The "Context Window" is the absolute limit of how much text an LLM can pay attention to at one time. Once it fills up, the LLM cannot process additional information without specific strategies like summarization or truncating previous parts of the conversation.
+Training an LLM happens in three stages. **Pre-training** teaches the model language by having it guess missing words across billions of texts. **Fine-Tuning (SFT)** teaches it to answer questions, not just complete sentences. **RLHF** teaches it to give *good* answers, by rewarding helpful, safe responses.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-bookshelf-slider"}
+:::visual{name="visual-training"}
 
 ## 📝 Key Concepts
 
-- **The Limit of Attention:** The math of calculating attention between every single word gets incredibly expensive as text gets longer. This is why LLMs have a hard limit on their context window.
-- **Short Term Memory:** The context window is an LLM's only "memory". If you had a 50-page conversation, but the context window only fits 40 pages, the LLM will completely forget the first 10 pages.
-- **Growing Capabilities:** Early LLMs could only remember about 2,000 tokens (a few pages). Today's models can remember 200,000 to 2,000,000 tokens (entire libraries of books).
+### Stage 1: Pre-training (Learning Language from the Internet)
+- **The Analogy:** A student who reads every book, website, and forum post ever written — not to study for a test, but to absorb how language, ideas, and facts connect.
+- **How It Actually Works:** Given a sentence like *"I am learning ___ much"*, the model is trained to guess the missing word. Do this billions of times across the internet, and it absorbs grammar, facts, and reasoning patterns automatically.
+- **The Result:** A model that is a powerful — but chaotic — text completer. It can write poetry, complete code, or ramble like a forum post. But it has no idea how to be a polite, helpful assistant.
+
+### Stage 2: Fine-Tuning / SFT (Supervised Fine-Tuning)
+- **What Happens:** Trainers collect thousands of (question → ideal answer) pairs. The model is shown these examples and learns to respond with an answer — not just autocomplete text.
+- **The Result:** A model that understands what "following instructions" looks like and can respond to questions purposefully.
+
+### Stage 3: RLHF (Reinforcement Learning from Human Feedback)
+- **The Analogy (The Candy Reward):** Human raters see two different LLM responses to the same prompt and pick which one is better. That "vote" becomes a reward signal for the model — *"responses like that earn candy; responses like this don't."*
+- **What It Teaches:** Helpfulness, safety, and honesty. LLMs don't naturally avoid harmful content — RLHF is what shapes that behavior.
+- **The Result:** The polished, safety-aware assistant you use today.
+
+:::callout-dyk
+Even when human raters in RLHF are occasionally inconsistent (sometimes preferring different responses to the same prompt), the process still improves the model overall. Imperfect feedback at scale is far better than no feedback at all.
+:::
 
 :::callout-error
-Just because a model has a 1 Million token context window doesn't mean it pays *good* attention to everything in it. Often, LLMs suffer from the "needle in a haystack" problem, where they forget things in the middle of long text.
+LLMs aren't born polite or safe. Pre-training alone produces a raw pattern-matcher that would cheerfully complete a toxic rant just as easily as a business email. Only through Fine-Tuning and RLHF do they become the helpful, careful assistants we use today.
 :::
 
 :::quiz{id="02-05"}

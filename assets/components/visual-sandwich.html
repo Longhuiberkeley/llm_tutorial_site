@@ -1,0 +1,109 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-1">What's Actually Sent to the AI?</h3>
+        <p class="text-sm text-on-surface-variant italic">Toggle between the User View and the Full Sandwich</p>
+    </div>
+
+    <!-- View toggle -->
+    <div class="flex justify-center gap-3 mb-8">
+        <button id="sw-btn-user" onclick="swSwitch('user')"
+            class="px-6 py-2 rounded-full font-bold text-sm transition-all"
+            style="background-color: var(--primary); color: var(--on-primary);">
+            👤 User View (Clean Chat)
+        </button>
+        <button id="sw-btn-real" onclick="swSwitch('real')"
+            class="px-6 py-2 rounded-full font-bold text-sm transition-all bg-surface-container-highest text-on-surface-variant">
+            🥪 Full Sandwich View
+        </button>
+    </div>
+
+    <!-- User view: simple chat -->
+    <div id="sw-view-user" class="space-y-4 max-w-md mx-auto min-h-[400px]">
+        <div class="flex justify-end">
+            <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 max-w-xs text-sm font-medium shadow">
+                How are you?
+            </div>
+        </div>
+        <div class="flex justify-start">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl rounded-tl-sm px-5 py-3 max-w-xs text-sm shadow">
+                I am fine, thank you. How about you?
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 max-w-xs text-sm font-medium shadow">
+                I'm great. I need help writing an essay on American Culture in the 1990s.
+            </div>
+        </div>
+    </div>
+
+    <!-- Real view: the sandwich -->
+    <div id="sw-view-real" class="hidden min-h-[400px]">
+        <div class="space-y-2 text-xs font-mono">
+            <!-- System prompt layer -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: color-mix(in srgb, var(--primary) 10%, var(--surface-container-lowest)); border-color: var(--primary);">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1" style="color: var(--primary);">🔒 System Prompt (Hidden)</div>
+                <div class="text-on-surface-variant">You are a helpful, professional writing assistant. Maintain an academic tone. Use US English.</div>
+            </div>
+            
+            <!-- Pre-prompt / Context -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: #FFF9C4; border-color: #FBC02D;">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1" style="color: #F57F17;">📚 Context Injection (Files/Docs)</div>
+                <div class="text-on-surface-variant italic">[User preference: Prefers MLA style. Previous essay data: "90s fashion" uploaded.]</div>
+            </div>
+
+            <!-- Turn 1 User -->
+            <div class="rounded-lg px-4 py-3 border-l-4 border-outline-variant bg-surface-container-lowest">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1 opacity-60">👤 User Message #1</div>
+                <div class="text-on-surface-variant">How are you?</div>
+            </div>
+            
+            <!-- Turn 1 LLM -->
+            <div class="rounded-lg px-4 py-3 border-l-4 border-outline-variant bg-surface-container-lowest opacity-60">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1">🤖 LLM Reply #1</div>
+                <div class="text-on-surface-variant">I am fine, thank you. How about you?</div>
+            </div>
+
+            <!-- Turn 2 User -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: color-mix(in srgb, var(--accent) 15%, var(--surface-container-lowest)); border-color: var(--accent);">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1" style="color: var(--accent);">👤 User Message #2</div>
+                <div class="text-on-surface-variant font-bold">I'm great. I need help writing an essay on American Culture in the 1990s.</div>
+            </div>
+
+            <!-- Thinking Tokens -->
+            <div class="rounded-lg px-4 py-3 border-l-4 border-dashed border-outline-variant bg-surface-container-low opacity-70">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1 text-on-surface-variant">🧠 Internal Thinking Tokens (Hidden)</div>
+                <div class="text-on-surface-variant animate-pulse">The user is asking about 90s culture. I should combine the MLA preference with 90s fashion data...</div>
+            </div>
+
+            <!-- Final Response (Generating) -->
+            <div class="rounded-lg px-4 py-3 border-l-4" style="background-color: var(--primary); border-color: var(--on-primary);">
+                <div class="font-bold text-[10px] uppercase tracking-widest mb-1" style="color: white;">✨ Generating Final Reply...</div>
+                <div class="text-white">Certainly! To write an essay on American culture in the 1990s, we should explore...</div>
+            </div>
+        </div>
+        <p class="text-center text-[10px] text-on-surface-variant mt-6 opacity-60 italic">Every Turn #2, the FULL STACK above is sent to the LLM at once.</p>
+    </div>
+</div>
+
+<script>
+function swSwitch(view) {
+    var isUser = (view === 'user');
+    document.getElementById('sw-view-user').classList.toggle('hidden', !isUser);
+    document.getElementById('sw-view-real').classList.toggle('hidden', isUser);
+
+    var btnUser = document.getElementById('sw-btn-user');
+    var btnReal = document.getElementById('sw-btn-real');
+
+    if (isUser) {
+        btnUser.style.backgroundColor = 'var(--primary)';
+        btnUser.style.color = 'var(--on-primary)';
+        btnReal.style.backgroundColor = '';
+        btnReal.style.color = '';
+    } else {
+        btnReal.style.backgroundColor = 'var(--primary)';
+        btnReal.style.color = 'var(--on-primary)';
+        btnUser.style.backgroundColor = '';
+        btnUser.style.color = '';
+    }
+}
+</script>

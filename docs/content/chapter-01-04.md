@@ -21,6 +21,8 @@ Just like words, sentences can be "close" or "far" in meaning. "I'm hungry" and 
 ## 📝 Key Concepts
 
 - **Beyond Words:** LLMs don't just map individual words; they map entire sequences. 
+- **Example 1:** "The cat sat on the mat" and "The kitten rested on the rug" map to the same region, while "Stock prices fell" is far away.
+- **Example 2:** "I love my new phone" and "I adore my recent smartphone" are close in meaning. But "The phone rang at midnight" is far away, even though it shares the word "phone."
 - **Semantic Understanding:** Sentences that mean similar things (using completely different words) map to the same region in meaning-space. This is what enables "understanding".
 
 :::callout-error

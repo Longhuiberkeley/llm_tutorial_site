@@ -92,3 +92,4 @@ Use centralized classes in `main.css`:
 3. **New Pages:** Link `js/tailwind-config.js` and `js/main.js`.
 4. **Consistency:** Ensure all text uses `text-on-surface` or `text-on-surface-variant` (for secondary text) to guarantee readability.
 5. **No Chapter Number References:** Content pages must never reference other chapters by number (e.g., "In Chapter 2..."). Use topic references instead (e.g., "When we explored tokenization...").
+6. **Prefer "LLM" over "AI":** In tutorial content, prefer "LLM" or "the LLM" when referring to the model specifically. "AI" is acceptable when referring to the broader field or comparing AI vs humans, but avoid using it as a synonym for "the model" in explanations.

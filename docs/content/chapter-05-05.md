@@ -1,33 +1,30 @@
 ---
-title: "5.5 Privacy 🔒"
-description: "What never to paste (Secrets, PII)."
+title: "5.5 Using LLMs to Learn"
+description: "The Ultimate Personal Tutor."
 chapter: "Chapter 5"
 pageId: "05-05"
 ---
 
 ## 🎯 Core Goals
-- Establish strict boundaries for what is safe to share with an LLM.
-- Understand the difference between Consumer AI and Enterprise AI privacy.
+- See how LLMs can adapt to your level in real-time.
+- Learn the power of "Extrapolation" — asking follow-ups and changing analogies.
 
 :::callout-tldr
-When you use a free AI tool on the internet, assume anything you type could be read by a human reviewer or used to train the next version of the AI. Keep your secrets secret!
+LLMs are powerful learning tools because they can connect concepts across domains and explain at any level. You can't do that with a textbook!
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-privacy-lock"}
+:::visual{name="visual-learning-path"}
 
 ## 📝 Key Concepts
 
-- **The Training Risk:** Free models (like standard ChatGPT or free Claude) often use your chat history to train future models. This means your secret recipe or code could theoretically be spat out to a random user next year!
-- **Never Paste These:**
-  1. **PII (Personally Identifiable Information):** Customer names, addresses, social security numbers.
-  2. **Secrets:** API keys, passwords, proprietary financial data.
-  3. **Unreleased IP:** Source code for unreleased products.
-- **Enterprise Mode:** Most AI companies offer paid "Enterprise" or "API" tiers where they legally guarantee they will *not* use your data for training. If your company uses one of these, the rules are much safer!
+- **Adaptive Explanations:** "Explain like I'm 5," then "Explain like I'm a senior dev." The AI adjusts instantly.
+- **Provider Memory:** Features like ChatGPT's Memory or Claude's Projects (this expands on the chat sandwich we discussed earlier) persist your preferences, so the AI knows your background and learning goals over time.
+- **Extrapolation:** True learning isn't just reading; it's asking "What if...?" or "How does this relate to...?"
 
 :::callout-error
-Scrubbing data is your responsibility! If you want the AI to analyze a spreadsheet, manually change "John Doe" to "Customer A" before pasting it in.
+LLMs can confidently teach wrong things. They make up citations, fake examples, and incorrect technical details. Use LLMs to build intuition, then verify with authoritative sources!
 :::
 
 :::quiz{id="05-05"}

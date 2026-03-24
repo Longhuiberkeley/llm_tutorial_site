@@ -1,0 +1,104 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <span class="text-3xl block mb-2">🧩</span>
+        <h3 class="text-xl font-bold font-headline mb-1">How an LLM Reads Text</h3>
+        <p class="text-sm text-on-surface-variant italic">Not words, not letters — chunks called <strong>tokens</strong>. Click a sentence to see how it's sliced.</p>
+    </div>
+
+    <!-- Sentence selector -->
+    <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button onclick="tkShow(0)" id="tk-btn-0" class="px-4 py-2 rounded-full text-xs font-bold transition-all bg-primary text-on-primary">Sentence 1</button>
+        <button onclick="tkShow(1)" id="tk-btn-1" class="px-4 py-2 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">Sentence 2</button>
+        <button onclick="tkShow(2)" id="tk-btn-2" class="px-4 py-2 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">Sentence 3</button>
+    </div>
+
+    <!-- Original text display -->
+    <div class="mb-4 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-center">
+        <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">Original Text</div>
+        <div id="tk-original" class="text-base font-medium italic text-on-surface"></div>
+    </div>
+
+    <!-- Token chips -->
+    <div class="p-6 bg-surface-container-lowest border-2 border-outline-variant rounded-xl">
+        <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4 opacity-60">Tokens (what the LLM actually sees)</div>
+        <div id="tk-chips" class="flex flex-wrap gap-2 min-h-[48px]"></div>
+        <div id="tk-count" class="mt-4 text-xs text-on-surface-variant opacity-60 text-right"></div>
+    </div>
+
+    <!-- Explanation callout -->
+    <div id="tk-note" class="mt-4 p-4 rounded-xl border-l-4 text-sm" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 8%, transparent);"></div>
+</div>
+
+<script>
+(function() {
+    // Token color palette (rotating)
+    var palette = [
+        { bg: '#FFE082', text: '#5D4037' }, // amber
+        { bg: '#A5D6A7', text: '#1B5E20' }, // green
+        { bg: '#90CAF9', text: '#0D47A1' }, // blue
+        { bg: '#F48FB1', text: '#880E4F' }, // pink
+        { bg: '#CE93D8', text: '#4A148C' }, // purple
+        { bg: '#FFCC80', text: '#E65100' }, // orange
+        { bg: '#80DEEA', text: '#006064' }, // cyan
+        { bg: '#BCAAA4', text: '#3E2723' }, // brown
+    ];
+
+    var sentences = [
+        {
+            original: '"wow, i am learning so much in this tutorial!"',
+            tokens: ['wow', ',', ' i', ' am', ' learning', ' so', ' much', ' in', ' this', ' tutorial', '!', '"'],
+            note: '12 tokens for a short sentence! Notice that spaces often attach to the <em>next</em> word, and punctuation marks are their own tokens. This is how the LLM sees every sentence — as a list of numbered chunks.'
+        },
+        {
+            original: '"strawberry"',
+            tokens: ['straw', 'berry'],
+            note: '<strong>Wait — 2 tokens?</strong> "strawberry" splits into "straw" and "berry" — whole chunks, not letters. The LLM never sees s-t-r-a-w separately. "straw" is a single Lego block it can\'t look inside. This is exactly why it gets the \'r\' count wrong — the individual letters are invisible to it!'
+        },
+        {
+            original: '"I need help writing an email to my CEO about Q3 revenue."',
+            tokens: ['I', ' need', ' help', ' writing', ' an', ' email', ' to', ' my', ' CEO', ' about', ' Q', '3', ' revenue', '.'],
+            note: '14 tokens. Notice that "Q3" split into "Q" and "3" — the LLM treats the number separately. Also, longer common words like "writing" and "revenue" become single tokens because they appear so often in training data.'
+        }
+    ];
+
+    function tkShow(idx) {
+        // Update buttons
+        for (var i = 0; i < 3; i++) {
+            var btn = document.getElementById('tk-btn-' + i);
+            if (i === idx) {
+                btn.style.backgroundColor = 'var(--primary)';
+                btn.style.color = 'var(--on-primary)';
+            } else {
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+                btn.classList.add('bg-surface-container-highest', 'text-on-surface');
+                btn.classList.remove('bg-primary', 'text-on-primary');
+            }
+        }
+
+        var s = sentences[idx];
+        document.getElementById('tk-original').textContent = s.original;
+
+        var chips = document.getElementById('tk-chips');
+        chips.innerHTML = '';
+        s.tokens.forEach(function(tok, i) {
+            var color = palette[i % palette.length];
+            var chip = document.createElement('span');
+            chip.className = 'inline-block rounded-md px-2 py-1 text-sm font-bold border';
+            chip.style.backgroundColor = color.bg;
+            chip.style.color = color.text;
+            chip.style.borderColor = color.text + '33';
+            // Show spaces explicitly
+            chip.textContent = tok.startsWith(' ') ? '␣' + tok.trim() : tok;
+            if (tok === ' ') chip.textContent = '␣';
+            chips.appendChild(chip);
+        });
+
+        document.getElementById('tk-count').textContent = s.tokens.length + ' token' + (s.tokens.length !== 1 ? 's' : '');
+        document.getElementById('tk-note').innerHTML = s.note;
+    }
+
+    window.tkShow = tkShow;
+    tkShow(0);
+})();
+</script>

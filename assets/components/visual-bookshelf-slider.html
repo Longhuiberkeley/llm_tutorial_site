@@ -4,19 +4,13 @@
         <p class="text-lg text-on-surface-variant font-medium">How many "tokens" can the model hold in its head at once?</p>
     </div>
     
-    <div class="space-y-12">
-        <!-- Scale Bar -->
-        <div class="space-y-6">
-            <input type="range" id="capacity-slider" min="0" max="3" value="0" step="1" 
-                class="w-full h-3 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary transition-all active:scale-[1.01]"
-                oninput="updateCapacity(this.value)">
-            
-            <div class="flex justify-between px-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.15em] opacity-60">
-                <span>Small (2K)</span>
-                <span>Medium (32K)</span>
-                <span>Large (200K)</span>
-                <span>Giant (1M+)</span>
-            </div>
+    <div class="space-y-8">
+        <!-- Scale Buttons -->
+        <div class="flex flex-wrap justify-center gap-3">
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-primary text-on-primary shadow-lg hover:scale-105 active:scale-95 cap-btn" id="btn-cap-0" onclick="updateCapacity(0)">Small (2K)</button>
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-1" onclick="updateCapacity(1)">Medium (32K)</button>
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-2" onclick="updateCapacity(2)">Large (200K)</button>
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-3" onclick="updateCapacity(3)">Giant (1M+)</button>
         </div>
 
         <!-- Result Card -->
@@ -49,20 +43,30 @@ const capacityData = [
     {
         title: "200,000 Tokens",
         visual: "📚📚",
-        desc: "<strong>2 Harry Potter Books.</strong> A massive amount of space. You can feed it entire novels or large codebases.",
+        desc: "<strong>~2 Novels.</strong> A massive amount of space. You can feed it a couple of full-length books or a large codebase.",
         color: "var(--accent)"
     },
     {
         title: "1,000,000+ Tokens",
         visual: "📚📚📚📚📚📚📚📚📚📚",
-        desc: "<strong>~10 Novels.</strong> A staggering amount of space — about 10 novels at once. The model can cross-reference ideas across the entire <em>Lord of the Rings</em> trilogy and then some.",
+        desc: "<strong>~10 Novels.</strong> A staggering amount of space — stack up about 10 novels at once. The model can cross-reference ideas across the entire <em>Lord of the Rings</em> trilogy and then some.",
         color: "var(--on-surface-variant)"
     }
 ];
 
 function updateCapacity(val) {
-    const data = capacityData[parseInt(val)];
-    const card = document.getElementById('capacity-card');
+    // Update button styles
+    document.querySelectorAll('.cap-btn').forEach((btn, idx) => {
+        if (idx === val) {
+            btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
+            btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+        } else {
+            btn.classList.add('bg-surface-container-highest', 'text-on-surface');
+            btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
+        }
+    });
+
+    const data = capacityData[val];
     const visual = document.getElementById('capacity-visual');
     const title = document.getElementById('capacity-title');
     const desc = document.getElementById('capacity-desc');

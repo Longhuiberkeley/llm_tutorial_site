@@ -1,0 +1,59 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-1">Attention Decay (The "Needle" Test)</h3>
+        <p class="text-sm text-on-surface-variant italic">LLMs focus on the beginning and end, but forget the middle.</p>
+    </div>
+
+    <!-- The Haystack -->
+    <div class="relative bg-surface-container-lowest border-2 border-outline-variant rounded-2xl p-6 overflow-hidden max-w-md mx-auto">
+        <div class="space-y-1">
+            <!-- Beginning (Green) -->
+            <div class="h-6 bg-green-500/30 rounded flex items-center px-3 text-[10px] font-bold text-green-700">STRONG ATTENTION (START)</div>
+            <div class="h-4 bg-green-500/20 rounded"></div>
+            <div class="h-4 bg-green-500/10 rounded"></div>
+            
+            <!-- Middle (Yellow -> Red) -->
+            <div class="h-4 bg-yellow-500/10 rounded"></div>
+            <div class="h-4 bg-orange-500/10 rounded"></div>
+            <div class="h-10 bg-red-500/20 rounded border-2 border-dashed border-red-500/40 flex items-center justify-center text-[10px] font-bold text-red-700 relative group cursor-help">
+                🔍 THE SECRET NEEDLE
+                <div class="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+            </div>
+            <div class="h-4 bg-orange-500/10 rounded"></div>
+            <div class="h-4 bg-yellow-500/10 rounded"></div>
+            
+            <!-- End (Green) -->
+            <div class="h-4 bg-green-500/10 rounded"></div>
+            <div class="h-4 bg-green-500/20 rounded"></div>
+            <div class="h-6 bg-green-500/30 rounded flex items-center px-3 text-[10px] font-bold text-green-700">STRONG ATTENTION (END)</div>
+        </div>
+    </div>
+
+    <!-- Control Toggle -->
+    <div class="mt-8 flex flex-col items-center gap-6">
+        <div class="flex gap-4">
+            <button onclick="nhTest(true)" class="px-6 py-2 rounded-full bg-primary text-on-primary font-bold shadow hover:scale-105 transition-all">Start of Document</button>
+            <button onclick="nhTest(false)" class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface font-bold hover:scale-105 transition-all">Middle of Document</button>
+        </div>
+
+        <div id="nh-result" class="min-h-[60px] text-center max-w-sm">
+            <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">Result:</div>
+            <div id="nh-text" class="text-sm font-medium italic text-on-surface-variant">Click a button to test the AI's memory...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function nhTest(isGood) {
+    var text = document.getElementById('nh-text');
+    text.innerHTML = '<span class="animate-pulse">Thinking...</span>';
+    
+    setTimeout(() => {
+        if (isGood) {
+            text.innerHTML = '✅ <span class="text-green-600 font-bold">FOUND!</span> "The secret code is 7429." Since it was at the beginning, the AI had strong attention on it.';
+        } else {
+            text.innerHTML = '❌ <span class="text-red-600 font-bold">MISSED...</span> "I don\'t see any secret code." Because it was buried in the middle, the AI\'s attention decayed.';
+        }
+    }, 800);
+}
+</script>

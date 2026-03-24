@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>2.3 Building a Sentence - Concrete Example - LLM Tutorial</title>
+    <title>2.3 Attention Weights — How the Model Focuses - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -51,82 +51,85 @@
                     <span class="text-sm font-medium">2.1 What is Tokenization?</span>
                 </a><a href="chapter-02-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.2 Attention Arrows - Everything Connects</span>
+                    <span class="text-sm font-medium">2.2 ELI5 Attention — The Cocktail Party Effect</span>
                 </a><a href="chapter-02-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">2.3 Building a Sentence - Concrete Example</span>
+                    <span class="text-sm font-medium">2.3 Attention Weights — How the Model Focuses</span>
                 </a><a href="chapter-02-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.4 From Sentences to Paragraphs</span>
+                    <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
                 </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.5 Context Window</span>
+                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.1 The Chat Illusion</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Paper Tape Metaphor</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.3 System Prompts</span>
                 </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Chain-of-Thought</span>
-                </a><a href="chapter-03-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.5 Custom Spaces</span>
+                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.1 Counting Problems</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
                 </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.2 Hallucination</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
                 </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
                 </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.4 Context Poisoning</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
                 </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.5 When the Head is Full</span>
                 </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.6 The Stochastic Parrot</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
                 </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.1 The SPEC Kit</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
                 </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.2 Zero-Shot vs. Few-Shot</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
                 </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.3 Negative Constraints</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
                 </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.4 The Drafting Engine</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.5 Privacy 🔒</span>
+                    <span class="text-sm font-medium">5.5 Using LLMs to Learn</span>
+                </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Delegation</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
                 </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">MCP</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
                 </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Agentic Loops</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
                 </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Autonomous Failures</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
                 </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Building an Agent</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
+                </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">The Lawyer Case Study</span>
@@ -160,9 +163,6 @@
                 </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">OpenCanvas & Collaborative AI</span>
-                </a><a href="chapter-08-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Privacy vs Personalization</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Multimodal AI</span>
@@ -202,9 +202,6 @@
                 </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Verbalizing Processes</span>
-                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Leadership & AI Literacy</span>
@@ -220,6 +217,9 @@
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Adapting to Shifts</span>
+                </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.6 ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Harness Engineering</span>
@@ -251,121 +251,144 @@
                     <span>Chapter 2</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    2.3 Building a Sentence - Concrete Example
+                    2.3 Attention Weights — How the Model Focuses
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    See how attention and distance predict the next word.
+                    See how attention weights solve pronouns and track ideas across sentences.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Show how attention and distance work together to predict the next word.</li>
-<li>Make the generation process completely transparent.</li>
+<li>Make the math concrete: show attention as visual weight bars.</li>
+<li>Show how attention solves pronoun resolution (&quot;it&quot; -&gt; &quot;cat&quot;).</li>
+<li>Understand how attention tracks meaning across multiple sentences.</li>
 </ul>
 <div class="callout callout-tldr">
-    Generating text is a loop: Read the context → calculate attention → find the closest word in meaning-space → pick it → repeat.
+    Attention isn&#39;t just lines connecting words—it&#39;s measurable &quot;weights.&quot; By giving thick weights to important connections, the LLM can figure out exactly who &quot;it&quot; or &quot;she&quot; refers to, even across long paragraphs.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto">
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
     <div class="text-center mb-8">
-        <div class="text-2xl font-bold p-6 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm inline-block min-w-[300px]">
-            "My favorite pet is a" <span id="builder-target" class="animate-pulse text-primary border-b-2 border-primary">___</span>
+        <span class="text-3xl block mb-2">⚖️</span>
+        <h3 class="text-xl font-bold font-headline">Pronoun Resolution with Attention</h3>
+        <p class="text-sm text-on-surface-variant italic">Click "it" to see what the LLM is paying attention to</p>
+        <p class="text-xs text-on-surface-variant mt-1 opacity-70">💡 In this example, imagine every word is one token.</p>
+    </div>
+
+    <div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant">
+        <div class="flex flex-wrap justify-center gap-2 text-xl font-bold mb-10">
+            <span class="px-2 py-1 rounded" id="aw-The">The</span>
+            <span class="px-2 py-1 rounded" id="aw-cat">cat</span>
+            <span class="px-2 py-1 rounded" id="aw-sat">sat</span>
+            <span class="px-2 py-1 rounded" id="aw-on">on</span>
+            <span class="px-2 py-1 rounded" id="aw-the2">the</span>
+            <span class="px-2 py-1 rounded" id="aw-warm">warm</span>
+            <span class="px-2 py-1 rounded" id="aw-mat">mat</span>
+            <span class="px-2 py-1 rounded" id="aw-because">because</span>
+            <span class="px-3 py-1 rounded-lg border-2 border-transparent cursor-pointer transition-all hover:border-primary bg-primary/10" onclick="showAw(this)" id="aw-it">it</span>
+            <span class="px-2 py-1 rounded" id="aw-was">was</span>
+            <span class="px-2 py-1 rounded" id="aw-tired">tired.</span>
         </div>
-    </div>
 
-    <h4 class="font-bold text-center text-on-surface-variant mb-6 uppercase tracking-wider text-sm">Select the next word based on distance</h4>
+        <div id="aw-bars" style="opacity:0; transition: opacity 0.3s;">
+            <h4 class="font-bold text-on-surface-variant uppercase tracking-wider text-sm mb-4">Attention Weights for "it"</h4>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <!-- Dog -->
-        <button onclick="selectWord('🐕 dog', true, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
-            <span class="text-4xl mb-2">🐕</span>
-            <span class="font-bold">dog</span>
-            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-[90%]"></div>
+            <div class="space-y-3">
+                <!-- cat: 84% -->
+                <div class="flex items-center gap-3">
+                    <div class="w-16 text-right font-bold text-sm">cat</div>
+                    <div class="flex-grow rounded-full h-4 overflow-hidden" style="background-color: var(--surface-container-highest);">
+                        <div class="h-full rounded-full" id="aw-bar-cat" style="width:0; background-color: var(--primary); transition: width 1s ease-out;"></div>
+                    </div>
+                    <div class="w-10 font-bold text-sm" style="color: var(--primary);">84%</div>
+                </div>
+                <!-- tired: 10% -->
+                <div class="flex items-center gap-3">
+                    <div class="w-16 text-right font-bold text-sm">tired</div>
+                    <div class="flex-grow rounded-full h-4 overflow-hidden" style="background-color: var(--surface-container-highest);">
+                        <div class="h-full rounded-full" id="aw-bar-tired" style="width:0; background-color: var(--accent); transition: width 1s ease-out 0.15s;"></div>
+                    </div>
+                    <div class="w-10 font-bold text-sm" style="color: var(--accent);">10%</div>
+                </div>
+                <!-- mat: 4% -->
+                <div class="flex items-center gap-3">
+                    <div class="w-16 text-right text-sm text-on-surface-variant">mat</div>
+                    <div class="flex-grow rounded-full h-4 overflow-hidden" style="background-color: var(--surface-container-highest);">
+                        <div class="h-full rounded-full" id="aw-bar-mat" style="width:0; background-color: var(--outline); transition: width 1s ease-out 0.3s;"></div>
+                    </div>
+                    <div class="w-10 text-sm text-on-surface-variant">4%</div>
+                </div>
+                <!-- was: 1% -->
+                <div class="flex items-center gap-3">
+                    <div class="w-16 text-right text-sm text-on-surface-variant">was</div>
+                    <div class="flex-grow rounded-full h-4 overflow-hidden" style="background-color: var(--surface-container-highest);">
+                        <div class="h-full rounded-full" id="aw-bar-was" style="width:0; background-color: var(--outline-variant); transition: width 1s ease-out 0.4s;"></div>
+                    </div>
+                    <div class="w-10 text-sm text-on-surface-variant">1%</div>
+                </div>
+                <!-- warm: 1% -->
+                <div class="flex items-center gap-3">
+                    <div class="w-16 text-right text-sm text-on-surface-variant">warm</div>
+                    <div class="flex-grow rounded-full h-4 overflow-hidden" style="background-color: var(--surface-container-highest);">
+                        <div class="h-full rounded-full" id="aw-bar-warm" style="width:0; background-color: var(--outline-variant); transition: width 1s ease-out 0.5s;"></div>
+                    </div>
+                    <div class="w-10 text-sm text-on-surface-variant">1%</div>
+                </div>
+                <!-- others -->
+                <div class="flex items-center gap-3 opacity-50">
+                    <div class="w-16 text-right text-xs text-on-surface-variant">others…</div>
+                    <div class="flex-grow rounded-full h-4 overflow-hidden" style="background-color: var(--surface-container-highest);">
+                        <div class="h-full rounded-full" id="aw-bar-others" style="width:0; background-color: var(--outline-variant); transition: width 1s ease-out 0.6s;"></div>
+                    </div>
+                    <div class="w-10 text-xs text-on-surface-variant">~0%</div>
+                </div>
             </div>
-            <span class="text-xs text-on-surface-variant mt-1 font-bold">90% match</span>
-        </button>
 
-        <!-- Pizza -->
-        <button onclick="selectWord('🍕 pizza', false, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
-            <span class="text-4xl mb-2">🍕</span>
-            <span class="font-bold">pizza</span>
-            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
-                <div class="h-full bg-primary/30 w-[5%]"></div>
+            <div class="mt-6 p-4 rounded-lg text-center font-medium text-sm" style="background-color: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--primary);">
+                ✅ "it" → "cat" — Pronoun successfully resolved!
             </div>
-            <span class="text-xs text-on-surface-variant mt-1 font-bold">5% match</span>
-        </button>
-
-        <!-- Car -->
-        <button onclick="selectWord('🚗 car', false, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
-            <span class="text-4xl mb-2">🚗</span>
-            <span class="font-bold">car</span>
-            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
-                <div class="h-full bg-primary/20 w-[1%]"></div>
-            </div>
-            <span class="text-xs text-on-surface-variant mt-1 font-bold">1% match</span>
-        </button>
-
-        <!-- Phone -->
-        <button onclick="selectWord('📱 phone', false, this)" class="quiz-option group bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 hover:border-primary hover:shadow-md transition-all active:scale-95 flex flex-col items-center">
-            <span class="text-4xl mb-2">📱</span>
-            <span class="font-bold">phone</span>
-            <div class="w-full h-1 bg-surface-container-highest mt-3 rounded-full overflow-hidden">
-                <div class="h-full bg-primary/10 w-[0.1%]"></div>
-            </div>
-            <span class="text-xs text-on-surface-variant mt-1 font-bold">< 1% match</span>
-        </button>
-    </div>
-
-    <div id="builder-feedback" class="mt-8 text-center text-lg font-bold min-h-[30px] opacity-0 transition-opacity">
-        <!-- Feedback text goes here -->
+        </div>
     </div>
 </div>
 
 <script>
-function selectWord(word, isCorrect, btn) {
-    const target = document.getElementById('builder-target');
-    const feedback = document.getElementById('builder-feedback');
+window.showAw = function(btn) {
+    btn.style.borderColor = 'var(--primary)';
 
-    // Remove previous states from all buttons
-    btn.closest('.grid').querySelectorAll('.quiz-option').forEach(function(b) {
-        b.classList.remove('correct', 'wrong');
-        b.disabled = true;
-    });
+    // Highlight key words in sentence
+    document.getElementById('aw-cat').style.color = 'var(--primary)';
+    document.getElementById('aw-cat').style.fontWeight = '900';
+    document.getElementById('aw-tired').style.color = 'var(--accent)';
 
-    // Apply correct/wrong class to the clicked button
-    btn.classList.add(isCorrect ? 'correct' : 'wrong');
+    // Show bars
+    document.getElementById('aw-bars').style.opacity = '1';
 
-    target.textContent = word;
-    target.classList.remove('animate-pulse');
-
-    feedback.style.opacity = '1';
-    if (isCorrect) {
-        target.className = 'text-primary font-bold';
-        feedback.innerHTML = '✅ Correct! "Dog" has the closest distance in meaning-space to "pet".';
-        feedback.className = 'mt-8 text-center text-lg font-bold text-green-600 transition-opacity';
-    } else {
-        target.className = 'font-bold';
-        feedback.innerHTML = '❌ While grammatically possible, "' + word + '" is far away from "pet" in meaning-space.';
-        feedback.className = 'mt-8 text-center text-lg font-bold transition-opacity';
-        feedback.style.color = 'var(--error)';
-    }
-}
+    // Animate bars — delay lets browser register width:0 before transition fires
+    setTimeout(function() {
+        document.getElementById('aw-bar-cat').style.width = '84%';
+        document.getElementById('aw-bar-tired').style.width = '10%';
+        document.getElementById('aw-bar-mat').style.width = '4%';
+        document.getElementById('aw-bar-was').style.width = '1%';
+        document.getElementById('aw-bar-warm').style.width = '1%';
+        document.getElementById('aw-bar-others').style.width = '0.5%';
+    }, 60);
+};
 </script>
 
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>The Math of Context:</strong> The LLM takes all the attention connections in the current sentence and mathematically combines them to figure out exactly &quot;where&quot; we are in meaning-space.</li>
-<li><strong>The Nearest Neighbor:</strong> Once it has a coordinate for the current context, it simply looks at its vocabulary map and finds the token closest to that coordinate.</li>
-<li><strong>Autoregressive Loop:</strong> &quot;Autoregressive&quot; is just a fancy word for &quot;predicts the next thing, adds it to the list, and uses the new list to predict the next thing after that.&quot;</li>
+<li><strong>Attention Weights:</strong> These are numbers (between 0 and 1) showing how much one word &quot;looks at&quot; another. If a weight is high, the model is using that word heavily to understand the context.</li>
+<li><strong>Pronoun Resolution:</strong> Think about the word &quot;it&quot;. Does &quot;it&quot; mean the cat, the mat, or the weather? Attention solves this! The word &quot;it&quot; will have a massive attention weight pointing back to the specific noun it represents.</li>
+<li><strong>Cross-Sentence Tracking:</strong> Attention doesn&#39;t stop at a period. As text gets longer, the LLM keeps building attention arrows back to previous sentences. This is why an LLM can write a 5-paragraph story without forgetting the main character&#39;s name—the words in paragraph 5 are still paying &quot;attention&quot; to paragraph 1.</li>
+<li><strong>Multiple Heads:</strong> LLMs actually have multiple &quot;heads&quot; of attention. One head might track grammar (verbs looking at nouns), while another tracks pronouns, and another tracks the overall topic.</li>
 </ul>
-<div class="callout callout-dyk">
-    If the math just picks the &quot;closest&quot; word every time, why do we get different answers? We&#39;ll talk about &quot;Temperature&quot; and randomness in Chapter 4!
+<div class="callout callout-error">
+    The LLM isn&#39;t &quot;remembering&quot; the plot of the story like a human would. It is simply maintaining mathematical attention weights to previous tokens in the text sequence.
 </div>
 
 
@@ -378,10 +401,10 @@ function selectWord(word, isCorrect, btn) {
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-02-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 2.2 Attention Arrows - Everything Connects</a>
+                    <a href="chapter-02-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 2.2 ELI5 Attention — The Cocktail Party Effect</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-02-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">2.4 From Sentences to Paragraphs <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-02-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">2.4 Context Capacity — What Fits in the Head <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

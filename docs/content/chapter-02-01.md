@@ -15,11 +15,11 @@ LLMs don't read English words. They read "tokens"—chunks of letters (usually 3
 
 ## 👁️ Visuals & Interactives
 
-:::callout-dyk
-**Play with Tokenization!** 
-Want to see exactly how an LLM chops up your text? Try the amazing [Tokenizer Playground by Xenova (https://huggingface.co/spaces/Xenova/the-tokenizer-playground)](https://huggingface.co/spaces/Xenova/the-tokenizer-playground). 
+:::visual{name="visual-tokenizer"}
 
-Type in a word like "unbelievable" or a sentence with emojis, and watch how it gets sliced into colorful token chunks. This is exactly what the LLM's "eyes" see before the math begins!
+:::callout-dyk
+**Play with Tokenization!**
+Want to see exactly how an LLM chops up your text? Try the [Tokenizer Playground by Xenova](https://huggingface.co/spaces/Xenova/the-tokenizer-playground). Type in any word or sentence and watch how it gets sliced into colorful token chunks — this is exactly what the LLM's "eyes" see before processing begins!
 :::
 
 ## 📝 Key Concepts
@@ -27,5 +27,11 @@ Type in a word like "unbelievable" or a sentence with emojis, and watch how it g
 - **Chunks, Not Words:** A token can be a whole word (like "apple"), part of a word (like "un" or "believable"), or even a single space or punctuation mark.
 - **Numbers Under the Hood:** Each chunk is assigned a specific ID number in the LLM's vocabulary. "Apple" might be token #4591.
 - **The Spelling Problem:** Because LLMs see chunks instead of individual letters, they are notoriously bad at tasks like "Count how many 'r's are in strawberry." They see "straw" and "berry" as solid blocks, not strings of letters.
+- **A Pool of Tokens:** During prediction, the LLM is choosing from a fixed pool or set of possible tokens—like picking from a predefined vocabulary list, rather than guessing completely random text.
+
+:::callout-dyk
+**What does "predict" mean?**
+In the AI context, "predict" doesn't mean "foresee the future." It means "calculate what is most likely to come next based on patterns." Think of it more like "guess"—the LLM guesses the next token based on everything it's learned.
+:::
 
 :::quiz{id="02-01"}

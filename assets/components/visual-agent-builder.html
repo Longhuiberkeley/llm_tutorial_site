@@ -1,0 +1,158 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">Build Your Agent</h3>
+        <p class="text-sm text-on-surface-variant">Configure your first autonomous assistant.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+        <!-- Configuration -->
+        <div class="space-y-6">
+            <!-- 1. Task -->
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-3 opacity-60">1. Select a Task</div>
+                <div class="flex gap-2">
+                    <button onclick="setAgentTask('Researcher', this)" class="task-btn flex-1 p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">📚 Research</button>
+                    <button onclick="setAgentTask('Coder', this)" class="task-btn flex-1 p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">💻 Coding</button>
+                </div>
+            </div>
+
+            <!-- 2. Tools -->
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-3 opacity-60">2. Add Tools</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="toggleAgentTool('Web Search', this)" class="tool-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-accent transition-all text-xs font-bold active:scale-95">🌐 Search</button>
+                    <button onclick="toggleAgentTool('Calculator', this)" class="tool-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-accent transition-all text-xs font-bold active:scale-95">🧮 Math</button>
+                    <button onclick="toggleAgentTool('File Reader', this)" class="tool-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-accent transition-all text-xs font-bold active:scale-95">📁 Files</button>
+                    <button onclick="toggleAgentTool('Terminal', this)" class="tool-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-accent transition-all text-xs font-bold active:scale-95">🐚 Bash</button>
+                </div>
+            </div>
+
+            <!-- 3. Personality -->
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-3 opacity-60">3. Set Personality</div>
+                <select id="agent-personality" onchange="updateAgentPreview()" class="w-full p-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-xs font-bold">
+                    <option value="helpful">Helpful & Safe</option>
+                    <option value="concise">Concise & Direct</option>
+                    <option value="creative">Creative & Risky</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Preview & Test -->
+        <div class="bg-surface-container-lowest border-2 border-primary rounded-xl p-6 shadow-md min-h-[350px] flex flex-col relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl">🤖</div>
+            <div class="text-[10px] font-black uppercase tracking-widest text-primary mb-4">Agent Manifest</div>
+            
+            <div class="space-y-4 flex-grow">
+                <div>
+                    <div class="text-[9px] font-bold text-on-surface-variant uppercase mb-1">System Prompt</div>
+                    <div id="preview-prompt" class="text-xs italic bg-surface-container p-3 rounded leading-relaxed border-l-4 border-primary">
+                        You are a helpful researcher. Use the selected tools to solve the task safely.
+                    </div>
+                </div>
+                <div>
+                    <div class="text-[9px] font-bold text-on-surface-variant uppercase mb-1">Enabled Capabilities</div>
+                    <div id="preview-tools" class="flex flex-wrap gap-1">
+                        <span class="text-[9px] px-2 py-0.5 bg-surface-container rounded-full opacity-40 italic">No tools selected</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="testAgent()" id="test-agent-btn" class="mt-6 w-full py-3 bg-primary text-on-primary rounded-xl font-bold hover:shadow-xl transition-all active:scale-95">Deploy & Test →</button>
+        </div>
+    </div>
+
+    <!-- Live Test Area -->
+    <div id="test-area" class="hidden mt-8 animate-fade-in">
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white text-xs">U</div>
+                <div class="bg-surface-container rounded-xl px-4 py-2 text-xs">Find the revenue of Apple in 2023 and multiply it by 1.15.</div>
+            </div>
+            <div id="agent-response" class="space-y-3 pl-11">
+                <!-- Agent steps show up here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let selectedTask = 'Researcher';
+let selectedTools = [];
+let selectedPersonality = 'helpful';
+
+function setAgentTask(task, btn) {
+    selectedTask = task;
+    document.querySelectorAll('.task-btn').forEach(b => b.classList.remove('border-primary', 'bg-primary/5'));
+    btn.classList.add('border-primary', 'bg-primary/5');
+    updateAgentPreview();
+}
+
+function toggleAgentTool(tool, btn) {
+    const index = selectedTools.indexOf(tool);
+    if (index > -1) {
+        selectedTools.splice(index, 1);
+        btn.classList.remove('border-accent', 'bg-accent/5');
+    } else {
+        selectedTools.push(tool);
+        btn.classList.add('border-accent', 'bg-accent/5');
+    }
+    updateAgentPreview();
+}
+
+function updateAgentPreview() {
+    selectedPersonality = document.getElementById('agent-personality').value;
+    const prompt = document.getElementById('preview-prompt');
+    const toolsDiv = document.getElementById('preview-tools');
+
+    // Update Prompt
+    let promptText = `You are a ${selectedPersonality} ${selectedTask.toLowerCase()}. `;
+    if (selectedPersonality === 'concise') promptText += "Answer in 1 sentence only.";
+    if (selectedPersonality === 'creative') promptText += "Be imaginative and take risks.";
+    prompt.textContent = promptText;
+
+    // Update Tools
+    if (selectedTools.length === 0) {
+        toolsDiv.innerHTML = '<span class="text-[9px] px-2 py-0.5 bg-surface-container rounded-full opacity-40 italic">No tools selected</span>';
+    } else {
+        toolsDiv.innerHTML = selectedTools.map(t => `<span class="text-[9px] px-2 py-0.5 bg-accent/10 text-accent font-bold rounded-full border border-accent/20">${t}</span>`).join('');
+    }
+}
+
+function testAgent() {
+    const area = document.getElementById('test-area');
+    const response = document.getElementById('agent-response');
+    const btn = document.getElementById('test-agent-btn');
+    
+    area.classList.remove('hidden');
+    response.innerHTML = '<div class="text-[10px] font-bold text-primary animate-pulse italic">Agent thinking...</div>';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+
+    setTimeout(() => {
+        let html = '';
+        
+        if (selectedTools.includes('Web Search')) {
+            html += '<div class="flex items-center gap-2 text-[10px] text-accent font-mono"><span class="material-symbols-outlined text-xs">search</span> CALL: web_search("Apple revenue 2023")</div>';
+            html += '<div class="flex items-center gap-2 text-[10px] text-green-600 font-mono mb-2"><span class="material-symbols-outlined text-xs">check</span> RESULT: $383.29 Billion</div>';
+        } else {
+            html += '<div class="text-[10px] text-red-500 font-mono mb-2 italic">Error: Search tool missing. Guessing from memory...</div>';
+        }
+
+        if (selectedTools.includes('Calculator')) {
+            html += '<div class="flex items-center gap-2 text-[10px] text-accent font-mono"><span class="material-symbols-outlined text-xs">calculate</span> CALL: calc.multiply(383.29, 1.15)</div>';
+            html += '<div class="flex items-center gap-2 text-[10px] text-green-600 font-mono mb-2"><span class="material-symbols-outlined text-xs">check</span> RESULT: 440.7835</div>';
+        } else {
+            html += '<div class="text-[10px] text-red-500 font-mono mb-2 italic">Error: Calculator tool missing. Attempting mental math...</div>';
+        }
+
+        html += `<div class="bg-primary/5 border border-primary/10 rounded-xl p-3 text-xs italic font-bold">
+            ${selectedPersonality === 'concise' ? 'Result: $440.78B.' : 'The revenue for Apple in 2023 was $383.29 Billion. After applying the 1.15x multiplier, the final amount is approximately $440.78 Billion.'}
+        </div>`;
+
+        response.innerHTML = html;
+        btn.disabled = false;
+        btn.style.opacity = '1';
+    }, 1500);
+}
+</script>

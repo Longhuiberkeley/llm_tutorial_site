@@ -1,0 +1,110 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <!-- SECTION 1: WARMUP -->
+    <div class="mb-12">
+        <div class="text-center mb-6">
+            <h3 class="text-xl font-bold font-headline mb-1">1. The Guessing Game</h3>
+            <p class="text-sm text-on-surface-variant">There's no single "right" answer. Which word works best?</p>
+        </div>
+        
+        <div class="text-center mb-6">
+            <div class="text-2xl font-bold p-6 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm inline-block">
+                "My favorite piece of tech is a" <span id="temp-target" class="animate-pulse text-primary border-b-2 border-primary">___</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button onclick="tempSelect('📱 phone', '35%', this)" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 hover:border-primary transition-all active:scale-95 flex flex-col items-center">
+                <span class="text-3xl mb-1">📱</span>
+                <span class="font-bold text-xs">phone</span>
+                <div class="w-full h-1 bg-surface-container-highest mt-2 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary w-[35%]"></div>
+                </div>
+                <span class="text-[10px] text-on-surface-variant mt-1 font-bold">35%</span>
+            </button>
+            <button onclick="tempSelect('💻 laptop', '30%', this)" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 hover:border-primary transition-all active:scale-95 flex flex-col items-center">
+                <span class="text-3xl mb-1">💻</span>
+                <span class="font-bold text-xs">laptop</span>
+                <div class="w-full h-1 bg-surface-container-highest mt-2 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary w-[30%]"></div>
+                </div>
+                <span class="text-[10px] text-on-surface-variant mt-1 font-bold">30%</span>
+            </button>
+            <button onclick="tempSelect('📟 tablet', '20%', this)" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 hover:border-primary transition-all active:scale-95 flex flex-col items-center">
+                <span class="text-3xl mb-1">📟</span>
+                <span class="font-bold text-xs">tablet</span>
+                <div class="w-full h-1 bg-surface-container-highest mt-2 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary w-[20%]"></div>
+                </div>
+                <span class="text-[10px] text-on-surface-variant mt-1 font-bold">20%</span>
+            </button>
+            <button onclick="tempSelect('🎮 console', '15%', this)" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 hover:border-primary transition-all active:scale-95 flex flex-col items-center">
+                <span class="text-3xl mb-1">🎮</span>
+                <span class="font-bold text-xs">console</span>
+                <div class="w-full h-1 bg-surface-container-highest mt-2 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary w-[15%]"></div>
+                </div>
+                <span class="text-[10px] text-on-surface-variant mt-1 font-bold">15%</span>
+            </button>
+        </div>
+        
+        <div id="temp-warmup-feedback" class="hidden mt-6 text-center text-sm font-bold text-green-600">
+            ✅ All of these work! There's no single "right" answer. The AI just picks one.
+        </div>
+    </div>
+
+    <hr class="border-outline-variant/30 mb-12">
+
+    <!-- SECTION 2: TEMPERATURE SLIDER -->
+    <div>
+        <div class="text-center mb-6">
+            <h3 class="text-xl font-bold font-headline mb-1">2. Adjusting the "Creativity" Slider</h3>
+            <p class="text-sm text-on-surface-variant">Prompt: <em>"Write a short story about a cat."</em></p>
+        </div>
+
+        <div class="mb-8 px-4">
+            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+                <span>❄️ Predictable</span>
+                <span>🔥 Chaos</span>
+            </div>
+            <input type="range" id="temp-slider" min="0" max="2" value="0" step="1"
+                class="w-full h-3 rounded-full appearance-none cursor-pointer accent-primary"
+                style="background: linear-gradient(to right, #5B8DB8, var(--accent), var(--error));"
+                oninput="updateTemp(this.value)">
+            <div class="flex justify-between px-1 mt-2 text-[10px] font-bold text-on-surface-variant opacity-60">
+                <span>Temp 0.0</span>
+                <span>Temp 0.7</span>
+                <span>Temp 1.5</span>
+            </div>
+        </div>
+
+        <div id="temp-output" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 min-h-[120px] transition-all duration-300">
+            <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3 opacity-60">AI Output:</div>
+            <div id="temp-text" class="text-sm leading-relaxed italic">
+                The cat sat on the mat. It was a very good cat. Every day, the cat slept.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function tempSelect(word, pct, btn) {
+    document.getElementById('temp-target').textContent = word;
+    document.getElementById('temp-target').classList.remove('animate-pulse');
+    document.getElementById('temp-warmup-feedback').classList.remove('hidden');
+}
+
+var tempLevels = [
+    "The cat sat on the mat. It was a very good cat. Every day, the cat slept. The cat was happy.",
+    "Whiskers prowled the velvet sofa, dreaming of the tuna can opening in the kitchen later that evening.",
+    "Neon whiskers glitching through the purple fog, the feline entity calculated the distance to the cheese moon. Meow? Bleep."
+];
+
+function updateTemp(val) {
+    var text = document.getElementById('temp-text');
+    text.classList.add('opacity-0');
+    setTimeout(() => {
+        text.textContent = tempLevels[val];
+        text.classList.remove('opacity-0');
+    }, 200);
+}
+</script>

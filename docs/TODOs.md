@@ -23,8 +23,8 @@
 
 ### Files to CREATE (new pages)
 - [ ] `chapter-02-06.md` — "RLHF & the Reasoning Era"
-- [ ] `chapter-05-06.md` — "Privacy — What Never to Paste"
-- [ ] `chapter-06-06.md` — "Building a Simple Agent"
+- [x] `chapter-05-06.md` — "Privacy — What Never to Paste"
+- [x] `chapter-06-06.md` — "Building a Simple Agent"
 - [ ] `chapter-12-06.md` — "ROI Calculation"
 
 ---
@@ -74,23 +74,23 @@
 
 ## Chapter 5: Prompting Best Practices (REWRITE all — different topics)
 
-- [ ] **05-01:** REWRITE — Was "SPEC Kit" (moved to Ch 13). Now "Know When to Trust It". Four-zone trust spectrum. Emphasize AI CAN be used in production with proper engineering.
-- [ ] **05-02:** REWRITE — Was "Zero/Few-Shot". Now "Be Explicit — No Mind Reading". Before/after comparison, interactive adding-specificity demo.
-- [ ] **05-03:** REWRITE — Was "Negative Constraints". Now "Zero-Shot vs Few-Shot". Side-by-side 0/1/few-shot comparison.
-- [ ] **05-04:** REWRITE — Was "Drafting Engine". Now "Chain-of-Thought & Reasoning Tokens" (moved from old Ch 3). Step-by-step examples, connect to thinking models, callout about wrong reasoning improving accuracy.
-- [ ] **05-05:** REWRITE — Was "Privacy". Now "Using LLMs to Learn". Provider learning features, power of extrapolation, dangers of confident wrong answers.
-- [ ] **05-06:** CREATE — "Privacy — What Never to Paste". Red/green list. Samsung incident callout.
+- [x] **05-01:** REWRITE — Was "SPEC Kit" (moved to Ch 13). Now "Know When to Trust It". Four-zone trust spectrum. Emphasize AI CAN be used in production with proper engineering.
+- [x] **05-02:** REWRITE — Was "Zero/Few-Shot". Now "Be Explicit — No Mind Reading". Before/after comparison, interactive adding-specificity demo.
+- [x] **05-03:** REWRITE — Was "Negative Constraints". Now "Zero-Shot vs Few-Shot". Side-by-side 0/1/few-shot comparison.
+- [x] **05-04:** REWRITE — Was "Drafting Engine". Now "Chain-of-Thought & Reasoning Tokens" (moved from old Ch 3). Step-by-step examples, connect to thinking models, callout about wrong reasoning improving accuracy.
+- [x] **05-05:** REWRITE — Was "Privacy". Now "Using LLMs to Learn". Provider learning features, power of extrapolation, dangers of confident wrong answers.
+- [x] **05-06:** CREATE — "Privacy — What Never to Paste". Red/green list. Samsung incident callout.
 
 ---
 
 ## Chapter 6: Tool Use & Agents (REWRITE all — placeholders + restructured)
 
-- [ ] **06-01:** REWRITE — "What is Tool Use?" Add API callout box explaining what an API is. Before/after calculator example.
-- [ ] **06-02:** REWRITE — "MCP — Model Context Protocol". USB-C analogy. Simulink-style diagram.
-- [ ] **06-03:** REWRITE — Was "Agentic Loops". Now "What Makes a Good Agent?" Responsive, adaptive, self-correcting, goal-directed checklist. Feedback loop diagram.
-- [ ] **06-04:** REWRITE — Was "Autonomous Failures". Now "Agentic Loops — Perceive, Plan, Act, Observe". Step-by-step animation example.
-- [ ] **06-05:** REWRITE — Was "Building Agent". Now "When Agents Go Wrong". Bug gallery with click-to-reveal.
-- [ ] **06-06:** CREATE — "Building a Simple Agent". Duolingo-style step builder (choose task, add tools, set prompt, test).
+- [x] **06-01:** REWRITE — "What is Tool Use?" Add API callout box explaining what an API is. Before/after calculator example.
+- [x] **06-02:** REWRITE — "MCP — Model Context Protocol". USB-C analogy. Simulink-style diagram.
+- [x] **06-03:** REWRITE — Was "Agentic Loops". Now "What Makes a Good Agent?" Responsive, adaptive, self-correcting, goal-directed checklist. Feedback loop diagram.
+- [x] **06-04:** REWRITE — Was "Autonomous Failures". Now "Agentic Loops — Perceive, Plan, Act, Observe". Step-by-step animation example.
+- [x] **06-05:** REWRITE — Was "Building Agent". Now "When Agents Go Wrong". Bug gallery with click-to-reveal.
+- [x] **06-06:** CREATE — "Building a Simple Agent". Duolingo-style step builder (choose task, add tools, set prompt, test).
 
 ---
 
@@ -140,7 +140,7 @@
 - [ ] **11-02:** REWRITE — Was "Volume vs Variance". Now "Building AI Literacy". Managing fear, encouraging experimentation.
 - [ ] **11-03:** REWRITE — Was "HITL". Now "Is Your Company Ready?" Big data/analytics historical parallel.
 - [ ] **11-04:** REWRITE — Was "Exception Routing". Now "The Software Transition Trap". Company A story (US firm, Chinese software, address format problem).
-- [ ] **11-05:** REWRITE — Was "Communication Skills". Now "Lessons from Past Tech Shifts". Cloud, mobile, big data, AI pattern.
+- [ ] **11-05:** REWRITE — Was "Lessons from Past Tech Shifts". Cloud, mobile, big data, AI pattern.
 - [ ] **11-06:** DELETE — Ch 11 reduced to 5 pages.
 
 ---
@@ -211,8 +211,9 @@ An XY scatter plot with 4-5 labelled points: lion (3,7), cat (2,6), tiger (4,8),
 
 ## Technical / Visual Bugs (not content)
 
+- [ ] **02-03 Pronoun Resolution:** Bar chart is broken (weights don't animate or show correctly).
+- [ ] **02-02 Attention Arrows:** Still broken (not showing multiple arrows as requested).
 - [ ] **Nav bar inconsistency:** index.html and About page nav bar differs from chapter pages. Chapter nav bar is better (clicking "LLM Tutorial" goes home). Unify.
-- [ ] **02-02 attention arrows:** Currently broken. Rebuild with many arrows connecting all word pairs, varying thickness.
 - [ ] **02-04 context capacity visual:** Buttons should match 1.3 scene-selector style. Use stacked books (not buildings) for 1M. Fix accuracy: 200K ~ 2 novels, 1M ~ 10 novels.
 - [ ] **02-03 quiz (dog box):** Green highlight not showing after correct click. Investigate quiz component.
 - [ ] **Component reuse:** System prompt / custom spaces components should reuse existing interactive patterns (scene-selector buttons, quiz options, etc.) rather than creating new ones.

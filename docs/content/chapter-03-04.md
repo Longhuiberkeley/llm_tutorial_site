@@ -1,30 +1,30 @@
 ---
-title: "3.4 Chain-of-Thought"
-description: "Why 'thinking step-by-step' is just a prompt trick."
+title: "3.4 Custom Spaces — Pre-packaged Sandwiches"
+description: "Explain GPTs, Claude Projects, and Gemini Gems as pre-packaged system prompts and context."
 chapter: "Chapter 3"
 pageId: "03-04"
 ---
 
 ## 🎯 Core Goals
-- Understand why forcing an AI to "think out loud" makes it smarter.
-- Learn the "magic phrase" that improves AI reasoning.
+- Explain that "Custom GPTs" or "Claude Projects" are just pre-packaged versions of the Sandwich model.
+- Understand the three components of a custom space: system prompt, documents, and tools.
 
 :::callout-tldr
-LLMs can't think ahead. They generate words one at a time. If you force them to write down their "scratchpad thoughts" before answering, they naturally arrive at better conclusions!
+A "Custom GPT" or "Claude Project" isn't a new kind of AI. It's just a regular AI with a pre-filled "sandwich" of instructions and documents so you don't have to repeat yourself every time.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-chain-of-thought"}
+:::visual{name="visual-custom-spaces"}
 
 ## 📝 Key Concepts
 
-- **No Inner Monologue:** Unlike humans, standard LLMs don't have a silent "inner voice" where they ponder a problem before speaking. They just start talking immediately.
-- **The "Step-by-Step" Trick:** If you add *"Let's think step by step"* to your prompt, the AI generates words detailing its logical process. Because it generates words based on the *previous* words, seeing its own logical steps helps it predict the correct final answer!
-- **Modern Models:** Newer models (like OpenAI's o1 or Claude's extended thinking) have this "scratchpad" built-in. They secretly generate thousands of words of internal logic before showing you the final, polished answer.
-
-:::callout-dyk
-Did you know that just adding "Take a deep breath and work on this step by step" was proven in research papers to significantly increase an AI's math test scores?
-:::
+- **Pre-packaged Sandwiches:** Features like GPTs, Projects, and Gems are convenience layers. They bundle:
+    1. **System Prompt:** A specialized set of instructions (personality).
+    2. **Pre-prompt / Docs:** Reference materials like company policies or codebases.
+    3. **Tools:** Specific capabilities like web search or data analysis.
+- **Why Use Them?** They save you from having to "explain" your context and rules every single time you start a new chat.
+- **Business Use:** Companies create internal "Gems" or "Projects" with their brand voice, legal policies, and private data already pre-loaded into the sandwich.
+- **Memory Bonus:** Some Projects and Gems also allow access to previous conversation history, so the LLM can "remember" who you are across sessions. We'll explore how that actually works — and its limits — when we cover Memory.
 
 :::quiz{id="03-04"}

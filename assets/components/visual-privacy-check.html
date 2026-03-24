@@ -1,0 +1,87 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The AI Privacy Filter</h3>
+        <p class="text-sm text-on-surface-variant">Which of these are safe to paste into a chat with an LLM?</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔑</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Internal API Keys</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Technical Data</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+
+        <button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📝</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Draft Blog Post</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Public Content</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
+        </button>
+
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏥</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Medical Records</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Personal Info</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+
+        <button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💻</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Generic Code Snippet</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Open Source</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
+        </button>
+
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💳</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Customer Credit Cards</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Financial Data</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏗️</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Unreleased Blueprint</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Trade Secret</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+    </div>
+
+    <div id="privacy-feedback" class="mt-8 p-4 rounded-xl text-center font-bold text-sm opacity-0 transition-all duration-300">
+        <!-- Feedback here -->
+    </div>
+</div>
+
+<script>
+function checkPrivacy(isSafe, btn) {
+    const feedback = document.getElementById('privacy-feedback');
+    
+    // Reset buttons
+    btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.classList.remove('border-red-500', 'border-green-500', 'bg-red-50', 'bg-green-50');
+    });
+
+    if (isSafe) {
+        btn.classList.add('border-green-500', 'bg-green-50');
+        feedback.textContent = "✅ Correct! Public or generic information is generally safe to share.";
+        feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-green-100 text-green-800 opacity-100";
+    } else {
+        btn.classList.add('border-red-500', 'bg-red-50');
+        feedback.textContent = "❌ DANGER! Never paste sensitive, private, or proprietary data into an LLM.";
+        feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-red-100 text-red-800 opacity-100";
+    }
+}
+</script>

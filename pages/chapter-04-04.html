@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>4.4 Context Poisoning - LLM Tutorial</title>
+    <title>4.4 Context Poisoning — What the LLM Believes, It Believes Deeply - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -51,82 +51,85 @@
                     <span class="text-sm font-medium">2.1 What is Tokenization?</span>
                 </a><a href="chapter-02-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.2 Attention Arrows - Everything Connects</span>
+                    <span class="text-sm font-medium">2.2 ELI5 Attention — The Cocktail Party Effect</span>
                 </a><a href="chapter-02-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.3 Building a Sentence - Concrete Example</span>
+                    <span class="text-sm font-medium">2.3 Attention Weights — How the Model Focuses</span>
                 </a><a href="chapter-02-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.4 From Sentences to Paragraphs</span>
+                    <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
                 </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.5 Context Window</span>
+                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.1 The Chat Illusion</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Paper Tape Metaphor</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.3 System Prompts</span>
                 </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Chain-of-Thought</span>
-                </a><a href="chapter-03-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.5 Custom Spaces</span>
+                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.1 Counting Problems</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
                 </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.2 Hallucination</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
                 </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
                 </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">4.4 Context Poisoning</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
                 </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.5 When the Head is Full</span>
                 </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.6 The Stochastic Parrot</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
                 </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.1 The SPEC Kit</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
                 </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.2 Zero-Shot vs. Few-Shot</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
                 </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.3 Negative Constraints</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
                 </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.4 The Drafting Engine</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.5 Privacy 🔒</span>
+                    <span class="text-sm font-medium">5.5 Using LLMs to Learn</span>
+                </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Delegation</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
                 </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">MCP</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
                 </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Agentic Loops</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
                 </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Autonomous Failures</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
                 </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Building an Agent</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
+                </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">The Lawyer Case Study</span>
@@ -160,9 +163,6 @@
                 </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">OpenCanvas & Collaborative AI</span>
-                </a><a href="chapter-08-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Privacy vs Personalization</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Multimodal AI</span>
@@ -202,9 +202,6 @@
                 </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Verbalizing Processes</span>
-                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Leadership & AI Literacy</span>
@@ -220,6 +217,9 @@
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Adapting to Shifts</span>
+                </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.6 ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Harness Engineering</span>
@@ -251,35 +251,39 @@
                     <span>Chapter 4</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    4.4 Context Poisoning
+                    4.4 Context Poisoning — What the LLM Believes, It Believes Deeply
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    How irrelevant info makes the model dumber.
+                    How false information in a conversation history corrupts the LLM's future responses.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Understand the danger of overloading the context window with junk.</li>
-<li>Learn why &quot;more context&quot; isn&#39;t always &quot;better context&quot;.</li>
+<li>Understand that false information introduced into a conversation becomes &quot;sticky.&quot;</li>
+<li>Learn why you can&#39;t just tell an LLM to forget something you&#39;ve already told it.</li>
 </ul>
 <div class="callout callout-tldr">
-    If you throw a 100-page manual at an AI and ask it one specific question, the AI might get confused. The more irrelevant &quot;junk&quot; you put in its brain, the harder it is for it to find the truth.
+    Context poisoning occurs when false information, hallucinations, or errors are introduced into the conversation history, causing the LLM to behave incorrectly from that point on. Once it believes something is true, it keeps building on that belief — and telling it to &quot;forget&quot; rarely works.
 </div>
 
 
-<h2>👁️ Visuals &amp; Interactives</h2>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-context-poisoning</div>
-
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>The Needle in a Haystack:</strong> Every extra paragraph you add to a prompt acts as &quot;noise.&quot; If you ask a question about accounting, but paste in an entire company handbook that includes cafeteria rules, the AI might accidentally mix the concepts together.</li>
-<li><strong>Attention Dilution:</strong> Remember the &quot;Cocktail Party Effect&quot; from Chapter 2? If there are too many voices (too much text), the AI&#39;s &quot;attention&quot; gets stretched too thin, and it loses focus on your core question.</li>
-<li><strong>The Fix:</strong> Be ruthless about what you paste. Trim out irrelevant paragraphs before handing data to the AI.</li>
+<li><strong>The Conversation is the LLM&#39;s Entire Memory:</strong> Every time you send a message, the LLM re-reads the full conversation history from scratch. If that history contains wrong information, it gets re-read and re-believed every single time.</li>
+<li><strong>The &quot;Stuck Belief&quot; Problem:</strong> Imagine you tell an LLM: <em>&quot;Our company&#39;s revenue last year was $5 billion.&quot;</em> Even if that&#39;s wrong, the LLM will now use that figure confidently for every follow-up question — forecasts, ratios, comparisons, all of it.</li>
+<li><strong>You Can&#39;t Just Say &quot;Forget That&quot;:</strong> If you type <em>&quot;ignore what I said about the $5 billion&quot;</em>, the LLM sees both the original claim AND the correction in its history. It often gets confused about which version to trust — or simply continues using the poisoned figure.</li>
+<li><strong>Hallucinations Compound:</strong> If the LLM itself hallucinated a &quot;fact&quot; earlier in the conversation, that hallucination now sits in the transcript. Future responses treat the hallucinated fact as established context and build on it — creating a compounding chain of errors.</li>
+<li><strong>Security Risk:</strong> Intentional context poisoning is also an attack vector — someone plants a false &quot;document&quot; or message in a pipeline feeding an LLM, hoping to manipulate its outputs.</li>
 </ul>
+<div class="callout callout-error">
+    <strong>Once it&#39;s in, it&#39;s in.</strong> Most data quality problems end when you fix the input. Not here. Once bad data is in an LLM&#39;s conversation history, it rides along for the rest of the session. When you notice things going off-track — wrong facts, compounding errors — don&#39;t try to patch it. Start a fresh conversation with a clean slate.
+</div>
+
+
 <div class="callout callout-dyk">
-    Researchers test AI models using a &quot;Needle In A Haystack&quot; test, hiding a single secret sentence inside a 100,000-word document to see if the AI can successfully retrieve it without getting confused by the &quot;poison&quot; text around it!
+    The safest rule: treat each important LLM session like a blank whiteboard. Start fresh, provide the correct information upfront, and you avoid carrying old mistakes forward.
 </div>
 
 

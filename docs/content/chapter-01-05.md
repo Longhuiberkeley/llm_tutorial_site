@@ -25,6 +25,10 @@ LLMs generate text by finding words that are "close" to the context. "The delici
 - **Closest Word Output:** It statistically selects the closest valid word as the "next" word.
 - **The Cycle:** This connects back to the super-powered autocomplete concept—this is exactly how the generation process works.
 
+:::callout-dyk
+This is why LLMs can't "go back and edit" as they write—they only look forward, predicting the next token based on everything that came before it.
+:::
+
 :::callout-error
 LLMs don't "choose" words based on understanding. They calculate distances and pick statistically. No thinking, just math.
 :::

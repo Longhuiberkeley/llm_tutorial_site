@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>5.2 Zero-Shot vs. Few-Shot - LLM Tutorial</title>
+    <title>5.2 Be Explicit — No Mind Reading - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -51,82 +51,85 @@
                     <span class="text-sm font-medium">2.1 What is Tokenization?</span>
                 </a><a href="chapter-02-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.2 Attention Arrows - Everything Connects</span>
+                    <span class="text-sm font-medium">2.2 ELI5 Attention — The Cocktail Party Effect</span>
                 </a><a href="chapter-02-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.3 Building a Sentence - Concrete Example</span>
+                    <span class="text-sm font-medium">2.3 Attention Weights — How the Model Focuses</span>
                 </a><a href="chapter-02-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.4 From Sentences to Paragraphs</span>
+                    <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
                 </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.5 Context Window</span>
+                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.1 The Chat Illusion</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Paper Tape Metaphor</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.3 System Prompts</span>
                 </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Chain-of-Thought</span>
-                </a><a href="chapter-03-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.5 Custom Spaces</span>
+                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.1 Counting Problems</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
                 </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.2 Hallucination</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
                 </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
                 </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.4 Context Poisoning</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
                 </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.5 When the Head is Full</span>
                 </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.6 The Stochastic Parrot</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
                 </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.1 The SPEC Kit</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
                 </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">5.2 Zero-Shot vs. Few-Shot</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
                 </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.3 Negative Constraints</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
                 </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.4 The Drafting Engine</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.5 Privacy 🔒</span>
+                    <span class="text-sm font-medium">5.5 Using LLMs to Learn</span>
+                </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Delegation</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
                 </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">MCP</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
                 </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Agentic Loops</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
                 </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Autonomous Failures</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
                 </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Building an Agent</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
+                </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">The Lawyer Case Study</span>
@@ -160,9 +163,6 @@
                 </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">OpenCanvas & Collaborative AI</span>
-                </a><a href="chapter-08-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Privacy vs Personalization</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Multimodal AI</span>
@@ -202,9 +202,6 @@
                 </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Verbalizing Processes</span>
-                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Leadership & AI Literacy</span>
@@ -220,6 +217,9 @@
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Adapting to Shifts</span>
+                </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.6 ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Harness Engineering</span>
@@ -251,38 +251,159 @@
                     <span>Chapter 5</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    5.2 Zero-Shot vs. Few-Shot
+                    5.2 Be Explicit — No Mind Reading
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Show, don't just tell.
+                    State your requirements clearly.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Understand how examples dramatically improve AI performance.</li>
-<li>Learn the industry terms for prompting styles.</li>
+<li>Learn why &quot;more is more&quot; when it comes to prompt instructions.</li>
+<li>See how specificity leads to dramatically better results.</li>
 </ul>
 <div class="callout callout-tldr">
-    Explaining what you want is good. Showing the AI exactly what you want is 10x better. Providing just two or three examples can solve almost any formatting or tone problem!
+    If you don&#39;t specify it, the LLM will guess — and it will guess based on the most common pattern it&#39;s seen, not what <em>you</em> actually need. The more explicit you are, the less room there is for a wrong assumption.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-few-shot</div>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Specificity Stack</h3>
+        <p class="text-sm text-on-surface-variant">Click the layers to turn a vague prompt into a great one.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+        <!-- Controls -->
+        <div class="space-y-3">
+            <button onclick="toggleStep(1, this)" class="step-btn w-full text-left p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all flex items-center gap-4">
+                <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm">1</div>
+                <div>
+                    <div class="font-bold text-sm">Base Goal</div>
+                    <div class="text-xs opacity-60">"Write an email..."</div>
+                </div>
+            </button>
+
+            <button onclick="toggleStep(2, this)" class="step-btn w-full text-left p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all flex items-center gap-4 opacity-50">
+                <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm">2</div>
+                <div>
+                    <div class="font-bold text-sm">Add Context</div>
+                    <div class="text-xs opacity-60">"To my boss about a deadline..."</div>
+                </div>
+            </button>
+
+            <button onclick="toggleStep(3, this)" class="step-btn w-full text-left p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all flex items-center gap-4 opacity-50">
+                <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm">3</div>
+                <div>
+                    <div class="font-bold text-sm">Set Constraints</div>
+                    <div class="text-xs opacity-60">"Under 100 words, no apologies..."</div>
+                </div>
+            </button>
+
+            <button onclick="toggleStep(4, this)" class="step-btn w-full text-left p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all flex items-center gap-4 opacity-50">
+                <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm">4</div>
+                <div>
+                    <div class="font-bold text-sm">Define Format</div>
+                    <div class="text-xs opacity-60">"3 bulleted options..."</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Output Preview -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm min-h-[300px] flex flex-col">
+            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-4 opacity-40">Prompt Preview</div>
+            <div id="prompt-preview" class="text-sm font-mono bg-surface-container p-4 rounded-lg mb-6 flex-grow">
+                "Write an email."
+            </div>
+            
+            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-4 opacity-40">AI Result Quality</div>
+            <div class="w-full h-2 bg-surface-container rounded-full overflow-hidden mb-2">
+                <div id="quality-bar" class="h-full bg-primary transition-all duration-500" style="width: 10%;"></div>
+            </div>
+            <div id="quality-label" class="text-[10px] font-bold text-primary uppercase">Poor (Generic)</div>
+        </div>
+    </div>
+</div>
+
+<script>
+const promptSteps = [
+    {
+        prompt: '"Write an email."',
+        quality: 10,
+        label: "Poor (Generic)"
+    },
+    {
+        prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report."',
+        quality: 40,
+        label: "Better (Focused)"
+    },
+    {
+        prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report. Keep it under 100 words. Do not apologize profusely."',
+        quality: 75,
+        label: "Strong (Controlled)"
+    },
+    {
+        prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report. Keep it under 100 words. Do not apologize profusely. Provide 3 different subject line options in bullet points."',
+        quality: 100,
+        label: "Excellent (Surgical)"
+    }
+];
+
+function toggleStep(step, btn) {
+    // Enable all buttons up to this step
+    document.querySelectorAll('.step-btn').forEach((b, i) => {
+        if (i < step) {
+            b.classList.remove('opacity-50');
+            if (i === step - 1) {
+                b.classList.add('border-primary', 'bg-surface-container-lowest');
+            } else {
+                b.classList.remove('border-primary');
+            }
+        } else {
+            b.classList.add('opacity-50');
+            b.classList.remove('border-primary');
+        }
+    });
+
+    const data = promptSteps[step - 1];
+    const preview = document.getElementById('prompt-preview');
+    const bar = document.getElementById('quality-bar');
+    const label = document.getElementById('quality-label');
+
+    preview.classList.remove('animate-pulse');
+    void preview.offsetWidth; // trigger reflow
+    preview.classList.add('animate-pulse');
+    preview.textContent = data.prompt;
+    
+    bar.style.width = data.quality + '%';
+    label.textContent = data.label;
+}
+
+// Init first step
+document.addEventListener('DOMContentLoaded', () => {
+    toggleStep(1, document.querySelector('.step-btn'));
+});
+</script>
+
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Zero-Shot Prompting:</strong> Asking the AI to do something without giving it any examples. It&#39;s like asking a new chef to bake a cake without giving them a recipe. (e.g., <em>&quot;Classify this review as positive or negative.&quot;</em>)</li>
-<li><strong>Few-Shot Prompting:</strong> Giving the AI a &quot;few&quot; examples before asking your real question. </li>
-<li><strong>Pattern Matching Power:</strong> Because LLMs are fundamentally pattern-matching engines (remember Chapter 1?), they are incredibly good at mimicking the exact tone, structure, and logic of your examples.</li>
+<li><strong>Specify Length:</strong> Instead of &quot;Make this short,&quot; say &quot;Keep it under 100 words.&quot;</li>
+<li><strong>Specify Tone:</strong> Instead of &quot;Be professional,&quot; say &quot;Write in the style of a respectful business email.&quot;</li>
+<li><strong>Specify Audience:</strong> Instead of &quot;Explain quantum physics,&quot; say &quot;Explain quantum physics to a 12-year-old with no science background.&quot;</li>
+<li><strong>Specify Format:</strong> Instead of &quot;List the items,&quot; say &quot;Give me exactly 3 options, each in a single bullet point.&quot;</li>
+<li><strong>Use Negative Constraints:</strong> Tell the LLM what NOT to do — e.g., &quot;Do not apologize,&quot; &quot;Do not include a summary at the end,&quot; &quot;Do not use corporate jargon.&quot;</li>
 </ul>
 <div class="callout callout-dyk">
-    <em>Example of Few-Shot:</em>
-Review: &quot;The pizza was cold.&quot; -&gt; Classification: Negative
-Review: &quot;I loved the cheesy crust.&quot; -&gt; Classification: Positive
-Review: &quot;The waiter was very slow.&quot; -&gt; Classification: [AI WILL FILL THIS IN]
+    <strong>The 6W Framework for better prompts:</strong> When stuck on why your result isn&#39;t right, ask yourself if you covered: <strong>Who</strong> is the audience? <strong>What</strong> exactly do you want? <strong>When/Where</strong> is the context? <strong>Why</strong> does this matter? <strong>How</strong> should it be formatted? More answered Ws = better output.
+</div>
+
+
+<div class="callout callout-dyk">
+    <strong>How do you improve a bad prompt?</strong> Add more context. The most common reason an LLM gives a generic or off-target response is that the prompt was ambiguous. Read your own prompt as if you knew nothing about the task — would the instruction be clear to a stranger? If not, add more detail.
 </div>
 
 
@@ -295,10 +416,10 @@ Review: &quot;The waiter was very slow.&quot; -&gt; Classification: [AI WILL FIL
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-05-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 5.1 The SPEC Kit</a>
+                    <a href="chapter-05-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 5.1 Know When to Trust It</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-05-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">5.3 Negative Constraints <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-05-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">5.3 Zero-Shot vs. Few-Shot <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

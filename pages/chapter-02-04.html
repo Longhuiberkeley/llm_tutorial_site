@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>2.4 From Sentences to Paragraphs - LLM Tutorial</title>
+    <title>2.4 Context Capacity — What Fits in the Head - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -51,82 +51,85 @@
                     <span class="text-sm font-medium">2.1 What is Tokenization?</span>
                 </a><a href="chapter-02-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.2 Attention Arrows - Everything Connects</span>
+                    <span class="text-sm font-medium">2.2 ELI5 Attention — The Cocktail Party Effect</span>
                 </a><a href="chapter-02-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.3 Building a Sentence - Concrete Example</span>
+                    <span class="text-sm font-medium">2.3 Attention Weights — How the Model Focuses</span>
                 </a><a href="chapter-02-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">2.4 From Sentences to Paragraphs</span>
+                    <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
                 </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.5 Context Window</span>
+                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.1 The Chat Illusion</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Paper Tape Metaphor</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.3 System Prompts</span>
                 </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Chain-of-Thought</span>
-                </a><a href="chapter-03-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.5 Custom Spaces</span>
+                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.1 Counting Problems</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
                 </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.2 Hallucination</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
                 </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
                 </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.4 Context Poisoning</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
                 </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.5 When the Head is Full</span>
                 </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.6 The Stochastic Parrot</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
                 </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.1 The SPEC Kit</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
                 </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.2 Zero-Shot vs. Few-Shot</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
                 </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.3 Negative Constraints</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
                 </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.4 The Drafting Engine</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.5 Privacy 🔒</span>
+                    <span class="text-sm font-medium">5.5 Using LLMs to Learn</span>
+                </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Delegation</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
                 </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">MCP</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
                 </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Agentic Loops</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
                 </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Autonomous Failures</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
                 </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Building an Agent</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
+                </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">The Lawyer Case Study</span>
@@ -160,9 +163,6 @@
                 </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">OpenCanvas & Collaborative AI</span>
-                </a><a href="chapter-08-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Privacy vs Personalization</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Multimodal AI</span>
@@ -202,9 +202,6 @@
                 </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Verbalizing Processes</span>
-                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Leadership & AI Literacy</span>
@@ -220,6 +217,9 @@
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Adapting to Shifts</span>
+                </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.6 ROI Calculation</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">Harness Engineering</span>
@@ -251,89 +251,126 @@
                     <span>Chapter 2</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    2.4 From Sentences to Paragraphs
+                    2.4 Context Capacity — What Fits in the Head
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    How attention tracks meaning across multiple sentences.
+                    Make 'context window' concrete by visualizing what different token counts actually look like.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Show that attention works across sentence boundaries.</li>
-<li>Understand how ideas flow forward and pronouns refer backward.</li>
+<li>Make the concept of a &quot;Context Window&quot; concrete.</li>
+<li>Visualize what 200k or 1 Million tokens actually looks like.</li>
 </ul>
 <div class="callout callout-tldr">
-    Attention isn&#39;t limited to one sentence. The LLM tracks connections across paragraphs, allowing it to maintain a consistent topic and remember who is doing what.
+    The &quot;Context Window&quot; is the absolute limit of how much text an LLM can pay attention to at one time. It&#39;s the AI&#39;s only &quot;short-term memory.&quot; Once it fills up, old information has to fall out.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 text-center max-w-3xl mx-auto">
-    <div class="flex items-center justify-center gap-3 mb-6">
-        <span class="text-3xl">🔗</span>
-        <h3 class="text-xl font-bold font-headline">Cross-Sentence Attention</h3>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-10">
+        <h3 class="text-3xl font-bold font-headline mb-2 text-primary">Context Capacity</h3>
+        <p class="text-lg text-on-surface-variant font-medium">How many "tokens" can the model hold in its head at once?</p>
     </div>
     
-    <div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant relative">
-        <div class="flex flex-wrap justify-center gap-x-3 gap-y-6 text-2xl font-bold">
-            <!-- Sentence 1 -->
-            <span>Sarah</span>
-            <span>loves</span>
-            <span class="relative z-10">
-                programming.
-                <svg id="lines-cross" class="absolute pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[100px] z-[-1]" style="overflow: visible;">
-                    <!-- Line from She to Sarah -->
-                    <path class="path-animate" d="M 80,40 Q 0,80 -120,0" fill="none" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10,5" />
-                    <!-- Line from codes to programming -->
-                    <path class="path-animate-delay" d="M 160,40 Q 80,70 0,0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" />
-                </svg>
-            </span>
-            <!-- Sentence 2 -->
-            <span class="text-primary ml-4">She</span>
-            <span class="text-accent">codes</span>
-            <span>every</span>
-            <span>day.</span>
+    <div class="space-y-8">
+        <!-- Scale Buttons -->
+        <div class="flex flex-wrap justify-center gap-3">
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-primary text-on-primary shadow-lg hover:scale-105 active:scale-95 cap-btn" id="btn-cap-0" onclick="updateCapacity(0)">Small (2K)</button>
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-1" onclick="updateCapacity(1)">Medium (32K)</button>
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-2" onclick="updateCapacity(2)">Large (200K)</button>
+            <button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-3" onclick="updateCapacity(3)">Giant (1M+)</button>
         </div>
-        
-        <div class="mt-8 grid grid-cols-2 gap-4 text-sm font-medium">
-            <div class="bg-primary/10 p-3 rounded-lg border border-primary/20 text-primary">
-                "She" pays strong attention to "Sarah" across the period boundary.
-            </div>
-            <div class="bg-accent/10 p-3 rounded-lg border border-accent/20 text-accent">
-                "codes" looks back at "programming" to establish the context.
+
+        <!-- Result Card -->
+        <div id="capacity-card" class="bg-surface-container-lowest rounded-2xl p-8 border-2 border-outline-variant/30 shadow-inner min-h-[280px] flex flex-col items-center justify-center transition-all duration-300">
+            <div id="capacity-visual" class="text-6xl mb-6 animate-fade-in drop-shadow-sm">📄</div>
+            <div class="text-center">
+                <h4 id="capacity-title" class="text-2xl font-bold font-headline text-primary mb-2">2,000 Tokens</h4>
+                <p id="capacity-desc" class="text-on-surface-variant font-medium leading-relaxed max-w-sm mx-auto">
+                    Early LLMs: Equivalent to about <strong>4 pages</strong> of text. Perfect for a quick email or a short article.
+                </p>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-.path-animate {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 2s ease-out forwards infinite alternate;
-}
-.path-animate-delay {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 2s ease-out forwards infinite alternate;
-    animation-delay: 1s;
-}
-@keyframes draw {
-    to { stroke-dashoffset: 0; }
-}
-</style>
+<script>
+const capacityData = [
+    {
+        title: "2,000 Tokens",
+        visual: "📄",
+        desc: "<strong>The Short Article.</strong> About 4 pages of text. Just enough for a few emails or a recipe.",
+        color: "var(--primary)"
+    },
+    {
+        title: "32,000 Tokens",
+        visual: "📑",
+        desc: "<strong>The Product Manual.</strong> Roughly 60 pages. Enough to hold a technical guide or a long legal document.",
+        color: "var(--primary)"
+    },
+    {
+        title: "200,000 Tokens",
+        visual: "📚📚",
+        desc: "<strong>~2 Novels.</strong> A massive amount of space. You can feed it a couple of full-length books or a large codebase.",
+        color: "var(--accent)"
+    },
+    {
+        title: "1,000,000+ Tokens",
+        visual: "📚📚📚📚📚📚📚📚📚📚",
+        desc: "<strong>~10 Novels.</strong> A staggering amount of space — stack up about 10 novels at once. The model can cross-reference ideas across the entire <em>Lord of the Rings</em> trilogy and then some.",
+        color: "var(--on-surface-variant)"
+    }
+];
 
+function updateCapacity(val) {
+    // Update button styles
+    document.querySelectorAll('.cap-btn').forEach((btn, idx) => {
+        if (idx === val) {
+            btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
+            btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+        } else {
+            btn.classList.add('bg-surface-container-highest', 'text-on-surface');
+            btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
+        }
+    });
+
+    const data = capacityData[val];
+    const visual = document.getElementById('capacity-visual');
+    const title = document.getElementById('capacity-title');
+    const desc = document.getElementById('capacity-desc');
+    
+    // Animate out
+    visual.style.transform = 'scale(0.8)';
+    visual.style.opacity = '0';
+    
+    setTimeout(() => {
+        visual.innerHTML = data.visual;
+        title.innerHTML = data.title;
+        desc.innerHTML = data.desc;
+        title.style.color = data.color;
+        
+        // Animate in
+        visual.style.transform = 'scale(1.1)';
+        visual.style.opacity = '1';
+        setTimeout(() => {
+            visual.style.transform = 'scale(1)';
+        }, 150);
+    }, 150);
+}
+</script>
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Long-Range Connections:</strong> As text gets longer, the LLM keeps building attention arrows back to previous sentences. </li>
-<li><strong>Maintaining State:</strong> This is why an LLM can write a 5-paragraph story without forgetting the main character&#39;s name. The words in paragraph 5 are still paying &quot;attention&quot; to the character introduced in paragraph 1.</li>
-<li><strong>The Limit:</strong> The further back a word is, the harder it can be to maintain strong attention. This introduces the concept of a &quot;Context Window&quot;.</li>
+<li><strong>The Limit of Attention:</strong> The math of calculating attention between every single word gets incredibly expensive as text gets longer. This is why LLMs have a hard limit on their context window.</li>
+<li><strong>Short-Term Memory:</strong> The context window is an LLM&#39;s only &quot;memory&quot;. If you had a 50-page conversation, but the context window only fits 40 pages, the LLM will completely forget the first 10 pages.</li>
+<li><strong>Growing Capabilities:</strong> Early LLMs could only remember about 2,000 tokens (a few pages). Today&#39;s models can remember 200,000 tokens (about 2 full novels) up to 1,000,000 tokens (roughly 10 novels).</li>
 </ul>
 <div class="callout callout-error">
-    The LLM isn&#39;t &quot;remembering&quot; the plot of the story like a human would. It is simply maintaining mathematical attention weights to previous tokens in the text sequence.
+    Just because a model has a 1 Million token context window doesn&#39;t mean it pays <em>perfect</em> attention to everything in it. Often, LLMs suffer from the &quot;needle in a haystack&quot; problem, where they forget things in the middle of long text.
 </div>
 
 
@@ -346,10 +383,10 @@
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-02-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 2.3 Building a Sentence - Concrete Example</a>
+                    <a href="chapter-02-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 2.3 Attention Weights — How the Model Focuses</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-02-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">2.5 Context Window <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-02-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">2.5 How LLMs Are Trained <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

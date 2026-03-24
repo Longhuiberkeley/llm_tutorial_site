@@ -1,33 +1,36 @@
 ---
-title: "5.2 Zero-Shot vs. Few-Shot"
-description: "Show, don't just tell."
+title: "5.2 Be Explicit — No Mind Reading"
+description: "State your requirements clearly."
 chapter: "Chapter 5"
 pageId: "05-02"
 ---
 
 ## 🎯 Core Goals
-- Understand how examples dramatically improve AI performance.
-- Learn the industry terms for prompting styles.
+- Learn why "more is more" when it comes to prompt instructions.
+- See how specificity leads to dramatically better results.
 
 :::callout-tldr
-Explaining what you want is good. Showing the AI exactly what you want is 10x better. Providing just two or three examples can solve almost any formatting or tone problem!
+If you don't specify it, the LLM will guess — and it will guess based on the most common pattern it's seen, not what *you* actually need. The more explicit you are, the less room there is for a wrong assumption.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-few-shot"}
+:::visual{name="visual-be-explicit"}
 
 ## 📝 Key Concepts
 
-- **Zero-Shot Prompting:** Asking the AI to do something without giving it any examples. It's like asking a new chef to bake a cake without giving them a recipe. (e.g., *"Classify this review as positive or negative."*)
-- **Few-Shot Prompting:** Giving the AI a "few" examples before asking your real question. 
-- **Pattern Matching Power:** Because LLMs are fundamentally pattern-matching engines (remember Chapter 1?), they are incredibly good at mimicking the exact tone, structure, and logic of your examples.
+- **Specify Length:** Instead of "Make this short," say "Keep it under 100 words."
+- **Specify Tone:** Instead of "Be professional," say "Write in the style of a respectful business email."
+- **Specify Audience:** Instead of "Explain quantum physics," say "Explain quantum physics to a 12-year-old with no science background."
+- **Specify Format:** Instead of "List the items," say "Give me exactly 3 options, each in a single bullet point."
+- **Use Negative Constraints:** Tell the LLM what NOT to do — e.g., "Do not apologize," "Do not include a summary at the end," "Do not use corporate jargon."
 
 :::callout-dyk
-*Example of Few-Shot:*
-Review: "The pizza was cold." -> Classification: Negative
-Review: "I loved the cheesy crust." -> Classification: Positive
-Review: "The waiter was very slow." -> Classification: [AI WILL FILL THIS IN]
+**The 6W Framework for better prompts:** When stuck on why your result isn't right, ask yourself if you covered: **Who** is the audience? **What** exactly do you want? **When/Where** is the context? **Why** does this matter? **How** should it be formatted? More answered Ws = better output.
+:::
+
+:::callout-dyk
+**How do you improve a bad prompt?** Add more context. The most common reason an LLM gives a generic or off-target response is that the prompt was ambiguous. Read your own prompt as if you knew nothing about the task — would the instruction be clear to a stranger? If not, add more detail.
 :::
 
 :::quiz{id="05-02"}

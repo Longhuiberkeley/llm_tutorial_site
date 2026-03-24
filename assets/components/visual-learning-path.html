@@ -1,0 +1,110 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Ultimate Learning Tool</h3>
+        <p class="text-sm text-on-surface-variant">Tap a topic to see how an LLM adapts its explanation instantly.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+        <!-- Topic Selection -->
+        <div class="space-y-4">
+            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">1. Pick a complex topic</div>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="setTopic('Quantum Physics', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Quantum Physics</button>
+                <button onclick="setTopic('Stock Market', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Stock Market</button>
+                <button onclick="setTopic('Photosynthesis', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Photosynthesis</button>
+                <button onclick="setTopic('Bitcoin', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Bitcoin</button>
+            </div>
+
+            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mt-6 mb-2 opacity-60">2. Pick an audience</div>
+            <div class="flex gap-2">
+                <button onclick="setLevel('Child', this)" class="level-btn flex-1 p-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">5-year-old</button>
+                <button onclick="setLevel('Student', this)" class="level-btn flex-1 p-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">High Schooler</button>
+                <button onclick="setLevel('Expert', this)" class="level-btn flex-1 p-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">Professional</button>
+            </div>
+        </div>
+
+        <!-- Adaptive Result -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm min-h-[250px] flex flex-col transition-all duration-300">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="px-2 py-0.5 rounded bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest">Adaptive Explanation</span>
+            </div>
+            <div id="learning-output" class="text-sm leading-relaxed italic text-on-surface-variant">
+                Select a topic and audience to see how the AI adjusts its explanation instantly.
+            </div>
+            
+            <div id="extrapolation-btn" class="hidden mt-6 pt-4 border-t border-outline-variant">
+                <div class="text-[10px] font-bold uppercase tracking-widest text-primary mb-2">💡 Try Extrapolating</div>
+                <button onclick="extrapolate()" class="w-full p-2 bg-primary text-on-primary rounded text-xs font-bold hover:shadow-lg transition-all">"Explain it using a pizza analogy!"</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentTopic = '';
+let currentLevel = '';
+
+const knowledge = {
+    'Quantum Physics': {
+        'Child': 'Imagine two magic toys that are connected. When you spin one, the other one spins too, even if it\'s in another room!',
+        'Student': 'Quantum physics is the study of very small particles like atoms. They don\'t follow normal rules—they can be in two places at once until someone looks at them.',
+        'Expert': 'Quantum mechanics utilizes wave-particle duality and the Schrödinger equation to describe the probabilistic behavior of subatomic systems, where superposition and entanglement are core principles.',
+        'Pizza': 'Imagine a pizza that is both cheese AND pepperoni at the same time until you open the box and look at it!'
+    },
+    'Stock Market': {
+        'Child': 'It\'s like a giant swap meet where everyone buys and sells tiny pieces of their lemonade stands.',
+        'Student': 'The stock market is where people trade shares of companies. If a company does well, the value of the shares goes up and you make money.',
+        'Expert': 'Public equity markets facilitate capital allocation through continuous price discovery and liquidity provision, governed by supply and demand dynamics and macroeconomic indicators.',
+        'Pizza': 'Buying a stock is like buying one single slice of a pizza. If the pizza shop gets famous, your slice is worth more than you paid for it!'
+    },
+    'Photosynthesis': {
+        'Child': 'Plants eat sunlight and turn it into yummy snacks so they can grow big and tall!',
+        'Student': 'Plants take in carbon dioxide, water, and sunlight to create glucose (sugar) and release oxygen as a byproduct.',
+        'Expert': 'Photosynthesis is a complex biochemical process where chloroplasts convert radiant energy into chemical energy via the Calvin cycle and electron transport chain.',
+        'Pizza': 'It\'s like a pizza oven that uses solar power to turn dirt and air into delicious crust!'
+    },
+    'Bitcoin': {
+        'Child': 'It\'s like magic digital gold that lives inside computers instead of under the ground.',
+        'Student': 'Bitcoin is a decentralized digital currency that uses a public ledger called a blockchain to track transactions without needing a bank.',
+        'Expert': 'Bitcoin is a peer-to-peer electronic cash system based on SHA-256 proof-of-work consensus, ensuring a fixed supply and censorship-resistant value transfer.',
+        'Pizza': 'Imagine a pizza parlor where everyone in town has a copy of the receipt book, so nobody can lie about how many slices they bought!'
+    }
+};
+
+function setTopic(topic, btn) {
+    currentTopic = topic;
+    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('border-primary', 'bg-surface-container'));
+    btn.classList.add('border-primary', 'bg-surface-container');
+    updateOutput();
+}
+
+function setLevel(level, btn) {
+    currentLevel = level;
+    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('border-primary', 'bg-surface-container'));
+    btn.classList.add('border-primary', 'bg-surface-container');
+    updateOutput();
+}
+
+function updateOutput() {
+    const output = document.getElementById('learning-output');
+    const extra = document.getElementById('extrapolation-btn');
+    
+    if (currentTopic && currentLevel) {
+        output.classList.add('opacity-0');
+        setTimeout(() => {
+            output.textContent = knowledge[currentTopic][currentLevel];
+            output.classList.remove('opacity-0');
+            extra.classList.remove('hidden');
+        }, 200);
+    }
+}
+
+function extrapolate() {
+    const output = document.getElementById('learning-output');
+    output.classList.add('opacity-0');
+    setTimeout(() => {
+        output.innerHTML = '<strong>Pizza Analogy:</strong><br>' + knowledge[currentTopic]['Pizza'];
+        output.classList.remove('opacity-0');
+    }, 200);
+}
+</script>

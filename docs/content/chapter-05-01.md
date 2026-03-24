@@ -1,31 +1,35 @@
 ---
-title: "5.1 The SPEC Kit"
-description: "Goal, Context, Constraints, Format."
+title: "5.1 Know When to Trust It"
+description: "The Spectrum of Reliability."
 chapter: "Chapter 5"
 pageId: "05-01"
 ---
 
 ## 🎯 Core Goals
-- Move away from "treating the AI like a magic 8-ball."
-- Learn the foundational 4-part framework for writing reliable prompts.
+- Understand when to trust an LLM and when to verify it.
+- Learn that LLMs CAN be used in production — with the right engineering.
 
 :::callout-tldr
-Stop writing one-sentence prompts. To get good results consistently, you need a SPEC Kit: **S**pecific Goal, **P**rovided Context, **E**xplicit Constraints, and **C**lear Format.
+LLMs aren't "all or nothing." Their reliability depends entirely on the task. Knowing where your task sits on the **Trust Spectrum** is the single most important judgment call you can make before using an LLM.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-spec-kit"}
+:::visual{name="visual-trust-spectrum"}
 
 ## 📝 Key Concepts
 
-- **Specific Goal:** Don't say "Write an email." Say "Write an email to my boss asking for a deadline extension on the Q3 report."
-- **Provided Context:** Give the AI the "Why." (e.g., *"My computer crashed yesterday, so I lost two days of work."*) 
-- **Explicit Constraints:** The guardrails. (e.g., *"Do not apologize profusely. Keep it under 100 words."*)
-- **Clear Format:** How you want the answer delivered. (e.g., *"Provide 3 different options in bullet points."*)
+- **Ready to use:** Creative writing, brainstorming, explaining concepts, email drafts. These are low-stakes tasks where some variation is actually useful.
+- **Review before using:** Code, business communications, document summaries. The LLM does 80% of the work; your judgment provides the final 20% polish.
+- **Heavy verification needed:** Legal text, financial calculations, medical information. The LLM can draft and structure — but every fact must be cross-checked against authoritative sources.
+- **Don't trust without engineering:** Autonomous decisions, safety-critical operations, anything where a single undetected mistake is catastrophic. LLMs are powerful here *only* with proper guardrails, testing, and human oversight built in.
 
 :::callout-error
-If you don't provide constraints and formatting, the AI will default to its System Prompt—which usually results in a generic, overly-wordy, 5-paragraph essay that sounds like a robot wrote it.
+**LLMs are production-ready — but not for everything.** With proper engineering (retrieval, testing, human review), LLMs power systems handling millions of real decisions daily. The risk isn't that they're too unreliable to use in serious contexts — it's using them in serious contexts *without* the right engineering. Know your zone, and design accordingly.
+:::
+
+:::callout-dyk
+A useful question before any LLM task: *"What's the worst thing that happens if this response is wrong?"* If the answer is "nothing" or "I'd catch it" — go ahead. If the answer is "someone gets hurt" or "we face legal liability" — add engineering before shipping.
 :::
 
 :::quiz{id="05-01"}

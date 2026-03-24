@@ -1,0 +1,109 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">When Agents Go Wrong</h3>
+        <p class="text-sm text-on-surface-variant">Click a bug to reveal why it happened and how to fix it.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+        <!-- Bug 1: Infinite Loop -->
+        <button onclick="revealBug(0, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔄</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">The Infinite Loop</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Logic Error</div>
+            </div>
+        </button>
+
+        <!-- Bug 2: Tool Hallucination -->
+        <button onclick="revealBug(1, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">👻</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Tool Hallucination</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Instruction Error</div>
+            </div>
+        </button>
+
+        <!-- Bug 3: Stubborn Retry -->
+        <button onclick="revealBug(2, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🧱</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Stubborn Retry</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Execution Error</div>
+            </div>
+        </button>
+
+        <!-- Bug 4: The Wrong Tool -->
+        <button onclick="revealBug(3, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔨</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">The Wrong Tool</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Context Error</div>
+            </div>
+        </button>
+    </div>
+
+    <!-- Bug Detail Display -->
+    <div id="bug-display" class="mt-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 min-h-[180px] animate-fade-in opacity-0 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-4">
+            <span id="bug-icon" class="text-3xl">🔄</span>
+            <h4 id="bug-title" class="text-lg font-bold">The Infinite Loop</h4>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-red-500 mb-2">The Problem</div>
+                <p id="bug-problem" class="text-xs text-on-surface-variant leading-relaxed italic"></p>
+            </div>
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-green-600 mb-2">The Fix</div>
+                <p id="bug-fix" class="text-xs text-on-surface-variant leading-relaxed italic"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const bugData = [
+    {
+        title: "The Infinite Loop",
+        icon: "🔄",
+        problem: "The agent searches for info, gets a result, but isn't sure it's 'perfect', so it searches for the same thing again... forever.",
+        fix: "Set a <strong>maximum step limit</strong> (e.g., 5 cycles) or a timeout to force the agent to stop and report its current progress."
+    },
+    {
+        title: "Tool Hallucination",
+        icon: "👻",
+        problem: "The agent tries to call a tool that doesn't exist, like <code>magic_fix_everything()</code>, because it sounds like it SHOULD exist.",
+        fix: "Improve the <strong>system prompt</strong> to explicitly list only available tools and provide a 404 error if it tries a missing one."
+    },
+    {
+        title: "Stubborn Retry",
+        icon: "🧱",
+        problem: "The agent gets a 'Permission Denied' error from a file tool and immediately tries the exact same command again, expecting a different result.",
+        fix: "Implement <strong>error handling logic</strong> that forces the agent to 're-plan' or ask for human help after 2 consecutive failures."
+    },
+    {
+        title: "The Wrong Tool",
+        icon: "🔨",
+        problem: "The agent uses a calculator to find a capital city or uses web search to solve 2+2. It's using a hammer for a screw.",
+        fix: "Provide <strong>clear descriptions</strong> for every tool so the AI's internal 'attention' knows exactly when each tool is appropriate."
+    }
+];
+
+function revealBug(index, btn) {
+    const data = bugData[index];
+    const display = document.getElementById('bug-display');
+    
+    document.querySelectorAll('.bug-btn').forEach(b => b.classList.remove('border-red-500', 'bg-red-50'));
+    btn.classList.add('border-red-500', 'bg-red-50');
+
+    display.classList.remove('animate-fade-in');
+    void display.offsetWidth; // trigger reflow
+    display.classList.add('animate-fade-in');
+    display.style.opacity = "1";
+
+    document.getElementById('bug-icon').textContent = data.icon;
+    document.getElementById('bug-title').textContent = data.title;
+    document.getElementById('bug-problem').innerHTML = data.problem;
+    document.getElementById('bug-fix').innerHTML = data.fix;
+}
+</script>

@@ -1,6 +1,6 @@
 ---
 title: "1.1 Keyboard Autocomplete vs LLM Completion"
-description: "Learning the core intuition of LLMs: they are just autocomplete × 999."
+description: "Learning the core intuition of LLMs: they are just autocomplete on steroids."
 chapter: "Chapter 1"
 pageId: "01-01"
 ---
@@ -21,7 +21,7 @@ LLMs are just super-powered autocomplete. They predict what word comes next, not
 
 - **The Phone Autocomplete:** Predicts exactly **1 word** at a time based on basic local frequency (e.g., typing "Roses are" suggests "red").
 - **The Large Language Model:** Predicts **entire sentences and paragraphs** based on deep semantic patterns learned from billions of text documents.
-- **The Scale Difference:** It is the exact same underlying technology, simply scaled up 999 times. 
+- **The Scale Difference:** It is the exact same underlying technology, simply scaled up to a massive degree. 
 
 :::callout-error
 It is tempting to believe LLMs "understand" what they're saying. They don't—they are just exceptionally good at guessing the most statistically likely next word based on patterns in their training data.

@@ -1,0 +1,51 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">LLMs Can Delegate</h3>
+        <p class="text-sm text-on-surface-variant">See how an LLM uses a calculator to avoid "guessing" math.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-6 items-stretch">
+        <!-- Without Tool -->
+        <div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col">
+            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-4 opacity-60">Without Tools</div>
+            <div class="text-xs font-mono p-3 bg-surface-container rounded mb-4">
+                <strong>Question:</strong> "What is 123 × 456?"
+            </div>
+            <div class="p-3 bg-red-50 border border-red-200 rounded text-xs leading-relaxed italic text-red-700 flex-grow">
+                <strong>AI Logic:</strong> "I remember seeing numbers like this. It's probably around 50,000..."<br><br>
+                <strong>Output:</strong> "123 × 456 is 56,128." (Wrong! It guessed.)
+            </div>
+        </div>
+
+        <!-- Animation Center -->
+        <div class="flex items-center justify-center p-4">
+            <div class="flex flex-col items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-4xl animate-bounce">handyman</span>
+                <span class="text-[10px] font-bold text-primary uppercase">Tool Call</span>
+            </div>
+        </div>
+
+        <!-- With Tool -->
+        <div class="flex-1 bg-surface-container-lowest border-2 border-primary rounded-xl p-6 flex flex-col shadow-md">
+            <div class="text-[10px] font-bold uppercase tracking-widest text-primary mb-4">With Calculator Tool</div>
+            <div class="text-xs font-mono p-3 bg-surface-container rounded mb-4">
+                <strong>Question:</strong> "What is 123 × 456?"
+            </div>
+            <div class="space-y-3 flex-grow">
+                <div class="p-3 bg-surface-container rounded border-l-4 border-primary text-[10px] font-mono">
+                    <span class="text-primary font-bold">CALL:</span> calculator.multiply(123, 456)<br>
+                    <span class="text-green-600 font-bold">RESULT:</span> 56088
+                </div>
+                <div class="p-3 bg-green-50 border border-green-200 rounded text-xs leading-relaxed italic text-green-700">
+                    <strong>Output:</strong> "123 × 456 is 56,088." (Correct! Exact calculation.)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+        <p class="text-xs text-center italic text-on-surface-variant">
+            By delegating to a <strong>calculator</strong>, the AI stops being a "statistical guesser" and becomes a precise processor.
+        </p>
+    </div>
+</div>

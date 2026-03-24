@@ -1,30 +1,30 @@
 ---
-title: "5.3 Negative Constraints"
-description: "What NOT to do."
+title: "5.3 Zero-Shot vs. Few-Shot"
+description: "Show, Don't Just Tell."
 chapter: "Chapter 5"
 pageId: "05-03"
 ---
 
 ## 🎯 Core Goals
-- Learn why telling an AI what *not* to do can sometimes backfire.
-- Master the art of affirmative constraints.
+- Understand the power of examples in prompting.
+- Learn why 2-3 examples are better than 10 paragraphs of text.
 
 :::callout-tldr
-Telling an AI "Do not think of a pink elephant" almost guarantees it will think of a pink elephant. It's usually better to tell the AI exactly what *to* do instead of what *not* to do.
+Explaining what you want is good. Showing the AI exactly what you want is 10x better. Providing just two or three examples can solve almost any formatting or tone problem!
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-negative-constraints"}
+:::visual{name="visual-few-shot"}
 
 ## 📝 Key Concepts
 
-- **The Pink Elephant Problem:** Because LLMs generate words based on the tokens in your prompt, if you include the word "apologize" in a negative constraint (*"Do not apologize"*), you are actively increasing the probability of the AI generating an apology!
-- **Affirmative Phrasing:** Instead of *"Don't write long paragraphs"*, write *"Write exclusively in single sentences."* Instead of *"Don't use jargon"*, write *"Explain this to a 5-year-old."*
-- **When to use Negative Constraints:** Negative constraints are best used when the AI keeps making a very specific, stubborn mistake. Use them as a last resort "patch."
+- **Zero-Shot:** Just instructions, no examples. (e.g., "Convert dates to MM/DD/YYYY")
+- **Few-Shot:** Instructions + 2-3 examples of the desired pattern. (e.g., "January 5th -> 01/05/2024. March 21st -> 03/21/2024. Now convert: December 1st")
+- **Pattern Matching Power:** LLMs are incredibly good at mimicking the exact tone, structure, and logic of your examples (as we saw when we explored building intuition).
 
-:::callout-error
-Avoid giving the AI a laundry list of 20 things *not* to do. It dilutes the AI's attention and makes the prompt confusing. Stick to 1 or 2 critical negative rules if necessary.
+:::callout-dyk
+Rule of thumb: 2-3 examples is usually enough. Adding more than 5 often yields diminishing returns and wastes tokens!
 :::
 
 :::quiz{id="05-03"}
