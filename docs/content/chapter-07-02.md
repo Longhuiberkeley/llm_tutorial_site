@@ -1,30 +1,69 @@
 ---
-title: "What is RAG?"
-description: "Search + LLM."
+title: "7.2 What is RAG? — Search + LLM"
+description: "How Retrieval-Augmented Generation works: retrieve relevant documents first, then generate an answer from them."
 chapter: "Chapter 7"
 pageId: "07-02"
 ---
 
 ## 🎯 Core Goals
-- [Placeholder for core goals]
+- Explain RAG as a two-step process: retrieve first, then generate.
+- Show the concrete difference between a hallucinating LLM and a RAG-grounded LLM.
 
 :::callout-tldr
-This page is a placeholder for the "What is RAG?" topic. Content will be added soon!
+RAG combines a search engine with an LLM. First find the right documents, then have the LLM answer from them — not from memory.
 :::
 
-## 👁️ Visuals & Interactives
+## Three Letters, One Big Idea
 
-:::visual{name="placeholder-visual"}
+**R**etrieval — **A**ugmented — **G**eneration
 
-*(Visual placeholder for What is RAG?)*
+- **Retrieve:** Search your knowledge base for the most relevant documents
+- **Augment:** Add those documents to the prompt (slot them right into the Sandwich)
+- **Generate:** The LLM writes an answer grounded in those documents — not guessing from training data
+
+:::visual{name="visual-rag-flow"}
+
+## Before and After
+
+The difference is dramatic:
+
+**Without RAG:**
+> You: "What's our company's refund policy for damaged goods?"
+> LLM: "Most companies offer a 30-day return window for damaged items..." *(total hallucination — it has no idea what YOUR policy says)*
+
+**With RAG:**
+> System retrieves your actual refund policy document from the knowledge base.
+> LLM: "According to your policy, damaged goods qualify for a full refund within 60 days with photo documentation." *(grounded in your real document)*
+
+The LLM hasn't changed at all. What changed is that the *right document* was placed in front of it.
+
+## The RAG Flow, Step by Step
+
+1. User asks a question
+2. The system converts the question into a search
+3. Top 3–5 relevant documents are retrieved from the knowledge base
+4. Those documents are injected into the prompt — right in the Sandwich, before the user's message
+5. The LLM reads question + retrieved docs and generates an answer
+6. The answer reflects actual documents — not a statistical guess
+
+:::callout-error
+RAG dramatically *reduces* hallucination — it does not eliminate it. The LLM can still misread or misinterpret a document. But grounding answers in real documents is far better than answering from training memory alone.
+:::
+
+## Why This Is Powerful
+
+RAG means your LLM is never limited to what it knew during training. You can:
+
+- Add new company documents today — the LLM "knows" them immediately
+- Keep proprietary data on your own servers — the LLM only sees what you retrieve
+- Update your knowledge base without retraining the model
 
 ## 📝 Key Concepts
 
-- Concept 1: [To be defined]
-- Concept 2: [To be defined]
-
-:::callout-dyk
-Did you know that this concept is essential for mastering LLMs?
-:::
+- **Retrieve first, generate second** — order matters; search happens before the LLM speaks
+- **Grounded answers:** The LLM responds from retrieved content, not training memory
+- **Dynamic knowledge:** New documents are immediately available without model retraining
+- **RAG ≠ fine-tuning:** The model doesn't change — only the context it receives changes
+- **Hallucination reduction:** Not elimination, but a major improvement
 
 :::quiz{id="07-02"}

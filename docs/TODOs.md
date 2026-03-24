@@ -1,5 +1,24 @@
 # Content TODOs
 
+## 🗂️ Session Status
+
+| Group | Chapters | Status |
+|---|---|---|
+| Group 1 Basics | Ch 1–6 | Content written — needs **revision pass** |
+| Group 2 Advanced | Ch 7–9 | Content written (Session 2) — needs **revision pass** |
+| Group 3 Business | Ch 10–13 | Content written — needs **revision pass** |
+| Visuals Ch 1–6 | Various | Partially built — bugs outstanding |
+| Visuals Ch 7–13 | Various | Referenced but **not yet created** |
+| Technical bugs | Nav, quizzes, etc. | Outstanding — see bottom of file |
+
+## 📌 Up Next (Session 3)
+- **Content revision pass:** Review all chapters for quality, accuracy, tone, and completeness (especially Ch 7–11 written this session)
+- **Visual components Ch 7+:** Create HTML visual components referenced in new content (e.g., `visual-xy-embeddings`, `visual-rag-flow`, `visual-lawyer-case`, etc.)
+- **Fix outstanding technical bugs** listed at the bottom of this file
+- **File Management:** Delete `chapter-03-05.md`, `chapter-08-05.md`, `chapter-11-06.md`
+
+---
+
 **Source of truth:** `docs/content/overview.md` — every page is described in detail there.
 
 **How to use this file:** Work through each task below. For each content `.md` file, read the corresponding section in `overview.md` and write/rewrite the content to match. Follow the format established in `docs/md2html_guide.md` and the existing Ch 1 files (e.g., `chapter-01-01.md`).
@@ -94,76 +113,76 @@
 
 ---
 
-## Chapter 7: RAG & Context Engineering (REWRITE all — placeholders)
+## Chapter 7: RAG & Context Engineering ✅ DONE (Session 2)
 
-- [ ] **07-01:** REWRITE — "The Lawyer Case Study". 500+ cases, 20 years, can't fit in context.
-- [ ] **07-02:** REWRITE — "What is RAG?" Flowchart animation. Before/after comparison.
-- [ ] **07-03:** REWRITE — "Vector Embeddings". Add XY graph interactive: lion/cat/tiger/banana as coordinates, user calculates distance. Optional 3D view.
-- [ ] **07-04:** REWRITE — Was "Plumbing of RAG". Now "Alternatives to RAG". Keyword search, subagent, concatenation comparison table.
-- [ ] **07-05:** REWRITE — "Context Injection". Two-pile visualization. Chunking strategies.
-- [ ] **07-06:** REWRITE — "Data Formats are Destiny". Markdown vs Word vs PDF. File format trap.
-- [ ] **07-07:** REWRITE — "RAG vs Fine-Tuning". Open book vs studying analogy.
-
----
-
-## Chapter 8: Memory & Personalization (REWRITE all, DELETE 05)
-
-- [ ] **08-01:** REWRITE — "State vs Stateless". Fresh whiteboard metaphor.
-- [ ] **08-02:** REWRITE — "What Companies Are Trying". ChatGPT Memory, Claude Projects, Gemini Gems.
-- [ ] **08-03:** REWRITE — "Why It's Not Solved Yet". Lawyer example revisited. Core retrieval problem.
-- [ ] **08-04:** REWRITE — "Privacy vs Personalization". Spectrum visualization.
-- [ ] **08-05:** DELETE — Ch 8 reduced to 4 pages.
+- [x] **07-01:** "The Lawyer Case Study" — 500+ cases, naive approaches, RAG motivation
+- [x] **07-02:** "What is RAG?" — Retrieve/Augment/Generate flow, before/after comparison
+- [x] **07-03:** "Vector Embeddings" — XY graph with lion/cat/tiger/banana, Euclidean distance exercise, references `visual-xy-embeddings`
+- [x] **07-04:** "Alternatives to RAG" — Keyword, subagent, concatenation comparison table + decision guide
+- [x] **07-05:** "Context Injection" — Two-pile visualization, chunking, placement in Sandwich
+- [x] **07-06:** "Data Formats are Destiny" — Format spectrum, hidden OCR trap, 80% rule
+- [x] **07-07:** "RAG vs Fine-Tuning" — Open book vs studying analogy, decision table
 
 ---
 
-## Chapter 9: Beyond Text (REWRITE all — placeholders)
+## Chapter 8: Memory & Personalization ✅ DONE (Session 2)
 
-- [ ] **09-01:** REWRITE — "Multimodal AI". Visual gallery. Note: many LLMs can't natively generate images.
-- [ ] **09-02:** REWRITE — "Understanding vs Generating". Input vs output distinction.
-- [ ] **09-03:** REWRITE — "Multimodal RAG & Document Extraction". OCR explained. Multimodal RAG concept.
-
----
-
-## Chapter 10: The LLM Landscape (REWRITE all — placeholders + restructured)
-
-- [ ] **10-01:** REWRITE — "The Big Players". Visual landscape map. Don't over-specify model versions.
-- [ ] **10-02:** REWRITE — "Model Tiers & Costs". Generic tiers (flagship/mid/fast). Cost per million tokens explained.
-- [ ] **10-03:** REWRITE — "Open Source vs Closed Source". Trade-off table. Hidden costs of self-hosting.
-- [ ] **10-04:** REWRITE — Was "Cost of Intelligence". Now "Web UI vs API". Decision tree. Include API reminder callout.
-- [ ] **10-05:** REWRITE — Was "Build vs Buy". Now "Choosing Your Model — Thought Exercise". Interactive evaluation framework.
+- [x] **08-01:** "State vs Stateless" — Fresh whiteboard, read-only model, context-injection truth
+- [x] **08-02:** "What Companies Are Trying" — ChatGPT Memory, Claude Projects, Gemini Gems
+- [x] **08-03:** "Why It's Not Solved Yet" — Lawyer retrieval problem, all approaches fall short
+- [x] **08-04:** "Privacy vs Personalization" — Spectrum, key questions, enterprise implications
+- [x] **08-05:** DELETED (Ch 8 reduced to 4 pages — file removed from git)
 
 ---
 
-## Chapter 11: Culture & AI Change (REWRITE all — completely new topics, DELETE 06)
+## Chapter 9: Beyond Text ✅ DONE (Session 2)
 
-- [ ] **11-01:** REWRITE — Was "RPA vs Agentic". Now "The Augmentation Narrative". Supercharging not replacing.
-- [ ] **11-02:** REWRITE — Was "Volume vs Variance". Now "Building AI Literacy". Managing fear, encouraging experimentation.
-- [ ] **11-03:** REWRITE — Was "HITL". Now "Is Your Company Ready?" Big data/analytics historical parallel.
-- [ ] **11-04:** REWRITE — Was "Exception Routing". Now "The Software Transition Trap". Company A story (US firm, Chinese software, address format problem).
-- [ ] **11-05:** REWRITE — Was "Lessons from Past Tech Shifts". Cloud, mobile, big data, AI pattern.
-- [ ] **11-06:** DELETE — Ch 11 reduced to 5 pages.
+- [x] **09-01:** "Multimodal AI" — Understanding vs generating, not all models do both
+- [x] **09-02:** "Understanding vs Generating" — Critic vs illustrator analogy, reliability difference
+- [x] **09-03:** "Multimodal RAG & Document Extraction" — OCR, diagram-aware RAG, legacy docs
 
 ---
 
-## Chapter 12: Automation & Implementation (REWRITE all — completely new topics, CREATE 06)
+## Chapter 10: The LLM Landscape ✅ DONE (Session 2)
 
-- [ ] **12-01:** REWRITE — Was "Leadership & Change". Now "You Can't Automate What You Can't Explain". Checklist for any process. Broken process + automation = automated disaster.
-- [ ] **12-02:** REWRITE — Was "Adapting Workflows". Now "Right vs Wrong in Business Logic". Child essay vs invoice number. Hidden rules problem.
-- [ ] **12-03:** REWRITE — Was "Psychological Safety". Now "RPA vs Agentic AI". Side-by-side comparison. Railroad tracks vs car with GPS.
-- [ ] **12-04:** REWRITE — Was "Augmentation Narrative". Now "The Volume vs Variance Matrix". 2x2 matrix with examples.
-- [ ] **12-05:** REWRITE — Was "Case Study". Now "Human-in-the-Loop". Full agentic vs HITL. Where each works.
-- [ ] **12-06:** CREATE — "ROI Calculation". Cost/benefit framework. Reality check on break-even.
+- [x] **10-01:** "The Big Players" — OpenAI, Anthropic, Google, Meta, xAI, Chinese ecosystem
+- [x] **10-02:** "Model Tiers & Costs" — Flagship/mid/fast tiers, token pricing explained
+- [x] **10-03:** "Open Source vs Closed Source" — Trade-off table, hidden self-hosting costs
+- [x] **10-04:** "Web UI vs API" — Restaurant vs delivery analogy, when to switch
+- [x] **10-05:** "Choosing Your Model" — Six dimensions, match to strengths, revisit quarterly
 
 ---
 
-## Chapter 13: Managing AI-Assisted Projects (REWRITE all — rearranged)
+## Chapter 11: Culture & AI Change ✅ DONE (Session 2)
 
-- [ ] **13-01:** REWRITE — Was "Harness Engineering". Now "Why AI Projects Are Different". Non-deterministic, continuous eval, risk matrix.
-- [ ] **13-02:** REWRITE — Was "Spec-Driven Modeling". Now "Frameworks in Practice". SPEC Kit template (moved from old Ch 5) + BMAD + why devs need structure.
-- [ ] **13-03:** REWRITE — Was "Vibe Coding Trap". Now "Evaluation & Test Sets". Plain-language explanation of curated test inputs with known-correct outputs. How to measure and track accuracy.
-- [ ] **13-04:** REWRITE — Was "Golden Datasets". Now "Traceability & Audit Trails". Log every AI decision. Reconstruct the why.
-- [ ] **13-05:** REWRITE — Was "Traceability". Now "The Vibe Coding Trap". Borrowed money metaphor. Phantom code, scattered logic, speed trap.
-- [ ] **13-06:** REWRITE — Still "AI-Driven Review" but expanded. Add AI pitfalls: lint disabled, test cheating, hardcoded values, dead code. Review framework: automated + AI + human.
+- [x] **11-01:** "The Augmentation Narrative" — Lawyer/designer/support agent examples
+- [x] **11-02:** "Building AI Literacy" — Resistance reasons, 3-phase framework, leaders go first
+- [x] **11-03:** "Is Your Company Ready?" — Big data parallel, readiness checklist
+- [x] **11-04:** "The Software Transition Trap" — Company A case study, 6-step due diligence
+- [x] **11-05:** "Lessons from Past Tech Shifts" — Cloud/mobile/big data/AI pattern, strategic adopter playbook
+- [x] **11-06:** DELETED (Ch 11 reduced to 5 pages — file removed from git)
+
+---
+
+## Chapter 12: Automation & Implementation ✅ DONE (prior session + Session 2)
+
+- [x] **12-01:** "You Can't Automate What You Can't Explain" — Refund disaster, 8-question checklist
+- [x] **12-02:** "Right vs Wrong in Business Logic" — Creative vs strict spectrum, hidden rules interview
+- [x] **12-03:** "RPA vs Agentic AI" — Railroad vs GPS analogy, hybrid approach
+- [x] **12-04:** "The Volume vs Variance Matrix" — 2x2 with examples, "don't automate" quadrant
+- [x] **12-05:** "Human-in-the-Loop" — HITL patterns, where autonomy works, logging requirements
+- [x] **12-06:** CREATED — "ROI Calculation" — 3-step framework, hidden costs, break-even example
+
+---
+
+## Chapter 13: Managing AI-Assisted Projects ✅ DONE (prior session)
+
+- [x] **13-01:** "Why AI Projects Are Different" — Non-determinism, silent failures, cost/debug risks
+- [x] **13-02:** "Frameworks in Practice" — SPEC Kit template with worked example, BMAD mindset
+- [x] **13-03:** "Evaluation & Test Sets" — Build-first discipline, edge cases, regression tracking
+- [x] **13-04:** "Traceability & Audit Trails" — Before/after pricing scenario, 7-item log checklist
+- [x] **13-05:** "The Vibe Coding Trap" — Debt metaphor, 4 failure patterns, speed trap
+- [x] **13-06:** "AI-Driven Review" — LLM-as-judge, 6 cheat patterns, 3-layer review framework
 
 ---
 

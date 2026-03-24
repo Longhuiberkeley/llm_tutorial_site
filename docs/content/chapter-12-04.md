@@ -1,30 +1,80 @@
 ---
-title: "Augmentation Narrative"
-description: "Supercharging output, not replacing people."
+title: "12.4 The Volume vs. Variance Matrix"
+description: "A simple 2x2 framework for deciding what to automate and which approach to use."
 chapter: "Chapter 12"
 pageId: "12-04"
 ---
 
 ## 🎯 Core Goals
-- [Placeholder for core goals]
+- Introduce the Volume vs. Variance Matrix as a prioritization framework for automation decisions.
+- Walk through all four quadrants with concrete examples.
+- Establish that not everything should be automated.
 
 :::callout-tldr
-This page is a placeholder for the "Augmentation Narrative" topic. Content will be added soon!
+Two questions determine how to handle any task: How often does it happen? How much does it vary? The answers tell you whether to use RPA, agentic AI, or no automation at all.
 :::
 
-## 👁️ Visuals & Interactives
+## 📊 The Two-Axis Framework
 
-:::visual{name="placeholder-visual"}
+When deciding what to automate — and how — two factors matter most:
 
-*(Visual placeholder for Augmentation Narrative)*
+**Volume:** How often does this task happen? Once a week, or a thousand times a day?
+
+**Variance:** How different is each instance? Is every case identical, or does each one require different judgment?
+
+Plot any task on these two axes and you get a clear recommendation.
+
+:::visual{name="visual-volume-variance"}
+
+## 🔲 Walking Through Each Quadrant
+
+**High Volume + Low Variance → RPA**
+
+This is the automation sweet spot for rule-based tools. The task happens constantly and each instance is nearly identical. Think: processing standard invoices, transferring data between systems, generating weekly status reports.
+
+The math is easy here: high frequency means the time savings add up quickly. Low variance means RPA's rigidity isn't a problem — there are no surprises to handle.
+
+**High Volume + High Variance → Agentic AI (with human oversight)**
+
+This is where LLMs shine. The task happens constantly, but each instance is different enough to require judgment. Think: customer support email responses, contract review, lead qualification.
+
+You can't use RPA here — the variance will break it. You need something that can read context and adapt. But because it's high volume, you also need monitoring and spot-checking. Human oversight remains important even as the AI handles the volume.
+
+**Low Volume + Low Variance → Manual (just do it)**
+
+If a task happens rarely and is always the same, it probably doesn't justify an automation investment. The ROI simply won't be there. A task that takes 10 minutes and happens once a month equals 2 hours per year — automation setup will cost more than that.
+
+The right answer here is often a simple checklist or template, not a sophisticated system.
+
+**Low Volume + High Variance → Human Judgment**
+
+This is the quadrant where automation is least appropriate. Tasks here are rare AND unpredictable — think strategic decisions, unusual client situations, board-level negotiations. These require human expertise, relationship context, and judgment that no current LLM can reliably replace.
+
+Trying to automate here is usually a mistake — not because the LLM can't attempt it, but because the cost of errors is high and the volume doesn't justify the investment in building something trustworthy.
+
+:::callout-error
+A common mistake is automating low-volume tasks just because they feel annoying. Annoying is not the same as automatable. If something happens twice a week and takes 15 minutes each time, that's 26 hours per year. Whether automation makes sense depends on the build cost, maintenance cost, and error risk — not just the annoyance level.
+:::
+
+## 🎯 Using the Matrix in Practice
+
+Start by mapping out your potential automation candidates. For each one, ask:
+
+1. How many times per day/week/month does this happen?
+2. Are the inputs basically the same every time, or is there meaningful variation?
+
+Then apply the matrix. You'll often find that your most valuable automation opportunities are the ones with the least glamour: boring, high-volume, low-variance tasks that someone is grinding through manually every single day.
+
+:::callout-dyk
+Many companies focus automation investment on impressive-looking AI applications (chatbots, voice assistants) while leaving high-value, high-volume, low-variance work (data entry, report generation, file routing) completely manual. The unsexy tasks often have the best ROI.
+:::
 
 ## 📝 Key Concepts
 
-- Concept 1: [To be defined]
-- Concept 2: [To be defined]
-
-:::callout-dyk
-Did you know that this concept is essential for mastering LLMs?
-:::
+- **High volume + low variance** = RPA — the most reliable and cost-effective automation target.
+- **High volume + high variance** = Agentic AI — flexible but requires monitoring and oversight.
+- **Low volume** = probably not worth automating — the math usually doesn't work.
+- **Low volume + high variance** = human judgment — automation here is risky and rarely worth it.
+- **Not everything should be automated** — the matrix helps you make that call rationally, not emotionally.
 
 :::quiz{id="12-04"}
