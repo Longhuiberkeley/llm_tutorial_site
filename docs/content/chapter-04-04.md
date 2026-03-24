@@ -13,6 +13,10 @@ pageId: "04-04"
 Context poisoning occurs when false information, hallucinations, or errors are introduced into the conversation history, causing the LLM to behave incorrectly from that point on. Once it believes something is true, it keeps building on that belief — and telling it to "forget" rarely works.
 :::
 
+## 👁️ Visuals & Interactives
+
+:::visual{name="visual-forget-illusion"}
+
 ## 📝 Key Concepts
 
 - **The Conversation is the LLM's Entire Memory:** Every time you send a message, the LLM re-reads the full conversation history from scratch. If that history contains wrong information, it gets re-read and re-believed every single time.

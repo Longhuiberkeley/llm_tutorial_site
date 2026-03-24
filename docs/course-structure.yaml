@@ -18,11 +18,11 @@ groups:
         totalPages: 6
       - id: "03"
         title: "How Chat Really Works"
-        description: "The chat illusion, the Sandwich, and system prompts."
+        description: "The black box model, the growing sandwich, and system prompts."
         icon: "🎭"
         status: "active"
         firstPage: "chapter-03-01.html"
-        totalPages: 4
+        totalPages: 3
       - id: "04"
         title: "LLM Limitations"
         description: "Why they can't count, why they hallucinate, and when to watch out."

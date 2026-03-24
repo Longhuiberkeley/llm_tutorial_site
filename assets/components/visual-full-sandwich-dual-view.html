@@ -1,0 +1,172 @@
+<style>
+@keyframes fsdvFlash {
+    0%, 40% { background-color: #FFF9C4; border-color: #FBC02D; }
+    100% { background-color: var(--surface-container-lowest); border-color: transparent; }
+}
+.fsdv-flash { animation: fsdvFlash 1.8s ease-out forwards; }
+</style>
+
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-1">The Full Sandwich — Hidden Layers</h3>
+        <p class="text-sm italic" style="color: var(--on-surface-variant);">Before you type a word, the bundle already has invisible layers on top</p>
+    </div>
+
+    <!-- Peek button + Controls -->
+    <div class="flex flex-wrap justify-center items-center gap-3 mb-6">
+        <button id="fsdv-peek-btn" onclick="fsdvTogglePeek()" class="px-5 py-2 rounded-full font-bold text-sm transition-all border-2" style="border-color: var(--primary); color: var(--primary); background-color: var(--surface-container-lowest);">
+            👁 Peek at Hidden Layers
+        </button>
+        <span id="fsdv-counter" class="text-sm font-medium px-3 py-1 rounded-full" style="background-color: var(--surface-container);">Turn 0 / 3</span>
+        <button id="fsdv-btn" onclick="fsdvNext()" class="px-6 py-2 rounded-full font-bold text-sm shadow-md transition-all hover:opacity-90" style="background-color: var(--primary); color: var(--on-primary);">
+            Send → Turn 1
+        </button>
+    </div>
+
+    <!-- Panels -->
+    <div class="flex flex-col md:flex-row gap-5">
+
+        <!-- LEFT: TechCorp chat -->
+        <div class="flex-1 flex flex-col min-w-0">
+            <div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--primary);">👤 TechCorp Support Chat</div>
+            <div class="rounded-xl overflow-hidden border" style="border-color: var(--outline-variant);">
+                <!-- Chat header -->
+                <div class="px-4 py-3 flex items-center gap-3" style="background-color: var(--primary); color: var(--on-primary);">
+                    <span class="text-xl">🏢</span>
+                    <div>
+                        <div class="font-bold text-sm">TechCorp Support</div>
+                        <div class="text-xs opacity-75">Powered by AI</div>
+                    </div>
+                </div>
+                <!-- Chat body -->
+                <div id="fsdv-chat" class="p-4 space-y-3" style="background-color: var(--surface-container-lowest); min-height: 240px;">
+                    <p class="text-xs text-center italic pt-6 opacity-40">Press Send to start...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Bundle view -->
+        <div class="flex-1 flex flex-col min-w-0">
+            <div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--accent);">📦 What's Actually Sent</div>
+
+            <!-- Dashed bundle container -->
+            <div id="fsdv-bundle" class="rounded-xl p-3 space-y-2 border-2 border-dashed" style="background-color: var(--surface-container); border-color: var(--outline-variant);">
+
+                <!-- Layer 1: Provider Prompt (always locked) -->
+                <div class="rounded-lg px-3 py-2 text-xs border-l-4" style="background-color: color-mix(in srgb, var(--primary) 8%, var(--surface-container-lowest)); border-left-color: var(--primary);">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-[10px] uppercase tracking-widest" style="color: var(--primary);">🔒 Layer 1 — Provider Prompt</span>
+                        <span class="text-[10px] italic opacity-60">Always hidden</span>
+                    </div>
+                    <div id="fsdv-layer1-hidden" class="mt-1 text-xs italic opacity-50">[Hidden — set by Anthropic / OpenAI / Google]</div>
+                    <div id="fsdv-layer1-text" class="hidden mt-1 text-xs" style="color: var(--on-surface-variant);">You are a helpful, harmless AI assistant. Never claim to be human when sincerely asked. Never produce harmful content. Follow all usage policies.</div>
+                </div>
+
+                <!-- Layer 2: App Pre-prompt (always locked) -->
+                <div class="rounded-lg px-3 py-2 text-xs border-l-4" style="background-color: color-mix(in srgb, #FBC02D 10%, var(--surface-container-lowest)); border-left-color: #FBC02D;">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-[10px] uppercase tracking-widest" style="color: #F57F17;">🏢 Layer 2 — App Pre-prompt</span>
+                        <span class="text-[10px] italic opacity-60">Set by TechCorp</span>
+                    </div>
+                    <div id="fsdv-layer2-hidden" class="mt-1 text-xs italic opacity-50">[Hidden — set by TechCorp developers]</div>
+                    <div id="fsdv-layer2-text" class="hidden mt-1 text-xs" style="color: var(--on-surface-variant);">You are TechCorp's support assistant. Our products: TechPad Pro ($999) — our flagship tablet. TechBuds ($149) — wireless earbuds. Be helpful, concise, and always mention our warranty policy if asked about pricing.</div>
+                </div>
+
+                <!-- Conversation turns go here -->
+                <div id="fsdv-turns"></div>
+
+                <p id="fsdv-bundle-placeholder" class="text-xs text-center italic pb-2 opacity-40">↑ These two layers are always here, before your first message.</p>
+            </div>
+
+            <!-- LLM box + Output -->
+            <div id="fsdv-llm-section" class="hidden mt-2 flex flex-col items-center gap-1">
+                <div class="text-base font-bold" style="color: var(--on-surface-variant);">↓ entire bundle ↓</div>
+                <div class="w-full rounded-xl px-4 py-3 text-center font-bold text-sm" style="background-color: var(--on-surface); color: var(--background);">
+                    🤖 LLM reads it all from scratch
+                </div>
+                <div class="text-base font-bold" style="color: var(--on-surface-variant);">↓</div>
+                <div id="fsdv-output" class="w-full rounded-xl px-4 py-2 text-center text-sm font-medium border" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest));"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var fsdvPeeking = false;
+
+function fsdvTogglePeek() {
+    fsdvPeeking = !fsdvPeeking;
+    var btn = document.getElementById('fsdv-peek-btn');
+    ['fsdv-layer1-hidden', 'fsdv-layer2-hidden'].forEach(function(id) {
+        document.getElementById(id).classList.toggle('hidden', fsdvPeeking);
+    });
+    ['fsdv-layer1-text', 'fsdv-layer2-text'].forEach(function(id) {
+        document.getElementById(id).classList.toggle('hidden', !fsdvPeeking);
+    });
+    btn.textContent = fsdvPeeking ? '🙈 Hide Layers' : '👁 Peek at Hidden Layers';
+    btn.style.backgroundColor = fsdvPeeking ? 'var(--primary)' : 'var(--surface-container-lowest)';
+    btn.style.color = fsdvPeeking ? 'var(--on-primary)' : 'var(--primary)';
+}
+
+(function() {
+    var fsdvTurns = [
+        { user: 'What products do you sell?', llm: 'We offer two products: the TechPad Pro ($999) — our flagship tablet — and TechBuds ($149), our wireless earbuds. Can I help you with either?' },
+        { user: 'How much is the TechPad Pro?', llm: 'The TechPad Pro is $999. It also comes with our standard 1-year warranty. Would you like to know more?' },
+        { user: 'Why do you know all about TechCorp?', llm: "I was set up specifically as TechCorp's support assistant! I've been given detailed instructions about our products and policies before this conversation started." }
+    ];
+    var fsdvCurrent = 0;
+
+    window.fsdvNext = function() {
+        if (fsdvCurrent >= fsdvTurns.length) return;
+        var turn = fsdvTurns[fsdvCurrent];
+        fsdvCurrent++;
+
+        // Update LEFT chat
+        var chat = document.getElementById('fsdv-chat');
+        var placeholder = chat.querySelector('p');
+        if (placeholder) placeholder.remove();
+
+        var userEl = document.createElement('div');
+        userEl.className = 'flex justify-end';
+        userEl.innerHTML = '<div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm font-medium shadow-sm max-w-[85%]" style="background-color: var(--primary); color: var(--on-primary);">' + turn.user + '</div>';
+        chat.appendChild(userEl);
+
+        var llmEl = document.createElement('div');
+        llmEl.className = 'flex justify-start';
+        llmEl.innerHTML = '<div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm shadow-sm max-w-[85%]" style="background-color: var(--surface-container); border: 1px solid var(--outline-variant);">' + turn.llm + '</div>';
+        chat.appendChild(llmEl);
+
+        // Update RIGHT bundle
+        var ph = document.getElementById('fsdv-bundle-placeholder');
+        if (ph) ph.remove();
+
+        var turns = document.getElementById('fsdv-turns');
+        var userMsg = document.createElement('div');
+        userMsg.className = 'rounded-lg px-3 py-2 text-xs border fsdv-flash';
+        userMsg.style.backgroundColor = 'var(--surface-container-lowest)';
+        userMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">Turn ' + fsdvCurrent + ' — User</span><div class="mt-0.5">' + turn.user + '</div>';
+        turns.appendChild(userMsg);
+
+        var llmMsg = document.createElement('div');
+        llmMsg.className = 'rounded-lg px-3 py-2 text-xs border fsdv-flash';
+        llmMsg.style.backgroundColor = 'var(--surface-container-lowest)';
+        llmMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">Turn ' + fsdvCurrent + ' — LLM</span><div class="mt-0.5 opacity-70">' + turn.llm + '</div>';
+        turns.appendChild(llmMsg);
+
+        // Show LLM section
+        document.getElementById('fsdv-llm-section').classList.remove('hidden');
+        document.getElementById('fsdv-output').textContent = '💬 "' + turn.llm.substring(0, 60) + (turn.llm.length > 60 ? '...' : '') + '"';
+
+        // Update controls
+        document.getElementById('fsdv-counter').textContent = 'Turn ' + fsdvCurrent + ' / 3';
+        var btn = document.getElementById('fsdv-btn');
+        if (fsdvCurrent >= fsdvTurns.length) {
+            btn.textContent = 'All 3 turns done ✓';
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+        } else {
+            btn.textContent = 'Send → Turn ' + (fsdvCurrent + 1);
+        }
+    };
+})();
+</script>

@@ -29,7 +29,12 @@ If you set the temperature too high (e.g., 2.0), the LLM will start picking the 
 :::
 
 :::callout-dyk
-**For most users: leave temperature alone.** The default temperature setting is carefully chosen by the model's creators. Tweaking it without understanding the task can noticeably degrade response quality. If you do adjust it — lower for precision tasks (code, data), slightly higher for creative tasks (brainstorming, storytelling).
+**For most users: leave temperature alone.** The default temperature setting is carefully chosen by the model's creators. Tweaking it without understanding the task can noticeably degrade response quality.
+:::
+
+:::callout-dyk
+**Have you tried asking the LLM if it has a favorite number?** Have you noticed if it gives you the same answer sometimes? Why is it?  
+Adjusting the temperature is a very good way to introduce more randomness in this scenario.
 :::
 
 :::quiz{id="04-03"}

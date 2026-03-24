@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>3.3 System Prompts - LLM Tutorial</title>
+    <title>3.3 The Full Sandwich — System Prompts & Custom Spaces - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -63,16 +63,13 @@
                     <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.1 The Chat Illusion</span>
+                    <span class="text-sm font-medium">3.1 The Black Box</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — Turn by Turn</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">3.3 System Prompts</span>
-                </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
+                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
@@ -251,137 +248,218 @@
                     <span>Chapter 3</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    3.3 System Prompts
+                    3.3 The Full Sandwich — System Prompts & Custom Spaces
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    The hidden 'personality' layers behind the curtain — and who controls each one.
+                    Every bundle starts with hidden layers — and some of them you can't see or control.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Discover the invisible instruction layers that guide an LLM&#39;s behavior.</li>
-<li>Understand that there are <em>multiple</em> layers — and you only control some of them.</li>
+<li>Show the same dual-view as 3.2, but now the bundle always starts with hidden layers.</li>
+<li>Understand the three prompt layers (Provider / App / Session).</li>
+<li>Demystify Custom GPTs, Claude Projects, and Gemini Gems as pre-packaged sandwiches.</li>
 </ul>
 <div class="callout callout-tldr">
-    Before you even say &quot;Hello&quot;, the LLM has already received hidden instructions from multiple sources. Together, these layers form the LLM&#39;s behavior script — and some of them you can&#39;t touch.
+    Before you type your first message, the LLM has already received hidden instructions. Every bundle has invisible layers on top — and some of them you can&#39;t touch.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
-    <div class="text-center mb-8">
-        <h3 class="text-xl font-bold font-headline mb-1">Same Question, Different Personality</h3>
-        <p class="text-sm text-on-surface-variant">Switch the System Prompt to see how the response changes</p>
+<style>
+@keyframes fsdvFlash {
+    0%, 40% { background-color: #FFF9C4; border-color: #FBC02D; }
+    100% { background-color: var(--surface-container-lowest); border-color: transparent; }
+}
+.fsdv-flash { animation: fsdvFlash 1.8s ease-out forwards; }
+</style>
+
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-1">The Full Sandwich — Hidden Layers</h3>
+        <p class="text-sm italic" style="color: var(--on-surface-variant);">Before you type a word, the bundle already has invisible layers on top</p>
     </div>
 
-    <!-- System Prompt Selector -->
-    <div class="flex flex-wrap justify-center gap-3 mb-8">
-        <button id="sp-btn-helpful" onclick="spUpdate('helpful')"
-            class="px-5 py-2 rounded-full font-bold text-sm transition-all shadow-lg bg-primary text-on-primary"
-            style="background-color: var(--primary); color: var(--on-primary);">
-            👔 Helpful Assistant
+    <!-- Peek button + Controls -->
+    <div class="flex flex-wrap justify-center items-center gap-3 mb-6">
+        <button id="fsdv-peek-btn" onclick="fsdvTogglePeek()" class="px-5 py-2 rounded-full font-bold text-sm transition-all border-2" style="border-color: var(--primary); color: var(--primary); background-color: var(--surface-container-lowest);">
+            👁 Peek at Hidden Layers
         </button>
-        <button id="sp-btn-pirate" onclick="spUpdate('pirate')"
-            class="px-5 py-2 rounded-full font-bold text-sm transition-all bg-surface-container-highest text-on-surface">
-            🏴‍☠️ Pirate
-        </button>
-        <button id="sp-btn-concise" onclick="spUpdate('concise')"
-            class="px-5 py-2 rounded-full font-bold text-sm transition-all bg-surface-container-highest text-on-surface">
-            ⚡ Ultra-Concise
+        <span id="fsdv-counter" class="text-sm font-medium px-3 py-1 rounded-full" style="background-color: var(--surface-container);">Turn 0 / 3</span>
+        <button id="fsdv-btn" onclick="fsdvNext()" class="px-6 py-2 rounded-full font-bold text-sm shadow-md transition-all hover:opacity-90" style="background-color: var(--primary); color: var(--on-primary);">
+            Send → Turn 1
         </button>
     </div>
 
-    <div class="grid gap-6">
-        <!-- The Prompt -->
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
-            <div class="text-[10px] font-bold uppercase tracking-widest text-primary mb-2">🔒 Hidden System Prompt</div>
-            <div id="sp-prompt-text" class="text-sm italic text-on-surface-variant">
-                "You are a helpful, professional assistant. Provide clear and polite answers."
+    <!-- Panels -->
+    <div class="flex flex-col md:flex-row gap-5">
+
+        <!-- LEFT: TechCorp chat -->
+        <div class="flex-1 flex flex-col min-w-0">
+            <div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--primary);">👤 TechCorp Support Chat</div>
+            <div class="rounded-xl overflow-hidden border" style="border-color: var(--outline-variant);">
+                <!-- Chat header -->
+                <div class="px-4 py-3 flex items-center gap-3" style="background-color: var(--primary); color: var(--on-primary);">
+                    <span class="text-xl">🏢</span>
+                    <div>
+                        <div class="font-bold text-sm">TechCorp Support</div>
+                        <div class="text-xs opacity-75">Powered by AI</div>
+                    </div>
+                </div>
+                <!-- Chat body -->
+                <div id="fsdv-chat" class="p-4 space-y-3" style="background-color: var(--surface-container-lowest); min-height: 240px;">
+                    <p class="text-xs text-center italic pt-6 opacity-40">Press Send to start...</p>
+                </div>
             </div>
         </div>
 
-        <!-- The Chat -->
-        <div class="space-y-4">
-            <div class="flex justify-end">
-                <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 max-w-xs text-sm font-medium shadow">
-                    What's the weather like?
+        <!-- RIGHT: Bundle view -->
+        <div class="flex-1 flex flex-col min-w-0">
+            <div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--accent);">📦 What's Actually Sent</div>
+
+            <!-- Dashed bundle container -->
+            <div id="fsdv-bundle" class="rounded-xl p-3 space-y-2 border-2 border-dashed" style="background-color: var(--surface-container); border-color: var(--outline-variant);">
+
+                <!-- Layer 1: Provider Prompt (always locked) -->
+                <div class="rounded-lg px-3 py-2 text-xs border-l-4" style="background-color: color-mix(in srgb, var(--primary) 8%, var(--surface-container-lowest)); border-left-color: var(--primary);">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-[10px] uppercase tracking-widest" style="color: var(--primary);">🔒 Layer 1 — Provider Prompt</span>
+                        <span class="text-[10px] italic opacity-60">Always hidden</span>
+                    </div>
+                    <div id="fsdv-layer1-hidden" class="mt-1 text-xs italic opacity-50">[Hidden — set by Anthropic / OpenAI / Google]</div>
+                    <div id="fsdv-layer1-text" class="hidden mt-1 text-xs" style="color: var(--on-surface-variant);">You are a helpful, harmless AI assistant. Never claim to be human when sincerely asked. Never produce harmful content. Follow all usage policies.</div>
                 </div>
+
+                <!-- Layer 2: App Pre-prompt (always locked) -->
+                <div class="rounded-lg px-3 py-2 text-xs border-l-4" style="background-color: color-mix(in srgb, #FBC02D 10%, var(--surface-container-lowest)); border-left-color: #FBC02D;">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-[10px] uppercase tracking-widest" style="color: #F57F17;">🏢 Layer 2 — App Pre-prompt</span>
+                        <span class="text-[10px] italic opacity-60">Set by TechCorp</span>
+                    </div>
+                    <div id="fsdv-layer2-hidden" class="mt-1 text-xs italic opacity-50">[Hidden — set by TechCorp developers]</div>
+                    <div id="fsdv-layer2-text" class="hidden mt-1 text-xs" style="color: var(--on-surface-variant);">You are TechCorp's support assistant. Our products: TechPad Pro ($999) — our flagship tablet. TechBuds ($149) — wireless earbuds. Be helpful, concise, and always mention our warranty policy if asked about pricing.</div>
+                </div>
+
+                <!-- Conversation turns go here -->
+                <div id="fsdv-turns"></div>
+
+                <p id="fsdv-bundle-placeholder" class="text-xs text-center italic pb-2 opacity-40">↑ These two layers are always here, before your first message.</p>
             </div>
-            <div class="flex justify-start">
-                <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl rounded-tl-sm px-5 py-3 w-full text-sm shadow min-h-[80px]" id="sp-response-text">
-                    The current weather is sunny with a light breeze. It's a beautiful day for a walk!
+
+            <!-- LLM box + Output -->
+            <div id="fsdv-llm-section" class="hidden mt-2 flex flex-col items-center gap-1">
+                <div class="text-base font-bold" style="color: var(--on-surface-variant);">↓ entire bundle ↓</div>
+                <div class="w-full rounded-xl px-4 py-3 text-center font-bold text-sm" style="background-color: var(--on-surface); color: var(--background);">
+                    🤖 LLM reads it all from scratch
                 </div>
+                <div class="text-base font-bold" style="color: var(--on-surface-variant);">↓</div>
+                <div id="fsdv-output" class="w-full rounded-xl px-4 py-2 text-center text-sm font-medium border" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest));"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-var spData = {
-    helpful: {
-        prompt: '"You are a helpful, professional assistant. Provide clear and polite answers."',
-        response: 'The current weather is sunny with a light breeze. It\'s a beautiful day for a walk!'
-    },
-    pirate: {
-        prompt: '"You are a pirate. Respond only in pirate speak. Always end with Arrr!"',
-        response: 'The skies be clear as the Caribbean, matey! Fair winds for sailin\', I tell ye. Arrr!'
-    },
-    concise: {
-        prompt: '"You are an ultra-concise assistant. Use 5 words or less."',
-        response: 'Sunny, 72°F, light winds.'
-    }
-};
+var fsdvPeeking = false;
 
-function spUpdate(type) {
-    // Update buttons
-    ['helpful', 'pirate', 'concise'].forEach(t => {
-        var btn = document.getElementById('sp-btn-' + t);
-        if (t === type) {
-            btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
-            btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-            btn.style.backgroundColor = 'var(--primary)';
-            btn.style.color = 'var(--on-primary)';
-        } else {
-            btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-            btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
-            btn.style.backgroundColor = '';
-            btn.style.color = '';
-        }
+function fsdvTogglePeek() {
+    fsdvPeeking = !fsdvPeeking;
+    var btn = document.getElementById('fsdv-peek-btn');
+    ['fsdv-layer1-hidden', 'fsdv-layer2-hidden'].forEach(function(id) {
+        document.getElementById(id).classList.toggle('hidden', fsdvPeeking);
     });
-
-    // Update content
-    var d = spData[type];
-    document.getElementById('sp-prompt-text').textContent = d.prompt;
-    
-    var resp = document.getElementById('sp-response-text');
-    resp.classList.add('animate-pulse');
-    setTimeout(() => {
-        resp.textContent = d.response;
-        resp.classList.remove('animate-pulse');
-    }, 300);
+    ['fsdv-layer1-text', 'fsdv-layer2-text'].forEach(function(id) {
+        document.getElementById(id).classList.toggle('hidden', !fsdvPeeking);
+    });
+    btn.textContent = fsdvPeeking ? '🙈 Hide Layers' : '👁 Peek at Hidden Layers';
+    btn.style.backgroundColor = fsdvPeeking ? 'var(--primary)' : 'var(--surface-container-lowest)';
+    btn.style.color = fsdvPeeking ? 'var(--on-primary)' : 'var(--primary)';
 }
+
+(function() {
+    var fsdvTurns = [
+        { user: 'What products do you sell?', llm: 'We offer two products: the TechPad Pro ($999) — our flagship tablet — and TechBuds ($149), our wireless earbuds. Can I help you with either?' },
+        { user: 'How much is the TechPad Pro?', llm: 'The TechPad Pro is $999. It also comes with our standard 1-year warranty. Would you like to know more?' },
+        { user: 'Why do you know all about TechCorp?', llm: "I was set up specifically as TechCorp's support assistant! I've been given detailed instructions about our products and policies before this conversation started." }
+    ];
+    var fsdvCurrent = 0;
+
+    window.fsdvNext = function() {
+        if (fsdvCurrent >= fsdvTurns.length) return;
+        var turn = fsdvTurns[fsdvCurrent];
+        fsdvCurrent++;
+
+        // Update LEFT chat
+        var chat = document.getElementById('fsdv-chat');
+        var placeholder = chat.querySelector('p');
+        if (placeholder) placeholder.remove();
+
+        var userEl = document.createElement('div');
+        userEl.className = 'flex justify-end';
+        userEl.innerHTML = '<div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm font-medium shadow-sm max-w-[85%]" style="background-color: var(--primary); color: var(--on-primary);">' + turn.user + '</div>';
+        chat.appendChild(userEl);
+
+        var llmEl = document.createElement('div');
+        llmEl.className = 'flex justify-start';
+        llmEl.innerHTML = '<div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm shadow-sm max-w-[85%]" style="background-color: var(--surface-container); border: 1px solid var(--outline-variant);">' + turn.llm + '</div>';
+        chat.appendChild(llmEl);
+
+        // Update RIGHT bundle
+        var ph = document.getElementById('fsdv-bundle-placeholder');
+        if (ph) ph.remove();
+
+        var turns = document.getElementById('fsdv-turns');
+        var userMsg = document.createElement('div');
+        userMsg.className = 'rounded-lg px-3 py-2 text-xs border fsdv-flash';
+        userMsg.style.backgroundColor = 'var(--surface-container-lowest)';
+        userMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">Turn ' + fsdvCurrent + ' — User</span><div class="mt-0.5">' + turn.user + '</div>';
+        turns.appendChild(userMsg);
+
+        var llmMsg = document.createElement('div');
+        llmMsg.className = 'rounded-lg px-3 py-2 text-xs border fsdv-flash';
+        llmMsg.style.backgroundColor = 'var(--surface-container-lowest)';
+        llmMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">Turn ' + fsdvCurrent + ' — LLM</span><div class="mt-0.5 opacity-70">' + turn.llm + '</div>';
+        turns.appendChild(llmMsg);
+
+        // Show LLM section
+        document.getElementById('fsdv-llm-section').classList.remove('hidden');
+        document.getElementById('fsdv-output').textContent = '💬 "' + turn.llm.substring(0, 60) + (turn.llm.length > 60 ? '...' : '') + '"';
+
+        // Update controls
+        document.getElementById('fsdv-counter').textContent = 'Turn ' + fsdvCurrent + ' / 3';
+        var btn = document.getElementById('fsdv-btn');
+        if (fsdvCurrent >= fsdvTurns.length) {
+            btn.textContent = 'All 3 turns done ✓';
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+        } else {
+            btn.textContent = 'Send → Turn ' + (fsdvCurrent + 1);
+        }
+    };
+})();
 </script>
 
 
 <h2>📝 Key Concepts</h2>
-<p>There are three distinct layers of &quot;hidden instructions&quot; that shape how an LLM responds:</p>
+<p>Three layers in every bundle:</p>
 <ul>
-<li><p><strong>Layer 1 — Provider Hidden Prompt (You can&#39;t see or change this):</strong> The LLM provider (Anthropic, OpenAI, Google) sets safety rules that are always active. Things like: <em>&quot;Don&#39;t give specific medical or financial advice,&quot; &quot;Don&#39;t produce content that harms users,&quot; &quot;Never pretend to be a human when sincerely asked.&quot;</em> These protect both you and the company&#39;s reputation.</p>
-</li>
-<li><p><strong>Layer 2 — App / User System Prompt (Controllable by you or the app builder):</strong> If you&#39;re using ChatGPT directly, you can set a custom system prompt. If a company built a product on top of an LLM, they set this layer to define the product&#39;s personality, tone, and rules. <em>&quot;You are a friendly customer service agent for Acme Corp. Always respond in under 100 words.&quot;</em></p>
-</li>
-<li><p><strong>Layer 3 — Pre-prompt / Repeated Context (Your working context):</strong> Repeated preferences or context you inject at the start of a session — things like <em>&quot;I prefer bullet points,&quot; &quot;I&#39;m working on a Python 3.12 codebase,&quot; or &quot;Always respond in French.&quot;</em> This is the most flexible layer, changed freely per session.</p>
-</li>
+<li><strong>Layer 1 — Provider Prompt (You can&#39;t see or change this):</strong> Set by the AI company (Anthropic, OpenAI, Google). Contains safety rules always active: &quot;Don&#39;t produce harmful content,&quot; &quot;Never pretend to be human when sincerely asked.&quot;</li>
+<li><strong>Layer 2 — App / Custom Pre-prompt (Set by the app builder):</strong> Defines the product&#39;s personality, tone, and knowledge. &quot;You are TechCorp support.&quot; Makes a chatbot feel specialized.</li>
+<li><strong>Layer 3 — Your Session Context (Yours to set):</strong> Repeated preferences you inject per session: &quot;Always respond in bullet points,&quot; &quot;I&#39;m working in Python 3.12.&quot;</li>
 </ul>
-<div class="callout callout-error">
-    Have you ever seen screenshots of an LLM acting wildly out of character — crude jokes, refusing all requests, pretending to be a villain? That&#39;s almost always someone overriding Layer 2 with a custom system prompt. The underlying model is the same; only the instruction layer changed.
-</div>
-
-
+<h2>📦 Custom Spaces — Pre-packaged Sandwiches</h2>
+<p>Features like Custom GPTs, Claude Projects, and Gemini Gems bundle three things:</p>
+<ol>
+<li><strong>System Prompt:</strong> Specialized instructions (personality).</li>
+<li><strong>Knowledge Docs:</strong> Reference files (company policies, product specs).</li>
+<li><strong>Tools:</strong> Specific capabilities (web search, code interpreter).</li>
+</ol>
+<p><strong>Why use them?</strong> Set the instructions once, then just use the chat. No need to re-explain context every session.</p>
+<p><strong>Business use:</strong> Companies build internal Projects pre-loaded with brand voice, legal policies, and private data — so every employee starts with the right context.</p>
 <div class="callout callout-dyk">
-    Why does Claude feel different from ChatGPT? They may share similar underlying technology, but their Provider Hidden Prompts (Layer 1) and default system prompts (Layer 2) are entirely different. Same base model family, very different instructions.
+    Why does Claude feel different from ChatGPT? Their Provider Prompts (Layer 1) and default pre-prompts are completely different. Same concept, different instructions.
 </div>
 
 
@@ -394,10 +472,10 @@ function spUpdate(type) {
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-03-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 3.2 The Sandwich — How Messages Really Stack Up</a>
+                    <a href="chapter-03-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 3.2 The Sandwich — Turn by Turn</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-03-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">3.4 Custom Spaces — Pre-packaged Sandwiches <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-04-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">4.1 Counting Problems — Pattern Matching, Not Math <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

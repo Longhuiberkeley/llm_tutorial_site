@@ -1,30 +1,32 @@
 ---
-title: "3.2 The Sandwich — How Messages Really Stack Up"
-description: "See the full payload structure that gets sent to the LLM on every turn."
+title: "3.2 The Sandwich — Turn by Turn"
+description: "Watch what's actually sent to the LLM with every message you send."
 chapter: "Chapter 3"
 pageId: "03-02"
 ---
 
 ## 🎯 Core Goals
-- Show the full "payload" structure sent to the LLM.
-- Understand that the "reply" is just the bottom layer of a huge sandwich.
+- Show simultaneously what the user sees (chat) vs. what's actually sent (the growing bundle).
+- Make visceral the fact that the ENTIRE conversation history is re-bundled and sent every turn.
+- No system prompt or custom preprompt yet — pure conversation history only.
 
 :::callout-tldr
-Every time you send a message, the AI doesn't just see your words. It sees a giant "sandwich" containing hidden instructions, your past messages, and even documents you've uploaded.
+The LLM doesn't "remember" your conversation. Every time you send a message, the app bundles the **entire history** — all previous messages — and sends it to the LLM as one big package. The LLM reads it all from scratch, every time.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-sandwich"}
+:::visual{name="visual-sandwich-dual-view"}
 
 ## 📝 Key Concepts
 
-- **Layered Payload:** Your message is wrapped in several layers:
-    - **System Prompt:** Hidden instructions like "Be concise."
-    - **Pre-prompt / Context:** Injected data like RAG results or files.
-    - **Conversation History:** All previous messages from both you and the AI.
-    - **Thinking Tokens:** (For reasoning models) The model's internal work.
-- **Stateless Re-reading:** Every turn, the LLM processes ALL of this at once to generate its next reply.
-- **The Magic Trick:** What you see as a simple chat is actually a complex stack being replayed every single time you hit enter.
+- **The LLM Has No Memory:** Each turn, the LLM starts from zero. It only knows what's in the bundle sent right now.
+- **The App Builds the Bundle:** The chat interface silently collects the entire conversation history and bundles it with the new message on every send.
+- **The Bundle Grows:** Every turn adds two messages. By Turn 4, the LLM reads 7 messages at once — just to answer the latest one.
+- **Cost & Speed:** Bigger bundles = more tokens processed = slower and more expensive. Many providers provide Caching to lower the cost
+
+:::callout-error
+The LLM doesn't "know" you — it re-reads the transcript every single time. In 2026, many AI services have a MEMORY mechanism, it often is just a way to bundle your previous conversation into your current one somehow. We will discuss some common methods later.
+:::
 
 :::quiz{id="03-02"}

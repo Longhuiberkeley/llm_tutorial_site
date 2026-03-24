@@ -63,16 +63,13 @@
                     <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.1 The Chat Illusion</span>
+                    <span class="text-sm font-medium">3.1 The Black Box</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — Turn by Turn</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.3 System Prompts</span>
-                </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
+                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
@@ -272,8 +269,8 @@
 <h2>📝 Key Concepts</h2>
 <ul>
 <li><strong>What Is Context Rot?</strong> As a conversation (or document) grows longer, the LLM&#39;s ability to reason carefully over all of it gradually degrades. It may start missing details, contradicting itself, or producing lower-quality responses — even if everything technically &quot;fits&quot; in the context window.</li>
-<li><strong>The &quot;Friend Yapping&quot; Analogy:</strong> Imagine a friend who talks non-stop for an hour. You&#39;re nodding along — <em>&quot;yep, yep, yep&quot;</em> — but honestly, your focus drifted long ago. Now imagine they dropped a critical piece of information somewhere in the middle of that hour. Would you have caught it? That&#39;s context rot. The LLM has no choice but to keep nodding — but it&#39;s not really absorbing everything.</li>
 <li><strong>The Needle in the Haystack:</strong> The longer the conversation, the harder it becomes to &quot;find the needle&quot; — a critical fact buried somewhere deep in a very long thread. This isn&#39;t a deliberate shortcut by the model; it&#39;s a fundamental degradation from sheer volume.</li>
+<li><strong>The &quot;Friend Yapping&quot; Analogy:</strong> Imagine a friend who talks non-stop for an hour. You&#39;re nodding along — <em>&quot;yep, yep, yep&quot;</em> — but honestly, your focus drifted long ago. Now imagine they dropped a critical piece of information somewhere in the middle of that hour. Would you have caught it?</li>
 <li><strong>Bigger ≠ Better:</strong> A 1-million token context window is impressive, but filling it all the way doesn&#39;t guarantee equal quality across all tokens. Performance measurably drops as context approaches its limit.</li>
 </ul>
 <div class="callout callout-error">

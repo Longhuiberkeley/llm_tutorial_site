@@ -19,18 +19,20 @@ If you don't specify it, the LLM will guess — and it will guess based on the m
 
 ## 📝 Key Concepts
 
-- **Specify Length:** Instead of "Make this short," say "Keep it under 100 words."
-- **Specify Tone:** Instead of "Be professional," say "Write in the style of a respectful business email."
-- **Specify Audience:** Instead of "Explain quantum physics," say "Explain quantum physics to a 12-year-old with no science background."
-- **Specify Format:** Instead of "List the items," say "Give me exactly 3 options, each in a single bullet point."
-- **Use Negative Constraints:** Tell the LLM what NOT to do — e.g., "Do not apologize," "Do not include a summary at the end," "Do not use corporate jargon."
+- Can you specify what you want?
+- Can you describe in detail what you do for a living?
+- Does the answer you expect from the LLM have a clear right or wrong answer?
+- Can you improve the prompt above?
+
 
 :::callout-dyk
 **The 6W Framework for better prompts:** When stuck on why your result isn't right, ask yourself if you covered: **Who** is the audience? **What** exactly do you want? **When/Where** is the context? **Why** does this matter? **How** should it be formatted? More answered Ws = better output.
+
+For AI assisted coding or project management, it's very important to have clearly defined specification. We will discuss this further in later chapter.
 :::
 
 :::callout-dyk
-**How do you improve a bad prompt?** Add more context. The most common reason an LLM gives a generic or off-target response is that the prompt was ambiguous. Read your own prompt as if you knew nothing about the task — would the instruction be clear to a stranger? If not, add more detail.
+**How do you improve a bad prompt?** Add more context. The most common reason an LLM gives a generic or off-target response is that the prompt was ambiguous. Read your own prompt as if you knew nothing about the task — would the instruction be clear to a stranger? If not, add more detail. 
 :::
 
 :::quiz{id="05-02"}

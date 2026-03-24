@@ -63,16 +63,13 @@
                     <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.1 The Chat Illusion</span>
+                    <span class="text-sm font-medium">3.1 The Black Box</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Sandwich — How Messages Really Stack Up</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — Turn by Turn</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.3 System Prompts</span>
-                </a><a href="chapter-03-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.4 Custom Spaces — Pre-packaged Sandwiches</span>
+                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
@@ -395,7 +392,12 @@ function updateTemp(val) {
 
 
 <div class="callout callout-dyk">
-    <strong>For most users: leave temperature alone.</strong> The default temperature setting is carefully chosen by the model&#39;s creators. Tweaking it without understanding the task can noticeably degrade response quality. If you do adjust it — lower for precision tasks (code, data), slightly higher for creative tasks (brainstorming, storytelling).
+    <strong>For most users: leave temperature alone.</strong> The default temperature setting is carefully chosen by the model&#39;s creators. Tweaking it without understanding the task can noticeably degrade response quality.
+</div>
+
+
+<div class="callout callout-dyk">
+    <strong>Have you tried asking the LLM if it has a favorite number?</strong> Have you noticed if it gives you the same answer sometimes? Why is it?<br>Adjusting the temperature is a very good way to introduce more randomness in this scenario.
 </div>
 
 

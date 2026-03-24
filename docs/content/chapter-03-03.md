@@ -1,38 +1,46 @@
 ---
-title: "3.3 System Prompts"
-description: "The hidden 'personality' layers behind the curtain — and who controls each one."
+title: "3.3 The Full Sandwich — System Prompts & Custom Spaces"
+description: "Every bundle starts with hidden layers — and some of them you can't see or control."
 chapter: "Chapter 3"
 pageId: "03-03"
 ---
 
 ## 🎯 Core Goals
-- Discover the invisible instruction layers that guide an LLM's behavior.
-- Understand that there are *multiple* layers — and you only control some of them.
+- Show the same dual-view as 3.2, but now the bundle always starts with hidden layers.
+- Understand the three prompt layers (Provider / App / Session).
+- Demystify Custom GPTs, Claude Projects, and Gemini Gems as pre-packaged sandwiches.
 
 :::callout-tldr
-Before you even say "Hello", the LLM has already received hidden instructions from multiple sources. Together, these layers form the LLM's behavior script — and some of them you can't touch.
+Before you type your first message, the LLM has already received hidden instructions. Every bundle has invisible layers on top — and some of them you can't touch.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-system-prompt"}
+:::visual{name="visual-full-sandwich-dual-view"}
 
 ## 📝 Key Concepts
 
-There are three distinct layers of "hidden instructions" that shape how an LLM responds:
+Three layers in every bundle:
 
-- **Layer 1 — Provider Hidden Prompt (You can't see or change this):** The LLM provider (Anthropic, OpenAI, Google) sets safety rules that are always active. Things like: *"Don't give specific medical or financial advice," "Don't produce content that harms users," "Never pretend to be a human when sincerely asked."* These protect both you and the company's reputation.
+- **Layer 1 — Provider Prompt (You can't see or change this):** Set by the AI company (Anthropic, OpenAI, Google). Contains safety rules always active: "Don't produce harmful content," "Never pretend to be human when sincerely asked."
+- **Layer 2 — App / Custom Pre-prompt (Set by the app builder):** Defines the product's personality, tone, and knowledge. "You are TechCorp support." Makes a chatbot feel specialized.
+- **Layer 3 — Your Session Context (Yours to set):** Repeated preferences you inject per session: "Always respond in bullet points," "I'm working in Python 3.12."
 
-- **Layer 2 — App / User System Prompt (Controllable by you or the app builder):** If you're using ChatGPT directly, you can set a custom system prompt. If a company built a product on top of an LLM, they set this layer to define the product's personality, tone, and rules. *"You are a friendly customer service agent for Acme Corp. Always respond in under 100 words."*
+## 📦 Custom Spaces — Pre-packaged Sandwiches
 
-- **Layer 3 — Pre-prompt / Repeated Context (Your working context):** Repeated preferences or context you inject at the start of a session — things like *"I prefer bullet points," "I'm working on a Python 3.12 codebase," or "Always respond in French."* This is the most flexible layer, changed freely per session.
+Features like Custom GPTs, Claude Projects, and Gemini Gems bundle three things:
+1. **System Prompt:** Specialized instructions (personality).
+2. **Knowledge Docs:** Reference files (company policies, product specs).
+3. **Tools:** Specific capabilities (web search, code interpreter).
 
-:::callout-error
-Have you ever seen screenshots of an LLM acting wildly out of character — crude jokes, refusing all requests, pretending to be a villain? That's almost always someone overriding Layer 2 with a custom system prompt. The underlying model is the same; only the instruction layer changed.
-:::
+**Why use them?** Set the instructions once, then just use the chat. No need to re-explain context every session.
+
+**Business use:** Companies build internal Projects pre-loaded with brand voice, legal policies, and private data — so every employee starts with the right context.
+
+
 
 :::callout-dyk
-Why does Claude feel different from ChatGPT? They may share similar underlying technology, but their Provider Hidden Prompts (Layer 1) and default system prompts (Layer 2) are entirely different. Same base model family, very different instructions.
+Why does Claude feel different from ChatGPT? Their Provider Prompts (Layer 1) and default pre-prompts are completely different. Same concept, different instructions.
 :::
 
 :::quiz{id="03-03"}

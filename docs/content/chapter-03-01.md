@@ -1,30 +1,32 @@
 ---
-title: "3.1 The Chat Illusion"
-description: "AI doesn’t remember you; it re-reads the whole transcript every time."
+title: "3.1 The Black Box"
+description: "Text goes in, text comes out — but what's actually happening inside?"
 chapter: "Chapter 3"
 pageId: "03-01"
 ---
 
 ## 🎯 Core Goals
-- Understand that LLMs are "stateless"—they have no memory of past conversations.
-- Learn why long conversations get slower and more expensive.
+- Introduce the LLM as an input/output black box.
+- Build curiosity about what happens inside with a predefined guess quiz.
+- Bridge to the sandwich model in 3.2.
 
 :::callout-tldr
-When you chat with an AI, it feels like it's remembering your conversation. It's an illusion! Every time you hit enter, the AI is secretly re-reading the *entire* conversation history from scratch.
+Text goes in. Text comes out. That's the whole interface — but what's actually happening inside that box? Let's find out.
 :::
 
 ## 👁️ Visuals & Interactives
 
-:::visual{name="visual-chat-illusion"}
+:::visual{name="visual-black-box"}
 
 ## 📝 Key Concepts
 
-- **Statelessness:** Imagine talking to an incredibly smart friend with zero short-term memory (like the movie *50 First Dates*). Every time you speak, you have to hand them a massive transcript of the entire conversation so far. The AI has no memory between messages. Every "turn" starts fresh.
-- **The Chat Illusion:** The chat interface (like ChatGPT or Claude) hides this transcript from you, neatly organizing the back-and-forth messages. It creates the ILLUSION of a flowing conversation, but behind the scenes, the ENTIRE transcript is sent every time you hit enter.
-- **Context Window:** As the conversation gets longer, the "transcript" grows. This makes the conversation slower and more expensive because the AI has to re-read more tokens every single turn.
+- **The Black Box:** From the outside, an LLM is simple — text in, text out. The chat interface hides all the machinery.
+- **Next-Token Prediction:** The LLM's core job is to predict the most statistically likely next word/token, given everything before it. It does this repeatedly until the reply is complete.
+- **Not a Search Engine:** LLMs don't look things up in real-time. They generate text from learned patterns — powerful, but also why they can confidently say things that are wrong.
+- **The Interface Illusion:** The chat app makes it *look* like a flowing conversation. What actually happens each turn? That's what we explore next.
 
-:::callout-error
-Never assume the AI "knows" you just because you've been chatting for an hour. If the conversation gets too long, the oldest messages fall off the top of the transcript, and the AI permanently forgets them!
+:::callout-dyk
+If it just predicts words... how does it "remember" your whole conversation? That's the trick — every time you hit Send, something surprising happens under the hood. Let's look at it next.
 :::
 
 :::quiz{id="03-01"}

@@ -6,7 +6,7 @@ pageId: "04-06"
 ---
 
 ## 🎯 Core Goals
-- Understand that longer conversations lead to degraded LLM performance.
+- Understand that longer conversations lead to degraded LLM performance, similar to When the Head is Full
 - Learn why context rot happens and how to avoid it.
 
 :::callout-tldr
@@ -16,8 +16,8 @@ Context rot is the degradation of an LLM's performance and accuracy as the input
 ## 📝 Key Concepts
 
 - **What Is Context Rot?** As a conversation (or document) grows longer, the LLM's ability to reason carefully over all of it gradually degrades. It may start missing details, contradicting itself, or producing lower-quality responses — even if everything technically "fits" in the context window.
-- **The "Friend Yapping" Analogy:** Imagine a friend who talks non-stop for an hour. You're nodding along — *"yep, yep, yep"* — but honestly, your focus drifted long ago. Now imagine they dropped a critical piece of information somewhere in the middle of that hour. Would you have caught it? That's context rot. The LLM has no choice but to keep nodding — but it's not really absorbing everything.
 - **The Needle in the Haystack:** The longer the conversation, the harder it becomes to "find the needle" — a critical fact buried somewhere deep in a very long thread. This isn't a deliberate shortcut by the model; it's a fundamental degradation from sheer volume.
+- **The "Friend Yapping" Analogy:** Imagine a friend who talks non-stop for an hour. You're nodding along — *"yep, yep, yep"* — but honestly, your focus drifted long ago. Now imagine they dropped a critical piece of information somewhere in the middle of that hour. Would you have caught it?
 - **Bigger ≠ Better:** A 1-million token context window is impressive, but filling it all the way doesn't guarantee equal quality across all tokens. Performance measurably drops as context approaches its limit.
 
 :::callout-error
