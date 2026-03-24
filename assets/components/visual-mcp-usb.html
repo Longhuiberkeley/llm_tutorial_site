@@ -1,57 +1,69 @@
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
     <div class="text-center mb-10">
         <h3 class="text-xl font-bold font-headline mb-2">MCP: The USB-C of AI</h3>
-        <p class="text-sm text-on-surface-variant">Standardizing how AI connects to tools and data.</p>
+        <p class="text-sm text-on-surface-variant">One standard connection for tools, data, and context.</p>
     </div>
 
-    <div class="relative flex flex-col items-center gap-12 py-10">
-        <!-- AI Model (The Client) -->
-        <div class="z-10 bg-surface-container-lowest border-4 border-accent rounded-2xl p-6 shadow-xl flex flex-col items-center gap-4 min-w-[200px] animate-pulse">
+    <!-- AI Model at top -->
+    <div class="flex justify-center mb-6">
+        <div class="bg-surface-container-lowest border-4 border-accent rounded-2xl p-5 shadow-xl flex flex-col items-center gap-3 min-w-[180px]">
             <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white text-3xl">🤖</div>
             <div class="text-center">
-                <div class="font-bold">AI Model</div>
-                <div class="text-[10px] uppercase tracking-widest opacity-60">The MCP Client</div>
+                <div class="font-bold text-sm">AI Model</div>
+                <div class="text-[10px] uppercase tracking-widest opacity-60">MCP Client</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connector line + MCP label -->
+    <div class="flex flex-col items-center mb-6">
+        <div class="w-0.5 h-8 bg-primary/30"></div>
+        <div class="bg-primary rounded-full px-6 py-2 flex items-center gap-3 shadow">
+            <span class="material-symbols-outlined text-on-primary text-xl">usb</span>
+            <span class="text-on-primary font-black text-xs tracking-widest">MCP STANDARD</span>
+            <span class="material-symbols-outlined text-on-primary text-xl">usb</span>
+        </div>
+        <div class="w-0.5 h-8 bg-primary/30"></div>
+    </div>
+
+    <!-- Three columns -->
+    <div class="grid grid-cols-3 gap-4">
+        <!-- Tools column -->
+        <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4">
+            <div class="text-[10px] font-black uppercase tracking-widest text-primary mb-3 text-center">🔧 Tools</div>
+            <div class="space-y-2">
+                <div class="bg-surface-container rounded-lg px-3 py-2 text-[11px] font-medium text-center">Web Search</div>
+                <div class="bg-surface-container rounded-lg px-3 py-2 text-[11px] font-medium text-center">Code Runner</div>
+                <div class="bg-surface-container rounded-lg px-3 py-2 text-[11px] font-medium text-center">Email / Calendar</div>
             </div>
         </div>
 
-        <!-- Connection Lines -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-20">
-            <div class="w-1 h-full bg-accent"></div>
+        <!-- Data column -->
+        <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4">
+            <div class="text-[10px] font-black uppercase tracking-widest text-primary mb-3 text-center">📦 Data</div>
+            <div class="space-y-2">
+                <div class="bg-surface-container rounded-lg px-3 py-2 text-[11px] font-medium text-center">Files & Docs</div>
+                <div class="bg-surface-container rounded-lg px-3 py-2 text-[11px] font-medium text-center">Database</div>
+                <div class="bg-surface-container rounded-lg px-3 py-2 text-[11px] font-medium text-center">GitHub Repos</div>
+            </div>
         </div>
 
-        <!-- The Universal Standard (MCP) -->
-        <div class="z-20 bg-primary rounded-full px-8 py-3 shadow-lg border-4 border-background flex items-center gap-4 transform -translate-y-6">
-            <span class="material-symbols-outlined text-white text-3xl">usb</span>
-            <span class="text-white font-black tracking-widest">MCP STANDARD</span>
-            <span class="material-symbols-outlined text-white text-3xl">usb</span>
-        </div>
-
-        <!-- Data & Tools (The Servers) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 flex flex-col items-center gap-3 hover:border-accent transition-all">
-                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-xl">📁</div>
-                <div class="text-[10px] font-bold text-center">Files</div>
-            </div>
-            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 flex flex-col items-center gap-3 hover:border-accent transition-all">
-                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-xl">📊</div>
-                <div class="text-[10px] font-bold text-center">Database</div>
-            </div>
-            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 flex flex-col items-center gap-3 hover:border-accent transition-all">
-                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-xl">🌐</div>
-                <div class="text-[10px] font-bold text-center">Web Search</div>
-            </div>
-            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-4 flex flex-col items-center gap-3 hover:border-accent transition-all">
-                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-xl">🐙</div>
-                <div class="text-[10px] font-bold text-center">GitHub</div>
+        <!-- Context column -->
+        <div class="bg-surface-container-lowest border-2 border-accent/40 rounded-xl p-4">
+            <div class="text-[10px] font-black uppercase tracking-widest text-accent mb-3 text-center">💡 Context</div>
+            <div class="space-y-2">
+                <div class="bg-accent/5 border border-accent/20 rounded-lg px-3 py-2 text-[11px] font-medium text-center">Best Practices</div>
+                <div class="bg-accent/5 border border-accent/20 rounded-lg px-3 py-2 text-[11px] font-medium text-center">Travel Templates</div>
+                <div class="bg-accent/5 border border-accent/20 rounded-lg px-3 py-2 text-[11px] font-medium text-center">Domain Glossary</div>
             </div>
         </div>
     </div>
 
     <div class="mt-8 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center gap-4">
-        <div class="text-4xl">🔌</div>
+        <div class="text-3xl">🔌</div>
         <p class="text-xs text-on-surface-variant leading-relaxed italic">
             <strong>Before MCP:</strong> Each AI needed a different "cable" for every tool.<br>
-            <strong>With MCP:</strong> One standard connection works for everything, just like USB-C!
+            <strong>With MCP:</strong> One standard connection works for everything — whether you're fetching data, running tools, or loading context.
         </p>
     </div>
 </div>

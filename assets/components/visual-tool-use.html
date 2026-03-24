@@ -45,7 +45,45 @@
 
     <div class="mt-8 p-4 bg-primary/5 border border-primary/20 rounded-xl">
         <p class="text-xs text-center italic text-on-surface-variant">
-            By delegating to a <strong>calculator</strong>, the AI stops being a "statistical guesser" and becomes a precise processor.
+            By delegating to a <strong>calculator</strong>, the LLM stops being a "statistical guesser" and becomes a precise processor.
         </p>
+    </div>
+
+    <!-- Simon Says explanation -->
+    <div class="mt-8 border-t border-outline-variant pt-8">
+        <h4 class="text-sm font-bold text-center mb-6 text-on-surface">But wait — how does the LLM actually "use" a tool?</h4>
+        <div class="flex flex-col md:flex-row items-stretch gap-4">
+            <!-- Step 1: LLM outputs text -->
+            <div class="flex-1 bg-surface-container-lowest border-2 border-accent/30 rounded-xl p-5 flex flex-col gap-3">
+                <div class="text-[10px] font-black uppercase tracking-widest text-accent">Step 1 — LLM Output</div>
+                <div class="font-mono text-xs bg-surface-container rounded-lg p-3 leading-relaxed border border-outline-variant">
+                    I need to calculate this.<br>
+                    <span class="bg-accent/15 text-accent font-bold px-1 rounded">[tool_call: calculator.multiply(123, 456)]</span><br>
+                    Let me use the result...
+                </div>
+                <p class="text-[11px] text-on-surface-variant italic">The LLM only outputs text — including the trigger phrase. It never "runs" anything itself.</p>
+            </div>
+
+            <!-- Arrow -->
+            <div class="flex items-center justify-center p-2 text-primary">
+                <span class="material-symbols-outlined text-3xl rotate-90 md:rotate-0">arrow_forward</span>
+            </div>
+
+            <!-- Step 2: Executor intercepts -->
+            <div class="flex-1 bg-surface-container-lowest border-2 border-primary/30 rounded-xl p-5 flex flex-col gap-3">
+                <div class="text-[10px] font-black uppercase tracking-widest text-primary">Step 2 — Executor Intercepts</div>
+                <div class="font-mono text-xs bg-surface-container rounded-lg p-3 leading-relaxed border border-outline-variant text-green-700">
+                    Detected: <span class="font-bold">tool_call</span><br>
+                    Running: calculator.multiply(123, 456)<br>
+                    Result: <span class="font-bold">56088</span> ✓
+                </div>
+                <p class="text-[11px] text-on-surface-variant italic">A separate program reads the trigger, executes the real action, and sends the result back.</p>
+            </div>
+        </div>
+        <div class="mt-5 p-4 bg-accent/5 border border-accent/20 rounded-xl text-center">
+            <p class="text-xs italic text-on-surface-variant">
+                🎮 Think of it as <strong>Simon Says</strong>: the LLM is Simon — it only <em>says</em> the command. Someone else actually carries it out.
+            </p>
+        </div>
     </div>
 </div>

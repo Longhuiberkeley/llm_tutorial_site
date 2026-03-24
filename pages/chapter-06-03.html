@@ -123,7 +123,7 @@
                     <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
@@ -258,11 +258,11 @@
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Define what makes an AI system &quot;agentic&quot; (vs. just a script).</li>
-<li>Identify the traits of high-quality agents.</li>
+<li>Define what makes an AI system truly &quot;agentic&quot; — not just a script with tools.</li>
+<li>Understand the six key characteristics of high-quality agents.</li>
 </ul>
 <div class="callout callout-tldr">
-    An agent isn&#39;t just an AI with tools. It&#39;s an AI that can <strong>adapt</strong> its plan when things go wrong and <strong>self-correct</strong> until the goal is achieved.
+    A real agent isn&#39;t just an LLM with tools bolted on. It operates <strong>autonomously</strong>, breaks down complex goals, adapts when things go wrong, and can collaborate — like an employee who figures things out, not just a tool that waits to be used.
 </div>
 
 
@@ -273,78 +273,103 @@
         <p class="text-sm text-on-surface-variant">What separates a smart script from a true AI agent?</p>
     </div>
 
-    <div class="grid sm:grid-cols-2 gap-6">
-        <!-- Responsive -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Autonomy & Proactivity -->
         <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
             <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">reply</span>
-                <h4 class="font-bold text-sm">Responsive</h4>
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">self_improvement</span>
+                <h4 class="font-bold text-sm">Autonomy & Proactivity</h4>
             </div>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                Listens to feedback mid-task and adjusts instantly. "Wait, don't search Google, use Bing instead."
+                Acts independently toward a goal — doesn't wait to be told every step. More like an employee than a tool.
             </p>
         </div>
 
-        <!-- Adaptive -->
+        <!-- Goal-Oriented Planning -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">checklist</span>
+                <h4 class="font-bold text-sm">Goal-Oriented Planning</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Breaks high-level goals into actionable steps, prioritizes them, and adjusts when conditions change.
+            </p>
+        </div>
+
+        <!-- Tool Use & Interoperability -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">build</span>
+                <h4 class="font-bold text-sm">Tool Use & Interoperability</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Interacts with external APIs, search engines, and databases to get real things done — not just talk about them.
+            </p>
+        </div>
+
+        <!-- Adaptability & Learning -->
         <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
             <div class="flex items-center gap-3 mb-3">
                 <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">published_with_changes</span>
-                <h4 class="font-bold text-sm">Adaptive</h4>
+                <h4 class="font-bold text-sm">Adaptability</h4>
             </div>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                If Tool A fails, the agent tries Tool B or a different search term instead of giving up.
+                If Tool A fails, it tries Tool B. Uses real-time feedback to refine its approach mid-task.
             </p>
         </div>
 
-        <!-- Self-Correcting -->
+        <!-- Context Awareness & Memory -->
         <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
             <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">spellcheck</span>
-                <h4 class="font-bold text-sm">Self-Correcting</h4>
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">memory</span>
+                <h4 class="font-bold text-sm">Context & Memory</h4>
             </div>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                Identifies its own mistakes. "I got a math error, let me re-calculate with the calculator tool."
+                Maintains short- and long-term memory of past steps, enabling coherent work across multi-step or multi-session tasks.
             </p>
         </div>
 
-        <!-- Goal-Directed -->
+        <!-- Collaboration -->
         <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
             <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">target</span>
-                <h4 class="font-bold text-sm">Goal-Directed</h4>
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">group</span>
+                <h4 class="font-bold text-sm">Collaboration</h4>
             </div>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                Stays focused on the final objective, even if the intermediate steps become messy or complex.
+                Works alongside humans and other specialized agents to accomplish complex, multi-part projects.
             </p>
         </div>
     </div>
 
-    <div class="mt-10 bg-surface-container-lowest border-t-4 border-accent p-6 rounded-xl shadow-sm">
-        <div class="text-[10px] font-bold uppercase tracking-widest text-accent mb-4">The Result</div>
-        <div class="flex items-center gap-4">
-            <div class="flex-grow space-y-2">
-                <div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
-                    <div class="h-full bg-accent animate-pulse" style="width: 100%;"></div>
-                </div>
-                <div class="flex justify-between text-[10px] font-bold opacity-60 italic">
-                    <span>Task Started</span>
-                    <span>Problem Solved Autonomously</span>
-                </div>
+    <!-- Script vs Agent contrast -->
+    <div class="mt-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-5">
+        <div class="grid grid-cols-2 gap-6 text-center">
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">Script</div>
+                <div class="font-mono text-xs text-on-surface-variant bg-surface-container rounded-lg px-4 py-3">A → B → C</div>
+                <p class="text-[11px] text-on-surface-variant mt-2 opacity-70 italic">Fixed steps, breaks if anything changes</p>
+            </div>
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-primary mb-2">Agent</div>
+                <div class="font-mono text-xs text-primary bg-primary/5 border border-primary/20 rounded-lg px-4 py-3">Perceive → Plan → Act → Observe → Repeat</div>
+                <p class="text-[11px] text-on-surface-variant mt-2 italic">Adaptive loop — keeps going until the goal is met</p>
             </div>
         </div>
     </div>
 </div>
 
 
-<h2>📝 Key Concepts</h2>
+<h2>📝 Key Characteristics</h2>
 <ul>
-<li><strong>Responsive:</strong> Listens to feedback and changes direction.</li>
-<li><strong>Adaptive:</strong> If a tool fails, it tries a different approach instead of giving up.</li>
-<li><strong>Self-Correcting:</strong> &quot;That output looks wrong, let me double-check my calculation.&quot;</li>
-<li><strong>Goal-Directed:</strong> Keeps working toward the final objective, even if the middle steps change.</li>
+<li><strong>Autonomy &amp; Proactivity:</strong> Unlike passive, reactive AI, a good agent acts independently to achieve goals. It doesn&#39;t wait to be told every step — it decides what to do next.</li>
+<li><strong>Goal-Oriented Planning:</strong> Agents break complex, high-level goals into actionable steps, prioritize them, and adjust strategies when conditions change.</li>
+<li><strong>Tool Use &amp; Interoperability:</strong> Good agents interact with external systems — APIs, software, search engines, databases — to get tasks done (e.g., checking email, updating a CRM).</li>
+<li><strong>Adaptability &amp; Learning:</strong> Agents use feedback loops and real-time data to refine their performance and adapt to new situations mid-task.</li>
+<li><strong>Context Awareness &amp; Memory:</strong> Agentic LLMs maintain both short-term and long-term memory of past interactions, allowing for coherent work across multiple steps or sessions.</li>
+<li><strong>Collaboration:</strong> Agents can work alongside humans and often with other specialized agents to accomplish complex, multi-part projects.</li>
 </ul>
 <div class="callout callout-dyk">
-    Contrast: A traditional script follows fixed steps (A -&gt; B -&gt; C). An agent follows a loop: Perceive -&gt; Plan -&gt; Act -&gt; Observe -&gt; Repeat.
+    A traditional script follows fixed steps: A → B → C. An agent follows an adaptive loop: <strong>Perceive → Plan → Act → Observe → Repeat</strong>. The loop continues until the goal is met — or the agent asks for help.
 </div>
 
 

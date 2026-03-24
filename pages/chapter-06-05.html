@@ -123,7 +123,7 @@
                     <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
@@ -258,68 +258,68 @@
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Learn to identify common &quot;agent bugs.&quot;</li>
-<li>Understand why testing agents is harder than traditional software.</li>
+<li>Understand that agent failures happen at two levels: planning and execution.</li>
+<li>Recognize the four classic failure modes using the Simon Says analogy.</li>
 </ul>
 <div class="callout callout-tldr">
-    Agents fail in hard-to-predict ways. They can get stuck in loops, use the wrong tools, or stubbornly try the same failed action over and over.
+    A good agentic LLM needs to be a good LLM first. It should have a clear sense of direction before it ever reaches for a tool. When things go wrong, the failure is usually in the <em>planning</em> — not just the <em>tool call</em>.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
     <div class="text-center mb-8">
-        <h3 class="text-xl font-bold font-headline mb-2">When Agents Go Wrong</h3>
-        <p class="text-sm text-on-surface-variant">Click a bug to reveal why it happened and how to fix it.</p>
+        <h3 class="text-xl font-bold font-headline mb-2">The Simon Says Failure Test</h3>
+        <p class="text-sm text-on-surface-variant">Click each scenario to see what went wrong and how to fix it.</p>
     </div>
 
     <div class="grid sm:grid-cols-2 gap-4">
-        <!-- Bug 1: Infinite Loop -->
-        <button onclick="revealBug(0, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔄</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">The Infinite Loop</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Logic Error</div>
+        <!-- Scenario 1: Impossible Task -->
+        <button onclick="revealBug(0, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-400 transition-all text-left flex items-start gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">🏔️</div>
+            <div>
+                <div class="font-bold text-sm mb-1">"Simon says, jump 10 meters tall"</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Impossible Task</div>
             </div>
         </button>
 
-        <!-- Bug 2: Tool Hallucination -->
-        <button onclick="revealBug(1, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">👻</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Tool Hallucination</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Instruction Error</div>
+        <!-- Scenario 2: Wrong Trigger -->
+        <button onclick="revealBug(1, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-400 transition-all text-left flex items-start gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">📢</div>
+            <div>
+                <div class="font-bold text-sm mb-1">"Simon <em>told</em>, do your homework"</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Wrong Trigger</div>
             </div>
         </button>
 
-        <!-- Bug 3: Stubborn Retry -->
-        <button onclick="revealBug(2, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🧱</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Stubborn Retry</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Execution Error</div>
+        <!-- Scenario 3: Missing Tool -->
+        <button onclick="revealBug(2, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-400 transition-all text-left flex items-start gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">🏎️</div>
+            <div>
+                <div class="font-bold text-sm mb-1">"Simon says, drive the Ferrari to work"</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Missing Tool</div>
             </div>
         </button>
 
-        <!-- Bug 4: The Wrong Tool -->
-        <button onclick="revealBug(3, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔨</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">The Wrong Tool</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Context Error</div>
+        <!-- Scenario 4: Harmful Behavior -->
+        <button onclick="revealBug(3, this)" class="bug-btn p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-400 transition-all text-left flex items-start gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">🚨</div>
+            <div>
+                <div class="font-bold text-sm mb-1">"Simon says, jump off the building"</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Harmful Behavior</div>
             </div>
         </button>
     </div>
 
-    <!-- Bug Detail Display -->
+    <!-- Detail Display -->
     <div id="bug-display" class="mt-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 min-h-[180px] animate-fade-in opacity-0 transition-all duration-300">
         <div class="flex items-center gap-3 mb-4">
-            <span id="bug-icon" class="text-3xl">🔄</span>
-            <h4 id="bug-title" class="text-lg font-bold">The Infinite Loop</h4>
+            <span id="bug-icon" class="text-3xl">🏔️</span>
+            <h4 id="bug-title" class="text-lg font-bold"></h4>
         </div>
         <div class="grid md:grid-cols-2 gap-6">
             <div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-red-500 mb-2">The Problem</div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-red-500 mb-2">What Went Wrong</div>
                 <p id="bug-problem" class="text-xs text-on-surface-variant leading-relaxed italic"></p>
             </div>
             <div>
@@ -328,45 +328,53 @@
             </div>
         </div>
     </div>
+
+    <!-- Think further callout -->
+    <div class="mt-6 p-4 bg-accent/5 border-l-4 border-accent rounded-r-xl">
+        <div class="text-[10px] font-black uppercase tracking-widest text-accent mb-1">🤔 Think Further</div>
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+            These four aren't the only ways agents fail. Can you think of others? What if the agent misreads its own output and acts on it? What if two agents give each other conflicting instructions? What if someone deliberately crafts a web page to trick the agent into doing something harmful mid-task?
+        </p>
+    </div>
 </div>
 
 <script>
 const bugData = [
     {
-        title: "The Infinite Loop",
-        icon: "🔄",
-        problem: "The agent searches for info, gets a result, but isn't sure it's 'perfect', so it searches for the same thing again... forever.",
-        fix: "Set a <strong>maximum step limit</strong> (e.g., 5 cycles) or a timeout to force the agent to stop and report its current progress."
+        title: "Impossible Task",
+        icon: "🏔️",
+        problem: "The goal itself is unrealistic — no tool can help. The agent should recognize this in the <strong>planning phase</strong>, before it ever tries a tool call. A good LLM asks: 'Is this even achievable?' before acting.",
+        fix: "Improve the underlying LLM quality and system prompt to encourage <strong>feasibility checks</strong> before execution. The agent should surface 'This goal is not achievable' as a valid response."
     },
     {
-        title: "Tool Hallucination",
-        icon: "👻",
-        problem: "The agent tries to call a tool that doesn't exist, like <code>magic_fix_everything()</code>, because it sounds like it SHOULD exist.",
-        fix: "Improve the <strong>system prompt</strong> to explicitly list only available tools and provide a 404 error if it tries a missing one."
+        title: "Wrong Trigger",
+        icon: "📢",
+        problem: "The agent used <em>told</em> instead of <em>says</em> — the trigger word was wrong. In real terms: the tool call was malformed or missing the required format, so the executor never detected it and nothing happened.",
+        fix: "The system prompt should clearly specify the <strong>exact tool call format</strong>. Validate outputs before sending them to the executor, and return a format error if the pattern doesn't match."
     },
     {
-        title: "Stubborn Retry",
-        icon: "🧱",
-        problem: "The agent gets a 'Permission Denied' error from a file tool and immediately tries the exact same command again, expecting a different result.",
-        fix: "Implement <strong>error handling logic</strong> that forces the agent to 're-plan' or ask for human help after 2 consecutive failures."
+        title: "Missing Tool (Hallucination)",
+        icon: "🏎️",
+        problem: "The command was perfectly formed, but there's no Ferrari — the tool doesn't exist. Imagine the LLM wants to open a Chrome browser, but you're a Firefox user. The call fails because the tool simply isn't there, even though the instruction was correct.",
+        fix: "List only <strong>available tools explicitly</strong> in the system prompt. If the agent calls a tool not on the list, return a 404-style error and force it to re-plan using only what's available."
     },
     {
-        title: "The Wrong Tool",
-        icon: "🔨",
-        problem: "The agent uses a calculator to find a capital city or uses web search to solve 2+2. It's using a hammer for a screw.",
-        fix: "Provide <strong>clear descriptions</strong> for every tool so the AI's internal 'attention' knows exactly when each tool is appropriate."
+        title: "Harmful Behavior",
+        icon: "🚨",
+        problem: "The command is syntactically correct and technically executable — but it should never be carried out. The agent followed instructions without checking whether the action was safe or ethical.",
+        fix: "Implement <strong>safety guardrails</strong> at the executor level — a separate layer that reviews actions before running them. Never rely solely on the LLM to self-police harmful commands."
     }
 ];
 
 function revealBug(index, btn) {
     const data = bugData[index];
     const display = document.getElementById('bug-display');
-    
-    document.querySelectorAll('.bug-btn').forEach(b => b.classList.remove('border-red-500', 'bg-red-50'));
-    btn.classList.add('border-red-500', 'bg-red-50');
+
+    document.querySelectorAll('.bug-btn').forEach(b => b.classList.remove('border-red-400', 'bg-red-50'));
+    btn.classList.add('border-red-400', 'bg-red-50');
 
     display.classList.remove('animate-fade-in');
-    void display.offsetWidth; // trigger reflow
+    void display.offsetWidth;
     display.classList.add('animate-fade-in');
     display.style.opacity = "1";
 
@@ -380,10 +388,10 @@ function revealBug(index, btn) {
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Infinite Loops:</strong> Searching for the same thing repeatedly without moving forward.</li>
-<li><strong>Tool Hallucination:</strong> Trying to use a tool that doesn&#39;t exist.</li>
-<li><strong>Stubborn Retries:</strong> Getting a &quot;Permission Denied&quot; error and trying the exact same command 10 times.</li>
-<li><strong>Solutions:</strong> Timeouts, step limits, and human-in-the-loop oversight are essential guardrails.</li>
+<li><strong>Planning failures</strong> happen before any tool is called — the agent has a bad goal or a bad plan.</li>
+<li><strong>Execution failures</strong> happen during the tool call — wrong format, missing tool, or unsafe action.</li>
+<li><strong>Solutions:</strong> Timeouts, step limits, and human-in-the-loop oversight are essential guardrails for execution. For planning failures, the quality of the underlying LLM and its system prompt matters most.</li>
+<li><strong>Old problems don&#39;t disappear:</strong> Every issue we&#39;ve seen with LLMs still applies inside an agent. Hallucinations, context rot (the LLM losing track of earlier steps in a long task), context window limits, and prompt injection (a malicious web page trying to hijack the agent mid-task) — all of these remain real risks at every step of the agentic loop.</li>
 </ul>
 <div class="callout callout-error">
     Never &quot;set and forget&quot; an autonomous agent with access to your email or bank account! Always start with high human oversight.
@@ -402,7 +410,7 @@ function revealBug(index, btn) {
                     <a href="chapter-06-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 6.4 Agentic Loops — Perceive, Plan, Act, Observe</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-06-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">6.6 Building a Simple Agent <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-06-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">6.6 Configuring a Good Agent <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>
