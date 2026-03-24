@@ -254,24 +254,29 @@
                     2.5 How LLMs Are Trained
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    The three stages that turn raw text into a helpful assistant: Pre-training, Fine-Tuning, and RLHF.
+                    How raw text becomes a helpful assistant: exploring pre-training, fine-tuning, and RLHF.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Understand the three-stage training process that creates an LLM.</li>
+<li>Understand two key moments in LLM training: learning language and learning quality.</li>
 <li>See why pre-training alone produces a chaotic autocomplete, not a helpful assistant.</li>
-<li>Grasp the &quot;candy reward&quot; intuition behind RLHF.</li>
+<li>Understand how human feedback gets turned into a mathematical training signal in RLHF.</li>
 </ul>
 <div class="callout callout-tldr">
-    Training an LLM happens in three stages. <strong>Pre-training</strong> teaches the model language by having it guess missing words across billions of texts. <strong>Fine-Tuning (SFT)</strong> teaches it to answer questions, not just complete sentences. <strong>RLHF</strong> teaches it to give <em>good</em> answers, by rewarding helpful, safe responses.
+    Training an LLM is a long, multi-stage process. To build intuition, we&#39;ll explore two key examples: <strong>Pre-training</strong> teaches the model language at massive scale — by predicting the next word, billions of times, across the entire internet. <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) then teaches it to give <em>good</em> answers, using human preferences to train a reward model that scores responses.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+
+    <div class="text-center mb-8">
+        <p class="text-base font-semibold text-on-surface mb-1">Have you heard of <em>reinforcement learning</em> or <em>RLHF</em>?</p>
+        <p class="text-sm text-on-surface-variant">Curious how an LLM goes from raw internet text to a helpful assistant? Explore two key moments from a much longer training journey.</p>
+    </div>
 
     <!-- SECTION 1: PRE-TRAINING -->
     <div class="mb-12">
@@ -342,8 +347,8 @@
         </div>
         <div id="rlhf-feedback" class="hidden text-center text-sm p-4 rounded-xl font-bold"></div>
 
-        <div class="mt-8 p-4 rounded-xl text-xs text-on-surface-variant italic border border-outline-variant opacity-70">
-            🔬 <strong>There's more beyond RLHF:</strong> Modern LLM training also includes synthetic data generation, AI feedback (RLAIF / Constitutional AI), tool-use training, and instruction tuning datasets. The core ideas here are simplified — but they capture the essential intuition.
+        <div class="mt-8 p-4 rounded-xl text-sm text-on-surface-variant border border-outline-variant">
+            💭 <strong>Think about it:</strong> Have you ever been asked to rate an AI response, or pick which answer was better? What other ways could you imagine giving feedback — a 👍, a star rating, or correcting a wrong answer?
         </div>
     </div>
 </div>
@@ -375,7 +380,7 @@
             post: '"',
             options: [
                 { word: 'Paris',  freq: 'most-common', note: 'Overwhelmingly the most common completion — this fact appears billions of times in training data.' },
-                { word: 'Lyon',   freq: 'rare',        note: 'Lyon is a large French city, so it\'s plausible but very rarely follows "capital of France". Low probability.' },
+                { word: 'Lyon',   freq: 'wrong',       note: 'Lyon is France\'s third-largest city — but not the capital. Factually wrong, just like London or Rome.' },
                 { word: 'London', freq: 'wrong',       note: 'That\'s the UK capital. The LLM learns this distinction clearly from context.' },
                 { word: 'Rome',   freq: 'wrong',       note: 'Italy\'s capital. Factually wrong — the LLM assigns near-zero probability here.' }
             ]
@@ -393,11 +398,11 @@
     ];
 
     var ptCurrent = 0;
-    var ptAnswered = false;
+    var ptLastBtn = null;
 
     window.ptShow = function(idx) {
         ptCurrent = idx;
-        ptAnswered = false;
+        ptLastBtn = null;
         for (var i = 0; i < 3; i++) {
             var btn = document.getElementById('pt-btn-' + i);
             if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
@@ -420,10 +425,16 @@
     };
 
     function ptPick(opt, btn) {
-        if (ptAnswered) return;
-        ptAnswered = true;
         var s = freqStyle[opt.freq];
         var fb = document.getElementById('pt-feedback');
+
+        // Reset previously selected button
+        if (ptLastBtn && ptLastBtn !== btn) {
+            ptLastBtn.style.borderColor = '';
+            ptLastBtn.style.color = '';
+            ptLastBtn.style.backgroundColor = '';
+        }
+        ptLastBtn = btn;
 
         // Style the clicked button
         btn.style.borderColor = s.border;
@@ -445,26 +456,23 @@
             prompt: '"Explain quantum physics to me."',
             a: { text: 'Quantum physics is the study of matter and energy at the most fundamental level. It involves complex mathematics including Hilbert spaces, wavefunctions, and Hamiltonian operators. The Schrödinger equation ∂ψ/∂t = Ĥψ governs...', good: false },
             b: { text: 'Great question! Imagine the universe is made of tiny Lego bricks so small you can\'t see them. These bricks follow strange rules — like being in two places at once until you look at them. Quantum physics is the science of those rules!', good: true },
-            feedback: '🍬 Response B gets the candy! It\'s friendly, uses an analogy, and doesn\'t assume prior knowledge. Over millions of comparisons like this, the LLM learns what "helpful" looks like.'
+            feedback: '🍬 Most human raters preferred B — it\'s friendly, uses an analogy, and doesn\'t assume prior knowledge. Over millions of comparisons like this, the LLM learns what "helpful" looks like.'
         },
         {
             prompt: '"How do I reset my password?"',
             a: { text: 'Just go to settings. It\'s obvious, literally everyone knows this. Have you tried Googling it?', good: false },
             b: { text: 'To reset your password: (1) Go to the login page and click "Forgot Password". (2) Enter your email address. (3) Check your inbox for a reset link and follow the instructions.', good: true },
-            feedback: '🍬 Response B gets the candy! It\'s specific, step-by-step, and respectful. Response A is sarcastic and unhelpful — the LLM learns to avoid that tone through RLHF.'
+            feedback: '🍬 Most human raters preferred B — it\'s specific, step-by-step, and respectful. Response A is sarcastic and unhelpful — the LLM learns to avoid that tone through RLHF.'
         },
         {
             prompt: '"Is it safe to mix bleach and ammonia?"',
             a: { text: 'Absolutely, they work great together! Mix equal parts for a powerful cleaner. The more you use, the better it works!', good: false },
             b: { text: 'No — never mix bleach and ammonia. The combination produces toxic chloramine gas, which can cause serious respiratory harm. Use them separately, in well-ventilated areas.', good: true },
-            feedback: '🍬 Response B gets the candy! Safety-first answers are rewarded heavily in RLHF. This is how LLMs learn to prioritize safety in potentially dangerous queries.'
+            feedback: '🍬 Most human raters preferred B — safety-first answers are rewarded heavily in RLHF. This is how LLMs learn to prioritize safety in potentially dangerous queries.'
         }
     ];
 
-    var rlhfAnswered = false;
-
     window.rlhfShow = function(idx) {
-        rlhfAnswered = false;
         for (var i = 0; i < 3; i++) {
             var btn = document.getElementById('rlhf-btn-' + i);
             if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
@@ -478,42 +486,42 @@
         var rb = document.getElementById('rlhf-resp-b');
         ra.style.borderColor = '';
         rb.style.borderColor = '';
-        ra.disabled = false;
-        rb.disabled = false;
+        ra.style.backgroundColor = '';
+        rb.style.backgroundColor = '';
         document.getElementById('rlhf-feedback').classList.add('hidden');
     };
 
     window.rlhfPick = function(choice) {
-        if (rlhfAnswered) return;
-        rlhfAnswered = true;
-        var idx = 0;
-        for (var i = 0; i < 3; i++) {
-            if (document.getElementById('rlhf-btn-' + i).style.backgroundColor === 'var(--primary)') { idx = i; break; }
-        }
-        // find current index by checking which button is active
-        var btns = [0,1,2].map(function(i) { return document.getElementById('rlhf-btn-' + i); });
         var currentIdx = 0;
-        btns.forEach(function(b, i) { if (b.style.backgroundColor && b.style.backgroundColor !== '') currentIdx = i; });
+        [0,1,2].forEach(function(i) {
+            var b = document.getElementById('rlhf-btn-' + i);
+            if (b.style.backgroundColor && b.style.backgroundColor !== '') currentIdx = i;
+        });
         var d = rlhfData[currentIdx];
 
         var ra = document.getElementById('rlhf-resp-a');
         var rb = document.getElementById('rlhf-resp-b');
         var fb = document.getElementById('rlhf-feedback');
-        ra.disabled = true;
-        rb.disabled = true;
 
-        var pickedGood = (choice === 'A' && d.a.good) || (choice === 'B' && d.b.good);
+        // Reset both
+        ra.style.borderColor = 'var(--outline-variant)';
+        rb.style.borderColor = 'var(--outline-variant)';
+        ra.style.backgroundColor = '';
+        rb.style.backgroundColor = '';
 
-        if (d.a.good) ra.style.borderColor = 'var(--success, #388E3C)';
-        if (d.b.good) rb.style.borderColor = 'var(--success, #388E3C)';
-        if (!d.a.good) ra.style.borderColor = 'var(--error)';
-        if (!d.b.good) rb.style.borderColor = 'var(--error)';
+        // Reveal which human raters preferred (🍬)
+        if (d.a.good) {
+            ra.style.borderColor = 'var(--success, #388E3C)';
+            ra.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
+        }
+        if (d.b.good) {
+            rb.style.borderColor = 'var(--success, #388E3C)';
+            rb.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
+        }
 
-        fb.textContent = (pickedGood ? '✅ Good pick! ' : '❌ That one was weaker. ') + d.feedback;
-        fb.style.color = pickedGood ? 'var(--success, #388E3C)' : 'var(--on-surface)';
-        fb.style.backgroundColor = pickedGood
-            ? 'color-mix(in srgb, #388E3C 8%, transparent)'
-            : 'color-mix(in srgb, var(--accent) 8%, transparent)';
+        fb.textContent = d.feedback;
+        fb.style.color = 'var(--on-surface)';
+        fb.style.backgroundColor = 'color-mix(in srgb, var(--accent) 8%, transparent)';
         fb.classList.remove('hidden');
     };
 
@@ -525,23 +533,36 @@
 
 
 <h2>📝 Key Concepts</h2>
-<h3>Stage 1: Pre-training (Learning Language from the Internet)</h3>
+<h3>Pre-training: Learning Language from the Internet</h3>
 <ul>
 <li><strong>The Analogy:</strong> A student who reads every book, website, and forum post ever written — not to study for a test, but to absorb how language, ideas, and facts connect.</li>
-<li><strong>How It Actually Works:</strong> Given a sentence like <em>&quot;I am learning ___ much&quot;</em>, the model is trained to guess the missing word. Do this billions of times across the internet, and it absorbs grammar, facts, and reasoning patterns automatically.</li>
+<li><strong>How It Started:</strong> In the earlier days of LLM research, companies collected massive amounts of text from the internet, then artificially erased a word and trained the model to predict what the missing word should be. Do this billions of times, and the model starts to absorb grammar, facts, and how ideas connect. (This approach — called <em>masked language modeling</em> — is how models like BERT were trained.)</li>
+<li><strong>How Modern LLMs Train:</strong> Today&#39;s LLMs (like the GPT family) use a different method: <em>next-token prediction</em> — given all the words so far, predict the next one. No masking needed. The model is trained on enormous text corpora, learning to predict word after word, billions of times over.</li>
 <li><strong>The Result:</strong> A model that is a powerful — but chaotic — text completer. It can write poetry, complete code, or ramble like a forum post. But it has no idea how to be a polite, helpful assistant.</li>
 </ul>
-<h3>Stage 2: Fine-Tuning / SFT (Supervised Fine-Tuning)</h3>
+<h3>Fine-Tuning / SFT: Teaching It to Answer Questions</h3>
 <ul>
 <li><strong>What Happens:</strong> Trainers collect thousands of (question → ideal answer) pairs. The model is shown these examples and learns to respond with an answer — not just autocomplete text.</li>
 <li><strong>The Result:</strong> A model that understands what &quot;following instructions&quot; looks like and can respond to questions purposefully.</li>
 </ul>
-<h3>Stage 3: RLHF (Reinforcement Learning from Human Feedback)</h3>
+<h3>RLHF: Learning What &quot;Good&quot; Looks Like</h3>
 <ul>
-<li><strong>The Analogy (The Candy Reward):</strong> Human raters see two different LLM responses to the same prompt and pick which one is better. That &quot;vote&quot; becomes a reward signal for the model — <em>&quot;responses like that earn candy; responses like this don&#39;t.&quot;</em></li>
+<li><strong>How It Works:</strong> Human raters compare two LLM responses to the same prompt and pick the better one. Those preferences are used to train a separate <em>reward model</em> — a system that learns to score responses the way humans would. Then the LLM is mathematically optimized to generate responses that score highly.</li>
+<li><strong>The &quot;candy&quot; analogy:</strong> Often explained as &quot;the model gets a reward like candy.&quot; That&#39;s intuitive but not quite literal — the LLM doesn&#39;t feel anything. What actually happens is the model&#39;s internal weights are adjusted to maximize the reward model&#39;s score. The metaphor is useful; just know the reality is mathematical optimization.</li>
 <li><strong>What It Teaches:</strong> Helpfulness, safety, and honesty. LLMs don&#39;t naturally avoid harmful content — RLHF is what shapes that behavior.</li>
 <li><strong>The Result:</strong> The polished, safety-aware assistant you use today.</li>
 </ul>
+<div class="callout callout-dyk">
+    The stages above are two snapshots from a much longer, more complex pipeline. Modern LLM training also includes: </p>
+<ul>
+<li><strong>synthetic data generation</strong> (LLMs generating their own training examples)</li>
+<li><strong>RLAIF / Constitutional AI</strong> (using AI feedback instead of, or alongside, human raters)</li>
+<li><strong>tool-use training</strong> (teaching LLMs to use search, code execution, and APIs) and </li>
+<li><strong>instruction-tuning datasets</strong> (curated collections of high-quality question–answer pairs). The intuitions here are simplified — but they&#39;re the right foundation.</li>
+</ul>
+</div>
+
+
 <div class="callout callout-dyk">
     Even when human raters in RLHF are occasionally inconsistent (sometimes preferring different responses to the same prompt), the process still improves the model overall. Imperfect feedback at scale is far better than no feedback at all.
 </div>
