@@ -26,26 +26,6 @@ The *content* is the same. The *format* determines whether the LLM can even read
 
 :::visual{name="visual-data-formats"}
 
-## The Format Spectrum
-
-**Easy for LLMs — minimal processing:**
-
-- **Plain text (.txt)** — just text, nothing to parse
-- **Markdown (.md)** — clean structure with headers and lists; LLMs read it naturally
-- **CSV** — rows and columns that LLMs handle well
-- **JSON** — structured data that maps cleanly to LLM understanding
-
-**Requires conversion tools:**
-
-- **Word (.docx)** — extraction libraries exist; tables often lose formatting
-- **PowerPoint (.pptx)** — text scattered across slides; order may not be meaningful
-- **Excel (.xlsx)** — formulas disappear; only values survive
-
-**Requires OCR first:**
-
-- **Scanned PDFs** — the document is a photo of text; the LLM can't read pixels
-- **Photographed documents** — same problem; must convert to text first
-
 ## The File Format Trap
 
 Many organizations store everything in complex formats — polished Word reports, elaborate Excel workbooks, beautiful PowerPoint decks. This looks professional. For AI processing, it's a liability.
@@ -60,13 +40,14 @@ Every conversion step:
 A surprisingly common AI project failure: a team builds a great RAG system, then discovers 80% of their knowledge base is scanned PDFs. Before the AI can help, someone has to run OCR on thousands of documents — a project that takes months and costs significant money.
 :::
 
-## Practical Advice
-
+:::callout-tip
 If you're building a knowledge base for LLM use, invest in format early:
 
 - Prefer Markdown or plain text for new documentation going forward
 - Convert critical old documents to cleaner formats before indexing
 - For PDFs, verify they're native (text-selectable) rather than scanned images — try selecting text in a PDF reader
+- Consider an **intermediate processing step**: before indexing complex documents (Word, PDFs), run a pre-processing pipeline that converts them to clean Markdown or plain text first. This one-time investment improves retrieval quality at every query, and is far cheaper than paying per-query for multimodal processing.
+:::
 
 Data preparation is frequently 80% of any real AI project. The quality of your LLM output is bounded by the quality of your data *format*, not just your data content.
 

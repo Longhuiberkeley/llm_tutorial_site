@@ -27,18 +27,9 @@ Here are four words plotted on a simple XY graph:
 
 :::visual{name="visual-xy-embeddings"}
 
-- **lion** at (3, 7)
-- **cat** at (2, 6)
-- **tiger** at (4, 8)
-- **banana** at (9, 1)
+Click any animal to see its distances to the others. Notice how the three felines cluster together — lion, cat, and tiger all share the same region of the map — while banana lands far away in its own corner.
 
-Which word is closest to **cat**? Use the distance formula: √((x₂−x₁)² + (y₂−y₁)²)
-
-- cat → lion: √(1² + 1²) = √2 ≈ **1.4**
-- cat → tiger: √(2² + 2²) = √8 ≈ **2.8**
-- cat → banana: √(7² + 5²) = √74 ≈ **8.6**
-
-**Lion** is closest. The math confirms what intuition already knew — lions and cats share far more in common than cats and bananas.
+**The math confirms what intuition already knew** — animals in the same category share far more in common than animals and fruit.
 
 ## Scaling Up
 

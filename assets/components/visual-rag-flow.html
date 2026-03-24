@@ -1,0 +1,48 @@
+<!-- Visual: RAG Flow — 5-step pipeline -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-lg font-bold font-headline mb-1">The RAG Pipeline</h3>
+        <p class="text-sm text-on-surface-variant">From question to grounded answer</p>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🙋</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 1</div>
+            <div class="text-xs font-bold">User asks a question</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔢</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 2</div>
+            <div class="text-xs font-bold">Question embedded into vectors</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔍</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 3</div>
+            <div class="text-xs font-bold">Vector DB finds closest matches</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">📄</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 4</div>
+            <div class="text-xs font-bold">Top docs injected into prompt</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 5 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-accent/15 border-2 border-accent/40 flex items-center justify-center text-2xl mb-2">🤖</div>
+            <div class="text-xs font-black text-accent uppercase tracking-wide mb-1">Step 5</div>
+            <div class="text-xs font-bold">LLM answers from real documents</div>
+        </div>
+    </div>
+    <p class="text-center text-xs text-on-surface-variant mt-5 italic">The LLM model itself never changes — only what it reads before answering.</p>
+</div>

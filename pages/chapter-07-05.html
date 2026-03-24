@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>7.5 Context Injection — Feeding Only What's Needed - LLM Tutorial</title>
+    <title>7.5 Context Engineering — What You Feed the LLM Is Everything - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -123,7 +123,7 @@
                     <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
@@ -138,13 +138,13 @@
                     <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">7.5 Context Injection — Feeding Only What's Needed</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
                 </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
                 </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — Open Book vs. Studying</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">8.1 State vs. Stateless — Starting from Zero</span>
@@ -248,21 +248,83 @@
                     <span>Chapter 7</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    7.5 Context Injection — Feeding Only What's Needed
+                    7.5 Context Engineering — What You Feed the LLM Is Everything
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    The art of selecting and placing the right amount of retrieved context — not too much, not too little.
+                    RAG is one tactic within a bigger discipline: the systematic art of managing everything you feed an LLM.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Explain how retrieved documents get inserted into the prompt.</li>
-<li>Show that context quality matters more than context quantity.</li>
+<li>Define Context Engineering as the broader discipline — RAG is one tactic within it.</li>
+<li>Show the decisions that separate good from great LLM systems: what to inject, how much, and where.</li>
 </ul>
 <div class="callout callout-tldr">
-    Inject too little and the LLM is flying blind. Inject too much and attention dilutes — same as a cluttered conversation. Quality beats quantity, every time.
+    Context Engineering is the systematic discipline of organizing, formatting, and managing everything fed into an LLM — instructions, memory, retrieved docs, conversation history. RAG is one powerful tactic within it. Many AI failures aren&#39;t about bad models; they&#39;re about bad context engineering.
+</div>
+
+
+<h2>What Is Context Engineering?</h2>
+<p>Every time an LLM answers a question, it works from whatever is inside its context window. Context Engineering is the discipline of <em>deliberately designing</em> what goes in there.</p>
+<p>It&#39;s not just about RAG. The whole context — from the opening system prompt to the last retrieved document — is yours to engineer:</p>
+<ul>
+<li><strong>System Prompt</strong> — role, instructions, constraints, tone</li>
+<li><strong>Retrieved Documents (RAG)</strong> — relevant chunks fetched at query time</li>
+<li><strong>Conversation History</strong> — prior turns; how much to keep, summarize, or trim</li>
+<li><strong>User Query</strong> — the question or task from the user</li>
+</ul>
+<p>Every layer is a decision. Context Engineering is the discipline of making those decisions well.</p>
+<!-- Visual: Context Engineering Stack — 4 layers -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-5">
+        <h3 class="text-lg font-bold font-headline mb-1">What's Inside the Context Window</h3>
+        <p class="text-sm text-on-surface-variant">Every layer is a deliberate engineering decision</p>
+    </div>
+    <div class="max-w-sm mx-auto space-y-2">
+        <!-- System Prompt -->
+        <div class="bg-primary/10 border-l-4 border-primary rounded-r-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl mt-0.5">⚙️</span>
+            <div>
+                <div class="font-bold text-sm">System Prompt</div>
+                <div class="text-xs text-on-surface-variant">Role, instructions, constraints, tone — who the LLM is and how it should behave</div>
+            </div>
+        </div>
+        <!-- Retrieved Documents -->
+        <div class="bg-accent/10 border-l-4 border-accent rounded-r-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl mt-0.5">📄</span>
+            <div>
+                <div class="font-bold text-sm">Retrieved Documents (RAG)</div>
+                <div class="text-xs text-on-surface-variant">Relevant chunks fetched from the knowledge base at query time</div>
+            </div>
+        </div>
+        <!-- Conversation History -->
+        <div class="bg-blue-500/10 border-l-4 border-blue-400 rounded-r-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl mt-0.5">💬</span>
+            <div>
+                <div class="font-bold text-sm">Conversation History</div>
+                <div class="text-xs text-on-surface-variant">Prior turns — how much to keep, summarize, or trim is an engineering choice</div>
+            </div>
+        </div>
+        <!-- User Query -->
+        <div class="bg-green-500/10 border-l-4 border-green-500 rounded-r-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl mt-0.5">🙋</span>
+            <div>
+                <div class="font-bold text-sm">User Query</div>
+                <div class="text-xs text-on-surface-variant">The question or task — at the bottom, but often most important for relevance</div>
+            </div>
+        </div>
+        <!-- Arrow to LLM -->
+        <div class="flex flex-col items-center py-1 gap-1">
+            <div class="text-on-surface/30 text-xl font-bold">↓</div>
+            <div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant rounded-full px-4 py-2">
+                <span class="text-base">🤖</span>
+                <span class="text-sm font-bold">LLM processes everything above</span>
+            </div>
+        </div>
+    </div>
+    <p class="text-center text-xs text-on-surface-variant mt-4 italic">Context Engineering = deciding what goes in each layer, how much, and in what order.</p>
 </div>
 
 
@@ -271,43 +333,43 @@
 <p><strong>The Context Pile</strong> — what fits in the current prompt right now: the system prompt, conversation history, and any injected documents. Maybe 5,000–20,000 tokens total.</p>
 <p><strong>The Knowledge Pile</strong> — everything in your knowledge base: all 500 cases, every policy document, every manual. Potentially millions of tokens.</p>
 <p>RAG&#39;s job is to grab the <em>right pieces</em> from the Knowledge Pile and move them into the Context Pile — just the right pieces, not everything.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-context-injection</div>
-
 <h2>The Goldilocks Problem</h2>
 <p>Getting context injection right means finding the sweet spot:</p>
-<p><strong>Too little context:</strong></p>
-<blockquote>
-<p>&quot;Summarize our refund policy for this customer.&quot;
-<em>(No policy retrieved — the LLM guesses or admits it doesn&#39;t know)</em></p>
-</blockquote>
-<p><strong>Too much context:</strong></p>
-<blockquote>
-<p><em>(All 50 policy documents injected)</em>
-The LLM gets confused by conflicting clauses, outdated versions, and irrelevant sections. Output quality drops.</p>
-</blockquote>
-<p><strong>Just right:</strong></p>
-<blockquote>
-<p><em>(The 2 most relevant policy sections retrieved — current version, matching the customer&#39;s issue)</em>
-Focused, accurate, grounded answer.</p>
-</blockquote>
+<div class="grid md:grid-cols-3 gap-3 my-4">
+  <div class="bg-error/5 border border-error/20 rounded-xl p-4">
+    <div class="text-xs font-black text-error mb-2">❌ Too little</div>
+    <p class="text-xs italic">"Summarize our refund policy for this customer."</p>
+    <p class="text-xs text-on-surface-variant mt-1">No policy retrieved — the LLM guesses or admits it doesn't know.</p>
+  </div>
+  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+    <div class="text-xs font-black text-yellow-700 mb-2">⚠️ Too much</div>
+    <p class="text-xs italic">All 50 policy documents injected.</p>
+    <p class="text-xs text-on-surface-variant mt-1">LLM confused by conflicting clauses, outdated versions, irrelevant sections.</p>
+  </div>
+  <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+    <div class="text-xs font-black text-green-700 mb-2">✅ Just right</div>
+    <p class="text-xs italic">The 2 most relevant sections retrieved — current version, matching the issue.</p>
+    <p class="text-xs text-on-surface-variant mt-1">Focused, accurate, grounded answer.</p>
+  </div>
+</div>
+
 <h2>Chunking: Breaking Documents into Right-Sized Pieces</h2>
 <p>A 50-page document shouldn&#39;t be injected whole. Instead, break it into <strong>chunks</strong> — paragraphs or sections of around 500–1,000 tokens each. Index each chunk separately.</p>
 <p>When a question arrives, retrieve the <em>specific chunks</em> that are most relevant — not the whole document.</p>
-<p>This means Sarah can retrieve just the <em>statute of limitations section</em> from a relevant case file, not the entire 80-page document.</p>
 <h2>Placement Matters Too</h2>
 <p>Where you put retrieved content in the Sandwich matters. LLMs pay more attention to the beginning and end of their context. Put critical retrieved information near the start — before the conversation history — for maximum attention.</p>
 <div class="callout callout-dyk">
-    &quot;Context engineering&quot; is becoming a serious discipline in AI development. The skill isn&#39;t just using RAG — it&#39;s deciding what to retrieve, how much to retrieve, and where to place it. Many AI failures trace back to bad context engineering, not bad models.
+    There&#39;s also a related discipline called <strong>harness engineering</strong> — the scaffolding <em>around</em> LLM calls: retry logic, caching, cost tracking, response parsing, evaluation pipelines. As systems grow complex, harness engineering becomes its own field. Worth exploring on your own.
 </div>
 
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Context window is finite:</strong> Every token for retrieved docs is one fewer for the response</li>
+<li><strong>Context Engineering:</strong> The discipline of managing everything fed to an LLM — prompts, retrieved docs, history, instructions</li>
+<li><strong>RAG is one tactic:</strong> Retrieval is part of context engineering, not the whole discipline</li>
 <li><strong>Quality &gt; quantity:</strong> 3 highly relevant paragraphs beat 30 loosely related pages</li>
 <li><strong>Chunking:</strong> Break documents into pieces (500–1,000 tokens), index each chunk separately</li>
 <li><strong>Placement:</strong> Critical context goes at the start of the prompt for maximum attention</li>
-<li><strong>Context engineering:</strong> The art of selecting, sizing, and placing retrieved content</li>
 </ul>
 <div id="quiz-07-05" class="quiz-container my-12"></div>
             </div>

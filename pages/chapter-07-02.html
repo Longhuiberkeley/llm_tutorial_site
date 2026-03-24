@@ -123,7 +123,7 @@
                     <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
@@ -138,13 +138,13 @@
                     <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.5 Context Injection — Feeding Only What's Needed</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
                 </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
                 </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — Open Book vs. Studying</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">8.1 State vs. Stateless — Starting from Zero</span>
@@ -273,7 +273,55 @@
 <li><strong>Augment:</strong> Add those documents to the prompt (slot them right into the Sandwich)</li>
 <li><strong>Generate:</strong> The LLM writes an answer grounded in those documents — not guessing from training data</li>
 </ul>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-rag-flow</div>
+<!-- Visual: RAG Flow — 5-step pipeline -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-lg font-bold font-headline mb-1">The RAG Pipeline</h3>
+        <p class="text-sm text-on-surface-variant">From question to grounded answer</p>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🙋</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 1</div>
+            <div class="text-xs font-bold">User asks a question</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔢</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 2</div>
+            <div class="text-xs font-bold">Question embedded into vectors</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔍</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 3</div>
+            <div class="text-xs font-bold">Vector DB finds closest matches</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">📄</div>
+            <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 4</div>
+            <div class="text-xs font-bold">Top docs injected into prompt</div>
+        </div>
+        <!-- Arrow -->
+        <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+        <!-- Step 5 -->
+        <div class="flex flex-col items-center text-center w-28">
+            <div class="w-14 h-14 rounded-full bg-accent/15 border-2 border-accent/40 flex items-center justify-center text-2xl mb-2">🤖</div>
+            <div class="text-xs font-black text-accent uppercase tracking-wide mb-1">Step 5</div>
+            <div class="text-xs font-bold">LLM answers from real documents</div>
+        </div>
+    </div>
+    <p class="text-center text-xs text-on-surface-variant mt-5 italic">The LLM model itself never changes — only what it reads before answering.</p>
+</div>
+
 
 <h2>Before and After</h2>
 <p>The difference is dramatic:</p>
@@ -288,20 +336,24 @@ LLM: &quot;Most companies offer a 30-day return window for damaged items...&quot
 LLM: &quot;According to your policy, damaged goods qualify for a full refund within 60 days with photo documentation.&quot; <em>(grounded in your real document)</em></p>
 </blockquote>
 <p>The LLM hasn&#39;t changed at all. What changed is that the <em>right document</em> was placed in front of it.</p>
-<h2>The RAG Flow, Step by Step</h2>
-<ol>
-<li>User asks a question</li>
-<li>The system converts the question into a search</li>
-<li>Top 3–5 relevant documents are retrieved from the knowledge base</li>
-<li>Those documents are injected into the prompt — right in the Sandwich, before the user&#39;s message</li>
-<li>The LLM reads question + retrieved docs and generates an answer</li>
-<li>The answer reflects actual documents — not a statistical guess</li>
-</ol>
 <div class="callout callout-error">
     RAG dramatically <em>reduces</em> hallucination — it does not eliminate it. The LLM can still misread or misinterpret a document. But grounding answers in real documents is far better than answering from training memory alone.
 </div>
 
 
+<div class="callout callout-dyk">
+    Think of RAG like a <strong>smart table of contents</strong>. The vector database doesn&#39;t answer your question — it just identifies <em>which pages</em> might be relevant, the way a book&#39;s index points you to the right chapter. The actual reading and answering is still the LLM&#39;s job.
+</div>
+
+
+<h2>When Retrieval Gets It Wrong</h2>
+<p>RAG dramatically improves grounding — but the retrieval step has its own failure modes:</p>
+<ul>
+<li><strong>False negatives:</strong> A relevant document used different phrasing and never made it into the retrieved set. The LLM can&#39;t save what it never receives.</li>
+<li><strong>False positives:</strong> An irrelevant document was retrieved anyway — it dilutes the context and can mislead the answer.</li>
+<li><strong>Wrong chunk:</strong> The right document exists in the knowledge base, but the wrong <em>section</em> of it was retrieved.</li>
+</ul>
+<p>The takeaway: RAG reduces hallucination but introduces a new axis of failure — retrieval quality. A great LLM with bad retrieval still gives bad answers.</p>
 <h2>Why This Is Powerful</h2>
 <p>RAG means your LLM is never limited to what it knew during training. You can:</p>
 <ul>

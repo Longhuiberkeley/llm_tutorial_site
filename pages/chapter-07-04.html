@@ -123,7 +123,7 @@
                     <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
@@ -138,13 +138,13 @@
                     <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.5 Context Injection — Feeding Only What's Needed</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
                 </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
                 </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — Open Book vs. Studying</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">8.1 State vs. Stateless — Starting from Zero</span>
@@ -268,83 +268,115 @@
 
 <h2>The Lawyer&#39;s Options</h2>
 <p>Let&#39;s return to Sarah&#39;s 500-case problem. RAG isn&#39;t her only path. Here are the realistic alternatives — with honest trade-offs.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-rag-alternatives</div>
+<!-- Visual: RAG Alternatives — Strategy comparison cards -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-5">
+        <h3 class="text-lg font-bold font-headline mb-1">Four Ways to Handle a Large Knowledge Base</h3>
+        <p class="text-sm text-on-surface-variant">Each approach has a different character — and a different best use case</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Keyword Search -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="text-2xl">🔤</span>
+                <div>
+                    <div class="font-bold text-sm">Keyword Search</div>
+                    <div class="text-xs text-on-surface-variant">The classic, zero-setup approach</div>
+                </div>
+            </div>
+            <div class="space-y-1 text-xs mb-3">
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Instant — works in any doc system</div>
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> No embedding, no vector DB needed</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Binary: word present or absent</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Misses synonyms, paraphrasing</div>
+            </div>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-yellow-700">Best for:</span> Consistent terminology, exact-match needs
+            </div>
+        </div>
+
+        <!-- Concatenation -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="text-2xl">📋</span>
+                <div>
+                    <div class="font-bold text-sm">File Concatenation</div>
+                    <div class="text-xs text-on-surface-variant">Paste everything in, ask away</div>
+                </div>
+            </div>
+            <div class="space-y-1 text-xs mb-3">
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Literally zero setup</div>
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> LLM sees full context, no retrieval errors</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Hits context window limit fast</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Doesn't scale beyond a few docs</div>
+            </div>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-yellow-700">Best for:</span> Tiny datasets — under a dozen short docs
+            </div>
+        </div>
+
+        <!-- Subagent -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="text-2xl">🤖</span>
+                <div>
+                    <div class="font-bold text-sm">Subagent Sequential Read</div>
+                    <div class="text-xs text-on-surface-variant">LLM reads each doc and decides</div>
+                </div>
+            </div>
+            <div class="space-y-1 text-xs mb-3">
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Deep understanding — no retrieval errors</div>
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Handles nuance and context well</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Slow: reads 500 cases one at a time</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Expensive: pays per doc, every query</div>
+            </div>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-yellow-700">Best for:</span> Small sets where thoroughness > speed/cost
+            </div>
+        </div>
+
+        <!-- RAG -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border-2 border-primary/30">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="text-2xl">🔍</span>
+                <div>
+                    <div class="font-bold text-sm text-primary">RAG</div>
+                    <div class="text-xs text-on-surface-variant">Find by meaning, answer from docs</div>
+                </div>
+            </div>
+            <div class="space-y-1 text-xs mb-3">
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Semantic — finds synonyms and paraphrases</div>
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Scales to millions of documents</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Requires setup (vector DB, embeddings)</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Retrieval can miss or mis-rank docs</div>
+            </div>
+            <div class="bg-primary/5 border border-primary/20 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-primary">Best for:</span> Large, diverse knowledge bases at scale
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <h2>Option 1 — Keyword Search</h2>
-<p>The classic approach: find documents containing specific words.</p>
-<ul>
-<li><strong>How it works:</strong> &quot;Find all cases containing &#39;breach of contract.&#39;&quot;</li>
-<li><strong>Strength:</strong> Fast, cheap, zero setup — most document systems already have it</li>
-<li><strong>Problem:</strong> The relevant case from 2019 might be titled &quot;failed to uphold terms&quot; — no match</li>
-</ul>
-<p>Keyword search is binary. Either the word is there or it isn&#39;t. It doesn&#39;t understand synonyms, paraphrasing, or context.</p>
-<p><strong>Best for:</strong> Consistent terminology where exact matches are reliable.</p>
+<p>The oldest approach: find documents containing specific words.</p>
+<p>It&#39;s binary — either the word is present or it isn&#39;t. It has no concept of synonyms, paraphrasing, or context. The 2019 case titled &quot;contractor failed to uphold terms&quot; won&#39;t appear when you search for &quot;breach of contract.&quot;</p>
+<p>Its character: <strong>fast, cheap, zero setup</strong> — and surprisingly effective when your organization uses consistent terminology.</p>
 <h2>Option 2 — Subagent / Sequential Read</h2>
-<p>Have the LLM read through documents one at a time, deciding which are relevant.</p>
-<ul>
-<li><strong>How it works:</strong> Send case #1 → ask &quot;is this relevant?&quot; → send case #2 → repeat for all 500</li>
-<li><strong>Strength:</strong> Thorough, understands nuance, no special infrastructure</li>
-<li><strong>Problem:</strong> 500 cases × reading time and cost = very slow and expensive</li>
-</ul>
-<p><strong>Best for:</strong> Small document sets where thoroughness matters more than speed or cost.</p>
+<p>An LLM reads through documents one at a time and decides what&#39;s relevant.</p>
+<p>This approach is thorough and nuanced — the LLM understands context, not just keywords. But it pays the full cost for every document it touches: 500 cases means 500 reads, every single query.</p>
+<p>Its character: <strong>deep understanding, no retrieval errors</strong> — at the price of being slow and expensive at scale.</p>
 <h2>Option 3 — File Concatenation</h2>
-<p>Join all documents into one big text block and send it as context.</p>
-<ul>
-<li><strong>How it works:</strong> Merge all files → paste into prompt → ask your question</li>
-<li><strong>Strength:</strong> Dead simple — no infrastructure at all</li>
-<li><strong>Problem:</strong> Hits context window limits fast. 500 cases will never fit.</li>
-</ul>
-<p><strong>Best for:</strong> Tiny datasets (under a few dozen short documents) where simplicity wins.</p>
-<h2>The Comparison</h2>
-<table>
-<thead>
-<tr>
-<th>Approach</th>
-<th>Speed</th>
-<th>Cost</th>
-<th>Handles synonyms?</th>
-<th>Setup</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>RAG</td>
-<td>Fast</td>
-<td>Medium</td>
-<td>Yes</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Keyword search</td>
-<td>Fast</td>
-<td>Low</td>
-<td>No</td>
-<td>Low</td>
-</tr>
-<tr>
-<td>Subagent</td>
-<td>Slow</td>
-<td>High</td>
-<td>Yes</td>
-<td>Medium</td>
-</tr>
-<tr>
-<td>Concatenation</td>
-<td>Instant</td>
-<td>Low</td>
-<td>N/A</td>
-<td>None</td>
-</tr>
-</tbody></table>
-<h2>Decision Guide</h2>
-<ul>
-<li><strong>Tiny dataset?</strong> Concatenation — just paste it all in</li>
-<li><strong>Exact terminology?</strong> Keyword search — no infrastructure needed</li>
-<li><strong>Meaning matters?</strong> RAG — worth the setup cost</li>
-<li><strong>Need thoroughness, cost no object?</strong> Subagent sequential read</li>
-<li><strong>In production at scale?</strong> RAG + keyword hybrid — best of both worlds</li>
-</ul>
+<p>Merge everything into one text block and send it all in as context.</p>
+<p>This is the simplest possible approach — no infrastructure whatsoever. But it runs into a hard wall: the context window. A handful of short documents? Fine. Sarah&#39;s 500 cases? Never fits.</p>
+<p>Its character: <strong>zero setup, zero retrieval errors</strong> — for datasets small enough to fit.</p>
 <div class="callout callout-dyk">
     Most production systems use a hybrid approach: keyword search narrows the candidate pool first, then vector similarity re-ranks the results. You get the speed of keyword filtering with the precision of semantic matching.
+</div>
+
+
+<div class="callout callout-dyk">
+    When you use ChatGPT or Gemini through their web interfaces, you don&#39;t get to choose the retrieval mechanism — you simply use whatever they&#39;ve built in. This understanding becomes important when you start building your own LLM-powered products or integrating an LLM API into your systems.
 </div>
 
 
@@ -367,7 +399,7 @@
                     <a href="chapter-07-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 7.3 Vector Embeddings — Storing Meaning as Coordinates</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-07-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">7.5 Context Injection — Feeding Only What's Needed <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-07-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">7.5 Context Engineering — What You Feed the LLM Is Everything <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

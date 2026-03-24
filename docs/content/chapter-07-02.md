@@ -37,18 +37,23 @@ The difference is dramatic:
 
 The LLM hasn't changed at all. What changed is that the *right document* was placed in front of it.
 
-## The RAG Flow, Step by Step
-
-1. User asks a question
-2. The system converts the question into a search
-3. Top 3–5 relevant documents are retrieved from the knowledge base
-4. Those documents are injected into the prompt — right in the Sandwich, before the user's message
-5. The LLM reads question + retrieved docs and generates an answer
-6. The answer reflects actual documents — not a statistical guess
-
 :::callout-error
 RAG dramatically *reduces* hallucination — it does not eliminate it. The LLM can still misread or misinterpret a document. But grounding answers in real documents is far better than answering from training memory alone.
 :::
+
+:::callout-dyk
+Think of RAG like a **smart table of contents**. The vector database doesn't answer your question — it just identifies *which pages* might be relevant, the way a book's index points you to the right chapter. The actual reading and answering is still the LLM's job.
+:::
+
+## When Retrieval Gets It Wrong
+
+RAG dramatically improves grounding — but the retrieval step has its own failure modes:
+
+- **False negatives:** A relevant document used different phrasing and never made it into the retrieved set. The LLM can't save what it never receives.
+- **False positives:** An irrelevant document was retrieved anyway — it dilutes the context and can mislead the answer.
+- **Wrong chunk:** The right document exists in the knowledge base, but the wrong *section* of it was retrieved.
+
+The takeaway: RAG reduces hallucination but introduces a new axis of failure — retrieval quality. A great LLM with bad retrieval still gives bad answers.
 
 ## Why This Is Powerful
 

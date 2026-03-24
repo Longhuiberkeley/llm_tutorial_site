@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>7.7 RAG vs. Fine-Tuning — Open Book vs. Studying - LLM Tutorial</title>
+    <title>7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense? - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -123,7 +123,7 @@
                     <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
@@ -138,13 +138,13 @@
                     <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.5 Context Injection — Feeding Only What's Needed</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
                 </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
                 </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — Open Book vs. Studying</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">8.1 State vs. Stateless — Starting from Zero</span>
@@ -248,102 +248,138 @@
                     <span>Chapter 7</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    7.7 RAG vs. Fine-Tuning — Open Book vs. Studying
+                    7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Two very different approaches to giving LLMs your knowledge. Most businesses should start with RAG.
+                    Fine-tuning used to be the hot answer to everything. In 2026, the picture is much clearer — and more nuanced.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Distinguish RAG (lookup at query time) from fine-tuning (knowledge baked into training).</li>
-<li>Help readers choose the right approach for their situation.</li>
+<li>Understand when fine-tuning genuinely makes sense — and when it doesn&#39;t.</li>
+<li>Learn to ask the right question: &quot;Does the LLM already know this domain at all?&quot;</li>
 </ul>
 <div class="callout callout-tldr">
-    RAG = open-book exam. Fine-tuning = closed-book exam. Both have their place — but RAG is almost always the right starting point for businesses.
+    Models are smarter and context windows are larger than ever. Most problems are now solvable with good prompting, tool use, and RAG — without fine-tuning. Fine-tune only when you have data that no public model could possibly have learned from.
 </div>
 
 
-<h2>The Analogy</h2>
-<p>Imagine two law students preparing for a bar exam:</p>
-<p><strong>Student A (RAG approach):</strong> Takes the exam open-book. Looks things up in real time. Gets accurate, current answers — but takes a moment to find them.</p>
-<p><strong>Student B (Fine-tuning approach):</strong> Memorized everything cold. Answers instantly from memory. But if the law changed last month, Student B doesn&#39;t know it.</p>
-<p>LLMs face the same trade-off.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-rag-vs-finetune</div>
+<h2>The Conversation Has Shifted</h2>
+<p>A few years ago, fine-tuning was making waves in both industry and academia. In 2026, LLMs are dramatically more capable and context windows have expanded massively. A well-crafted prompt, tool use, or a RAG pipeline now handles the vast majority of real-world tasks.</p>
+<p>The key question: <strong>&quot;Does standard LLM training data even contain knowledge about our problem?&quot;</strong></p>
+<p>There&#39;s also a practical constraint: today&#39;s frontier models (GPT-4, Claude, Gemini) have hundreds of billions of parameters. Fine-tuning them yourself is impractical or impossible for most organizations. Smaller distilled variants can be fine-tuned, but the full frontier models require infrastructure few can afford.</p>
+<h2>The Open-Book vs. Closed-Book Distinction</h2>
+<p>Think of it like an exam:</p>
+<ul>
+<li><strong>RAG = open-book exam.</strong> The LLM looks things up in real time from your knowledge base — accurate, current, and citable. The model itself never changes.</li>
+<li><strong>Fine-tuning = studying deeply.</strong> Knowledge is baked directly into the model&#39;s weights — fast and consistent at inference, but locked to whatever was in the training data.</li>
+</ul>
+<!-- Visual: RAG vs Fine-Tuning comparison -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-5">
+        <h3 class="text-lg font-bold font-headline mb-1">Two Ways to Give an LLM Knowledge</h3>
+        <p class="text-sm text-on-surface-variant">The open-book exam vs. studying deeply</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- RAG -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border-2 border-blue-400/40">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">📖</span>
+                <div>
+                    <div class="font-bold">RAG</div>
+                    <div class="text-xs text-blue-600 font-bold">Open-book exam</div>
+                </div>
+            </div>
+            <div class="space-y-2 text-xs mb-4">
+                <div class="flex gap-2"><span class="text-blue-500 font-bold mt-0.5">•</span><span>Model unchanged — attach a knowledge base</span></div>
+                <div class="flex gap-2"><span class="text-blue-500 font-bold mt-0.5">•</span><span>Retrieve relevant docs at query time</span></div>
+                <div class="flex gap-2"><span class="text-blue-500 font-bold mt-0.5">•</span><span>Knowledge is current and traceable</span></div>
+                <div class="flex gap-2"><span class="text-blue-500 font-bold mt-0.5">•</span><span>Update the knowledge base any time</span></div>
+                <div class="flex gap-2"><span class="text-blue-500 font-bold mt-0.5">•</span><span>No retraining needed</span></div>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-blue-700">Use when:</span> LLM already understands the domain — you just need to feed it your specific data
+            </div>
+        </div>
 
-<h2>RAG — Open-Book Lookup</h2>
-<p>The LLM itself is unchanged. You build a knowledge base alongside it. At query time, the system retrieves relevant documents and injects them as context.</p>
-<p><strong>Strengths:</strong></p>
-<ul>
-<li><strong>Always current:</strong> Update the knowledge base today, LLM &quot;knows&quot; it immediately</li>
-<li><strong>Traceable:</strong> You can point to exactly which document the answer came from</li>
-<li><strong>Flexible:</strong> Works across many topics without retraining</li>
-<li><strong>Lower cost:</strong> No expensive training run required</li>
-</ul>
-<p><strong>Weaknesses:</strong></p>
-<ul>
-<li><strong>Slower:</strong> Retrieval adds latency to each response</li>
-<li><strong>Requires infrastructure:</strong> Vector database, embedding model, retrieval pipeline</li>
-<li><strong>Quality depends on retrieval:</strong> Wrong documents fetched = wrong answer</li>
-</ul>
-<h2>Fine-Tuning — Baked-In Training</h2>
-<p>The model itself is retrained on your data. The knowledge becomes part of the model&#39;s weights — it answers from memory, not from lookup.</p>
-<p><strong>Strengths:</strong></p>
-<ul>
-<li><strong>Fast at inference:</strong> No retrieval step — answers come directly</li>
-<li><strong>Consistent behavior:</strong> Great for narrow, well-defined tasks (e.g., always use a specific format)</li>
-<li><strong>No retrieval infrastructure:</strong> Simpler runtime once trained</li>
-</ul>
-<p><strong>Weaknesses:</strong></p>
-<ul>
-<li><strong>Expensive to train:</strong> Can cost thousands to hundreds of thousands of dollars</li>
-<li><strong>Hard to update:</strong> Data changes → retrain from scratch</li>
-<li><strong>Not traceable:</strong> You can&#39;t point to &quot;which document&quot; the answer came from</li>
-<li><strong>Overfitting risk:</strong> Can make the model worse at tasks outside the training data</li>
-</ul>
-<h2>When to Use Which</h2>
-<table>
-<thead>
-<tr>
-<th>Situation</th>
-<th>Recommendation</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Data changes frequently</td>
-<td>RAG</td>
-</tr>
-<tr>
-<td>Need to cite sources</td>
-<td>RAG</td>
-</tr>
-<tr>
-<td>Task is narrow and stable</td>
-<td>Fine-tuning</td>
-</tr>
-<tr>
-<td>Consistent tone/format</td>
-<td>Fine-tuning</td>
-</tr>
-<tr>
-<td>Just starting out</td>
-<td>RAG</td>
-</tr>
-</tbody></table>
-<div class="callout callout-dyk">
-    Most enterprise AI projects that start with fine-tuning eventually add RAG anyway — because business data keeps changing. RAG is almost always the better first step. Fine-tune only when you&#39;ve proven RAG isn&#39;t sufficient for your specific need.
+        <!-- Fine-tuning -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border-2 border-orange-400/40">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🎓</span>
+                <div>
+                    <div class="font-bold">Fine-Tuning</div>
+                    <div class="text-xs text-orange-600 font-bold">Studying deeply</div>
+                </div>
+            </div>
+            <div class="space-y-2 text-xs mb-4">
+                <div class="flex gap-2"><span class="text-orange-500 font-bold mt-0.5">•</span><span>Model retrained on your data</span></div>
+                <div class="flex gap-2"><span class="text-orange-500 font-bold mt-0.5">•</span><span>Knowledge baked into model weights</span></div>
+                <div class="flex gap-2"><span class="text-orange-500 font-bold mt-0.5">•</span><span>Fast at inference, no retrieval step</span></div>
+                <div class="flex gap-2"><span class="text-orange-500 font-bold mt-0.5">•</span><span>Expensive and slow to update</span></div>
+                <div class="flex gap-2"><span class="text-orange-500 font-bold mt-0.5">•</span><span>Frontier models require enormous infra</span></div>
+            </div>
+            <div class="bg-orange-50 border border-orange-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-orange-700">Use when:</span> Knowledge truly doesn't exist in public training data — proprietary language, niche domain
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 bg-primary/5 border border-primary/20 rounded-xl px-4 py-3 text-xs text-center">
+        <span class="font-bold">These aren't mutually exclusive</span> — many production systems use fine-tuning to shape <em>behavior</em> while using RAG to inject domain <em>knowledge</em>.
+    </div>
+</div>
+
+
+<h2>When Fine-Tuning Is Genuinely the Right Choice</h2>
+<p><strong>Case 1: Proprietary programming language</strong>
+Your company built an internal DSL only 50 people use globally. GPT/Claude/Gemini have never seen it. Even with a tutorial.txt in every prompt, the LLM makes consistent syntax errors. Fine-tune on your codebase.</p>
+<p><strong>Case 2: Radiology rare condition detection</strong>
+You need an LLM to analyze chest X-rays for rare pulmonary conditions. Big labs don&#39;t have your institution&#39;s imaging datasets. Fine-tune on your labeled scans.</p>
+<h2>When RAG Is Enough</h2>
+<p><strong>Company HR policy Q&amp;A:</strong> LLM already knows how to answer HR questions — just load your policy docs via RAG.</p>
+<p><strong>Legal document analysis:</strong> LLM already understands legal language — Sarah just needs her 500 cases available via retrieval.</p>
+<h2>The Decision Guide</h2>
+<div class="space-y-3 my-4">
+  <div class="flex items-start gap-3 bg-surface-container-low rounded-xl p-4">
+    <span class="text-lg">🔍</span>
+    <div><strong class="text-sm">Is this knowledge unique to your org/domain?</strong>
+    <p class="text-xs text-on-surface-variant mt-1">If publicly available data covers it → RAG. If it truly doesn't exist outside your walls → consider fine-tuning.</p></div>
+  </div>
+  <div class="flex items-start gap-3 bg-surface-container-low rounded-xl p-4">
+    <span class="text-lg">🧠</span>
+    <div><strong class="text-sm">Does the LLM already understand this domain?</strong>
+    <p class="text-xs text-on-surface-variant mt-1">If yes → RAG will work. The LLM just needs your specific data, not new domain knowledge.</p></div>
+  </div>
+  <div class="flex items-start gap-3 bg-surface-container-low rounded-xl p-4">
+    <span class="text-lg">📊</span>
+    <div><strong class="text-sm">Do you have a high-quality, curated dataset?</strong>
+    <p class="text-xs text-on-surface-variant mt-1">Garbage in, garbage out. Noisy or inconsistent training data makes models worse. Don't fine-tune yet if the answer is no.</p></div>
+  </div>
+  <div class="flex items-start gap-3 bg-surface-container-low rounded-xl p-4">
+    <span class="text-lg">🔄</span>
+    <div><strong class="text-sm">Does your data update frequently?</strong>
+    <p class="text-xs text-on-surface-variant mt-1">RAG lets you update the knowledge base any time. Fine-tuned models need retraining when data changes.</p></div>
+  </div>
+  <div class="flex items-start gap-3 bg-surface-container-low rounded-xl p-4">
+    <span class="text-lg">🛠️</span>
+    <div><strong class="text-sm">Can strong prompting + tool use already solve it?</strong>
+    <p class="text-xs text-on-surface-variant mt-1">Always start with the simplest approach. Most problems yield to good prompting or RAG — don't over-engineer.</p></div>
+  </div>
+</div>
+
+<div class="callout callout-tip">
+    Always start with the simplest approach: good prompting and tool use. If insufficient, add RAG. Fine-tune only when you can clearly answer: &quot;This knowledge simply doesn&#39;t exist in any public training data.&quot;
 </div>
 
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>RAG = open-book:</strong> Retrieve at query time — current, flexible, traceable</li>
-<li><strong>Fine-tuning = studying:</strong> Bake knowledge into model weights — fast, narrow, expensive to update</li>
-<li><strong>Start with RAG:</strong> Lower cost, easier to iterate, works for most business use cases</li>
-<li><strong>Fine-tune when:</strong> Speed is critical, task is narrow and stable, RAG has proven insufficient</li>
-<li><strong>They&#39;re not mutually exclusive:</strong> Many production systems combine both</li>
+<li><strong>Fine-tuning hype has cooled:</strong> RAG + prompting now handles most cases</li>
+<li><strong>The real fine-tuning test:</strong> &quot;Could standard models have been trained on this data?&quot;</li>
+<li><strong>RAG for most business needs:</strong> If the LLM knows the domain, just give it your data</li>
+<li><strong>Proprietary + rare = fine-tune territory:</strong> Custom languages, niche medical imaging</li>
+<li><strong>Not mutually exclusive:</strong> Many systems use fine-tuning for behavior + RAG for knowledge</li>
 </ul>
 <div id="quiz-07-07" class="quiz-container my-12"></div>
             </div>
