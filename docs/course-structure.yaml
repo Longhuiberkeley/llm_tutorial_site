@@ -32,11 +32,11 @@ groups:
         totalPages: 7
       - id: "05"
         title: "Prompting Best Practices"
-        description: "Know when to trust it, be explicit, few-shot, chain-of-thought, and learning with LLMs."
+        description: "Know when to trust it, be explicit, few-shot, chain-of-thought, and handling privacy."
         icon: "✍️"
         status: "active"
         firstPage: "chapter-05-01.html"
-        totalPages: 6
+        totalPages: 5
 
   - name: "Group 2: Advanced"
     subtitle: "Extending LLMs to solve their limitations."
@@ -101,3 +101,14 @@ groups:
         status: "active"
         firstPage: "chapter-13-01.html"
         totalPages: 6
+
+  - name: "Group 4: Others"
+    subtitle: "Standalone topics worth knowing."
+    chapters:
+      - id: "14"
+        title: "Using LLMs to Learn"
+        description: "Smarter strategies for making LLMs your personal tutor — Socratic methods, the 10-80-10 rule, and more."
+        icon: "🎓"
+        status: "active"
+        firstPage: "chapter-14-01.html"
+        totalPages: 1

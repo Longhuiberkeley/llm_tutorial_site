@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>5.5 Using LLMs to Learn - LLM Tutorial</title>
+    <title>5.5 Privacy — What Never to Paste - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -105,10 +105,7 @@
                     <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">5.5 Using LLMs to Learn</span>
-                </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
+                    <span class="text-sm font-medium">5.5 Privacy — What Never to Paste</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
@@ -235,6 +232,9 @@
                 </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">13.6 AI-Driven Review & Common Pitfalls</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
                 </a>
             </nav>
         </aside>
@@ -248,145 +248,130 @@
                     <span>Chapter 5</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    5.5 Using LLMs to Learn
+                    5.5 Privacy — What Never to Paste
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    The Ultimate Personal Tutor.
+                    Protecting your data when using LLMs.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>See how LLMs can adapt to your level in real-time.</li>
-<li>Learn the power of &quot;Extrapolation&quot; — asking follow-ups and changing analogies.</li>
+<li>Understand why LLMs create a stronger temptation to share sensitive data — and why that matters.</li>
+<li>Apply a simple mental model for deciding what is safe to share.</li>
 </ul>
 <div class="callout callout-tldr">
-    LLMs are powerful learning tools because they can connect concepts across domains and explain at any level. You can&#39;t do that with a textbook!
+    LLMs are remarkably useful, and that usefulness is exactly what makes privacy harder. The easier it is to get help, the easier it is to paste something you shouldn&#39;t. At its core, the rule is the same as it&#39;s always been: don&#39;t hand sensitive data to external services you don&#39;t fully control.
 </div>
 
 
 <h2>👁️ Visuals &amp; Interactives</h2>
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
     <div class="text-center mb-8">
-        <h3 class="text-xl font-bold font-headline mb-2">The Ultimate Learning Tool</h3>
-        <p class="text-sm text-on-surface-variant">Tap a topic to see how an LLM adapts its explanation instantly.</p>
+        <h3 class="text-xl font-bold font-headline mb-2">The AI Privacy Filter</h3>
+        <p class="text-sm text-on-surface-variant">Which of these are safe to paste into a chat with an LLM?</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8 items-start">
-        <!-- Topic Selection -->
-        <div class="space-y-4">
-            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">1. Pick a complex topic</div>
-            <div class="grid grid-cols-2 gap-2">
-                <button onclick="setTopic('Quantum Physics', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Quantum Physics</button>
-                <button onclick="setTopic('Stock Market', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Stock Market</button>
-                <button onclick="setTopic('Photosynthesis', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Photosynthesis</button>
-                <button onclick="setTopic('Bitcoin', this)" class="topic-btn p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-sm font-bold active:scale-95">Bitcoin</button>
+    <div class="grid sm:grid-cols-2 gap-4">
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔑</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Internal API Keys</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Technical Data</div>
             </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
 
-            <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mt-6 mb-2 opacity-60">2. Pick an audience</div>
-            <div class="flex gap-2">
-                <button onclick="setLevel('Child', this)" class="level-btn flex-1 p-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">5-year-old</button>
-                <button onclick="setLevel('Student', this)" class="level-btn flex-1 p-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">High Schooler</button>
-                <button onclick="setLevel('Expert', this)" class="level-btn flex-1 p-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-primary transition-all text-xs font-bold active:scale-95">Professional</button>
+        <button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📝</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Draft Blog Post</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Public Content</div>
             </div>
-        </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
+        </button>
 
-        <!-- Adaptive Result -->
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm min-h-[250px] flex flex-col transition-all duration-300">
-            <div class="flex items-center gap-2 mb-4">
-                <span class="px-2 py-0.5 rounded bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest">Adaptive Explanation</span>
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏥</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Medical Records</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Personal Info</div>
             </div>
-            <div id="learning-output" class="text-sm leading-relaxed italic text-on-surface-variant">
-                Select a topic and audience to see how the AI adjusts its explanation instantly.
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+
+        <button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💻</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Generic Code Snippet</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Open Source</div>
             </div>
-            
-            <div id="extrapolation-btn" class="hidden mt-6 pt-4 border-t border-outline-variant">
-                <div class="text-[10px] font-bold uppercase tracking-widest text-primary mb-2">💡 Try Extrapolating</div>
-                <button onclick="extrapolate()" class="w-full p-2 bg-primary text-on-primary rounded text-xs font-bold hover:shadow-lg transition-all">"Explain it using a pizza analogy!"</button>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
+        </button>
+
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💳</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Customer Credit Cards</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Financial Data</div>
             </div>
-        </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+
+        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏗️</div>
+            <div class="flex-grow">
+                <div class="font-bold text-sm">Unreleased Blueprint</div>
+                <div class="text-[10px] opacity-60 uppercase tracking-widest">Trade Secret</div>
+            </div>
+            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+        </button>
+    </div>
+
+    <div id="privacy-feedback" class="mt-8 p-4 rounded-xl text-center font-bold text-sm opacity-0 transition-all duration-300">
+        <!-- Feedback here -->
     </div>
 </div>
 
 <script>
-let currentTopic = '';
-let currentLevel = '';
-
-const knowledge = {
-    'Quantum Physics': {
-        'Child': 'Imagine two magic toys that are connected. When you spin one, the other one spins too, even if it\'s in another room!',
-        'Student': 'Quantum physics is the study of very small particles like atoms. They don\'t follow normal rules—they can be in two places at once until someone looks at them.',
-        'Expert': 'Quantum mechanics utilizes wave-particle duality and the Schrödinger equation to describe the probabilistic behavior of subatomic systems, where superposition and entanglement are core principles.',
-        'Pizza': 'Imagine a pizza that is both cheese AND pepperoni at the same time until you open the box and look at it!'
-    },
-    'Stock Market': {
-        'Child': 'It\'s like a giant swap meet where everyone buys and sells tiny pieces of their lemonade stands.',
-        'Student': 'The stock market is where people trade shares of companies. If a company does well, the value of the shares goes up and you make money.',
-        'Expert': 'Public equity markets facilitate capital allocation through continuous price discovery and liquidity provision, governed by supply and demand dynamics and macroeconomic indicators.',
-        'Pizza': 'Buying a stock is like buying one single slice of a pizza. If the pizza shop gets famous, your slice is worth more than you paid for it!'
-    },
-    'Photosynthesis': {
-        'Child': 'Plants eat sunlight and turn it into yummy snacks so they can grow big and tall!',
-        'Student': 'Plants take in carbon dioxide, water, and sunlight to create glucose (sugar) and release oxygen as a byproduct.',
-        'Expert': 'Photosynthesis is a complex biochemical process where chloroplasts convert radiant energy into chemical energy via the Calvin cycle and electron transport chain.',
-        'Pizza': 'It\'s like a pizza oven that uses solar power to turn dirt and air into delicious crust!'
-    },
-    'Bitcoin': {
-        'Child': 'It\'s like magic digital gold that lives inside computers instead of under the ground.',
-        'Student': 'Bitcoin is a decentralized digital currency that uses a public ledger called a blockchain to track transactions without needing a bank.',
-        'Expert': 'Bitcoin is a peer-to-peer electronic cash system based on SHA-256 proof-of-work consensus, ensuring a fixed supply and censorship-resistant value transfer.',
-        'Pizza': 'Imagine a pizza parlor where everyone in town has a copy of the receipt book, so nobody can lie about how many slices they bought!'
-    }
-};
-
-function setTopic(topic, btn) {
-    currentTopic = topic;
-    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('border-primary', 'bg-surface-container'));
-    btn.classList.add('border-primary', 'bg-surface-container');
-    updateOutput();
-}
-
-function setLevel(level, btn) {
-    currentLevel = level;
-    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('border-primary', 'bg-surface-container'));
-    btn.classList.add('border-primary', 'bg-surface-container');
-    updateOutput();
-}
-
-function updateOutput() {
-    const output = document.getElementById('learning-output');
-    const extra = document.getElementById('extrapolation-btn');
+function checkPrivacy(isSafe, btn) {
+    const feedback = document.getElementById('privacy-feedback');
     
-    if (currentTopic && currentLevel) {
-        output.classList.add('opacity-0');
-        setTimeout(() => {
-            output.textContent = knowledge[currentTopic][currentLevel];
-            output.classList.remove('opacity-0');
-            extra.classList.remove('hidden');
-        }, 200);
-    }
-}
+    // Reset buttons
+    btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.classList.remove('border-red-500', 'border-green-500', 'bg-red-50', 'bg-green-50');
+    });
 
-function extrapolate() {
-    const output = document.getElementById('learning-output');
-    output.classList.add('opacity-0');
-    setTimeout(() => {
-        output.innerHTML = '<strong>Pizza Analogy:</strong><br>' + knowledge[currentTopic]['Pizza'];
-        output.classList.remove('opacity-0');
-    }, 200);
+    if (isSafe) {
+        btn.classList.add('border-green-500', 'bg-green-50');
+        feedback.textContent = "✅ Correct! Public or generic information is generally safe to share.";
+        feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-green-100 text-green-800 opacity-100";
+    } else {
+        btn.classList.add('border-red-500', 'bg-red-50');
+        feedback.textContent = "❌ DANGER! Never paste sensitive, private, or proprietary data into an LLM.";
+        feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-red-100 text-red-800 opacity-100";
+    }
 }
 </script>
 
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Adaptive Explanations:</strong> &quot;Explain like I&#39;m 5,&quot; then &quot;Explain like I&#39;m a senior dev.&quot; The AI adjusts instantly.</li>
-<li><strong>Provider Memory:</strong> Features like ChatGPT&#39;s Memory or Claude&#39;s Projects (this expands on the chat sandwich we discussed earlier) persist your preferences, so the AI knows your background and learning goals over time.</li>
-<li><strong>Extrapolation:</strong> True learning isn&#39;t just reading; it&#39;s asking &quot;What if...?&quot; or &quot;How does this relate to...?&quot;</li>
+<li><strong>A new temptation:</strong> Unlike a search engine where you type a query, an LLM conversation flows naturally — it feels like talking to a knowledgeable colleague. That friction-free experience makes it tempting to paste in a client email, a patient record, or internal financials &quot;just to get help.&quot; The helpfulness is real, but so is the risk.</li>
+<li><strong>Same old rule, new context:</strong> The underlying principle hasn&#39;t changed. You wouldn&#39;t email patient data to a random consultant or share trade secrets with a stranger on the phone. Pasting that same data into an LLM chat is equivalent — your data leaves your environment and lands on someone else&#39;s infrastructure.</li>
+<li><strong>The Email Heuristic:</strong> Before pasting anything into an LLM, ask yourself: <em>&quot;Would I be comfortable including this in a work email sent to someone I don&#39;t fully trust?&quot;</em> If the answer is no — don&#39;t paste it.</li>
+<li><strong>NEVER Paste:</strong> Passwords, API keys, private keys, credit card numbers, SSNs, medical records, trade secrets, internal financial data, or client/patient personally identifiable information (PII).</li>
+<li><strong>OK to Paste:</strong> Public information, your own non-confidential writing, general questions, anonymized or sanitized data, code that doesn&#39;t contain secrets.</li>
+<li><strong>Sanitize Before Sharing:</strong> If you need help with a real document, remove the sensitive parts first. Replace names with &quot;Person A&quot;, figures with &quot;X&quot;, and internal references with generic labels. The LLM can still help with structure and language.</li>
 </ul>
 <div class="callout callout-error">
-    LLMs can confidently teach wrong things. They make up citations, fake examples, and incorrect technical details. Use LLMs to build intuition, then verify with authoritative sources!
+    <strong>The Samsung Incident:</strong> Samsung engineers pasted proprietary source code into ChatGPT for help debugging. That code was potentially used in training data. Samsung had to ban the use of external LLMs company-wide shortly after. LLMs introduce a new vector for accidental data leakage — apply good cybersecurity hygiene.
+</div>
+
+
+<div class="callout callout-dyk">
+    Even &quot;Enterprise&quot; plans that promise data privacy and opt-out from training aren&#39;t foolproof. Your data still travels over the internet, is processed on external infrastructure, and is subject to that provider&#39;s security posture. Treat LLMs like a trusted but external contractor — give them what they need to do the job, not your house keys.
 </div>
 
 
@@ -402,7 +387,7 @@ function extrapolate() {
                     <a href="chapter-05-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 5.4 Chain-of-Thought & Reasoning Tokens</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-05-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">5.6 Privacy — What Never to Paste <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-06-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">6.1 What is Tool Use? — LLMs Can Delegate <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

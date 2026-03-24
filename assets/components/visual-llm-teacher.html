@@ -1,0 +1,72 @@
+<!-- Comparison Section (Bento Grid Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 mt-8">
+    <!-- Textbook Side -->
+    <div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden group flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl">📖</span>
+            <h3 class="text-xl font-bold font-headline">A Textbook</h3>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex-grow flex flex-col min-h-[340px]">
+            <!-- Fake textbook lines -->
+            <div class="space-y-3 text-sm leading-relaxed text-on-surface-variant">
+                <p class="font-bold text-on-surface text-base">Chapter 7: Photosynthesis</p>
+                <p>Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize nutrients from carbon dioxide and water. The general equation is:</p>
+                <div class="bg-surface-container rounded p-3 font-mono text-xs text-center text-on-surface">
+                    6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂
+                </div>
+                <p>This process involves two main stages: the light-dependent reactions and the Calvin cycle, both occurring within the chloroplast...</p>
+                <div class="mt-4 pt-4 border-t border-outline-variant/30 opacity-50">
+                    <div class="h-2.5 bg-on-surface/10 rounded w-full mb-2"></div>
+                    <div class="h-2.5 bg-on-surface/10 rounded w-4/5 mb-2"></div>
+                    <div class="h-2.5 bg-on-surface/10 rounded w-full"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 text-sm text-on-surface-variant italic">One explanation, written for a fixed audience. Can't answer your questions.</div>
+    </div>
+    <!-- LLM Tutor Side -->
+    <div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden flex flex-col">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-3xl translate-x-10 -translate-y-10"></div>
+        </div>
+        <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl">🤖</span>
+            <h3 class="text-xl font-bold font-headline">Your LLM Tutor</h3>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex-grow border border-primary/10 min-h-[340px]">
+            <div class="space-y-4">
+                <!-- User message -->
+                <div class="flex justify-end">
+                    <div class="bg-primary/10 rounded-xl rounded-tr-sm px-4 py-2 max-w-[85%]">
+                        <p class="text-sm font-medium">Explain photosynthesis like I'm 8 years old.</p>
+                    </div>
+                </div>
+                <!-- LLM response -->
+                <div class="flex justify-start">
+                    <div class="bg-surface-container rounded-xl rounded-tl-sm px-4 py-2 max-w-[90%] border border-outline-variant/30">
+                        <p class="text-sm text-primary font-bold leading-relaxed">Plants eat sunlight! 🌱 They take air and water and turn them into sugar using the sun — like a little solar-powered factory inside every leaf.</p>
+                    </div>
+                </div>
+                <!-- Follow-up -->
+                <div class="flex justify-end">
+                    <div class="bg-primary/10 rounded-xl rounded-tr-sm px-4 py-2 max-w-[85%]">
+                        <p class="text-sm font-medium">Now explain it like I'm a biology student.</p>
+                    </div>
+                </div>
+                <!-- LLM adapts -->
+                <div class="flex justify-start">
+                    <div class="bg-surface-container rounded-xl rounded-tl-sm px-4 py-2 max-w-[90%] border border-outline-variant/30">
+                        <p class="text-sm text-primary font-bold leading-relaxed">Plants convert CO₂ and H₂O into glucose via two stages: light-dependent reactions in the thylakoid, and the Calvin cycle in the stroma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 text-sm text-on-surface-variant italic">Adapts to your level instantly. Answers follow-ups. Never runs out of patience.</div>
+    </div>
+</div>
+<!-- The Big Equation Text -->
+<div class="flex justify-center mb-16">
+    <div class="equation-banner px-10 py-6 rounded-full inline-flex items-center gap-6 rotate-[-1deg]">
+        <span class="text-4xl font-extrabold font-headline">LLM = the best teacher you've never had</span>
+    </div>
+</div>

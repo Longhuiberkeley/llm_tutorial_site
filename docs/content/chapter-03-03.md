@@ -26,6 +26,10 @@ Three layers in every bundle:
 - **Layer 2 — App / Custom Pre-prompt (Set by the app builder):** Defines the product's personality, tone, and knowledge. "You are TechCorp support." Makes a chatbot feel specialized.
 - **Layer 3 — Your Session Context (Yours to set):** Repeated preferences you inject per session: "Always respond in bullet points," "I'm working in Python 3.12."
 
+:::callout-tip
+**The Hidden Cost of Context:** Now that you know sending a message often means sending a "bundled" message, here's the catch: since LLMs don't "remember" previous turns, you re-send the entire history (the bundle) with every new reply. This means the 10th message in a chat costs significantly more to process than the 1st one!
+:::
+
 ## 📦 Custom Spaces — Pre-packaged Sandwiches
 
 Features like Custom GPTs, Claude Projects, and Gemini Gems bundle three things:

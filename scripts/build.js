@@ -23,6 +23,7 @@ const components = {
     'callout-tldr': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-tldr.html'), 'utf8'),
     'callout-error': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-error.html'), 'utf8'),
     'callout-dyk': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-dyk.html'), 'utf8'),
+    'callout-tip': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-tip.html'), 'utf8'),
 };
 
 /**
@@ -78,7 +79,7 @@ async function build() {
         let calloutIndex = 0;
 
         // 1. Extract Callouts and replace with placeholders
-        markdown = markdown.replace(/:::callout-(tldr|error|dyk)\n([\s\S]*?)\n:::/g, (match, type, inner) => {
+        markdown = markdown.replace(/:::callout-(tldr|error|dyk|tip)\n([\s\S]*?)\n:::/g, (match, type, inner) => {
             const placeholder = `<!-- CALLOUT_${calloutIndex} -->`;
             calloutMap[placeholder] = { type, content: marked.parse(inner.trim()) };
             calloutIndex++;
@@ -131,7 +132,8 @@ async function build() {
                 const placeholderMap = {
                     tldr: '<!-- Your summary content here -->',
                     error: '<!-- Your warning content here -->',
-                    dyk: '<!-- Your question or fact here -->'
+                    dyk: '<!-- Your question or fact here -->',
+                    tip: '<!-- Your actionable tip here -->'
                 };
                 const cleanContent = data.content.trim().replace(/^<p>|<\/p>$/g, '');
                 componentHtml = compTemplate.replace(placeholderMap[data.type], cleanContent);

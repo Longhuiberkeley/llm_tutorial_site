@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>5.6 Privacy — What Never to Paste - LLM Tutorial</title>
+    <title>14.1 Using LLMs to Learn - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -105,10 +105,7 @@
                     <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.5 Using LLMs to Learn</span>
-                </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
-                    <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
+                    <span class="text-sm font-medium">5.5 Privacy — What Never to Paste</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
@@ -235,6 +232,9 @@
                 </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">13.6 AI-Driven Review & Common Pitfalls</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
+                    <span class="material-symbols-outlined text-sm text-accent">school</span>
+                    <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
                 </a>
             </nav>
         </aside>
@@ -245,135 +245,115 @@
                 <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
                     <a href="../index.html" class="hover:underline">Overview</a>
                     <span class="material-symbols-outlined text-xs">chevron_right</span>
-                    <span>Chapter 5</span>
+                    <span>Chapter 14</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    5.6 Privacy — What Never to Paste
+                    14.1 Using LLMs to Learn
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Protecting your data when using LLMs.
+                    Smarter strategies for making LLMs your personal tutor.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Understand the risks of pasting sensitive data into LLMs.</li>
-<li>Apply a simple mental model for deciding what is safe to share.</li>
+<li>See how LLMs can adapt explanations to your level in real-time.</li>
+<li>Learn practical strategies for learning more effectively with an LLM.</li>
 </ul>
 <div class="callout callout-tldr">
-    Everything you type into an LLM is sent to external servers. Even with trustworthy providers, your data can be retained, used for training, or inadvertently exposed. The same instincts that govern what you&#39;d include in an email should govern what you paste into an LLM.
+    LLMs are powerful learning tools because they can connect concepts across domains and explain at any level. You can&#39;t do that with a textbook — but raw access isn&#39;t enough. How you use them makes all the difference.
 </div>
 
 
-<h2>👁️ Visuals &amp; Interactives</h2>
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
-    <div class="text-center mb-8">
-        <h3 class="text-xl font-bold font-headline mb-2">The AI Privacy Filter</h3>
-        <p class="text-sm text-on-surface-variant">Which of these are safe to paste into a chat with an LLM?</p>
+<!-- Comparison Section (Bento Grid Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 mt-8">
+    <!-- Textbook Side -->
+    <div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden group flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl">📖</span>
+            <h3 class="text-xl font-bold font-headline">A Textbook</h3>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex-grow flex flex-col min-h-[340px]">
+            <!-- Fake textbook lines -->
+            <div class="space-y-3 text-sm leading-relaxed text-on-surface-variant">
+                <p class="font-bold text-on-surface text-base">Chapter 7: Photosynthesis</p>
+                <p>Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize nutrients from carbon dioxide and water. The general equation is:</p>
+                <div class="bg-surface-container rounded p-3 font-mono text-xs text-center text-on-surface">
+                    6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂
+                </div>
+                <p>This process involves two main stages: the light-dependent reactions and the Calvin cycle, both occurring within the chloroplast...</p>
+                <div class="mt-4 pt-4 border-t border-outline-variant/30 opacity-50">
+                    <div class="h-2.5 bg-on-surface/10 rounded w-full mb-2"></div>
+                    <div class="h-2.5 bg-on-surface/10 rounded w-4/5 mb-2"></div>
+                    <div class="h-2.5 bg-on-surface/10 rounded w-full"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 text-sm text-on-surface-variant italic">One explanation, written for a fixed audience. Can't answer your questions.</div>
     </div>
-
-    <div class="grid sm:grid-cols-2 gap-4">
-        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔑</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Internal API Keys</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Technical Data</div>
+    <!-- LLM Tutor Side -->
+    <div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden flex flex-col">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-3xl translate-x-10 -translate-y-10"></div>
+        </div>
+        <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl">🤖</span>
+            <h3 class="text-xl font-bold font-headline">Your LLM Tutor</h3>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex-grow border border-primary/10 min-h-[340px]">
+            <div class="space-y-4">
+                <!-- User message -->
+                <div class="flex justify-end">
+                    <div class="bg-primary/10 rounded-xl rounded-tr-sm px-4 py-2 max-w-[85%]">
+                        <p class="text-sm font-medium">Explain photosynthesis like I'm 8 years old.</p>
+                    </div>
+                </div>
+                <!-- LLM response -->
+                <div class="flex justify-start">
+                    <div class="bg-surface-container rounded-xl rounded-tl-sm px-4 py-2 max-w-[90%] border border-outline-variant/30">
+                        <p class="text-sm text-primary font-bold leading-relaxed">Plants eat sunlight! 🌱 They take air and water and turn them into sugar using the sun — like a little solar-powered factory inside every leaf.</p>
+                    </div>
+                </div>
+                <!-- Follow-up -->
+                <div class="flex justify-end">
+                    <div class="bg-primary/10 rounded-xl rounded-tr-sm px-4 py-2 max-w-[85%]">
+                        <p class="text-sm font-medium">Now explain it like I'm a biology student.</p>
+                    </div>
+                </div>
+                <!-- LLM adapts -->
+                <div class="flex justify-start">
+                    <div class="bg-surface-container rounded-xl rounded-tl-sm px-4 py-2 max-w-[90%] border border-outline-variant/30">
+                        <p class="text-sm text-primary font-bold leading-relaxed">Plants convert CO₂ and H₂O into glucose via two stages: light-dependent reactions in the thylakoid, and the Calvin cycle in the stroma.</p>
+                    </div>
+                </div>
             </div>
-            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
-        </button>
-
-        <button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📝</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Draft Blog Post</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Public Content</div>
-            </div>
-            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
-        </button>
-
-        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏥</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Medical Records</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Personal Info</div>
-            </div>
-            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
-        </button>
-
-        <button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💻</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Generic Code Snippet</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Open Source</div>
-            </div>
-            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
-        </button>
-
-        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💳</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Customer Credit Cards</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Financial Data</div>
-            </div>
-            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
-        </button>
-
-        <button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏗️</div>
-            <div class="flex-grow">
-                <div class="font-bold text-sm">Unreleased Blueprint</div>
-                <div class="text-[10px] opacity-60 uppercase tracking-widest">Trade Secret</div>
-            </div>
-            <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
-        </button>
+        </div>
+        <div class="mt-4 text-sm text-on-surface-variant italic">Adapts to your level instantly. Answers follow-ups. Never runs out of patience.</div>
     </div>
-
-    <div id="privacy-feedback" class="mt-8 p-4 rounded-xl text-center font-bold text-sm opacity-0 transition-all duration-300">
-        <!-- Feedback here -->
+</div>
+<!-- The Big Equation Text -->
+<div class="flex justify-center mb-16">
+    <div class="equation-banner px-10 py-6 rounded-full inline-flex items-center gap-6 rotate-[-1deg]">
+        <span class="text-4xl font-extrabold font-headline">LLM = the best teacher you've never had</span>
     </div>
 </div>
 
-<script>
-function checkPrivacy(isSafe, btn) {
-    const feedback = document.getElementById('privacy-feedback');
-    
-    // Reset buttons
-    btn.parentElement.querySelectorAll('button').forEach(b => {
-        b.classList.remove('border-red-500', 'border-green-500', 'bg-red-50', 'bg-green-50');
-    });
 
-    if (isSafe) {
-        btn.classList.add('border-green-500', 'bg-green-50');
-        feedback.textContent = "✅ Correct! Public or generic information is generally safe to share.";
-        feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-green-100 text-green-800 opacity-100";
-    } else {
-        btn.classList.add('border-red-500', 'bg-red-50');
-        feedback.textContent = "❌ DANGER! Never paste sensitive, private, or proprietary data into an LLM.";
-        feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-red-100 text-red-800 opacity-100";
-    }
-}
-</script>
-
-
-<h2>📝 Key Concepts</h2>
+<h2>📝 Key Strategies</h2>
 <ul>
-<li><strong>The Email Heuristic:</strong> Before pasting anything into an LLM, ask yourself: <em>&quot;Would I be comfortable including this in a work email sent to someone I don&#39;t fully trust?&quot;</em> If the answer is no — don&#39;t paste it.</li>
-<li><strong>NEVER Paste:</strong> Passwords, API keys, private keys, credit card numbers, SSNs, medical records, trade secrets, internal financial data, or client/patient personally identifiable information (PII).</li>
-<li><strong>OK to Paste:</strong> Public information, your own non-confidential writing, general questions, anonymized or sanitized data, code that doesn&#39;t contain secrets.</li>
-<li><strong>Sanitize Before Sharing:</strong> If you need help with a real document, remove the sensitive parts first. Replace names with &quot;Person A&quot;, figures with &quot;X&quot;, and internal references with generic labels. The LLM can still help with structure and language.</li>
+<li><strong>Build your curriculum first:</strong> Ask the LLM to lay out a structured learning path for a topic, tailored to your current level. A good starting prompt: <em>&quot;I want to learn [X]. I already know [Y]. Give me a 4-week plan.&quot;</em></li>
+<li><strong>Use the Socratic method:</strong> Instead of asking for the answer, ask the LLM to guide you with questions. <em>&quot;Don&#39;t explain it — ask me leading questions until I figure it out.&quot;</em> This deepens understanding far more than passive reading.</li>
+<li><strong>Summarize and simplify:</strong> Drop in a dense article, research paper, or video transcript and ask for the core ideas. <em>&quot;Explain this like I&#39;m 5&quot;</em> is a surprisingly powerful framing for breaking down abstract topics.</li>
+<li><strong>Test yourself:</strong> After studying something, ask the LLM to quiz you, generate flashcards, or throw edge cases at you. Active recall beats re-reading every time.</li>
+<li><strong>Understand, don&#39;t just copy:</strong> When the LLM generates code or an explanation, ask it to walk through the reasoning. <em>&quot;Why does this work? What would happen if I changed X?&quot;</em> Curiosity compounds faster than copying.</li>
 </ul>
-<div class="callout callout-error">
-    <strong>The Samsung Incident:</strong> Samsung engineers pasted proprietary source code into ChatGPT for help debugging. That code was potentially used in training data. Samsung had to ban the use of external LLMs company-wide shortly after. LLMs introduce a new vector for accidental data leakage — apply good cybersecurity hygiene.
+<div class="callout callout-tip">
+    Pro tip: Many LLM platforms have built-in learning features — ChatGPT, Claude, and others let you set context, save preferences, and build on prior conversations. Explore what your platform offers before you build your own workarounds.
 </div>
 
 
-<div class="callout callout-dyk">
-    Even &quot;Enterprise&quot; plans that promise data privacy and opt-out from training aren&#39;t foolproof. Your data still travels over the internet, is processed on external infrastructure, and is subject to that provider&#39;s security posture. Treat LLMs like a trusted but external contractor — give them what they need to do the job, not your house keys.
-</div>
-
-
-<div id="quiz-05-06" class="quiz-container my-12"></div>
+<div id="quiz-14-01" class="quiz-container my-12"></div>
             </div>
 
             <!-- Quiz Section (if present) -->
@@ -382,10 +362,10 @@ function checkPrivacy(isSafe, btn) {
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-05-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 5.5 Using LLMs to Learn</a>
+                    <a href="chapter-13-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 13.6 AI-Driven Review & Common Pitfalls</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-06-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">6.1 What is Tool Use? — LLMs Can Delegate <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="../index.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">Back to Overview <span class="material-symbols-outlined">home</span></a>
                 </div>
             </nav>
         </main>
