@@ -10,7 +10,7 @@ pageId: "14-01"
 - Learn practical strategies for learning more effectively with an LLM.
 
 :::callout-tldr
-LLMs are powerful learning tools because they can connect concepts across domains and explain at any level. You can't do that with a textbook — but raw access isn't enough. How you use them makes all the difference.
+LLMs are powerful learning tools because they can connect concepts across domains and explain at any level. You can't do that with a textbook — but raw access isn't enough. How you use them makes all the difference. It can help you conceptualize anything you want to learn!
 :::
 
 :::visual{name="visual-llm-teacher"}

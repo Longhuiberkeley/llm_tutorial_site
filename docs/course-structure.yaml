@@ -56,8 +56,8 @@ groups:
         firstPage: "chapter-07-01.html"
         totalPages: 7
       - id: "08"
-        title: "Memory & Personalization"
-        description: "Why LLMs forget, what companies are trying, and privacy trade-offs."
+        title: "The Personal Assistant Vision"
+        description: "The industry's race to build AI that knows you — and why a stateless model makes it hard."
         icon: "🧠"
         status: "active"
         firstPage: "chapter-08-01.html"

@@ -1,69 +1,108 @@
 ---
-title: "8.2 What Companies Are Trying — Simulated Memory"
-description: "ChatGPT Memory, Claude Projects, Gemini Gems — a tour of how AI products fake persistent memory."
+title: "8.2 Knowing and Doing: Context + Tools"
+description: "How a stateless model becomes a personal assistant — through the READ side and the ACT side."
 chapter: "Chapter 8"
 pageId: "08-02"
 ---
 
 ## 🎯 Core Goals
-- Survey current "memory" features from major AI providers.
-- Show that all of them are variations of automated context injection, not true memory.
+- Show that the personal assistant experience requires two things: context engineering (knowing) and tools (doing).
+- Connect to the Perceive → Plan → Act → Observe loop.
 
 :::callout-tldr
-ChatGPT Memory, Claude Projects, Gemini Gems — they all work the same way under the hood. The system remembers things and injects them into the prompt. The model itself still forgets everything.
+A personal assistant doesn't just know things about you — it can also act on your behalf. Context engineering handles the "knowing" side: getting the right information into the LLM. Tools handle the "doing" side: letting the LLM take actions in the world. Both are needed. Neither is enough alone.
 :::
 
-## The Memory Race
+## The Answer Has Two Parts
 
-Every major AI provider is racing to give their product the *feel* of persistent memory. Here's how the big three approach it:
+We established the problem: the model is stateless, but the goal is a personal assistant that knows you and acts for you.
 
-:::visual{name="visual-memory-features"}
+The answer has two sides:
 
-## ChatGPT Memory
+**Context engineering** — the discipline of deliberately designing what goes into the LLM's context window. Getting the right information in front of the model before it responds. We explored this with RAG. The same principle applies here, aimed at personalization: past sessions, your preferences, your emails — all injected as text.
 
-ChatGPT can extract facts from your conversations and save them:
-- "User is a software engineer"
-- "User prefers concise answers"
-- "User's company is in healthcare"
+**Tools** — capabilities that let the LLM take actions outside the conversation: search the web, run code, send an email, query a database. Rather than just generating text, the model can do things.
 
-On the next conversation, these facts are automatically injected into the system prompt. It *looks* like the LLM remembers you. What's actually happening: a database saved those facts, and they're being pasted into the Sandwich before you even type.
+A true personal assistant needs both.
 
-You can view, edit, and delete your saved memories in the settings.
+## The Personal Assistant Stack (The "Knowing" Side)
 
-## Claude Projects
+Think of it as four layers of context that make an LLM feel like it knows you:
 
-Claude Projects let you create a persistent workspace. You can:
-- Upload documents (your company policies, your codebase)
-- Write a custom system prompt (your preferred working style)
-- These persist across every conversation in that project
+<div class="space-y-3 my-6">
+  <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 flex gap-4 items-start">
+    <div class="text-2xl flex-shrink-0">📜</div>
+    <div>
+      <div class="font-bold text-on-surface mb-1">Conversation History</div>
+      <p class="text-sm text-on-surface/80">What happened in <em>this</em> session. The LLM already re-reads every prior message — this is the basic Sandwich at work. No extra engineering required; it's the foundation.</p>
+    </div>
+  </div>
+  <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 flex gap-4 items-start">
+    <div class="text-2xl flex-shrink-0">🧠</div>
+    <div>
+      <div class="font-bold text-on-surface mb-1">Past Session Memory</div>
+      <p class="text-sm text-on-surface/80">Notes or summaries from <em>previous</em> conversations, saved somewhere and re-injected at the start of the next one. "We discussed the product launch last Thursday." "User mentioned a key vendor called Apex Corp." This is what AI "memory features" are trying to provide.</p>
+    </div>
+  </div>
+  <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 flex gap-4 items-start">
+    <div class="text-2xl flex-shrink-0">📬</div>
+    <div>
+      <div class="font-bold text-on-surface mb-1">Live Data Access</div>
+      <p class="text-sm text-on-surface/80">Fresh context fetched at query time — your emails, calendar, recent documents. Rather than storing old summaries, the system reads live information just before calling the model. Always current, but requires giving the system access to your data.</p>
+    </div>
+  </div>
+  <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 flex gap-4 items-start">
+    <div class="text-2xl flex-shrink-0">👤</div>
+    <div>
+      <div class="font-bold text-on-surface mb-1">User Profile</div>
+      <p class="text-sm text-on-surface/80">Persistent facts about you: your name, job, communication style, known preferences. The simplest layer — injected as a short paragraph at the start of every session.</p>
+    </div>
+  </div>
+</div>
 
-Every new conversation inside the project automatically gets the documents and prompt injected. Same mechanism — just fancier tooling around it.
-
-## Google Gemini Gems
-
-Gemini Gems are customized AI agents with:
-- A name and personality
-- A specific system prompt
-- Pre-loaded context and instructions
-
-Again: automated context injection. The model hasn't changed. The *starting* Sandwich has been pre-filled.
+All four layers resolve to the same thing: **text in the Sandwich**. The model reads it all from scratch, every time. There's no magic — just better context engineering.
 
 :::callout-dyk
-All three of these features are genuinely useful — they save you from repeating yourself constantly. But they're engineering solutions to a fundamental limitation, not a true solution to statelessness. The model's memory is still just text on a page.
+This is why AI products can feel dramatically different even when they use the same underlying model. The difference isn't the model — it's how much context the surrounding system engineers into each conversation.
 :::
 
-## The Ceiling of Simulated Memory
+## But That's Only Half the Picture
 
-These approaches all have the same fundamental limit: the **context window**. No matter how much you save, only so much can be injected at once. The more "memories" you accumulate, the harder the system has to work to decide what to retrieve for each conversation.
+Context engineering tells the LLM what to *know*. Tools tell the LLM what it can *do*.
 
-Which memories matter right now? That's still a hard problem — explored in the next page.
+<div class="grid md:grid-cols-2 gap-4 my-6">
+  <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5">
+    <div class="font-bold text-on-surface mb-2">📖 Context Engineering — the READ side</div>
+    <p class="text-sm text-on-surface/70 mb-3">Getting the right information into the LLM's context window.</p>
+    <ul class="text-sm space-y-1.5 text-on-surface/80">
+      <li>📁 Retrieving relevant case files for a lawyer</li>
+      <li>🧠 Injecting past session memory at conversation start</li>
+      <li>📬 Reading today's emails before a morning briefing</li>
+    </ul>
+  </div>
+  <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5">
+    <div class="font-bold text-on-surface mb-2">🤝 Tools — the ACT side</div>
+    <p class="text-sm text-on-surface/70 mb-3">Letting the LLM execute actions in the world.</p>
+    <ul class="text-sm space-y-1.5 text-on-surface/80">
+      <li>📧 Drafting and sending an email</li>
+      <li>🧪 Running tests on a piece of code</li>
+      <li>🗓️ Booking a meeting on your calendar</li>
+    </ul>
+  </div>
+</div>
+
+The lawyer example from earlier is mostly context engineering: fetch the right case files to read. But a fuller assistant would also need tools: run a legal database query, draft and file a document, check a court deadline.
+
+A software assistant flips the balance: knowing the codebase is context engineering; but *running the tests*, *reading the error output*, *committing the fix* — those are tools.
+
+In practice, agents interleave both in a continuous loop. This maps directly to the **Perceive → Plan → Act → Observe** cycle: perceiving is context engineering (reading what's relevant), acting is tools (doing something in the world), and observing brings the tool's result back as new context for the next step.
 
 ## 📝 Key Concepts
 
-- **All "memory" features = automated context injection** — the model itself still forgets
-- **ChatGPT Memory:** Extracts facts, saves to database, injects into next system prompt
-- **Claude Projects:** Pre-loaded documents + system prompt, persistent across a workspace
-- **Gemini Gems:** Custom agents with persistent context and personality
-- **Context window is still the ceiling:** More memory = harder retrieval decisions
+- **Context engineering = the knowing side:** Getting the right information into the LLM's context window — memory, live data, user profile, conversation history
+- **Tools = the acting side:** Capabilities that let the LLM do things in the world — run code, send messages, query systems
+- **Both are needed:** Context tells the LLM what's true. Tools let it act on that truth.
+- **Perceive → Plan → Act → Observe:** Context engineering handles perceiving; tools handle acting; the loop continues
+- **No magic:** When personalization fails, it's context engineering failing. When the assistant takes a wrong action, it's a tool being misused.
 
 :::quiz{id="08-02"}

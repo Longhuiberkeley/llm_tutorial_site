@@ -85,11 +85,36 @@ Use centralized classes in `main.css`:
 
 ---
 
+## Build System
+
+This site uses a Node.js static site generator. **Never directly edit generated output files.**
+
+**Sources of truth (edit these):**
+- `docs/content/*.md` → generates `pages/*.html`
+- `docs/course-structure.yaml` → generates `index.html` chapter cards
+- `assets/page-template.html` — page HTML shell
+- `assets/index-template.html` — landing page HTML shell
+- `assets/components/*.html` — named visual/callout components
+
+**Generated output (do not edit directly):**
+- `pages/*.html`
+- `index.html`
+
+**To make changes:**
+1. Edit `.md` files for page content changes
+2. Edit `docs/course-structure.yaml` for chapter card titles/descriptions/metadata
+3. Run `npm run build` to regenerate all HTML
+
+**Inline visuals in Markdown:** Write raw HTML directly in `.md` files using Tailwind classes — `marked` passes it through unchanged. Use `:::visual{name="X"}` only when a dedicated file exists at `assets/components/X.html`; otherwise it renders as an error div.
+
+---
+
 ## Development Workflow
 
 1. **Local Server:** `python3 -m http.server 8000`
-2. **Styling:** Add new variables to `css/main.css` and map them in `js/tailwind-config.js`.
-3. **New Pages:** Link `js/tailwind-config.js` and `js/main.js`.
-4. **Consistency:** Ensure all text uses `text-on-surface` or `text-on-surface-variant` (for secondary text) to guarantee readability.
-5. **No Chapter Number References:** Content pages must never reference other chapters by number (e.g., "In Chapter 2..."). Use topic references instead (e.g., "When we explored tokenization...").
-6. **Prefer "LLM" over "AI":** In tutorial content, prefer "LLM" or "the LLM" when referring to the model specifically. "AI" is acceptable when referring to the broader field or comparing AI vs humans, but avoid using it as a synonym for "the model" in explanations.
+2. **Build:** `npm run build` — regenerates all HTML from markdown and YAML sources
+3. **Styling:** Add new variables to `css/main.css` and map them in `js/tailwind-config.js`.
+4. **New Pages:** Add a `.md` file to `docs/content/`, add the page to the chapter's `totalPages` in `docs/course-structure.yaml`, then run `npm run build`.
+5. **Consistency:** Ensure all text uses `text-on-surface` or `text-on-surface-variant` (for secondary text) to guarantee readability.
+6. **No Chapter Number References:** Content pages must never reference other chapters by number (e.g., "In Chapter 2..."). Use topic references instead (e.g., "When we explored tokenization...").
+7. **Prefer "LLM" over "AI":** In tutorial content, prefer "LLM" or "the LLM" when referring to the model specifically. "AI" is acceptable when referring to the broader field or comparing AI vs humans, but avoid using it as a synonym for "the model" in explanations.
