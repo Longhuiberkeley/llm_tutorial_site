@@ -23,7 +23,7 @@ You download the model weights (from Meta's Llama, Mistral, DeepSeek, etc.) and 
 
 ## The Case for Hosted APIs
 
-As of 2026, the frontier models — GPT-o3, Claude 3.7, Gemini 2.0 Ultra — are all closed-source. These companies are also actively subsidizing access (through cheap subscriptions and competitive API pricing) to win market share. You're getting a lot for your money right now.
+As of 2026, the frontier models — are all closed-source. These companies are also actively subsidizing access (through cheap subscriptions and competitive API pricing) to win market share. You're getting a lot for your money right now.
 
 **Pros:**
 - Zero infrastructure setup — start calling the API within minutes

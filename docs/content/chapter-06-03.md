@@ -30,4 +30,9 @@ A real agent isn't just an LLM with tools bolted on. It operates **autonomously*
 A traditional script follows fixed steps: A → B → C. An agent follows an adaptive loop: **Perceive → Plan → Act → Observe → Repeat**. The loop continues until the goal is met — or the agent asks for help.
 :::
 
+:::callout-tip
+Remember those absurd questions, like "Peter bought 12 watermelons, Mary bought 24 apples — how many pineapples does Jack have?" A good model should respond, "No, that’s impossible." Similarly, if you ask an impossible question, a good LLM shouldn’t say, "What a great idea!" — it should push back. Researchers have created a benchmark to test this capability: [Bullshit Benchmark](https://github.com/petergpt/bullshit-benchmark)
+:::
+
+
 :::quiz{id="06-03"}
