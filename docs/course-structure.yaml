@@ -64,14 +64,14 @@ groups:
         totalPages: 4
       - id: "09"
         title: "Beyond Text"
-        description: "Multimodal AI, OCR, and document extraction."
+        description: "Multimodal AI, OCR, and data processing."
         icon: "🖼️"
         status: "active"
         firstPage: "chapter-09-01.html"
         totalPages: 3
 
-  - name: "Group 3: Business"
-    subtitle: "Think → Decide → Execute"
+  - name: "Group 3: Using agents in business settings"
+    subtitle: "How to evaluate, implement, and manage LLMs in a business context."
     chapters:
       - id: "10"
         title: "The LLM Landscape"
@@ -107,7 +107,7 @@ groups:
     chapters:
       - id: "14"
         title: "Using LLMs to Learn"
-        description: "Smarter strategies for making LLMs your personal tutor — Socratic methods, the 10-80-10 rule, and more."
+        description: "Smarter strategies for making LLMs your personal tutor."
         icon: "🎓"
         status: "active"
         firstPage: "chapter-14-01.html"
