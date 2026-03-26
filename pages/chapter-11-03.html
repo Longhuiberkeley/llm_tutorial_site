@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>11.3 Is Your Company Ready? — The Big Data Lesson - LLM Tutorial</title>
+    <title>11.3 Digital Transformation & Change Management - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -183,19 +183,22 @@
                     <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 11</div><a href="chapter-11-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">11.1 The Augmentation Narrative — Supercharging, Not Replacing</span>
+                    <span class="text-sm font-medium">11.1 New Technology, Same Domain</span>
                 </a><a href="chapter-11-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">11.2 Building AI Literacy — Making AI Approachable for Everyone</span>
                 </a><a href="chapter-11-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">11.3 Is Your Company Ready? — The Big Data Lesson</span>
+                    <span class="text-sm font-medium">11.3 Digital Transformation & Change Management</span>
                 </a><a href="chapter-11-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">11.4 The Software Transition Trap — A Cautionary Tale</span>
+                    <span class="text-sm font-medium">11.4 Is Your Infrastructure Ready?</span>
                 </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">11.5 Lessons from Past Tech Shifts — The Pattern Never Changes</span>
+                    <span class="text-sm font-medium">11.5 Planning Your AI Rollout</span>
+                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.6 Seeing Clearly Through the Hype</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">12.1 You Can't Automate What You Can't Explain</span>
@@ -248,95 +251,186 @@
                     <span>Chapter 11</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    11.3 Is Your Company Ready? — The Big Data Lesson
+                    11.3 Digital Transformation & Change Management
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    History repeats itself. The same mistakes made during the big data era are being made again with AI — often by the same companies.
+                    The playbook for leading organizational AI adoption — and why the human side is harder than the technology.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
-                <h2>🎯 Core Goals</h2>
-<ul>
-<li>Draw clear parallels between the big data era and the current AI era.</li>
-<li>Help organizations assess their readiness before investing heavily in AI.</li>
-</ul>
-<div class="callout callout-tldr">
-    Before the AI rush, there was the big data rush. Companies built data lakes that became data swamps. The lesson: technology without foundation is expensive failure. AI is repeating the same pattern.
+                <div class="callout callout-tldr">
+    Digital transformation looks new. The change management underneath it isn&#39;t. The same leadership, communication, and process discipline that drove past transformations — from ERP rollouts to cloud migrations — drives this one too.
 </div>
 
 
-<h2>History Rhymes</h2>
-<p>The year is 2015. &quot;Data is the new oil.&quot; Every company needs a data strategy, a Chief Data Officer, a data lake. The consultants are booked months out.</p>
-<p>A few years later: many of those data lakes were abandoned. Data was siloed across departments. Quality was poor. Nobody agreed on definitions (&quot;Is &#39;active customer&#39; someone who bought once or twice this year?&quot;). The dashboards nobody used. The insights nobody trusted.</p>
-<p>The companies that succeeded weren&#39;t necessarily the ones who moved fastest. They were the ones who built <strong>foundations first</strong>: data governance, quality standards, clear ownership, agreed definitions.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-company-readiness</div>
+<h2>Strategic Reminders Before You Start</h2>
+<p>These four principles have derailed more AI initiatives than any technical failure. Get them right before anything else.</p>
+<div class="space-y-3 my-6">
 
-<h2>The Parallel Is Exact</h2>
-<p>The AI rush of 2024–2026 is following the same pattern:</p>
-<table>
-<thead>
-<tr>
-<th>Big Data Era</th>
-<th>AI Era</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&quot;Data is the new oil&quot;</td>
-<td>&quot;AI will transform every business&quot;</td>
-</tr>
-<tr>
-<td>Data lakes built without governance</td>
-<td>AI tools deployed without process clarity</td>
-</tr>
-<tr>
-<td>Poor data quality → bad insights</td>
-<td>Poor process documentation → bad automation</td>
-</tr>
-<tr>
-<td>&quot;We have the data, why don&#39;t insights work?&quot;</td>
-<td>&quot;We have the AI, why doesn&#39;t it work?&quot;</td>
-</tr>
-</tbody></table>
-<p>The root cause is the same: <strong>rushing to the technology before the foundations are ready.</strong></p>
-<h2>The AI Readiness Checklist</h2>
-<p>Before investing heavily in AI, ask honestly:</p>
-<p><strong>Process documentation:</strong></p>
-<ul>
-<li>Can you describe your key workflows in enough detail for an outsider to follow them?</li>
-<li>Are the exceptions and edge cases written down, or only in employees&#39; heads?</li>
-</ul>
-<p><strong>Data quality:</strong></p>
-<ul>
-<li>Is the data your AI will use clean, consistent, and accessible?</li>
-<li>Do different teams use the same terms for the same things?</li>
-</ul>
-<p><strong>Success metrics:</strong></p>
-<ul>
-<li>How will you know if the AI is working?</li>
-<li>What does &quot;good&quot; look like for the task you&#39;re automating?</li>
-</ul>
-<p><strong>Team skills:</strong></p>
-<ul>
-<li>Do you have people who can evaluate AI outputs critically?</li>
-<li>Is there someone who can translate between business needs and technical implementation?</li>
-</ul>
-<p>If you can&#39;t answer these, the AI project will struggle — not because AI doesn&#39;t work, but because the foundation isn&#39;t ready.</p>
-<h2>The Silver Lining</h2>
-<p>Here&#39;s what&#39;s different this time: AI-assisted development makes building the foundations dramatically faster and cheaper than it was during the big data era.</p>
-<p>Documenting processes, cleaning data, writing specifications — AI can help with all of these. The tools make it faster to <em>get ready</em> for the tools. You just need to know you need to get ready first.</p>
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🎯</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Business First, Tech Second</div>
+        <p class="text-sm text-on-surface/80">Avoid "technology-led" projects — those that start with a tool and search for a use case. Successful AI initiatives start with a clear business problem and define measurable outcomes before a single line of code is written.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🗄️</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Data Is the Foundation</div>
+        <p class="text-sm text-on-surface/80">AI is "garbage in, garbage out." The quality of your outputs is bounded by the quality of your inputs — your data, your process documentation, your system integrations. Strong foundations aren't glamorous, but they're the difference between AI that works and AI that looks like it works.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🚀</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Start Small, Scale Fast</div>
+        <p class="text-sm text-on-surface/80">Use high-impact pilot programs to generate quick wins before attempting full-scale rollout. A customer service team that handles tickets 40% faster is a story you can tell. That story builds the organizational confidence — and the political capital — to expand.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🔄</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Automation as a Window to Improve</div>
+        <p class="text-sm text-on-surface/80">Automating a step is a good start — and sometimes it's all you need. But it's also an opportunity to ask: now that we're touching this process anyway, could we do it better? Not every workflow needs to be redesigned. But many benefit from a fresh look when AI enters the picture. The question isn't just "how do we automate this?" — it's "while we're here, is this the best version of this process?"</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<h2>Two Types of Change</h2>
+<p>Not all AI initiatives require the same level of organizational disruption. Understanding the type of change you&#39;re undertaking shapes how you manage it.</p>
+<p><strong>Adaptive change</strong> is incremental — adding AI assistance to one workflow at a time, improving without overhauling. Lower disruption, easier to absorb, faster to show results. Good for building confidence and learning before committing to bigger bets.</p>
+<p><strong>Transformational change</strong> means redesigning how the organization fundamentally operates — new roles, new processes, new ways of making decisions. Higher impact, higher risk, and it requires more deliberate management. The ADKAR framework below is especially important here.</p>
+<h2>The Change Process</h2>
+<p>Every successful transformation — whether AI-powered or not — moves through five stages. Skip a stage and it tends to come back and bite you later.</p>
+<div class="space-y-3 my-6">
+
+  <div class="flex items-start gap-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">1</div>
+    <div>
+      <div class="font-semibold text-sm mb-1">Prepare the Organization</div>
+      <p class="text-sm text-on-surface/80">Assess readiness honestly. Surface resistance before it surfaces in production. Build the case for change with the people who will be most affected — not just the people who decided on it.</p>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">2</div>
+    <div>
+      <div class="font-semibold text-sm mb-1">Craft a Vision and Plan</div>
+      <p class="text-sm text-on-surface/80">Define what the future state looks like in concrete terms. Align leadership on both the destination and the route. Ambiguity at this stage creates confusion and competing interpretations downstream.</p>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">3</div>
+    <div>
+      <div class="font-semibold text-sm mb-1">Implement in Phases</div>
+      <p class="text-sm text-on-surface/80">Execute in stages, not all at once. Communicate constantly during this phase — more than you think is necessary. Keep feedback channels genuinely open and act on what you hear.</p>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">4</div>
+    <div>
+      <div class="font-semibold text-sm mb-1">Embed Changes in Culture</div>
+      <p class="text-sm text-on-surface/80">Update processes, job descriptions, training, and incentives so the new way becomes "how we do things here" — not a special initiative that fades when attention moves elsewhere.</p>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">5</div>
+    <div>
+      <div class="font-semibold text-sm mb-1">Review Progress and Adapt</div>
+      <p class="text-sm text-on-surface/80">Measure against the original goals — not the easy metrics. Learn from what didn't work. Adjust rather than declaring premature victory when demos look good.</p>
+    </div>
+  </div>
+
+</div>
+
+<h2>ADKAR: The Human Journey Through Change</h2>
+<p>Technology is easy. People are complicated.</p>
+<p>When you introduce AI into a team&#39;s workflow, the primary emotions you&#39;ll encounter are fear — fear of obsolescence, fear of making mistakes with a &quot;black box,&quot; fear of losing control over work that previously felt familiar. The ADKAR model maps the human journey that every individual needs to travel for change to actually stick.</p>
+<div class="space-y-3 my-6">
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 font-bold text-accent text-base w-6">A</div>
+      <div>
+        <div class="font-bold text-sm mb-1">Awareness — <em>Why do we need this?</em></div>
+        <p class="text-sm text-on-surface/80">People need to understand the business reason for the change before they can embrace it. "Our manual ticketing process is bottlenecking growth" is a real reason. "AI is the future" is not.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 font-bold text-accent text-base w-6">D</div>
+      <div>
+        <div class="font-bold text-sm mb-1">Desire — <em>What's in it for me?</em></div>
+        <p class="text-sm text-on-surface/80">"The AI handles the copy-pasting so you can focus on the work that actually requires your judgment." Desire is personal. Generic benefit statements don't create it — specific, role-level answers do.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 font-bold text-accent text-base w-6">K</div>
+      <div>
+        <div class="font-bold text-sm mb-1">Knowledge — <em>How do I actually use it?</em></div>
+        <p class="text-sm text-on-surface/80">This is where AI literacy and prompt training come in. Not a one-hour all-hands. Role-specific guidance on the specific workflows that are changing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 font-bold text-accent text-base w-6">A</div>
+      <div>
+        <div class="font-bold text-sm mb-1">Ability — <em>Can I actually do it?</em></div>
+        <p class="text-sm text-on-surface/80">The right UI and workflow integration matters. Employees shouldn't need to be engineers to trigger an AI workflow. If the tool requires technical skill that the team doesn't have, ability breaks down regardless of desire.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 font-bold text-accent text-base w-6">R</div>
+      <div>
+        <div class="font-bold text-sm mb-1">Reinforcement — <em>Why keep using it?</em></div>
+        <p class="text-sm text-on-surface/80">Celebrate wins where AI made work genuinely easier. Share those stories. And critically: don't use AI adoption metrics to justify headcount cuts — that's the fastest way to make the first four letters of ADKAR collapse.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <div class="callout callout-dyk">
-    One of the best AI use cases during readiness preparation: have an AI interview your key employees about their workflows and draft the documentation. What used to take a business analyst weeks now takes days. Use AI to accelerate your AI readiness.
+    <strong>&quot;If it ain&#39;t broken, don&#39;t fix it&quot; — but is it really not broken?</strong></p>
+<p>Japan famously continued using fax machines in government offices well into the 2020s. They worked fine internally — reliable, familiar, trusted. But as digital-first businesses and citizens increasingly expected email and web interfaces, the fax machine became a point of friction with the outside world. In 2024, the Japanese government officially retired the last government fax requirement.</p>
+<p>The lesson: the right question isn&#39;t &quot;does this work?&quot; It&#39;s &quot;does this keep working <em>as the world changes around it</em>?&quot; Some processes are genuinely fine. Others are fine <em>right now</em> — and quietly accumulating technical and competitive debt.
 </div>
 
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>History repeats:</strong> The big data era&#39;s failures are the roadmap for AI adoption failures</li>
-<li><strong>Foundation first:</strong> Process clarity, data quality, and success metrics before technology</li>
-<li><strong>The same companies:</strong> Many organizations making AI mistakes today made identical big data mistakes</li>
-<li><strong>AI accelerates readiness:</strong> Ironically, AI can help you prepare for AI — document processes, clean data, write specs</li>
-<li><strong>Strategic timing beats speed:</strong> The companies that win aren&#39;t first — they&#39;re careful</li>
+<li><strong>Business first:</strong> define the problem and the ROI before choosing the technology</li>
+<li><strong>Two types of change:</strong> adaptive (incremental) vs. transformational (overhaul) — they require different management intensity</li>
+<li><strong>Five-stage process:</strong> prepare → vision/plan → implement → embed → review; skipping stages costs more later</li>
+<li><strong>ADKAR:</strong> the human journey through change; all five stages must be met for adoption to stick</li>
+<li><strong>Reinforcement matters most:</strong> people sustain change when it visibly improves their work — not when it&#39;s mandated</li>
 </ul>
 <div id="quiz-11-03" class="quiz-container my-12"></div>
             </div>
@@ -350,7 +444,7 @@
                     <a href="chapter-11-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 11.2 Building AI Literacy — Making AI Approachable for Everyone</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-11-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">11.4 The Software Transition Trap — A Cautionary Tale <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-11-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">11.4 Is Your Infrastructure Ready? <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

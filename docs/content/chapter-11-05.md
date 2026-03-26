@@ -1,65 +1,158 @@
 ---
-title: "11.5 Lessons from Past Tech Shifts — The Pattern Never Changes"
-description: "Cloud, mobile, big data, AI — every major technology wave follows the same arc. Strategic adopters win; early rushers often don't."
+title: "11.5 Planning Your AI Rollout"
+description: "What separates a successful AI implementation from a costly mess — and how to plan a rollout that actually sticks."
 chapter: "Chapter 11"
 pageId: "11-05"
 ---
 
-## 🎯 Core Goals
-- Place AI adoption in historical context by tracing prior technology waves.
-- Reinforce that the winners aren't the first movers — they're the strategic ones.
-
 :::callout-tldr
-Every major technology wave — cloud, mobile, big data — follows the same arc: hype → rush → most fail → strategic adopters win → technology becomes normal. AI is following the same arc right now.
+A rollout plan isn't optional — it's the difference between an AI deployment that works and one that costs you more than it saves. And the plan is mostly about communication, not technology.
 :::
 
-## The Pattern
+## A Story Without a Plan
 
-Every transformative technology in modern business history has followed the same curve:
+**Company A** is a mid-sized US e-commerce business. Their ordering platform costs $50K/year. The CEO finds a Chinese-market platform with comparable features at $35K — plus a $10K customization package described as adapting the platform for international markets. All told, still a meaningful saving on paper. The feature list looks comparable. The customization package sounds thorough. They sign the contract.
 
-1. **Breakthrough** — a genuinely new capability emerges
-2. **Hype** — everyone predicts it will change everything, immediately
-3. **Rush** — companies invest heavily, often before they're ready
-4. **Reckoning** — most early efforts underperform; some fail publicly
-5. **Strategic adoption** — companies with clear problems and good foundations win
-6. **Normalization** — the technology becomes table stakes; not using it is the risk
+Three months later, they have a very expensive problem.
 
-:::visual{name="visual-tech-shifts"}
+<div class="space-y-3 my-6">
 
-## The Waves
+  <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">📦</span>
+      <div>
+        <div class="font-bold text-sm mb-1 text-red-800">Address Fields</div>
+        <p class="text-sm text-red-700">The platform uses Chinese address format (Province → City → Street → Number). US addresses are Street → City → State → ZIP. Every customer address in the database is broken. Shipping fails for the first two weeks. The customization package was supposed to handle localization — but "address format" wasn't in the written scope.</p>
+      </div>
+    </div>
+  </div>
 
-**The Cloud (2010s)**
-"Move everything to the cloud!" Many companies moved wholesale — and discovered that lifting and shifting poorly-architected systems just made slow software run expensively in someone else's data center. Others thoughtfully identified what *should* move to the cloud and built new services cloud-native. Those companies got the cost, scale, and reliability benefits. The early rushers often got expensive bills and migration headaches.
+  <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">📅</span>
+      <div>
+        <div class="font-bold text-sm mb-1 text-red-800">Date Formats</div>
+        <p class="text-sm text-red-700">The platform stores dates as YYYY/MM/DD. Their accounting software expects MM/DD/YYYY. All historical records are mismatched. Reconciliation takes months. Nobody had mapped out which downstream systems would receive data from the new platform.</p>
+      </div>
+    </div>
+  </div>
 
-**Mobile (2010s)**
-"Every business needs a mobile app!" Thousands of apps were built and downloaded once, then forgotten. The winners solved real problems that mobile uniquely enabled: navigation, payments, real-time communication. They started with "what problem does mobile solve better?" not "how do we get an app?"
+  <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">💳</span>
+      <div>
+        <div class="font-bold text-sm mb-1 text-red-800">Payment Integrations</div>
+        <p class="text-sm text-red-700">The platform supports WePay and Alipay natively. US processors (Stripe, Braintree) require a custom integration. The customization contract mentioned payment support — but only for the processors the vendor already knew. Additional cost: $30K+ in unplanned development.</p>
+      </div>
+    </div>
+  </div>
 
-**Big Data (Mid-2010s)**
-"Data is the new oil!" Companies built massive data infrastructure — Hadoop clusters, data lakes, dashboards. Most of the dashboards were never used. The data sat in silos. The companies that won invested in *question-first* analytics: "What decisions do we need to make, and what data would help?" Then they built toward that.
+  <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">👩‍💼</span>
+      <div>
+        <div class="font-bold text-sm mb-1 text-red-800">Employee Efficiency</div>
+        <p class="text-sm text-red-700">Staff trained on the old system need retraining. Nobody had planned for this, scheduled it, or budgeted for the productivity gap. Efficiency drops 40% for six weeks. The "savings" disappear into overtime and missed orders.</p>
+      </div>
+    </div>
+  </div>
 
-**AI (2024–present)**
-The pattern is repeating in real time. Companies are deploying AI because competitors are, because the press is breathless, because the CEO read an article. Most of these early efforts will underperform. The companies that win will start with "what problem are we solving?" — and match AI capabilities to specific, well-understood business needs.
+</div>
 
-:::callout-dyk
-The Gartner Hype Cycle has described this pattern since the 1990s: technology peaks at "inflated expectations," descends into the "trough of disillusionment," then climbs the "slope of enlightenment" to the "plateau of productivity." AI is currently somewhere between peak hype and the trough. Strategic adoption now means you'll be climbing the slope while competitors are still disillusioned.
+**Total cost of the switch:** The $15K annual saving cost roughly $200K in adaptation, development, and lost productivity.
+
+The problem wasn't that they chose the wrong software, or even that they skipped the customization. The problem was that there was no rollout plan — no documented scope, no integration mapping, no transition timeline, no training plan. The customization contract gave them false confidence that the hard parts were handled.
+
+:::callout-error
+This exact story repeats in AI tool adoption. A company deploys an AI product without piloting it, without mapping the workflows it will touch, without preparing the team. It fails in production. The time saved becomes time spent cleaning up the mess.
 :::
 
-## The Strategic Adopter Playbook
+## A Rollout Plan Is Required
 
-Winners in every technology wave shared the same traits:
+Here's what a real rollout plan covers:
 
-- **Started with the problem,** not the technology
-- **Piloted before committing** at scale
-- **Built foundations** (processes, data, skills) before building applications
-- **Measured results honestly** rather than declaring victory after demos
-- **Kept up** as the technology matured rather than locking into early decisions
+<div class="space-y-3 my-6">
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">📢</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Communication</div>
+        <p class="text-sm text-on-surface/80">People resist what they don't understand. Before any deployment, communicate clearly: <em>why</em> this change is happening, <em>what</em> is changing, <em>what stays the same</em>, and <em>what it means for each specific role</em>. This is the step most implementations skip — and the most damaging one to skip.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🎓</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Training</div>
+        <p class="text-sm text-on-surface/80">Not just "here's the tool." Workflow-specific guidance, role by role. How does this change <em>my</em> job specifically? What do I do when something goes wrong? Generic training sessions rarely transfer to real work.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🆘</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Support Channels</div>
+        <p class="text-sm text-on-surface/80">Before go-live, define who people ask when something breaks. A helpdesk ticket? A Slack channel? A designated point person on each team? Ambiguity here leads to confusion and silent workarounds that quietly undermine adoption.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🪜</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Phased Rollout</div>
+        <p class="text-sm text-on-surface/80">Don't flip the switch globally. Start with a pilot team, gather real feedback, fix what's broken, then expand. Problems found in a pilot cost a fraction of what they cost in a full deployment.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🔁</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Feedback Loops</div>
+        <p class="text-sm text-on-surface/80">After launch, establish a genuine channel for users to report problems — and actually address them. Token feedback forms that go nowhere destroy trust faster than almost anything else.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">⏱️</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Transition Window</div>
+        <p class="text-sm text-on-surface/80">How long will old and new coexist? Define this deliberately. Keeping both systems running indefinitely is expensive. Cutting over too fast leaves no safety net. Pick a window, communicate it clearly, and hold to it.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+## The Person in Charge Matters
+
+Successful AI rollouts aren't primarily a technology challenge. They're a change management challenge — and the person leading the implementation needs to understand both.
+
+The implementer needs to be asking:
+- Who is most affected by this change, and have I actually talked to them?
+- Where will resistance come from — fear, added workload, skepticism about the technology?
+- What does success look like from each team's perspective, not just the project sponsor's?
+- What are the failure modes, and what's the early warning signal for each?
+
+A rollout plan that lives in a spreadsheet and never gets discussed with the people it affects is not a rollout plan. It's a document.
 
 ## 📝 Key Concepts
 
-- **Every tech wave follows the same arc** — hype → rush → reckoning → strategic adoption → normalization
-- **Early movers often lose** — those who rush before they're ready pay the adaptation cost
-- **Strategic adopters win** — clear problem + good foundation + measured approach
-- **Start with the problem:** "What decision/outcome do we need?" Then find the technology fit
-- **AI is in the hype phase now** — strategic adoption today sets you up for the productivity phase
+- **A rollout plan is required** — not optional, not a nice-to-have
+- **Communication comes first:** people resist what they don't understand; explain the *why* before the *what*
+- **Phased over global:** pilot with a small team, learn from it, then expand
+- **Define the transition window:** know how long both systems will coexist and commit to that timeline
+- **The implementer's job is people, not just technology:** technical success without human adoption is failure
 
 :::quiz{id="11-05"}

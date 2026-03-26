@@ -5,52 +5,72 @@ chapter: "Chapter 11"
 pageId: "11-02"
 ---
 
-## 🎯 Core Goals
-- Identify the real reasons people resist AI adoption.
-- Give a practical framework for building AI literacy without triggering fear.
-
 :::callout-tldr
 People resist AI for real reasons: fear of looking incompetent, fear of job loss, discomfort with uncertainty. The antidote isn't an all-hands training — it's psychological safety, low-stakes starts, and leaders who go first.
 :::
+
+Digital transformation and change management have been studied for decades — from ERP rollouts to cloud migrations to agile transitions. We're not inventing a new playbook here. We're applying proven principles to a new context. The next page covers the broader strategic framework; this one focuses on the most human part of the challenge: building genuine AI literacy without triggering the fear that kills adoption before it starts.
 
 ## Why People Actually Resist
 
 Before building literacy, understand the resistance. It's rarely about the technology itself.
 
-**Fear of incompetence:** "What if I can't figure it out and everyone notices?" People who've been experts for years suddenly feel like beginners. That's uncomfortable — and it's often unspoken.
+<div class="space-y-3 my-6">
 
-**Fear of relevance:** "If AI can do my job, what am I for?" Even if intellectually they know the augmentation story, the emotional reaction is real.
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">😰</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Fear of Incompetence</div>
+        <p class="text-sm text-on-surface/80">"What if I can't figure it out and everyone notices?" People who've been experts for years suddenly feel like beginners. That's uncomfortable — and it's often unspoken rather than surfaced as a concern.</p>
+      </div>
+    </div>
+  </div>
 
-**Fear of making mistakes:** "What if I use it wrong and it causes a problem?" In organizations where mistakes are punished, people avoid experimenting with anything new.
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🪞</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Fear of Relevance</div>
+        <p class="text-sm text-on-surface/80">"If AI can do my job, what am I for?" Even if people intellectually accept the augmentation framing, the emotional reaction is real — and it drives avoidance behaviors that look like laziness but are actually self-protection.</p>
+      </div>
+    </div>
+  </div>
 
-**Learned helplessness:** "It's for tech people, not me." Non-technical workers often assume AI tools are simply not for them — and nobody has shown them otherwise.
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">⚠️</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Fear of Making Mistakes</div>
+        <p class="text-sm text-on-surface/80">"What if I use it wrong and it causes a problem?" In organizations where mistakes are penalized, people avoid experimenting with anything new. The safer choice is to not use the tool at all.</p>
+      </div>
+    </div>
+  </div>
 
-:::visual{name="visual-ai-literacy"}
+  <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-xl">🚫</span>
+      <div>
+        <div class="font-bold text-sm mb-1">Learned Helplessness</div>
+        <p class="text-sm text-on-surface/80">"It's for tech people, not me." Non-technical workers often assume AI tools are simply outside their domain — and if nobody has shown them otherwise, that assumption calcifies quickly.</p>
+      </div>
+    </div>
+  </div>
 
-## The Framework: Start Small, Build Confidence
+</div>
 
-**Phase 1 — Low-stakes, non-threatening use cases**
+:::callout-dyk
+**Flip the script: from fear to curiosity**
 
-Start where there's no wrong answer and no professional risk:
-- "Draft a rough agenda for today's team meeting"
-- "Summarize these meeting notes"
-- "Help me think through how to phrase this tricky email"
+Instead of waiting for people to overcome fear, give them a reason to be proactive. Motivation beats mandate.
 
-These feel helpful immediately. There's no fear of being "replaced" by an AI that drafts meeting agendas.
+- **Tie AI to personal growth** — frame it as a skill that makes them more valuable, not one that replaces them. People invest in skills that benefit their career.
+- **Show the boring work disappearing** — the most persuasive demo isn't the most impressive one; it's the one where someone sees their least-favourite task handled in seconds.
+- **Make early wins visible** — when someone on the team discovers a useful trick, share it. Success stories from peers are more motivating than any top-down mandate.
+- **Give people a safe sandbox** — low-stakes, no-judgment space to explore. Curiosity needs room to breathe without consequences.
 
-**Phase 2 — Shared experimentation**
-
-Create space for people to share what they've tried:
-- "I used AI to prep for this client meeting — here's how"
-- Peer-to-peer sharing removes the expert/novice dynamic
-- Celebrating "interesting failures" normalizes imperfect experimentation
-
-**Phase 3 — Higher-stakes applications**
-
-Once confidence and judgment are calibrated, expand:
-- Customer-facing draft generation (with review)
-- Research assistance for complex reports
-- Process documentation and analysis
+The goal is an environment where people *want* to figure out how AI fits into their work — not one where they feel pressured to adopt something they don't understand.
+:::
 
 ## Leaders Must Go First
 
@@ -65,8 +85,6 @@ Psychological safety is the strongest predictor of AI adoption success. Teams wh
 ## 📝 Key Concepts
 
 - **Resistance is emotional, not logical** — address the fear, not just the tool
-- **Low-stakes first:** Meeting notes and email drafts before customer-facing outputs
-- **Peer sharing beats top-down training:** Show, don't lecture
 - **Leaders model the learning curve** — openly sharing wins AND failures is more powerful than claiming mastery
 - **Psychological safety is the prerequisite** — without it, adoption stalls regardless of tooling
 
