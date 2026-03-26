@@ -10,7 +10,7 @@ pageId: "10-03"
 - Show that "free" open-source often isn't free in practice.
 
 :::callout-tldr
-Hosted APIs are simple and reliable but your data leaves your servers. Open-source lets you self-host for full control and privacy — but comes with real hidden costs that make it less "free" than it appears.
+Right now, the best-performing models in the world are all closed-source — and providers are actively subsidizing their cost to win users. Open-source gives you full control and privacy, but comes with real trade-offs.
 :::
 
 ## Two Paths
@@ -19,11 +19,11 @@ Hosted APIs are simple and reliable but your data leaves your servers. Open-sour
 You send requests to the provider's servers. They process them, return results, bill you per token. You never see the model weights.
 
 **Open-Source (Self-Hosted):**
-You download the model weights (often from Meta's Llama, Mistral, DeepSeek, etc.) and run them on your own hardware. You own the process entirely.
-
-:::visual{name="visual-open-vs-closed"}
+You download the model weights (from Meta's Llama, Mistral, DeepSeek, etc.) and run them on your own hardware. You own the process entirely.
 
 ## The Case for Hosted APIs
+
+As of 2026, the frontier models — GPT-o3, Claude 3.7, Gemini 2.0 Ultra — are all closed-source. These companies are also actively subsidizing access (through cheap subscriptions and competitive API pricing) to win market share. You're getting a lot for your money right now.
 
 **Pros:**
 - Zero infrastructure setup — start calling the API within minutes
@@ -55,6 +55,19 @@ You download the model weights (often from Meta's Llama, Mistral, DeepSeek, etc.
 
 **Best for:** Organizations with strict data privacy requirements (healthcare, legal, government, finance) or very high volume where per-token costs exceed infrastructure costs.
 
+## Quantized Models — Self-Hosting Lite
+
+If you want to experiment with self-hosting without enterprise hardware, **quantized models** are the entry point.
+
+Quantization compresses a model by reducing the numerical precision of its internal weights — think of it like saving a photo as a JPEG instead of a RAW file. The result:
+- Much smaller file size (a 70B model can go from 140 GB down to ~40 GB)
+- Runs on consumer hardware — even a decent laptop with enough RAM
+- Noticeably less capable on complex tasks, but often fine for simple ones
+
+Tools like **Ollama** let you download and run quantized versions of Llama, Mistral, Gemma, and others with a single command. No cloud account, no API key — just your machine.
+
+Good for: local experimentation, privacy-first prototyping, and getting a feel for open-source models without infrastructure cost.
+
 ## The Hidden Cost Reality
 
 Self-hosting *sounds* free. The model weights often are free to download. But:
@@ -67,13 +80,5 @@ Self-hosting *sounds* free. The model weights often are free to download. But:
 :::callout-error
 "We'll just self-host to save money" is a common mistake. Unless you're processing millions of tokens daily or have strict data residency requirements, the engineering and infrastructure cost will almost certainly exceed what you'd pay for a hosted API. Do the math first.
 :::
-
-## 📝 Key Concepts
-
-- **Hosted API:** Easy, reliable, data leaves your servers, pay-per-use
-- **Self-hosted open-source:** Full control, data stays private, significant hidden costs
-- **Start hosted:** Most businesses should default to API access
-- **Self-host when:** Volume justifies infrastructure, or privacy/compliance demands it
-- **"Free" is relative:** GPU hardware and engineering time cost real money
 
 :::quiz{id="10-03"}

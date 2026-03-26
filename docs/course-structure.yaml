@@ -75,7 +75,7 @@ groups:
     chapters:
       - id: "10"
         title: "The LLM Landscape"
-        description: "Choosing your model: providers, tiers, open vs closed, Web UI vs API."
+        description: "Choosing your model: providers, tiers, open vs closed, subscription vs API."
         icon: "🗺️"
         status: "active"
         firstPage: "chapter-10-01.html"

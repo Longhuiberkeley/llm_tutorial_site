@@ -1,0 +1,136 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Six Evaluation Dimensions</h3>
+        <p class="text-sm text-on-surface-variant">Rate each 1–5 for your use case. The right model matches your highest priorities.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Speed -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">bolt</span>
+                <h4 class="font-bold text-sm">Speed</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                How fast does the response need to arrive? Users notice lag; batch jobs don't.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">User-facing chat, real-time tools</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Overnight batch processing</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accuracy -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">verified</span>
+                <h4 class="font-bold text-sm">Accuracy & Reasoning</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                How much does getting it exactly right matter? Some tasks forgive errors; others can't.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Medical summaries, legal analysis</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Marketing brainstorming, ideation</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cost -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">payments</span>
+                <h4 class="font-bold text-sm">Cost</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                What's your token budget at expected scale? Cost compounds quickly at volume.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">High-volume, simple repeated tasks</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Low-volume, quality-critical tasks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Context Window -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">article</span>
+                <h4 class="font-bold text-sm">Context Window</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                How much text does the model need to hold in mind at once? Long documents need large windows.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Reviewing 50-page contracts</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Short Q&A, single-turn queries</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">lock</span>
+                <h4 class="font-bold text-sm">Privacy & Data Residency</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                Can your data leave your servers? Regulations in some industries make self-hosting non-negotiable.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Healthcare, legal, government, finance</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">General marketing, public content</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Domain Fit -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">tune</span>
+                <h4 class="font-bold text-sm">Domain Fit</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                Does the model have strengths in your specific area? Not all models are equally good at code or multilingual tasks.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Code generation, non-English markets</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">General English text tasks</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

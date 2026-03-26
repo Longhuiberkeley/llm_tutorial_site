@@ -177,7 +177,7 @@
                     <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
                 </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">10.4 Web UI vs. API — Which Should You Use?</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
                 </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
@@ -251,60 +251,75 @@
                     10.1 The LLM Landscape — Who's Who
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    A map of major LLM providers and their strengths, so you can choose based on capabilities rather than brand.
+                    A quick map of who makes LLMs and what makes each group distinct.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
-                <h2>🎯 Core Goals</h2>
-<ul>
-<li>Map the major LLM providers and their distinct strengths.</li>
-<li>Establish that there is no single &quot;best&quot; model — the right choice depends on your use case.</li>
-</ul>
-<div class="callout callout-tldr">
-    There are many LLM providers — each with different strengths, pricing, and philosophies. No single model wins at everything. The goal is to match the model to your specific needs.
+                <div class="callout callout-tldr">
+    The LLM space has many players — but a handful of groups dominate. No single model wins at everything. This page gives you the lay of the land.
 </div>
 
 
 <h2>A Rapidly Evolving Landscape</h2>
-<p>The LLM space moves fast. New models are released every few months. Rankings shift. What was the best model six months ago may be middle-of-the-pack today.</p>
-<p>This page focuses on <strong>frameworks</strong> for evaluation — not specific model versions, which will be outdated before the ink dries.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-llm-landscape</div>
-
+<p>The LLM space moves fast. New models release every few months. Rankings shift. What was best six months ago may be middle-of-the-pack today.</p>
+<p>Rather than memorizing model names, focus on <em>who the key players are and what makes them distinct</em>.</p>
 <h2>The Major Players</h2>
-<p><strong>OpenAI (GPT series)</strong>
-The pioneer. Launched the modern LLM era with GPT-3, then GPT-4. The largest ecosystem of third-party integrations and developer tools. Strong general-purpose performance. ChatGPT remains the most widely used consumer product. Known for: <em>breadth of ecosystem, developer tooling, brand recognition.</em></p>
-<p><strong>Anthropic (Claude)</strong>
-Founded by former OpenAI researchers with a focus on AI safety. Known for very large context windows, strong reasoning, and careful handling of sensitive topics. Claude&#39;s Projects feature enables persistent workspace contexts. Known for: <em>long context, safety focus, nuanced reasoning.</em></p>
-<p><strong>Google (Gemini)</strong>
-Deep integration with Google Workspace (Docs, Gmail, Drive). Strong multimodal capabilities — can process images, audio, and video natively. Benefits from Google&#39;s search and data infrastructure. Known for: <em>Google ecosystem integration, multimodal, real-time information.</em></p>
-<p><strong>Meta (Llama)</strong>
-Open-source models available for self-hosting. The largest open-source LLM community. Anyone can download, modify, and deploy Llama models on their own hardware. Known for: <em>open-source, privacy (self-host), customizability.</em></p>
-<p><strong>xAI (Grok)</strong>
-Real-time access to information via X (Twitter) integration. Less content moderation than competitors — a deliberate choice. Known for: <em>real-time web data, less restrictive outputs.</em></p>
-<p><strong>Chinese ecosystem (DeepSeek, Qwen, others)</strong>
-Highly competitive performance at significantly lower cost. DeepSeek in particular has challenged the assumption that the best models are expensive. Known for: <em>cost efficiency, competitive quality, rapidly improving.</em></p>
-<h2>The Right Framework</h2>
-<p>When evaluating providers, don&#39;t ask &quot;which is best?&quot; Ask:</p>
-<ul>
-<li><strong>What does my task need?</strong> (reasoning, speed, multimodal, long context)</li>
-<li><strong>Where does my data live?</strong> (privacy, compliance, self-hosting)</li>
-<li><strong>What integrations matter?</strong> (Google Workspace, Microsoft 365, Slack)</li>
-<li><strong>What&#39;s my cost ceiling?</strong> (token pricing, volume, budget)</li>
-</ul>
+<div class="space-y-4 my-6">
+
+  <div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-2xl">🏆</span>
+      <div>
+        <div class="font-bold text-base mb-1">The Big Three — OpenAI, Anthropic, Google</div>
+        <p class="text-sm text-on-surface/80 mb-2">These three companies set the pace for the industry. They compete fiercely and actively subsidize access to win market share — which is great news for users.</p>
+        <ul class="text-sm space-y-1 text-on-surface/80">
+          <li><strong>OpenAI (GPT series)</strong> — the pioneer. Largest ecosystem of third-party integrations. ChatGPT is the most widely used LLM product in the world.</li>
+          <li><strong>Anthropic (Claude)</strong> — founded by former OpenAI researchers with a safety-first focus. Known for large context windows and careful reasoning.</li>
+          <li><strong>Google (Gemini)</strong> — deep integration with Google Workspace (Docs, Gmail, Drive). Strong multimodal capabilities and real-time search access.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-2xl">🦙</span>
+      <div>
+        <div class="font-bold text-base mb-1">Meta (Llama)</div>
+        <p class="text-sm text-on-surface/80">Meta releases its Llama models as open-source — free to download and run on your own hardware. This has spawned the largest open-source LLM community in the world. Known for: <em>privacy (self-host), customizability, no vendor lock-in.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-2xl">⚡</span>
+      <div>
+        <div class="font-bold text-base mb-1">xAI (Grok)</div>
+        <p class="text-sm text-on-surface/80">Elon Musk's AI company. Grok has real-time access to X (Twitter) data and takes a notably less restrictive approach to content. Known for: <em>real-time information, fewer content guardrails.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+    <div class="flex items-start gap-3">
+      <span class="text-2xl">🇨🇳</span>
+      <div>
+        <div class="font-bold text-base mb-1">Chinese Ecosystem — DeepSeek, Qwen, GLM, Kimi, MiniMax</div>
+        <p class="text-sm text-on-surface/80 mb-2">A rapidly growing cluster of Chinese labs producing highly competitive models at significantly lower cost. DeepSeek in particular shocked the industry by matching frontier performance at a fraction of the price. Many of these models are also open-source, making them popular choices for self-hosting.</p>
+        <p class="text-sm text-on-surface/80">Known for: <em>cost efficiency, competitive quality, open-source options, fast iteration.</em></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <div class="callout callout-dyk">
-    The LLM landscape has compressed dramatically since 2023. Models that cost $50 per million tokens then cost under $1 today. Competition is the biggest driver of capability improvement — which is great news for users.
+    LLMs have gotten remarkably capable, remarkably fast. Intelligence per dollar has improved at a pace that surprises even people inside the industry — and it&#39;s still accelerating.
 </div>
 
 
-<h2>📝 Key Concepts</h2>
-<ul>
-<li><strong>No single &quot;best&quot; model</strong> — depends entirely on your use case and constraints</li>
-<li><strong>Major providers:</strong> OpenAI, Anthropic, Google, Meta, xAI, Chinese ecosystem</li>
-<li><strong>Each has distinct strengths</strong> — ecosystem, safety, multimodal, open-source, cost</li>
-<li><strong>Evaluate on frameworks, not brand loyalty</strong> — capabilities matter more than logos</li>
-<li><strong>The landscape changes fast</strong> — revisit your choice regularly</li>
-</ul>
 <div id="quiz-10-01" class="quiz-container my-12"></div>
             </div>
 

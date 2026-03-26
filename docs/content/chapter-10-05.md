@@ -21,60 +21,36 @@ This is rarely optimal.
 
 Model selection should be driven by your actual requirements — which vary enormously by use case. A customer support bot has different needs than a legal document reviewer. A marketing email generator has different needs than a code assistant.
 
-:::visual{name="visual-model-chooser"}
-
 ## The Six Dimensions
 
 Rate each dimension for your specific use case (1 = low priority, 5 = critical):
 
-**Speed** — How fast does the response need to be?
-- User-facing chat: high priority (>3s feels slow)
-- Batch overnight processing: low priority
-
-**Accuracy / Reasoning Quality** — How much does getting it right matter?
-- Medical or legal summaries: critical (5)
-- Marketing brainstorming: lower (2-3)
-
-**Cost** — What's your token budget at expected scale?
-- High-volume simple tasks: cost matters a lot
-- Low-volume complex tasks: pay for quality
-
-**Context Window** — How much text do you need to process at once?
-- Summarizing a 50-page contract: large window needed
-- Short Q&A: doesn't matter
-
-**Privacy / Data Residency** — Can data leave your servers?
-- Healthcare or legal: strict requirements
-- General marketing: flexible
-
-**Domain Fit** — Does the model have particular strengths in your domain?
-- Code generation: some models are notably better at code
-- Multilingual: check language coverage for your markets
+:::visual{name="visual-model-dimensions"}
 
 ## Match to Model Strengths
 
 After rating your priorities:
 
-- **High accuracy + large context → Flagship closed-source** (Claude, GPT)
-- **High speed + high volume → Fast tier** (Haiku, Mini, Flash)
-- **Strict privacy → Self-hosted open-source** (Llama, Mistral)
-- **Google Workspace integration → Gemini**
-- **Cost-sensitive at scale → Competitive alternatives** (DeepSeek, Qwen)
+- **High accuracy + large context → Flagship closed-source** (the best/ultra tier from any major provider)
+- **High speed + high volume → Fast tier** (lite, mini, flash-tier models)
+- **Strict privacy → Self-hosted open-source** (models you download and run yourself)
+- **Google Workspace integration → Google's ecosystem**
+- **Cost-sensitive at scale → Chinese open-source alternatives** (DeepSeek, Qwen, and others)
+
+If you're evaluating a model for agent or automation work, the qualities that make a good agent — which we explored earlier in the course — are also worth mapping against your model choice:
+
+:::visual{name="visual-agent-traits"}
 
 :::callout-dyk
 The most important number isn't the benchmark score — it's your own accuracy on your own tasks. Run your actual use cases through competing models and measure the outputs. Internal testing on real examples beats any published leaderboard.
 :::
 
+:::callout-tip
+**Thinking about building an app or automating a workflow?** The model is only part of the decision. When we explored what makes good agents, we saw how they rely on tools, memory, integrations, and the ability to take actions in the world — all things that go beyond the model itself. The ecosystem around the model — what it connects to, how it's orchestrated, what tools it can use — often matters just as much. Future chapters go deeper on this.
+:::
+
 ## Revisit Regularly
 
 The LLM landscape shifts every few months. A model that didn't exist six months ago might now be your best option. Set a calendar reminder every quarter to recheck whether your current choice still makes sense.
-
-## 📝 Key Concepts
-
-- **Model selection is multi-dimensional** — no single metric wins
-- **Six dimensions:** Speed, accuracy, cost, context window, privacy, domain fit
-- **Rate your priorities first,** then find the model that matches
-- **Run your own tests** — published benchmarks often don't reflect your specific use case
-- **Revisit quarterly** — the landscape evolves faster than most technology decisions
 
 :::quiz{id="10-05"}

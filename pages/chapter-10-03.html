@@ -177,7 +177,7 @@
                     <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
                 </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">10.4 Web UI vs. API — Which Should You Use?</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
                 </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
@@ -262,7 +262,7 @@
 <li>Show that &quot;free&quot; open-source often isn&#39;t free in practice.</li>
 </ul>
 <div class="callout callout-tldr">
-    Hosted APIs are simple and reliable but your data leaves your servers. Open-source lets you self-host for full control and privacy — but comes with real hidden costs that make it less &quot;free&quot; than it appears.
+    Right now, the best-performing models in the world are all closed-source — and providers are actively subsidizing their cost to win users. Open-source gives you full control and privacy, but comes with real trade-offs.
 </div>
 
 
@@ -270,10 +270,9 @@
 <p><strong>Closed-Source (Hosted API):</strong>
 You send requests to the provider&#39;s servers. They process them, return results, bill you per token. You never see the model weights.</p>
 <p><strong>Open-Source (Self-Hosted):</strong>
-You download the model weights (often from Meta&#39;s Llama, Mistral, DeepSeek, etc.) and run them on your own hardware. You own the process entirely.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-open-vs-closed</div>
-
+You download the model weights (from Meta&#39;s Llama, Mistral, DeepSeek, etc.) and run them on your own hardware. You own the process entirely.</p>
 <h2>The Case for Hosted APIs</h2>
+<p>As of 2026, the frontier models — GPT-o3, Claude 3.7, Gemini 2.0 Ultra — are all closed-source. These companies are also actively subsidizing access (through cheap subscriptions and competitive API pricing) to win market share. You&#39;re getting a lot for your money right now.</p>
 <p><strong>Pros:</strong></p>
 <ul>
 <li>Zero infrastructure setup — start calling the API within minutes</li>
@@ -305,6 +304,16 @@ You download the model weights (often from Meta&#39;s Llama, Mistral, DeepSeek, 
 <li>Open-source models typically lag behind the best closed-source in capability</li>
 </ul>
 <p><strong>Best for:</strong> Organizations with strict data privacy requirements (healthcare, legal, government, finance) or very high volume where per-token costs exceed infrastructure costs.</p>
+<h2>Quantized Models — Self-Hosting Lite</h2>
+<p>If you want to experiment with self-hosting without enterprise hardware, <strong>quantized models</strong> are the entry point.</p>
+<p>Quantization compresses a model by reducing the numerical precision of its internal weights — think of it like saving a photo as a JPEG instead of a RAW file. The result:</p>
+<ul>
+<li>Much smaller file size (a 70B model can go from 140 GB down to ~40 GB)</li>
+<li>Runs on consumer hardware — even a decent laptop with enough RAM</li>
+<li>Noticeably less capable on complex tasks, but often fine for simple ones</li>
+</ul>
+<p>Tools like <strong>Ollama</strong> let you download and run quantized versions of Llama, Mistral, Gemma, and others with a single command. No cloud account, no API key — just your machine.</p>
+<p>Good for: local experimentation, privacy-first prototyping, and getting a feel for open-source models without infrastructure cost.</p>
 <h2>The Hidden Cost Reality</h2>
 <p>Self-hosting <em>sounds</em> free. The model weights often are free to download. But:</p>
 <ul>
@@ -318,14 +327,6 @@ You download the model weights (often from Meta&#39;s Llama, Mistral, DeepSeek, 
 </div>
 
 
-<h2>📝 Key Concepts</h2>
-<ul>
-<li><strong>Hosted API:</strong> Easy, reliable, data leaves your servers, pay-per-use</li>
-<li><strong>Self-hosted open-source:</strong> Full control, data stays private, significant hidden costs</li>
-<li><strong>Start hosted:</strong> Most businesses should default to API access</li>
-<li><strong>Self-host when:</strong> Volume justifies infrastructure, or privacy/compliance demands it</li>
-<li><strong>&quot;Free&quot; is relative:</strong> GPU hardware and engineering time cost real money</li>
-</ul>
 <div id="quiz-10-03" class="quiz-container my-12"></div>
             </div>
 
@@ -338,7 +339,7 @@ You download the model weights (often from Meta&#39;s Llama, Mistral, DeepSeek, 
                     <a href="chapter-10-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 10.2 Model Tiers & Costs — Bigger Isn't Always Better</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-10-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">10.4 Web UI vs. API — Which Should You Use? <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-10-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">10.4 How You Access LLMs — Interfaces & Pricing Models <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

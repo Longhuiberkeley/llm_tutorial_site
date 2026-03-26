@@ -177,7 +177,7 @@
                     <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
                 </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">10.4 Web UI vs. API — Which Should You Use?</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
                 </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
                     <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
@@ -270,64 +270,260 @@
 <p>Many organizations default to the most famous model, or whatever their IT team approved first, or whatever the CEO saw in a demo.</p>
 <p>This is rarely optimal.</p>
 <p>Model selection should be driven by your actual requirements — which vary enormously by use case. A customer support bot has different needs than a legal document reviewer. A marketing email generator has different needs than a code assistant.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-model-chooser</div>
-
 <h2>The Six Dimensions</h2>
 <p>Rate each dimension for your specific use case (1 = low priority, 5 = critical):</p>
-<p><strong>Speed</strong> — How fast does the response need to be?</p>
-<ul>
-<li>User-facing chat: high priority (&gt;3s feels slow)</li>
-<li>Batch overnight processing: low priority</li>
-</ul>
-<p><strong>Accuracy / Reasoning Quality</strong> — How much does getting it right matter?</p>
-<ul>
-<li>Medical or legal summaries: critical (5)</li>
-<li>Marketing brainstorming: lower (2-3)</li>
-</ul>
-<p><strong>Cost</strong> — What&#39;s your token budget at expected scale?</p>
-<ul>
-<li>High-volume simple tasks: cost matters a lot</li>
-<li>Low-volume complex tasks: pay for quality</li>
-</ul>
-<p><strong>Context Window</strong> — How much text do you need to process at once?</p>
-<ul>
-<li>Summarizing a 50-page contract: large window needed</li>
-<li>Short Q&amp;A: doesn&#39;t matter</li>
-</ul>
-<p><strong>Privacy / Data Residency</strong> — Can data leave your servers?</p>
-<ul>
-<li>Healthcare or legal: strict requirements</li>
-<li>General marketing: flexible</li>
-</ul>
-<p><strong>Domain Fit</strong> — Does the model have particular strengths in your domain?</p>
-<ul>
-<li>Code generation: some models are notably better at code</li>
-<li>Multilingual: check language coverage for your markets</li>
-</ul>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Six Evaluation Dimensions</h3>
+        <p class="text-sm text-on-surface-variant">Rate each 1–5 for your use case. The right model matches your highest priorities.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Speed -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">bolt</span>
+                <h4 class="font-bold text-sm">Speed</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                How fast does the response need to arrive? Users notice lag; batch jobs don't.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">User-facing chat, real-time tools</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Overnight batch processing</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accuracy -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">verified</span>
+                <h4 class="font-bold text-sm">Accuracy & Reasoning</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                How much does getting it exactly right matter? Some tasks forgive errors; others can't.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Medical summaries, legal analysis</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Marketing brainstorming, ideation</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cost -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">payments</span>
+                <h4 class="font-bold text-sm">Cost</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                What's your token budget at expected scale? Cost compounds quickly at volume.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">High-volume, simple repeated tasks</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Low-volume, quality-critical tasks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Context Window -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">article</span>
+                <h4 class="font-bold text-sm">Context Window</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                How much text does the model need to hold in mind at once? Long documents need large windows.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Reviewing 50-page contracts</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">Short Q&A, single-turn queries</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">lock</span>
+                <h4 class="font-bold text-sm">Privacy & Data Residency</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                Can your data leave your servers? Regulations in some industries make self-hosting non-negotiable.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Healthcare, legal, government, finance</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">General marketing, public content</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Domain Fit -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent material-symbols-outlined text-sm">tune</span>
+                <h4 class="font-bold text-sm">Domain Fit</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">
+                Does the model have strengths in your specific area? Not all models are equally good at code or multilingual tasks.
+            </p>
+            <div class="space-y-1.5">
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-green-600 font-bold shrink-0 mt-0.5">↑ High</span>
+                    <span class="text-on-surface-variant">Code generation, non-English markets</span>
+                </div>
+                <div class="text-[10px] flex gap-1.5 items-start">
+                    <span class="text-on-surface/40 font-bold shrink-0 mt-0.5">↓ Low</span>
+                    <span class="text-on-surface-variant">General English text tasks</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <h2>Match to Model Strengths</h2>
 <p>After rating your priorities:</p>
 <ul>
-<li><strong>High accuracy + large context → Flagship closed-source</strong> (Claude, GPT)</li>
-<li><strong>High speed + high volume → Fast tier</strong> (Haiku, Mini, Flash)</li>
-<li><strong>Strict privacy → Self-hosted open-source</strong> (Llama, Mistral)</li>
-<li><strong>Google Workspace integration → Gemini</strong></li>
-<li><strong>Cost-sensitive at scale → Competitive alternatives</strong> (DeepSeek, Qwen)</li>
+<li><strong>High accuracy + large context → Flagship closed-source</strong> (the best/ultra tier from any major provider)</li>
+<li><strong>High speed + high volume → Fast tier</strong> (lite, mini, flash-tier models)</li>
+<li><strong>Strict privacy → Self-hosted open-source</strong> (models you download and run yourself)</li>
+<li><strong>Google Workspace integration → Google&#39;s ecosystem</strong></li>
+<li><strong>Cost-sensitive at scale → Chinese open-source alternatives</strong> (DeepSeek, Qwen, and others)</li>
 </ul>
+<p>If you&#39;re evaluating a model for agent or automation work, the qualities that make a good agent — which we explored earlier in the course — are also worth mapping against your model choice:</p>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Agent Checklist</h3>
+        <p class="text-sm text-on-surface-variant">What separates a smart script from a true AI agent?</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Autonomy & Proactivity -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">self_improvement</span>
+                <h4 class="font-bold text-sm">Autonomy & Proactivity</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Acts independently toward a goal — doesn't wait to be told every step. More like an employee than a tool.
+            </p>
+        </div>
+
+        <!-- Goal-Oriented Planning -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">checklist</span>
+                <h4 class="font-bold text-sm">Goal-Oriented Planning</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Breaks high-level goals into actionable steps, prioritizes them, and adjusts when conditions change.
+            </p>
+        </div>
+
+        <!-- Tool Use & Interoperability -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">build</span>
+                <h4 class="font-bold text-sm">Tool Use & Interoperability</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Interacts with external APIs, search engines, and databases to get real things done — not just talk about them.
+            </p>
+        </div>
+
+        <!-- Adaptability & Learning -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">published_with_changes</span>
+                <h4 class="font-bold text-sm">Adaptability</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                If Tool A fails, it tries Tool B. Uses real-time feedback to refine its approach mid-task.
+            </p>
+        </div>
+
+        <!-- Context Awareness & Memory -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">memory</span>
+                <h4 class="font-bold text-sm">Context & Memory</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Maintains short- and long-term memory of past steps, enabling coherent work across multi-step or multi-session tasks.
+            </p>
+        </div>
+
+        <!-- Collaboration -->
+        <div class="p-6 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary material-symbols-outlined text-sm">group</span>
+                <h4 class="font-bold text-sm">Collaboration</h4>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                Works alongside humans and other specialized agents to accomplish complex, multi-part projects.
+            </p>
+        </div>
+    </div>
+
+    <!-- Script vs Agent contrast -->
+    <div class="mt-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-5">
+        <div class="grid grid-cols-2 gap-6 text-center">
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">Script</div>
+                <div class="font-mono text-xs text-on-surface-variant bg-surface-container rounded-lg px-4 py-3">A → B → C</div>
+                <p class="text-[11px] text-on-surface-variant mt-2 opacity-70 italic">Fixed steps, breaks if anything changes</p>
+            </div>
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-primary mb-2">Agent</div>
+                <div class="font-mono text-xs text-primary bg-primary/5 border border-primary/20 rounded-lg px-4 py-3">Perceive → Plan → Act → Observe → Repeat</div>
+                <p class="text-[11px] text-on-surface-variant mt-2 italic">Adaptive loop — keeps going until the goal is met</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="callout callout-dyk">
     The most important number isn&#39;t the benchmark score — it&#39;s your own accuracy on your own tasks. Run your actual use cases through competing models and measure the outputs. Internal testing on real examples beats any published leaderboard.
 </div>
 
 
+<div class="callout callout-tip">
+    <strong>Thinking about building an app or automating a workflow?</strong> The model is only part of the decision. When we explored what makes good agents, we saw how they rely on tools, memory, integrations, and the ability to take actions in the world — all things that go beyond the model itself. The ecosystem around the model — what it connects to, how it&#39;s orchestrated, what tools it can use — often matters just as much. Future chapters go deeper on this.
+</div>
+
+
 <h2>Revisit Regularly</h2>
 <p>The LLM landscape shifts every few months. A model that didn&#39;t exist six months ago might now be your best option. Set a calendar reminder every quarter to recheck whether your current choice still makes sense.</p>
-<h2>📝 Key Concepts</h2>
-<ul>
-<li><strong>Model selection is multi-dimensional</strong> — no single metric wins</li>
-<li><strong>Six dimensions:</strong> Speed, accuracy, cost, context window, privacy, domain fit</li>
-<li><strong>Rate your priorities first,</strong> then find the model that matches</li>
-<li><strong>Run your own tests</strong> — published benchmarks often don&#39;t reflect your specific use case</li>
-<li><strong>Revisit quarterly</strong> — the landscape evolves faster than most technology decisions</li>
-</ul>
 <div id="quiz-10-05" class="quiz-container my-12"></div>
             </div>
 
@@ -337,7 +533,7 @@
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-10-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 10.4 Web UI vs. API — Which Should You Use?</a>
+                    <a href="chapter-10-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 10.4 How You Access LLMs — Interfaces & Pricing Models</a>
                 </div>
                 <div class="next-link">
                     <a href="chapter-11-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">11.1 The Augmentation Narrative — Supercharging, Not Replacing <span class="material-symbols-outlined">arrow_forward</span></a>

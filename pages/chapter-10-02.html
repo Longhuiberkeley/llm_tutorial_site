@@ -177,7 +177,7 @@
                     <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
                 </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">10.4 Web UI vs. API — Which Should You Use?</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
                 </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
@@ -256,69 +256,167 @@
             </header>
 
             <div class="content-body space-y-12">
-                <h2>🎯 Core Goals</h2>
-<ul>
-<li>Explain the three-tier model structure that almost every provider uses.</li>
-<li>Show that the biggest model is often overkill — and mid-tier is frequently the right call.</li>
-</ul>
-<div class="callout callout-tldr">
-    You don&#39;t always need the most powerful (or most expensive) model. Flagship models shine for complex tasks. Fast models handle simple work cheaply. Mid-tier models are the sweet spot for most business use cases.
+                <div class="callout callout-tldr">
+    You don&#39;t always need the most powerful model. Almost every provider offers three tiers — and picking the right one is more important than picking the right brand.
 </div>
 
 
 <h2>The Three Tiers</h2>
-<p>Almost every major provider offers roughly three tiers. The names change, but the pattern is consistent:</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-model-tiers</div>
+<p>Almost every major provider offers roughly three tiers. The names change, but the pattern is universal. Click to explore each:</p>
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <h3 class="text-lg font-bold font-headline text-center mb-5">Pick a tier to explore</h3>
 
-<p><strong>FLAGSHIP</strong> — The best quality model</p>
-<ul>
-<li>Strongest reasoning, longest context, best at complex tasks</li>
-<li>Highest cost per token, slowest response time</li>
-<li>Use for: Legal document analysis, complex code generation, nuanced writing, anything where quality is critical and speed/cost is secondary</li>
-</ul>
-<p><strong>MID-TIER</strong> — The smart compromise</p>
-<ul>
-<li>Excellent quality for most tasks at significantly lower cost</li>
-<li>Good speed, reasonable context window</li>
-<li>Use for: The vast majority of business tasks — summarization, drafting, Q&amp;A, customer support drafts</li>
-<li><em>This is where most teams should start</em></li>
-</ul>
-<p><strong>FAST (Nano/Mini/Haiku)</strong> — Speed and scale</p>
-<ul>
-<li>Cheapest, fastest, smaller context window</li>
-<li>Lower reasoning quality — makes more mistakes on complex tasks</li>
-<li>Use for: Simple classification, routing decisions, very high-volume simple tasks where cost matters more than quality</li>
-</ul>
+    <!-- Tab buttons -->
+    <div class="flex gap-2 mb-6" id="tier-tabs">
+        <button onclick="selectTier(0)" id="tier-btn-0"
+            class="flex-1 py-2.5 px-3 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer">
+            🚀 Flagship
+        </button>
+        <button onclick="selectTier(1)" id="tier-btn-1"
+            class="flex-1 py-2.5 px-3 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer">
+            ⚖️ Mid-Tier
+        </button>
+        <button onclick="selectTier(2)" id="tier-btn-2"
+            class="flex-1 py-2.5 px-3 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer">
+            ⚡ Fast
+        </button>
+    </div>
+
+    <!-- Content panel -->
+    <div id="tier-panel" class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant min-h-[240px] transition-all">
+        <!-- Populated by JS -->
+    </div>
+</div>
+
+<script>
+(function() {
+    var tiers = [
+        {
+            label: '🚀 Flagship',
+            tagline: 'Best quality. Highest cost.',
+            cost: '💰💰💰',
+            costLabel: 'Most expensive',
+            color: 'var(--primary)',
+            examples: [
+                'Legal document analysis',
+                'Complex multi-step reasoning',
+                'Nuanced long-form writing',
+                'Intricate code generation'
+            ],
+            when: 'Quality is critical and you can\'t afford mistakes. Cost and speed are secondary.',
+            models: 'Often labelled: Ultra, Max, Opus, Pro (top tier)'
+        },
+        {
+            label: '⚖️ Mid-Tier',
+            tagline: 'Excellent quality. Smart price.',
+            cost: '💰💰',
+            costLabel: 'Sweet spot',
+            color: 'var(--accent)',
+            examples: [
+                'Summarizing reports and documents',
+                'Drafting emails and content',
+                'Customer support responses',
+                'General Q&A and analysis'
+            ],
+            when: 'The vast majority of business tasks. Start here. Upgrade to flagship only if quality falls short.',
+            models: 'Often labelled: Pro, Standard, Sonnet, Balanced'
+        },
+        {
+            label: '⚡ Fast',
+            tagline: 'Fastest. Cheapest. Simpler tasks only.',
+            cost: '💰',
+            costLabel: 'Lowest cost',
+            color: '#5B8DB8',
+            examples: [
+                'Classifying support tickets',
+                'Tagging or routing items',
+                'Simple yes/no decisions',
+                'Very high-volume simple tasks'
+            ],
+            when: 'The task is simple AND volume is high. Makes more mistakes on complex tasks — test carefully before using for anything important.',
+            models: 'Often labelled: Lite, Mini, Flash, Haiku, Nano'
+        }
+    ];
+
+    function render(idx) {
+        var t = tiers[idx];
+        var panel = document.getElementById('tier-panel');
+        panel.innerHTML =
+            '<div class="flex items-start justify-between mb-3">' +
+                '<div>' +
+                    '<div class="text-xl font-bold mb-0.5">' + t.label + '</div>' +
+                    '<div class="text-sm text-on-surface/70">' + t.tagline + '</div>' +
+                '</div>' +
+                '<div class="text-right shrink-0 ml-4">' +
+                    '<div class="text-xl">' + t.cost + '</div>' +
+                    '<div class="text-xs text-on-surface/50 mt-0.5">' + t.costLabel + '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="border-t border-outline-variant pt-3 mt-3">' +
+                '<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">Typical use cases</div>' +
+                '<ul class="text-sm space-y-1">' +
+                    t.examples.map(function(e) {
+                        return '<li class="flex items-start gap-2"><span class="mt-0.5 shrink-0" style="color:' + t.color + '">▸</span>' + e + '</li>';
+                    }).join('') +
+                '</ul>' +
+            '</div>' +
+            '<div class="border-t border-outline-variant pt-3 mt-3">' +
+                '<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-1">Pick this when...</div>' +
+                '<p class="text-sm">' + t.when + '</p>' +
+            '</div>' +
+            '<div class="mt-3 text-xs text-on-surface/40 italic">e.g. ' + t.models + '</div>';
+
+        // Update tab styles
+        for (var i = 0; i < 3; i++) {
+            var btn = document.getElementById('tier-btn-' + i);
+            if (i === idx) {
+                btn.style.borderColor = tiers[i].color;
+                btn.style.color = tiers[i].color;
+                btn.style.backgroundColor = 'color-mix(in srgb, ' + tiers[i].color + ' 10%, var(--surface-container-lowest))';
+            } else {
+                btn.style.borderColor = 'var(--outline-variant)';
+                btn.style.color = 'var(--on-surface)';
+                btn.style.backgroundColor = 'var(--surface-container-lowest)';
+            }
+        }
+    }
+
+    window.selectTier = function(idx) { render(idx); };
+
+    render(1); // default to mid-tier
+})();
+</script>
+
+
 <h2>Understanding Token Pricing</h2>
-<p>Every provider charges per million tokens. A token is roughly ¾ of a word — so 1 million tokens ≈ 750,000 words ≈ several large novels.</p>
-<p><strong>What this means in practice:</strong></p>
+<p>Every provider charges per <strong>million tokens</strong>. A token is roughly ¾ of a word — so 1 million tokens ≈ 750,000 words.</p>
+<p>Pricing has two separate rates:</p>
 <ul>
-<li>A typical customer support response exchange: ~500-2,000 tokens</li>
-<li>Summarizing a 10-page report: ~3,000-5,000 tokens</li>
-<li>Processing 1,000 customer emails per day: perhaps 2-4 million tokens/month</li>
+<li><strong>Input tokens</strong> — what you send to the model (your prompt, documents, context)</li>
+<li><strong>Output tokens</strong> — what the model generates back (usually 3–4× more expensive than input)</li>
 </ul>
-<p>At mid-tier pricing, 4 million tokens might cost $4–$20/month — very affordable. At flagship pricing, the same usage could cost 5-20x more.</p>
+<p>Two additional details that matter once you&#39;re building:</p>
+<p><strong>Reasoning tokens</strong> — some models spend tokens internally working through a problem before producing an answer. These count as output tokens and add to your bill.</p>
+<p><strong>Cache hits</strong> — if you&#39;re sending the same large context repeatedly (e.g. a system prompt or document), providers cache it. A cache hit typically costs only <strong>~10% of standard input prices</strong> — a big saving at scale.</p>
 <div class="callout callout-dyk">
-    A common mistake: defaulting to the flagship model &quot;just to be safe.&quot; For most tasks, mid-tier models perform at 90%+ the quality of flagship at 10-20% of the cost. Start mid-tier, upgrade only if quality is genuinely insufficient.
+    Subscription plans are <strong>heavily subsidized</strong> by providers to drive adoption. The same usage billed through the API can cost significantly more at low to moderate volumes. Great if you&#39;re an individual user — but know the difference when you&#39;re building a product.
 </div>
 
 
-<h2>The Decision Logic</h2>
-<p>When choosing a tier, ask:</p>
-<ol>
-<li><strong>Is this task complex?</strong> (Legal reasoning, intricate code, multi-step analysis) → Flagship</li>
-<li><strong>Is this task standard?</strong> (Summarize, draft, classify, explain) → Mid-tier</li>
-<li><strong>Is this task simple AND high-volume?</strong> (Route support tickets, tag categories) → Fast</li>
-</ol>
-<p>If you&#39;re unsure, start mid-tier. Monitor quality. Adjust.</p>
-<h2>📝 Key Concepts</h2>
+<h2>How to Read LLM Benchmarks</h2>
+<p>Benchmarks are standardized tests that score models on specific tasks. You&#39;ll see them quoted everywhere in reviews and announcements. A few you&#39;ll encounter:</p>
 <ul>
-<li><strong>Three tiers:</strong> Flagship (best, expensive), Mid-tier (sweet spot), Fast (cheap, simple tasks)</li>
-<li><strong>Token pricing:</strong> Charged per million tokens — roughly ¾ of a word each</li>
-<li><strong>Start mid-tier:</strong> Most tasks don&#39;t need flagship quality; upgrade only if needed</li>
-<li><strong>Cost scales with usage:</strong> Monitor token consumption early — it can grow fast in production</li>
-<li><strong>Speed matters:</strong> Fast models aren&#39;t just cheaper — they respond faster, which matters for user-facing apps</li>
+<li><strong>MMLU</strong> — tests general knowledge across 57 subjects (law, medicine, history, math...)</li>
+<li><strong>HumanEval / MBPP</strong> — measures coding ability: can the model write correct programs?</li>
+<li><strong>GPQA</strong> — graduate-level science questions designed to be hard even with Google</li>
+<li><strong>MATH</strong> — competition-level math problem solving</li>
+<li><strong>Chatbot Arena (LMSYS)</strong> — real humans compare two model responses and vote; the ELO score reflects actual human preference at scale</li>
 </ul>
+<div class="callout callout-error">
+    <strong>Benchmarks are a starting point, not a verdict.</strong> Models are increasingly trained on benchmark-adjacent data, inflating scores. More importantly, a model that tops the MMLU leaderboard may still fumble your specific task. The best evaluation is always your own: take 10–20 real examples from your use case and run them through competing models. What you observe beats any published number.
+</div>
+
+
 <div id="quiz-10-02" class="quiz-container my-12"></div>
             </div>
 
