@@ -1,0 +1,103 @@
+<!-- Visual: Multimodal modality tour — 5 clickable cards -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-2">What Can AI Work With?</h3>
+        <p class="text-sm text-on-surface-variant">Modern AI isn't limited to text. Click each type to see what's possible.</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+
+        <!-- Images -->
+        <button onclick="toggleModality(this)" class="mod-card p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent text-left transition-all cursor-pointer">
+            <div class="text-3xl mb-2">🖼️</div>
+            <div class="font-bold text-sm mb-1">Images</div>
+            <div class="text-[11px] text-on-surface/60">Photos, diagrams, screenshots</div>
+            <div class="mod-detail hidden mt-3 pt-3 border-t border-outline-variant">
+                <div class="text-[11px] leading-relaxed space-y-2">
+                    <div><span class="font-bold text-green-700">✅ Business use:</span> Upload a photo of a defective part and ask "What's wrong with this?" — gets an accurate answer.</div>
+                    <div><span class="font-bold" style="color: var(--accent);">⚠️ Limitation:</span> Tiny labels in dense technical diagrams can still be misread.</div>
+                </div>
+            </div>
+        </button>
+
+        <!-- Documents -->
+        <button onclick="toggleModality(this)" class="mod-card p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent text-left transition-all cursor-pointer">
+            <div class="text-3xl mb-2">📄</div>
+            <div class="font-bold text-sm mb-1">Documents</div>
+            <div class="text-[11px] text-on-surface/60">PDFs, scans, spreadsheets</div>
+            <div class="mod-detail hidden mt-3 pt-3 border-t border-outline-variant">
+                <div class="text-[11px] leading-relaxed space-y-2">
+                    <div><span class="font-bold text-green-700">✅ Business use:</span> Upload a 50-page contract and ask "Are there any auto-renewal clauses?" — saves hours of reading.</div>
+                    <div><span class="font-bold" style="color: var(--accent);">⚠️ Limitation:</span> Very long documents may exceed context limits — check the model's page cap.</div>
+                </div>
+            </div>
+        </button>
+
+        <!-- Audio -->
+        <button onclick="toggleModality(this)" class="mod-card p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent text-left transition-all cursor-pointer">
+            <div class="text-3xl mb-2">🎙️</div>
+            <div class="font-bold text-sm mb-1">Audio</div>
+            <div class="text-[11px] text-on-surface/60">Speech, calls, recordings</div>
+            <div class="mod-detail hidden mt-3 pt-3 border-t border-outline-variant">
+                <div class="text-[11px] leading-relaxed space-y-2">
+                    <div><span class="font-bold text-green-700">✅ Business use:</span> Transcribe and summarize a one-hour customer call into 5 action items in seconds.</div>
+                    <div><span class="font-bold" style="color: var(--accent);">⚠️ Limitation:</span> Strong accents or background noise can reduce transcription accuracy.</div>
+                </div>
+            </div>
+        </button>
+
+        <!-- Video -->
+        <button onclick="toggleModality(this)" class="mod-card p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent text-left transition-all cursor-pointer">
+            <div class="text-3xl mb-2">🎬</div>
+            <div class="font-bold text-sm mb-1">Video</div>
+            <div class="text-[11px] text-on-surface/60">Clips, screen recordings, demos</div>
+            <div class="mod-detail hidden mt-3 pt-3 border-t border-outline-variant">
+                <div class="text-[11px] leading-relaxed space-y-2">
+                    <div><span class="font-bold text-green-700">✅ Business use:</span> Upload a screen recording of a software bug and ask "What caused this error?" — describes the sequence of events.</div>
+                    <div><span class="font-bold" style="color: var(--accent);">⚠️ Limitation:</span> Long videos may be sampled (not every frame analyzed) — fast-moving detail can be missed.</div>
+                </div>
+            </div>
+        </button>
+
+        <!-- Cross-modal Search -->
+        <button onclick="toggleModality(this)" class="mod-card p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent text-left transition-all cursor-pointer col-span-2 sm:col-span-1">
+            <div class="text-3xl mb-2">🔍</div>
+            <div class="font-bold text-sm mb-1">Cross-modal Search</div>
+            <div class="text-[11px] text-on-surface/60">Search images with text (or vice versa)</div>
+            <div class="mod-detail hidden mt-3 pt-3 border-t border-outline-variant">
+                <div class="text-[11px] leading-relaxed space-y-2">
+                    <div><span class="font-bold text-green-700">✅ Business use:</span> Type "a red machine part with a circular connector" and find the matching photo in your archive — without any file naming or tagging.</div>
+                    <div><span class="font-bold" style="color: var(--accent);">⚠️ Limitation:</span> Requires your content to be indexed first — it's a setup-and-maintain system, not instant.</div>
+                </div>
+            </div>
+        </button>
+
+    </div>
+
+    <div class="mt-5 bg-error/5 border border-error/20 rounded-xl px-4 py-3 text-xs text-center text-on-surface/70">
+        ⚠️ Not every LLM handles every modality — always verify the specific model's capabilities before building a workflow around them.
+    </div>
+</div>
+
+<script>
+(function() {
+    window.toggleModality = function(card) {
+        var detail = card.querySelector('.mod-detail');
+        var isOpen = !detail.classList.contains('hidden');
+
+        // Close all cards
+        document.querySelectorAll('.mod-card').forEach(function(c) {
+            c.querySelector('.mod-detail').classList.add('hidden');
+            c.style.borderColor = '';
+            c.style.backgroundColor = '';
+        });
+
+        // If it wasn't open, open it
+        if (!isOpen) {
+            detail.classList.remove('hidden');
+            card.style.borderColor = 'var(--accent)';
+            card.style.backgroundColor = 'color-mix(in srgb, var(--accent) 6%, white)';
+        }
+    };
+})();
+</script>

@@ -165,7 +165,7 @@
                     <span class="text-sm font-medium">9.2 Understanding vs. Generating — Two Very Different Skills</span>
                 </a><a href="chapter-09-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">9.3 Multimodal RAG & Document Extraction</span>
+                    <span class="text-sm font-medium">9.3 What Can You Do With a Stack of Scanned Documents?</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 10</div><a href="chapter-10-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">10.1 The LLM Landscape — Who's Who</span>
@@ -259,56 +259,167 @@
                 <h2>🎯 Core Goals</h2>
 <ul>
 <li>Clarify the fundamental difference between understanding media (input) and generating media (output).</li>
-<li>Help readers calibrate expectations: understanding is more reliable; generation is more creative but less controllable.</li>
+<li>Help readers calibrate expectations: understanding is reliable enough for production; generation is powerful but done by entirely different, specialized systems.</li>
 </ul>
 <div class="callout callout-tldr">
-    Describing a photo and drawing a photo are completely different skills — even for AI. Understanding is more reliable. Generation is powerful but harder to control. Many products blend both, which can hide the complexity.
+    Describing a photo and creating one are completely different skills — even for AI. Understanding has gotten very good. Generation is powerful, but it usually happens in a separate specialist model. Many products blend both, which hides the complexity.
 </div>
 
 
 <h2>The Two Directions</h2>
-<p>Think of it like a professional illustrator vs. an art critic:</p>
-<p><strong>The critic (understanding/input):</strong> Looks at a painting and describes what they see — technique, emotion, subject matter, historical context. Analytical. Based on what&#39;s actually there.</p>
-<p><strong>The illustrator (generation/output):</strong> Creates something new from a description. Creative. Many valid interpretations exist — and mistakes are harder to catch.</p>
-<p>AI systems have analogues of both. And they work very differently.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-understand-vs-generate</div>
+<p>Think of it like a professional film critic vs. a specialist studio:</p>
+<p><strong>The critic (understanding/input):</strong> Watches a film and explains what&#39;s on screen — the lighting, the emotion, the plot holes. Analytical. Grounded in what&#39;s actually there.</p>
+<p><strong>The studio (generation/output):</strong> Creates something from scratch based on a brief. Creative. Many valid results exist, and subtle problems are hard to catch before the premiere.</p>
+<p>AI has analogues of both. And they work very differently — often not even in the same model.</p>
+<!-- Visual: Understanding vs. Generating — static two-column comparison -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-5">
+        <h3 class="text-lg font-bold font-headline mb-1">Two Very Different Skills</h3>
+        <p class="text-sm text-on-surface-variant">The film critic vs. the specialist studio</p>
+    </div>
 
-<h2>Understanding — Input Direction</h2>
-<p>When an AI <em>understands</em> an image, it&#39;s essentially reading it. The image is converted into embeddings (like word embeddings, but for pixels and regions), and the model uses those to answer questions.</p>
-<p><strong>What makes it relatively reliable:</strong></p>
-<ul>
-<li>There&#39;s a &quot;ground truth&quot; — the image actually shows what it shows</li>
-<li>Mistakes are usually obvious — a misidentified object is easy to spot</li>
-<li>Improving is straightforward — more training on diverse images</li>
-</ul>
-<p><strong>Real uses:</strong> Document analysis, medical imaging, accessibility (alt-text generation), quality control in manufacturing, reading receipts or forms.</p>
-<h2>Generating — Output Direction</h2>
-<p>When an AI <em>generates</em> an image, it&#39;s creating something that never existed. There&#39;s no single correct answer — &quot;a professional headshot in a warm office&quot; could look a thousand different ways.</p>
-<p><strong>What makes it harder to control:</strong></p>
-<ul>
-<li>No objective right answer — only preferences and constraints</li>
-<li>Subtle errors are hard to detect (extra fingers, wrong text in signs, unnatural lighting)</li>
-<li>Consistency across multiple generated images is difficult to maintain</li>
-</ul>
-<p><strong>Real uses:</strong> Marketing mockups, concept illustration, product visualization, creative exploration.</p>
-<div class="callout callout-dyk">
-    The same AI product often uses understanding for one thing and generation for another — simultaneously. A system that &quot;reads your uploaded diagram and creates an improved version&quot; is using vision understanding first, then image generation second. Two different models, orchestrated together.
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Understanding — blue -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border-2 border-blue-400/40">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🎬</span>
+                <div>
+                    <div class="font-bold">Understanding</div>
+                    <div class="text-xs text-blue-600 font-bold">The film critic</div>
+                </div>
+            </div>
+
+            <!-- Flow -->
+            <div class="flex items-center justify-between gap-1 mb-4 text-[10px]">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg px-2 py-2 text-center flex-1">
+                    <div class="text-xl mb-1">🖼️</div>
+                    <div class="font-bold text-blue-700">Image in</div>
+                </div>
+                <div class="text-blue-400 font-black text-base">→</div>
+                <div class="bg-blue-100 border border-blue-200 rounded-lg px-2 py-2 text-center flex-1">
+                    <div class="text-xl mb-1">🧠</div>
+                    <div class="font-bold text-blue-700">LLM reads</div>
+                </div>
+                <div class="text-blue-400 font-black text-base">→</div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg px-2 py-2 text-center flex-1">
+                    <div class="text-xl mb-1">💬</div>
+                    <div class="font-bold text-blue-700">Answer out</div>
+                </div>
+            </div>
+
+            <div class="space-y-1.5 text-xs mb-4">
+                <div class="flex gap-2"><span class="text-blue-500 font-bold flex-shrink-0">•</span><span>Ground truth exists — mistakes are obvious</span></div>
+                <div class="flex gap-2"><span class="text-blue-500 font-bold flex-shrink-0">•</span><span>Reliable enough for production workflows</span></div>
+                <div class="flex gap-2"><span class="text-blue-500 font-bold flex-shrink-0">•</span><span>Works with photos, documents, diagrams</span></div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-blue-700">Done by:</span> The LLM itself
+            </div>
+        </div>
+
+        <!-- Generation — orange -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border-2 border-orange-400/40">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🎨</span>
+                <div>
+                    <div class="font-bold">Generation</div>
+                    <div class="text-xs text-orange-600 font-bold">The specialist studio</div>
+                </div>
+            </div>
+
+            <!-- Flow -->
+            <div class="flex items-center justify-between gap-1 mb-4 text-[10px]">
+                <div class="bg-orange-50 border border-orange-200 rounded-lg px-2 py-2 text-center flex-1">
+                    <div class="text-xl mb-1">📝</div>
+                    <div class="font-bold text-orange-700">Text in</div>
+                </div>
+                <div class="text-orange-400 font-black text-base">→</div>
+                <div class="bg-orange-100 border border-orange-200 rounded-lg px-2 py-2 text-center flex-1">
+                    <div class="text-xl mb-1">🧠</div>
+                    <div class="font-bold text-orange-700">LLM directs</div>
+                </div>
+                <div class="text-orange-400 font-black text-base">→</div>
+                <div class="bg-orange-50 border border-orange-200 rounded-lg px-2 py-2 text-center flex-1">
+                    <div class="text-xl mb-1">🖼️✨</div>
+                    <div class="font-bold text-orange-700">Specialist model</div>
+                </div>
+            </div>
+
+            <div class="space-y-1.5 text-xs mb-4">
+                <div class="flex gap-2"><span class="text-orange-500 font-bold flex-shrink-0">•</span><span>No single right answer — many valid outputs</span></div>
+                <div class="flex gap-2"><span class="text-orange-500 font-bold flex-shrink-0">•</span><span>Subtle errors are hard to spot</span></div>
+                <div class="flex gap-2"><span class="text-orange-500 font-bold flex-shrink-0">•</span><span>Video adds another order of complexity</span></div>
+            </div>
+
+            <div class="bg-orange-50 border border-orange-200 rounded-lg px-3 py-2 text-xs">
+                <span class="font-bold text-orange-700">Done by:</span> A separate specialized model
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-4 bg-primary/5 border border-primary/20 rounded-xl px-4 py-3 text-xs text-center">
+        The same product interface can use <strong>both</strong> — silently, in the same conversation.
+    </div>
 </div>
 
 
-<h2>Why This Distinction Matters for Business</h2>
-<p>When evaluating AI tools:</p>
+<h2>Understanding — It&#39;s Gotten Really Good</h2>
+<p>When a modern LLM &quot;sees&quot; an image, it does something genuinely impressive: it converts a photo, diagram, or screenshot into meaning — connecting visual content to language.</p>
+<p>Today&#39;s multimodal LLMs are reliably good at:</p>
 <ul>
-<li><strong>Understanding tasks</strong> (classify this photo, extract text from this scan, describe this chart) → generally reliable, can go into production with testing</li>
-<li><strong>Generation tasks</strong> (create a product image, illustrate this concept) → requires human review; outputs vary; not appropriate for high-stakes contexts without oversight</li>
+<li><strong>Describing what&#39;s in a photo</strong> — &quot;there is a cracked seal near the left inlet fitting&quot;</li>
+<li><strong>Reading text in images</strong> — printed labels, handwritten notes, whiteboard photos</li>
+<li><strong>Answering questions about charts and slides</strong> — &quot;what&#39;s the trend in Q3?&quot;</li>
+<li><strong>Flagging anomalies</strong> — product defects on an assembly line, inconsistencies in a document</li>
+</ul>
+<p><strong>What makes understanding reliable:</strong></p>
+<ul>
+<li>There is a &quot;ground truth&quot; — the image either shows something or it doesn&#39;t</li>
+<li>Mistakes are usually obvious and easy to catch in testing</li>
+<li>Improving accuracy is straightforward — test on your actual documents</li>
+</ul>
+<p><strong>Real uses:</strong> Quality control in manufacturing, extracting data from scanned forms, generating alt-text for accessibility, analyzing competitor product photos, reviewing images for anomalies.</p>
+<h2>Generating — A Whole Different World</h2>
+<p>Generating images or video is an order of magnitude more complex — and almost always done by a <strong>separate, specialized model</strong>, not the text LLM you are talking to.</p>
+<p>When you ask a chat interface to &quot;create an image,&quot; here is what actually happens:</p>
+<ol>
+<li><strong>The LLM understands your request</strong> — its job, in the understanding direction</li>
+<li><strong>The LLM calls a specialist</strong> — it sends your description to a dedicated image generation model as a tool call</li>
+<li><strong>The specialist model does the drawing</strong> — the result comes back through the same interface</li>
+</ol>
+<p>The LLM is the director, not the artist. It calls in a specialist for the creative work.</p>
+<p>This is also why some platforms require you to <strong>explicitly toggle on</strong> capabilities like &quot;Create Image,&quot; &quot;Create Music,&quot; or &quot;Create Video.&quot; That toggle is activating a different model — not just flipping a feature switch on the same LLM. Image and video generation are harder for a deeper reason too: they&#39;re higher-dimensional. A single 1024×1024 image contains over a million pixel values that must all cohere into something visually sensible. A 10-second video multiplies that by hundreds of frames — plus motion, physics, lighting consistency, and audio sync. This difficulty is less about &quot;understanding vs. generating&quot; and more about the sheer complexity of the medium.</p>
+<p><strong>What makes generation harder to control:</strong></p>
+<ul>
+<li>No single &quot;correct&quot; answer — &quot;a warm office headshot&quot; has thousands of valid interpretations</li>
+<li>Subtle errors are hard to spot: extra fingers, wrong text on signs, unnatural shadows</li>
+<li>Consistency across a series of images is difficult to maintain</li>
+<li><strong>Video generation multiplies every challenge</strong> — frame-to-frame consistency, realistic motion, physics, audio sync — each adds another layer of complexity</li>
+</ul>
+<div class="callout callout-dyk">
+    Some AI platforms let you explicitly toggle which tools are active — Web Search on or off, Image Generation enabled or not. Others handle this automatically, deciding behind the scenes when to call which specialist. Explicit control is more transparent and privacy-friendly; seamless auto-selection is simpler but harder to audit. If you&#39;ve ever wondered why a chat interface sometimes searches the web and sometimes doesn&#39;t — that&#39;s tool routing, not magic.
+</div>
+
+
+<h2>Why This Actually Matters</h2>
+<p>When thinking about what to trust and how to use these tools:</p>
+<ul>
+<li><strong>Understanding tasks</strong> (classify this photo, extract text from this scan, describe this chart) → reliable enough for production use; build test suites around accuracy and edge cases</li>
+<li><strong>Image generation tasks</strong> (create product mockups, illustrate concepts) → requires human review; outputs vary run to run; not appropriate for high-stakes materials without oversight</li>
+<li><strong>Video generation</strong> → still rapidly maturing; treat as a creative exploration tool, not a production pipeline yet</li>
 </ul>
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Understanding = perception (input):</strong> Analyzing existing media — more reliable</li>
-<li><strong>Generation = creation (output):</strong> Making new media — more powerful, less controllable</li>
-<li><strong>Different techniques:</strong> Not even the same type of model under the hood</li>
-<li><strong>Production readiness differs:</strong> Understanding tasks are generally more production-ready than generation</li>
-<li><strong>Many products blend both</strong> — knowing which mode is active helps calibrate trust</li>
+<li><strong>Understanding = reliable perception (input):</strong> Analyzing existing media — good enough for production workflows today</li>
+<li><strong>Generation = creative construction (output):</strong> Making new media — powerful, but done by specialist models</li>
+<li><strong>The LLM as orchestrator:</strong> It doesn&#39;t draw — it calls a specialist image or video model as a tool</li>
+<li><strong>Calibrate trust differently:</strong> Understanding tasks are reliable enough for production; generation tasks need human review</li>
+<li><strong>Higher dimensions = harder to generate:</strong> Images and video involve millions of values that must all cohere — that&#39;s the deeper difficulty, not just the direction</li>
+<li><strong>Explicit vs. seamless tool selection:</strong> Some platforms let you toggle tools on/off; others auto-route silently — each has trade-offs</li>
+<li><strong>Many products blend both</strong> — knowing which mode is active helps calibrate how much to trust the output</li>
 </ul>
 <div id="quiz-09-02" class="quiz-container my-12"></div>
             </div>
@@ -322,7 +433,7 @@
                     <a href="chapter-09-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 9.1 Multimodal AI — More Than Words</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-09-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">9.3 Multimodal RAG & Document Extraction <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-09-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">9.3 What Can You Do With a Stack of Scanned Documents? <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

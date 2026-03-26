@@ -1,0 +1,136 @@
+<!-- Visual: OCR demo — handwritten paper + scan button + extracted text -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
+.ocr-paper-text { font-family: 'Caveat', cursive; }
+
+@keyframes ocr-scan {
+    0%   { top: 0; opacity: 1; }
+    90%  { top: 100%; opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+.ocr-scan-line {
+    position: absolute;
+    left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, #3b82f6 30%, #60a5fa, #3b82f6 70%, transparent);
+    box-shadow: 0 0 8px 2px rgba(59,130,246,0.5);
+    animation: ocr-scan 1.4s ease-in-out forwards;
+}
+</style>
+
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+    <div class="text-center mb-5">
+        <h3 class="text-lg font-bold font-headline mb-1">See OCR in Action</h3>
+        <p class="text-sm text-on-surface-variant">A computer sees pixels. OCR turns those pixels into text.</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 items-stretch">
+
+        <!-- Left: The "paper" -->
+        <div class="flex-1">
+            <div class="text-xs font-bold text-on-surface/50 uppercase tracking-widest mb-2 text-center">📷 Photo of a handwritten report</div>
+            <div id="ocr-paper" class="relative bg-amber-50 border-2 border-amber-200 rounded-lg p-4 shadow-sm overflow-hidden"
+                 style="transform: rotate(-1deg); min-height: 200px;">
+                <!-- Scan line (hidden until triggered) -->
+                <div id="ocr-scan-line" class="ocr-scan-line hidden"></div>
+
+                <!-- Handwritten content -->
+                <div class="ocr-paper-text text-stone-700 leading-relaxed space-y-1" style="font-size: 1.05rem;">
+                    <div style="font-size: 1.1rem; font-weight: 600;">Site Visit — March 15</div>
+                    <div>Facility: Riverside Plant B</div>
+                    <div>Inspector: J. Chen</div>
+                    <div style="margin-top: 0.5rem;">Boiler #3 showing minor</div>
+                    <div>corrosion near inlet valve.</div>
+                    <div>Recommend service in</div>
+                    <div>next 30 days.</div>
+                    <div>Pressure readings normal.</div>
+                    <div style="margin-top: 0.75rem; font-size: 0.95rem; opacity: 0.7;">— J.C. ✓</div>
+                </div>
+
+                <!-- "Scanned" overlay (visible during scan) -->
+                <div id="ocr-scanning-overlay" class="hidden absolute inset-0 rounded-lg"
+                     style="background: linear-gradient(180deg, rgba(59,130,246,0.05) 0%, transparent 100%);"></div>
+            </div>
+        </div>
+
+        <!-- Middle: Arrow / Button -->
+        <div class="flex flex-col items-center justify-center gap-3 py-2">
+            <button id="ocr-btn" onclick="runOCR()"
+                    class="font-bold text-sm px-5 py-3 rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-sm whitespace-nowrap"
+                    style="background-color: var(--accent); color: white;">
+                🔍 Run OCR
+            </button>
+            <div id="ocr-arrow" class="text-2xl text-on-surface/20 hidden sm:block">→</div>
+        </div>
+
+        <!-- Right: Extracted text -->
+        <div class="flex-1">
+            <div class="text-xs font-bold text-on-surface/50 uppercase tracking-widest mb-2 text-center">💻 Extracted digital text</div>
+            <div id="ocr-result" class="bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-4 min-h-[200px] flex items-center justify-center transition-all duration-500">
+                <span class="text-sm text-on-surface/30 italic">Click "Run OCR" to extract text</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Callout below -->
+    <div id="ocr-note" class="hidden mt-4 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 text-xs text-on-surface">
+        <span class="font-bold text-blue-700">What just happened:</span> OCR mapped the pixels of each letter to machine-readable characters. The computer now has text it can search, copy, and process — but it still doesn't <em>understand</em> what the report means. That's where LLMs come in.
+    </div>
+</div>
+
+<script>
+(function() {
+    var ran = false;
+
+    window.runOCR = function() {
+        if (ran) return;
+        ran = true;
+
+        var btn = document.getElementById('ocr-btn');
+        var paper = document.getElementById('ocr-paper');
+        var scanLine = document.getElementById('ocr-scan-line');
+        var overlay = document.getElementById('ocr-scanning-overlay');
+        var result = document.getElementById('ocr-result');
+        var note = document.getElementById('ocr-note');
+
+        btn.textContent = '⏳ Scanning...';
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+
+        // Show scan line animation
+        scanLine.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        // After scan completes, show result
+        setTimeout(function() {
+            scanLine.classList.add('hidden');
+            overlay.classList.add('hidden');
+
+            result.innerHTML = [
+                '<div class="font-mono text-xs leading-relaxed text-on-surface w-full space-y-1">',
+                '<div class="text-on-surface/50 text-[10px] mb-2 uppercase tracking-widest">Extracted text:</div>',
+                '<div><strong>Site Visit — March 15</strong></div>',
+                '<div>Facility: Riverside Plant B</div>',
+                '<div>Inspector: J. Chen</div>',
+                '<div>&nbsp;</div>',
+                '<div>Boiler #3 showing minor</div>',
+                '<div>corrosion near inlet valve.</div>',
+                '<div>Recommend service in</div>',
+                '<div>next 30 days.</div>',
+                '<div>Pressure readings normal.</div>',
+                '<div>&nbsp;</div>',
+                '<div class="text-on-surface/50">— J.C. ✓</div>',
+                '</div>'
+            ].join('');
+
+            result.style.borderColor = '#86efac';
+            result.style.backgroundColor = '#f0fdf4';
+
+            btn.textContent = '✅ Done';
+            btn.style.backgroundColor = '#16a34a';
+
+            note.classList.remove('hidden');
+        }, 1600);
+    };
+})();
+</script>
