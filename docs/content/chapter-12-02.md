@@ -66,6 +66,10 @@ Before building any automation, run a structured interview with the people who c
 
 Once you have the hidden rules documented, you can decide: are these creative guidelines (LLM can handle the nuance) or strict rules (need to be hardcoded or explicitly enforced)?
 
+:::callout-tip
+This is a perfect moment to pause and reflect on your own workflows. Can you improve the process yourself before automating it? Get feedback from colleagues who do the same work differently? Or try describing your process to an LLM and ask it to find gaps, edge cases, or inefficiencies you might be missing. Sometimes the biggest gains come from fixing the process, not automating it.
+:::
+
 :::visual{name="visual-business-logic"}
 
 ## 📝 Key Concepts

@@ -1,0 +1,152 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Business Logic Spectrum</h3>
+        <p class="text-sm text-on-surface-variant">Where does your task fall? Click each zone to see the automation guidance.</p>
+    </div>
+
+    <!-- Spectrum Labels -->
+    <div class="flex justify-between mb-2 px-1">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">🎨 Creative / No Wrong Answer</span>
+        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">📐 Strict / One Right Answer</span>
+    </div>
+
+    <!-- Spectrum Bar -->
+    <div class="relative mb-6">
+        <div class="h-4 w-full rounded-full overflow-hidden flex">
+            <div class="h-full flex-1" style="background: #4CAF50;"></div>
+            <div class="h-full flex-1" style="background: #8BC34A;"></div>
+            <div class="h-full flex-1" style="background: #FFC107;"></div>
+            <div class="h-full flex-1" style="background: #FF9800;"></div>
+            <div class="h-full flex-1" style="background: #F44336;"></div>
+        </div>
+
+        <!-- Zone Buttons -->
+        <div class="grid grid-cols-5 gap-2 mt-4">
+            <button onclick="showBLZone(0, this)" id="bl-btn-0" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-primary bg-surface-container-lowest hover:bg-surface-container transition-all">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #4CAF50;">1</div>
+                <span class="text-[10px] font-bold text-center leading-tight">Fully Creative</span>
+            </button>
+
+            <button onclick="showBLZone(1, this)" id="bl-btn-1" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #8BC34A;">2</div>
+                <span class="text-[10px] font-bold text-center leading-tight">Mostly Creative</span>
+            </button>
+
+            <button onclick="showBLZone(2, this)" id="bl-btn-2" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #FFC107;">3</div>
+                <span class="text-[10px] font-bold text-center leading-tight">Mixed</span>
+            </button>
+
+            <button onclick="showBLZone(3, this)" id="bl-btn-3" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #FF9800;">4</div>
+                <span class="text-[10px] font-bold text-center leading-tight">Mostly Strict</span>
+            </button>
+
+            <button onclick="showBLZone(4, this)" id="bl-btn-4" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #F44336;">5</div>
+                <span class="text-[10px] font-bold text-center leading-tight">Fully Strict</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Detail Card -->
+    <div id="bl-detail" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 animate-fade-in">
+        <div class="flex items-center gap-3 mb-3">
+            <div id="bl-detail-badge" class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-md" style="background: #4CAF50;">1</div>
+            <div>
+                <h4 id="bl-detail-title" class="font-bold text-base">Fully Creative</h4>
+                <p id="bl-detail-subtitle" class="text-[11px] text-on-surface-variant">Brainstorming, name ideas, creative writing</p>
+            </div>
+        </div>
+
+        <div id="bl-detail-guidance" class="rounded-lg p-4 mb-4 text-sm leading-relaxed" style="background: #4CAF5015; border-left: 4px solid #4CAF50;">
+            <span class="font-bold">🤖 Automation Guidance:</span> LLM can run freely. Variation is a feature, not a bug. Every response being different is the whole point.
+        </div>
+
+        <div class="flex flex-wrap gap-2" id="bl-detail-tags">
+            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Brainstorming sessions</span>
+            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Product name ideas</span>
+            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Creative writing</span>
+            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Marketing slogans</span>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const blZones = [
+        {
+            title: "Fully Creative",
+            subtitle: "Brainstorming, name ideas, creative writing",
+            color: "#4CAF50",
+            guidance: "LLM can run freely. Variation is a feature, not a bug. Every response being different is the whole point.",
+            tags: ["Brainstorming sessions", "Product name ideas", "Creative writing", "Marketing slogans"]
+        },
+        {
+            title: "Mostly Creative",
+            subtitle: "Email drafts, meeting summaries, social posts",
+            color: "#8BC34A",
+            guidance: "LLM with light guidelines. Review occasionally to keep tone consistent, but give the model room to work. A quick scan is usually enough.",
+            tags: ["Email drafts", "Meeting summaries", "Blog outlines", "Social media posts"]
+        },
+        {
+            title: "Mixed",
+            subtitle: "Customer responses, support tickets, reports",
+            color: "#FFC107",
+            guidance: "LLM with clear constraints. Set brand guidelines, approved language, and required data points. Review regularly — this is where quality drifts silently.",
+            tags: ["Customer responses", "Brand-guided content", "Support ticket replies", "Templated reports"]
+        },
+        {
+            title: "Mostly Strict",
+            subtitle: "Invoice formatting, data entry, standard forms",
+            color: "#FF9800",
+            guidance: "Hardcode the rules. Use traditional logic for the structured parts. LLM only for edge cases or interpreting ambiguous inputs — never for the core calculations.",
+            tags: ["Invoice processing", "Data entry validation", "Standard form filling", "Inventory updates"]
+        },
+        {
+            title: "Fully Strict",
+            subtitle: "Tax calculations, regulatory filings, compliance",
+            color: "#F44336",
+            guidance: "No LLM for the core logic. Use traditional code, validated formulas, and rule engines. A creative answer here means a wrong answer — and possibly a legal problem.",
+            tags: ["Tax calculations", "Regulatory filings", "Financial reconciliation", "Legal compliance checks"]
+        }
+    ];
+
+    window.showBLZone = function(index, btn) {
+        const zone = blZones[index];
+
+        // Update button states
+        document.querySelectorAll('.bl-zone-btn').forEach(b => {
+            b.classList.remove('border-primary');
+            b.classList.add('border-transparent');
+        });
+        btn.classList.remove('border-transparent');
+        btn.classList.add('border-primary');
+
+        // Animate detail card
+        const detail = document.getElementById('bl-detail');
+        detail.classList.remove('animate-fade-in');
+        void detail.offsetWidth;
+        detail.classList.add('animate-fade-in');
+
+        // Update content
+        document.getElementById('bl-detail-badge').style.background = zone.color;
+        document.getElementById('bl-detail-badge').textContent = index + 1;
+        document.getElementById('bl-detail-title').textContent = zone.title;
+        document.getElementById('bl-detail-subtitle').textContent = zone.subtitle;
+
+        const guidance = document.getElementById('bl-detail-guidance');
+        guidance.style.background = zone.color + '15';
+        guidance.style.borderLeftColor = zone.color;
+        guidance.innerHTML = '<span class="font-bold">🤖 Automation Guidance:</span> ' + zone.guidance;
+
+        const tagsHtml = zone.tags.map(t => '<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">' + t + '</span>').join('');
+        document.getElementById('bl-detail-tags').innerHTML = tagsHtml;
+    };
+
+    // Initialize with first zone selected
+    document.addEventListener('DOMContentLoaded', function() {
+        showBLZone(0, document.getElementById('bl-btn-0'));
+    });
+})();
+</script>

@@ -1,0 +1,196 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-2">The Three Pillars of Digital Transformation</h3>
+        <p class="text-sm text-on-surface-variant">Toggle pillars on and off to see what happens when one is missing.</p>
+    </div>
+
+    <!-- Roof Bar -->
+    <div id="dt-roof" class="relative rounded-lg px-6 py-3 text-center font-bold text-on-primary transition-all duration-500 bg-primary shadow-md mb-1">
+        <span id="dt-roof-label">🏛️ Digital Transformation Success</span>
+    </div>
+
+    <!-- Roof support line -->
+    <div class="flex justify-around px-8 mb-0">
+        <div class="w-1 h-4 bg-primary/30 rounded-full"></div>
+        <div class="w-1 h-4 bg-primary/30 rounded-full"></div>
+        <div class="w-1 h-4 bg-primary/30 rounded-full"></div>
+    </div>
+
+    <!-- Three Pillars -->
+    <div class="grid grid-cols-3 gap-4 mb-4">
+        <!-- Pillar 1: Communication -->
+        <div id="dt-pillar-0" class="transition-all duration-500 cursor-pointer" onclick="togglePillarDetail(0)">
+            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-5 text-center hover:border-primary transition-all h-full">
+                <div class="text-3xl mb-2">💬</div>
+                <h4 class="font-bold text-sm mb-1">Communication</h4>
+                <p class="text-[11px] text-on-surface-variant leading-relaxed">Explaining the "why" and getting buy-in from every level.</p>
+            </div>
+        </div>
+
+        <!-- Pillar 2: Business Insight -->
+        <div id="dt-pillar-1" class="transition-all duration-500 cursor-pointer" onclick="togglePillarDetail(1)">
+            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-5 text-center hover:border-primary transition-all h-full">
+                <div class="text-3xl mb-2">📊</div>
+                <h4 class="font-bold text-sm mb-1">Business Insight</h4>
+                <p class="text-[11px] text-on-surface-variant leading-relaxed">Knowing which processes matter and where value hides.</p>
+            </div>
+        </div>
+
+        <!-- Pillar 3: Technical Ability -->
+        <div id="dt-pillar-2" class="transition-all duration-500 cursor-pointer" onclick="togglePillarDetail(2)">
+            <div class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-5 text-center hover:border-primary transition-all h-full">
+                <div class="text-3xl mb-2">🔧</div>
+                <h4 class="font-bold text-sm mb-1">Technical Ability</h4>
+                <p class="text-[11px] text-on-surface-variant leading-relaxed">Building, integrating, and maintaining the actual tools.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toggle Controls -->
+    <div class="flex justify-center gap-3 mb-5">
+        <button onclick="togglePillar(0)" id="dt-toggle-0" class="px-4 py-2 rounded-full text-xs font-bold border-2 border-primary text-primary bg-primary/5 hover:bg-primary/10 transition-all">
+            💬 Communication: ON
+        </button>
+        <button onclick="togglePillar(1)" id="dt-toggle-1" class="px-4 py-2 rounded-full text-xs font-bold border-2 border-primary text-primary bg-primary/5 hover:bg-primary/10 transition-all">
+            📊 Business Insight: ON
+        </button>
+        <button onclick="togglePillar(2)" id="dt-toggle-2" class="px-4 py-2 rounded-full text-xs font-bold border-2 border-primary text-primary bg-primary/5 hover:bg-primary/10 transition-all">
+            🔧 Technical Ability: ON
+        </button>
+    </div>
+
+    <!-- Status Message -->
+    <div id="dt-status" class="rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-green-50 text-green-700 border border-green-200">
+        ✅ All three pillars are strong — transformation is on track!
+    </div>
+
+    <!-- Detail Panel -->
+    <div id="dt-detail" class="mt-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-5 hidden animate-fade-in">
+        <h4 id="dt-detail-title" class="text-lg font-bold mb-2"></h4>
+        <p id="dt-detail-desc" class="text-sm text-on-surface-variant leading-relaxed mb-3"></p>
+        <div class="text-xs text-on-surface-variant">
+            <span class="font-bold">Examples: </span><span id="dt-detail-examples"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const pillarState = [true, true, true];
+
+    const pillarData = [
+        {
+            name: "Communication",
+            emoji: "💬",
+            desc: "Without clear communication, even the best technology fails. Stakeholders resist what they don't understand. Teams build the wrong thing. Users ignore the tool. Communication means explaining the 'why,' training people, and listening to feedback throughout the process.",
+            examples: "Change management plans, stakeholder presentations, training programs, feedback loops, internal champions"
+        },
+        {
+            name: "Business Insight",
+            emoji: "📊",
+            desc: "Technology for technology's sake wastes money. Business insight means knowing which processes are worth automating, where the bottlenecks are, and what 'success' actually looks like in measurable terms. It's the difference between automating the right thing and automating the wrong thing faster.",
+            examples: "Process mapping, ROI analysis, KPI definition, workflow audits, identifying pain points vs. nice-to-haves"
+        },
+        {
+            name: "Technical Ability",
+            emoji: "🔧",
+            desc: "Ideas without execution are just wishes. Technical ability means being able to build, integrate, and maintain the actual tools — whether that's configuring an LLM, connecting APIs, or writing automation scripts. Someone on the team needs to make it real.",
+            examples: "API integration, prompt engineering, system architecture, data pipelines, security implementation, testing"
+        }
+    ];
+
+    const warningMessages = {
+        "0": "⚠️ Without Communication, teams resist change and tools go unused.",
+        "1": "⚠️ Without Business Insight, you automate the wrong things.",
+        "2": "⚠️ Without Technical Ability, great ideas stay on whiteboards.",
+        "0,1": "🚨 No communication or business insight — you're building blindly.",
+        "0,2": "🚨 No communication or technical ability — transformation stalls completely.",
+        "1,2": "🚨 No business insight or technical ability — just talk, no action.",
+        "0,1,2": "🛑 All three pillars are down — there is no transformation happening."
+    };
+
+    window.togglePillar = function(index) {
+        pillarState[index] = !pillarState[index];
+        updatePillars();
+    };
+
+    window.togglePillarDetail = function(index) {
+        const detail = document.getElementById('dt-detail');
+        const data = pillarData[index];
+
+        if (!detail.classList.contains('hidden') && document.getElementById('dt-detail-title').textContent.includes(data.name)) {
+            detail.classList.add('hidden');
+            return;
+        }
+
+        document.getElementById('dt-detail-title').textContent = data.emoji + ' ' + data.name;
+        document.getElementById('dt-detail-desc').textContent = data.desc;
+        document.getElementById('dt-detail-examples').textContent = data.examples;
+
+        detail.classList.remove('hidden');
+        detail.classList.remove('animate-fade-in');
+        void detail.offsetWidth;
+        detail.classList.add('animate-fade-in');
+    };
+
+    function updatePillars() {
+        const activeCount = pillarState.filter(Boolean).length;
+        const missingIndices = pillarState.map((v, i) => v ? null : i).filter(v => v !== null);
+
+        // Update pillar visuals
+        pillarState.forEach((active, i) => {
+            const pillar = document.getElementById('dt-pillar-' + i);
+            const toggle = document.getElementById('dt-toggle-' + i);
+            const data = pillarData[i];
+
+            if (active) {
+                pillar.style.opacity = '1';
+                pillar.style.transform = 'scale(1)';
+                toggle.textContent = data.emoji + ' ' + data.name + ': ON';
+                toggle.classList.remove('bg-surface-container-low', 'text-on-surface-variant', 'border-outline-variant');
+                toggle.classList.add('border-primary', 'text-primary', 'bg-primary/5');
+            } else {
+                pillar.style.opacity = '0.25';
+                pillar.style.transform = 'scale(0.95)';
+                toggle.textContent = data.emoji + ' ' + data.name + ': OFF';
+                toggle.classList.add('bg-surface-container-low', 'text-on-surface-variant', 'border-outline-variant');
+                toggle.classList.remove('border-primary', 'text-primary', 'bg-primary/5');
+            }
+        });
+
+        // Update roof
+        const roof = document.getElementById('dt-roof');
+        const roofLabel = document.getElementById('dt-roof-label');
+
+        if (activeCount === 3) {
+            roof.classList.remove('opacity-60');
+            roof.classList.add('bg-primary');
+            roof.style.transform = 'rotate(0deg)';
+            roofLabel.textContent = '🏛️ Digital Transformation Success';
+        } else if (activeCount === 2) {
+            roof.classList.add('opacity-60');
+            roof.style.transform = 'rotate(-1deg)';
+            roofLabel.textContent = '⚠️ Unstable Foundation';
+        } else if (activeCount === 1) {
+            roof.classList.add('opacity-60');
+            roof.style.transform = 'rotate(-2.5deg)';
+            roofLabel.textContent = '🚨 Collapsing Structure';
+        } else {
+            roof.classList.add('opacity-60');
+            roof.style.transform = 'rotate(-4deg)';
+            roofLabel.textContent = '🛑 No Foundation';
+        }
+
+        // Update status message
+        const status = document.getElementById('dt-status');
+        if (activeCount === 3) {
+            status.className = 'rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-green-50 text-green-700 border border-green-200';
+            status.textContent = '✅ All three pillars are strong — transformation is on track!';
+        } else {
+            status.className = 'rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-red-50 text-red-700 border border-red-200';
+            const key = missingIndices.join(',');
+            status.textContent = warningMessages[key] || '⚠️ Missing pillars weaken the foundation.';
+        }
+    }
+})();
+</script>

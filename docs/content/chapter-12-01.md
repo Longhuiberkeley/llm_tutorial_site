@@ -14,6 +14,32 @@ pageId: "12-01"
 You can't automate what you can't explain. The ceiling of any automation project is YOUR understanding of the process. Automate a broken process and you get a broken process running faster — at scale.
 :::
 
+## 🏛️ The Three Pillars of Digital Transformation
+
+The ceiling of any digital transformation isn't technology — it's the combination of three things working together:
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant text-center">
+<div class="text-3xl mb-3">💬</div>
+<div class="font-bold text-base mb-2">Communication</div>
+<p class="text-sm text-on-surface/80">Can you clearly articulate the process, the requirements, and the goals? Can your team communicate across departments about what needs to happen?</p>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant text-center">
+<div class="text-3xl mb-3">📊</div>
+<div class="font-bold text-base mb-2">Business Insight</div>
+<p class="text-sm text-on-surface/80">Do you have the planning, strategy, and execution capability? Do you understand the process deeply enough to know what "good" looks like?</p>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant text-center">
+<div class="text-3xl mb-3">🔧</div>
+<div class="font-bold text-base mb-2">Technical Ability</div>
+<p class="text-sm text-on-surface/80">Do you have the technical skills — or the right partners — to actually build, deploy, and maintain the solution?</p>
+</div>
+</div>
+
+Technology is only one of the three pillars. Without clear communication or solid business understanding, even the most advanced tech will fail. This is why this chapter starts with understanding your process, not choosing your tools.
+
+:::visual{name="visual-digital-transformation-pillars"}
+
 ## 💥 The Cautionary Tale
 
 Imagine a company's returns department is overwhelmed. A manager decides to solve the problem with automation: an agentic AI will handle all refund requests automatically.

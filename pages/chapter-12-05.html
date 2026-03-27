@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>12.5 Human-in-the-Loop - LLM Tutorial</title>
+    <title>12.5 Building Agentic Applications - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -210,13 +210,19 @@
                     <span class="text-sm font-medium">12.3 RPA vs. Agentic AI</span>
                 </a><a href="chapter-12-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">12.4 The Volume vs. Variance Matrix</span>
+                    <span class="text-sm font-medium">12.4 Choosing Your Automation Approach</span>
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">12.5 Human-in-the-Loop</span>
+                    <span class="text-sm font-medium">12.5 Building Agentic Applications</span>
                 </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">12.6 ROI Calculation — Is It Worth It?</span>
+                    <span class="text-sm font-medium">12.6 The Volume vs. Variance Matrix</span>
+                </a><a href="chapter-12-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.7 Human-in-the-Loop</span>
+                </a><a href="chapter-12-08.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.8 ROI Estimation Framework</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">13.1 Why AI Projects Are Different</span>
@@ -251,83 +257,356 @@
                     <span>Chapter 12</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    12.5 Human-in-the-Loop
+                    12.5 Building Agentic Applications
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Most business AI should involve human oversight, not full autonomy — here's how to design it right.
+                    The building blocks and design patterns behind agentic AI systems — what your team will build and how to think about it.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Explain the human-in-the-loop (HITL) design pattern and why it&#39;s often better than full autonomy.</li>
-<li>Define where full autonomy is appropriate and where it is dangerous.</li>
-<li>Introduce monitoring, logging, and the gradual trust-building model.</li>
+<li>Demystify what an agentic application actually consists of.</li>
+<li>Introduce the four core building blocks in plain language.</li>
+<li>Present common design patterns as concepts, not code.</li>
+<li>Frame everything as &quot;what your team will build&quot; — accessible to business decision-makers.</li>
 </ul>
 <div class="callout callout-tldr">
-    &quot;Human-in-the-loop&quot; means the AI proposes, the human approves. It&#39;s not a sign of distrust in the technology — it&#39;s smart system design. Most business AI should involve human oversight, at least until trust is earned through a track record.
+    Agentic applications are built from four simple building blocks: a brain (the Agent), hands (Tools), memory (Sessions), and an engine (the Runner). You don&#39;t need to be a developer to understand them — and understanding them helps you have much better conversations with your development team.
 </div>
 
 
-<h2>🚦 Full Autonomy vs. Human-in-the-Loop</h2>
-<p>When building an agentic AI system, one of the most important design decisions is: how much can the AI do on its own before a human needs to weigh in?</p>
-<p><strong>Full autonomy</strong> means the AI acts, and the action is taken — no human reviews it first. The AI sends the email. The AI processes the refund. The AI updates the record.</p>
-<p>This sounds efficient. And for the right tasks, it is. But for anything that affects customers, money, legal obligations, or reputation, full autonomy without a proven track record is a risk most organizations shouldn&#39;t take.</p>
-<p><strong>Human-in-the-loop (HITL)</strong> means the AI does the work, but a human reviews and approves before the action is taken — or at minimum, before it&#39;s irreversible.</p>
-<p>Common HITL patterns:</p>
+<h2>🧩 The Four Building Blocks</h2>
+<p>Every agentic application, from a simple chatbot to a complex multi-step workflow, is built from the same four pieces. Think of them like the organs of the system — each has a clear job.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="text-2xl">🧠</span>
+<div>
+<div class="font-bold text-base mb-1">The Agent (the Brain)</div>
+<p class="text-sm text-on-surface/80">The LLM with its instructions. It reads input, thinks about what to do, and makes decisions. Its instructions — what you tell it about its role, rules, and personality — are its interface. Good instructions produce good behavior; vague instructions produce unpredictable behavior.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="text-2xl">🔧</span>
+<div>
+<div class="font-bold text-base mb-1">Tools (the Hands)</div>
+<p class="text-sm text-on-surface/80">Functions the agent can call to interact with the real world: search the web, read a database, send an email, call an API, update a spreadsheet. Without tools, the agent can only talk. With tools, it can act.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="text-2xl">📝</span>
+<div>
+<div class="font-bold text-base mb-1">Sessions (the Memory)</div>
+<p class="text-sm text-on-surface/80">How the agent remembers what happened in the current interaction. It knows what you said three messages ago, what tools it called, and what results came back. This is what makes multi-step conversations and workflows possible.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="text-2xl">⚙️</span>
+<div>
+<div class="font-bold text-base mb-1">The Runner (the Engine)</div>
+<p class="text-sm text-on-surface/80">The orchestration layer that actually runs everything. It manages the loop: send input to the agent, the agent decides what to do, the runner executes tool calls, sends results back, and repeats until the task is complete.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">The Four Building Blocks of Agentic Apps</h3>
+        <p class="text-sm text-on-surface-variant">Click a block to learn what it does. Then watch them work together.</p>
+    </div>
+
+    <!-- Four Clickable Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="prim-cards">
+        <button onclick="selectPrimitive(0)" id="prim-btn-0"
+            class="prim-card p-5 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-center transition-all hover:border-primary cursor-pointer">
+            <div class="text-3xl mb-2">🧠</div>
+            <div class="font-bold text-sm">Agent</div>
+            <div class="text-[10px] text-on-surface-variant mt-1">The Brain</div>
+        </button>
+        <button onclick="selectPrimitive(1)" id="prim-btn-1"
+            class="prim-card p-5 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-center transition-all hover:border-primary cursor-pointer">
+            <div class="text-3xl mb-2">🔧</div>
+            <div class="font-bold text-sm">Tools</div>
+            <div class="text-[10px] text-on-surface-variant mt-1">The Hands</div>
+        </button>
+        <button onclick="selectPrimitive(2)" id="prim-btn-2"
+            class="prim-card p-5 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-center transition-all hover:border-primary cursor-pointer">
+            <div class="text-3xl mb-2">📝</div>
+            <div class="font-bold text-sm">Session</div>
+            <div class="text-[10px] text-on-surface-variant mt-1">The Memory</div>
+        </button>
+        <button onclick="selectPrimitive(3)" id="prim-btn-3"
+            class="prim-card p-5 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-center transition-all hover:border-primary cursor-pointer">
+            <div class="text-3xl mb-2">⚙️</div>
+            <div class="font-bold text-sm">Runner</div>
+            <div class="text-[10px] text-on-surface-variant mt-1">The Engine</div>
+        </button>
+    </div>
+
+    <!-- Detail Panel -->
+    <div id="prim-detail" class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant min-h-[100px] mb-6 transition-all">
+        <p class="text-sm text-on-surface-variant text-center italic">Click a building block above to see details.</p>
+    </div>
+
+    <!-- Animation Button & Status Area -->
+    <div class="text-center mb-4">
+        <button onclick="startPrimDemo()" id="prim-play-btn"
+            class="px-6 py-2.5 bg-primary text-on-primary rounded-full text-sm font-bold hover:shadow-lg transition-all cursor-pointer">
+            ▶ See Them Work Together
+        </button>
+    </div>
+
+    <!-- Animation Status Display -->
+    <div id="prim-status" class="hidden bg-surface-container-lowest border-2 border-primary/20 rounded-xl p-6 min-h-[80px] flex flex-col justify-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full bg-primary opacity-20"></div>
+        <div id="prim-status-label" class="text-[10px] font-black uppercase tracking-widest text-primary mb-2 opacity-60"></div>
+        <div id="prim-status-text" class="text-sm font-bold leading-relaxed italic text-on-surface"></div>
+    </div>
+</div>
+
+<script>
+(function() {
+    var primitives = [
+        {
+            emoji: '🧠',
+            name: 'Agent (The Brain)',
+            desc: 'Reads, thinks, decides. The Agent is the LLM at the core — it receives input, reasons about what to do next, and decides which tools to call or what response to give.',
+            details: [
+                'Interprets natural language requests',
+                'Plans a sequence of actions',
+                'Decides when the task is complete'
+            ],
+            analogy: 'Like a project manager who reads the brief, decides the approach, and delegates tasks.'
+        },
+        {
+            emoji: '🔧',
+            name: 'Tools (The Hands)',
+            desc: 'Searches, calls APIs, sends emails. Tools are external functions the agent can invoke to interact with the real world — things the LLM cannot do with text alone.',
+            details: [
+                'Web search, database queries, calculations',
+                'API calls (email, calendar, CRM)',
+                'File operations (read, write, create)'
+            ],
+            analogy: 'Like a worker\'s toolbelt — each tool does one specific job, and the agent picks the right one.'
+        },
+        {
+            emoji: '📝',
+            name: 'Session (The Memory)',
+            desc: 'Remembers the conversation. The Session stores the full history of messages, tool calls, and results so the agent can build on previous steps.',
+            details: [
+                'Tracks the full conversation history',
+                'Stores tool call results for reference',
+                'Enables multi-step reasoning over time'
+            ],
+            analogy: 'Like a notebook where every step is written down — the agent can flip back to check what happened before.'
+        },
+        {
+            emoji: '⚙️',
+            name: 'Runner (The Engine)',
+            desc: 'Orchestrates the loop. The Runner manages the cycle: send messages to the agent, execute tool calls, feed results back, and repeat until the task is done.',
+            details: [
+                'Runs the perceive-plan-act-observe loop',
+                'Routes tool calls to the right functions',
+                'Decides when to stop (task complete or limit reached)'
+            ],
+            analogy: 'Like an assembly line conveyor belt that keeps everything moving in the right order.'
+        }
+    ];
+
+    var animSteps = [
+        { highlight: -1, label: 'Input', text: '📨 "Find me the cheapest flight to Tokyo next week"' },
+        { highlight: 0,  label: 'Agent (Think)', text: '🧠 Agent reads the request and decides: I need to search flights' },
+        { highlight: 1,  label: 'Tools (Act)', text: '🔧 Calling flight_search("Tokyo", "next week")' },
+        { highlight: 2,  label: 'Session (Store)', text: '📝 Stores search results — 3 flights found' },
+        { highlight: 3,  label: 'Runner (Loop)', text: '⚙️ Agent hasn\'t finished yet → loop continues' },
+        { highlight: 0,  label: 'Agent (Think)', text: '🧠 Agent compares prices and picks the cheapest: $420 on ANA' },
+        { highlight: -1, label: 'Complete', text: '✅ "The cheapest flight is $420 on ANA, departing Tuesday"' }
+    ];
+
+    var isPlaying = false;
+    var currentAnimStep = 0;
+
+    function renderDetail(idx) {
+        var p = primitives[idx];
+        var panel = document.getElementById('prim-detail');
+        panel.innerHTML =
+            '<div class="flex items-start gap-4 mb-4">' +
+                '<div class="text-3xl shrink-0">' + p.emoji + '</div>' +
+                '<div>' +
+                    '<div class="text-lg font-bold mb-1">' + p.name + '</div>' +
+                    '<p class="text-sm text-on-surface-variant leading-relaxed">' + p.desc + '</p>' +
+                '</div>' +
+            '</div>' +
+            '<div class="grid sm:grid-cols-2 gap-4">' +
+                '<div class="bg-surface-container rounded-xl p-4">' +
+                    '<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">What it does</div>' +
+                    '<ul class="text-sm space-y-1.5">' +
+                        p.details.map(function(d) {
+                            return '<li class="flex items-start gap-2"><span class="shrink-0 mt-0.5 text-primary">▸</span>' + d + '</li>';
+                        }).join('') +
+                    '</ul>' +
+                '</div>' +
+                '<div class="bg-surface-container rounded-xl p-4">' +
+                    '<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">Analogy</div>' +
+                    '<p class="text-sm leading-relaxed italic">' + p.analogy + '</p>' +
+                '</div>' +
+            '</div>';
+    }
+
+    function highlightCard(idx) {
+        var cards = document.querySelectorAll('.prim-card');
+        cards.forEach(function(card, i) {
+            if (i === idx) {
+                card.classList.remove('border-outline-variant');
+                card.classList.add('border-primary', 'scale-105');
+                card.style.boxShadow = '0 4px 12px rgba(143, 72, 47, 0.15)';
+            } else {
+                card.classList.remove('border-primary', 'scale-105');
+                card.classList.add('border-outline-variant');
+                card.style.boxShadow = 'none';
+            }
+        });
+    }
+
+    function clearCardHighlights() {
+        var cards = document.querySelectorAll('.prim-card');
+        cards.forEach(function(card) {
+            card.classList.remove('border-primary', 'scale-105');
+            card.classList.add('border-outline-variant');
+            card.style.boxShadow = 'none';
+        });
+    }
+
+    function runAnimStep() {
+        if (currentAnimStep >= animSteps.length) {
+            isPlaying = false;
+            var btn = document.getElementById('prim-play-btn');
+            btn.disabled = false;
+            btn.textContent = '▶ Replay Demo';
+            btn.classList.remove('opacity-50');
+            return;
+        }
+
+        var step = animSteps[currentAnimStep];
+
+        // Highlight the corresponding card
+        if (step.highlight >= 0) {
+            highlightCard(step.highlight);
+        } else {
+            clearCardHighlights();
+        }
+
+        // Update status display
+        var label = document.getElementById('prim-status-label');
+        var text = document.getElementById('prim-status-text');
+
+        label.style.opacity = '0';
+        text.style.opacity = '0';
+
+        setTimeout(function() {
+            label.textContent = step.label;
+            text.textContent = step.text;
+            label.style.opacity = '0.6';
+            text.style.opacity = '1';
+        }, 150);
+
+        currentAnimStep++;
+
+        // Final step stays longer
+        var delay = currentAnimStep >= animSteps.length ? 3000 : 2000;
+        setTimeout(runAnimStep, delay);
+    }
+
+    window.selectPrimitive = function(idx) {
+        if (isPlaying) return; // Don't interfere with animation
+        highlightCard(idx);
+        renderDetail(idx);
+    };
+
+    window.startPrimDemo = function() {
+        if (isPlaying) return;
+        isPlaying = true;
+        currentAnimStep = 0;
+
+        var btn = document.getElementById('prim-play-btn');
+        btn.disabled = true;
+        btn.classList.add('opacity-50');
+        btn.textContent = '⏳ Running...';
+
+        // Show status area
+        var status = document.getElementById('prim-status');
+        status.classList.remove('hidden');
+        status.classList.add('flex');
+
+        // Clear detail panel during animation
+        document.getElementById('prim-detail').innerHTML =
+            '<p class="text-sm text-on-surface-variant text-center italic">Watch the building blocks work together below...</p>';
+
+        runAnimStep();
+    };
+})();
+</script>
+
+
+<p>The key insight: the Agent (brain) is the only part that uses AI. Tools, Sessions, and the Runner are regular software engineering. This means most of the system is predictable and testable — only the decision-making layer involves the unpredictability of an LLM.</p>
+<h2>🏗️ Common Design Patterns</h2>
+<p>When developers build agentic applications, they typically reach for one of three well-established patterns. Understanding these helps you evaluate proposals and ask better questions.</p>
+<h3>A. Delegation (Specialists and Orchestrators)</h3>
+<p>Instead of building one giant agent that handles everything, you create <strong>specialist agents</strong> — each an expert in one area — and an <strong>orchestrator</strong> that knows who to call.</p>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant my-6">
+<div class="text-sm mb-3"><strong>Analogy:</strong> A project manager doesn't write code, design graphics, AND handle legal reviews. They know which team member to call for each task.</div>
+<div class="text-sm"><strong>Example:</strong> A customer service orchestrator receives all incoming requests. It routes billing questions to a Billing Agent (which has access to the payment system), technical issues to a Tech Support Agent (which can check system status), and shipping questions to a Logistics Agent (which can track packages). Each specialist is small, focused, and accurate.</div>
+</div>
+
+<p><strong>Why this works better than one big agent:</strong> Small, specialized agents are more accurate and less likely to make mistakes than one massive agent trying to handle every possible scenario.</p>
+<h3>B. The Router Pattern</h3>
+<p>A <strong>router agent</strong> sits at the front door. Its only job is to figure out <strong>what kind of request</strong> this is and pass it to the right worker. It doesn&#39;t do the actual work — it just sorts.</p>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant my-6">
+<div class="text-sm mb-3"><strong>Analogy:</strong> A hospital triage nurse assesses each patient and sends them to the right department. The nurse doesn't treat the patient — but without good triage, the system breaks down.</div>
+<div class="text-sm"><strong>Example:</strong> A customer writes in. The router determines: is this about billing, technical support, or a general question? Then it hands the conversation to the appropriate specialist. The classification step is fast and cheap; the specialized handling is where the real work happens.</div>
+</div>
+
+<h3>C. The Self-Correction Loop</h3>
+<p>Instead of delivering its first answer and stopping, the agent <strong>checks its own work</strong> and tries again if the result isn&#39;t good enough.</p>
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant my-6">
+<div class="text-sm mb-3"><strong>Analogy:</strong> A student who solves a math problem, verifies the answer, and reworks it if it's wrong. The checking step is what separates a careful worker from a sloppy one.</div>
+<div class="text-sm"><strong>Example:</strong> An agent drafts a customer response, then a "quality checker" reviews it against company guidelines. If it fails the check, the agent revises and resubmits. This loop continues until the response passes — or gets flagged for human review after too many attempts.</div>
+</div>
+
+<p>This pattern is what makes agents feel &quot;intelligent.&quot; They recover from their own mistakes without human intervention — at least for the kinds of mistakes they&#39;ve been taught to catch.</p>
+<h2>🏢 Multi-Agent Systems: Teams of Agents</h2>
+<p>Complex workflows don&#39;t need one superhero agent — they need a <strong>team</strong> of agents working together, just like a human organization.</p>
+<p>Think of it as an org chart for agents:</p>
 <ul>
-<li><strong>AI drafts → human edits and sends</strong> (email responses, reports)</li>
-<li><strong>AI proposes → human approves</strong> (pricing changes, contract terms)</li>
-<li><strong>AI flags → human decides</strong> (unusual transactions, escalated support cases)</li>
-<li><strong>AI acts → human can revert</strong> (changes logged, easy rollback available)</li>
+<li>A <strong>manager agent</strong> coordinates the overall workflow</li>
+<li><strong>Specialist agents</strong> handle their domain (billing, logistics, content, etc.)</li>
+<li><strong>Review agents</strong> check quality before anything goes out the door</li>
+<li><strong>Escalation paths</strong> route difficult cases to humans</li>
 </ul>
+<p>This mirrors how your own organization works. The better your human org chart is defined, the easier it is to design an agent org chart to match it.</p>
 <div class="callout callout-dyk">
-    The term &quot;human-in-the-loop&quot; comes from control systems engineering, where a human operator monitors and adjusts automated systems in real time. It&#39;s been standard practice in aviation, nuclear power, and manufacturing for decades — AI-assisted workflows are just the latest application of an old, well-proven principle.
+    The most important skill for building agentic applications isn&#39;t coding — it&#39;s clearly describing what the agent should do, what tools it needs, and what it should never do. This is why business expertise is essential to the process. Your developers build the system; your business knowledge defines what it should actually accomplish.
 </div>
 
-
-<h2>✅ Where Autonomy Works — and Where It Doesn&#39;t</h2>
-<p><strong>Full autonomy works well when:</strong></p>
-<ul>
-<li>The task is low-risk and contained (email categorization, tagging, sorting)</li>
-<li>Errors are easily reversible (a mislabeled category is easy to fix)</li>
-<li>The AI has a proven track record on this specific task</li>
-<li>Volume is too high for human review to be practical</li>
-</ul>
-<p><strong>HITL is essential when:</strong></p>
-<ul>
-<li>The task affects customers directly (responses, offers, account changes)</li>
-<li>Money is involved (pricing, billing, refunds, payments)</li>
-<li>Legal or compliance obligations apply (contracts, regulatory filings)</li>
-<li>Errors are hard or impossible to reverse</li>
-<li>The AI is new to this task and hasn&#39;t built a track record yet</li>
-</ul>
-<p>The key insight: HITL is not a permanent state. It&#39;s the starting point. As an AI system proves itself on real cases, you can gradually reduce the scope of human oversight — moving from reviewing every output to spot-checking, to reviewing only flagged cases.</p>
-<div class="callout callout-error">
-    A common mistake is launching an AI system with full autonomy right away because it looked good in demos and internal testing. Demos use curated examples. Production introduces edge cases, unexpected inputs, and adversarial users. Start with HITL. Earn autonomy through performance data, not optimism.
-</div>
-
-
-<h2>📋 Monitoring and Logging Are Not Optional</h2>
-<p>For any AI system operating in production — even one with human review — you need to log what&#39;s happening. This means:</p>
-<ul>
-<li><strong>Every input the AI receives</strong> should be stored.</li>
-<li><strong>Every output the AI produces</strong> should be stored.</li>
-<li><strong>Every tool the AI calls</strong> and what it returned should be stored.</li>
-<li><strong>Human review outcomes</strong> should be stored (did the human approve, edit, or reject?).</li>
-</ul>
-<p>Why? Because without logs, you can&#39;t improve the system. You can&#39;t find patterns in failures. You can&#39;t demonstrate compliance. You can&#39;t reconstruct what happened when something goes wrong.</p>
-<p>Monitoring means actively watching the system — not just storing logs, but reviewing them. Set up alerts for unusual patterns: sudden drop in approval rate, spike in rejections, unusual error types. Treat your AI system like a new employee: check in regularly, especially early on.</p>
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-hitl</div>
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>HITL = AI proposes, human approves</strong> — the safety net for AI systems in production.</li>
-<li><strong>Full autonomy requires a proven track record</strong> — not just good demos.</li>
-<li><strong>Low-risk, reversible tasks</strong> can move toward autonomy first; high-stakes tasks need persistent oversight.</li>
-<li><strong>Monitoring and logging are mandatory</strong> — you can&#39;t improve or debug what you haven&#39;t recorded.</li>
-<li><strong>Gradually reduce oversight as trust builds</strong> — treat it like onboarding a new employee, not flipping a switch.</li>
+<li><strong>Four building blocks:</strong> Agent (brain), Tools (hands), Sessions (memory), Runner (engine).</li>
+<li><strong>Only the Agent uses AI</strong> — the rest is predictable software engineering.</li>
+<li><strong>Delegation pattern</strong> — specialist agents coordinated by an orchestrator, not one giant agent.</li>
+<li><strong>Router pattern</strong> — classify first, then hand off to the right worker.</li>
+<li><strong>Self-correction loop</strong> — agents that check and improve their own work.</li>
+<li><strong>Multi-agent = team of agents</strong> — mirrors your organization structure.</li>
+<li><strong>Business expertise drives agent design</strong> — clear instructions matter more than code.</li>
 </ul>
 <div id="quiz-12-05" class="quiz-container my-12"></div>
             </div>
@@ -338,10 +617,10 @@
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-12-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.4 The Volume vs. Variance Matrix</a>
+                    <a href="chapter-12-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.4 Choosing Your Automation Approach</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-12-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">12.6 ROI Calculation — Is It Worth It? <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-12-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">12.6 The Volume vs. Variance Matrix <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

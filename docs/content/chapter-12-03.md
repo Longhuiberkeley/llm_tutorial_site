@@ -30,6 +30,10 @@ RPA comes in two main flavors:
 
 **Weakness:** Breaks when anything changes. Can't handle ambiguity. Can't make judgment calls.
 
+:::callout-dyk
+**What does RPA look like in practice?** Think of it as macros on steroids. Common examples: automatically downloading bank statements every morning, copying invoice data from PDF emails into an accounting system, filling out government forms from spreadsheet data, generating and sending a weekly status report from a dashboard, or syncing customer records between two systems on a schedule.
+:::
+
 ## 🧠 Agentic AI: The Flexible Decision-Maker
 
 Agentic AI (LLMs with tools and autonomous action capabilities) can read context, make decisions, handle exceptions, and adapt to variation. Think of it like a car with GPS — it can navigate around roadblocks, find alternate routes, and respond to unexpected situations.
@@ -48,19 +52,15 @@ A common mistake is reaching for agentic AI when RPA would work perfectly well �
 
 ## 🔀 The Hybrid Approach
 
-In practice, the best automation systems use both. The pattern looks like this:
+In practice, the best automation systems use both RPA and agentic AI together. The pattern is straightforward:
 
 - **RPA handles the routine** — standard invoices, data transfers, scheduled reports
 - **Agentic AI handles the exceptions** — unusual cases, ambiguous requests, judgment calls
 - **Humans handle the escalations** — anything the AI flags as beyond its confidence
 
-For example: A company processes 500 invoices per day. 450 of them are standard format — RPA handles those automatically. 40 have minor variations — agentic AI reads them and processes with judgment. 10 are unusual enough to need a human — the agent flags them and routes them to the right person.
+For example: A company processes 500 invoices per day. 450 are standard format — RPA handles those automatically. 40 have minor variations — agentic AI reads them and processes with judgment. 10 are unusual enough to need a human — the agent flags them and routes them to the right person.
 
-This hybrid structure is more reliable than pure agentic AI and more flexible than pure RPA.
-
-:::callout-dyk
-Many companies that rushed to build fully agentic workflows are now moving toward hybrid models. Full autonomy sounds appealing until one unexpected input causes a cascade of wrong decisions. The most resilient systems combine rigid reliability for known cases with flexible intelligence for unknown ones.
-:::
+We'll explore specific hybrid patterns — and how to choose the right approach for your situation — on the next page.
 
 :::visual{name="visual-rpa-vs-agentic"}
 

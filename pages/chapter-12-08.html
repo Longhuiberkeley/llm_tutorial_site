@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>12.8 ROI Estimation Framework - LLM Tutorial</title>
+    <script src="../js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../css/animations.css"/>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
+        <a href="../index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
+            <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
+            LLM Tutorial
+        </a>
+        <div class="flex items-center gap-6">
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="../pages/about.html">About</a>
+        </div>
+    </nav>
+
+    <div class="flex pt-16 min-h-screen">
+        <!-- SideNavBar -->
+        <aside class="sidebar hidden lg:flex w-64 fixed left-0 top-0 pt-20 bg-surface-container-low flex flex-col gap-2 p-4 z-40">
+            <div class="mb-6 px-2">
+                <h2 class="text-lg font-bold text-on-surface font-headline">Curriculum</h2>
+                <p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">LLM Mastery Series</p>
+            </div>
+            <nav class="flex flex-col gap-1 overflow-y-auto max-h-[calc(100vh-160px)]">
+                <div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 1</div><a href="chapter-01-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.1 Keyboard Autocomplete vs LLM Completion</span>
+                </a><a href="chapter-01-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.2 Word Distance - Which Words Are Close?</span>
+                </a><a href="chapter-01-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.3 Context Matters - Distance Can Change</span>
+                </a><a href="chapter-01-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.4 Sentence Distance - What Does 'Similar' Mean?</span>
+                </a><a href="chapter-01-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.5 Distance = How LLMs Generate</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 2</div><a href="chapter-02-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.1 What is Tokenization?</span>
+                </a><a href="chapter-02-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.2 ELI5 Attention — The Cocktail Party Effect</span>
+                </a><a href="chapter-02-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.3 Attention Weights — How the Model Focuses</span>
+                </a><a href="chapter-02-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
+                </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">3.1 The Black Box</span>
+                </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — Turn by Turn</span>
+                </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
+                </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
+                </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
+                </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
+                </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.5 When the Head is Full</span>
+                </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
+                </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
+                </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
+                </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
+                </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
+                </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.5 Privacy — What Never to Paste</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
+                </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
+                </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
+                </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
+                </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
+                </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
+                </a><a href="chapter-07-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.2 What is RAG? — Search + LLM</span>
+                </a><a href="chapter-07-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.3 Vector Embeddings — Storing Meaning as Coordinates</span>
+                </a><a href="chapter-07-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
+                </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
+                </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
+                </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.1 The Personal Assistant Dream</span>
+                </a><a href="chapter-08-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.2 Knowing and Doing: Context + Tools</span>
+                </a><a href="chapter-08-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.3 How It Could Be Built — And Why It's Still Hard</span>
+                </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.4 The Trade-offs: Usefulness, Privacy, and Risk</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">9.1 Multimodal AI — More Than Words</span>
+                </a><a href="chapter-09-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">9.2 Understanding vs. Generating — Two Very Different Skills</span>
+                </a><a href="chapter-09-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">9.3 What Can You Do With a Stack of Scanned Documents?</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 10</div><a href="chapter-10-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.1 The LLM Landscape — Who's Who</span>
+                </a><a href="chapter-10-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.2 Model Tiers & Costs — Bigger Isn't Always Better</span>
+                </a><a href="chapter-10-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
+                </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
+                </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 11</div><a href="chapter-11-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.1 New Technology, Same Domain</span>
+                </a><a href="chapter-11-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.2 Building AI Literacy — Making AI Approachable for Everyone</span>
+                </a><a href="chapter-11-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.3 Digital Transformation & Change Management</span>
+                </a><a href="chapter-11-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.4 Is Your Infrastructure Ready?</span>
+                </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.5 Planning Your AI Rollout</span>
+                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.6 Seeing Clearly Through the Hype</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.1 You Can't Automate What You Can't Explain</span>
+                </a><a href="chapter-12-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.2 Right vs. Wrong in Business Logic</span>
+                </a><a href="chapter-12-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.3 RPA vs. Agentic AI</span>
+                </a><a href="chapter-12-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.4 Choosing Your Automation Approach</span>
+                </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.5 Building Agentic Applications</span>
+                </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.6 The Volume vs. Variance Matrix</span>
+                </a><a href="chapter-12-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.7 Human-in-the-Loop</span>
+                </a><a href="chapter-12-08.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
+                    <span class="material-symbols-outlined text-sm text-accent">school</span>
+                    <span class="text-sm font-medium">12.8 ROI Estimation Framework</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.1 Why AI Projects Are Different</span>
+                </a><a href="chapter-13-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.2 Frameworks in Practice — SPEC Kits, BMAD, and More</span>
+                </a><a href="chapter-13-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.3 Evaluation & Test Sets</span>
+                </a><a href="chapter-13-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.4 Traceability & Audit Trails</span>
+                </a><a href="chapter-13-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.5 The Vibe Coding Trap</span>
+                </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.6 AI-Driven Review & Common Pitfalls</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Canvas -->
+        <main class="lg:ml-64 w-full px-6 md:px-12 py-16 max-w-5xl">
+            <header class="mb-12 fade-in">
+                <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
+                    <a href="../index.html" class="hover:underline">Overview</a>
+                    <span class="material-symbols-outlined text-xs">chevron_right</span>
+                    <span>Chapter 12</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
+                    12.8 ROI Estimation Framework
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
+                    A practical framework for estimating whether an automation investment actually makes financial sense.
+                </p>
+            </header>
+
+            <div class="content-body space-y-12">
+                <h2>🎯 Core Goals</h2>
+<ul>
+<li>Introduce a simple cost-benefit framework for evaluating automation ROI.</li>
+<li>Surface hidden costs that most people overlook (maintenance, monitoring, error handling).</li>
+<li>Establish that &quot;don&#39;t automate&quot; is sometimes the correct answer.</li>
+</ul>
+<div class="callout callout-tldr">
+    Before building any automation, do the math. Development costs money. Maintenance costs money. Errors cost money. If a task takes 2 minutes, three times a week, it may take a decade to break even on a $5,000 automation project.
+</div>
+
+
+<h2>💰 The Simple ROI Framework</h2>
+<p>Every automation decision is fundamentally a financial one. You&#39;re trading a one-time (and ongoing) investment for recurring savings. The question is: does the savings ever exceed the investment?</p>
+<p><strong>Step 1: Estimate your BENEFITS</strong></p>
+<ul>
+<li>Time saved per instance × number of instances per year</li>
+<li>Convert time to money (employee hourly rate × hours saved)</li>
+<li>Error reduction value (how often does the manual process produce errors? What does fixing them cost?)</li>
+<li>Speed improvement value (does faster completion have revenue impact?)</li>
+</ul>
+<p><strong>Step 2: Estimate your COSTS</strong></p>
+<ul>
+<li>Development cost (internal time or external contractor)</li>
+<li>API and compute costs (LLM calls, infrastructure)</li>
+<li>Ongoing monitoring and maintenance (someone has to watch it)</li>
+<li>Human review time (if using human-in-the-loop — this isn&#39;t free)</li>
+<li>Error handling and correction (when it breaks, how expensive is the fix?)</li>
+</ul>
+<p><strong>Step 3: Calculate your break-even point</strong>
+Divide total first-year costs by annual benefits. That&#39;s how many years until the investment pays off. If the answer is more than 2-3 years for a simple automation, think carefully before proceeding.</p>
+<div class="callout callout-dyk">
+    A useful rule of thumb: if you can&#39;t estimate your ROI, you don&#39;t understand the process well enough to automate it yet. The exercise of calculating ROI forces you to articulate exactly what the process does, how often, and at what cost — which is also exactly what you need to automate it well.
+</div>
+
+
+<h2>🔍 The Hidden Costs People Miss</h2>
+<p>Most people correctly identify development cost and time savings. The budget surprises come from costs they didn&#39;t anticipate:</p>
+<p><strong>Maintenance:</strong> Software changes. APIs change. The process it automates changes. Someone has to update the automation when any of these happen. Budget at least 20% of development cost per year for maintenance.</p>
+<p><strong>Monitoring:</strong> You can&#39;t &quot;set and forget&quot; an automation that runs in production. Someone needs to check that it&#39;s working correctly, especially after any changes upstream. This is real ongoing labor.</p>
+<p><strong>Human review:</strong> If your automation requires human review before actions are taken, that review time isn&#39;t free. If it saves 10 minutes of work but requires 8 minutes of review, the real savings is 2 minutes — not 10.</p>
+<p><strong>Error correction:</strong> When the automation produces a wrong output (and it will, eventually), someone has to catch it and fix it. In a high-volume process, even a 1% error rate can mean significant cleanup work.</p>
+<p><strong>&quot;Verification time&quot; vs. &quot;time saved&quot;:</strong> A subtle cost. If the automation produces outputs that still need to be checked before use, the human time isn&#39;t eliminated — it&#39;s transformed from doing to checking. Sometimes checking takes nearly as long as doing.</p>
+<div class="callout callout-error">
+    A common mistake: calculating only the &quot;time saved&quot; and ignoring everything else. An automation that saves 2 hours/week of labor but requires 30 minutes/week of monitoring, plus occasional error cleanup, plus quarterly maintenance updates might net only 1 hour/week of real savings — changing the break-even timeline significantly.
+</div>
+
+
+<h2>🧮 Putting the Framework to Work</h2>
+<p>Estimating exact costs and timelines for automation projects is notoriously difficult. The numbers below are illustrative — but even rough estimates using this framework will help you make better decisions than no estimates at all.</p>
+<p>A marketing team manually sends weekly newsletter segmentation reports to three stakeholders. Each report takes 20 minutes to pull and format. That&#39;s 60 minutes per week, or about 52 hours per year.</p>
+<p>At $50/hour fully-loaded cost, that&#39;s <strong>$2,600/year</strong> in labor.</p>
+<p>A developer estimates the automation at <strong>$3,000</strong> to build, plus <strong>$500/year</strong> in maintenance and monitoring.</p>
+<p>Break-even: Year 2 (barely). And that assumes zero errors, zero review time, and no process changes that require rework.</p>
+<p>Is it worth it? Maybe — especially if the team finds the task tedious and error-prone. But it&#39;s close enough that the answer isn&#39;t obvious, and rushing in without doing this math would be a mistake.</p>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-10">
+        <h3 class="text-xl font-bold font-headline mb-2">ROI Calculator</h3>
+        <p class="text-sm text-on-surface-variant">Adjust the sliders to estimate your automation ROI.</p>
+    </div>
+
+    <!-- Sliders -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Time per task -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm font-bold text-on-surface">⏱️ Time per task</label>
+                <span id="roi-time-val" class="text-sm font-bold text-primary">15 min</span>
+            </div>
+            <input type="range" min="1" max="60" value="15" step="1"
+                oninput="document.getElementById('roi-time-val').textContent = this.value + ' min'; calcROI();"
+                id="roi-time" class="w-full accent-primary">
+            <div class="flex justify-between text-[10px] text-on-surface-variant mt-1">
+                <span>1 min</span><span>60 min</span>
+            </div>
+        </div>
+
+        <!-- Times per week -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm font-bold text-on-surface">🔁 Times per week</label>
+                <span id="roi-freq-val" class="text-sm font-bold text-primary">10x</span>
+            </div>
+            <input type="range" min="1" max="100" value="10" step="1"
+                oninput="document.getElementById('roi-freq-val').textContent = this.value + 'x'; calcROI();"
+                id="roi-freq" class="w-full accent-primary">
+            <div class="flex justify-between text-[10px] text-on-surface-variant mt-1">
+                <span>1x</span><span>100x</span>
+            </div>
+        </div>
+
+        <!-- Hourly labor cost -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm font-bold text-on-surface">💰 Hourly labor cost</label>
+                <span id="roi-rate-val" class="text-sm font-bold text-primary">$50</span>
+            </div>
+            <input type="range" min="20" max="200" value="50" step="5"
+                oninput="document.getElementById('roi-rate-val').textContent = '
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div> + this.value; calcROI();"
+                id="roi-rate" class="w-full accent-primary">
+            <div class="flex justify-between text-[10px] text-on-surface-variant mt-1">
+                <span>$20</span><span>$200</span>
+            </div>
+        </div>
+
+        <!-- Development cost -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant">
+            <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm font-bold text-on-surface">🛠️ Development cost</label>
+                <span id="roi-dev-val" class="text-sm font-bold text-primary">$5,000</span>
+            </div>
+            <input type="range" min="1000" max="50000" value="5000" step="500"
+                oninput="document.getElementById('roi-dev-val').textContent = '
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div> + Number(this.value).toLocaleString(); calcROI();"
+                id="roi-dev" class="w-full accent-primary">
+            <div class="flex justify-between text-[10px] text-on-surface-variant mt-1">
+                <span>$1,000</span><span>$50,000</span>
+            </div>
+        </div>
+
+        <!-- Annual maintenance -->
+        <div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant md:col-span-2">
+            <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm font-bold text-on-surface">🔧 Annual maintenance</label>
+                <span id="roi-maint-val" class="text-sm font-bold text-primary">$1,000</span>
+            </div>
+            <input type="range" min="0" max="10000" value="1000" step="250"
+                oninput="document.getElementById('roi-maint-val').textContent = '
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div> + Number(this.value).toLocaleString(); calcROI();"
+                id="roi-maint" class="w-full accent-primary">
+            <div class="flex justify-between text-[10px] text-on-surface-variant mt-1">
+                <span>$0</span><span>$10,000</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="bg-surface-container-lowest border-2 border-primary/20 rounded-xl p-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <!-- Annual labor cost -->
+            <div class="text-center p-4 rounded-xl bg-surface-container-low">
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-1">Annual Labor Cost</div>
+                <div id="roi-labor" class="text-2xl font-bold text-on-surface">$6,500</div>
+                <div class="text-[10px] text-on-surface-variant mt-1">What you spend today</div>
+            </div>
+
+            <!-- Annual savings -->
+            <div class="text-center p-4 rounded-xl bg-surface-container-low">
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-1">Annual Savings</div>
+                <div id="roi-savings" class="text-2xl font-bold text-on-surface">$5,500</div>
+                <div class="text-[10px] text-on-surface-variant mt-1">Labor cost minus maintenance</div>
+            </div>
+
+            <!-- Break-even -->
+            <div class="text-center p-4 rounded-xl bg-surface-container-low">
+                <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-1">Break-even</div>
+                <div id="roi-breakeven" class="text-2xl font-bold text-on-surface">11 months</div>
+                <div class="text-[10px] text-on-surface-variant mt-1">When you recoup dev cost</div>
+            </div>
+        </div>
+
+        <!-- Verdict Badge -->
+        <div class="text-center">
+            <div id="roi-verdict" class="inline-block px-6 py-3 rounded-full text-sm font-bold transition-all duration-300">
+                Good Investment 👍
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function calcROI() {
+    const time = Number(document.getElementById('roi-time').value);
+    const freq = Number(document.getElementById('roi-freq').value);
+    const rate = Number(document.getElementById('roi-rate').value);
+    const dev = Number(document.getElementById('roi-dev').value);
+    const maint = Number(document.getElementById('roi-maint').value);
+
+    // Annual labor cost = (time / 60) * freq * 52 * rate
+    const annualLabor = (time / 60) * freq * 52 * rate;
+    const annualSavings = annualLabor - maint;
+
+    // Break-even in months
+    let breakevenMonths = null;
+    let breakevenText = '';
+    if (annualSavings <= 0) {
+        breakevenText = 'Never';
+    } else {
+        breakevenMonths = Math.ceil((dev / annualSavings) * 12);
+        breakevenText = breakevenMonths + ' month' + (breakevenMonths !== 1 ? 's' : '');
+    }
+
+    // Update display
+    document.getElementById('roi-labor').textContent = '
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div> + Math.round(annualLabor).toLocaleString();
+    document.getElementById('roi-savings').textContent = (annualSavings >= 0 ? '
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div> : '-
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div>) + Math.abs(Math.round(annualSavings)).toLocaleString();
+    document.getElementById('roi-breakeven').textContent = breakevenText;
+
+    // Determine verdict
+    const verdict = document.getElementById('roi-verdict');
+    let verdictText = '';
+    let verdictBg = '';
+    let verdictColor = '';
+
+    if (annualSavings <= 0) {
+        verdictText = 'Probably Not Worth It ❌';
+        verdictBg = 'rgba(244, 67, 54, 0.12)';
+        verdictColor = '#c62828';
+    } else if (breakevenMonths <= 6) {
+        verdictText = 'Strong ROI ✅';
+        verdictBg = 'rgba(76, 175, 80, 0.12)';
+        verdictColor = '#2e7d32';
+    } else if (breakevenMonths <= 12) {
+        verdictText = 'Good Investment 👍';
+        verdictBg = 'rgba(139, 195, 74, 0.12)';
+        verdictColor = '#558b2f';
+    } else if (breakevenMonths <= 24) {
+        verdictText = 'Worth Considering 🤔';
+        verdictBg = 'rgba(255, 193, 7, 0.15)';
+        verdictColor = '#f57f17';
+    } else if (breakevenMonths <= 36) {
+        verdictText = 'Think Carefully ⚠️';
+        verdictBg = 'rgba(255, 152, 0, 0.12)';
+        verdictColor = '#e65100';
+    } else {
+        verdictText = 'Probably Not Worth It ❌';
+        verdictBg = 'rgba(244, 67, 54, 0.12)';
+        verdictColor = '#c62828';
+    }
+
+    verdict.textContent = verdictText;
+    verdict.style.background = verdictBg;
+    verdict.style.color = verdictColor;
+}
+
+// Run initial calculation on load
+document.addEventListener('DOMContentLoaded', calcROI);
+</script>
+
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>Always calculate ROI before building</strong> — guessing is how budgets blow up.</li>
+<li><strong>Benefits:</strong> time saved × volume, error reduction, speed improvement.</li>
+<li><strong>Hidden costs:</strong> maintenance, monitoring, human review, error correction.</li>
+<li><strong>&quot;Don&#39;t automate&quot; is a valid answer</strong> — sometimes the math simply doesn&#39;t work.</li>
+<li><strong>Verification time is a real cost</strong> — checking AI output isn&#39;t as fast as people assume.</li>
+</ul>
+<div id="quiz-12-08" class="quiz-container my-12"></div>
+            </div>
+
+            <!-- Quiz Section (if present) -->
+            
+
+            <!-- Navigation -->
+            <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
+                <div class="prev-link">
+                    <a href="chapter-12-07.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.7 Human-in-the-Loop</a>
+                </div>
+                <div class="next-link">
+                    <a href="chapter-13-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">13.1 Why AI Projects Are Different <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 LLM Tutorial. Built with 🧠.</p>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/quizzes.js"></script>
+    
+</body>
+</html>

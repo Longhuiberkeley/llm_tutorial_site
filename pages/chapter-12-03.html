@@ -210,13 +210,19 @@
                     <span class="text-sm font-medium">12.3 RPA vs. Agentic AI</span>
                 </a><a href="chapter-12-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">12.4 The Volume vs. Variance Matrix</span>
+                    <span class="text-sm font-medium">12.4 Choosing Your Automation Approach</span>
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">12.5 Human-in-the-Loop</span>
+                    <span class="text-sm font-medium">12.5 Building Agentic Applications</span>
                 </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">12.6 ROI Calculation — Is It Worth It?</span>
+                    <span class="text-sm font-medium">12.6 The Volume vs. Variance Matrix</span>
+                </a><a href="chapter-12-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.7 Human-in-the-Loop</span>
+                </a><a href="chapter-12-08.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.8 ROI Estimation Framework</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">13.1 Why AI Projects Are Different</span>
@@ -281,6 +287,11 @@
 <p><strong>Best for:</strong> Copying 1,000 rows from a spreadsheet into an accounting system. Processing a fixed-format invoice. Running the same report every Monday at 9 AM.</p>
 <p><strong>Strength:</strong> 100% reliable for stable, well-defined tasks. Cheap per operation at scale.</p>
 <p><strong>Weakness:</strong> Breaks when anything changes. Can&#39;t handle ambiguity. Can&#39;t make judgment calls.</p>
+<div class="callout callout-dyk">
+    <strong>What does RPA look like in practice?</strong> Think of it as macros on steroids. Common examples: automatically downloading bank statements every morning, copying invoice data from PDF emails into an accounting system, filling out government forms from spreadsheet data, generating and sending a weekly status report from a dashboard, or syncing customer records between two systems on a schedule.
+</div>
+
+
 <h2>🧠 Agentic AI: The Flexible Decision-Maker</h2>
 <p>Agentic AI (LLMs with tools and autonomous action capabilities) can read context, make decisions, handle exceptions, and adapt to variation. Think of it like a car with GPS — it can navigate around roadblocks, find alternate routes, and respond to unexpected situations.</p>
 <p>Where RPA would simply crash on an unexpected input, an agentic system can reason about it: &quot;This email is unusual. Let me check the policy, consider the customer&#39;s history, and decide whether to escalate.&quot;</p>
@@ -293,20 +304,190 @@
 
 
 <h2>🔀 The Hybrid Approach</h2>
-<p>In practice, the best automation systems use both. The pattern looks like this:</p>
+<p>In practice, the best automation systems use both RPA and agentic AI together. The pattern is straightforward:</p>
 <ul>
 <li><strong>RPA handles the routine</strong> — standard invoices, data transfers, scheduled reports</li>
 <li><strong>Agentic AI handles the exceptions</strong> — unusual cases, ambiguous requests, judgment calls</li>
 <li><strong>Humans handle the escalations</strong> — anything the AI flags as beyond its confidence</li>
 </ul>
-<p>For example: A company processes 500 invoices per day. 450 of them are standard format — RPA handles those automatically. 40 have minor variations — agentic AI reads them and processes with judgment. 10 are unusual enough to need a human — the agent flags them and routes them to the right person.</p>
-<p>This hybrid structure is more reliable than pure agentic AI and more flexible than pure RPA.</p>
-<div class="callout callout-dyk">
-    Many companies that rushed to build fully agentic workflows are now moving toward hybrid models. Full autonomy sounds appealing until one unexpected input causes a cascade of wrong decisions. The most resilient systems combine rigid reliability for known cases with flexible intelligence for unknown ones.
+<p>For example: A company processes 500 invoices per day. 450 are standard format — RPA handles those automatically. 40 have minor variations — agentic AI reads them and processes with judgment. 10 are unusual enough to need a human — the agent flags them and routes them to the right person.</p>
+<p>We&#39;ll explore specific hybrid patterns — and how to choose the right approach for your situation — on the next page.</p>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-8">
+        <h3 class="text-xl font-bold font-headline mb-2">RPA vs Agentic AI</h3>
+        <p class="text-sm text-on-surface-variant">Two approaches to automation — and a powerful hybrid.</p>
+    </div>
+
+    <!-- Tab Buttons -->
+    <div class="flex gap-2 mb-6" id="rpa-tabs">
+        <button onclick="selectRpaTab(0)" id="rpa-btn-0"
+            class="flex-1 py-3 px-4 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer bg-primary text-on-primary border-primary">
+            🚂 RPA
+        </button>
+        <button onclick="selectRpaTab(1)" id="rpa-btn-1"
+            class="flex-1 py-3 px-4 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer bg-surface-container-lowest border-outline-variant text-on-surface">
+            🚗 Agentic AI
+        </button>
+        <button onclick="selectRpaTab(2)" id="rpa-btn-2"
+            class="flex-1 py-3 px-4 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer bg-surface-container-lowest border-outline-variant text-on-surface">
+            🔀 Hybrid
+        </button>
+    </div>
+
+    <!-- Content Panel -->
+    <div id="rpa-panel" class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant min-h-[300px] transition-all">
+        <!-- Populated by JS -->
+    </div>
 </div>
 
+<script>
+(function() {
+    var tabs = [
+        {
+            id: 'rpa',
+            emoji: '🚂',
+            metaphor: 'Like a Train on Tracks',
+            desc: 'Follows exact rules, breaks on surprises. Every step is pre-programmed — fast and reliable on known routes, but derails if anything changes.',
+            strengths: [
+                'Blazing fast on repetitive, identical tasks',
+                'Near-zero error rate on structured data',
+                'Easy to audit — every step is logged and predictable'
+            ],
+            weaknesses: [
+                'Breaks immediately when formats or layouts change',
+                'Cannot handle exceptions or edge cases',
+                'Expensive to maintain as systems evolve'
+            ],
+            bestFor: ['Data entry from fixed forms', 'Payroll processing', 'Scheduled report generation', 'Invoice routing (standard formats)']
+        },
+        {
+            id: 'agentic',
+            emoji: '🚗',
+            metaphor: 'Like a Car with GPS',
+            desc: 'Navigates around obstacles, adapts to situations. Understands intent and can figure out alternative routes when the road is blocked.',
+            strengths: [
+                'Handles messy, unstructured, or unexpected input',
+                'Adapts to format changes without reprogramming',
+                'Can reason about edge cases and make judgment calls'
+            ],
+            weaknesses: [
+                'Slower and more expensive per task',
+                'Occasional errors require human oversight',
+                'Harder to audit — reasoning is not always transparent'
+            ],
+            bestFor: ['Processing free-text emails', 'Handling exception invoices', 'Customer request interpretation', 'Document understanding']
+        }
+    ];
 
-<div class="p-4 bg-error text-on-error">Visual component not found: visual-rpa-vs-agentic</div>
+    function renderTab(idx) {
+        var panel = document.getElementById('rpa-panel');
+
+        // Update button styles
+        for (var i = 0; i < 3; i++) {
+            var btn = document.getElementById('rpa-btn-' + i);
+            if (i === idx) {
+                btn.className = 'flex-1 py-3 px-4 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer bg-primary text-on-primary border-primary';
+            } else {
+                btn.className = 'flex-1 py-3 px-4 rounded-lg text-sm font-bold border-2 transition-all cursor-pointer bg-surface-container-lowest border-outline-variant text-on-surface';
+            }
+        }
+
+        // Render Hybrid tab
+        if (idx === 2) {
+            panel.innerHTML =
+                '<div class="text-center mb-6">' +
+                    '<div class="text-2xl mb-2">🔀</div>' +
+                    '<div class="text-lg font-bold mb-1">The Best of Both Worlds</div>' +
+                    '<p class="text-sm text-on-surface-variant">Example: Processing 500 invoices per day</p>' +
+                '</div>' +
+
+                '<div class="space-y-4">' +
+                    '<!-- RPA bar -->' +
+                    '<div>' +
+                        '<div class="flex items-center justify-between mb-1.5">' +
+                            '<span class="text-sm font-bold">🚂 RPA handles standard invoices</span>' +
+                            '<span class="text-sm font-bold" style="color: #4CAF50;">450 invoices (90%)</span>' +
+                        '</div>' +
+                        '<div class="w-full bg-surface-container rounded-full h-8 overflow-hidden">' +
+                            '<div class="h-full rounded-full flex items-center justify-center text-white text-xs font-bold" style="width: 90%; background: #4CAF50;">Fast, cheap, predictable</div>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<!-- Agentic bar -->' +
+                    '<div>' +
+                        '<div class="flex items-center justify-between mb-1.5">' +
+                            '<span class="text-sm font-bold">🚗 Agentic AI handles exceptions</span>' +
+                            '<span class="text-sm font-bold" style="color: #5B8DB8;">40 invoices (8%)</span>' +
+                        '</div>' +
+                        '<div class="w-full bg-surface-container rounded-full h-8 overflow-hidden">' +
+                            '<div class="h-full rounded-full flex items-center justify-center text-white text-xs font-bold" style="width: 8%; min-width: 180px; background: #5B8DB8;">Reads, reasons, adapts</div>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<!-- Human bar -->' +
+                    '<div>' +
+                        '<div class="flex items-center justify-between mb-1.5">' +
+                            '<span class="text-sm font-bold">👤 Humans handle edge cases</span>' +
+                            '<span class="text-sm font-bold" style="color: var(--accent);">10 invoices (2%)</span>' +
+                        '</div>' +
+                        '<div class="w-full bg-surface-container rounded-full h-8 overflow-hidden">' +
+                            '<div class="h-full rounded-full flex items-center justify-center text-white text-xs font-bold" style="width: 4%; min-width: 180px; background: var(--accent);">Expert judgment needed</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+
+                '<div class="mt-6 bg-surface-container rounded-xl p-4 text-center">' +
+                    '<p class="text-sm text-on-surface-variant"><strong>Result:</strong> 98% automated, humans only touch the truly unusual cases. Each tool does what it does best.</p>' +
+                '</div>';
+            return;
+        }
+
+        // Render RPA or Agentic tab
+        var t = tabs[idx];
+        panel.innerHTML =
+            '<div class="flex items-start gap-4 mb-5">' +
+                '<div class="text-4xl shrink-0">' + t.emoji + '</div>' +
+                '<div>' +
+                    '<div class="text-lg font-bold mb-1">' + t.metaphor + '</div>' +
+                    '<p class="text-sm text-on-surface-variant leading-relaxed">' + t.desc + '</p>' +
+                '</div>' +
+            '</div>' +
+
+            '<div class="grid sm:grid-cols-2 gap-4 mb-5">' +
+                '<div class="bg-surface-container rounded-xl p-4">' +
+                    '<div class="text-xs font-bold uppercase tracking-widest mb-2" style="color: #4CAF50;">✅ Strengths</div>' +
+                    '<ul class="text-sm space-y-1.5">' +
+                        t.strengths.map(function(s) {
+                            return '<li class="flex items-start gap-2"><span class="shrink-0 mt-0.5" style="color: #4CAF50;">▸</span>' + s + '</li>';
+                        }).join('') +
+                    '</ul>' +
+                '</div>' +
+                '<div class="bg-surface-container rounded-xl p-4">' +
+                    '<div class="text-xs font-bold uppercase tracking-widest mb-2" style="color: #E53935;">⚠️ Weaknesses</div>' +
+                    '<ul class="text-sm space-y-1.5">' +
+                        t.weaknesses.map(function(w) {
+                            return '<li class="flex items-start gap-2"><span class="shrink-0 mt-0.5" style="color: #E53935;">▸</span>' + w + '</li>';
+                        }).join('') +
+                    '</ul>' +
+                '</div>' +
+            '</div>' +
+
+            '<div class="border-t border-outline-variant pt-4">' +
+                '<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">Best for</div>' +
+                '<div class="flex flex-wrap gap-2">' +
+                    t.bestFor.map(function(b) {
+                        return '<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">' + b + '</span>';
+                    }).join('') +
+                '</div>' +
+            '</div>';
+    }
+
+    window.selectRpaTab = function(idx) { renderTab(idx); };
+
+    renderTab(0); // Default to RPA
+})();
+</script>
+
 
 <h2>📝 Key Concepts</h2>
 <ul>
@@ -328,7 +509,7 @@
                     <a href="chapter-12-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.2 Right vs. Wrong in Business Logic</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-12-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">12.4 The Volume vs. Variance Matrix <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-12-04.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">12.4 Choosing Your Automation Approach <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

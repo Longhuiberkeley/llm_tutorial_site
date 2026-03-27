@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>12.7 Human-in-the-Loop - LLM Tutorial</title>
+    <script src="../js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../css/animations.css"/>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
+        <a href="../index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
+            <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
+            LLM Tutorial
+        </a>
+        <div class="flex items-center gap-6">
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="../pages/about.html">About</a>
+        </div>
+    </nav>
+
+    <div class="flex pt-16 min-h-screen">
+        <!-- SideNavBar -->
+        <aside class="sidebar hidden lg:flex w-64 fixed left-0 top-0 pt-20 bg-surface-container-low flex flex-col gap-2 p-4 z-40">
+            <div class="mb-6 px-2">
+                <h2 class="text-lg font-bold text-on-surface font-headline">Curriculum</h2>
+                <p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">LLM Mastery Series</p>
+            </div>
+            <nav class="flex flex-col gap-1 overflow-y-auto max-h-[calc(100vh-160px)]">
+                <div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 1</div><a href="chapter-01-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.1 Keyboard Autocomplete vs LLM Completion</span>
+                </a><a href="chapter-01-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.2 Word Distance - Which Words Are Close?</span>
+                </a><a href="chapter-01-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.3 Context Matters - Distance Can Change</span>
+                </a><a href="chapter-01-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.4 Sentence Distance - What Does 'Similar' Mean?</span>
+                </a><a href="chapter-01-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">1.5 Distance = How LLMs Generate</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 2</div><a href="chapter-02-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.1 What is Tokenization?</span>
+                </a><a href="chapter-02-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.2 ELI5 Attention — The Cocktail Party Effect</span>
+                </a><a href="chapter-02-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.3 Attention Weights — How the Model Focuses</span>
+                </a><a href="chapter-02-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
+                </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">3.1 The Black Box</span>
+                </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — Turn by Turn</span>
+                </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
+                </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
+                </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
+                </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
+                </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.5 When the Head is Full</span>
+                </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
+                </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
+                </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
+                </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
+                </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
+                </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">5.5 Privacy — What Never to Paste</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
+                </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
+                </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
+                </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
+                </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
+                </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
+                </a><a href="chapter-07-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.2 What is RAG? — Search + LLM</span>
+                </a><a href="chapter-07-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.3 Vector Embeddings — Storing Meaning as Coordinates</span>
+                </a><a href="chapter-07-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
+                </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
+                </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
+                </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.1 The Personal Assistant Dream</span>
+                </a><a href="chapter-08-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.2 Knowing and Doing: Context + Tools</span>
+                </a><a href="chapter-08-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.3 How It Could Be Built — And Why It's Still Hard</span>
+                </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">8.4 The Trade-offs: Usefulness, Privacy, and Risk</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">9.1 Multimodal AI — More Than Words</span>
+                </a><a href="chapter-09-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">9.2 Understanding vs. Generating — Two Very Different Skills</span>
+                </a><a href="chapter-09-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">9.3 What Can You Do With a Stack of Scanned Documents?</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 10</div><a href="chapter-10-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.1 The LLM Landscape — Who's Who</span>
+                </a><a href="chapter-10-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.2 Model Tiers & Costs — Bigger Isn't Always Better</span>
+                </a><a href="chapter-10-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
+                </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
+                </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 11</div><a href="chapter-11-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.1 New Technology, Same Domain</span>
+                </a><a href="chapter-11-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.2 Building AI Literacy — Making AI Approachable for Everyone</span>
+                </a><a href="chapter-11-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.3 Digital Transformation & Change Management</span>
+                </a><a href="chapter-11-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.4 Is Your Infrastructure Ready?</span>
+                </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.5 Planning Your AI Rollout</span>
+                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.6 Seeing Clearly Through the Hype</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.1 You Can't Automate What You Can't Explain</span>
+                </a><a href="chapter-12-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.2 Right vs. Wrong in Business Logic</span>
+                </a><a href="chapter-12-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.3 RPA vs. Agentic AI</span>
+                </a><a href="chapter-12-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.4 Choosing Your Automation Approach</span>
+                </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.5 Building Agentic Applications</span>
+                </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.6 The Volume vs. Variance Matrix</span>
+                </a><a href="chapter-12-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
+                    <span class="material-symbols-outlined text-sm text-accent">school</span>
+                    <span class="text-sm font-medium">12.7 Human-in-the-Loop</span>
+                </a><a href="chapter-12-08.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.8 ROI Estimation Framework</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.1 Why AI Projects Are Different</span>
+                </a><a href="chapter-13-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.2 Frameworks in Practice — SPEC Kits, BMAD, and More</span>
+                </a><a href="chapter-13-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.3 Evaluation & Test Sets</span>
+                </a><a href="chapter-13-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.4 Traceability & Audit Trails</span>
+                </a><a href="chapter-13-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.5 The Vibe Coding Trap</span>
+                </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">13.6 AI-Driven Review & Common Pitfalls</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Canvas -->
+        <main class="lg:ml-64 w-full px-6 md:px-12 py-16 max-w-5xl">
+            <header class="mb-12 fade-in">
+                <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
+                    <a href="../index.html" class="hover:underline">Overview</a>
+                    <span class="material-symbols-outlined text-xs">chevron_right</span>
+                    <span>Chapter 12</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
+                    12.7 Human-in-the-Loop
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
+                    Most business AI should involve human oversight, not full autonomy — here's how to design it right.
+                </p>
+            </header>
+
+            <div class="content-body space-y-12">
+                <h2>🎯 Core Goals</h2>
+<ul>
+<li>Explain the human-in-the-loop (HITL) design pattern and why it&#39;s often better than full autonomy.</li>
+<li>Define where full autonomy is appropriate and where it is dangerous.</li>
+<li>Introduce monitoring, logging, and the gradual trust-building model.</li>
+</ul>
+<div class="callout callout-tldr">
+    &quot;Human-in-the-loop&quot; means the AI proposes, the human approves. It&#39;s not a sign of distrust in the technology — it&#39;s smart system design. Most business AI should involve human oversight, at least until trust is earned through a track record.
+</div>
+
+
+<h2>🚦 Full Autonomy vs. Human-in-the-Loop</h2>
+<p>When building an agentic AI system, one of the most important design decisions is: how much can the AI do on its own before a human needs to weigh in?</p>
+<p><strong>Full autonomy</strong> means the AI acts, and the action is taken — no human reviews it first. The AI sends the email. The AI processes the refund. The AI updates the record.</p>
+<p>This sounds efficient. And for the right tasks, it is. But for anything that affects customers, money, legal obligations, or reputation, full autonomy without a proven track record is a risk most organizations shouldn&#39;t take.</p>
+<p><strong>Human-in-the-loop (HITL)</strong> means the AI does the work, but a human reviews and approves before the action is taken — or at minimum, before it&#39;s irreversible.</p>
+<p>Common HITL patterns:</p>
+<ul>
+<li><strong>AI drafts → human edits and sends</strong> (email responses, reports)</li>
+<li><strong>AI proposes → human approves</strong> (pricing changes, contract terms)</li>
+<li><strong>AI flags → human decides</strong> (unusual transactions, escalated support cases)</li>
+<li><strong>AI acts → human can revert</strong> (changes logged, easy rollback available)</li>
+</ul>
+<div class="callout callout-tip">
+    When designing human-in-the-loop interfaces, think beyond the traditional dashboard. You can give reviewers an LLM-powered chat interface where they can ask questions about the situation, explore edge cases conversationally, and then make their decision. Instead of staring at a table of numbers, the reviewer asks: &quot;Why did the system flag this transaction?&quot; and gets an instant, contextual explanation. The review experience itself can be enhanced by AI.
+</div>
+
+
+<div class="callout callout-dyk">
+    The term &quot;human-in-the-loop&quot; comes from control systems engineering, where a human operator monitors and adjusts automated systems in real time. It&#39;s been standard practice in aviation, nuclear power, and manufacturing for decades — AI-assisted workflows are just the latest application of an old, well-proven principle.
+</div>
+
+
+<h2>✅ Where Autonomy Works — and Where It Doesn&#39;t</h2>
+<p><strong>Full autonomy works well when:</strong></p>
+<ul>
+<li>The task is low-risk and contained (email categorization, tagging, sorting)</li>
+<li>Errors are easily reversible (a mislabeled category is easy to fix)</li>
+<li>The AI has a proven track record on this specific task</li>
+<li>Volume is too high for human review to be practical</li>
+</ul>
+<p><strong>HITL is essential when:</strong></p>
+<ul>
+<li>The task affects customers directly (responses, offers, account changes)</li>
+<li>Money is involved (pricing, billing, refunds, payments)</li>
+<li>Legal or compliance obligations apply (contracts, regulatory filings)</li>
+<li>Errors are hard or impossible to reverse</li>
+<li>The AI is new to this task and hasn&#39;t built a track record yet</li>
+</ul>
+<p>The key insight: HITL is not a permanent state. It&#39;s the starting point. As an AI system proves itself on real cases, you can gradually reduce the scope of human oversight — moving from reviewing every output to spot-checking, to reviewing only flagged cases.</p>
+<div class="callout callout-error">
+    A common mistake is launching an AI system with full autonomy right away because it looked good in demos and internal testing. Demos use curated examples. Production introduces edge cases, unexpected inputs, and adversarial users. Start with HITL. Earn autonomy through performance data, not optimism.
+</div>
+
+
+<h2>📋 Monitoring and Logging Are Not Optional</h2>
+<p>For any AI system operating in production — even one with human review — you need to log what&#39;s happening. This means:</p>
+<ul>
+<li><strong>Every input the AI receives</strong> should be stored.</li>
+<li><strong>Every output the AI produces</strong> should be stored.</li>
+<li><strong>Every tool the AI calls</strong> and what it returned should be stored.</li>
+<li><strong>Human review outcomes</strong> should be stored (did the human approve, edit, or reject?).</li>
+</ul>
+<p>Why? Because without logs, you can&#39;t improve the system. You can&#39;t find patterns in failures. You can&#39;t demonstrate compliance. You can&#39;t reconstruct what happened when something goes wrong.</p>
+<p>Monitoring means actively watching the system — not just storing logs, but reviewing them. Set up alerts for unusual patterns: sudden drop in approval rate, spike in rejections, unusual error types. Treat your AI system like a new employee: check in regularly, especially early on.</p>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-10">
+        <h3 class="text-xl font-bold font-headline mb-2">Human-in-the-Loop Workflow</h3>
+        <p class="text-sm text-on-surface-variant">Watch how AI and humans work together.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-6 items-center justify-between px-4 relative">
+        <!-- Connecting line -->
+        <div class="hidden md:block absolute top-8 left-0 w-full h-1 bg-outline-variant/30 -z-10"></div>
+
+        <!-- Step 1: Input -->
+        <div id="hitl-step-0" class="z-10 flex flex-col items-center gap-3 group">
+            <div class="hitl-circle w-16 h-16 rounded-full bg-surface-container-lowest border-4 border-outline-variant flex items-center justify-center text-2xl transition-all duration-500 shadow-sm">📥</div>
+            <div class="text-[10px] font-black uppercase tracking-widest opacity-60 text-center">Input</div>
+        </div>
+
+        <!-- Step 2: AI Processes -->
+        <div id="hitl-step-1" class="z-10 flex flex-col items-center gap-3 group">
+            <div class="hitl-circle w-16 h-16 rounded-full bg-surface-container-lowest border-4 border-outline-variant flex items-center justify-center text-2xl transition-all duration-500 shadow-sm">🧠</div>
+            <div class="text-[10px] font-black uppercase tracking-widest opacity-60 text-center">AI Processes</div>
+        </div>
+
+        <!-- Step 3: Human Reviews -->
+        <div id="hitl-step-2" class="z-10 flex flex-col items-center gap-3 group">
+            <div class="hitl-circle w-16 h-16 rounded-full bg-surface-container-lowest border-4 border-outline-variant flex items-center justify-center text-2xl transition-all duration-500 shadow-sm">👤</div>
+            <div class="text-[10px] font-black uppercase tracking-widest opacity-60 text-center">Human Reviews</div>
+        </div>
+
+        <!-- Step 4: Decision -->
+        <div id="hitl-step-3" class="z-10 flex flex-col items-center gap-3 group">
+            <div class="hitl-circle w-16 h-16 rounded-full bg-surface-container-lowest border-4 border-outline-variant flex items-center justify-center text-2xl transition-all duration-500 shadow-sm">✅</div>
+            <div class="text-[10px] font-black uppercase tracking-widest opacity-60 text-center">Decision</div>
+        </div>
+
+        <!-- Step 5: Action -->
+        <div id="hitl-step-4" class="z-10 flex flex-col items-center gap-3 group">
+            <div class="hitl-circle w-16 h-16 rounded-full bg-surface-container-lowest border-4 border-outline-variant flex items-center justify-center text-2xl transition-all duration-500 shadow-sm">⚡</div>
+            <div class="text-[10px] font-black uppercase tracking-widest opacity-60 text-center">Action</div>
+        </div>
+    </div>
+
+    <!-- Status Display -->
+    <div class="mt-10 bg-surface-container-lowest border-2 border-primary/20 rounded-xl p-6 min-h-[120px] flex flex-col justify-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full bg-primary opacity-20"></div>
+        <div id="hitl-status-title" class="text-[10px] font-black uppercase tracking-widest text-primary mb-2 opacity-60">Ready to Start</div>
+        <div id="hitl-status-desc" class="text-sm font-bold leading-relaxed italic text-on-surface">
+            Follow a customer support email through the human-in-the-loop pipeline.
+        </div>
+        <button onclick="startHitl()" id="hitl-start-btn" class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-full text-xs font-bold hover:shadow-lg transition-all self-start">
+            ▶ Start
+        </button>
+    </div>
+
+    <!-- Gradual Trust Section (hidden until animation completes) -->
+    <div id="hitl-trust-section" class="mt-8 hidden">
+        <div class="border-t border-outline-variant pt-6">
+            <h4 class="text-sm font-bold text-on-surface mb-1">📈 Gradual Trust: Choose Your Oversight Level</h4>
+            <p class="text-xs text-on-surface-variant mb-4">As confidence in the AI grows, you can reduce human involvement.</p>
+
+            <div class="flex flex-wrap gap-3 mb-4">
+                <button onclick="selectTrust(0, this)" id="trust-btn-0"
+                    class="trust-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">
+                    🔍 Review Everything
+                </button>
+                <button onclick="selectTrust(1, this)" id="trust-btn-1"
+                    class="trust-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">
+                    📊 Spot Check
+                </button>
+                <button onclick="selectTrust(2, this)" id="trust-btn-2"
+                    class="trust-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">
+                    🚀 Autonomous
+                </button>
+            </div>
+
+            <div id="trust-detail" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 text-sm text-on-surface-variant leading-relaxed animate-fade-in">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const hitlSteps = [
+    { title: 'Input', desc: '📥 A customer support email arrives: "I was charged twice for my subscription last month. Please help!"' },
+    { title: 'AI Processes', desc: '🧠 The LLM analyzes the email, checks the customer\'s account history, and drafts a response with a refund offer.' },
+    { title: 'Human Reviews', desc: '👤 A support agent reviews the AI\'s draft. They verify the double charge in the billing system and check the refund amount.' },
+    { title: 'Decision', desc: '✅ The agent approves the response with a small edit — adding a personalized apology and a 10% discount code.' },
+    { title: 'Action', desc: '⚡ The final response is sent to the customer, the refund is processed, and the interaction is logged for quality tracking.' }
+];
+
+const trustLevels = [
+    {
+        title: '🔍 Review Everything',
+        desc: '<strong>Starting phase.</strong> A human reviews every single AI output before it goes out. This is where you begin — it builds understanding of what the AI does well and where it struggles. Expect to review 100% of outputs. Best for: first weeks of deployment, high-stakes domains, or regulated industries.'
+    },
+    {
+        title: '📊 Spot Check',
+        desc: '<strong>Building confidence.</strong> The AI handles routine cases autonomously, but a human samples 10–20% of outputs for quality assurance. Flagged or unusual cases still get full review. Best for: after the AI has proven reliable on common patterns, typically after a few weeks of "Review Everything."'
+    },
+    {
+        title: '🚀 Autonomous',
+        desc: '<strong>Earned trust.</strong> The AI operates independently for well-understood task types. Humans only intervene on edge cases, escalations, or when the AI signals low confidence. Monitoring dashboards track quality metrics. Best for: mature deployments with strong guardrails, logging, and rollback capabilities.'
+    }
+];
+
+let hitlCurrentStep = 0;
+let hitlIsPlaying = false;
+
+function startHitl() {
+    if (hitlIsPlaying) return;
+    hitlIsPlaying = true;
+
+    const btn = document.getElementById('hitl-start-btn');
+    btn.disabled = true;
+    btn.classList.add('opacity-0');
+
+    // Hide trust section on restart
+    document.getElementById('hitl-trust-section').classList.add('hidden');
+
+    // Reset all steps
+    for (let i = 0; i < 5; i++) {
+        const circle = document.querySelector('#hitl-step-' + i + ' .hitl-circle');
+        circle.classList.remove('border-primary', 'scale-110');
+        circle.style.background = '';
+        circle.classList.add('border-outline-variant');
+    }
+
+    hitlCurrentStep = 0;
+    runHitlStep();
+}
+
+function runHitlStep() {
+    if (hitlCurrentStep >= hitlSteps.length) {
+        hitlIsPlaying = false;
+        const btn = document.getElementById('hitl-start-btn');
+        btn.disabled = false;
+        btn.classList.remove('opacity-0');
+        btn.textContent = '▶ Replay';
+
+        // Show gradual trust section
+        const trustSection = document.getElementById('hitl-trust-section');
+        trustSection.classList.remove('hidden');
+        trustSection.classList.remove('animate-fade-in');
+        void trustSection.offsetWidth;
+        trustSection.classList.add('animate-fade-in');
+
+        // Default select "Review Everything"
+        selectTrust(0, document.getElementById('trust-btn-0'));
+        return;
+    }
+
+    const step = hitlSteps[hitlCurrentStep];
+
+    // Reset previous step highlight (keep it completed but not active)
+    if (hitlCurrentStep > 0) {
+        const prevCircle = document.querySelector('#hitl-step-' + (hitlCurrentStep - 1) + ' .hitl-circle');
+        prevCircle.classList.remove('scale-110');
+        prevCircle.style.background = 'var(--accent)';
+        prevCircle.style.opacity = '0.15';
+        prevCircle.classList.remove('border-primary');
+        prevCircle.classList.add('border-outline-variant');
+    }
+
+    // Highlight current step
+    const circle = document.querySelector('#hitl-step-' + hitlCurrentStep + ' .hitl-circle');
+    circle.classList.remove('border-outline-variant');
+    circle.classList.add('border-primary', 'scale-110');
+    circle.style.background = '';
+    circle.style.opacity = '';
+
+    // Update status display
+    const title = document.getElementById('hitl-status-title');
+    const desc = document.getElementById('hitl-status-desc');
+
+    title.classList.remove('animate-fade-in');
+    desc.classList.remove('animate-fade-in');
+    void title.offsetWidth;
+    title.classList.add('animate-fade-in');
+    desc.classList.add('animate-fade-in');
+
+    title.textContent = step.title;
+    desc.textContent = step.desc;
+
+    hitlCurrentStep++;
+    setTimeout(runHitlStep, 2200);
+}
+
+function selectTrust(index, btn) {
+    const trust = trustLevels[index];
+
+    // Reset all trust buttons
+    document.querySelectorAll('.trust-btn').forEach(b => {
+        b.classList.remove('border-primary', 'bg-primary/10');
+        b.classList.add('border-outline-variant');
+    });
+
+    // Highlight selected
+    btn.classList.remove('border-outline-variant');
+    btn.classList.add('border-primary', 'bg-primary/10');
+
+    // Update detail
+    const detail = document.getElementById('trust-detail');
+    detail.classList.remove('animate-fade-in');
+    void detail.offsetWidth;
+    detail.classList.add('animate-fade-in');
+    detail.innerHTML = trust.desc;
+}
+</script>
+
+
+<h2>📝 Key Concepts</h2>
+<ul>
+<li><strong>HITL = AI proposes, human approves</strong> — the safety net for AI systems in production.</li>
+<li><strong>Full autonomy requires a proven track record</strong> — not just good demos.</li>
+<li><strong>Low-risk, reversible tasks</strong> can move toward autonomy first; high-stakes tasks need persistent oversight.</li>
+<li><strong>Monitoring and logging are mandatory</strong> — you can&#39;t improve or debug what you haven&#39;t recorded.</li>
+<li><strong>Gradually reduce oversight as trust builds</strong> — treat it like onboarding a new employee, not flipping a switch.</li>
+</ul>
+<div id="quiz-12-07" class="quiz-container my-12"></div>
+            </div>
+
+            <!-- Quiz Section (if present) -->
+            
+
+            <!-- Navigation -->
+            <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
+                <div class="prev-link">
+                    <a href="chapter-12-06.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.6 The Volume vs. Variance Matrix</a>
+                </div>
+                <div class="next-link">
+                    <a href="chapter-12-08.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">12.8 ROI Estimation Framework <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 LLM Tutorial. Built with 🧠.</p>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/quizzes.js"></script>
+    
+</body>
+</html>
