@@ -1,0 +1,149 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-2">Regression Testing Timeline</h3>
+        <p class="text-sm text-on-surface-variant">Click a time point to see test results. Watch what happens after a model update.</p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative mb-8">
+        <div class="absolute top-8 left-[12.5%] right-[12.5%] h-1 bg-outline-variant/40 rounded-full"></div>
+        <div class="flex justify-around">
+            <button onclick="selectTimepoint(0, this)" class="es-node flex flex-col items-center gap-2 group relative z-10">
+                <div class="es-circle w-16 h-16 rounded-full border-3 border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center text-xl transition-all duration-300 shadow-sm group-hover:border-primary">🚀</div>
+                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors text-center">Pre-launch</span>
+            </button>
+            <button onclick="selectTimepoint(1, this)" class="es-node flex flex-col items-center gap-2 group relative z-10">
+                <div class="es-circle w-16 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center text-xl transition-all duration-300 shadow-sm group-hover:border-primary">📅</div>
+                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors text-center">Month 1</span>
+            </button>
+            <button onclick="selectTimepoint(2, this)" class="es-node flex flex-col items-center gap-2 group relative z-10">
+                <div class="es-circle w-16 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center text-xl transition-all duration-300 shadow-sm group-hover:border-primary">⚠️</div>
+                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors text-center">Month 3<br><span class="text-[9px] text-orange-500 font-bold">model update</span></span>
+            </button>
+            <button onclick="selectTimepoint(3, this)" class="es-node flex flex-col items-center gap-2 group relative z-10">
+                <div class="es-circle w-16 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center text-xl transition-all duration-300 shadow-sm group-hover:border-primary">✅</div>
+                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors text-center">Month 4<br><span class="text-[9px] text-green-600 font-bold">prompts fixed</span></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Detail Panel -->
+    <div id="es-detail" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 min-h-[180px] transition-all duration-300">
+        <p class="text-sm text-on-surface-variant text-center italic">Click a time point above to see results.</p>
+    </div>
+</div>
+
+<script>
+(function() {
+    const timepoints = [
+        {
+            label: 'Pre-launch Baseline',
+            emoji: '🚀',
+            color: 'border-primary',
+            bgColor: 'bg-primary/5',
+            accuracy: 91,
+            barColor: '#4CAF50',
+            metrics: [
+                { label: 'Easy cases', value: 100, note: '38/38 passing' },
+                { label: 'Edge cases', value: 82, note: '28/34 passing' },
+                { label: 'Adversarial cases', value: 75, note: '21/28 passing' }
+            ],
+            status: '🟢 Baseline established',
+            note: 'Test set created before launch: 100 cases covering routine requests, edge cases, and adversarial inputs. This number is your anchor — everything is measured against it.'
+        },
+        {
+            label: 'Month 1 Check',
+            emoji: '📅',
+            color: 'border-primary',
+            bgColor: 'bg-primary/5',
+            accuracy: 93,
+            barColor: '#4CAF50',
+            metrics: [
+                { label: 'Easy cases', value: 100, note: '38/38 passing' },
+                { label: 'Edge cases', value: 88, note: '30/34 passing' },
+                { label: 'Adversarial cases', value: 82, note: '23/28 passing' }
+            ],
+            status: '🟢 Performance stable — slight improvement',
+            note: 'Prompt refinements based on early production patterns improved edge case handling. Running the test set monthly takes 10 minutes and catches drift before users notice.'
+        },
+        {
+            label: 'Month 3 — Model Update',
+            emoji: '⚠️',
+            color: 'border-orange-400',
+            bgColor: 'bg-orange-50',
+            accuracy: 78,
+            barColor: '#f59e0b',
+            metrics: [
+                { label: 'Easy cases', value: 97, note: '37/38 passing' },
+                { label: 'Edge cases', value: 71, note: '24/34 passing' },
+                { label: 'Adversarial cases', value: 57, note: '16/28 passing' }
+            ],
+            status: '🟡 Regression detected — accuracy dropped from 91% to 78%',
+            note: 'The LLM provider updated their model. Nothing in your code changed — but behavior shifted. Without a test set, you would only discover this when customers start complaining. With a test set, you catch it immediately and know exactly where to fix.'
+        },
+        {
+            label: 'Month 4 — Prompts Fixed',
+            emoji: '✅',
+            color: 'border-green-500',
+            bgColor: 'bg-green-50',
+            accuracy: 95,
+            barColor: '#4CAF50',
+            metrics: [
+                { label: 'Easy cases', value: 100, note: '38/38 passing' },
+                { label: 'Edge cases', value: 91, note: '31/34 passing' },
+                { label: 'Adversarial cases', value: 89, note: '25/28 passing' }
+            ],
+            status: '🟢 Fully recovered — better than pre-launch',
+            note: 'Prompt adjustments compensated for the model update. The test set showed exactly which case categories regressed, making fixes targeted rather than guesswork. This is why continuous evaluation matters.'
+        }
+    ];
+
+    window.selectTimepoint = function(index, btn) {
+        const tp = timepoints[index];
+
+        // Update circle highlights
+        document.querySelectorAll('.es-node').forEach((node, i) => {
+            const circle = node.querySelector('.es-circle');
+            circle.classList.remove('border-primary', 'border-orange-400', 'border-green-500', 'scale-110', 'shadow-md');
+            circle.classList.add('border-outline-variant');
+        });
+        const circle = btn.querySelector('.es-circle');
+        circle.classList.remove('border-outline-variant');
+        circle.classList.add(tp.color, 'scale-110', 'shadow-md');
+
+        // Build detail panel
+        const detail = document.getElementById('es-detail');
+        detail.className = 'border-2 rounded-xl p-6 min-h-[180px] transition-all duration-300 ' + tp.color + ' ' + tp.bgColor;
+
+        let html = '<div class="flex flex-col sm:flex-row gap-6">';
+
+        // Left: accuracy gauge
+        html += '<div class="flex flex-col items-center justify-center min-w-[100px]">';
+        html += '<div class="text-4xl font-black" style="color:' + tp.barColor + '">' + tp.accuracy + '%</div>';
+        html += '<div class="text-xs font-bold text-on-surface-variant mt-1">accuracy</div>';
+        html += '<div class="mt-3 w-20 h-3 bg-surface-container-low rounded-full overflow-hidden border border-outline-variant">';
+        html += '<div class="h-full rounded-full transition-all duration-700" style="width:' + tp.accuracy + '%;background:' + tp.barColor + '"></div>';
+        html += '</div></div>';
+
+        // Right: metrics + note
+        html += '<div class="flex-1">';
+        html += '<div class="font-bold text-sm mb-3">' + tp.label + '</div>';
+        html += '<div class="space-y-2 mb-3">';
+        tp.metrics.forEach(m => {
+            html += '<div class="flex items-center gap-2">';
+            html += '<span class="text-xs text-on-surface-variant w-24 shrink-0">' + m.label + '</span>';
+            html += '<div class="flex-1 h-2 bg-surface-container-low rounded-full overflow-hidden border border-outline-variant">';
+            html += '<div class="h-full rounded-full" style="width:' + m.value + '%;background:' + tp.barColor + '"></div>';
+            html += '</div>';
+            html += '<span class="text-[10px] text-on-surface-variant w-20 text-right">' + m.note + '</span>';
+            html += '</div>';
+        });
+        html += '</div>';
+        html += '<div class="text-[11px] font-bold mb-1 text-on-surface">' + tp.status + '</div>';
+        html += '<p class="text-[11px] text-on-surface-variant leading-relaxed">' + tp.note + '</p>';
+        html += '</div></div>';
+
+        detail.innerHTML = html;
+    };
+})();
+</script>

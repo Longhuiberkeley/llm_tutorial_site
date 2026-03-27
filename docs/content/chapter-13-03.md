@@ -1,78 +1,119 @@
 ---
-title: "13.3 Evaluation & Test Sets"
-description: "How to prove your AI actually works — not just in demos, but in the real world."
+title: "13.3 From Vibe Coding to Structured Development"
+description: "Why the natural default when using LLMs is to build fast and loose — and the structured frameworks that are the antidote."
 chapter: "Chapter 13"
 pageId: "13-03"
 ---
 
 ## 🎯 Core Goals
-- Explain what an evaluation test set is and why it's essential for AI projects.
-- Establish the importance of creating test sets BEFORE building, not after.
-- Cover regression testing: catching when AI behavior degrades over time.
+- Frame the spectrum of AI-assisted development — from pure vibe coding to structured, human-led work.
+- Define vibe coding and explain why it emerges naturally from LLM-assisted work.
+- Show how speed without structure produces drift across any type of output — not just code.
+- Introduce SPEC Kit and BMAD as practical structured frameworks that anchor work to real needs.
 
 :::callout-tldr
-"Seemed good in the demo" is not proof. An evaluation test set is a collection of inputs where you already know the correct output — it lets you grade your LLM objectively, measure improvement, and catch regressions before they reach users.
+Vibe coding feels right. Speed is intoxicating. But generating fast without structure is how impressive-looking projects become unmaintainable ones. Structured frameworks aren't bureaucracy — they're the scaffolding that makes speed sustainable.
 :::
 
-## 🎓 What Is an Evaluation Test Set?
+## 📊 The AI-Assisted Development Spectrum
 
-Imagine you're hiring a new employee to handle customer support. Before you let them respond to real customers, you'd probably give them a set of practice emails and check how they respond. You already know what a good answer looks like. You're grading them against a standard.
+Not all LLM-assisted work is the same. There is a spectrum.
 
-That's exactly what an evaluation test set is for an AI system.
+**One end — pure vibe coding.** Andrej Karpathy, one of the researchers who popularized the term, described it as fully giving in to the vibes, embracing exponentials, and forgetting that the code even exists. In this mode, the programmer guides, tests, and gives feedback rather than writing code manually. The LLM does the writing; the human does the directing. Karpathy captured the spirit in an earlier observation: the hottest new programming language is English — the idea that LLMs had become capable enough that natural language instruction could replace explicit code.
 
-Before launching any LLM-powered feature, you create a collection of sample inputs where you already know what the correct (or acceptable) output looks like. Then you run your AI on those inputs and measure how well it does.
+**The other end — AI-assisted craftsmanship.** The LLM is a tool you consult rather than a system you delegate to. Tab completion, targeted suggestions, and occasional code generation assist your work — but you understand every decision, you wrote most of what's there, and the LLM never had authorship of any substantial component. Quality reflects your judgment; the LLM amplifies it.
 
-For a customer support bot, that might look like:
-- 100 sample customer emails, covering a range of topics and tones
-- For each one, a "gold standard" response (or at minimum, criteria for what makes a good response)
-- A scoring rubric: did the AI cite policy correctly? Was the tone appropriate? Did it escalate when needed?
+**The middle — structured AI development.** You use the LLM heavily — sometimes for entire modules or sections — but with requirements written first, clear context in every prompt, and genuine review before acceptance. You act more like a manager or architect than a line-writer: directing the work, checking outputs, making decisions, and correcting course. This is where frameworks like SPEC Kit and BMAD live.
 
-Run the bot on all 100. 90 pass your criteria = 90% accuracy. You now have a **baseline** — a measurable starting point.
+Most practical work lands in the middle. The question isn't whether to use LLMs — it's how much structure and review you bring to that use.
+
+## 🎸 What Is Vibe Coding?
+
+**Vibe coding** is building primarily by prompting an LLM, iterating quickly on outputs, and accepting results that seem to work — without deeply understanding what's been built or verifying it against a stated need.
+
+The name comes from software development, but the pattern applies to any LLM-assisted work. Writing a 40-page industry report by generating section after section without a clear argument structure. Building an application by adding features as they occur to you. Producing a research document by prompting for content without a defined research question.
+
+In each case, the LLM is helpful. The output looks good. The problem emerges later.
+
+The core issue is **drift**: without a clear specification, you build what seems interesting at the moment rather than what was actually needed. The LLM doesn't know your goals — it optimizes for plausible responses to your prompts. If the prompts aren't anchored to requirements, neither is the output.
+
+When a carpenter gets a nail gun, the first reaction isn't to plan more carefully — it's to put nails in everything, fast. LLMs do this to projects. The ability to generate in seconds creates an intoxicating pace. Teams move quickly, demos look impressive, and then someone asks: "Does this actually solve the problem we set out to solve?"
 
 :::callout-dyk
-In machine learning research, these test collections are called "evaluation sets" or "benchmarks." Major LLM providers publish benchmarks to compare their models. The same principle applies at the application level: you define what success looks like for YOUR use case, then measure against it.
+Software engineer Ward Cunningham coined the term "technical debt" in 1992 to describe the cost of choosing quick-and-easy solutions now over better approaches that take longer. Vibe coding accumulates technical debt at an accelerated rate — but the concept applies equally to reports, documents, and research. Phantom sections that repeat the same analysis in different words. An argument structure that contradicts itself by section 8. The interest on that debt is paid when you try to edit, publish, or act on the output.
 :::
 
-## 📅 Build Your Test Set Before You Build Your Feature
+## 🏎️ The Speed Trap
 
-This is the counterintuitive part: **write your test set before you write your feature.**
+The danger of vibe coding doesn't appear immediately. It appears on a delay.
 
-Why? Because writing test cases forces you to define success. You can't create a test case without answering: "What is the right output for this input?" And if you can't answer that question, you're not ready to build yet.
+**Week 2:** Everything is great. Features or sections appear quickly. The project feels alive and productive.
 
-The test-first discipline also prevents a common trap: building a feature and then writing test cases that match what the feature already produces (whether or not that output is actually correct). That's not testing — that's rubber-stamping.
+**Week 6:** Adding something new takes longer than expected. Changing one section breaks the logic in another. A new feature creates three new bugs. The project starts to feel "sticky."
 
-Good test sets include:
-- **Easy cases** — the straightforward, expected inputs the system should always handle correctly
-- **Edge cases** — unusual, ambiguous, or tricky inputs that reveal where the system struggles
-- **Adversarial cases** — inputs designed to trip up the system (what happens if a user tries to misuse it?)
-- **Real examples** — sampled from actual usage data where possible (the most valuable kind)
+**Week 12:** What should be a one-day addition takes three days of archaeology. You spend more time understanding what was built than building new things.
+
+This pattern is consistent across project types. A 50-page industry report vibe-coded over a month looks impressive at draft stage. By the time it needs editing — when a key argument has to change, or a new finding needs to be incorporated — the lack of underlying structure makes every edit a risk. Changing one section reveals inconsistencies in two others.
+
+The solution isn't to stop using LLMs. It's to **invest in structure before generating**. Design the outline, define the argument, specify the requirements — then use LLMs to produce content within that structure.
+
+## 📋 The Antidote: Structured Frameworks
+
+Several frameworks have emerged specifically to address vibe coding in LLM-assisted development. They share a common approach: specify the work clearly before generating any of it.
+
+### SPEC Kit
+
+The **SPEC Kit** is an open-source toolkit that enables Spec-Driven Development (SDD). Instead of generating from vague prompts, it uses structured markdown files — `spec.md`, `plan.md` — to give LLM agents clear context, requirements, and constraints.
+
+The SPEC Kit workflow defines a clear lifecycle: set a **constitution** (the project's rules and principles), write a **specification**, create a **technical plan**, generate **tasks**, then **implement**. Each phase is an explicit handoff — you can't skip ahead without the prior phase's output.
+
+At its core is a requirements template that forces specificity. For every capability you want to build or write:
+
+---
+
+**As a** [USER ROLE]
+**I need** [CAPABILITY]
+**So that** [OUTCOME]
+
+**INPUT:** What goes into this feature or section?
+**OUTPUT:** What comes out? What exactly should it produce?
+**CONSTRAINTS:** What limits and rules apply? What must it never do?
+**SUCCESS CRITERIA:** How do we know it's working or done?
+
+---
+
+**Example:** "As a customer support agent, I need the LLM to draft email responses, so that I can respond to customers faster. Input: Customer email + company policy document. Output: A draft response ready to edit and send. Constraints: Must cite specific policy when making claims; no refunds over $100 without manager approval. Success: 80% of drafts are usable with minor edits or no edits."
+
+Notice what completing this template requires: you must know your user, your input, your expected output, your rules, and your success metric. That is exactly the information you need before generating anything — and exactly what vibe coding skips.
 
 :::callout-error
-A common mistake: only testing on "happy path" examples that you expect the system to handle well. Real users will send you edge cases constantly. If your test set doesn't include them, you won't know how your system behaves until something goes wrong in production.
+A common mistake: writing requirements that describe the technology ("use this LLM to analyze emails") instead of the business need ("reduce average response time from 4 hours to 30 minutes"). Requirements should describe the problem. The solution can change — the problem defines success.
 :::
 
-## 🔄 Catching Regressions Over Time
+### BMAD
 
-Here's a property of AI systems that catches teams off guard: **behavior can change without you changing anything.**
+**BMAD** (Build More Architect Dreams) is a free open-source agile framework for LLM-assisted development. Rather than one agent doing everything, BMAD organizes work into a multi-agent team: product managers, architects, developers, and reviewers — each with a bounded role. Giving each agent a clear, limited responsibility reduces hallucinations and improves precision across the full development lifecycle.
 
-LLM providers update their models regularly. A model update in October might subtly shift how it handles a certain type of input. Your feature wasn't touched — but its behavior changed.
+The BMAD mindset is a question chain that every capability must answer before it gets built:
 
-This is called a regression: performance on a previously working case gets worse.
+1. **Why build this?** — What problem does it solve?
+2. **What does success look like?** — A measurable outcome, not a feeling.
+3. **Who benefits?** — Which user or team, and how?
+4. **What's the cost of not building this?** — Is it urgent or nice-to-have?
 
-Without a test set, you'd never know. With a test set that you run regularly, you catch it immediately:
+SPEC Kit and BMAD work together: SPEC Kit captures the requirements for what to build. BMAD ensures each item was worth specifying in the first place.
 
-> "After the model update last Tuesday, our accuracy on billing-related emails dropped from 91% to 78%. We need to update our prompts to compensate."
+### Other Frameworks
 
-This is why continuous evaluation matters. Running your test set once before launch is good. Running it monthly (or after any system change) is necessary. Treating it as a live monitoring tool is best practice.
-
-:::visual{name="visual-eval-sets"}
+GSD, Superpowers, and a growing ecosystem of similar frameworks take the same root approach: define before generating, structure before speed. The specific tool matters less than the discipline of using one. Any framework that forces you to answer "what am I building, for whom, and how will I know it's done" before opening a prompt window will produce better results than none.
 
 ## 📝 Key Concepts
 
-- **Test set** = curated inputs with known-correct outputs, used to grade your AI objectively.
-- **Build test sets before building features** — they define what success looks like.
-- **Include edge cases and adversarial inputs**, not just easy happy-path examples.
-- **Establish a baseline** — measure accuracy before launch so you can track improvement and detect regressions.
-- **Run test sets continuously** — LLM behavior can drift over time even when you change nothing.
+- **The spectrum** — LLM-assisted work ranges from pure vibe coding (LLM writes, human guides) to structured AI development (LLM generates within defined specs, human directs). Most practical work is in the middle.
+- **Vibe coding** = generating output by prompting quickly and accepting what seems to work, without anchoring to requirements. Applies to code, reports, documents — any LLM output.
+- **Drift** — without a spec, you build what's interesting rather than what's needed. Speed hides the problem until it's expensive to fix.
+- **SPEC Kit** = open-source Spec-Driven Development toolkit. Uses a structured template (user / capability / outcome / input / output / constraints / success criteria) to anchor every feature to a real need.
+- **BMAD** = multi-agent development framework. Organizes LLM work into specialist roles (PM, architect, developer, reviewer) to reduce hallucinations and improve quality.
+- **Any consistent framework beats none** — what matters is the discipline of answering "what, for whom, how do I know it's done" before generating.
 
 :::quiz{id="13-03"}

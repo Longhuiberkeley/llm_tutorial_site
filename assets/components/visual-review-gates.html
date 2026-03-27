@@ -1,0 +1,262 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-2">Pre-Prompt Checklist</h3>
+        <p class="text-sm text-on-surface-variant">Work through the four phases before starting any LLM-assisted project. Check each item as you confirm it.</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+            <span id="rg-progress-text" class="text-sm font-bold text-on-surface">0 of 14 complete</span>
+            <span id="rg-progress-pct" class="text-xs font-bold text-on-surface-variant">0%</span>
+        </div>
+        <div class="w-full h-3 bg-surface-container-lowest rounded-full border border-outline-variant overflow-hidden">
+            <div id="rg-progress-bar" class="h-full rounded-full transition-all duration-500 ease-out" style="width: 0%; background: var(--accent);"></div>
+        </div>
+    </div>
+
+    <!-- Phase Sections -->
+    <div class="space-y-4" id="rg-phases">
+        <!-- Phase 1: Define -->
+        <div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+            <button onclick="togglePhase(0, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+                <div class="flex items-center gap-3">
+                    <span id="rg-phase-icon-0" class="text-xl">📋</span>
+                    <div>
+                        <div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 1 — Define</div>
+                        <div class="text-xs text-on-surface-variant">What are you building? For whom? How will you know it's done?</div>
+                    </div>
+                </div>
+                <span id="rg-phase-toggle-0" class="text-on-surface-variant text-lg">▼</span>
+            </button>
+            <div id="rg-phase-body-0" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+                <button onclick="toggleCheck(0, this)" id="rg-item-0" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-0" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Purpose is defined</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">I can state in one sentence what this project/document does and who it's for.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: "This is a chess puzzle site for beginner players." 📄 Report: "This analyzes EV adoption trends for a non-technical executive."</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(1, this)" id="rg-item-1" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-1" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Success criteria are written</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">I have a measurable definition of "done" — not a feeling but a number or observable outcome.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: "70% of users solve the first puzzle." 📄 Report: "Answers all 3 research questions within 20 pages."</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(2, this)" id="rg-item-2" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-2" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Constraints are listed</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">I know what this must never do, what limits apply, and what approvals are needed.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: "No hints visible by default; mobile-first." 📄 Report: "No proprietary client data included; verified sources only."</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(3, this)" id="rg-item-3" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-3" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Requirements are written down</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Requirements are externalized (not in my head) and numbered so I can trace work back to them.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Even a numbered bullet list counts. The key is: written, numbered, consulted before accepting output.</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phase 2: Design -->
+        <div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+            <button onclick="togglePhase(1, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+                <div class="flex items-center gap-3">
+                    <span id="rg-phase-icon-1" class="text-xl">🗺️</span>
+                    <div>
+                        <div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 2 — Design</div>
+                        <div class="text-xs text-on-surface-variant">How is it structured? Could someone else build from this?</div>
+                    </div>
+                </div>
+                <span id="rg-phase-toggle-1" class="text-on-surface-variant text-lg">▼</span>
+            </button>
+            <div id="rg-phase-body-1" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+                <button onclick="toggleCheck(4, this)" id="rg-item-4" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-4" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Structure is defined</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Modules, sections, or components are planned. Each piece has a clear purpose and place.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: Architecture diagram, module list. 📄 Report: Detailed outline with each section's purpose.</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(5, this)" id="rg-item-5" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-5" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Tasks are broken down</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Work is broken into small, reviewable chunks — one per prompt session. No megaprompts.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Each chunk = one role + one phase + one deliverable. If a chunk can't be reviewed in 5 minutes, it's too large.</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(6, this)" id="rg-item-6" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-6" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Design is externalized</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">The design is written down, not held in my head. Someone else could build from it.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Gate: "If I left today, could someone else pick this up?" If no, the design needs more work.</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phase 3: Build -->
+        <div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+            <button onclick="togglePhase(2, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+                <div class="flex items-center gap-3">
+                    <span id="rg-phase-icon-2" class="text-xl">🔨</span>
+                    <div>
+                        <div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 3 — Build</div>
+                        <div class="text-xs text-on-surface-variant">Give the LLM clear context. Review before proceeding.</div>
+                    </div>
+                </div>
+                <span id="rg-phase-toggle-2" class="text-on-surface-variant text-lg">▼</span>
+            </button>
+            <div id="rg-phase-body-2" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+                <button onclick="toggleCheck(7, this)" id="rg-item-7" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-7" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Each prompt has clear context</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">The prompt includes: project purpose, current phase, what this prompt produces, input/output format, constraints, and where related work lives.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Context you skip, the LLM invents. Invented context is plausible but often wrong.</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(8, this)" id="rg-item-8" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-8" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">One chunk at a time</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">I'm generating one module/section at a time, not the whole thing at once.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Small chunks = verifiable checkpoints. Large chunks = accumulated unreviewed debt.</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(9, this)" id="rg-item-9" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-9" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Review before proceeding</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Each chunk is reviewed against its requirements before the next chunk is started.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Gate: "Has this been reviewed?" If no, don't start the next chunk yet.</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(10, this)" id="rg-item-10" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-10" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Issues corrected immediately</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Problems found in review are fixed now, not deferred to "clean up at the end."</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Debt cost grows with each layer built on top of an unfixed problem.</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phase 4: Verify -->
+        <div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+            <button onclick="togglePhase(3, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+                <div class="flex items-center gap-3">
+                    <span id="rg-phase-icon-3" class="text-xl">🔍</span>
+                    <div>
+                        <div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 4 — Verify</div>
+                        <div class="text-xs text-on-surface-variant">Does the output meet the requirements from Phase 1?</div>
+                    </div>
+                </div>
+                <span id="rg-phase-toggle-3" class="text-on-surface-variant text-lg">▼</span>
+            </button>
+            <div id="rg-phase-body-3" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+                <button onclick="toggleCheck(11, this)" id="rg-item-11" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-11" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Output verified against success criteria</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">The output is checked against the measurable success criteria written in Phase 1 — not just "does it look right."</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: Does the feature meet its acceptance criteria? 📄 Report: Does it answer all stated research questions?</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(12, this)" id="rg-item-12" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-12" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Requirements traceability confirmed</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Every piece of work in the output traces back to a stated requirement. Nothing was added without a requirement.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">Gate: Can you answer "which requirement does this serve?" for every part of the output?</div>
+                    </div>
+                </button>
+                <button onclick="toggleCheck(13, this)" id="rg-item-13" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+                    <div id="rg-box-13" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+                    <div>
+                        <div class="font-bold text-xs text-on-surface mb-0.5">Failure patterns checked</div>
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">Reviewed for: duplicate content/logic, scattered structure, inconsistent coverage, always-passing checks.</div>
+                        <div class="text-[10px] text-primary/70 mt-1 italic">These patterns are easy to miss on a quick read. Set aside time for a structured review against this list.</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Badge -->
+    <div id="rg-status" class="mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-surface-container-lowest border border-outline-variant text-on-surface-variant">
+        📝 Work through all four phases before starting. Check each item as you confirm it.
+    </div>
+</div>
+
+<script>
+(function() {
+    const TOTAL = 14;
+    const checked = new Array(TOTAL).fill(false);
+    const phaseOpen = [true, true, true, true];
+
+    window.togglePhase = function(index, btn) {
+        phaseOpen[index] = !phaseOpen[index];
+        const body = document.getElementById('rg-phase-body-' + index);
+        const toggle = document.getElementById('rg-phase-toggle-' + index);
+        body.classList.toggle('hidden', !phaseOpen[index]);
+        toggle.textContent = phaseOpen[index] ? '▼' : '▶';
+    };
+
+    window.toggleCheck = function(index, btn) {
+        checked[index] = !checked[index];
+        const box = document.getElementById('rg-box-' + index);
+        const item = document.getElementById('rg-item-' + index);
+        const checkmark = box;
+
+        if (checked[index]) {
+            box.style.backgroundColor = '#4CAF50';
+            box.style.borderColor = '#4CAF50';
+            box.style.color = 'white';
+            item.classList.add('opacity-70');
+        } else {
+            box.style.backgroundColor = '';
+            box.style.borderColor = '';
+            box.style.color = '';
+            item.classList.remove('opacity-70');
+        }
+
+        const count = checked.filter(Boolean).length;
+        const pct = Math.round((count / TOTAL) * 100);
+        const bar = document.getElementById('rg-progress-bar');
+        bar.style.width = pct + '%';
+        document.getElementById('rg-progress-text').textContent = count + ' of ' + TOTAL + ' complete';
+        document.getElementById('rg-progress-pct').textContent = pct + '%';
+
+        if (count === TOTAL) bar.style.background = '#4CAF50';
+        else bar.style.background = 'var(--accent)';
+
+        const status = document.getElementById('rg-status');
+        if (count === 0) {
+            status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-surface-container-lowest border border-outline-variant text-on-surface-variant';
+            status.textContent = '📝 Work through all four phases before starting. Check each item as you confirm it.';
+        } else if (count === TOTAL) {
+            status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-green-50 text-green-700 border border-green-200';
+            status.textContent = '🎉 All phases complete. Your foundation is solid — proceed with confidence.';
+        } else if (pct >= 75) {
+            status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-primary/5 border border-primary/30 text-primary';
+            status.textContent = '✅ Good progress — ' + (TOTAL - count) + ' item' + (TOTAL - count > 1 ? 's' : '') + ' remaining before you proceed.';
+        } else {
+            const gaps = TOTAL - count;
+            status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-amber-50 text-amber-700 border border-amber-200';
+            status.textContent = '⚠️ ' + gaps + ' item' + (gaps > 1 ? 's' : '') + ' remaining — don\'t skip ahead. The phase gates exist for a reason.';
+        }
+    };
+})();
+</script>

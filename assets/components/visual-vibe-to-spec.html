@@ -1,0 +1,196 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-2">Vibe Mode vs. Spec Mode</h3>
+        <p class="text-sm text-on-surface-variant">The same project — a chess puzzle learning site — built two ways. Select a week to compare.</p>
+    </div>
+
+    <!-- Week Selector -->
+    <div class="flex gap-2 justify-center mb-6 flex-wrap">
+        <button onclick="selectVts(1, this)" class="vts-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">Week 1</button>
+        <button onclick="selectVts(2, this)" class="vts-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">Week 4</button>
+        <button onclick="selectVts(3, this)" class="vts-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">Week 8</button>
+        <button onclick="selectVts(4, this)" class="vts-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">Week 12</button>
+    </div>
+
+    <!-- Comparison Columns -->
+    <div id="vts-cols" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div id="vts-loose" class="rounded-xl border-2 border-outline-variant bg-surface-container-lowest p-5 flex items-center justify-center min-h-[160px]">
+            <p class="text-sm text-on-surface-variant italic text-center">Select a week above</p>
+        </div>
+        <div id="vts-spec" class="rounded-xl border-2 border-outline-variant bg-surface-container-lowest p-5 flex items-center justify-center min-h-[160px]">
+            <p class="text-sm text-on-surface-variant italic text-center">Select a week above</p>
+        </div>
+    </div>
+
+    <!-- SPEC Kit Mini-Template -->
+    <div class="border-t border-outline-variant pt-6">
+        <h4 class="text-sm font-bold mb-3 text-center">📋 What a SPEC Kit entry looks like</h4>
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 font-mono text-[11px] text-on-surface leading-loose">
+            <div><span class="font-black text-primary">As a</span> beginner chess player</div>
+            <div><span class="font-black text-primary">I need</span> to see a new puzzle each session and get a hint when I'm stuck</div>
+            <div><span class="font-black text-primary">So that</span> I can improve my tactical skills at my own pace</div>
+            <div class="mt-2"><span class="font-black text-on-surface-variant">INPUT:</span> User's skill level (set during onboarding), puzzle database</div>
+            <div><span class="font-black text-on-surface-variant">OUTPUT:</span> One puzzle per session, styled board view, optional hint revealed on request</div>
+            <div><span class="font-black text-on-surface-variant">CONSTRAINTS:</span> Puzzles must match skill level; hints shown max once per puzzle; no spoilers visible by default</div>
+            <div><span class="font-black text-on-surface-variant">SUCCESS:</span> 70% of users solve the puzzle or engage with the hint in the first session</div>
+        </div>
+        <p class="text-[11px] text-on-surface-variant text-center mt-2 italic">You cannot fill this out without knowing your user, input, output, rules, and success metric — exactly what vibe coding skips.</p>
+    </div>
+</div>
+
+<script>
+(function() {
+    const weeks = {
+        1: {
+            loose: {
+                emoji: '😄',
+                label: 'Fast & Loose — Week 1',
+                color: 'border-orange-400',
+                bg: 'bg-orange-50',
+                items: [
+                    '✅ Board UI generated in 2 hours',
+                    '✅ 10 hardcoded puzzles showing',
+                    '✅ Demo looks done',
+                    '❓ No user account system yet',
+                    '❓ No requirements written'
+                ],
+                note: 'Looks great. Ahead of the Spec Mode project.'
+            },
+            spec: {
+                emoji: '🤔',
+                label: 'Spec Mode — Week 1',
+                color: 'border-primary',
+                bg: 'bg-primary/5',
+                items: [
+                    '✅ SPEC Kit entries written for 4 features',
+                    '✅ User flows defined (beginner vs. advanced)',
+                    '✅ Database schema designed',
+                    '✅ Success criteria written for each feature',
+                    '🔨 First feature being built to spec'
+                ],
+                note: 'A little slower. Foundation is solid.'
+            }
+        },
+        2: {
+            loose: {
+                emoji: '😐',
+                label: 'Fast & Loose — Week 4',
+                color: 'border-orange-400',
+                bg: 'bg-orange-50',
+                items: [
+                    '✅ Many features added',
+                    '⚠️ 3 different auth implementations exist',
+                    '⚠️ Puzzle difficulty logic in 2 different files',
+                    '⚠️ Mobile layout broken — nobody noticed',
+                    '❓ Still no defined success criteria'
+                ],
+                note: 'Still moving but cracks are showing.'
+            },
+            spec: {
+                emoji: '😊',
+                label: 'Spec Mode — Week 4',
+                color: 'border-primary',
+                bg: 'bg-primary/5',
+                items: [
+                    '✅ 4 features shipped, all traced to requirements',
+                    '✅ Auth implemented once, used everywhere',
+                    '✅ Mobile tested (it was in the requirements)',
+                    '✅ 78% puzzle solve rate — on track for 70% target',
+                    '🔨 Working on hint system per spec'
+                ],
+                note: 'Slightly fewer features, all of them working correctly.'
+            }
+        },
+        3: {
+            loose: {
+                emoji: '😰',
+                label: 'Fast & Loose — Week 8',
+                color: 'border-orange-400',
+                bg: 'bg-orange-50',
+                items: [
+                    '⚠️ Adding hints broke puzzle loading (hidden dep)',
+                    '⚠️ 3 bugs from last week still unresolved',
+                    '🚨 Requested feature: "track user progress" — team unsure where to add it',
+                    '🚨 Original chess puzzle site purpose unclear',
+                    '❓ Team discussing a full rewrite'
+                ],
+                note: 'Velocity collapsed. Debt payment has begun.'
+            },
+            spec: {
+                emoji: '😎',
+                label: 'Spec Mode — Week 8',
+                color: 'border-primary',
+                bg: 'bg-primary/5',
+                items: [
+                    '✅ Hint system shipped and tested',
+                    '✅ Progress tracking added cleanly (was R5 in the spec)',
+                    '✅ 84% puzzle solve rate — exceeding target',
+                    '✅ 3 new SPEC Kit entries written for next sprint',
+                    '🔨 Adding difficulty progression per spec'
+                ],
+                note: 'Predictable velocity. Features fit because the architecture was designed.'
+            }
+        },
+        4: {
+            loose: {
+                emoji: '😫',
+                label: 'Fast & Loose — Week 12',
+                color: 'border-orange-400',
+                bg: 'bg-orange-50',
+                items: [
+                    '🚨 1-day feature taking 4 days',
+                    '🚨 New dev joining: "I can\'t understand this codebase"',
+                    '🚨 Multiple features working but not serving any defined user need',
+                    '🚨 Users asking for features that were never planned',
+                    '❌ Team morale low. Considering restart.'
+                ],
+                note: 'The cost of the velocity trap is now fully visible.'
+            },
+            spec: {
+                emoji: '🎉',
+                label: 'Spec Mode — Week 12',
+                color: 'border-primary',
+                bg: 'bg-primary/5',
+                items: [
+                    '✅ All original requirements shipped',
+                    '✅ New requirements being added (V2 spec underway)',
+                    '✅ New dev joined: onboarded in 2 days via spec docs',
+                    '✅ 91% puzzle solve rate',
+                    '🔨 Building social sharing (R11 in the spec)'
+                ],
+                note: 'Velocity maintained. Requirements traceability means every decision is justified.'
+            }
+        }
+    };
+
+    window.selectVts = function(week, btn) {
+        document.querySelectorAll('.vts-btn').forEach(b => {
+            b.classList.remove('border-primary', 'bg-primary/10');
+            b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+        });
+        btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
+        btn.classList.add('border-primary', 'bg-primary/10');
+
+        const data = weeks[week];
+        updateCol('vts-loose', data.loose);
+        updateCol('vts-spec', data.spec);
+    };
+
+    function updateCol(id, d) {
+        const el = document.getElementById(id);
+        el.className = 'rounded-xl border-2 p-5 min-h-[160px] transition-all duration-300 ' + d.color + ' ' + d.bg;
+        let html = '<div>';
+        html += '<div class="flex items-center gap-2 mb-3">';
+        html += '<span class="text-xl">' + d.emoji + '</span>';
+        html += '<div class="font-bold text-xs">' + d.label + '</div></div>';
+        html += '<ul class="space-y-1 mb-3">';
+        d.items.forEach(item => {
+            html += '<li class="text-[11px] leading-relaxed">' + item + '</li>';
+        });
+        html += '</ul>';
+        html += '<p class="text-[10px] italic text-on-surface-variant border-t border-outline-variant/50 pt-2">' + d.note + '</p>';
+        html += '</div>';
+        el.innerHTML = html;
+    }
+})();
+</script>

@@ -1,0 +1,183 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+    <div class="text-center mb-6">
+        <h3 class="text-xl font-bold font-headline mb-2">Requirements Traceability Chain</h3>
+        <p class="text-sm text-on-surface-variant">Click a requirement to trace it through the chain. Try "Feature Drift Mode" to spot orphaned work.</p>
+    </div>
+
+    <!-- Mode Toggle -->
+    <div class="flex gap-2 justify-center mb-6">
+        <button onclick="setRtMode('trace', this)" id="rt-btn-trace"
+            class="rt-mode-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">
+            🔗 Trace Mode
+        </button>
+        <button onclick="setRtMode('drift', this)" id="rt-btn-drift"
+            class="rt-mode-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest transition-all hover:border-primary">
+            🌊 Feature Drift Mode
+        </button>
+    </div>
+
+    <!-- Trace Mode -->
+    <div id="rt-trace-view">
+        <!-- Requirements Row -->
+        <div class="mb-4">
+            <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-2 text-center">📋 Requirements — click to trace</div>
+            <div class="flex flex-wrap gap-2 justify-center" id="rt-reqs">
+                <button onclick="traceReq('R1', this)" class="rt-req px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">R1: User Login</button>
+                <button onclick="traceReq('R2', this)" class="rt-req px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">R2: Fast Search</button>
+                <button onclick="traceReq('R3', this)" class="rt-req px-4 py-2 rounded-full text-xs font-bold border-2 border-outline-variant bg-surface-container-lowest hover:border-primary transition-all">R3: Export to PDF</button>
+            </div>
+        </div>
+
+        <!-- Chain -->
+        <div id="rt-chain" class="hidden">
+            <div class="flex flex-col sm:flex-row items-stretch gap-2 justify-center">
+                <div id="rt-c-req" class="flex-1 rounded-xl p-4 border-2 border-outline-variant bg-surface-container-lowest text-xs text-center">
+                    <div class="font-black text-[9px] uppercase tracking-wider text-on-surface-variant mb-1">REQUIREMENT</div>
+                    <div id="rt-c-req-text" class="font-bold text-on-surface"></div>
+                    <div id="rt-c-req-desc" class="text-on-surface-variant mt-1 text-[10px]"></div>
+                </div>
+                <div class="flex items-center justify-center text-on-surface-variant font-bold text-lg">→</div>
+                <div id="rt-c-design" class="flex-1 rounded-xl p-4 border-2 border-outline-variant bg-surface-container-lowest text-xs text-center">
+                    <div class="font-black text-[9px] uppercase tracking-wider text-on-surface-variant mb-1">DESIGN DECISION</div>
+                    <div id="rt-c-design-text" class="font-bold text-on-surface"></div>
+                    <div id="rt-c-design-desc" class="text-on-surface-variant mt-1 text-[10px]"></div>
+                </div>
+                <div class="flex items-center justify-center text-on-surface-variant font-bold text-lg">→</div>
+                <div id="rt-c-impl" class="flex-1 rounded-xl p-4 border-2 border-outline-variant bg-surface-container-lowest text-xs text-center">
+                    <div class="font-black text-[9px] uppercase tracking-wider text-on-surface-variant mb-1">IMPLEMENTATION</div>
+                    <div id="rt-c-impl-text" class="font-bold text-on-surface"></div>
+                    <div id="rt-c-impl-desc" class="text-on-surface-variant mt-1 text-[10px]"></div>
+                </div>
+                <div class="flex items-center justify-center text-on-surface-variant font-bold text-lg">→</div>
+                <div id="rt-c-test" class="flex-1 rounded-xl p-4 border-2 border-outline-variant bg-surface-container-lowest text-xs text-center">
+                    <div class="font-black text-[9px] uppercase tracking-wider text-on-surface-variant mb-1">VERIFICATION</div>
+                    <div id="rt-c-test-text" class="font-bold text-on-surface"></div>
+                    <div id="rt-c-test-desc" class="text-on-surface-variant mt-1 text-[10px]"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rt-chain-prompt" class="text-center mt-4">
+            <p class="text-xs text-on-surface-variant italic">Click a requirement above to see its full chain.</p>
+        </div>
+    </div>
+
+    <!-- Drift Mode -->
+    <div id="rt-drift-view" class="hidden">
+        <p class="text-xs text-on-surface-variant text-center mb-4">Five features were built. Which ones trace back to a stated requirement? Click each to find out.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="rt-drift-items">
+            <button onclick="checkDrift(0, this)" class="rt-drift p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-left hover:border-primary transition-all text-xs">
+                <div class="font-bold mb-1">🔐 User login via email and Google OAuth</div>
+                <div class="text-on-surface-variant text-[10px]">Two login methods with password reset</div>
+            </button>
+            <button onclick="checkDrift(1, this)" class="rt-drift p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-left hover:border-primary transition-all text-xs">
+                <div class="font-bold mb-1">🎨 Animated background on the homepage</div>
+                <div class="text-on-surface-variant text-[10px]">Subtle particle effect, looked cool in the LLM demo</div>
+            </button>
+            <button onclick="checkDrift(2, this)" class="rt-drift p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-left hover:border-primary transition-all text-xs">
+                <div class="font-bold mb-1">⚡ Search results in under 2 seconds</div>
+                <div class="text-on-surface-variant text-[10px]">Indexed search with caching</div>
+            </button>
+            <button onclick="checkDrift(3, this)" class="rt-drift p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-left hover:border-primary transition-all text-xs">
+                <div class="font-bold mb-1">🌙 Dark mode toggle</div>
+                <div class="text-on-surface-variant text-[10px]">The LLM suggested it while building the UI</div>
+            </button>
+            <button onclick="checkDrift(4, this)" class="rt-drift p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest text-left hover:border-primary transition-all text-xs sm:col-span-2">
+                <div class="font-bold mb-1">📄 Export results to PDF</div>
+                <div class="text-on-surface-variant text-[10px]">Users asked for this in stakeholder interviews</div>
+            </button>
+        </div>
+        <div id="rt-drift-result" class="mt-4 rounded-xl p-4 text-center text-xs font-bold bg-surface-container-lowest border border-outline-variant text-on-surface-variant hidden"></div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const chains = {
+        R1: {
+            req: { text: 'R1: User Login', desc: 'Users can log in via email or Google OAuth with password reset — on mobile and desktop.' },
+            design: { text: 'Auth module', desc: 'Separate authentication service, OAuth integration via provider SDK, JWT session tokens.' },
+            impl: { text: 'auth.js + GoogleOAuth', desc: 'Login form, Google OAuth button, password reset flow, session token issuance.' },
+            test: { text: 'Auth test suite', desc: 'Login with email, login with Google, password reset, session expiry, mobile/desktop layout tests.' }
+        },
+        R2: {
+            req: { text: 'R2: Fast Search', desc: 'Search results must appear in under 2 seconds for 95% of queries.' },
+            design: { text: 'Indexed search + cache', desc: 'Inverted index built at write time. Redis cache for top 1000 queries. Query timeout: 1.8s.' },
+            impl: { text: 'search.js + RedisCache', desc: 'Index builder, cache warmer, query router, result formatter.' },
+            test: { text: 'Performance tests', desc: 'Load test: 100 concurrent users. P95 latency < 2s. Edge case: empty query, special chars.' }
+        },
+        R3: {
+            req: { text: 'R3: Export to PDF', desc: 'Users can export any search results page to a formatted PDF.' },
+            design: { text: 'PDF generation service', desc: 'Server-side render to headless browser, template for branded layout, max 10MB output.' },
+            impl: { text: 'export.js + pdf-template.html', desc: 'Export button on results page, PDF generation API endpoint, download link delivery.' },
+            test: { text: 'Export tests', desc: 'Export with 10 results, 100 results. Verify layout, verify branding, verify file size limit.' }
+        }
+    };
+
+    const driftData = [
+        { traced: true, req: 'R1', note: '✅ Traced to R1: User Login. Stakeholder interviews defined this as a core requirement in the brief.' },
+        { traced: false, req: null, note: '❌ No requirement found. This was generated because "it looked cool." It adds bundle size, slows load time, and serves no defined user need.' },
+        { traced: true, req: 'R2', note: '✅ Traced to R2: Fast Search. Performance requirement defined before development.' },
+        { traced: false, req: null, note: '❌ No requirement found. Dark mode was suggested by the LLM during UI generation. It may be valuable — but it should be added as an explicit requirement (R6?) with success criteria, not absorbed implicitly.' },
+        { traced: true, req: 'R3', note: '✅ Traced to R3: Export to PDF. Defined in stakeholder interviews.' }
+    ];
+
+    let driftChecked = 0;
+
+    window.setRtMode = function(mode, btn) {
+        document.querySelectorAll('.rt-mode-btn').forEach(b => {
+            b.classList.remove('border-primary', 'bg-primary/10');
+            b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+        });
+        btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
+        btn.classList.add('border-primary', 'bg-primary/10');
+
+        document.getElementById('rt-trace-view').classList.toggle('hidden', mode !== 'trace');
+        document.getElementById('rt-drift-view').classList.toggle('hidden', mode !== 'drift');
+    };
+
+    window.traceReq = function(req, btn) {
+        const chain = chains[req];
+        document.querySelectorAll('.rt-req').forEach(b => {
+            b.classList.remove('border-primary', 'bg-primary/10');
+            b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+        });
+        btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
+        btn.classList.add('border-primary', 'bg-primary/10');
+
+        ['req', 'design', 'impl', 'test'].forEach(key => {
+            document.getElementById('rt-c-' + key + '-text').textContent = chain[key].text;
+            document.getElementById('rt-c-' + key + '-desc').textContent = chain[key].desc;
+            const el = document.getElementById('rt-c-' + key);
+            el.classList.remove('border-outline-variant');
+            el.classList.add('border-primary', 'bg-primary/5');
+        });
+
+        document.getElementById('rt-chain').classList.remove('hidden');
+        document.getElementById('rt-chain-prompt').classList.add('hidden');
+    };
+
+    window.checkDrift = function(index, btn) {
+        const d = driftData[index];
+        driftChecked++;
+
+        btn.disabled = true;
+        btn.classList.remove('border-outline-variant', 'hover:border-primary');
+        if (d.traced) {
+            btn.classList.add('border-green-500', 'bg-green-50');
+            btn.querySelector('.font-bold').textContent = '✅ ' + btn.querySelector('.font-bold').textContent.replace(/^[^ ]+ /, '');
+        } else {
+            btn.classList.add('border-red-400', 'bg-red-50');
+        }
+
+        const result = document.getElementById('rt-drift-result');
+        result.classList.remove('hidden');
+        result.textContent = d.note;
+        if (d.traced) {
+            result.className = 'mt-4 rounded-xl p-4 text-xs font-bold bg-green-50 border border-green-300 text-green-700';
+        } else {
+            result.className = 'mt-4 rounded-xl p-4 text-xs font-bold bg-red-50 border border-red-300 text-red-700';
+        }
+    };
+})();
+</script>

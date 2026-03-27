@@ -1,70 +1,154 @@
 ---
-title: "13.5 The Vibe Coding Trap"
-description: "AI-generated code can build fast but accumulate invisible debt — learn the hidden dangers of building without understanding."
+title: "13.5 Review, Best Practices & Common Pitfalls"
+description: "How to review LLM output well, the failure patterns to watch for, and V-model-inspired prompting practices for any type of project."
 chapter: "Chapter 13"
 pageId: "13-05"
 ---
 
 ## 🎯 Core Goals
-- Define "vibe coding" and explain why it creates unique technical debt risks.
-- Identify the specific failure patterns that emerge from AI-generated code built without structure.
-- Establish the principle: understand before accepting, and invest in structure before generating.
+- Catalogue the failure patterns that emerge from LLM-generated output across any project type.
+- Introduce LLM-as-judge and the layered review framework.
+- Establish five V-model-inspired prompting best practices applicable to code, reports, and any complex document.
 
 :::callout-tldr
-"Vibe coding" — generating large amounts of code with LLMs without deeply understanding what's being built — creates invisible technical debt that's harder to fix than debt from code you wrote yourself. Speed without structure is a skyscraper on quicksand.
+LLM output always needs review — always. This page covers the failure patterns to watch for, a three-layer review framework, and five prompting best practices that apply whether you're building software, writing a 50-page industry report, or producing any complex document.
 :::
 
-## 🎸 What Is Vibe Coding?
+## 🚨 Failure Patterns (Generalized)
 
-"Vibe coding" is a term for building software primarily by prompting an LLM to generate code, iterating quickly on outputs, and accepting results that seem to work — without necessarily understanding the underlying structure, patterns, or implications of what was generated.
+When LLM-assisted projects grow large enough without structure, they develop recognizable failure patterns. These apply to code, reports, research documents, and any multi-part output:
 
-It's not inherently wrong. LLMs are genuinely useful tools for writing code. The problem emerges when the speed of generation outpaces the developer's understanding of what's been built.
+**Phantom duplicates:** The same content exists in multiple places in slightly different forms. In code: the same function written three times in three files because the LLM regenerated rather than reusing. In a report: the same analysis appearing in two sections with slightly different conclusions — and a contradiction neither version acknowledges.
 
-Think of it like borrowing money with high interest rates. The first loan is fast and easy. The second adds to the first. By the time you notice the compounding interest, you owe far more than you can comfortably pay back. Technical debt from vibe coding works the same way — it accumulates invisibly, and the interest is paid when you try to change something.
+**Scattered logic:** Important content ends up in the wrong place. In code: business rules buried in the UI layer. In a report: the conclusion buried in the middle, the introduction front-loaded with detail that belongs later. Structure was never defined, so structure was never enforced.
 
-:::callout-dyk
-The term "technical debt" was coined by software engineer Ward Cunningham in 1992. It describes the implied cost of future rework caused by choosing quick-and-easy solutions now instead of better approaches that would take longer. Vibe coding can accumulate technical debt faster than almost any other development approach — because the generation speed disguises how much is being built without structural planning.
-:::
+**Incomplete coverage:** Edge cases are handled differently in different parts of the output. One section of the report addresses counterarguments; another ignores them entirely. One code module validates inputs; another module doing the same task doesn't. There's no single standard because the standard was never defined.
 
-## 🚨 The Failure Patterns
-
-When vibe-coded projects grow large enough, they develop recognizable failure patterns:
-
-**Phantom code:** The same function exists in three slightly different versions in three different files, because each time it was needed, the LLM just wrote a new version rather than finding and reusing the existing one. Now every change needs to be made three times — and developers have to know all three versions exist.
-
-**Scattered logic:** Business logic lives in random places because the LLM didn't know your project's intended structure. The pricing calculation is in the UI layer. The validation logic is in the database layer. Nothing is where you'd expect it.
-
-**Incomplete duplicates:** Similar functions exist at 80% completion — each handles the common case, but different edge cases were handled by different copies. None of the copies is complete enough to safely use everywhere.
-
-**Hidden dependencies:** A change in one file breaks three others in ways that aren't obvious, because the LLM created tight couplings that no one mapped. You find out when something breaks in production.
+**False verification:** Tests that always pass. Review criteria applied in a way that validates format rather than substance. A report reviewed for grammar but not for argument consistency. Code tested for the happy path but not for edge cases. The checks exist and run clean — but they're not checking the things that matter.
 
 :::callout-error
-A common mistake: accepting AI-generated code because the tests pass and the demo works. Tests can be wrong. Demos use the happy path. The debt doesn't show up until you try to add a new feature, fix a bug, or hand the codebase to a new developer — all of which become much harder in a vibe-coded project.
+Verification that always passes is worse than no verification — it creates false confidence. Before trusting any check, confirm it would actually detect a failure. A test that can't fail is not a test. A review that doesn't check requirements is not a review.
 :::
 
-## 🏗️ The Speed Trap in Practice
+## 🔄 LLM Reviewing LLM
 
-Here's what makes vibe coding dangerous at scale: it feels productive right up until it doesn't.
+One LLM can review another LLM's output — and this is more useful than it sounds.
 
-In the first two weeks of a vibe-coded project, everything is great. Features appear in hours. Demos impress stakeholders. The team is energized. Then, around week six, something subtle happens: adding a new feature takes longer than expected. Fixing a bug creates two new bugs. The codebase starts feeling "sticky" — hard to move through.
+Generating and reviewing are different tasks. A model generating content is trying to satisfy a specification. A model reviewing content is asking: "What could go wrong here? What's missing? What looks inconsistent?" Fresh pattern recognition, without the original context and its blind spots.
 
-By week twelve, what should be a one-day change takes three days of careful archaeology. The developers who built it are spending more time understanding what was built than building new things. But here's the trap: by this point, there are 10 metaphorical floors built on the bad foundation. Fixing the foundation means tearing them down.
+This is called **LLM-as-judge**. In practice: after an LLM generates a section, report, or module, you prompt a second LLM to review it — looking for problems the generating model missed.
 
-The solution isn't to avoid LLMs for code generation — it's to invest in structure before generation:
+For documents: *"You are a critical editor. Review this section for: unsupported claims, gaps in the argument, contradictions with earlier sections, and unclear writing."*
 
-1. **Design your project structure first** — Where does each type of logic live? What are the naming conventions?
-2. **Understand before accepting** — Don't accept generated code you can't explain. If you can't describe what it does, you can't maintain it.
-3. **Refactor regularly** — Don't let duplicate code accumulate. Clean up as you go.
-4. **Code review matters more, not less** — AI-generated code needs rigorous review precisely because it was generated fast.
+For code: *"Review this module for: security holes, hardcoded values, missing input validation, disabled linting, and code that only tests the happy path."*
 
-:::visual{name="visual-vibe-coding"}
+Why it works: each LLM call brings fresh pattern recognition. The reviewer doesn't know what the generator was "trying" to do — it only sees what was produced. That's often exactly the perspective needed to catch what the generator missed.
+
+That said, LLM-as-judge has real limits. It's not bulletproof — just as one human proofreader doesn't guarantee an error-free document, one LLM review doesn't guarantee a correct or complete output. Both the generating and reviewing LLMs may share the same training blind spots and reach the same wrong conclusions. This is why LLM review is Layer 2, not the final word. Human judgment remains essential for anything that matters.
+
+:::callout-dyk
+When we explored agentic patterns, we covered the self-correction loop — one agent generates, another reviews, the loop continues until the output passes. LLM-as-judge is exactly that pattern applied to project-level review. The same logic that makes self-correction useful in an agentic workflow makes it useful in your own review process.
+:::
+
+:::callout-tip
+**Get more from LLM review by starting fresh.** Open a new chat session for the review step — one where the context isn't shaped by the same conversation that generated the output. Then give it a specific adversarial role: "Play devil's advocate and find every weakness in this argument." or "Act as a red-teamer — identify all the ways this could fail or be exploited." or "Act as a skeptical editor — find unsupported claims, logical gaps, and contradictions." These roles push the LLM away from the "this seems right" instinct toward actively hunting for problems. This technique can be applied at any stage: before you start building (to stress-test your design), after each section (to catch issues early), or at the end before delivery.
+:::
+
+## 🛡️ The Layered Review Framework
+
+No single review layer catches everything. Best practice is three layers, each targeting different types of problems:
+
+**Layer 1 — Automated checks**
+- For code: linting, security scanning, type checking, unit tests
+- For documents: spell-check, formatting consistency, citation verification
+- Runs automatically, catches mechanical problems consistently and quickly
+
+**Layer 2 — LLM review**
+Prompt a second LLM to review against your acceptance criteria and the failure patterns above. Provide it with context: what was this supposed to produce, what are the constraints, what does success look like?
+
+This layer is fast and catches pattern-matching problems that humans miss in routine review — especially when reviewing large volumes of generated output.
+
+**Layer 3 — Human review**
+You review the LLM reviewer's findings, verify them, make judgment calls, and sign off. This layer is especially important for logic, business rules, and correctness — areas where both the generating and reviewing LLMs may share blind spots.
+
+The key principle: **LLM review is an additional layer, never the only layer.** The goal is different types of review covering different types of problems. Human judgment remains the final gate.
+
+## ✅ Five V-Model-Inspired Prompting Best Practices
+
+These practices are drawn from the same logic as the V-model phase gates — applied to how you work with LLMs prompt by prompt. They work for coding projects, long documents, research, and any multi-part LLM-assisted work.
+
+---
+
+**Best Practice 1 — Plan First**
+
+Before opening a prompt window, answer three questions: What phase am I in (define, design, build, verify)? What specifically am I trying to produce right now? What does good output look like for this specific deliverable?
+
+The most expensive prompts are the ones run in the wrong phase. Generating implementation before the design is done produces output you'll throw away. Writing section 5 before section 2's argument is resolved creates a contradiction you'll have to untangle later. Know what phase you're in before you type.
+
+---
+
+**Best Practice 2 — Give the LLM Clear Context**
+
+Every prompt should tell the LLM:
+- What the overall project or document is, and its purpose
+- What phase of work you're currently in
+- What this specific prompt is trying to produce
+- What the expected input format is
+- What the expected output format is
+- Where related prior work is (prior sections, prior decisions, related artifacts)
+- What constraints apply from earlier phases
+
+Context you skip, the LLM invents. LLM-invented context is plausible-sounding and often wrong. If you don't tell it that section 3 argued X, it won't know to make section 5 consistent with X. If you don't tell it that the codebase uses pattern Y, it will invent a different pattern.
+
+---
+
+**Best Practice 3 — Phase Gates Before Moving On**
+
+Before moving to the next section, module, or feature: can you answer yes to both of these questions?
+
+1. Does this output meet the acceptance criteria from the Define phase?
+2. Can you trace this output back to a stated requirement?
+
+If the answer to either is no, don't proceed. The most common source of technical debt — in code, reports, and any complex output — is proceeding when the gate hasn't been passed, and only discovering the problem three phases later when it's expensive to fix.
+
+---
+
+**Best Practice 4 — Verify, Don't Accept**
+
+Define what you're checking before you review. What requirements does this output serve? What constraints must it satisfy? What does inconsistency look like in this context?
+
+Checking output without defined criteria is reading rather than reviewing. You notice what looks wrong intuitively, but miss structural problems that only appear when measured against requirements.
+
+Specific things to look for in LLM output:
+- Disabled lint rules or suppressed warnings (code)
+- Tests or checks that only verify the happy path
+- Values that should be configurable but are hardcoded
+- Missing input validation or security checks (code) / unsupported claims (documents)
+- Functions or sections that exist but are never called / never serve the argument
+- The same problem solved differently in different places — inconsistency you'll pay to maintain
+
+---
+
+**Best Practice 5 — Correct Course Early**
+
+LLM-assisted debt accumulates faster than traditional debt. The cost of fixing a problem grows with every layer built on top of it.
+
+When you identify a problem during review, fix it before proceeding to the next phase. Don't accept and continue. Don't defer to "clean up at the end." The end is the most expensive time to clean up.
+
+In practice: if Phase 3 review reveals that the design from Phase 2 was wrong, go back to Phase 2 and fix it. If a generated section contradicts an earlier section, resolve the contradiction before writing the next section. The discipline of correcting early is what keeps a project's accumulated output coherent as it grows.
+
+:::callout-dyk
+These practices generalize to non-coding projects explicitly. Writing a 30-page industry report: Phase 1 (define) = what question does this answer, for whom? Phase 2 (design) = outline, argument structure, section plan. Phase 3 (build) = one section at a time, reviewed before moving to the next. Phase 4 (verify) = does each section serve the argument and answer the questions from Phase 1? The same gates apply. The same discipline pays off.
+:::
+
+:::visual{name="visual-review-gates"}
 
 ## 📝 Key Concepts
 
-- **Vibe coding** = generating code quickly via LLM without deeply understanding what's being built.
-- **Technical debt** accumulates invisibly — the interest compounds and is paid during future changes.
-- **Failure patterns**: phantom code, scattered logic, incomplete duplicates, hidden dependencies.
-- **Speed is deceptive** — projects feel fast until the accumulated debt slows everything down.
-- **Invest in structure before generation** — design patterns, naming conventions, and clear module boundaries should come first.
+- **Failure patterns** — phantom duplicates, scattered logic, incomplete coverage, false verification. Apply to code, reports, and any LLM output.
+- **LLM-as-judge** — use a second LLM to review the first's output with fresh pattern recognition. Effective for catching consistency and pattern problems; not a substitute for human judgment.
+- **Three review layers** — automated checks + LLM review + human review. Each catches different problems.
+- **Five best practices**: Plan First → Give Clear Context → Phase Gates → Verify Don't Accept → Correct Course Early.
+- **Generalize to all projects** — these practices apply whether you're building software, writing a long document, or producing any multi-part LLM output.
 
 :::quiz{id="13-05"}

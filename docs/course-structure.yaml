@@ -89,18 +89,18 @@ groups:
         totalPages: 6
       - id: "12"
         title: "Automation & Implementation"
-        description: "RPA vs Agentic AI, hybrid patterns, agentic app building blocks, and ROI."
+        description: "RPA vs Agentic AI, hybrid patterns, agentic app building blocks, evaluation, and ROI."
         icon: "⚖️"
         status: "active"
         firstPage: "chapter-12-01.html"
-        totalPages: 8
+        totalPages: 9
       - id: "13"
         title: "Managing AI-Assisted Projects"
-        description: "SPEC Kits, test sets, traceability, the vibe coding trap, and AI-driven review."
+        description: "The velocity trap, PM fundamentals, structured frameworks, requirements traceability, and review best practices."
         icon: "📊"
         status: "active"
         firstPage: "chapter-13-01.html"
-        totalPages: 6
+        totalPages: 5
 
   - name: "Group 4: Others"
     subtitle: "Standalone topics worth knowing."
