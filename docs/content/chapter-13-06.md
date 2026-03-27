@@ -106,4 +106,4 @@ If the LLM just says "sounds great, go for it" — push back. A good evaluation 
 | ROI & cost-benefit analysis | [ROI Estimation Framework](chapter-12-09.html) |
 | The velocity trap & project discipline | [Why LLM Projects Are Different](chapter-13-01.html) |
 | Requirements traceability | [Building the Right Thing](chapter-13-04.html) |
-| Review best practices & failure patterns | [Review, Best Practices & Common Pitfalls](chapter-13-05.html) |
+| Review practices & failure patterns | [Review, Prompting with Purpose & Common Pitfalls](chapter-13-05.html) |

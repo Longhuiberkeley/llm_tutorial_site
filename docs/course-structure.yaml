@@ -96,7 +96,7 @@ groups:
         totalPages: 9
       - id: "13"
         title: "Managing AI-Assisted Projects"
-        description: "The velocity trap, PM fundamentals, structured frameworks, requirements traceability, and review best practices."
+        description: "The velocity trap, PM fundamentals, structured frameworks, requirements traceability, and purposeful prompting."
         icon: "📊"
         status: "active"
         firstPage: "chapter-13-01.html"

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>13.5 Review, Best Practices & Common Pitfalls - LLM Tutorial</title>
+    <title>13.5 Review, Prompting with Purpose & Common Pitfalls - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -249,7 +249,7 @@
                     <span class="text-sm font-medium">13.4 Building the Right Thing: Requirements Traceability</span>
                 </a><a href="chapter-13-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">13.5 Review, Best Practices & Common Pitfalls</span>
+                    <span class="text-sm font-medium">13.5 Review, Prompting with Purpose & Common Pitfalls</span>
                 </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">The Business Section in Review</span>
@@ -269,10 +269,10 @@
                     <span>Chapter 13</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    13.5 Review, Best Practices & Common Pitfalls
+                    13.5 Review, Prompting with Purpose & Common Pitfalls
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    How to review LLM output well, the failure patterns to watch for, and V-model-inspired prompting practices for any type of project.
+                    How to review LLM output well, the failure patterns to watch for, and five purposeful prompting practices rooted in good software discipline — applicable to any type of project.
                 </p>
             </header>
 
@@ -281,10 +281,10 @@
 <ul>
 <li>Catalogue the failure patterns that emerge from LLM-generated output across any project type.</li>
 <li>Introduce LLM-as-judge and the layered review framework.</li>
-<li>Establish five V-model-inspired prompting best practices applicable to code, reports, and any complex document.</li>
+<li>Introduce five purposeful prompting practices rooted in proven software discipline — applicable to code, reports, and any complex document.</li>
 </ul>
 <div class="callout callout-tldr">
-    LLM output always needs review — always. This page covers the failure patterns to watch for, a three-layer review framework, and five prompting best practices that apply whether you&#39;re building software, writing a 50-page industry report, or producing any complex document.
+    LLM output always needs review — always. This page covers the failure patterns to watch for, a three-layer review framework, and five purposeful prompting practices that apply whether you&#39;re building software, writing a 50-page industry report, or producing any complex document. These aren&#39;t just LLM tips. They&#39;re proven software development discipline. The LLM just makes them more important.
 </div>
 
 
@@ -331,14 +331,16 @@ Prompt a second LLM to review against your acceptance criteria and the failure p
 <p><strong>Layer 3 — Human review</strong>
 You review the LLM reviewer&#39;s findings, verify them, make judgment calls, and sign off. This layer is especially important for logic, business rules, and correctness — areas where both the generating and reviewing LLMs may share blind spots.</p>
 <p>The key principle: <strong>LLM review is an additional layer, never the only layer.</strong> The goal is different types of review covering different types of problems. Human judgment remains the final gate.</p>
-<h2>✅ Five V-Model-Inspired Prompting Best Practices</h2>
-<p>These practices are drawn from the same logic as the V-model phase gates — applied to how you work with LLMs prompt by prompt. They work for coding projects, long documents, research, and any multi-part LLM-assisted work.</p>
+<h2>✅ Prompting with Purpose</h2>
+<p>These five practices aren&#39;t specific to LLMs. They&#39;re the habits that separate disciplined software projects from chaotic ones — and they&#39;ve been true since long before language models existed. Plan before you build. Give clear context. Gate your phases. Verify against requirements. Fix problems early. If you prompt like this, you&#39;ll be pretty good at running software development projects with or without LLMs.</p>
+<p>What LLMs change is the cost of skipping them. When a human writes code slowly, shortcuts are visible and contained. When an LLM generates thousands of lines in minutes, skipped discipline compounds into problems faster than you can track. Follow these practices and your LLM-assisted process will be higher quality and more scalable. Skip them and the speed that felt like an advantage becomes the source of your technical debt.</p>
+<p>One practical implication: don&#39;t try to do everything in a single chat session. A long, sprawling conversation accumulates context drift — the LLM starts losing track of earlier decisions, and you start losing track of what&#39;s been verified. Break your work into focused sessions: one for design, one for building a specific module, one for review. Each session gets a clear purpose, clean context, and a defined deliverable. This isn&#39;t just an LLM limitation — it&#39;s how disciplined projects have always worked.</p>
 <hr>
-<p><strong>Best Practice 1 — Plan First</strong></p>
+<p><strong>Practice 1 — Plan First</strong></p>
 <p>Before opening a prompt window, answer three questions: What phase am I in (define, design, build, verify)? What specifically am I trying to produce right now? What does good output look like for this specific deliverable?</p>
 <p>The most expensive prompts are the ones run in the wrong phase. Generating implementation before the design is done produces output you&#39;ll throw away. Writing section 5 before section 2&#39;s argument is resolved creates a contradiction you&#39;ll have to untangle later. Know what phase you&#39;re in before you type.</p>
 <hr>
-<p><strong>Best Practice 2 — Give the LLM Clear Context</strong></p>
+<p><strong>Practice 2 — Give the LLM Clear Context</strong></p>
 <p>Every prompt should tell the LLM:</p>
 <ul>
 <li>What the overall project or document is, and its purpose</li>
@@ -351,7 +353,7 @@ You review the LLM reviewer&#39;s findings, verify them, make judgment calls, an
 </ul>
 <p>Context you skip, the LLM invents. LLM-invented context is plausible-sounding and often wrong. If you don&#39;t tell it that section 3 argued X, it won&#39;t know to make section 5 consistent with X. If you don&#39;t tell it that the codebase uses pattern Y, it will invent a different pattern.</p>
 <hr>
-<p><strong>Best Practice 3 — Phase Gates Before Moving On</strong></p>
+<p><strong>Practice 3 — Phase Gates Before Moving On</strong></p>
 <p>Before moving to the next section, module, or feature: can you answer yes to both of these questions?</p>
 <ol>
 <li>Does this output meet the acceptance criteria from the Define phase?</li>
@@ -359,7 +361,7 @@ You review the LLM reviewer&#39;s findings, verify them, make judgment calls, an
 </ol>
 <p>If the answer to either is no, don&#39;t proceed. The most common source of technical debt — in code, reports, and any complex output — is proceeding when the gate hasn&#39;t been passed, and only discovering the problem three phases later when it&#39;s expensive to fix.</p>
 <hr>
-<p><strong>Best Practice 4 — Verify, Don&#39;t Accept</strong></p>
+<p><strong>Practice 4 — Verify, Don&#39;t Accept</strong></p>
 <p>Define what you&#39;re checking before you review. What requirements does this output serve? What constraints must it satisfy? What does inconsistency look like in this context?</p>
 <p>Checking output without defined criteria is reading rather than reviewing. You notice what looks wrong intuitively, but miss structural problems that only appear when measured against requirements.</p>
 <p>Specific things to look for in LLM output:</p>
@@ -372,7 +374,7 @@ You review the LLM reviewer&#39;s findings, verify them, make judgment calls, an
 <li>The same problem solved differently in different places — inconsistency you&#39;ll pay to maintain</li>
 </ul>
 <hr>
-<p><strong>Best Practice 5 — Correct Course Early</strong></p>
+<p><strong>Practice 5 — Correct Course Early</strong></p>
 <p>LLM-assisted debt accumulates faster than traditional debt. The cost of fixing a problem grows with every layer built on top of it.</p>
 <p>When you identify a problem during review, fix it before proceeding to the next phase. Don&#39;t accept and continue. Don&#39;t defer to &quot;clean up at the end.&quot; The end is the most expensive time to clean up.</p>
 <p>In practice: if Phase 3 review reveals that the design from Phase 2 was wrong, go back to Phase 2 and fix it. If a generated section contradicts an earlier section, resolve the contradiction before writing the next section. The discipline of correcting early is what keeps a project&#39;s accumulated output coherent as it grows.</p>
@@ -383,8 +385,8 @@ You review the LLM reviewer&#39;s findings, verify them, make judgment calls, an
 
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
     <div class="text-center mb-6">
-        <h3 class="text-xl font-bold font-headline mb-2">Pre-Prompt Checklist</h3>
-        <p class="text-sm text-on-surface-variant">Work through the four phases before starting any LLM-assisted project. Check each item as you confirm it.</p>
+        <h3 class="text-xl font-bold font-headline mb-2">Prompting with Purpose</h3>
+        <p class="text-sm text-on-surface-variant">Work through the four phases for any LLM-assisted project. Check each item as you confirm it — and don't try to do it all in one chat session.</p>
     </div>
 
     <!-- Progress Bar -->
@@ -650,7 +652,7 @@ You review the LLM reviewer&#39;s findings, verify them, make judgment calls, an
 <li><strong>Failure patterns</strong> — phantom duplicates, scattered logic, incomplete coverage, false verification. Apply to code, reports, and any LLM output.</li>
 <li><strong>LLM-as-judge</strong> — use a second LLM to review the first&#39;s output with fresh pattern recognition. Effective for catching consistency and pattern problems; not a substitute for human judgment.</li>
 <li><strong>Three review layers</strong> — automated checks + LLM review + human review. Each catches different problems.</li>
-<li><strong>Five best practices</strong>: Plan First → Give Clear Context → Phase Gates → Verify Don&#39;t Accept → Correct Course Early.</li>
+<li><strong>Prompting with Purpose</strong> — Plan First → Give Clear Context → Phase Gates → Verify Don&#39;t Accept → Correct Course Early. These are proven software discipline practices; the LLM just raises the stakes.</li>
 <li><strong>Generalize to all projects</strong> — these practices apply whether you&#39;re building software, writing a long document, or producing any multi-part LLM output.</li>
 </ul>
 <div id="quiz-13-05" class="quiz-container my-12"></div>

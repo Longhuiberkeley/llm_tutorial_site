@@ -1,17 +1,17 @@
 ---
 title: "13.4 Building the Right Thing: Requirements Traceability"
-description: "Every feature should trace back to a requirement — here's how to ensure you're building what was actually needed."
+description: "Every feature should trace back to a requirement — here's why that mindset matters and how to apply it, whether formally or informally."
 chapter: "Chapter 13"
 pageId: "13-04"
 ---
 
 ## 🎯 Core Goals
 - Distinguish between building things right and building the right things.
-- Define requirements traceability and the chain from requirement to verification.
+- Define requirements traceability as a mental model — the chain from requirement to verification — and why it matters even if you never formalize it.
 - Introduce feature drift and how to detect it in LLM-assisted projects.
 
 :::callout-tldr
-It's easy to build things. It's harder to build the right things. Requirements traceability is the practice of ensuring every piece of work can be traced back to a stated need — so you can prove you're solving real problems, not just generating output. You don't need to run a formal tracking system to benefit from this — the mindset alone changes how you make decisions.
+It's easy to build things. It's harder to build the right things. Requirements traceability is the practice of ensuring every piece of work can be traced back to a stated need — so you can prove you're solving real problems, not just generating output. You don't need to run a formal tracking system to benefit from this — the mindset alone changes how you make decisions. Many agile teams never formalize it — but the best ones think this way instinctively.
 :::
 
 ## 🏗️ Two Ways to Fail
@@ -32,15 +32,17 @@ LLMs accelerate both failure modes equally. The question is: which one are you m
 
 ## 🔗 What Is Requirements Traceability?
 
-Requirements traceability is a discipline for ensuring the first failure mode can't hide.
+Requirements traceability is a way of thinking that protects against the first failure mode.
 
 The idea is a **chain** connecting every piece of work back to the need it serves:
 
 **Requirement → Design Decision → Implementation → Verification**
 
-Each requirement has an ID. Every design decision traces to a requirement ("this module exists because of R4"). Every implementation item traces to a design decision. Every verification test or check traces to a requirement.
+In its most formal version, each requirement has an ID, every design decision traces to a requirement ("this module exists because of R4"), every implementation item traces to a design decision, and every test traces to a requirement. In practice, few teams outside regulated industries maintain that level of formality — and they don't need to. The value isn't in the tracking system. It's in the habit of asking the question: **"Which requirement does this serve?"** If you can answer that for any piece of work in your project — whether from a spreadsheet, from memory, or from a gut check against your project goals — the mental model is working.
 
-If you pick up any piece of work in the project and ask "which requirement does this serve?" — requirements traceability means you can answer.
+:::callout-tip
+In reality, most agile teams, fast-moving startups, and solo developers never maintain formal traceability chains — and many ship great products. The reason to learn this concept isn't to impose paperwork on your process. It's to build the reflex of asking "why are we building this?" before you build it. That reflex alone prevents the most expensive class of project failures. How you practice it — and whether you formalize it — is entirely up to you.
+:::
 
 :::visual{name="visual-requirements-trace"}
 
@@ -52,7 +54,7 @@ This applies beyond software:
 If you can't complete the chain for a piece of work, that's a signal — not a failure. It means asking: "Why are we doing this? Which stated need does it serve?"
 
 :::callout-dyk
-This practice has roots in industries where getting the wrong thing built is very expensive — aerospace, medical devices, automotive software. The principle that every line of implementation should be traceable to a requirement was formalized decades before LLMs. The reason it matters even more now: LLMs generate so much, so fast, that untraced work can accumulate faster than ever before.
+This practice has roots in industries where getting the wrong thing built is very expensive — aerospace, medical devices, automotive software. The principle that every line of implementation should be traceable to a requirement was formalized decades before LLMs. In those industries, it's a regulatory mandate. For everyone else, it's a powerful mental model — you take the thinking, leave the paperwork. The reason it matters even more now: LLMs generate so much, so fast, that untraced work can accumulate faster than ever before.
 :::
 
 ## 🔍 Two Conversations
@@ -93,21 +95,21 @@ A common mistake: treating requirement changes as a reason to abandon traceabili
 
 ## 📄 The Building Blocks: User Stories and PRDs
 
-Two tools make requirements traceability practical:
+If you do want to give traceability some structure, two lightweight tools can help:
 
 **User stories** are single requirements written from the user's perspective:
 *"As a [user], I want to [do something] so that [I achieve some outcome]."*
 
-They're short by design. Each story is one need, one user, one outcome. A project's requirements become a list of user stories — each one numbered, each one traceable.
+They're short by design. Each story is one need, one user, one outcome. For teams that want a lightweight requirements list, user stories are a natural fit — each one captures a single traceable need.
 
 **Product Requirement Documents (PRDs)** capture a larger set of requirements in one place: the purpose of the project, the users it serves, each capability required, the constraints, and the acceptance criteria. A PRD is a living document — updated when requirements change, consulted when making decisions.
 
-You don't need either to be formal. A numbered list of requirements in a shared document is enough to establish a chain. What matters is that requirements are externalized (written down, not held in someone's head), numbered, and consulted before work is accepted.
+You don't need either to be formal. A numbered list of requirements in a shared document works. Even a set of bullet points in a project README is better than nothing. What matters most is that requirements exist somewhere outside your head and get consulted — even informally — before work is accepted.
 
 ## 📝 Key Concepts
 
 - **Two failure modes** — building the wrong thing (invisible) and building it wrong (visible). LLMs accelerate both; traceability addresses the first.
-- **The chain** — Requirement → Design Decision → Implementation → Verification. Every piece of work should complete this chain.
+- **The chain** — Requirement → Design Decision → Implementation → Verification. A mental model for checking that every piece of work connects to a stated need.
 - **Feature drift** — plausible-looking work accumulates without connecting to stated needs. Before accepting LLM output: "which requirement does this serve?"
 - **User stories** — single requirements in the format "As a [user], I want [action] so that [outcome]."
 - **PRDs** — living documents capturing the full requirements set; updated when requirements change, consulted when making decisions.

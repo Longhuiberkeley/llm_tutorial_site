@@ -1,6 +1,6 @@
 ---
-title: "13.5 Review, Best Practices & Common Pitfalls"
-description: "How to review LLM output well, the failure patterns to watch for, and V-model-inspired prompting practices for any type of project."
+title: "13.5 Review, Prompting with Purpose & Common Pitfalls"
+description: "How to review LLM output well, the failure patterns to watch for, and five purposeful prompting practices rooted in good software discipline — applicable to any type of project."
 chapter: "Chapter 13"
 pageId: "13-05"
 ---
@@ -8,10 +8,10 @@ pageId: "13-05"
 ## 🎯 Core Goals
 - Catalogue the failure patterns that emerge from LLM-generated output across any project type.
 - Introduce LLM-as-judge and the layered review framework.
-- Establish five V-model-inspired prompting best practices applicable to code, reports, and any complex document.
+- Introduce five purposeful prompting practices rooted in proven software discipline — applicable to code, reports, and any complex document.
 
 :::callout-tldr
-LLM output always needs review — always. This page covers the failure patterns to watch for, a three-layer review framework, and five prompting best practices that apply whether you're building software, writing a 50-page industry report, or producing any complex document.
+LLM output always needs review — always. This page covers the failure patterns to watch for, a three-layer review framework, and five purposeful prompting practices that apply whether you're building software, writing a 50-page industry report, or producing any complex document. These aren't just LLM tips. They're proven software development discipline. The LLM just makes them more important.
 :::
 
 ## 🚨 Failure Patterns (Generalized)
@@ -73,13 +73,17 @@ You review the LLM reviewer's findings, verify them, make judgment calls, and si
 
 The key principle: **LLM review is an additional layer, never the only layer.** The goal is different types of review covering different types of problems. Human judgment remains the final gate.
 
-## ✅ Five V-Model-Inspired Prompting Best Practices
+## ✅ Prompting with Purpose
 
-These practices are drawn from the same logic as the V-model phase gates — applied to how you work with LLMs prompt by prompt. They work for coding projects, long documents, research, and any multi-part LLM-assisted work.
+These five practices aren't specific to LLMs. They're the habits that separate disciplined software projects from chaotic ones — and they've been true since long before language models existed. Plan before you build. Give clear context. Gate your phases. Verify against requirements. Fix problems early. If you prompt like this, you'll be pretty good at running software development projects with or without LLMs.
+
+What LLMs change is the cost of skipping them. When a human writes code slowly, shortcuts are visible and contained. When an LLM generates thousands of lines in minutes, skipped discipline compounds into problems faster than you can track. Follow these practices and your LLM-assisted process will be higher quality and more scalable. Skip them and the speed that felt like an advantage becomes the source of your technical debt.
+
+One practical implication: don't try to do everything in a single chat session. A long, sprawling conversation accumulates context drift — the LLM starts losing track of earlier decisions, and you start losing track of what's been verified. Break your work into focused sessions: one for design, one for building a specific module, one for review. Each session gets a clear purpose, clean context, and a defined deliverable. This isn't just an LLM limitation — it's how disciplined projects have always worked.
 
 ---
 
-**Best Practice 1 — Plan First**
+**Practice 1 — Plan First**
 
 Before opening a prompt window, answer three questions: What phase am I in (define, design, build, verify)? What specifically am I trying to produce right now? What does good output look like for this specific deliverable?
 
@@ -87,7 +91,7 @@ The most expensive prompts are the ones run in the wrong phase. Generating imple
 
 ---
 
-**Best Practice 2 — Give the LLM Clear Context**
+**Practice 2 — Give the LLM Clear Context**
 
 Every prompt should tell the LLM:
 - What the overall project or document is, and its purpose
@@ -102,7 +106,7 @@ Context you skip, the LLM invents. LLM-invented context is plausible-sounding an
 
 ---
 
-**Best Practice 3 — Phase Gates Before Moving On**
+**Practice 3 — Phase Gates Before Moving On**
 
 Before moving to the next section, module, or feature: can you answer yes to both of these questions?
 
@@ -113,7 +117,7 @@ If the answer to either is no, don't proceed. The most common source of technica
 
 ---
 
-**Best Practice 4 — Verify, Don't Accept**
+**Practice 4 — Verify, Don't Accept**
 
 Define what you're checking before you review. What requirements does this output serve? What constraints must it satisfy? What does inconsistency look like in this context?
 
@@ -129,7 +133,7 @@ Specific things to look for in LLM output:
 
 ---
 
-**Best Practice 5 — Correct Course Early**
+**Practice 5 — Correct Course Early**
 
 LLM-assisted debt accumulates faster than traditional debt. The cost of fixing a problem grows with every layer built on top of it.
 
@@ -148,7 +152,7 @@ These practices generalize to non-coding projects explicitly. Writing a 30-page 
 - **Failure patterns** — phantom duplicates, scattered logic, incomplete coverage, false verification. Apply to code, reports, and any LLM output.
 - **LLM-as-judge** — use a second LLM to review the first's output with fresh pattern recognition. Effective for catching consistency and pattern problems; not a substitute for human judgment.
 - **Three review layers** — automated checks + LLM review + human review. Each catches different problems.
-- **Five best practices**: Plan First → Give Clear Context → Phase Gates → Verify Don't Accept → Correct Course Early.
+- **Prompting with Purpose** — Plan First → Give Clear Context → Phase Gates → Verify Don't Accept → Correct Course Early. These are proven software discipline practices; the LLM just raises the stakes.
 - **Generalize to all projects** — these practices apply whether you're building software, writing a long document, or producing any multi-part LLM output.
 
 :::quiz{id="13-05"}
