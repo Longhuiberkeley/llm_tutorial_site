@@ -26,32 +26,6 @@ Plot any task on these two axes and you get a clear recommendation.
 
 :::visual{name="visual-volume-variance"}
 
-## 🔲 Walking Through Each Quadrant
-
-**High Volume + Low Variance → RPA**
-
-This is the automation sweet spot for rule-based tools. The task happens constantly and each instance is nearly identical. Think: processing standard invoices, transferring data between systems, generating weekly status reports.
-
-The math is easy here: high frequency means the time savings add up quickly. Low variance means RPA's rigidity isn't a problem — there are no surprises to handle.
-
-**High Volume + High Variance → Agentic AI (with human oversight)**
-
-This is where LLMs shine. The task happens constantly, but each instance is different enough to require judgment. Think: customer support email responses, contract review, lead qualification.
-
-You can't use RPA here — the variance will break it. You need something that can read context and adapt. But because it's high volume, you also need monitoring and spot-checking. Human oversight remains important even as the AI handles the volume.
-
-**Low Volume + Low Variance → Manual (just do it)**
-
-If a task happens rarely and is always the same, it probably doesn't justify an automation investment. The ROI simply won't be there. A task that takes 10 minutes and happens once a month equals 2 hours per year — automation setup will cost more than that.
-
-The right answer here is often a simple checklist or template, not a sophisticated system.
-
-**Low Volume + High Variance → Human Judgment**
-
-This is the quadrant where automation is least appropriate. Tasks here are rare AND unpredictable — think strategic decisions, unusual client situations, board-level negotiations. These require human expertise, relationship context, and judgment that no current LLM can reliably replace.
-
-Trying to automate here is usually a mistake — not because the LLM can't attempt it, but because the cost of errors is high and the volume doesn't justify the investment in building something trustworthy.
-
 :::callout-dyk
 While both RPA and agentic AI are remarkable, never forget that **humans are remarkable too.** We might find certain tasks tedious, but we often outperform automation in ways that are easy to overlook. By default, we can learn and adapt without the constraint of a context window. We can work on Monday and won't need to be told the instructions again on Tuesday. We can read a room, sense a client's mood, and adjust on the fly. Before automating, honestly ask: is a human already the best solution here?
 :::

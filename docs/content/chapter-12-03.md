@@ -52,15 +52,7 @@ A common mistake is reaching for agentic AI when RPA would work perfectly well �
 
 ## 🔀 The Hybrid Approach
 
-In practice, the best automation systems use both RPA and agentic AI together. The pattern is straightforward:
-
-- **RPA handles the routine** — standard invoices, data transfers, scheduled reports
-- **Agentic AI handles the exceptions** — unusual cases, ambiguous requests, judgment calls
-- **Humans handle the escalations** — anything the AI flags as beyond its confidence
-
-For example: A company processes 500 invoices per day. 450 are standard format — RPA handles those automatically. 40 have minor variations — agentic AI reads them and processes with judgment. 10 are unusual enough to need a human — the agent flags them and routes them to the right person.
-
-We'll explore specific hybrid patterns — and how to choose the right approach for your situation — on the next page.
+In practice, most real-world systems combine both — using RPA for routine cases, agentic AI for exceptions, and humans for escalations. The specific patterns for how to combine them, and how to choose the right approach for your situation, are covered on the next page.
 
 :::visual{name="visual-rpa-vs-agentic"}
 

@@ -30,6 +30,8 @@ Common HITL patterns:
 - **AI flags → human decides** (unusual transactions, escalated support cases)
 - **AI acts → human can revert** (changes logged, easy rollback available)
 
+:::visual{name="visual-hitl"}
+
 :::callout-tip
 When designing human-in-the-loop interfaces, think beyond the traditional dashboard. You can give reviewers an LLM-powered chat interface where they can ask questions about the situation, explore edge cases conversationally, and then make their decision. Instead of staring at a table of numbers, the reviewer asks: "Why did the system flag this transaction?" and gets an instant, contextual explanation. The review experience itself can be enhanced by AI.
 :::
@@ -71,8 +73,6 @@ For any AI system operating in production — even one with human review — you
 Why? Because without logs, you can't improve the system. You can't find patterns in failures. You can't demonstrate compliance. You can't reconstruct what happened when something goes wrong.
 
 Monitoring means actively watching the system — not just storing logs, but reviewing them. Set up alerts for unusual patterns: sudden drop in approval rate, spike in rejections, unusual error types. Treat your AI system like a new employee: check in regularly, especially early on.
-
-:::visual{name="visual-hitl"}
 
 ## 📝 Key Concepts
 

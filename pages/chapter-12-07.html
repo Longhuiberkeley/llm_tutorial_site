@@ -288,48 +288,6 @@
 <li><strong>AI flags → human decides</strong> (unusual transactions, escalated support cases)</li>
 <li><strong>AI acts → human can revert</strong> (changes logged, easy rollback available)</li>
 </ul>
-<div class="callout callout-tip">
-    When designing human-in-the-loop interfaces, think beyond the traditional dashboard. You can give reviewers an LLM-powered chat interface where they can ask questions about the situation, explore edge cases conversationally, and then make their decision. Instead of staring at a table of numbers, the reviewer asks: &quot;Why did the system flag this transaction?&quot; and gets an instant, contextual explanation. The review experience itself can be enhanced by AI.
-</div>
-
-
-<div class="callout callout-dyk">
-    The term &quot;human-in-the-loop&quot; comes from control systems engineering, where a human operator monitors and adjusts automated systems in real time. It&#39;s been standard practice in aviation, nuclear power, and manufacturing for decades — AI-assisted workflows are just the latest application of an old, well-proven principle.
-</div>
-
-
-<h2>✅ Where Autonomy Works — and Where It Doesn&#39;t</h2>
-<p><strong>Full autonomy works well when:</strong></p>
-<ul>
-<li>The task is low-risk and contained (email categorization, tagging, sorting)</li>
-<li>Errors are easily reversible (a mislabeled category is easy to fix)</li>
-<li>The AI has a proven track record on this specific task</li>
-<li>Volume is too high for human review to be practical</li>
-</ul>
-<p><strong>HITL is essential when:</strong></p>
-<ul>
-<li>The task affects customers directly (responses, offers, account changes)</li>
-<li>Money is involved (pricing, billing, refunds, payments)</li>
-<li>Legal or compliance obligations apply (contracts, regulatory filings)</li>
-<li>Errors are hard or impossible to reverse</li>
-<li>The AI is new to this task and hasn&#39;t built a track record yet</li>
-</ul>
-<p>The key insight: HITL is not a permanent state. It&#39;s the starting point. As an AI system proves itself on real cases, you can gradually reduce the scope of human oversight — moving from reviewing every output to spot-checking, to reviewing only flagged cases.</p>
-<div class="callout callout-error">
-    A common mistake is launching an AI system with full autonomy right away because it looked good in demos and internal testing. Demos use curated examples. Production introduces edge cases, unexpected inputs, and adversarial users. Start with HITL. Earn autonomy through performance data, not optimism.
-</div>
-
-
-<h2>📋 Monitoring and Logging Are Not Optional</h2>
-<p>For any AI system operating in production — even one with human review — you need to log what&#39;s happening. This means:</p>
-<ul>
-<li><strong>Every input the AI receives</strong> should be stored.</li>
-<li><strong>Every output the AI produces</strong> should be stored.</li>
-<li><strong>Every tool the AI calls</strong> and what it returned should be stored.</li>
-<li><strong>Human review outcomes</strong> should be stored (did the human approve, edit, or reject?).</li>
-</ul>
-<p>Why? Because without logs, you can&#39;t improve the system. You can&#39;t find patterns in failures. You can&#39;t demonstrate compliance. You can&#39;t reconstruct what happened when something goes wrong.</p>
-<p>Monitoring means actively watching the system — not just storing logs, but reviewing them. Set up alerts for unusual patterns: sudden drop in approval rate, spike in rejections, unusual error types. Treat your AI system like a new employee: check in regularly, especially early on.</p>
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
     <div class="text-center mb-10">
         <h3 class="text-xl font-bold font-headline mb-2">Human-in-the-Loop Workflow</h3>
@@ -539,6 +497,48 @@ function selectTrust(index, btn) {
 </script>
 
 
+<div class="callout callout-tip">
+    When designing human-in-the-loop interfaces, think beyond the traditional dashboard. You can give reviewers an LLM-powered chat interface where they can ask questions about the situation, explore edge cases conversationally, and then make their decision. Instead of staring at a table of numbers, the reviewer asks: &quot;Why did the system flag this transaction?&quot; and gets an instant, contextual explanation. The review experience itself can be enhanced by AI.
+</div>
+
+
+<div class="callout callout-dyk">
+    The term &quot;human-in-the-loop&quot; comes from control systems engineering, where a human operator monitors and adjusts automated systems in real time. It&#39;s been standard practice in aviation, nuclear power, and manufacturing for decades — AI-assisted workflows are just the latest application of an old, well-proven principle.
+</div>
+
+
+<h2>✅ Where Autonomy Works — and Where It Doesn&#39;t</h2>
+<p><strong>Full autonomy works well when:</strong></p>
+<ul>
+<li>The task is low-risk and contained (email categorization, tagging, sorting)</li>
+<li>Errors are easily reversible (a mislabeled category is easy to fix)</li>
+<li>The AI has a proven track record on this specific task</li>
+<li>Volume is too high for human review to be practical</li>
+</ul>
+<p><strong>HITL is essential when:</strong></p>
+<ul>
+<li>The task affects customers directly (responses, offers, account changes)</li>
+<li>Money is involved (pricing, billing, refunds, payments)</li>
+<li>Legal or compliance obligations apply (contracts, regulatory filings)</li>
+<li>Errors are hard or impossible to reverse</li>
+<li>The AI is new to this task and hasn&#39;t built a track record yet</li>
+</ul>
+<p>The key insight: HITL is not a permanent state. It&#39;s the starting point. As an AI system proves itself on real cases, you can gradually reduce the scope of human oversight — moving from reviewing every output to spot-checking, to reviewing only flagged cases.</p>
+<div class="callout callout-error">
+    A common mistake is launching an AI system with full autonomy right away because it looked good in demos and internal testing. Demos use curated examples. Production introduces edge cases, unexpected inputs, and adversarial users. Start with HITL. Earn autonomy through performance data, not optimism.
+</div>
+
+
+<h2>📋 Monitoring and Logging Are Not Optional</h2>
+<p>For any AI system operating in production — even one with human review — you need to log what&#39;s happening. This means:</p>
+<ul>
+<li><strong>Every input the AI receives</strong> should be stored.</li>
+<li><strong>Every output the AI produces</strong> should be stored.</li>
+<li><strong>Every tool the AI calls</strong> and what it returned should be stored.</li>
+<li><strong>Human review outcomes</strong> should be stored (did the human approve, edit, or reject?).</li>
+</ul>
+<p>Why? Because without logs, you can&#39;t improve the system. You can&#39;t find patterns in failures. You can&#39;t demonstrate compliance. You can&#39;t reconstruct what happened when something goes wrong.</p>
+<p>Monitoring means actively watching the system — not just storing logs, but reviewing them. Set up alerts for unusual patterns: sudden drop in approval rate, spike in rejections, unusual error types. Treat your AI system like a new employee: check in regularly, especially early on.</p>
 <h2>📝 Key Concepts</h2>
 <ul>
 <li><strong>HITL = AI proposes, human approves</strong> — the safety net for AI systems in production.</li>

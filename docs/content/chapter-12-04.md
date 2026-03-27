@@ -110,6 +110,14 @@ The kiosk is a purpose-built solution optimized for a specific task. It's cheape
 </div>
 </div>
 
+:::callout-tip
+Before jumping to any technical solution, identify what problem you're actually solving. Is it really a technology problem? It might be a management issue, a communication gap, or a training problem. McDonald's kiosk worked because they deeply understood their bottleneck. Be creative about solutions: gamification, better incentive structures, clearer SOPs, or improved training sometimes outperform any AI implementation — and cost far less.
+:::
+
+:::callout-tip
+The end-user experience matters enormously. Most people already dislike calling customer support. Many now find LLM-powered support even more frustrating — especially when the LLM confidently attempts to help but can't actually solve the problem. If you're building something customer-facing, invest in the experience. A simple, well-designed system that knows its limits beats an overconfident one that wastes people's time. Bad AI UX can damage your brand more than no AI at all.
+:::
+
 ## 📏 The Implementation Spectrum
 
 Not every AI project needs to be a full agentic system. There's a wide spectrum of implementation complexity, and most companies should start on the simpler end.
@@ -130,7 +138,34 @@ Before building any automated system, ask one critical question: **is this inter
 If your system is external-facing, assume people will try to trick your LLM into giving unauthorized discounts, leaking internal information, bypassing rules, or behaving in ways you didn't intend. This isn't hypothetical — it happens to every public-facing AI system. Design with adversarial use in mind from day one, not as an afterthought.
 :::
 
-Even for internal tools, consider: who has access? Can a disgruntled employee abuse the automation? What happens if credentials are shared? The answer to "internal or external?" shapes every design decision that follows.
+**Real cases — external misuse:**
+
+<div class="space-y-3 my-6">
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="text-2xl">🏪</span>
+<div>
+<div class="font-bold text-sm mb-1">The Car Dealership Chat</div>
+<p class="text-sm text-on-surface/80">A car dealership deployed an LLM-powered web chat to help customers. Within days, users discovered they could get it to agree to arbitrarily low prices, speak favorably about competitor vehicles, and even help them with unrelated tasks like homework. The dealership had to take it down. A chat widget without guardrails is a liability, not a sales tool.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="text-2xl">✈️</span>
+<div>
+<div class="font-bold text-sm mb-1">The Airline Chatbot Lawsuit</div>
+<p class="text-sm text-on-surface/80">An airline's LLM chatbot told a grieving customer he could apply for a bereavement fare discount retroactively after his trip — contrary to actual company policy. When the airline was sued, they argued the chatbot was a "separate legal entity" responsible for its own statements. The court disagreed. The airline was held liable and had to pay. <strong>The lesson: your LLM's statements are your statements.</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+**Internal misuse — the metric trap:**
+
+Not all adversarial behavior comes from bad actors outside your organization. Internal incentive structures can create their own problems. Some companies track **token usage** (how many LLM API calls employees make) as a KPI for AI adoption. This sounds reasonable — but it's a poor metric. It measures activity, not value or quality. An employee can generate thousands of tokens of low-quality, unhelpful AI outputs to hit a number. Metrics that measure AI usage quantity without measuring output quality create a different kind of misuse — one that's harder to spot and just as costly.
+
+Even for internal tools, consider: who has access? Can the automation be gamed to meet a KPI? What happens if credentials are shared? The answer to "internal or external?" shapes every design decision that follows.
 
 ## 📝 Key Concepts
 
