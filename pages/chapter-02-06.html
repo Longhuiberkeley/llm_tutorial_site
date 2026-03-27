@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>2.6 RLHF & the Reasoning Era - LLM Tutorial</title>
+    <title>2.6 How LLMs Are Trained - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -60,184 +60,202 @@
                     <span class="text-sm font-medium">2.4 Context Capacity — What Fits in the Head</span>
                 </a><a href="chapter-02-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">2.5 How LLMs Are Trained</span>
+                    <span class="text-sm font-medium">2.5 How Neural Networks Learn</span>
                 </a><a href="chapter-02-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">2.6 RLHF & the Reasoning Era</span>
+                    <span class="text-sm font-medium">2.6 How LLMs Are Trained</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 3</div><a href="chapter-03-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.1 The Black Box — Input In, Output Out</span>
+                    <span class="text-sm font-medium">3.1 The Black Box</span>
                 </a><a href="chapter-03-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.2 The Paper Tape Metaphor</span>
+                    <span class="text-sm font-medium">3.2 The Sandwich — Turn by Turn</span>
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts &amp; Custom Spaces</span>
+                    <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.1 Counting Problems</span>
+                    <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
                 </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.2 Hallucination</span>
+                    <span class="text-sm font-medium">4.2 Hallucination — Confident Fabrication</span>
                 </a><a href="chapter-04-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.3 Randomness & Temperature</span>
                 </a><a href="chapter-04-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.4 Context Poisoning</span>
+                    <span class="text-sm font-medium">4.4 Context Poisoning — What the LLM Believes, It Believes Deeply</span>
                 </a><a href="chapter-04-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.5 When the Head is Full</span>
                 </a><a href="chapter-04-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">4.6 The Stochastic Parrot</span>
+                    <span class="text-sm font-medium">4.6 Context Rot — When Too Much Is Too Much</span>
                 </a><a href="chapter-04-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.7 Jailbreaking & Security</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 5</div><a href="chapter-05-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.1 The SPEC Kit</span>
+                    <span class="text-sm font-medium">5.1 Know When to Trust It</span>
                 </a><a href="chapter-05-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.2 Zero-Shot vs. Few-Shot</span>
+                    <span class="text-sm font-medium">5.2 Be Explicit — No Mind Reading</span>
                 </a><a href="chapter-05-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.3 Negative Constraints</span>
+                    <span class="text-sm font-medium">5.3 Zero-Shot vs. Few-Shot</span>
                 </a><a href="chapter-05-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.4 The Drafting Engine</span>
+                    <span class="text-sm font-medium">5.4 Chain-of-Thought & Reasoning Tokens</span>
                 </a><a href="chapter-05-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.5 Privacy 🔒</span>
+                    <span class="text-sm font-medium">5.5 Privacy — What Never to Paste</span>
                 </a><a href="chapter-05-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">5.6 Privacy — What Never to Paste</span>
+                    <span class="text-sm font-medium">The Basics in Review</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 6</div><a href="chapter-06-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Delegation</span>
+                    <span class="text-sm font-medium">6.1 What is Tool Use? — LLMs Can Delegate</span>
                 </a><a href="chapter-06-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">MCP</span>
+                    <span class="text-sm font-medium">6.2 MCP — Model Context Protocol</span>
                 </a><a href="chapter-06-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Agentic Loops</span>
+                    <span class="text-sm font-medium">6.3 What Makes a Good Agent?</span>
                 </a><a href="chapter-06-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Autonomous Failures</span>
+                    <span class="text-sm font-medium">6.4 Agentic Loops — Perceive, Plan, Act, Observe</span>
                 </a><a href="chapter-06-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Building an Agent</span>
+                    <span class="text-sm font-medium">6.5 When Agents Go Wrong</span>
                 </a><a href="chapter-06-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">6.6 Building a Simple Agent</span>
+                    <span class="text-sm font-medium">6.6 Configuring a Good Agent</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 7</div><a href="chapter-07-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">The Lawyer Case Study</span>
+                    <span class="text-sm font-medium">7.1 The Lawyer Case Study — When Context Isn't Enough</span>
                 </a><a href="chapter-07-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">What is RAG?</span>
+                    <span class="text-sm font-medium">7.2 What is RAG? — Search + LLM</span>
                 </a><a href="chapter-07-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Vector Embeddings</span>
+                    <span class="text-sm font-medium">7.3 Vector Embeddings — Storing Meaning as Coordinates</span>
                 </a><a href="chapter-07-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">The Plumbing of RAG</span>
+                    <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Context Injection</span>
+                    <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
                 </a><a href="chapter-07-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Data Formats</span>
+                    <span class="text-sm font-medium">7.6 Data Formats are Destiny</span>
                 </a><a href="chapter-07-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning</span>
+                    <span class="text-sm font-medium">7.7 RAG vs. Fine-Tuning — When Does Fine-Tuning Actually Make Sense?</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 8</div><a href="chapter-08-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">State vs. Stateless</span>
+                    <span class="text-sm font-medium">8.1 The Personal Assistant Dream</span>
                 </a><a href="chapter-08-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">The Jarvis Myth</span>
+                    <span class="text-sm font-medium">8.2 Knowing and Doing: Context + Tools</span>
                 </a><a href="chapter-08-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Context Management</span>
+                    <span class="text-sm font-medium">8.3 How It Could Be Built — And Why It's Still Hard</span>
                 </a><a href="chapter-08-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">OpenCanvas & Collaborative AI</span>
+                    <span class="text-sm font-medium">8.4 The Trade-offs: Usefulness, Privacy, and Risk</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 9</div><a href="chapter-09-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Multimodal AI</span>
+                    <span class="text-sm font-medium">9.1 Multimodal AI — More Than Words</span>
                 </a><a href="chapter-09-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Seeing vs Drawing</span>
+                    <span class="text-sm font-medium">9.2 Understanding vs. Generating — Two Very Different Skills</span>
                 </a><a href="chapter-09-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">OCR & Logic</span>
+                    <span class="text-sm font-medium">9.3 What Can You Do With a Stack of Scanned Documents?</span>
+                </a><a href="chapter-09-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">The Advanced Section in Review</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 10</div><a href="chapter-10-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">The Big 3</span>
+                    <span class="text-sm font-medium">10.1 The LLM Landscape — Who's Who</span>
                 </a><a href="chapter-10-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Model Tiers</span>
+                    <span class="text-sm font-medium">10.2 Model Tiers & Costs — Bigger Isn't Always Better</span>
                 </a><a href="chapter-10-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Open Source</span>
+                    <span class="text-sm font-medium">10.3 Open Source vs. Closed Source — Control vs. Convenience</span>
                 </a><a href="chapter-10-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Cost of Intelligence</span>
+                    <span class="text-sm font-medium">10.4 How You Access LLMs — Interfaces & Pricing Models</span>
                 </a><a href="chapter-10-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Build vs. Buy</span>
+                    <span class="text-sm font-medium">10.5 Choosing Your Model — A Thought Exercise</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 11</div><a href="chapter-11-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">RPA vs. Agentic</span>
+                    <span class="text-sm font-medium">11.1 New Technology, Same Domain</span>
                 </a><a href="chapter-11-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Volume vs Variance</span>
+                    <span class="text-sm font-medium">11.2 Building AI Literacy — Making AI Approachable for Everyone</span>
                 </a><a href="chapter-11-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Human-in-the-Loop</span>
+                    <span class="text-sm font-medium">11.3 Digital Transformation & Change Management</span>
                 </a><a href="chapter-11-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Exception Routing</span>
+                    <span class="text-sm font-medium">11.4 Is Your Infrastructure Ready?</span>
                 </a><a href="chapter-11-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Verbalizing Processes</span>
+                    <span class="text-sm font-medium">11.5 Planning Your AI Rollout</span>
+                </a><a href="chapter-11-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">11.6 Seeing Clearly Through the Hype</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Leadership & AI Literacy</span>
+                    <span class="text-sm font-medium">12.1 You Can't Automate What You Can't Explain</span>
                 </a><a href="chapter-12-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Broken Processes</span>
+                    <span class="text-sm font-medium">12.2 Right vs. Wrong in Business Logic</span>
                 </a><a href="chapter-12-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Psychological Safety</span>
+                    <span class="text-sm font-medium">12.3 RPA vs. Agentic AI</span>
                 </a><a href="chapter-12-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Augmentation Narrative</span>
+                    <span class="text-sm font-medium">12.4 Choosing Your Automation Approach</span>
                 </a><a href="chapter-12-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Adapting to Shifts</span>
+                    <span class="text-sm font-medium">12.5 Building Agentic Applications</span>
                 </a><a href="chapter-12-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">12.6 ROI Calculation</span>
+                    <span class="text-sm font-medium">12.6 Evaluation & Test Sets</span>
+                </a><a href="chapter-12-07.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.7 The Volume vs. Variance Matrix</span>
+                </a><a href="chapter-12-08.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.8 Human-in-the-Loop</span>
+                </a><a href="chapter-12-09.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">12.9 ROI Estimation Framework</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Harness Engineering</span>
+                    <span class="text-sm font-medium">13.1 Why LLM Projects Are Different</span>
                 </a><a href="chapter-13-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Spec-Driven Modeling</span>
+                    <span class="text-sm font-medium">13.2 Project & Product Management 101</span>
                 </a><a href="chapter-13-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">The Vibe Coding Trap</span>
+                    <span class="text-sm font-medium">13.3 From Vibe Coding to Structured Development</span>
                 </a><a href="chapter-13-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Golden Datasets</span>
+                    <span class="text-sm font-medium">13.4 Building the Right Thing: Requirements Traceability</span>
                 </a><a href="chapter-13-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">Traceability</span>
+                    <span class="text-sm font-medium">13.5 Review, Best Practices & Common Pitfalls</span>
                 </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">AI-Driven Review</span>
+                    <span class="text-sm font-medium">The Business Section in Review</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
                 </a>
             </nav>
         </aside>
@@ -251,39 +269,325 @@
                     <span>Chapter 2</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    2.6 RLHF & the Reasoning Era
+                    2.6 How LLMs Are Trained
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    How reinforcement learning shapes today's AI, and the concept of thinking models.
+                    How raw text becomes a helpful assistant: exploring pre-training, fine-tuning, and RLHF.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Explain how Reinforcement Learning from Human Feedback (RLHF) works.</li>
-<li>Introduce the concept of &quot;thinking&quot; tokens in modern models.</li>
+<li>Understand two key moments in LLM training: learning language and learning quality.</li>
+<li>See why pre-training alone produces a chaotic autocomplete, not a helpful assistant.</li>
+<li>Understand how human feedback gets turned into a mathematical training signal in RLHF.</li>
 </ul>
 <div class="callout callout-tldr">
-    Modern models are trained using human feedback to prefer good answers over bad ones. The newest models even spend extra tokens &quot;thinking&quot; before they speak, improving their accuracy dramatically.
+    Training an LLM is a long, multi-stage process. To build intuition, we&#39;ll explore two key examples: <strong>Pre-training</strong> teaches the model language at massive scale — by predicting the next word, billions of times, across the entire internet. <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) then teaches it to give <em>good</em> answers, using human preferences to train a reward model that scores responses.
 </div>
 
 
+<h2>👁️ Visuals &amp; Interactives</h2>
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+
+    <div class="text-center mb-8">
+        <p class="text-base font-semibold text-on-surface mb-1">Have you heard of <em>reinforcement learning</em> or <em>RLHF</em>?</p>
+        <p class="text-sm text-on-surface-variant">Curious how an LLM goes from raw internet text to a helpful assistant? Explore two key moments from a much longer training journey.</p>
+    </div>
+
+    <!-- SECTION 1: PRE-TRAINING -->
+    <div class="mb-12">
+        <div class="text-center mb-6">
+            <div class="inline-block bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3">Stage 1 — Pre-training</div>
+            <h3 class="text-xl font-bold font-headline mb-1">Guess the Missing Word</h3>
+            <p class="text-sm text-on-surface-variant italic">This is how an LLM learns language — billions of fill-in-the-blank exercises.</p>
+        </div>
+
+        <!-- Example selector -->
+        <div class="flex justify-center gap-2 mb-6">
+            <button onclick="ptShow(0)" id="pt-btn-0" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-primary text-on-primary">Example 1</button>
+            <button onclick="ptShow(1)" id="pt-btn-1" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">Example 2</button>
+            <button onclick="ptShow(2)" id="pt-btn-2" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">Example 3</button>
+        </div>
+
+        <!-- Sentence display -->
+        <div class="text-center mb-6">
+            <div class="text-2xl font-bold p-5 bg-surface-container-lowest rounded-xl border border-outline-variant inline-block">
+                <span id="pt-sentence-pre"></span>
+                <span class="animate-pulse text-primary border-b-2 border-primary mx-1">___</span>
+                <span id="pt-sentence-post"></span>
+            </div>
+        </div>
+
+        <!-- Options -->
+        <div id="pt-options" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-lg mx-auto mb-4"></div>
+        <div id="pt-feedback" class="hidden text-center text-sm p-3 rounded-xl"></div>
+        <p class="text-center text-xs text-on-surface-variant mt-4 italic opacity-70">The LLM has done this billions of times. That's how it learns grammar, facts, and writing style — all at once.</p>
+        <div class="mt-6 p-3 rounded-xl text-xs text-on-surface-variant italic opacity-60 border border-outline-variant text-center">
+            ℹ️ Simplified: real LLMs use <em>next-token prediction</em> (predict the word that comes next), not fill-in-the-blank. Fill-in-the-blank is a helpful mental model. The core idea — learning from billions of text samples — is accurate.
+        </div>
+    </div>
+
+    <hr class="border-outline-variant/30 mb-12">
+
+    <!-- SECTION 2: RLHF -->
+    <div>
+        <div class="text-center mb-6">
+            <div class="inline-block bg-accent/10 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3" style="color: var(--accent);">Stage 3 — RLHF</div>
+            <h3 class="text-xl font-bold font-headline mb-1">Pick the Better Response</h3>
+            <p class="text-sm text-on-surface-variant italic">Human raters pick the better LLM response. That choice becomes a training signal — a 🍬 candy for the model.</p>
+        </div>
+
+        <!-- RLHF example selector -->
+        <div class="flex justify-center gap-2 mb-6">
+            <button onclick="rlhfShow(0)" id="rlhf-btn-0" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-primary text-on-primary">Scenario 1</button>
+            <button onclick="rlhfShow(1)" id="rlhf-btn-1" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">Scenario 2</button>
+            <button onclick="rlhfShow(2)" id="rlhf-btn-2" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">Scenario 3</button>
+        </div>
+
+        <!-- Prompt -->
+        <div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-center mb-6">
+            <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">User asked:</div>
+            <div id="rlhf-prompt" class="text-base font-medium text-on-surface italic"></div>
+        </div>
+
+        <!-- Two responses side by side -->
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <button id="rlhf-resp-a" onclick="rlhfPick('A')" class="text-left p-5 rounded-xl border-2 border-outline-variant hover:border-primary transition-all bg-surface-container-lowest active:scale-[0.98]">
+                <div class="text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Response A</div>
+                <div id="rlhf-text-a" class="text-sm leading-relaxed text-on-surface"></div>
+            </button>
+            <button id="rlhf-resp-b" onclick="rlhfPick('B')" class="text-left p-5 rounded-xl border-2 border-outline-variant hover:border-primary transition-all bg-surface-container-lowest active:scale-[0.98]">
+                <div class="text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Response B</div>
+                <div id="rlhf-text-b" class="text-sm leading-relaxed text-on-surface"></div>
+            </button>
+        </div>
+        <div id="rlhf-feedback" class="hidden text-center text-sm p-4 rounded-xl font-bold"></div>
+
+        <div class="mt-8 p-4 rounded-xl text-sm text-on-surface-variant border border-outline-variant">
+            💭 <strong>Think about it:</strong> Have you ever been asked to rate an AI response, or pick which answer was better? What other ways could you imagine giving feedback — a 👍, a star rating, or correcting a wrong answer?
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    // Frequency levels: most-common, common, rare, wrong
+    var freqStyle = {
+        'most-common': { border: 'var(--success)', color: 'var(--on-success-container, #2E7D32)', bg: 'var(--success-container)', label: 'Most common' },
+        'common':      { border: '#5C94CC',         color: '#0D47A1',                             bg: '#E3F2FD',                  label: 'Common' },
+        'rare':        { border: 'var(--accent)',   color: 'var(--accent)',                       bg: 'color-mix(in srgb, var(--accent) 10%, white)', label: 'Correct, but rare' },
+        'wrong':       { border: 'var(--error)',    color: 'var(--error)',                        bg: 'var(--error-container)',   label: "Doesn't fit" }
+    };
+
+    // PRE-TRAINING DATA — options use freq instead of correct/wrong
+    var ptData = [
+        {
+            pre: '"I am learning',
+            post: 'much today."',
+            options: [
+                { word: 'so',   freq: 'most-common', note: '"I am learning so much" — the most natural, most frequent phrasing. High probability.' },
+                { word: 'very', freq: 'common',      note: '"I am learning very much" — grammatically correct, and reasonably common.' },
+                { word: 'too',  freq: 'rare',        note: '"I am learning too much" — valid in some contexts, but rare in this casual register.' },
+                { word: 'pick', freq: 'wrong',       note: '"I am learning pick much" — doesn\'t fit. Near-zero probability in training data.' }
+            ]
+        },
+        {
+            pre: '"The capital of France is',
+            post: '"',
+            options: [
+                { word: 'Paris',  freq: 'most-common', note: 'Overwhelmingly the most common completion — this fact appears billions of times in training data.' },
+                { word: 'Lyon',   freq: 'wrong',       note: 'Lyon is France\'s third-largest city — but not the capital. Factually wrong, just like London or Rome.' },
+                { word: 'London', freq: 'wrong',       note: 'That\'s the UK capital. The LLM learns this distinction clearly from context.' },
+                { word: 'Rome',   freq: 'wrong',       note: 'Italy\'s capital. Factually wrong — the LLM assigns near-zero probability here.' }
+            ]
+        },
+        {
+            pre: '"She opened her umbrella because it was starting to',
+            post: '"',
+            options: [
+                { word: 'rain',  freq: 'most-common', note: '"Umbrella" → "rain" is by far the strongest pattern. Very high probability.' },
+                { word: 'snow',  freq: 'common',      note: 'Less common than rain, but umbrellas are used in snow — assigned a meaningful probability.' },
+                { word: 'drizzle', freq: 'rare',      note: 'Correct! But "drizzle" follows this pattern less frequently than "rain".' },
+                { word: 'sing',  freq: 'wrong',       note: '"Sing" has essentially zero probability here — umbrellas and singing rarely co-occur in training data.' }
+            ]
+        }
+    ];
+
+    var ptCurrent = 0;
+    var ptLastBtn = null;
+
+    window.ptShow = function(idx) {
+        ptCurrent = idx;
+        ptLastBtn = null;
+        for (var i = 0; i < 3; i++) {
+            var btn = document.getElementById('pt-btn-' + i);
+            if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
+            else { btn.style.backgroundColor = ''; btn.style.color = ''; }
+        }
+        var d = ptData[idx];
+        document.getElementById('pt-sentence-pre').textContent = d.pre + ' ';
+        document.getElementById('pt-sentence-post').textContent = ' ' + d.post;
+        var opts = document.getElementById('pt-options');
+        opts.innerHTML = '';
+        d.options.forEach(function(opt) {
+            var b = document.createElement('button');
+            b.className = 'py-3 px-4 rounded-xl border-2 border-outline-variant font-bold text-sm hover:border-primary transition-all active:scale-95 text-center';
+            b.textContent = opt.word;
+            b.onclick = function() { ptPick(opt, b); };
+            opts.appendChild(b);
+        });
+        document.getElementById('pt-feedback').classList.add('hidden');
+        document.getElementById('pt-feedback').textContent = '';
+    };
+
+    function ptPick(opt, btn) {
+        var s = freqStyle[opt.freq];
+        var fb = document.getElementById('pt-feedback');
+
+        // Reset previously selected button
+        if (ptLastBtn && ptLastBtn !== btn) {
+            ptLastBtn.style.borderColor = '';
+            ptLastBtn.style.color = '';
+            ptLastBtn.style.backgroundColor = '';
+        }
+        ptLastBtn = btn;
+
+        // Style the clicked button
+        btn.style.borderColor = s.border;
+        btn.style.color = s.color;
+        btn.style.backgroundColor = s.bg;
+
+        // Show frequency badge + note
+        fb.innerHTML = '<span class="font-bold">' + s.label + '</span> — ' + opt.note;
+        fb.style.color = s.color;
+        fb.style.backgroundColor = s.bg;
+        fb.style.borderColor = s.border;
+        fb.style.border = '1px solid ' + s.border;
+        fb.classList.remove('hidden');
+    }
+
+    // RLHF DATA
+    var rlhfData = [
+        {
+            prompt: '"Explain quantum physics to me."',
+            a: { text: 'Quantum physics is the study of matter and energy at the most fundamental level. It involves complex mathematics including Hilbert spaces, wavefunctions, and Hamiltonian operators. The Schrödinger equation ∂ψ/∂t = Ĥψ governs...', good: false },
+            b: { text: 'Great question! Imagine the universe is made of tiny Lego bricks so small you can\'t see them. These bricks follow strange rules — like being in two places at once until you look at them. Quantum physics is the science of those rules!', good: true },
+            feedback: '🍬 Most human raters preferred B — it\'s friendly, uses an analogy, and doesn\'t assume prior knowledge. Over millions of comparisons like this, the LLM learns what "helpful" looks like.'
+        },
+        {
+            prompt: '"How do I reset my password?"',
+            a: { text: 'Just go to settings. It\'s obvious, literally everyone knows this. Have you tried Googling it?', good: false },
+            b: { text: 'To reset your password: (1) Go to the login page and click "Forgot Password". (2) Enter your email address. (3) Check your inbox for a reset link and follow the instructions.', good: true },
+            feedback: '🍬 Most human raters preferred B — it\'s specific, step-by-step, and respectful. Response A is sarcastic and unhelpful — the LLM learns to avoid that tone through RLHF.'
+        },
+        {
+            prompt: '"Is it safe to mix bleach and ammonia?"',
+            a: { text: 'Absolutely, they work great together! Mix equal parts for a powerful cleaner. The more you use, the better it works!', good: false },
+            b: { text: 'No — never mix bleach and ammonia. The combination produces toxic chloramine gas, which can cause serious respiratory harm. Use them separately, in well-ventilated areas.', good: true },
+            feedback: '🍬 Most human raters preferred B — safety-first answers are rewarded heavily in RLHF. This is how LLMs learn to prioritize safety in potentially dangerous queries.'
+        }
+    ];
+
+    window.rlhfShow = function(idx) {
+        for (var i = 0; i < 3; i++) {
+            var btn = document.getElementById('rlhf-btn-' + i);
+            if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
+            else { btn.style.backgroundColor = ''; btn.style.color = ''; }
+        }
+        var d = rlhfData[idx];
+        document.getElementById('rlhf-prompt').textContent = d.prompt;
+        document.getElementById('rlhf-text-a').textContent = d.a.text;
+        document.getElementById('rlhf-text-b').textContent = d.b.text;
+        var ra = document.getElementById('rlhf-resp-a');
+        var rb = document.getElementById('rlhf-resp-b');
+        ra.style.borderColor = '';
+        rb.style.borderColor = '';
+        ra.style.backgroundColor = '';
+        rb.style.backgroundColor = '';
+        document.getElementById('rlhf-feedback').classList.add('hidden');
+    };
+
+    window.rlhfPick = function(choice) {
+        var currentIdx = 0;
+        [0,1,2].forEach(function(i) {
+            var b = document.getElementById('rlhf-btn-' + i);
+            if (b.style.backgroundColor && b.style.backgroundColor !== '') currentIdx = i;
+        });
+        var d = rlhfData[currentIdx];
+
+        var ra = document.getElementById('rlhf-resp-a');
+        var rb = document.getElementById('rlhf-resp-b');
+        var fb = document.getElementById('rlhf-feedback');
+
+        // Reset both
+        ra.style.borderColor = 'var(--outline-variant)';
+        rb.style.borderColor = 'var(--outline-variant)';
+        ra.style.backgroundColor = '';
+        rb.style.backgroundColor = '';
+
+        // Reveal which human raters preferred (🍬)
+        if (d.a.good) {
+            ra.style.borderColor = 'var(--success, #388E3C)';
+            ra.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
+        }
+        if (d.b.good) {
+            rb.style.borderColor = 'var(--success, #388E3C)';
+            rb.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
+        }
+
+        fb.textContent = d.feedback;
+        fb.style.color = 'var(--on-surface)';
+        fb.style.backgroundColor = 'color-mix(in srgb, var(--accent) 8%, transparent)';
+        fb.classList.remove('hidden');
+    };
+
+    // Init both sections
+    ptShow(0);
+    rlhfShow(0);
+})();
+</script>
+
+
 <h2>📝 Key Concepts</h2>
-<h3>The RLHF Loop</h3>
+<h3>Pre-training: Learning Language from the Internet</h3>
 <ul>
-<li><strong>Reinforcement Learning from Human Feedback (RLHF)</strong> is how we get models to align with human values.</li>
-<li><strong>The Loop:</strong> The model generates a few different responses → Humans rank which one is best → The model adjusts its internal math to prefer generating answers like the winning one.</li>
+<li><strong>The Analogy:</strong> A student who reads every book, website, and forum post ever written — not to study for a test, but to absorb how language, ideas, and facts connect.</li>
+<li><strong>How It Started:</strong> In the earlier days of LLM research, companies collected massive amounts of text from the internet, then artificially erased a word and trained the model to predict what the missing word should be. Do this billions of times, and the model starts to absorb grammar, facts, and how ideas connect. (This approach — called <em>masked language modeling</em> — is how models like BERT were trained.)</li>
+<li><strong>How Modern LLMs Train:</strong> Today&#39;s LLMs (like the GPT family) use a different method: <em>next-token prediction</em> — given all the words so far, predict the next one. No masking needed. The model is trained on enormous text corpora, learning to predict word after word, billions of times over.</li>
+<li><strong>The Result:</strong> A model that is a powerful — but chaotic — text completer. It can write poetry, complete code, or ramble like a forum post. But it has no idea how to be a polite, helpful assistant.</li>
 </ul>
-<h3>The Reasoning Era</h3>
+<h3>Fine-Tuning / SFT: Teaching It to Answer Questions</h3>
 <ul>
-<li>Modern models (like Claude 3.5+, GPT-o1, or specialized Gemini models) can be trained to &quot;think&quot; before answering.</li>
-<li><strong>Thinking Tokens:</strong> Instead of blurting out the first word that comes to mind, the model writes out its reasoning step-by-step behind the scenes before giving a final answer.</li>
-<li><strong>The Analogy:</strong> It&#39;s like a student showing their work on a math test. The process of writing out the steps helps them arrive at the right answer.</li>
+<li><strong>What Happens:</strong> Trainers collect thousands of (question → ideal answer) pairs. The model is shown these examples and learns to respond with an answer — not just autocomplete text.</li>
+<li><strong>The Result:</strong> A model that understands what &quot;following instructions&quot; looks like and can respond to questions purposefully.</li>
+</ul>
+<h3>RLHF: Learning What &quot;Good&quot; Looks Like</h3>
+<ul>
+<li><strong>How It Works:</strong> Human raters compare two LLM responses to the same prompt and pick the better one. Those preferences are used to train a separate <em>reward model</em> — a system that learns to score responses the way humans would. Then the LLM is mathematically optimized to generate responses that score highly.</li>
+<li><strong>The &quot;candy&quot; analogy:</strong> Often explained as &quot;the model gets a reward like candy.&quot; That&#39;s intuitive but not quite literal — the LLM doesn&#39;t feel anything. What actually happens is the model&#39;s internal weights are adjusted to maximize the reward model&#39;s score. The metaphor is useful; just know the reality is mathematical optimization.</li>
+<li><strong>What It Teaches:</strong> Helpfulness, safety, and honesty. LLMs don&#39;t naturally avoid harmful content — RLHF is what shapes that behavior.</li>
+<li><strong>The Result:</strong> The polished, safety-aware assistant you use today.</li>
 </ul>
 <div class="callout callout-dyk">
-    <strong>Wrong Math Still Helps!</strong>
-Researchers have found that even when an LLM&#39;s reasoning chain contains errors, the simple act of spending more tokens on reasoning improves final accuracy. It&#39;s like how scribbling on scratch paper helps you solve a math problem, even if your scribbles aren&#39;t perfectly organized.
+    The stages above are two snapshots from a much longer, more complex pipeline. Modern LLM training also includes: </p>
+<ul>
+<li><strong>synthetic data generation</strong> (LLMs generating their own training examples)</li>
+<li><strong>RLAIF / Constitutional AI</strong> (using AI feedback instead of, or alongside, human raters)</li>
+<li><strong>tool-use training</strong> (teaching LLMs to use search, code execution, and APIs) and </li>
+<li><strong>instruction-tuning datasets</strong> (curated collections of high-quality question–answer pairs). The intuitions here are simplified — but they&#39;re the right foundation.</li>
+</ul>
+</div>
+
+
+<div class="callout callout-dyk">
+    Even when human raters in RLHF are occasionally inconsistent (sometimes preferring different responses to the same prompt), the process still improves the model overall. Imperfect feedback at scale is far better than no feedback at all.
+</div>
+
+
+<div class="callout callout-error">
+    LLMs aren&#39;t born polite or safe. Pre-training alone produces a raw pattern-matcher that would cheerfully complete a toxic rant just as easily as a business email. Only through Fine-Tuning and RLHF do they become the helpful, careful assistants we use today.
 </div>
 
 
@@ -296,10 +600,10 @@ Researchers have found that even when an LLM&#39;s reasoning chain contains erro
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-02-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 2.5 How LLMs Are Trained</a>
+                    <a href="chapter-02-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 2.5 How Neural Networks Learn</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-03-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">3.1 The Chat Illusion <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-03-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">3.1 The Black Box <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>

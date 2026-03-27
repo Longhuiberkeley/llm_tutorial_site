@@ -15,7 +15,7 @@ groups:
         icon: "🔡"
         status: "active"
         firstPage: "chapter-02-01.html"
-        totalPages: 5
+        totalPages: 6
       - id: "03"
         title: "How Chat Really Works"
         description: "The black box model, the growing sandwich, and system prompts."
