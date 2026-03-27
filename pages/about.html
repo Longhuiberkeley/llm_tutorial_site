@@ -14,9 +14,12 @@
 <body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
-        <div class="text-xl font-bold text-on-surface tracking-tighter font-headline">LLM Tutorial</div>
+        <a href="../index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
+            <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
+            LLM Tutorial
+        </a>
         <div class="flex items-center gap-6">
-            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="../pages/about.html">About</a>
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="about.html">About</a>
         </div>
     </nav>
 
@@ -27,7 +30,7 @@
                 About This Tutorial
             </h1>
             <p class="text-xl text-on-surface-variant leading-relaxed">
-                A hands-on journey to understand Large Language Models — no technical background required.
+                An interactive, concept-focused journey to understand Large Language Models — no technical background required.
             </p>
         </header>
 
@@ -83,23 +86,37 @@
                         <span class="text-primary font-bold">•</span>
                         <span><strong>Interactive demos</strong> that let you see concepts in action</span>
                     </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary font-bold">•</span>
-                        <span><strong>Quick quizzes</strong> to check your understanding</span>
-                    </li>
                 </ul>
             </section>
 
             <!-- Contact -->
             <section class="bg-secondary-container rounded-xl p-8 flex gap-6 items-start">
                 <span class="text-4xl leading-none">📧</span>
-                <div>
-                    <h4 class="font-bold text-on-secondary-container mb-2 uppercase tracking-widest text-xs">Get in Touch</h4>
+                <div class="space-y-4">
+                    <h4 class="font-bold text-on-secondary-container uppercase tracking-widest text-xs">Get in Touch</h4>
                     <p class="text-on-secondary-container font-medium text-lg leading-relaxed">
-                        Have questions, feedback, or suggestions? We'd love to hear from you!
+                        I built this tutorial to help people understand AI from the ground up. Whether you need
+                        <strong>business consulting</strong>, <strong>AI consulting</strong>, are looking to
+                        <strong>hire AI engineers</strong>, or want <strong>corporate training</strong> for your team
+                        — let's talk.
                     </p>
-                    <a href="mailto:hello@llmtutorial.com" class="inline-block mt-4 text-primary font-bold hover:underline">
-                        hello@llmtutorial.com
+                    <div class="space-y-2 text-on-secondary-container">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg">person</span>
+                            <span><strong>Long</strong> — UC Berkeley Applied Math graduate</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg">location_on</span>
+                            <span>📍 Hong Kong · Serving clients globally</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg">work</span>
+                            <span>Project management, machine learning, computer vision, agentic software development, data analytics, automotive software development (ASPICE, sensor fusion)</span>
+                        </div>
+                    </div>
+                    <a href="mailto:longhui@berkeley.edu" class="inline-flex items-center gap-2 mt-2 text-primary font-bold hover:underline text-lg">
+                        <span class="material-symbols-outlined text-xl">mail</span>
+                        longhui@berkeley.edu
                     </a>
                 </div>
             </section>

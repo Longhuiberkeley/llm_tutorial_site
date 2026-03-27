@@ -24,7 +24,7 @@ LLMs are powerful learning tools because they can connect concepts across domain
 - **Understand, don't just copy:** When the LLM generates code or an explanation, ask it to walk through the reasoning. *"Why does this work? What would happen if I changed X?"* Curiosity compounds faster than copying.
 
 :::callout-tip
-Pro tip: Many LLM platforms have built-in learning features — ChatGPT, Claude, and others let you set context, save preferences, and build on prior conversations. Explore what your platform offers before you build your own workarounds.
+Pro tip: Many LLM platforms have built-in learning features — ChatGPT, Claude, and others let you set context, save preferences, and build on prior conversations. Explore what your platform offers before you build your own workarounds. In fact, any concept in this course — from tokenization to prompt engineering to agent design — can be explored deeper just by asking an LLM to teach you at your level.
 :::
 
 :::quiz{id="14-01"}

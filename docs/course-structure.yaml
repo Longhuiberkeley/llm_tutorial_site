@@ -15,7 +15,7 @@ groups:
         icon: "🔡"
         status: "active"
         firstPage: "chapter-02-01.html"
-        totalPages: 6
+        totalPages: 5
       - id: "03"
         title: "How Chat Really Works"
         description: "The black box model, the growing sandwich, and system prompts."
@@ -36,7 +36,7 @@ groups:
         icon: "✍️"
         status: "active"
         firstPage: "chapter-05-01.html"
-        totalPages: 5
+        totalPages: 6
 
   - name: "Group 2: Advanced"
     subtitle: "Extending LLMs to solve their limitations."
@@ -68,7 +68,7 @@ groups:
         icon: "🖼️"
         status: "active"
         firstPage: "chapter-09-01.html"
-        totalPages: 3
+        totalPages: 4
 
   - name: "Group 3: Using agents in business settings"
     subtitle: "How to evaluate, implement, and manage LLMs in a business context."
@@ -100,7 +100,7 @@ groups:
         icon: "📊"
         status: "active"
         firstPage: "chapter-13-01.html"
-        totalPages: 5
+        totalPages: 6
 
   - name: "Group 4: Others"
     subtitle: "Standalone topics worth knowing."

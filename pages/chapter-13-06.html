@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>12.2 Right vs. Wrong in Business Logic - LLM Tutorial</title>
+    <title>The Business Section in Review - LLM Tutorial</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -208,8 +208,8 @@
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 12</div><a href="chapter-12-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">12.1 You Can't Automate What You Can't Explain</span>
-                </a><a href="chapter-12-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
-                    <span class="material-symbols-outlined text-sm text-accent">school</span>
+                </a><a href="chapter-12-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">12.2 Right vs. Wrong in Business Logic</span>
                 </a><a href="chapter-12-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
@@ -247,8 +247,8 @@
                 </a><a href="chapter-13-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">13.5 Review, Best Practices & Common Pitfalls</span>
-                </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                </a><a href="chapter-13-06.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
+                    <span class="material-symbols-outlined text-sm text-accent">school</span>
                     <span class="text-sm font-medium">The Business Section in Review</span>
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
@@ -263,289 +263,127 @@
                 <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
                     <a href="../index.html" class="hover:underline">Overview</a>
                     <span class="material-symbols-outlined text-xs">chevron_right</span>
-                    <span>Chapter 12</span>
+                    <span>Chapter 13</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    12.2 Right vs. Wrong in Business Logic
+                    The Business Section in Review
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Some tasks have strict correct answers; others don't. Knowing which type you're automating is critical.
+                    The practical takeaways, pitfalls, and quick-reference from the business section.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Distinguish between tasks with no wrong answer (creative, open-ended) and tasks with strict correct answers (rule-bound).</li>
-<li>Highlight the danger of &quot;hidden rules&quot; — business logic that experienced employees know but can&#39;t articulate.</li>
-<li>Help learners identify which type of task they&#39;re automating before they start building.</li>
+<li>Consolidate the practical takeaways from the business section.</li>
+<li>Walk away with things you can apply when bringing LLMs into an organization.</li>
 </ul>
 <div class="callout callout-tldr">
-    Not all business tasks have a &quot;correct&quot; answer — but many do. Before automating anything, you must know whether your task is creative (flexible) or rule-bound (exact). The hardest part is finding the rules that employees follow without realizing it.
+    Using LLMs in business is a people and process problem, not just a technology problem. The frameworks here help you pick the right tool, manage the change, and ship reliable systems. But the biggest risk isn&#39;t choosing the wrong model — it&#39;s automating a process you don&#39;t fully understand, or moving so fast you skip the foundations.
 </div>
 
 
-<h2>🎨 The Spectrum: Creative to Strict</h2>
-<p>Business tasks sit on a spectrum. Think of it as a dial from &quot;anything goes&quot; on one end to &quot;one exact right answer&quot; on the other.</p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-<div class="bg-green-50 rounded-xl p-5 border border-green-200">
-<div class="font-bold text-base mb-3">🎨 No Wrong Answer (Creative)</div>
-<ul class="text-sm text-on-surface/80 space-y-2">
-<li>💡 Brainstorming marketing tagline ideas</li>
-<li>📝 Summarizing a meeting in plain English</li>
-<li>✉️ Writing a friendly follow-up email</li>
-<li>🏷️ Generating three options for a product name</li>
-</ul>
-<p class="text-sm text-on-surface/70 mt-3 italic">Slight variation between runs is fine — even desirable.</p>
-</div>
-<div class="bg-red-50 rounded-xl p-5 border border-red-200">
-<div class="font-bold text-base mb-3">📏 Strict Rules (Exact)</div>
-<ul class="text-sm text-on-surface/80 space-y-2">
-<li>🧾 Formatting invoice numbers as <code>INV-2024-XXXX</code></li>
-<li>🧮 Calculating tax following specific bracket rules</li>
-<li>📄 Client name in ALL CAPS on specific reports</li>
-<li>🗺️ Routing Texas orders through Form TX-7</li>
-</ul>
-<p class="text-sm text-on-surface/70 mt-3 italic">Getting it 95% right means 5% are wrong. That adds up fast.</p>
-</div>
+<hr>
+<h2>🧠 8 Things to Remember</h2>
+<p><strong>Most businesses transform, not replace</strong>
+AI rarely replaces entire businesses. More often, it changes how existing work gets done — same domain, new execution layer. Focus on transformation, not replacement.</p>
+<p><strong>Technology is only one pillar</strong>
+Successful digital transformation needs three things: technology, communication, and business insight. Projects fail when the non-tech pillars are weak.</p>
+<p><strong>Speed hides missing foundations</strong>
+LLMs move so fast that a prototype can <em>look</em> finished while missing its entire foundation. The earlier you skip requirements and planning, the more expensive the fix becomes later.</p>
+<p><strong>For every decision going in, have a way to check it on the way out</strong>
+The V-Model: Requirements → Design → Build → Verify. Each build phase needs a matching verification phase. If you can&#39;t describe &quot;done&quot; before you start, you can&#39;t know when you&#39;ve arrived.</p>
+<p><strong>Automate in order: verbalize → flowchart → checklist → automate</strong>
+Every gap in the checklist becomes a failure point at scale. If you can&#39;t write down the process, you can&#39;t automate it reliably.</p>
+<p><strong>Change happens one person at a time</strong>
+ADKAR: Awareness → Desire → Knowledge → Ability → Reinforcement. Skipping stages — especially Desire and Reinforcement — is why most AI initiatives fail to gain traction.</p>
+<p><strong>Structure beats speed for LLM projects</strong>
+LLM-assisted work ranges from &quot;vibe coding&quot; (accept everything) to structured development (review everything). Most real work falls in the middle. The question is: how much structure and review do you bring?</p>
+<p><strong>No single review catches everything</strong>
+Best practice: automated checks (mechanical issues) → LLM review (pattern issues with fresh eyes) → human review (judgment and correctness). Layer them.</p>
+<hr>
+<h2>🚨 8 Red Flags</h2>
+<p><strong>Automating a process you don&#39;t fully understand</strong> — You&#39;ll get a broken process running faster, at scale. Hidden rules that live only in employees&#39; heads are the biggest risk.</p>
+<p><strong>Feature drift</strong> — LLMs generate plausible extensions that look useful. Without requirements, you accumulate well-executed work that serves no stated need. Ask: &quot;Which requirement does this serve?&quot;</p>
+<p><strong>Launching with full autonomy on day one</strong> — Demos use curated examples; production has edge cases and adversarial users. Start with human-in-the-loop; earn autonomy through performance data.</p>
+<p><strong>The hammer-and-nail trap</strong> — After learning about AI, every problem looks like it needs AI. Start with the problem, not the tool. Sometimes the answer is a process change, better training, or a spreadsheet.</p>
+<p><strong>Customer-facing systems without adversarial design</strong> — Bad actors will test your chatbot. Real cases: a dealership bot that agreed to any price, an airline bot that invented policy and was held legally liable.</p>
+<p><strong>Treating LLM output as finished work</strong> — Clicking Accept without understanding accumulates technical debt fast. The same input can produce different outputs, and silent failures look like plausible wrong answers.</p>
+<p><strong>Measuring success by token usage</strong> — Tracking API call volume incentivizes generating low-quality output to hit a number. Measure outcomes, not volume.</p>
+<p><strong>Skipping the pilot</strong> — Going straight from demo to full rollout without a controlled pilot. Pilots catch the edge cases, integration issues, and user adoption problems that demos can&#39;t. Start small, measure, then scale.</p>
+<hr>
+<h2>💡 Pro Tips</h2>
+<div class="callout callout-tldr">
+    <strong>Use the LLM to draft your organizational playbook.</strong> Going beyond individual prompts, you can ask the LLM to help create team-level artifacts. Example: <em>&quot;I&#39;m rolling out LLMs across a 50-person team. Create a change management plan, a set of use-case evaluation criteria, and a list of guardrails for responsible use.&quot;</em>
 </div>
 
+
+<p>The LLM can help with the meta-work: evaluation frameworks, rollout plans, risk assessments, and team guidelines — not just the tasks themselves. Feed it the frameworks from this section and ask it to adapt them to your organization.</p>
 <div class="callout callout-dyk">
-    Most automation failures happen in the middle of this spectrum: tasks that SEEM flexible but actually have hidden rules. The automation performs well in testing (easy cases), then silently breaks in production (edge cases with strict rules no one mentioned).
+    <strong>Use the LLM as a sounding board for whether to automate.</strong> Describe a workflow you&#39;re considering automating and ask the LLM to challenge you on it — push back, ask hard questions, and poke holes in your plan. You now have the vocabulary to have that conversation properly: ask about hidden rules, volume vs. variance, where RPA ends and agentic AI begins, and what happens with edge cases.</p>
+<p>If the LLM just says &quot;sounds great, go for it&quot; — push back. A good evaluation should surface the hard parts, not just cheerlead. Ask: <em>&quot;What would make this fail? What hidden rules might exist? Is this actually worth automating, or would a process improvement do more with less risk?&quot;</em>
 </div>
 
 
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
-    <div class="text-center mb-8">
-        <h3 class="text-xl font-bold font-headline mb-2">The Business Logic Spectrum</h3>
-        <p class="text-sm text-on-surface-variant">Where does your task fall? Click each zone to see the automation guidance.</p>
-    </div>
+<hr>
+<h2>📐 Quick Reference</h2>
+<p><strong>Volume vs. Variance</strong> — High volume + low variance → RPA. High volume + high variance → agentic AI. Low volume → probably not worth automating. (<a href="chapter-12-07.html">Learn more</a>)</p>
+<p><strong>ROI Estimation</strong> — Benefits: time saved × volume + error reduction. Hidden costs: maintenance (~20%/year), monitoring, human review. If break-even is more than 2-3 years, think hard. &quot;Don&#39;t automate&quot; is a valid answer. (<a href="chapter-12-09.html">Learn more</a>)</p>
+<p><strong>Creative vs. Strict</strong> — Creative tasks (drafting, brainstorming) tolerate flexible LLM output. Strict tasks (compliance, calculations) need hardcoded rules. Danger zone: tasks that seem flexible but have hidden rules. (<a href="chapter-12-02.html">Learn more</a>)</p>
+<p><strong>Model Selection</strong> — Rate your use case on: accuracy, speed, cost, privacy, context window, ecosystem fit. Then run 10-20 real examples through competing models. Your own testing beats any benchmark. (<a href="chapter-10-05.html">Learn more</a>)</p>
+<p><strong>Phase Gates</strong> — Define (describe &quot;done&quot;?) → Design (could someone else build this?) → Build (review each chunk) → Verify (meets Phase 1 criteria?). Don&#39;t start building before defining. (<a href="chapter-13-02.html">Learn more</a>)</p>
+<hr>
+<h2>🗺️ Where to Go Deeper</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Explore</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The LLM landscape &amp; choosing a model</td>
+<td><a href="chapter-10-01.html">The LLM Landscape</a></td>
+</tr>
+<tr>
+<td>AI literacy &amp; overcoming resistance</td>
+<td><a href="chapter-11-02.html">Building AI Literacy</a></td>
+</tr>
+<tr>
+<td>Change management playbook</td>
+<td><a href="chapter-11-03.html">Digital Transformation &amp; Change Management</a></td>
+</tr>
+<tr>
+<td>Process documentation &amp; automation readiness</td>
+<td><a href="chapter-12-01.html">You Can&#39;t Automate What You Can&#39;t Explain</a></td>
+</tr>
+<tr>
+<td>RPA vs. agentic AI decision</td>
+<td><a href="chapter-12-03.html">RPA vs. Agentic AI</a></td>
+</tr>
+<tr>
+<td>Human-in-the-loop patterns</td>
+<td><a href="chapter-12-08.html">Human-in-the-Loop</a></td>
+</tr>
+<tr>
+<td>ROI &amp; cost-benefit analysis</td>
+<td><a href="chapter-12-09.html">ROI Estimation Framework</a></td>
+</tr>
+<tr>
+<td>The velocity trap &amp; project discipline</td>
+<td><a href="chapter-13-01.html">Why LLM Projects Are Different</a></td>
+</tr>
+<tr>
+<td>Requirements traceability</td>
+<td><a href="chapter-13-04.html">Building the Right Thing</a></td>
+</tr>
+<tr>
+<td>Review best practices &amp; failure patterns</td>
+<td><a href="chapter-13-05.html">Review, Best Practices &amp; Common Pitfalls</a></td>
+</tr>
+</tbody></table>
 
-    <!-- Spectrum Labels -->
-    <div class="flex justify-between mb-2 px-1">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">🎨 Creative / No Wrong Answer</span>
-        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">📐 Strict / One Right Answer</span>
-    </div>
-
-    <!-- Spectrum Bar -->
-    <div class="relative mb-6">
-        <div class="h-4 w-full rounded-full overflow-hidden flex">
-            <div class="h-full flex-1" style="background: #4CAF50;"></div>
-            <div class="h-full flex-1" style="background: #8BC34A;"></div>
-            <div class="h-full flex-1" style="background: #FFC107;"></div>
-            <div class="h-full flex-1" style="background: #FF9800;"></div>
-            <div class="h-full flex-1" style="background: #F44336;"></div>
-        </div>
-
-        <!-- Zone Buttons -->
-        <div class="grid grid-cols-5 gap-2 mt-4">
-            <button onclick="showBLZone(0, this)" id="bl-btn-0" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-primary bg-surface-container-lowest hover:bg-surface-container transition-all">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #4CAF50;">1</div>
-                <span class="text-[10px] font-bold text-center leading-tight">Fully Creative</span>
-            </button>
-
-            <button onclick="showBLZone(1, this)" id="bl-btn-1" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #8BC34A;">2</div>
-                <span class="text-[10px] font-bold text-center leading-tight">Mostly Creative</span>
-            </button>
-
-            <button onclick="showBLZone(2, this)" id="bl-btn-2" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #FFC107;">3</div>
-                <span class="text-[10px] font-bold text-center leading-tight">Mixed</span>
-            </button>
-
-            <button onclick="showBLZone(3, this)" id="bl-btn-3" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #FF9800;">4</div>
-                <span class="text-[10px] font-bold text-center leading-tight">Mostly Strict</span>
-            </button>
-
-            <button onclick="showBLZone(4, this)" id="bl-btn-4" class="bl-zone-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-transparent bg-surface-container-lowest hover:bg-surface-container transition-all">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: #F44336;">5</div>
-                <span class="text-[10px] font-bold text-center leading-tight">Fully Strict</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Detail Card -->
-    <div id="bl-detail" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 animate-fade-in">
-        <div class="flex items-center gap-3 mb-3">
-            <div id="bl-detail-badge" class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-md" style="background: #4CAF50;">1</div>
-            <div>
-                <h4 id="bl-detail-title" class="font-bold text-base">Fully Creative</h4>
-                <p id="bl-detail-subtitle" class="text-[11px] text-on-surface-variant">Brainstorming, name ideas, creative writing</p>
-            </div>
-        </div>
-
-        <div id="bl-detail-guidance" class="rounded-lg p-4 mb-4 text-sm leading-relaxed" style="background: #4CAF5015; border-left: 4px solid #4CAF50;">
-            <span class="font-bold">🤖 Automation Guidance:</span> LLM can run freely. Variation is a feature, not a bug. Every response being different is the whole point.
-        </div>
-
-        <div class="flex flex-wrap gap-2" id="bl-detail-tags">
-            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Brainstorming sessions</span>
-            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Product name ideas</span>
-            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Creative writing</span>
-            <span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">Marketing slogans</span>
-        </div>
-    </div>
-</div>
-
-<script>
-(function() {
-    const blZones = [
-        {
-            title: "Fully Creative",
-            subtitle: "Brainstorming, name ideas, creative writing",
-            color: "#4CAF50",
-            guidance: "LLM can run freely. Variation is a feature, not a bug. Every response being different is the whole point.",
-            tags: ["Brainstorming sessions", "Product name ideas", "Creative writing", "Marketing slogans"]
-        },
-        {
-            title: "Mostly Creative",
-            subtitle: "Email drafts, meeting summaries, social posts",
-            color: "#8BC34A",
-            guidance: "LLM with light guidelines. Review occasionally to keep tone consistent, but give the model room to work. A quick scan is usually enough.",
-            tags: ["Email drafts", "Meeting summaries", "Blog outlines", "Social media posts"]
-        },
-        {
-            title: "Mixed",
-            subtitle: "Customer responses, support tickets, reports",
-            color: "#FFC107",
-            guidance: "LLM with clear constraints. Set brand guidelines, approved language, and required data points. Review regularly — this is where quality drifts silently.",
-            tags: ["Customer responses", "Brand-guided content", "Support ticket replies", "Templated reports"]
-        },
-        {
-            title: "Mostly Strict",
-            subtitle: "Invoice formatting, data entry, standard forms",
-            color: "#FF9800",
-            guidance: "Hardcode the rules. Use traditional logic for the structured parts. LLM only for edge cases or interpreting ambiguous inputs — never for the core calculations.",
-            tags: ["Invoice processing", "Data entry validation", "Standard form filling", "Inventory updates"]
-        },
-        {
-            title: "Fully Strict",
-            subtitle: "Tax calculations, regulatory filings, compliance",
-            color: "#F44336",
-            guidance: "No LLM for the core logic. Use traditional code, validated formulas, and rule engines. A creative answer here means a wrong answer — and possibly a legal problem.",
-            tags: ["Tax calculations", "Regulatory filings", "Financial reconciliation", "Legal compliance checks"]
-        }
-    ];
-
-    window.showBLZone = function(index, btn) {
-        const zone = blZones[index];
-
-        // Update button states
-        document.querySelectorAll('.bl-zone-btn').forEach(b => {
-            b.classList.remove('border-primary');
-            b.classList.add('border-transparent');
-        });
-        btn.classList.remove('border-transparent');
-        btn.classList.add('border-primary');
-
-        // Animate detail card
-        const detail = document.getElementById('bl-detail');
-        detail.classList.remove('animate-fade-in');
-        void detail.offsetWidth;
-        detail.classList.add('animate-fade-in');
-
-        // Update content
-        document.getElementById('bl-detail-badge').style.background = zone.color;
-        document.getElementById('bl-detail-badge').textContent = index + 1;
-        document.getElementById('bl-detail-title').textContent = zone.title;
-        document.getElementById('bl-detail-subtitle').textContent = zone.subtitle;
-
-        const guidance = document.getElementById('bl-detail-guidance');
-        guidance.style.background = zone.color + '15';
-        guidance.style.borderLeftColor = zone.color;
-        guidance.innerHTML = '<span class="font-bold">🤖 Automation Guidance:</span> ' + zone.guidance;
-
-        const tagsHtml = zone.tags.map(t => '<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">' + t + '</span>').join('');
-        document.getElementById('bl-detail-tags').innerHTML = tagsHtml;
-    };
-
-    // Initialize with first zone selected
-    document.addEventListener('DOMContentLoaded', function() {
-        showBLZone(0, document.getElementById('bl-btn-0'));
-    });
-})();
-</script>
-
-
-<h2>🕵️ The Hidden Rules Problem</h2>
-<p>Here&#39;s the uncomfortable truth: many business rules exist only in people&#39;s heads. Experienced employees &quot;just know&quot; things that were never written down.</p>
-<p>For example:</p>
-<div class="space-y-3 my-6">
-<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
-<div class="flex items-start gap-3">
-<span class="text-xl">🔢</span>
-<div>
-<div class="font-bold text-sm mb-1">Invoice numbers above 5,000 go to Department B</div>
-<p class="text-sm text-on-surface/80">Nobody wrote this down. It started because Department A had capacity issues years ago. It just became "how things work."</p>
-</div>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
-<div class="flex items-start gap-3">
-<span class="text-xl">🤝</span>
-<div>
-<div class="font-bold text-sm mb-1">Certain clients always get extra review</div>
-<p class="text-sm text-on-surface/80">Because of a past dispute. Not in the policy — just in people's heads. The LLM will treat them like everyone else.</p>
-</div>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
-<div class="flex items-start gap-3">
-<span class="text-xl">🔡</span>
-<div>
-<div class="font-bold text-sm mb-1">Client name in ALL CAPS on this one report</div>
-<p class="text-sm text-on-surface/80">"It's always been that way." No one knows why. But if you get it wrong, someone will notice immediately.</p>
-</div>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
-<div class="flex items-start gap-3">
-<span class="text-xl">👔</span>
-<div>
-<div class="font-bold text-sm mb-1">Certain requests need the senior manager's eye</div>
-<p class="text-sm text-on-surface/80">Policy doesn't require it, but everyone knows. Skip this step and you'll hear about it.</p>
-</div>
-</div>
-</div>
-</div>
-
-<p>These unconscious rules are the hardest to automate and the most dangerous to miss. They often exist because of history, relationships, or one-off agreements that were never formalized.</p>
-<div class="callout callout-error">
-    A common mistake: assuming a process has no hidden rules because existing employees make it look easy. They make it look easy because they&#39;ve internalized the rules. Interview them deeply. Ask: &quot;What about edge cases?&quot; and &quot;What happens when X goes wrong?&quot; Keep asking until you find the hidden rules — because they&#39;re always there. Tools like checklists, flowcharts, and simple cheat sheets are great for capturing and sharing these rules — they don&#39;t need to live only in someone&#39;s head.
-</div>
-
-
-<h2>🔍 How to Surface the Hidden Rules</h2>
-<p>Before building any automation, run a structured interview with the people who currently do the work:</p>
-<ol>
-<li><strong>Walk me through the normal case</strong> — Get the happy path first.</li>
-<li><strong>What are the exceptions?</strong> — There are always exceptions. Push for specifics.</li>
-<li><strong>Tell me about a time this went wrong</strong> — Stories reveal the rules that prevent failures.</li>
-<li><strong>What would a new employee get wrong?</strong> — This surfaces the unwritten rules directly.</li>
-<li><strong>Is there anything that &quot;just goes without saying&quot;?</strong> — Those are exactly the rules you need to document.</li>
-</ol>
-<p>Once you have the hidden rules documented, you can decide: are these creative guidelines (LLM can handle the nuance) or strict rules (need to be hardcoded or explicitly enforced)?</p>
-<div class="callout callout-dyk">
-    Modern LLMs have become capable of creating and using their own tools dynamically — writing code on the fly, calling APIs, and taking actions in the real world. This makes strict rules even more critical to define upfront. An LLM that can only produce text might get a rule wrong and produce a bad document. An LLM with tool access that gets a rule wrong might send an unauthorized email, process a payment, or update a database. The stakes go up as the capabilities do.
-</div>
-
-
-<div class="callout callout-tip">
-    This is a perfect moment to pause and reflect on your own workflows. Can you improve the process yourself before automating it? Get feedback from colleagues who do the same work differently? Or try describing your process to an LLM and ask it to find gaps, edge cases, or inefficiencies you might be missing. Sometimes the biggest gains come from fixing the process, not automating it.
-</div>
-
-
-<h2>📝 Key Concepts</h2>
-<ul>
-<li><strong>Creative tasks</strong> allow variation and work well with flexible LLM outputs.</li>
-<li><strong>Rule-bound tasks</strong> require exact outputs — variation is a bug, not a feature.</li>
-<li><strong>Hidden rules</strong> are business logic that employees know but can&#39;t articulate — they are the biggest automation risk.</li>
-<li><strong>Interview the experts deeply</strong> — ask about failures, edge cases, and what goes without saying.</li>
-<li><strong>Know your task type before building</strong> — the wrong automation approach for the task type will produce confident-looking wrong answers.</li>
-</ul>
-<div id="quiz-12-02" class="quiz-container my-12"></div>
             </div>
 
             <!-- Quiz Section (if present) -->
@@ -554,10 +392,10 @@
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-12-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.1 You Can't Automate What You Can't Explain</a>
+                    <a href="chapter-13-05.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 13.5 Review, Best Practices & Common Pitfalls</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-12-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">12.3 RPA vs. Agentic AI <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="chapter-14-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">14.1 Using LLMs to Learn <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </nav>
         </main>
