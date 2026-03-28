@@ -28,3 +28,8 @@ Just because a model has a 1 Million token context window doesn't mean it pays *
 :::
 
 :::quiz{id="02-04"}
+What happens when a conversation exceeds the LLM's context window?
+- [ ] The LLM compresses older messages to make room
+- [x] The earliest parts of the conversation are effectively forgotten
+- [ ] The LLM asks you to start a new conversation
+:::

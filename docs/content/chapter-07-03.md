@@ -60,3 +60,8 @@ Sarah searching for "construction delay cases" finds *all* the relevant cases, e
 - **Dimensions:** Real embeddings use hundreds of dimensions — same concept, much bigger space
 
 :::quiz{id="07-03"}
+How do vector embeddings enable semantic search?
+- [ ] They match keywords in documents to keywords in the query
+- [x] They convert meaning into numerical coordinates so similar concepts are nearby in space
+- [ ] They use a thesaurus to find synonyms of search terms
+:::

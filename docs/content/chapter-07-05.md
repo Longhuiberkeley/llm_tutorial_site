@@ -66,13 +66,30 @@ A 50-page document shouldn't be injected whole. Instead, break it into **chunks*
 
 When a question arrives, retrieve the *specific chunks* that are most relevant — not the whole document.
 
+:::callout-dyk
+Chunk size is a surprisingly important lever. Too small (a single sentence) and you lose the surrounding context — the LLM sees a fragment without knowing what it's about. Too large (a whole chapter) and you mix relevant content with irrelevant filler, diluting the LLM's attention. The sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be precise.
+:::
+
 ## Placement Matters Too
 
 Where you put retrieved content in the Sandwich matters. LLMs pay more attention to the beginning and end of their context. Put critical retrieved information near the start — before the conversation history — for maximum attention.
 
-:::callout-dyk
-There's also a related discipline called **harness engineering** — the scaffolding *around* LLM calls: retry logic, caching, cost tracking, response parsing, evaluation pipelines. As systems grow complex, harness engineering becomes its own field. Worth exploring on your own.
-:::
+## Harness Engineering: The Scaffolding Around the LLM
+
+There's a related discipline that has become critical as LLM systems grow up: **harness engineering** — designing and building the scaffolding *around* LLM calls.
+
+Think of a horse. The LLM is the horse — powerful, fast, but without direction. The "harness" is everything that guides that power productively: the reins, the saddle, the bridle. Without a good harness, even the strongest horse runs in circles.
+
+In practice, harness engineering covers:
+
+- **Retry logic** — when the LLM fails or returns garbage, how do you recover gracefully?
+- **Caching** — storing previous results so you don't re-run expensive LLM calls for the same question
+- **Response parsing** — extracting structured data from the LLM's free-text output
+- **Cost tracking** — monitoring how much each query costs and setting budgets
+- **Evaluation pipelines** — continuously testing whether the system's answers are still good
+- **Workflow control** — deciding when the LLM can act autonomously vs. when it needs human approval
+
+None of these are glamorous. But they're the difference between a cool demo and a reliable product. As organizations move from experimenting with LLMs to running them in production, harness engineering often becomes the bottleneck — not the model itself.
 
 ## 📝 Key Concepts
 
@@ -81,5 +98,6 @@ There's also a related discipline called **harness engineering** — the scaffol
 - **Quality > quantity:** 3 highly relevant paragraphs beat 30 loosely related pages
 - **Chunking:** Break documents into pieces (500–1,000 tokens), index each chunk separately
 - **Placement:** Critical context goes at the start of the prompt for maximum attention
+- **Harness Engineering:** The scaffolding around LLM calls — retries, caching, parsing, cost tracking — that turns a demo into a reliable product
 
 :::quiz{id="07-05"}

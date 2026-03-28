@@ -284,7 +284,7 @@
 <li>Understand how human feedback gets turned into a mathematical training signal in RLHF.</li>
 </ul>
 <div class="callout callout-tldr">
-    Training an LLM is a long, multi-stage process. To build intuition, we&#39;ll explore two key examples: <strong>Pre-training</strong> teaches the model language at massive scale — by predicting the next word, billions of times, across the entire internet. <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) then teaches it to give <em>good</em> answers, using human preferences to train a reward model that scores responses.
+    Training an LLM is a long, multi-stage process. To build intuition, we&#39;ll explore two key examples: <strong>Pre-training</strong> teaches the model language at massive scale — by predicting the next word, billions of times, across the entire internet. <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) then teaches it to give <em>good</em> answers, using human preferences to guide which way to turn the knobs.
 </div>
 
 
@@ -292,15 +292,13 @@
 <div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
 
     <div class="text-center mb-8">
-        <p class="text-base font-semibold text-on-surface mb-1">Have you heard of <em>reinforcement learning</em> or <em>RLHF</em>?</p>
         <p class="text-sm text-on-surface-variant">Curious how an LLM goes from raw internet text to a helpful assistant? Explore two key moments from a much longer training journey.</p>
     </div>
 
     <!-- SECTION 1: PRE-TRAINING -->
     <div class="mb-12">
         <div class="text-center mb-6">
-            <div class="inline-block bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3">Stage 1 — Pre-training</div>
-            <h3 class="text-xl font-bold font-headline mb-1">Guess the Missing Word</h3>
+            <h3 class="text-xl font-bold font-headline mb-1">Pre-training: Guess the Missing Word</h3>
             <p class="text-sm text-on-surface-variant italic">This is how an LLM learns language — billions of fill-in-the-blank exercises.</p>
         </div>
 
@@ -334,8 +332,7 @@
     <!-- SECTION 2: RLHF -->
     <div>
         <div class="text-center mb-6">
-            <div class="inline-block bg-accent/10 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3" style="color: var(--accent);">Stage 3 — RLHF</div>
-            <h3 class="text-xl font-bold font-headline mb-1">Pick the Better Response</h3>
+            <h3 class="text-xl font-bold font-headline mb-1">RLHF: Pick the Better Response</h3>
             <p class="text-sm text-on-surface-variant italic">Human raters pick the better LLM response. That choice becomes a training signal — a 🍬 candy for the model.</p>
         </div>
 
@@ -554,8 +551,7 @@
 <h3>Pre-training: Learning Language from the Internet</h3>
 <ul>
 <li><strong>The Analogy:</strong> A student who reads every book, website, and forum post ever written — not to study for a test, but to absorb how language, ideas, and facts connect.</li>
-<li><strong>How It Started:</strong> In the earlier days of LLM research, companies collected massive amounts of text from the internet, then artificially erased a word and trained the model to predict what the missing word should be. Do this billions of times, and the model starts to absorb grammar, facts, and how ideas connect. (This approach — called <em>masked language modeling</em> — is how models like BERT were trained.)</li>
-<li><strong>How Modern LLMs Train:</strong> Today&#39;s LLMs (like the GPT family) use a different method: <em>next-token prediction</em> — given all the words so far, predict the next one. No masking needed. The model is trained on enormous text corpora, learning to predict word after word, billions of times over.</li>
+<li><strong>Two Approaches:</strong> Some models (like BERT) use <em>masked language modeling</em> — artificially erasing a word and training the model to predict what&#39;s missing. Do this billions of times and the model absorbs grammar, facts, and how ideas connect. The models you use today (like the GPT family) take a simpler approach: <em>next-token prediction</em> — given all the words so far, predict the next one. No masking needed. The model learns to predict word after word, billions of times over. Either way, the mechanism is the same as the previous page: the model&#39;s internal knobs (weights) are adjusted over and over until its predictions match the training data.</li>
 <li><strong>The Result:</strong> A model that is a powerful — but chaotic — text completer. It can write poetry, complete code, or ramble like a forum post. But it has no idea how to be a polite, helpful assistant.</li>
 </ul>
 <h3>Fine-Tuning / SFT: Teaching It to Answer Questions</h3>
@@ -565,11 +561,18 @@
 </ul>
 <h3>RLHF: Learning What &quot;Good&quot; Looks Like</h3>
 <ul>
-<li><strong>How It Works:</strong> Human raters compare two LLM responses to the same prompt and pick the better one. Those preferences are used to train a separate <em>reward model</em> — a system that learns to score responses the way humans would. Then the LLM is mathematically optimized to generate responses that score highly.</li>
-<li><strong>The &quot;candy&quot; analogy:</strong> Often explained as &quot;the model gets a reward like candy.&quot; That&#39;s intuitive but not quite literal — the LLM doesn&#39;t feel anything. What actually happens is the model&#39;s internal weights are adjusted to maximize the reward model&#39;s score. The metaphor is useful; just know the reality is mathematical optimization.</li>
+<li><strong>How It Works:</strong> Human raters compare two LLM responses to the same prompt and pick the better one. Those preferences are used to train a separate <em>reward model</em> — a system that learns to score responses the way humans would. Then the LLM is mathematically optimized to generate responses that score highly. In knob terms: engineers figured out which direction to turn the weights so the model produces responses humans actually prefer.</li>
+<li><strong>The &quot;candy&quot; analogy:</strong> Often explained as &quot;the model gets a reward like candy.&quot; That&#39;s intuitive but not quite literal — the LLM doesn&#39;t feel anything. What actually happens is the model&#39;s internal knobs (weights) are adjusted to maximize the reward model&#39;s score. The metaphor is useful; just know the reality is mathematical optimization.</li>
 <li><strong>What It Teaches:</strong> Helpfulness, safety, and honesty. LLMs don&#39;t naturally avoid harmful content — RLHF is what shapes that behavior.</li>
 <li><strong>The Result:</strong> The polished, safety-aware assistant you use today.</li>
 </ul>
+<div class="p-5 rounded-xl text-sm border-2 border-accent/30 text-center my-8" style="background: color-mix(in srgb, var(--accent) 8%, transparent);">
+    <div class="text-lg mb-2">💡</div>
+    <div class="font-bold text-on-surface mb-2">Building Intuition, Not Expertise</div>
+    <p class="text-on-surface-variant">The goal here is to build intuition for how LLMs work — not to master the engineering details. If any of this doesn't quite click, that's completely fine. You don't need to understand training pipelines to use LLMs effectively.</p>
+    <p class="text-on-surface font-medium mt-2">The key takeaway: LLMs start as raw pattern-matchers and get shaped into helpful assistants through stages of feedback and refinement — all by turning those internal knobs.</p>
+</div>
+
 <div class="callout callout-dyk">
     The stages above are two snapshots from a much longer, more complex pipeline. Modern LLM training also includes: </p>
 <ul>
@@ -591,7 +594,58 @@
 </div>
 
 
-<div id="quiz-02-06" class="quiz-container my-12"></div>
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-02-06" class="quiz-container bg-[#F9F9F9] border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">What is the correct order of LLM training stages?</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            Fine-tuning → Pre-training → RLHF
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            Pre-training → Fine-tuning → RLHF
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            RLHF → Pre-training → Fine-tuning
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-02-06b" class="quiz-container bg-[#F9F9F9] border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">Why does RLHF (Reinforcement Learning from Human Feedback) exist? What is its purpose?</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            To teach the model new languages and facts from the internet
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            To make the model generate text faster
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            To shape the model's behavior — making it helpful, safe, and honest instead of a raw autocomplete
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            To compress the model so it takes up less disk space
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
             </div>
 
             <!-- Quiz Section (if present) -->

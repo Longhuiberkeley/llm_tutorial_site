@@ -78,7 +78,7 @@ Remember the 3 weights you just tuned? Now imagine a network with **128 weight g
 
 - **The Router:** A tiny sub-network that looks at each incoming word and picks which expert handles it — like a switchboard operator connecting a call to the right department.
 - **The Experts:** Specialized groups of knobs, each good at certain types of words (e.g., one group handles code, another handles French, another handles math). Only 1 or 2 groups are active per word — the rest stay idle.
-- **Why It Matters:** This lets models be much larger without proportionally increasing compute cost. More knobs total, but you only turn on a few at a time — so the model is smarter without being dramatically slower.
+- **Why It Matters:** This lets models be much larger without proportionally increasing compute cost. More knobs total, but you only turn on a few at a time — so the model is smarter without being dramatically slower. That's why some of the largest models today can still respond in seconds: even with hundreds of billions of parameters, only a fraction are active for any single word.
 
 :::callout-error
 "Mixture of Experts" does NOT mean multiple AI agents collaborating. The "experts" aren't separate models with their own goals — they're specialized groups of knobs within a single model, selected one at a time by a simple routing mechanism. Think **switchboard operator**, not **committee meeting**.

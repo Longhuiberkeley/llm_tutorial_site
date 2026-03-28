@@ -127,4 +127,4 @@ A common mistake: calculating only the "time saved" and ignoring everything else
 - **"Don't automate" is a valid answer** — sometimes the math simply doesn't work.
 - **Verification time is a real cost** — checking AI output isn't as fast as people assume.
 
-:::quiz{id="12-08"}
+:::quiz{id="12-09"}

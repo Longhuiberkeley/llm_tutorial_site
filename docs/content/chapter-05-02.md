@@ -28,7 +28,7 @@ If you don't specify it, the LLM will guess — and it will guess based on the m
 :::callout-dyk
 **The 6W Framework for better prompts:** When stuck on why your result isn't right, ask yourself if you covered: **Who** is the audience? **What** exactly do you want? **When/Where** is the context? **Why** does this matter? **How** should it be formatted? More answered Ws = better output.
 
-For AI assisted coding or project management, it's very important to have clearly defined specification. We will discuss this further in later chapter.
+For LLM-assisted coding or project management, it's very important to have a clearly defined specification. We'll explore this when we cover project management.
 :::
 
 :::callout-dyk

@@ -87,3 +87,8 @@ Always start with the simplest approach: good prompting and tool use. If insuffi
 - **Not mutually exclusive:** Many systems use fine-tuning for behavior + RAG for knowledge
 
 :::quiz{id="07-07"}
+When should you consider fine-tuning an LLM instead of using RAG?
+- [x] When the knowledge is truly proprietary and couldn't exist in any public training data
+- [ ] Whenever you want better performance on your specific tasks
+- [ ] When your data updates frequently and needs to stay current
+:::

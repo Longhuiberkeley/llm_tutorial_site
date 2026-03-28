@@ -29,3 +29,8 @@ Security is a constant cat-and-mouse game. AI companies are constantly training 
 :::
 
 :::quiz{id="04-07"}
+Why are LLMs vulnerable to prompt injection attacks?
+- [ ] Their security systems are poorly designed
+- [x] They cannot distinguish between instructions and data — everything is just text to them
+- [ ] Hackers use special coding languages that bypass safety filters
+:::

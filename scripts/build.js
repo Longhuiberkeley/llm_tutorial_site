@@ -24,6 +24,7 @@ const components = {
     'callout-error': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-error.html'), 'utf8'),
     'callout-dyk': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-dyk.html'), 'utf8'),
     'callout-tip': fs.readFileSync(path.join(COMPONENTS_DIR, 'callout-tip.html'), 'utf8'),
+    'quiz-box': fs.readFileSync(path.join(COMPONENTS_DIR, 'quiz-box.html'), 'utf8'),
 };
 
 /**
@@ -94,10 +95,25 @@ async function build() {
             return placeholder;
         });
 
-        // 3. Extract Quizzes
+        // 3. Extract Quizzes (with content block or empty)
+        markdown = markdown.replace(/:::quiz{id="(.+?)"}\n([\s\S]*?)\n:::/g, (match, id, body) => {
+            const placeholder = `<!-- QUIZ_${id} -->`;
+            const lines = body.trim().split('\n');
+            const question = lines[0].trim();
+            const options = lines.slice(1)
+                .filter(l => l.trim().startsWith('- ['))
+                .map(l => {
+                    const correct = l.trim().startsWith('- [x]');
+                    const text = l.trim().replace(/^- \[[ x]\]\s*/, '');
+                    return { text, correct };
+                });
+            calloutMap[placeholder] = { type: 'quiz', id, question, options };
+            return placeholder;
+        });
+        // Fallback: empty quiz blocks (no content)
         markdown = markdown.replace(/:::quiz{id="(.+?)"}/g, (match, id) => {
             const placeholder = `<!-- QUIZ_${id} -->`;
-            calloutMap[placeholder] = { type: 'quiz', id };
+            calloutMap[placeholder] = { type: 'quiz', id, question: null, options: [] };
             return placeholder;
         });
 
@@ -119,7 +135,17 @@ async function build() {
             if (data.type === 'interactive') {
                 componentHtml = `<div id="${data.id}-container" class="interactive-container my-12"></div>`;
             } else if (data.type === 'quiz') {
-                componentHtml = `<div id="quiz-${data.id}" class="quiz-container my-12"></div>`;
+                if (data.question && data.options.length > 0) {
+                    const optionsHtml = data.options.map(opt =>
+                        `        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="${opt.correct}">\n            ${opt.text}\n        </div>`
+                    ).join('\n');
+                    componentHtml = components['quiz-box']
+                        .replace('{{QUIZ_ID}}', data.id)
+                        .replace('{{QUIZ_QUESTION}}', data.question)
+                        .replace('{{QUIZ_OPTIONS}}', optionsHtml);
+                } else {
+                    componentHtml = `<div id="quiz-${data.id}" class="quiz-container my-12"></div>`;
+                }
             } else if (data.type === 'visual') {
                 const visualPath = path.join(COMPONENTS_DIR, `${data.name}.html`);
                 if (fs.existsSync(visualPath)) {

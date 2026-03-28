@@ -33,3 +33,8 @@ Attention isn't human understanding. It's just a mathematical score of how often
 :::
 
 :::quiz{id="02-02"}
+What does "attention" mean in the context of LLMs?
+- [ ] The LLM carefully reads your message word by word, like a human would
+- [x] Every word mathematically compares itself to every other word to determine which connections matter most
+- [ ] The LLM focuses only on the most recent sentence and ignores earlier context
+:::

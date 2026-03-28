@@ -28,3 +28,8 @@ It is tempting to believe LLMs "understand" what they're saying. They don't—th
 :::
 
 :::quiz{id="01-01"}
+Why do LLMs produce such impressive, human-sounding text?
+- [ ] They understand the meaning behind their words
+- [x] They predict statistically likely next words based on patterns from billions of documents
+- [ ] They think through what they want to say before generating text
+:::

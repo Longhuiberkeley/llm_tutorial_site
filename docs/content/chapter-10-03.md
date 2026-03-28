@@ -25,33 +25,51 @@ You download the model weights (from Meta's Llama, Mistral, DeepSeek, etc.) and 
 
 As of 2026, the frontier models — are all closed-source. These companies are also actively subsidizing access (through cheap subscriptions and competitive API pricing) to win market share. You're getting a lot for your money right now.
 
-**Pros:**
-- Zero infrastructure setup — start calling the API within minutes
-- Provider handles scaling, reliability, and model updates
-- Access to the newest, most capable models
-- No hardware investment
-
-**Cons:**
-- Your data leaves your servers and is processed externally
-- You're dependent on provider uptime and pricing
-- Terms of service control what you can and can't do
-- Data may be used for training (varies by plan — check carefully)
+<div class="grid md:grid-cols-2 gap-4 my-6">
+  <div class="rounded-xl p-4 border-2" style="background: rgba(95, 168, 96, 0.08); border-color: rgba(95, 168, 96, 0.3);">
+    <div class="text-[10px] font-bold uppercase tracking-widest mb-3" style="color: #2e7d32;">✅ Pros</div>
+    <ul class="text-sm text-on-surface/80 space-y-2 list-none pl-0">
+      <li>• Zero infrastructure setup — start calling the API within minutes</li>
+      <li>• Provider handles scaling, reliability, and model updates</li>
+      <li>• Access to the newest, most capable models</li>
+      <li>• No hardware investment</li>
+    </ul>
+  </div>
+  <div class="rounded-xl p-4 border-2" style="background: rgba(214, 92, 92, 0.08); border-color: rgba(214, 92, 92, 0.3);">
+    <div class="text-[10px] font-bold uppercase tracking-widest mb-3" style="color: var(--error);">⚠️ Cons</div>
+    <ul class="text-sm text-on-surface/80 space-y-2 list-none pl-0">
+      <li>• Your data leaves your servers and is processed externally</li>
+      <li>• Dependent on provider uptime and pricing</li>
+      <li>• Terms of service control what you can and can't do</li>
+      <li>• Data may be used for training (varies by plan — check carefully)</li>
+    </ul>
+  </div>
+</div>
 
 **Best for:** Most businesses, especially when getting started. Start here.
 
 ## The Case for Self-Hosting
 
-**Pros:**
-- Data never leaves your servers — full privacy and compliance control
-- No per-token billing — fixed infrastructure cost
-- Customize and fine-tune the model as needed
-- No vendor lock-in
-
-**Cons:**
-- GPUs are expensive (high-quality models need A100s or H100s)
-- Setup, configuration, and maintenance require technical expertise
-- You're responsible for uptime, security, and scaling
-- Open-source models typically lag behind the best closed-source in capability
+<div class="grid md:grid-cols-2 gap-4 my-6">
+  <div class="rounded-xl p-4 border-2" style="background: rgba(95, 168, 96, 0.08); border-color: rgba(95, 168, 96, 0.3);">
+    <div class="text-[10px] font-bold uppercase tracking-widest mb-3" style="color: #2e7d32;">✅ Pros</div>
+    <ul class="text-sm text-on-surface/80 space-y-2 list-none pl-0">
+      <li>• Data never leaves your servers — full privacy and compliance control</li>
+      <li>• No per-token billing — fixed infrastructure cost</li>
+      <li>• Customize and fine-tune the model as needed</li>
+      <li>• No vendor lock-in</li>
+    </ul>
+  </div>
+  <div class="rounded-xl p-4 border-2" style="background: rgba(214, 92, 92, 0.08); border-color: rgba(214, 92, 92, 0.3);">
+    <div class="text-[10px] font-bold uppercase tracking-widest mb-3" style="color: var(--error);">⚠️ Cons</div>
+    <ul class="text-sm text-on-surface/80 space-y-2 list-none pl-0">
+      <li>• GPUs are expensive (high-quality models need A100s or H100s)</li>
+      <li>• Setup, configuration, and maintenance require technical expertise</li>
+      <li>• You're responsible for uptime, security, and scaling</li>
+      <li>• Open-source models typically lag behind the best closed-source</li>
+    </ul>
+  </div>
+</div>
 
 **Best for:** Organizations with strict data privacy requirements (healthcare, legal, government, finance) or very high volume where per-token costs exceed infrastructure costs.
 
@@ -80,5 +98,3 @@ Self-hosting *sounds* free. The model weights often are free to download. But:
 :::callout-error
 "We'll just self-host to save money" is a common mistake. Unless you're processing millions of tokens daily or have strict data residency requirements, the engineering and infrastructure cost will almost certainly exceed what you'd pay for a hosted API. Do the math first.
 :::
-
-:::quiz{id="10-03"}

@@ -55,4 +55,4 @@ Many companies focus automation investment on impressive-looking AI applications
 - **Low volume + high variance** = human judgment — automation here is risky and rarely worth it.
 - **Not everything should be automated** — the matrix helps you make that call rationally, not emotionally.
 
-:::quiz{id="12-06"}
+:::quiz{id="12-07"}

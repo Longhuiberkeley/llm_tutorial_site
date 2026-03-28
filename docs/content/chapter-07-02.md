@@ -38,7 +38,7 @@ The difference is dramatic:
 The LLM hasn't changed at all. What changed is that the *right document* was placed in front of it.
 
 :::callout-error
-RAG dramatically *reduces* hallucination — it does not eliminate it. The LLM can still misread or misinterpret a document. But grounding answers in real documents is far better than answering from training memory alone.
+RAG dramatically *reduces* hallucination — it does not eliminate it. It trades one kind of error for another: instead of the LLM inventing facts from training data, it might now answer confidently from the *wrong* retrieved document. The LLM can also still misread or misinterpret a document it did retrieve. But grounding answers in real documents is far better than guessing from training memory alone.
 :::
 
 :::callout-dyk
@@ -72,3 +72,8 @@ RAG means your LLM is never limited to what it knew during training. You can:
 - **Hallucination reduction:** Not elimination, but a major improvement
 
 :::quiz{id="07-02"}
+What is the main benefit of RAG (Retrieval-Augmented Generation)?
+- [ ] It makes the LLM respond faster
+- [ ] It completely eliminates hallucination
+- [x] It grounds the LLM's answers in actual retrieved documents instead of guessing from training data
+:::

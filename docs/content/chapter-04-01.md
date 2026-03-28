@@ -28,3 +28,8 @@ Never trust an LLM to count the exact number of words, characters, or sentences 
 :::
 
 :::quiz{id="04-01"}
+Why can't LLMs reliably count the letters in a word?
+- [ ] They haven't been trained on enough counting examples
+- [x] They process text as token chunks, not individual characters
+- [ ] Counting is too complex for any AI system
+:::

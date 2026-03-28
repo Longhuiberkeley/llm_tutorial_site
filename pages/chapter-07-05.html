@@ -377,13 +377,26 @@
 <h2>Chunking: Breaking Documents into Right-Sized Pieces</h2>
 <p>A 50-page document shouldn&#39;t be injected whole. Instead, break it into <strong>chunks</strong> — paragraphs or sections of around 500–1,000 tokens each. Index each chunk separately.</p>
 <p>When a question arrives, retrieve the <em>specific chunks</em> that are most relevant — not the whole document.</p>
-<h2>Placement Matters Too</h2>
-<p>Where you put retrieved content in the Sandwich matters. LLMs pay more attention to the beginning and end of their context. Put critical retrieved information near the start — before the conversation history — for maximum attention.</p>
 <div class="callout callout-dyk">
-    There&#39;s also a related discipline called <strong>harness engineering</strong> — the scaffolding <em>around</em> LLM calls: retry logic, caching, cost tracking, response parsing, evaluation pipelines. As systems grow complex, harness engineering becomes its own field. Worth exploring on your own.
+    Chunk size is a surprisingly important lever. Too small (a single sentence) and you lose the surrounding context — the LLM sees a fragment without knowing what it&#39;s about. Too large (a whole chapter) and you mix relevant content with irrelevant filler, diluting the LLM&#39;s attention. The sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be precise.
 </div>
 
 
+<h2>Placement Matters Too</h2>
+<p>Where you put retrieved content in the Sandwich matters. LLMs pay more attention to the beginning and end of their context. Put critical retrieved information near the start — before the conversation history — for maximum attention.</p>
+<h2>Harness Engineering: The Scaffolding Around the LLM</h2>
+<p>There&#39;s a related discipline that has become critical as LLM systems grow up: <strong>harness engineering</strong> — designing and building the scaffolding <em>around</em> LLM calls.</p>
+<p>Think of a horse. The LLM is the horse — powerful, fast, but without direction. The &quot;harness&quot; is everything that guides that power productively: the reins, the saddle, the bridle. Without a good harness, even the strongest horse runs in circles.</p>
+<p>In practice, harness engineering covers:</p>
+<ul>
+<li><strong>Retry logic</strong> — when the LLM fails or returns garbage, how do you recover gracefully?</li>
+<li><strong>Caching</strong> — storing previous results so you don&#39;t re-run expensive LLM calls for the same question</li>
+<li><strong>Response parsing</strong> — extracting structured data from the LLM&#39;s free-text output</li>
+<li><strong>Cost tracking</strong> — monitoring how much each query costs and setting budgets</li>
+<li><strong>Evaluation pipelines</strong> — continuously testing whether the system&#39;s answers are still good</li>
+<li><strong>Workflow control</strong> — deciding when the LLM can act autonomously vs. when it needs human approval</li>
+</ul>
+<p>None of these are glamorous. But they&#39;re the difference between a cool demo and a reliable product. As organizations move from experimenting with LLMs to running them in production, harness engineering often becomes the bottleneck — not the model itself.</p>
 <h2>📝 Key Concepts</h2>
 <ul>
 <li><strong>Context Engineering:</strong> The discipline of managing everything fed to an LLM — prompts, retrieved docs, history, instructions</li>
@@ -391,6 +404,7 @@
 <li><strong>Quality &gt; quantity:</strong> 3 highly relevant paragraphs beat 30 loosely related pages</li>
 <li><strong>Chunking:</strong> Break documents into pieces (500–1,000 tokens), index each chunk separately</li>
 <li><strong>Placement:</strong> Critical context goes at the start of the prompt for maximum attention</li>
+<li><strong>Harness Engineering:</strong> The scaffolding around LLM calls — retries, caching, parsing, cost tracking — that turns a demo into a reliable product</li>
 </ul>
 <div id="quiz-07-05" class="quiz-container my-12"></div>
             </div>

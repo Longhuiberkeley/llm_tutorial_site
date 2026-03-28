@@ -10,7 +10,7 @@ pageId: "02-01"
 - Understand why LLMs sometimes mess up spelling or word boundaries.
 
 :::callout-tldr
-LLMs don't read English words. They read "tokens"—chunks of letters (usually 3-4 characters long). To an LLM, "hamburger" might be split into "ham", "burg", and "er", which are then converted into numbers.
+LLMs don't read English words. They read "tokens"—chunks of letters (usually 3-4 characters long in English). To an LLM, "hamburger" might be split into "ham", "burg", and "er", which are then converted into numbers.
 :::
 
 ## 👁️ Visuals & Interactives
@@ -28,6 +28,7 @@ Want to see exactly how an LLM chops up your text? Try the [Tokenizer Playground
 - **Numbers Under the Hood:** Each chunk is assigned a specific ID number in the LLM's vocabulary. "Apple" might be token #4591.
 - **The Spelling Problem:** Because LLMs see chunks instead of individual letters, they are notoriously bad at tasks like "Count how many 'r's are in strawberry." They see "straw" and "berry" as solid blocks, not strings of letters.
 - **A Pool of Tokens:** During prediction, the LLM is choosing from a fixed pool or set of possible tokens—like picking from a predefined vocabulary list, rather than guessing completely random text.
+- **Why Tokens, Not Letters?** Processing text as chunks rather than individual characters is far more efficient. A typical English word is 2-3 tokens instead of 5-6 letters — that's fewer things for the model to predict, which makes training and generation dramatically faster.
 
 :::callout-dyk
 **What does "predict" mean?**
@@ -35,3 +36,8 @@ In the AI context, "predict" doesn't mean "foresee the future." It means "calcul
 :::
 
 :::quiz{id="02-01"}
+Why does an LLM struggle with "How many r's are in strawberry?"
+- [ ] It hasn't been trained on enough spelling data
+- [x] It processes "strawberry" as token chunks like "straw" + "berry", not individual letters
+- [ ] It doesn't know what the letter 'r' looks like
+:::

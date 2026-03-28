@@ -89,7 +89,7 @@ This is the **retrieval problem** — and it's genuinely unsolved.
 :::callout-dyk
 **A common counterargument:** "As LLMs get smarter and context windows get larger, won't we just be able to dump everything in and let the model figure it out? Problem solved."
 
-Worth thinking through — would that actually work? What speaks for it? What speaks against it?
+Worth thinking through — would that actually work? What speaks for it? What speaks against it? In practice, even with large context windows, the LLM's attention *quality* degrades when the context is stuffed with irrelevant material. More tokens doesn't mean better understanding — it often means more noise.
 :::
 
 ## An Active Area of Research

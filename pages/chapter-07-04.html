@@ -283,7 +283,7 @@
 <li>Help readers match the right approach to the right situation.</li>
 </ul>
 <div class="callout callout-tldr">
-    RAG is powerful but comes with setup costs. Sometimes keyword search, concatenation, or a subagent approach is faster and simpler. Know your options before committing to infrastructure.
+    RAG is powerful but comes with setup costs. Sometimes keyword search, concatenation, or a subagent approach is faster and simpler. Treat RAG like a tool — reach for it when the job calls for it, not as a default. Know your options before committing to infrastructure.
 </div>
 
 
@@ -392,7 +392,7 @@
 <p>This is the simplest possible approach — no infrastructure whatsoever. But it runs into a hard wall: the context window. A handful of short documents? Fine. Sarah&#39;s 500 cases? Never fits.</p>
 <p>Its character: <strong>zero setup, zero retrieval errors</strong> — for datasets small enough to fit.</p>
 <div class="callout callout-dyk">
-    Most production systems use a hybrid approach: keyword search narrows the candidate pool first, then vector similarity re-ranks the results. You get the speed of keyword filtering with the precision of semantic matching.
+    Most production systems don&#39;t pick just one approach — they use a divide-and-conquer strategy: keyword search narrows the candidate pool first, then vector similarity re-ranks the results, and sometimes a subagent does a final read of the top candidates. You get the speed of keyword filtering with the precision of semantic matching. The best systems mix and match based on the problem at hand.
 </div>
 
 
@@ -405,7 +405,7 @@
 <ul>
 <li><strong>Each approach has real trade-offs</strong> in speed, cost, accuracy, and setup complexity</li>
 <li><strong>Hybrid approaches</strong> (keyword + semantic) often outperform either alone in production</li>
-<li><strong>RAG is not always necessary</strong> — match the tool to the actual problem size</li>
+<li><strong>RAG is a tool, not a default</strong> — match the approach to the actual problem size</li>
 <li><strong>Concatenation is underrated</strong> for small datasets — don&#39;t over-engineer early</li>
 </ul>
 <div id="quiz-07-04" class="quiz-container my-12"></div>

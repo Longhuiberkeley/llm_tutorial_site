@@ -58,7 +58,7 @@ The gap between "per-session chatbot" and "always-on personal assistant" is obvi
 
 **Real-time voice + vision** — instead of typing, you're in a live audio conversation while the LLM sees your screen or camera feed in real time. Major AI services now offer this mode — a continuous back-and-forth rather than discrete message exchanges.
 
-**Autonomous agents** — software that runs an LLM continuously over hours or days, picking up tasks, executing multi-step work, and reporting back without you being involved at every step. Open-source projects like OpenClaw are early examples of this pattern.
+**Autonomous agents** — software that runs an LLM continuously over hours or days, picking up tasks, executing multi-step work, and reporting back without you being involved at every step. Open-source projects like AutoGPT are early examples of this pattern.
 
 These are the industry's answer to "how do we make a stateless model feel continuous and ambient?"
 

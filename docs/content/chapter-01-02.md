@@ -32,3 +32,8 @@ How do you think an LLM would know that "doctor" and "nurse" are related? What p
 :::
 
 :::quiz{id="01-02"}
+In an LLM's "meaning-space," which two words would be closest together?
+- [ ] "Doctor" and "doctrine" — they share most of the same letters
+- [x] "Doctor" and "nurse" — they share similar meaning and context
+- [ ] "Doctor" and "calendar" — doctors use calendars for appointments
+:::

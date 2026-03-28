@@ -82,4 +82,9 @@ Monitoring means actively watching the system — not just storing logs, but rev
 - **Monitoring and logging are mandatory** — you can't improve or debug what you haven't recorded.
 - **Gradually reduce oversight as trust builds** — treat it like onboarding a new employee, not flipping a switch.
 
-:::quiz{id="12-07"}
+:::quiz{id="12-08"}
+What is the purpose of "human-in-the-loop" (HITL) in AI systems?
+- [ ] To slow down the AI so humans can keep up with its output
+- [x] AI proposes actions and humans approve — building trust through verified performance before granting autonomy
+- [ ] To permanently replace the AI whenever it makes a mistake
+:::

@@ -19,8 +19,8 @@ LLMs aren't "all or nothing." Their reliability depends entirely on the task. Kn
 
 ## 📝 Key Concepts
 
-- Can you identify if what you want to do is a, **Ready to use:**, **Review before using:**, **Heavy verification needed:**, or **Don't trust without engineering:** application?
-- One better question is perhaps, can you identify which part in your project can be improved with LLM uses? 
+- Can you identify whether your task is **Ready to use**, **Review before using**, **Heavy verification needed**, or **Don't trust without engineering**?
+- A better question: which parts of your project could benefit from LLM use?
 
 :::callout-error
 **LLMs are production-ready — but not for everything.** With proper engineering (retrieval, testing, human review), LLMs power systems handling millions of real decisions daily. The risk isn't that they're too unreliable to use in serious contexts — it's using them in serious contexts *without* the right engineering. Know your zone, and design accordingly.

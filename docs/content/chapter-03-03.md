@@ -48,3 +48,8 @@ Why does Claude feel different from ChatGPT? Their Provider Prompts (Layer 1) an
 :::
 
 :::quiz{id="03-03"}
+Why does Claude feel different from ChatGPT when given the same question?
+- [ ] They use different programming languages under the hood
+- [x] Each has different hidden system prompts that shape their personality and behavior
+- [ ] One is fundamentally smarter than the other
+:::

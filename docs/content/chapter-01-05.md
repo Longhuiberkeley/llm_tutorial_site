@@ -34,3 +34,8 @@ LLMs don't "choose" words based on understanding. They calculate distances and p
 :::
 
 :::quiz{id="01-05"}
+When an LLM generates text, what happens at each step?
+- [ ] It plans the entire sentence first, then writes it all at once
+- [ ] It looks up a pre-written response from its training data
+- [x] It calculates the distance to every word in its vocabulary and picks the most likely one
+:::

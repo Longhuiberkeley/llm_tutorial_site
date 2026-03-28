@@ -10,7 +10,7 @@ pageId: "07-04"
 - Help readers match the right approach to the right situation.
 
 :::callout-tldr
-RAG is powerful but comes with setup costs. Sometimes keyword search, concatenation, or a subagent approach is faster and simpler. Know your options before committing to infrastructure.
+RAG is powerful but comes with setup costs. Sometimes keyword search, concatenation, or a subagent approach is faster and simpler. Treat RAG like a tool — reach for it when the job calls for it, not as a default. Know your options before committing to infrastructure.
 :::
 
 ## The Lawyer's Options
@@ -44,7 +44,7 @@ This is the simplest possible approach — no infrastructure whatsoever. But it 
 Its character: **zero setup, zero retrieval errors** — for datasets small enough to fit.
 
 :::callout-dyk
-Most production systems use a hybrid approach: keyword search narrows the candidate pool first, then vector similarity re-ranks the results. You get the speed of keyword filtering with the precision of semantic matching.
+Most production systems don't pick just one approach — they use a divide-and-conquer strategy: keyword search narrows the candidate pool first, then vector similarity re-ranks the results, and sometimes a subagent does a final read of the top candidates. You get the speed of keyword filtering with the precision of semantic matching. The best systems mix and match based on the problem at hand.
 :::
 
 :::callout-dyk
@@ -55,7 +55,7 @@ When you use ChatGPT or Gemini through their web interfaces, you don't get to ch
 
 - **Each approach has real trade-offs** in speed, cost, accuracy, and setup complexity
 - **Hybrid approaches** (keyword + semantic) often outperform either alone in production
-- **RAG is not always necessary** — match the tool to the actual problem size
+- **RAG is a tool, not a default** — match the approach to the actual problem size
 - **Concatenation is underrated** for small datasets — don't over-engineer early
 
 :::quiz{id="07-04"}

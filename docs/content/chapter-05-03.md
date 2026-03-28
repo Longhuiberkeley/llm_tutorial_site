@@ -28,3 +28,8 @@ Rule of thumb: 2-3 examples is usually enough. Adding more than 5 often yields d
 :::
 
 :::quiz{id="05-03"}
+What's the most effective way to get an LLM to match a specific output format?
+- [ ] Write a detailed paragraph describing exactly what you want
+- [x] Provide 2-3 examples of the desired output
+- [ ] Use more technical vocabulary in your instructions
+:::

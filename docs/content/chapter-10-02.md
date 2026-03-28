@@ -48,3 +48,8 @@ Benchmarks are standardized tests that score models on specific tasks. You'll se
 :::
 
 :::quiz{id="10-02"}
+What's the most reliable way to evaluate which LLM is best for your task?
+- [ ] Check the published benchmark leaderboards and pick the top scorer
+- [ ] Always choose the most expensive tier available
+- [x] Test 10-20 of your own real examples across competing models and compare the outputs
+:::

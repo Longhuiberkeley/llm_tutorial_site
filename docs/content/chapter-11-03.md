@@ -190,3 +190,8 @@ The lesson: the right question isn't "does this work?" It's "does this keep work
 - **Reinforcement matters most:** people sustain change when it visibly improves their work — not when it's mandated
 
 :::quiz{id="11-03"}
+In the ADKAR model, what does the "D" (Desire) stage address?
+- [ ] Documenting the technical requirements for the new system
+- [x] Answering "what's in it for me?" for each individual affected by the change
+- [ ] Designing the rollout timeline and milestones
+:::

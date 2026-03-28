@@ -24,7 +24,7 @@ LLMs don't "lie" — they guess. Because they are designed to predict the most l
 - **It's a Feature:** The exact mechanism that allows an LLM to write a beautiful poem about a robot on Mars (creativity) is the same mechanism that makes it invent a fake legal case. It's pattern-matching all the way down.
 
 :::callout-dyk
-For factual data like revenue figures, market statistics, or recent events — use the **Deep Research** or **web search** tool if available. It fetches real, current information from the internet instead of pattern-guessing. When in doubt: look it up, don't ask the LLM to recall it.
+For factual data like revenue figures, market statistics, or recent events — use the **Deep Research** or **web search** tool if available. It fetches real, current information from the internet instead of pattern-guessing. When in doubt: look it up, don't ask the LLM to recall it. Later we'll explore a technique called **RAG** (Retrieval-Augmented Generation) that does exactly this — automatically fetching real documents to ground the LLM's answers in facts rather than guesses.
 :::
 
 :::callout-dyk

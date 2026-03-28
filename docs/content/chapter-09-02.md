@@ -86,3 +86,8 @@ When thinking about what to trust and how to use these tools:
 - **Many products blend both** — knowing which mode is active helps calibrate how much to trust the output
 
 :::quiz{id="09-02"}
+Why is AI image understanding more reliable than AI image generation?
+- [ ] Image understanding models have been around longer and are more mature
+- [x] Understanding has a ground truth to verify against, while generation must create millions of coherent pixel values from scratch
+- [ ] Generation simply requires more computing power
+:::

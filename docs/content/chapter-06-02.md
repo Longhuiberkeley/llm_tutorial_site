@@ -36,3 +36,8 @@ The MCP ecosystem is evolving fast. It's worth searching for "best MCP servers 2
 :::
 
 :::quiz{id="06-02"}
+What problem does MCP (Model Context Protocol) solve?
+- [ ] It makes LLMs generate faster responses
+- [x] It standardizes how LLMs connect to tools and data sources — like USB-C for AI
+- [ ] It improves the quality of LLM responses by adding more training data
+:::

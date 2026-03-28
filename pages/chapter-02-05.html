@@ -778,7 +778,7 @@
 <ul>
 <li><strong>The Router:</strong> A tiny sub-network that looks at each incoming word and picks which expert handles it — like a switchboard operator connecting a call to the right department.</li>
 <li><strong>The Experts:</strong> Specialized groups of knobs, each good at certain types of words (e.g., one group handles code, another handles French, another handles math). Only 1 or 2 groups are active per word — the rest stay idle.</li>
-<li><strong>Why It Matters:</strong> This lets models be much larger without proportionally increasing compute cost. More knobs total, but you only turn on a few at a time — so the model is smarter without being dramatically slower.</li>
+<li><strong>Why It Matters:</strong> This lets models be much larger without proportionally increasing compute cost. More knobs total, but you only turn on a few at a time — so the model is smarter without being dramatically slower. That&#39;s why some of the largest models today can still respond in seconds: even with hundreds of billions of parameters, only a fraction are active for any single word.</li>
 </ul>
 <div class="callout callout-error">
     &quot;Mixture of Experts&quot; does NOT mean multiple AI agents collaborating. The &quot;experts&quot; aren&#39;t separate models with their own goals — they&#39;re specialized groups of knobs within a single model, selected one at a time by a simple routing mechanism. Think <strong>switchboard operator</strong>, not <strong>committee meeting</strong>.

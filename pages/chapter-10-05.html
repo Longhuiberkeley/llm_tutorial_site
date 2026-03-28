@@ -466,7 +466,7 @@
                 <h4 class="font-bold text-sm">Goal-Oriented Planning</h4>
             </div>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                Breaks high-level goals into actionable steps, prioritizes them, and adjusts when conditions change.
+                Breaks high-level goals into actionable steps in a logical order — prerequisites first, then build on them. Prioritizes, sequences, and adjusts when conditions change.
             </p>
         </div>
 
@@ -538,8 +538,18 @@
 </div>
 
 
+<div class="callout callout-dyk">
+    <strong>Long-horizon tasks — where frontier models earn their price.</strong> When a task involves many steps — reviewing a 50-page document, debugging across multiple files, maintaining consistency across a long conversation — cheaper models tend to &quot;forget&quot; earlier context or lose track of the goal. Frontier models handle this significantly better: they maintain coherence over longer tasks, follow complex multi-step instructions more reliably, and are more likely to push back when something doesn&#39;t make sense rather than cheerfully producing plausible garbage. If your use case involves sustained, multi-step work, the gap between cheap and frontier models is substantial.
+</div>
+
+
+<div class="callout callout-error">
+    <strong>A good model doesn&#39;t just agree with you.</strong> If you ask an LLM to evaluate your business plan and it says &quot;Wow, this is brilliant — it&#39;ll change the world!&quot; without a single critique or pushback... that&#39;s not a good sign. A genuinely capable model will spot weaknesses, ask pointed questions, and tell you when something won&#39;t work. <strong>Tip:</strong> Try pasting your plan into a <em>different</em> chat session — or even a different model entirely — and explicitly ask it to poke holes in your logic. A fresh model with no prior context is far more likely to give you honest feedback than one that&#39;s been cheerfully agreeing with you for the past 20 minutes.
+</div>
+
+
 <div class="callout callout-tip">
-    <strong>Thinking about building an app or automating a workflow?</strong> The model is only part of the decision. When we explored what makes good agents, we saw how they rely on tools, memory, integrations, and the ability to take actions in the world — all things that go beyond the model itself. The ecosystem around the model — what it connects to, how it&#39;s orchestrated, what tools it can use — often matters just as much. Future chapters go deeper on this.
+    <strong>Thinking about building an app or automating a workflow?</strong> The model is only part of the decision. When we explored what makes good agents, we saw how they rely on tools, memory, integrations, and the ability to take actions in the world — all things that go beyond the model itself. The ecosystem around the model — what it connects to, how it&#39;s orchestrated, what tools it can use — often matters just as much. The automation and implementation sections go deeper on this.
 </div>
 
 

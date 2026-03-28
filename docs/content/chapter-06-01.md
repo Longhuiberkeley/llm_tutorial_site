@@ -45,3 +45,8 @@ That's just text with a special trigger pattern. Another program reads it, runs 
 :::
 
 :::quiz{id="06-01"}
+When an LLM "uses a calculator," what actually happens?
+- [ ] The LLM performs the math internally using a built-in module
+- [x] The LLM outputs specially formatted text that an external system intercepts and executes
+- [ ] The LLM sends the calculation to another AI model that specializes in math
+:::

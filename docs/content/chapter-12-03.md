@@ -65,3 +65,8 @@ In practice, most real-world systems combine both — using RPA for routine case
 - **Hybrid is often best** — use RPA for routine cases, agentic AI for exceptions, humans for escalations.
 
 :::quiz{id="12-03"}
+A company processes 500 identical invoices daily in the exact same format. Which automation approach fits best?
+- [x] RPA — the task is high-volume, low-variance, and follows fixed rules
+- [ ] Agentic AI — you always want the most advanced solution
+- [ ] No automation — 500 isn't enough volume to justify it
+:::

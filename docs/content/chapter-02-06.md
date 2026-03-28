@@ -11,7 +11,7 @@ pageId: "02-06"
 - Understand how human feedback gets turned into a mathematical training signal in RLHF.
 
 :::callout-tldr
-Training an LLM is a long, multi-stage process. To build intuition, we'll explore two key examples: **Pre-training** teaches the model language at massive scale — by predicting the next word, billions of times, across the entire internet. **RLHF** (Reinforcement Learning from Human Feedback) then teaches it to give *good* answers, using human preferences to train a reward model that scores responses.
+Training an LLM is a long, multi-stage process. To build intuition, we'll explore two key examples: **Pre-training** teaches the model language at massive scale — by predicting the next word, billions of times, across the entire internet. **RLHF** (Reinforcement Learning from Human Feedback) then teaches it to give *good* answers, using human preferences to guide which way to turn the knobs.
 :::
 
 ## 👁️ Visuals & Interactives
@@ -22,8 +22,7 @@ Training an LLM is a long, multi-stage process. To build intuition, we'll explor
 
 ### Pre-training: Learning Language from the Internet
 - **The Analogy:** A student who reads every book, website, and forum post ever written — not to study for a test, but to absorb how language, ideas, and facts connect.
-- **How It Started:** In the earlier days of LLM research, companies collected massive amounts of text from the internet, then artificially erased a word and trained the model to predict what the missing word should be. Do this billions of times, and the model starts to absorb grammar, facts, and how ideas connect. (This approach — called *masked language modeling* — is how models like BERT were trained.)
-- **How Modern LLMs Train:** Today's LLMs (like the GPT family) use a different method: *next-token prediction* — given all the words so far, predict the next one. No masking needed. The model is trained on enormous text corpora, learning to predict word after word, billions of times over.
+- **Two Approaches:** Some models (like BERT) use *masked language modeling* — artificially erasing a word and training the model to predict what's missing. Do this billions of times and the model absorbs grammar, facts, and how ideas connect. The models you use today (like the GPT family) take a simpler approach: *next-token prediction* — given all the words so far, predict the next one. No masking needed. The model learns to predict word after word, billions of times over. Either way, the mechanism is the same as the previous page: the model's internal knobs (weights) are adjusted over and over until its predictions match the training data.
 - **The Result:** A model that is a powerful — but chaotic — text completer. It can write poetry, complete code, or ramble like a forum post. But it has no idea how to be a polite, helpful assistant.
 
 ### Fine-Tuning / SFT: Teaching It to Answer Questions
@@ -31,10 +30,17 @@ Training an LLM is a long, multi-stage process. To build intuition, we'll explor
 - **The Result:** A model that understands what "following instructions" looks like and can respond to questions purposefully.
 
 ### RLHF: Learning What "Good" Looks Like
-- **How It Works:** Human raters compare two LLM responses to the same prompt and pick the better one. Those preferences are used to train a separate *reward model* — a system that learns to score responses the way humans would. Then the LLM is mathematically optimized to generate responses that score highly.
-- **The "candy" analogy:** Often explained as "the model gets a reward like candy." That's intuitive but not quite literal — the LLM doesn't feel anything. What actually happens is the model's internal weights are adjusted to maximize the reward model's score. The metaphor is useful; just know the reality is mathematical optimization.
+- **How It Works:** Human raters compare two LLM responses to the same prompt and pick the better one. Those preferences are used to train a separate *reward model* — a system that learns to score responses the way humans would. Then the LLM is mathematically optimized to generate responses that score highly. In knob terms: engineers figured out which direction to turn the weights so the model produces responses humans actually prefer.
+- **The "candy" analogy:** Often explained as "the model gets a reward like candy." That's intuitive but not quite literal — the LLM doesn't feel anything. What actually happens is the model's internal knobs (weights) are adjusted to maximize the reward model's score. The metaphor is useful; just know the reality is mathematical optimization.
 - **What It Teaches:** Helpfulness, safety, and honesty. LLMs don't naturally avoid harmful content — RLHF is what shapes that behavior.
 - **The Result:** The polished, safety-aware assistant you use today.
+
+<div class="p-5 rounded-xl text-sm border-2 border-accent/30 text-center my-8" style="background: color-mix(in srgb, var(--accent) 8%, transparent);">
+    <div class="text-lg mb-2">💡</div>
+    <div class="font-bold text-on-surface mb-2">Building Intuition, Not Expertise</div>
+    <p class="text-on-surface-variant">The goal here is to build intuition for how LLMs work — not to master the engineering details. If any of this doesn't quite click, that's completely fine. You don't need to understand training pipelines to use LLMs effectively.</p>
+    <p class="text-on-surface font-medium mt-2">The key takeaway: LLMs start as raw pattern-matchers and get shaped into helpful assistants through stages of feedback and refinement — all by turning those internal knobs.</p>
+</div>
 
 :::callout-dyk
 The stages above are two snapshots from a much longer, more complex pipeline. Modern LLM training also includes: 
@@ -53,3 +59,16 @@ LLMs aren't born polite or safe. Pre-training alone produces a raw pattern-match
 :::
 
 :::quiz{id="02-06"}
+What is the correct order of LLM training stages?
+- [ ] Fine-tuning → Pre-training → RLHF
+- [x] Pre-training → Fine-tuning → RLHF
+- [ ] RLHF → Pre-training → Fine-tuning
+:::
+
+:::quiz{id="02-06b"}
+Why does RLHF (Reinforcement Learning from Human Feedback) exist? What is its purpose?
+- [ ] To teach the model new languages and facts from the internet
+- [ ] To make the model generate text faster
+- [x] To shape the model's behavior — making it helpful, safe, and honest instead of a raw autocomplete
+- [ ] To compress the model so it takes up less disk space
+:::

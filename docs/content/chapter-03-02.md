@@ -23,10 +23,15 @@ The LLM doesn't "remember" your conversation. Every time you send a message, the
 - **The LLM Has No Memory:** Each turn, the LLM starts from zero. It only knows what's in the bundle sent right now.
 - **The App Builds the Bundle:** The chat interface silently collects the entire conversation history and bundles it with the new message on every send.
 - **The Bundle Grows:** Every turn adds two messages. By Turn 4, the LLM reads 7 messages at once — just to answer the latest one.
-- **Cost & Speed:** Bigger bundles = more tokens processed = slower and more expensive. Many providers provide Caching to lower the cost
+- **Cost & Speed:** Bigger bundles = more tokens processed = slower and more expensive. Many providers offer caching to lower costs
 
 :::callout-error
-The LLM doesn't "know" you — it re-reads the transcript every single time. In 2026, many AI services have a MEMORY mechanism, it often is just a way to bundle your previous conversation into your current one somehow. We will discuss some common methods later.
+The LLM doesn't "know" you — it re-reads the transcript every single time. Modern LLM services often include a MEMORY mechanism, it often is just a way to bundle your previous conversation into your current one somehow. We will discuss some common methods later.
 :::
 
 :::quiz{id="03-02"}
+When you send your 5th message in a chat, what does the LLM actually receive?
+- [ ] Only your 5th message — it remembers the rest from earlier
+- [x] The entire conversation history bundled together and sent from scratch
+- [ ] A compressed summary of previous messages plus your new one
+:::

@@ -32,3 +32,8 @@ The safest rule: treat each important LLM session like a blank whiteboard. Start
 
 
 :::quiz{id="04-04"}
+If an LLM gives you incorrect information mid-conversation, what's the best approach?
+- [ ] Tell the LLM to "forget what you just said"
+- [ ] Repeat your original question more firmly
+- [x] Start a fresh conversation with the correct information upfront
+:::

@@ -76,3 +76,8 @@ This is why continuous evaluation matters. Running your test set once before lau
 - **Run test sets continuously** — LLM behavior can drift over time even when you change nothing.
 
 :::quiz{id="12-06"}
+When should you build your evaluation test set?
+- [ ] After the feature is built, to verify it works correctly
+- [ ] Only when something goes wrong in production
+- [x] Before building the feature, to define what success looks like
+:::

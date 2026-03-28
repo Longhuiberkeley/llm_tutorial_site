@@ -25,7 +25,7 @@ pageId: "04-03"
 - **Probabilistic Nature:** LLMs are fundamentally probabilistic — this is another reason they can't be 100% reliable. There is almost always more than one "correct" way to finish a sentence.
 
 :::callout-error
-If you set the temperature too high (e.g., 2.0), the LLM will start picking the least likely words, resulting in literal gibberish and broken grammar.
+If you set the temperature too high (e.g., 2.0), the LLM will start picking from a much wider, less predictable set of words, resulting in literal gibberish and broken grammar.
 :::
 
 :::callout-dyk
@@ -38,3 +38,8 @@ Adjusting the temperature is a very good way to introduce more randomness in thi
 :::
 
 :::quiz{id="04-03"}
+What does setting an LLM's temperature to 0 do?
+- [ ] Makes the LLM refuse to answer questions
+- [x] Makes it always pick the most likely next word, producing consistent and predictable output
+- [ ] Makes the LLM generate shorter responses
+:::

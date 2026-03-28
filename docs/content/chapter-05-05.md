@@ -35,3 +35,8 @@ Even "Enterprise" plans that promise data privacy and opt-out from training aren
 :::
 
 :::quiz{id="05-05"}
+Which of these is safe to paste into a public LLM chat?
+- [ ] A customer's email containing their personal details
+- [ ] Your company's API keys for a quick debugging session
+- [x] A publicly available article you want summarized
+:::
