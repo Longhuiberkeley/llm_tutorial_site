@@ -90,7 +90,7 @@
         structured: {
             label: '🏗️ Structured',
             color: 'border-primary',
-            bg: 'bg-primary/5',
+            bg: 'bg-primary-fixed',
             weeks: {
                 1: {
                     emoji: '🤔',
@@ -132,15 +132,16 @@
     window.setMode = function(mode, btn) {
         currentMode = mode;
         document.querySelectorAll('.apd-mode-btn').forEach(b => {
-            b.classList.remove('border-primary', 'border-orange-400', 'bg-primary/10', 'bg-orange-50');
+            b.classList.remove('border-primary', 'border-orange-400', 'bg-orange-400', 'text-white');
             b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+            b.style.backgroundColor = '';
         });
+        btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
         if (mode === 'loose') {
-            btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-            btn.classList.add('border-orange-400', 'bg-orange-50');
+            btn.classList.add('border-orange-400', 'bg-orange-400', 'text-white');
         } else {
-            btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-            btn.classList.add('border-primary', 'bg-primary/10');
+            btn.classList.add('border-primary', 'text-white');
+            btn.style.backgroundColor = 'var(--primary)';
         }
         if (currentWeek) updateDetail();
     };

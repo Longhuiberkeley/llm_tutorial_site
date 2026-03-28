@@ -14,7 +14,7 @@ pageId: "13-01"
 LLMs don't remove the need for project management — they amplify the cost of skipping it. The same real-world concerns exist in every project: who is the user, what are the requirements, how does it handle edge cases. LLMs just move fast enough that you might not notice those questions were never answered.
 :::
 
-## ⚡ The Velocity Trap
+## ⚡ The Velocity Trap: The Illusion of Completeness
 
 Imagine you say to an LLM: "Build me a website where I can learn to solve chess puzzles."
 
@@ -66,24 +66,12 @@ Managing these risks requires discipline at the project level — not just techn
 
 ## 🔪 Why Breaking Down Tasks Matters
 
-Here is a prompt that will produce mediocre results: *"Act as a product manager, a UX designer, a developer, and a QA tester. Design the user flow, create the UI, implement the backend, write the tests, and make sure everything is secure."*
+Asking an LLM to simultaneously act as product manager, designer, developer, and QA tester produces mediocre results — for the same reason that handing one person five jobs at once does. Context switching is expensive, roles have conflicting priorities, and no one can hold all the requirements in their head at once. LLMs have the same limitation.
 
-It produces mediocre results for the same reason that handing one person five jobs simultaneously produces mediocre work: context switching is expensive, roles have conflicting priorities, and no one can hold all the requirements in their head at once.
-
-LLMs have the same limitation. Context windows have limits. Multitasking roles produces muddled output where the PM thinking, the UX thinking, and the developer thinking blur together. The quality of each role's thinking degrades when the LLM is simultaneously managing all the others.
-
-Breaking down tasks works for two reasons:
-
-1. **Humans naturally work in phases.** We design before we build. We plan before we execute. We review before we ship. Forcing LLMs to do everything at once is the opposite of how good work actually gets done.
-
-2. **Bounded tasks produce verifiable output.** A prompt with one clear role, one clear phase, and one clear deliverable produces something you can evaluate. A prompt asking for everything at once produces something too entangled to review clearly.
+The fix: give each prompt **one role, one phase, and one deliverable**. Bounded tasks produce verifiable output. A prompt asking for everything at once produces something too entangled to review clearly.
 
 :::callout-dyk
-Think of a building contractor. A contractor who receives a complete blueprint, a budget, and a timeline on day one delivers better results than one asked to invent the design, manage the budget, and lay bricks at the same time. The project management work and the construction work require different thinking — separating them improves both.
-:::
-
-:::callout-tip
-**Calibrate your session size.** Try separating work into many focused sessions rather than one long conversation. You'll develop a feel for what a model can handle in one go — sometimes a tight list like "change the value on line 15; update the heading on line 49" is a clean single session. But "build the landing page" or "set up the database schema" almost certainly needs its own focused session with a clear brief. Once you have a sense of your model's range, you'll move faster and with fewer surprises. When a session starts producing inconsistent or confused output, that's often a sign the context is overloaded — start fresh with a clear, bounded task.
+Breaking down tasks is important enough that the next page covers it in depth — along with the project management fundamentals that make it work.
 :::
 
 ## 📝 Key Concepts
@@ -91,7 +79,7 @@ Think of a building contractor. A contractor who receives a complete blueprint, 
 - **The velocity trap** — LLMs move fast enough to make a project look complete before it is; missing foundations surface later, more expensively.
 - **The complacency problem** — clicking Accept without understanding accumulates debt; past success doesn't guarantee present correctness; complexity grows with every session.
 - **Technical debt accumulates faster** in LLM-assisted projects; corrections cost more, not less, than in traditional development.
-- **Break down tasks** — single role, single phase, single deliverable per prompt produces reviewable, verifiable output.
+- **Break down tasks** — one role, one phase, one deliverable per prompt produces reviewable, verifiable output. (Covered in depth in the next page.)
 - **The real risks** (hallucination, cost, non-determinism, silent failures) are symptoms of skipped discipline, not standalone surprises.
 
 :::quiz{id="13-01"}

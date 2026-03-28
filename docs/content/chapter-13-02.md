@@ -1,5 +1,5 @@
 ---
-title: "13.2 Project & Product Management 101"
+title: "13.2 Project Management 101"
 description: "A practical PM crash course for builders using LLMs — phases, gates, and why structure beats speed."
 chapter: "Chapter 13"
 pageId: "13-02"

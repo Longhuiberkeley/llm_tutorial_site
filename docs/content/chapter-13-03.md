@@ -43,7 +43,7 @@ When a carpenter gets a nail gun, the first reaction isn't to plan more carefull
 Software engineer Ward Cunningham coined the term "technical debt" in 1992 to describe the cost of choosing quick-and-easy solutions now over better approaches that take longer. Vibe coding accumulates technical debt at an accelerated rate — but the concept applies equally to reports, documents, and research. Phantom sections that repeat the same analysis in different words. An argument structure that contradicts itself by section 8. The interest on that debt is paid when you try to edit, publish, or act on the output.
 :::
 
-## 🏎️ The Speed Trap
+## 🏎️ The Velocity Trap: Quality Degradation
 
 The danger of vibe coding doesn't appear immediately. It appears on a delay.
 
