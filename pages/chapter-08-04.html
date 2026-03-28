@@ -301,6 +301,8 @@
 <h2>Trade-off 1: Usefulness vs. Accuracy</h2>
 <p>More context should make the LLM more useful. But wrong context makes it confidently wrong.</p>
 <p>If your memory system stored the fact that you &quot;prefer concise answers&quot; — but you&#39;ve since changed jobs and need detailed technical documentation — the LLM will keep giving you short answers, and it will seem right to do so. Old facts don&#39;t expire. Misextracted facts don&#39;t self-correct.</p>
+<p>The same problem scales to actions. You have three contacts named Peter — the system retrieves the wrong Peter&#39;s context and sends a message to your client instead of your colleague. Or consider: you run two restaurants and used an AI assistant with memory to handle Restaurant A&#39;s tax filings. After closing A, you start working on Restaurant B&#39;s finances — but the memory still has A&#39;s revenue figures, vendor contracts, and tax details. The LLM confidently applies A&#39;s numbers to B&#39;s calculations without flagging the mismatch.</p>
+<p>Context from one session or task shouldn&#39;t leak into the next — unless you explicitly allow it and understand the risk. With autonomous systems, there&#39;s always a chance that stale context from previous work bleeds into what you&#39;re currently working on.</p>
 <p>The better your memory system, the more you <em>depend</em> on it being accurate. A system that &quot;knows you well&quot; but knows wrong things is worse than a blank slate — because at least with a blank slate, you know you&#39;re starting fresh.</p>
 <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 my-6">
   <div class="text-sm font-bold text-on-surface mb-3">The accuracy paradox</div>

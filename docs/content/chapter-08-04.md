@@ -27,6 +27,10 @@ More context should make the LLM more useful. But wrong context makes it confide
 
 If your memory system stored the fact that you "prefer concise answers" — but you've since changed jobs and need detailed technical documentation — the LLM will keep giving you short answers, and it will seem right to do so. Old facts don't expire. Misextracted facts don't self-correct.
 
+The same problem scales to actions. You have three contacts named Peter — the system retrieves the wrong Peter's context and sends a message to your client instead of your colleague. Or consider: you run two restaurants and used an AI assistant with memory to handle Restaurant A's tax filings. After closing A, you start working on Restaurant B's finances — but the memory still has A's revenue figures, vendor contracts, and tax details. The LLM confidently applies A's numbers to B's calculations without flagging the mismatch.
+
+Context from one session or task shouldn't leak into the next — unless you explicitly allow it and understand the risk. With autonomous systems, there's always a chance that stale context from previous work bleeds into what you're currently working on.
+
 The better your memory system, the more you *depend* on it being accurate. A system that "knows you well" but knows wrong things is worse than a blank slate — because at least with a blank slate, you know you're starting fresh.
 
 <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 my-6">
