@@ -1,6 +1,6 @@
 ---
 title: "8.2 Knowing and Doing: Context + Tools"
-description: "How a stateless model becomes a personal assistant — through the READ side and the ACT side."
+description: "How a stateless model becomes a personal assistant — through the KNOWING side and the DOING side."
 chapter: "Chapter 8"
 pageId: "08-02"
 ---
@@ -72,7 +72,7 @@ Context engineering tells the LLM what to *know*. Tools tell the LLM what it can
 
 <div class="grid md:grid-cols-2 gap-4 my-6">
   <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5">
-    <div class="font-bold text-on-surface mb-2">📖 Context Engineering — the READ side</div>
+    <div class="font-bold text-on-surface mb-2">📖 Context Engineering — the KNOWING side</div>
     <p class="text-sm text-on-surface/70 mb-3">Getting the right information into the LLM's context window.</p>
     <ul class="text-sm space-y-1.5 text-on-surface/80">
       <li>📁 Retrieving relevant case files for a lawyer</li>
@@ -81,7 +81,7 @@ Context engineering tells the LLM what to *know*. Tools tell the LLM what it can
     </ul>
   </div>
   <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5">
-    <div class="font-bold text-on-surface mb-2">🤝 Tools — the ACT side</div>
+    <div class="font-bold text-on-surface mb-2">🤝 Tools — the DOING side</div>
     <p class="text-sm text-on-surface/70 mb-3">Letting the LLM execute actions in the world.</p>
     <ul class="text-sm space-y-1.5 text-on-surface/80">
       <li>📧 Drafting and sending an email</li>
@@ -90,6 +90,8 @@ Context engineering tells the LLM what to *know*. Tools tell the LLM what it can
     </ul>
   </div>
 </div>
+
+Context engineering often uses tools too — like RAG for retrieval — but the goal is gathering information, not changing the world.
 
 The lawyer example from earlier is mostly context engineering: fetch the right case files to read. But a fuller assistant would also need tools: run a legal database query, draft and file a document, check a court deadline.
 

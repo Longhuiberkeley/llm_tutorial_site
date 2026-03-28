@@ -272,7 +272,7 @@
                     8.2 Knowing and Doing: Context + Tools
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    How a stateless model becomes a personal assistant — through the READ side and the ACT side.
+                    How a stateless model becomes a personal assistant — through the KNOWING side and the DOING side.
                 </p>
             </header>
 
@@ -336,7 +336,7 @@
 <p>Context engineering tells the LLM what to <em>know</em>. Tools tell the LLM what it can <em>do</em>.</p>
 <div class="grid md:grid-cols-2 gap-4 my-6">
   <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5">
-    <div class="font-bold text-on-surface mb-2">📖 Context Engineering — the READ side</div>
+    <div class="font-bold text-on-surface mb-2">📖 Context Engineering — the KNOWING side</div>
     <p class="text-sm text-on-surface/70 mb-3">Getting the right information into the LLM's context window.</p>
     <ul class="text-sm space-y-1.5 text-on-surface/80">
       <li>📁 Retrieving relevant case files for a lawyer</li>
@@ -345,7 +345,7 @@
     </ul>
   </div>
   <div class="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5">
-    <div class="font-bold text-on-surface mb-2">🤝 Tools — the ACT side</div>
+    <div class="font-bold text-on-surface mb-2">🤝 Tools — the DOING side</div>
     <p class="text-sm text-on-surface/70 mb-3">Letting the LLM execute actions in the world.</p>
     <ul class="text-sm space-y-1.5 text-on-surface/80">
       <li>📧 Drafting and sending an email</li>
@@ -355,6 +355,7 @@
   </div>
 </div>
 
+<p>Context engineering often uses tools too — like RAG for retrieval — but the goal is gathering information, not changing the world.</p>
 <p>The lawyer example from earlier is mostly context engineering: fetch the right case files to read. But a fuller assistant would also need tools: run a legal database query, draft and file a document, check a court deadline.</p>
 <p>A software assistant flips the balance: knowing the codebase is context engineering; but <em>running the tests</em>, <em>reading the error output</em>, <em>committing the fix</em> — those are tools.</p>
 <p>In practice, agents interleave both in a continuous loop. This maps directly to the <strong>Perceive → Plan → Act → Observe</strong> cycle: perceiving is context engineering (reading what&#39;s relevant), acting is tools (doing something in the world), and observing brings the tool&#39;s result back as new context for the next step.</p>
