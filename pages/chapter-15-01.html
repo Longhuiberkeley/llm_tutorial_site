@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>4.1 Counting Problems — Pattern Matching, Not Math - AI Unpacked</title>
+    <title>15.1 How I Built This - AI Unpacked</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -74,8 +74,8 @@
                 </a><a href="chapter-03-03.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">3.3 The Full Sandwich — System Prompts & Custom Spaces</span>
-                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
-                    <span class="material-symbols-outlined text-sm text-accent">school</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 4</div><a href="chapter-04-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">4.1 Counting Problems — Pattern Matching, Not Math</span>
                 </a><a href="chapter-04-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
@@ -257,8 +257,8 @@
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
-                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 15</div><a href="chapter-15-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 15</div><a href="chapter-15-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
+                    <span class="material-symbols-outlined text-sm text-accent">school</span>
                     <span class="text-sm font-medium">15.1 How I Built This</span>
                 </a>
             </nav>
@@ -270,99 +270,105 @@
                 <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
                     <a href="../index.html" class="hover:underline">Overview</a>
                     <span class="material-symbols-outlined text-xs">chevron_right</span>
-                    <span>Chapter 4</span>
+                    <span>Chapter 15</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    4.1 Counting Problems — Pattern Matching, Not Math
+                    15.1 How I Built This
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Why LLMs can't reliably count or do math — they predict patterns, not compute.
+                    The story of building this tutorial — from curriculum to code, with AI as a collaborator.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
-                <h2>🎯 Core Goals</h2>
-<ul>
-<li>Understand why LLMs struggle with basic spelling and counting tasks.</li>
-<li>Connect this limitation back to tokenization.</li>
-</ul>
+                <h2>🎯 Why This Exists</h2>
 <div class="callout callout-tldr">
-    Because LLMs read in &quot;chunks&quot; (tokens) rather than individual letters, asking an LLM to count the letters in a word is like asking you to count the individual threads in a sweater while standing 10 feet away.
+    Friends and colleagues kept asking me the same thing: &quot;Why isn&#39;t AI doing what I asked?&quot; After years working across data analytics, automotive software, computer vision, and medical AI — I realized the gap was never about intelligence. It was about intuition. So I built this.
 </div>
 
 
-<h2>👁️ Visuals &amp; Interactives</h2>
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
-    <div class="text-center mb-8">
-        <h3 class="text-xl font-bold font-headline mb-1">The "Strawberry" Test</h3>
-        <p class="text-sm text-on-surface-variant italic">Why LLMs struggle to count letters</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-8 items-center">
-        <!-- Input -->
-        <div class="space-y-4">
-            <div class="p-6 bg-surface-container-lowest rounded-xl border-2 border-outline-variant text-center">
-                <div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">The Question:</div>
-                <div class="text-lg font-bold">"How many 'r's are in strawberry?"</div>
-            </div>
-            
-            <div class="bg-surface-container-highest rounded-xl p-4 text-[10px] font-mono">
-                <div class="font-bold mb-2">What the LLM sees (Tokens):</div>
-                <div class="flex gap-2">
-                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">straw</span>
-                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded">berry</span>
-                </div>
-                <p class="mt-3 text-on-surface-variant opacity-60 italic">It doesn't see the individual 'r's inside the chunks!</p>
-            </div>
-        </div>
-
-        <!-- Result -->
-        <div class="p-6 bg-surface-container-lowest rounded-xl border-2 border-error relative">
-            <div class="text-[10px] font-bold uppercase tracking-widest text-error mb-2">🤖 AI Response:</div>
-            <div class="text-lg font-bold text-error">"There are 2 'r's in strawberry."</div>
-            <div class="mt-4 text-xs italic">Reality check: s-t-<strong>r</strong>-a-w-b-e-<strong>r</strong>-<strong>r</strong>-y (There are 3!)</div>
-            
-            <!-- Red X -->
-            <div class="absolute -top-4 -right-4 bg-error text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">X</div>
-        </div>
+<p>I&#39;ve worn a lot of hats. Project management in data analytics. Automotive software engineering — the compliance side, control theory, sensor fusion. Computer vision and deep learning research. Even medical AI, specializing in uncertainty quantification and vision processing.</p>
+<p>Through all of it, the people around me kept hitting the same wall with AI. Not because they weren&#39;t smart — because nobody had explained <em>how these things actually think</em>. Or more accurately, how they <em>don&#39;t</em> think.</p>
+<h2>💡 The Core Philosophy</h2>
+<p>The most important thing about understanding LLMs is <strong>not</strong> the algebra. It&#39;s not the attention equations or the loss functions. It&#39;s building the right mental model — the kind of intuition that lets you predict when AI will nail it and when it&#39;ll confidently make something up.</p>
+<p>That&#39;s what this course is. Every analogy, every interactive, every chapter — designed to help you <em>conceptualize</em> how these systems work so you can actually use them well.</p>
+<div class="flex justify-center my-12">
+    <div class="equation-banner px-10 py-6 rounded-full inline-flex items-center gap-4 rotate-[-1deg]">
+        <span class="text-2xl md:text-3xl font-extrabold font-headline text-center">Build intuition first — use AI with confidence</span>
     </div>
 </div>
 
+<h2>🛠️ How It Actually Got Built</h2>
+<p>Here&#39;s the honest process, step by step:</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 1</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Typed the curriculum from scratch</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Key points, analogies, structure — all from my head first. Things like "context poisoning should go... somewhere. Which chapter?"</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 2</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Used an LLM to refine and organize</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Back-and-forth iterations to check placement, fill gaps, and stress-test the flow. Multiple rounds of "does this make sense here?"</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 3</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">LLM session for the technical plan</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">I wanted this on GitHub Pages — no server, no complexity, just static files anyone can fork. We mapped out the architecture together.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 4</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Generated the first chapter + template</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">I originally used Gemini's Stitch UI/UX tool to scaffold the visual design, then iterated from there.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 5</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Read chapter 1, fixed what wasn't right</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Some content from a lesser model had subtle issues — oversimplifications, wrong emphasis. The kind of thing only a human who <em>knows the material</em> would catch.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 6</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Repeated for all chapters</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Each one followed the same loop: generate a draft, read carefully, fix content, refine visuals. Easier one by one than batching.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 7</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Fixed content chapter by chapter</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">A dedicated pass through every page, checking accuracy, tone, and flow.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 8</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Used a smarter model to review everything</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Final quality pass across the whole site — catching inconsistencies, checking analogies held up, flagging anything off.</p>
+    </div>
+</div>
 
-<h2>📝 Key Concepts</h2>
-<ul>
-<li><strong>The Strawberry Problem:</strong> If you ask an LLM &quot;How many &#39;r&#39;s are in strawberry?&quot;, it often says 2. Why? Because it sees the word as two tokens: &quot;straw&quot; and &quot;berry&quot;. It doesn&#39;t analyze the individual letters. For us humans, we can break down &quot;straw&quot; letter by letter: s, t, r, a, w. But for an LLM, &quot;straw&quot; is its own Lego block — it can&#39;t be broken further.</li>
-<li><strong>Math vs. Language:</strong> LLMs are calculators of <em>language</em>, not math. When they do math correctly, it&#39;s often because they&#39;ve seen that exact math problem (like 2+2=4) millions of times in their training data, not because they are actually computing it.</li>
-<li><strong>Pattern Matching:</strong> If you ask an LLM to add long strings of numbers, it might guess a plausible-sounding sum based on patterns it&#39;s seen before, rather than performing actual addition.</li>
-</ul>
-<div class="callout callout-error">
-    Never trust an LLM to count the exact number of words, characters, or sentences in a paragraph. It is physically incapable of seeing the text at that granular level without specialized tools!
+<h2>🤔 What I Learned (Honestly)</h2>
+<p>I still overestimate what AI can do sometimes. It got some definitions subtly wrong — maybe from an earlier knowledge cutoff, maybe from training data quirks. And I&#39;ll be honest: I was sometimes lazy. I didn&#39;t always type out every detail I wanted, hoping the model would fill in the gaps. Sometimes it did. Sometimes it filled them with confident nonsense.</p>
+<p>The biggest lesson: <strong>AI-assisted doesn&#39;t mean AI-authored.</strong> Every page needed human judgment — the kind that comes from actually understanding the subject matter, not just being able to generate text about it.</p>
+<p>Looking back, this whole site took about <strong>5 days</strong>. And if I&#39;d followed my own advice — sat down, wrote more of the course content myself, had the LLM help me with the gaps, and spent more time on the overall flow — it probably would&#39;ve been done faster. Part of the process was me wanting to see how automatic and smart Gemini 3 and the Gemini CLI had become. Curiosity is a valid reason to build things, even if it&#39;s not the most efficient path.</p>
+<div class="callout callout-dyk">
+    <strong>Tools I used:</strong> Claude Code and Gemini CLI for development. Claude Opus and Claude Sonnet for content generation and review. A bit of GLM family models for light work and minor edits. I&#39;m just sharing what I used — sticking with one tool is perfectly fine and probably preferred. Use whatever works for you.
 </div>
 
 
-<!--
-Quiz Box Component
-Generated by build.js from :::quiz blocks in markdown.
--->
-<div id="quiz-04-01" class="quiz-container bg-[#F9F9F9] border border-outline-variant rounded-xl p-6 mt-10">
-    <div class="font-bold mb-4 flex items-center gap-2">
-        <span>🧠</span>
-        <span>QUIZ</span>
-    </div>
-    <p class="mb-4">Why can't LLMs reliably count the letters in a word?</p>
-    <div class="space-y-2">
-                <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
-            They haven't been trained on enough counting examples
-        </div>
-        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
-            They process text as token chunks, not individual characters
-        </div>
-        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
-            Counting is too complex for any AI system
-        </div>
-    </div>
-    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
-</div>
+<p>If you want to know more about what I do and how I can help, check out the <a href="about.html" class="text-primary font-bold hover:underline">About &amp; Contact</a> page.</p>
 
             </div>
 
@@ -372,10 +378,10 @@ Generated by build.js from :::quiz blocks in markdown.
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-03-03.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 3.3 The Full Sandwich — System Prompts & Custom Spaces</a>
+                    <a href="chapter-14-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 14.1 Using LLMs to Learn</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-04-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">4.2 Hallucination — Confident Fabrication <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="../index.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">Back to Overview <span class="material-symbols-outlined">home</span></a>
                 </div>
             </nav>
         </main>

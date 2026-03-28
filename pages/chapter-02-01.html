@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>2.1 What is Tokenization? - LLM Tutorial</title>
+    <title>2.1 What is Tokenization? - AI Unpacked</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -16,10 +16,11 @@
     <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
         <a href="../index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
             <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
-            LLM Tutorial
+            AI Unpacked
         </a>
         <div class="flex items-center gap-6">
-            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="../pages/about.html">About</a>
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="../pages/who-is-this-for.html">Who is this for?</a>
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="../pages/about.html">About & Contact</a>
         </div>
     </nav>
 
@@ -256,6 +257,9 @@
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 15</div><a href="chapter-15-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                    <span class="text-sm font-medium">15.1 How I Built This</span>
                 </a>
             </nav>
         </aside>
@@ -394,11 +398,35 @@
 </script>
 
 
+<p>The above is a simplified toy example — in reality, LLMs have vocabularies of 30,000–100,000+ tokens. A helpful rule of thumb from OpenAI: <strong>one token generally corresponds to ~4 characters</strong> of common English text, or roughly ¾ of a word. That means <strong>100 tokens ≈ 75 words</strong>.</p>
+<p>Common English words like &quot;guitar&quot;, &quot;William&quot;, and &quot;amazing&quot; each fit neatly as a single token. But what about less common or compound words?</p>
 <div class="callout callout-dyk">
-    <strong>Play with Tokenization!</strong>
-Want to see exactly how an LLM chops up your text? Try the <a href="https://huggingface.co/spaces/Xenova/the-tokenizer-playground">Tokenizer Playground by Xenova</a>. Type in any word or sentence and watch how it gets sliced into colorful token chunks — this is exactly what the LLM&#39;s &quot;eyes&quot; see before processing begins!
+
+<p><strong>🔬 Play with Tokenization!</strong></p>
+<p>Want to see exactly how an LLM chops up your text? Try the <a href="https://huggingface.co/spaces/Xenova/the-tokenizer-playground">Tokenizer Playground by Xenova</a>. Type in any word or sentence and watch how it gets sliced into colorful token chunks — this is exactly what the LLM&#39;s &quot;eyes&quot; see before processing begins!</p>
+<p>Here are some fun words to try — they look like they might be single tokens, but are they? Copy them and paste into the playground to find out:</p>
+<div class="flex items-center gap-2 mt-3 mb-2">
+<code id="tk-try-words" class="block flex-1 bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 text-sm text-on-surface break-all">tokenization antiestablishment 20250328 Schadenfreude McNugget someRandomFunction() haHahaha</code>
+<button id="tk-copy-btn" class="flex-shrink-0 p-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant transition-colors cursor-pointer border border-outline-variant" title="Copy to clipboard"><span class="material-symbols-outlined text-base">content_copy</span></button>
+<span id="tk-copy-msg" class="text-xs font-semibold text-green-700 opacity-0 transition-opacity duration-300">Copied!</span>
 </div>
 
+<script>
+document.getElementById('tk-copy-btn').addEventListener('click', function() {
+    var btn = this;
+    var msg = document.getElementById('tk-copy-msg');
+    navigator.clipboard.writeText(document.getElementById('tk-try-words').textContent).then(function() {
+        btn.innerHTML = '<span class="material-symbols-outlined text-base">check</span>';
+        msg.style.opacity = '1';
+        setTimeout(function() {
+            btn.innerHTML = '<span class="material-symbols-outlined text-base">content_copy</span>';
+            msg.style.opacity = '0';
+        }, 1500);
+    });
+});
+</script>
+
+</div>
 
 <h2>📝 Key Concepts</h2>
 <ul>
@@ -457,7 +485,7 @@ Generated by build.js from :::quiz blocks in markdown.
 
     <!-- Footer -->
     <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
-        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 LLM Tutorial. Built with 🧠.</p>
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 Long. Made with curiosity.</p>
     </footer>
 
     <!-- Load scripts -->

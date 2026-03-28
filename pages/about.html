@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>About - LLM Tutorial</title>
+    <title>About & Contact - AI Unpacked</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -16,110 +16,122 @@
     <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
         <a href="../index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
             <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
-            LLM Tutorial
+            AI Unpacked
         </a>
         <div class="flex items-center gap-6">
-            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="about.html">About</a>
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="who-is-this-for.html">Who is this for?</a>
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="about.html">About & Contact</a>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="pt-32 pb-20 px-6 md:px-12 max-w-4xl mx-auto">
-        <header class="mb-16 fade-in">
+        <header class="mb-12 fade-in">
             <h1 class="text-5xl md:text-6xl font-headline font-extrabold text-on-surface tracking-tight mb-6">
-                About This Tutorial
+                About & Contact
             </h1>
             <p class="text-xl text-on-surface-variant leading-relaxed">
-                An interactive, concept-focused journey to understand Large Language Models — no technical background required.
+                Hi, I'm <strong>Long</strong> — UC Berkeley Applied Math graduate, based in Hong Kong, serving clients globally.
             </p>
         </header>
 
-        <div class="space-y-12">
-            <!-- What is this? -->
-            <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
-                <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
-                    <span class="text-3xl">🎯</span>
-                    What is this?
-                </h2>
-                <p class="text-on-surface-variant leading-relaxed">
-                    This is a free, interactive tutorial that teaches you how Large Language Models (like ChatGPT, Claude, and Gemini) actually work. We break down complex concepts into bite-sized, interactive lessons that anyone can understand.
+        <!-- Motivation -->
+        <div class="mb-12">
+            <p class="text-on-surface-variant leading-relaxed text-lg">
+                Friends and colleagues kept asking me the same question: <em>"Why isn't AI doing what I asked?"</em> After years working across data analytics, automotive software, computer vision, and medical AI, I realized the gap wasn't intelligence — it was intuition. So I built this course to give people the mental models they need to actually work with AI, not just use it.
+            </p>
+        </div>
+
+        <!-- Equation Banner Tagline -->
+        <div class="flex justify-center mb-16">
+            <div class="equation-banner px-10 py-6 rounded-full inline-flex items-center gap-4 rotate-[-1deg]">
+                <span class="text-2xl md:text-3xl font-extrabold font-headline text-center">I help you with anything and everything AI</span>
+            </div>
+        </div>
+
+        <!-- What I Do -->
+        <div class="space-y-6 mb-16">
+            <h2 class="text-2xl font-headline font-bold text-on-surface mb-6">What I do</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-on-surface mb-2 flex items-center gap-2">
+                        <span class="text-xl">🧭</span> AI Strategy & Consulting
+                    </h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Figure out what your company should — and shouldn't — do with AI.</p>
+                </div>
+
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-on-surface mb-2 flex items-center gap-2">
+                        <span class="text-xl">🛠️</span> Implementation & Development
+                    </h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Available to build it, not just advise on it. From prototype to production.</p>
+                </div>
+
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-on-surface mb-2 flex items-center gap-2">
+                        <span class="text-xl">🎓</span> Corporate Training
+                    </h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">From executive briefings to hands-on team workshops, tailored to your level.</p>
+                </div>
+
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-on-surface mb-2 flex items-center gap-2">
+                        <span class="text-xl">⚙️</span> Process Automation
+                    </h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Identify what to automate, architect the solution, and ship it.</p>
+                </div>
+
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10 md:col-span-2">
+                    <h3 class="font-headline font-bold text-on-surface mb-2 flex items-center gap-2">
+                        <span class="text-xl">🔍</span> Technical Due Diligence
+                    </h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Evaluate AI vendors, review architectures, and assess feasibility — before you commit.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <section class="bg-secondary-container rounded-xl p-8 flex gap-6 items-start">
+            <span class="text-4xl leading-none">📧</span>
+            <div class="space-y-4">
+                <h4 class="font-bold text-on-secondary-container uppercase tracking-widest text-xs">Get in Touch</h4>
+                <p class="text-on-secondary-container font-medium text-lg leading-relaxed">
+                    Whether you're a 5-person startup or a 500-person enterprise — the same fundamentals apply, just at different scales. Let's talk.
                 </p>
-            </section>
-
-            <!-- Who is this for? -->
-            <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
-                <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
-                    <span class="text-3xl">👥</span>
-                    Who is this for?
-                </h2>
-                <ul class="text-on-surface-variant leading-relaxed space-y-2">
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary font-bold">•</span>
-                        <span><strong>Business professionals</strong> who want to understand AI to make better decisions</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary font-bold">•</span>
-                        <span><strong>Curious learners</strong> who want to peek under the hood of LLMs</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary font-bold">•</span>
-                        <span><strong>Anyone</strong> who uses ChatGPT but wonders "how does it actually do that?"</span>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- How does it work? -->
-            <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
-                <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
-                    <span class="text-3xl">⚡</span>
-                    How does it work?
-                </h2>
-                <p class="text-on-surface-variant leading-relaxed mb-4">
-                    Each chapter contains short pages with:
-                </p>
-                <ul class="text-on-surface-variant leading-relaxed space-y-2">
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary font-bold">•</span>
-                        <span><strong>Clear explanations</strong> with real-world examples</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary font-bold">•</span>
-                        <span><strong>Interactive demos</strong> that let you see concepts in action</span>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- Contact -->
-            <section class="bg-secondary-container rounded-xl p-8 flex gap-6 items-start">
-                <span class="text-4xl leading-none">📧</span>
-                <div class="space-y-4">
-                    <h4 class="font-bold text-on-secondary-container uppercase tracking-widest text-xs">Get in Touch</h4>
-                    <p class="text-on-secondary-container font-medium text-lg leading-relaxed">
-                        I built this tutorial to help people understand AI from the ground up. Whether you need
-                        <strong>business consulting</strong>, <strong>AI consulting</strong>, are looking to
-                        <strong>hire AI engineers</strong>, or want <strong>corporate training</strong> for your team
-                        — let's talk.
-                    </p>
-                    <div class="space-y-2 text-on-secondary-container">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-lg">person</span>
-                            <span><strong>Long</strong> — UC Berkeley Applied Math graduate</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-lg">location_on</span>
-                            <span>📍 Hong Kong · Serving clients globally</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-lg">work</span>
-                            <span>Project management, machine learning, computer vision, agentic software development, data analytics, automotive software development (ASPICE, sensor fusion)</span>
-                        </div>
+                <div class="space-y-2 text-on-secondary-container">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">person</span>
+                        <span><strong>Long</strong> — UC Berkeley Applied Math</span>
                     </div>
-                    <a href="mailto:longhui@berkeley.edu" class="inline-flex items-center gap-2 mt-2 text-primary font-bold hover:underline text-lg">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">location_on</span>
+                        <span>Hong Kong · Serving clients globally</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="mailto:longhui@berkeley.edu" class="inline-flex items-center gap-2 text-primary font-bold hover:underline text-lg">
                         <span class="material-symbols-outlined text-xl">mail</span>
                         longhui@berkeley.edu
                     </a>
+                    <a href="https://www.linkedin.com/in/longhui1996" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary font-bold hover:underline text-lg">
+                        <span class="material-symbols-outlined text-xl">link</span>
+                        LinkedIn
+                    </a>
                 </div>
-            </section>
+            </div>
+        </section>
+
+        <!-- How I Built This link -->
+        <div class="mt-12 mb-16">
+            <a href="chapter-15-01.html" class="group bg-surface-container-low rounded-xl p-6 flex items-center gap-4 hover:bg-surface-container hover:shadow-md transition-all">
+                <span class="text-3xl">🏗️</span>
+                <div>
+                    <p class="font-headline font-bold text-on-surface group-hover:text-accent transition-colors">Want to see how I work?</p>
+                    <p class="text-on-surface-variant text-sm">Read how I built this entire course — from curriculum design to AI-assisted development.</p>
+                </div>
+                <span class="material-symbols-outlined text-primary ml-auto group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
         </div>
 
         <!-- Back to Home -->
@@ -133,7 +145,7 @@
 
     <!-- Footer -->
     <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
-        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 LLM Tutorial. Built with 🧠.</p>
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 Long. Made with curiosity.</p>
     </footer>
 
     <!-- Load scripts -->

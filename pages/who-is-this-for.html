@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Who is this for? - AI Unpacked</title>
+    <script src="../js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../css/animations.css"/>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-8 py-4 max-w-full">
+        <a href="../index.html" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group">
+            <span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity">home</span>
+            AI Unpacked
+        </a>
+        <div class="flex items-center gap-6">
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="who-is-this-for.html">Who is this for?</a>
+            <a class="font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="about.html">About & Contact</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 px-6 md:px-12 max-w-4xl mx-auto">
+        <header class="mb-16 fade-in">
+            <h1 class="text-5xl md:text-6xl font-headline font-extrabold text-on-surface tracking-tight mb-6">
+                Who is this for?
+            </h1>
+            <p class="text-xl text-on-surface-variant leading-relaxed">
+                An interactive, concept-focused journey to understand Large Language Models — no technical background required.
+            </p>
+        </header>
+
+        <div class="space-y-12">
+            <!-- What is this? -->
+            <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+                <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
+                    <span class="text-3xl">🎯</span>
+                    What is this?
+                </h2>
+                <p class="text-on-surface-variant leading-relaxed">
+                    This is a free, interactive tutorial that teaches you how Large Language Models (like ChatGPT, Claude, and Gemini) actually work. We break down complex concepts into bite-sized, interactive lessons that anyone can understand.
+                </p>
+            </section>
+
+            <!-- Who is this for? -->
+            <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+                <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
+                    <span class="text-3xl">👥</span>
+                    Who is this for?
+                </h2>
+                <ul class="text-on-surface-variant leading-relaxed space-y-2">
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary font-bold">•</span>
+                        <span><strong>Business professionals</strong> who want to understand AI to make better decisions</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary font-bold">•</span>
+                        <span><strong>Curious learners</strong> who want to peek under the hood of LLMs</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary font-bold">•</span>
+                        <span><strong>Anyone</strong> who uses ChatGPT but wonders "how does it actually do that?"</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- How does it work? -->
+            <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+                <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
+                    <span class="text-3xl">⚡</span>
+                    How does it work?
+                </h2>
+                <p class="text-on-surface-variant leading-relaxed mb-4">
+                    Each chapter contains short pages with:
+                </p>
+                <ul class="text-on-surface-variant leading-relaxed space-y-2">
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary font-bold">•</span>
+                        <span><strong>Clear explanations</strong> with real-world examples</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary font-bold">•</span>
+                        <span><strong>Interactive demos</strong> that let you see concepts in action</span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="mt-16">
+            <a href="../index.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back to Course Overview
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 mt-20 bg-background border-t border-outline-variant/10 flex flex-col items-center justify-center gap-4 text-center">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 Long. Made with curiosity.</p>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

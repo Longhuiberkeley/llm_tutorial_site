@@ -112,3 +112,10 @@ groups:
         status: "active"
         firstPage: "chapter-14-01.html"
         totalPages: 1
+      - id: "15"
+        title: "How I Built This"
+        description: "The story behind this tutorial — curriculum design, AI-assisted development, and lessons learned."
+        icon: "🏗️"
+        status: "active"
+        firstPage: "chapter-15-01.html"
+        totalPages: 1
