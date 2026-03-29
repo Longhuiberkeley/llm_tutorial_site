@@ -155,7 +155,7 @@ function fsdvTogglePeek() {
 
         // Show LLM section
         document.getElementById('fsdv-llm-section').classList.remove('hidden');
-        document.getElementById('fsdv-output').textContent = '💬 "' + turn.llm.substring(0, 60) + (turn.llm.length > 60 ? '...' : '') + '"';
+        document.getElementById('fsdv-output').textContent = '⬅️ Response generated → see chat';
 
         // Update controls
         document.getElementById('fsdv-counter').textContent = 'Turn ' + fsdvCurrent + ' / 3';

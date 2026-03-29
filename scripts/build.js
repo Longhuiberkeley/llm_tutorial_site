@@ -58,6 +58,11 @@ async function build() {
     });
 
     pages.sort((a, b) => {
+        // Special chapters always go last
+        const aSpecial = a.chapter.toLowerCase() === 'special';
+        const bSpecial = b.chapter.toLowerCase() === 'special';
+        if (aSpecial && !bSpecial) return 1;
+        if (!aSpecial && bSpecial) return -1;
         if (a.chapter !== b.chapter) return a.chapter.localeCompare(b.chapter, undefined, { numeric: true, sensitivity: 'base' });
         return a.pageId.localeCompare(b.pageId, undefined, { numeric: true, sensitivity: 'base' });
     });
@@ -230,6 +235,7 @@ function generateIndex(structure) {
 
         group.chapters.forEach(chapter => {
             const isComingSoon = chapter.status !== 'active';
+            const chapterLabel = chapter.special ? 'SPECIAL' : `Chapter ${chapter.id}`;
             const linkTag = isComingSoon ? 'div' : `a href="pages/${chapter.firstPage}"`;
             const endTag = isComingSoon ? 'div' : 'a';
             const opacityClass = isComingSoon ? 'opacity-60' : '';
@@ -240,7 +246,7 @@ function generateIndex(structure) {
             groupsHtml += `
                     <${linkTag} class="group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden ${opacityClass}">
                         <span class="absolute top-4 right-6 text-4xl opacity-20 ${!isComingSoon ? 'group-hover:opacity-100 transition-opacity' : ''}">${chapter.icon}</span>
-                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">Chapter ${chapter.id}</p>
+                        <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest">${chapterLabel}</p>
                         <h3 class="text-xl font-headline font-bold text-on-surface mb-4">${chapter.title}</h3>
                         <p class="text-sm text-on-surface-variant leading-relaxed mb-6">${chapter.description}</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">

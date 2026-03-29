@@ -1,8 +1,8 @@
 ---
-title: "15.1 How I Built This"
+title: "How I Built This"
 description: "The story of building this tutorial — from curriculum to code, with AI as a collaborator."
-chapter: "Chapter 15"
-pageId: "15-01"
+chapter: "Special"
+pageId: "special-01"
 ---
 
 ## 🎯 Why This Exists

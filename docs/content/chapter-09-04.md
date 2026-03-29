@@ -54,7 +54,7 @@ An LLM can describe what's in a photo accurately, but generating a photorealisti
 
 **Building RAG when your data fits in one file.** — If your knowledge base is small enough to paste into the context window, just paste it. RAG adds complexity you may not need.
 
-**Your data format is your real bottleneck.** — If 80% of your documents are scanned PDFs, expect 80% of your project to be data preparation. Simple formats (Markdown, plain text) win.
+**Your data format is your real bottleneck — and the model may not have seen what you uploaded.** — Between your file and the LLM's response, the platform may run OCR, strip images, flatten layouts, or extract only a transcript from a video. Tables lose structure, multi-column text gets scrambled, diagrams disappear. The LLM answers confidently based on whatever survived that process — and won't tell you what went missing. Simple formats (Markdown, plain text) always win.
 
 **A memory system that stores wrong info is worse than none.** — Stale or incorrect facts make the LLM confidently wrong. A flawed memory system is more dangerous than starting fresh.
 

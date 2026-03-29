@@ -38,8 +38,38 @@
             </div>
         </div>
 
-        <!-- Step 3: Phone recall — multiple choice -->
+        <!-- Step 3: Math distraction 2 -->
         <div id="hf-step-3" class="hidden text-center space-y-6">
+            <div class="p-8 bg-surface-container-lowest rounded-xl border-2 border-outline-variant">
+                <div class="text-xs font-bold uppercase tracking-widest mb-4 opacity-60">One more!</div>
+                <div class="text-4xl font-bold text-primary mb-6">156 ÷ 12 = ?</div>
+                <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+                    <button onclick="hfMath2(this, false)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">11</button>
+                    <button onclick="hfMath2(this, true)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">13</button>
+                    <button onclick="hfMath2(this, false)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">15</button>
+                    <button onclick="hfMath2(this, false)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">17</button>
+                </div>
+                <div id="hf-math2-feedback" class="hidden mt-4 text-sm font-bold"></div>
+            </div>
+        </div>
+
+        <!-- Step 4: Math distraction 3 -->
+        <div id="hf-step-4" class="hidden text-center space-y-6">
+            <div class="p-8 bg-surface-container-lowest rounded-xl border-2 border-outline-variant">
+                <div class="text-xs font-bold uppercase tracking-widest mb-4 opacity-60">Last one, promise!</div>
+                <div class="text-4xl font-bold text-primary mb-6">8 × 17 = ?</div>
+                <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+                    <button onclick="hfMath3(this, false)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">126</button>
+                    <button onclick="hfMath3(this, true)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">136</button>
+                    <button onclick="hfMath3(this, false)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">146</button>
+                    <button onclick="hfMath3(this, false)" class="quiz-option py-3 rounded-xl border-2 border-outline-variant font-bold text-lg hover:border-primary transition-all">128</button>
+                </div>
+                <div id="hf-math3-feedback" class="hidden mt-4 text-sm font-bold"></div>
+            </div>
+        </div>
+
+        <!-- Step 5: Phone recall — multiple choice -->
+        <div id="hf-step-5" class="hidden text-center space-y-6">
             <div class="p-8 bg-surface-container-lowest rounded-xl border-2 border-primary">
                 <div class="text-lg font-bold mb-2">Quick: What was Peter's phone number?</div>
                 <p class="text-xs text-on-surface-variant mb-6 italic">Pick the one you remember…</p>
@@ -61,7 +91,7 @@
     <div>
         <div class="text-center mb-8">
             <h3 class="text-xl font-bold font-headline mb-1">2. How the LLM Manages a Full Head</h3>
-            <p class="text-sm text-on-surface-variant italic">Same conversation — different strategies for handling a full context window.</p>
+            <p class="text-sm text-on-surface-variant italic">Imagine you've been chatting over the last few days and the bundle has hit the model's context window limit. What happens next?</p>
         </div>
 
         <!-- Strategy Buttons -->
@@ -87,7 +117,7 @@
 
 <script>
 function hfNext(step) {
-    [1,2,3].forEach(function(s) {
+    [1,2,3,4,5].forEach(function(s) {
         document.getElementById('hf-step-' + s).classList.add('hidden');
     });
     document.getElementById('hf-step-' + step).classList.remove('hidden');
@@ -101,15 +131,53 @@ function hfMath(btn, correct) {
         btn.style.borderColor = 'var(--success, #388E3C)';
         btn.style.color = 'var(--success, #388E3C)';
         fb.style.color = 'var(--success, #388E3C)';
-        fb.textContent = '✅ Correct! 17 × 23 = 391. Now… let\'s test that memory.';
+        fb.textContent = '✅ Correct! 17 × 23 = 391.';
     } else {
         btn.style.borderColor = 'var(--error)';
         btn.style.color = 'var(--error)';
         fb.style.color = 'var(--error)';
-        fb.textContent = '❌ Not quite — it\'s 391. Now… let\'s test that memory.';
+        fb.textContent = '❌ Not quite — it\'s 391.';
     }
     fb.classList.remove('hidden');
     setTimeout(function() { hfNext(3); }, 1800);
+}
+
+function hfMath2(btn, correct) {
+    var allBtns = btn.closest('.grid').querySelectorAll('button');
+    allBtns.forEach(function(b) { b.disabled = true; });
+    var fb = document.getElementById('hf-math2-feedback');
+    if (correct) {
+        btn.style.borderColor = 'var(--success, #388E3C)';
+        btn.style.color = 'var(--success, #388E3C)';
+        fb.style.color = 'var(--success, #388E3C)';
+        fb.textContent = '✅ Correct! 156 ÷ 12 = 13.';
+    } else {
+        btn.style.borderColor = 'var(--error)';
+        btn.style.color = 'var(--error)';
+        fb.style.color = 'var(--error)';
+        fb.textContent = '❌ Not quite — it\'s 13.';
+    }
+    fb.classList.remove('hidden');
+    setTimeout(function() { hfNext(4); }, 1800);
+}
+
+function hfMath3(btn, correct) {
+    var allBtns = btn.closest('.grid').querySelectorAll('button');
+    allBtns.forEach(function(b) { b.disabled = true; });
+    var fb = document.getElementById('hf-math3-feedback');
+    if (correct) {
+        btn.style.borderColor = 'var(--success, #388E3C)';
+        btn.style.color = 'var(--success, #388E3C)';
+        fb.style.color = 'var(--success, #388E3C)';
+        fb.textContent = '✅ Correct! 8 × 17 = 136. Now… let\'s test that memory.';
+    } else {
+        btn.style.borderColor = 'var(--error)';
+        btn.style.color = 'var(--error)';
+        fb.style.color = 'var(--error)';
+        fb.textContent = '❌ Not quite — it\'s 136. Now… let\'s test that memory.';
+    }
+    fb.classList.remove('hidden');
+    setTimeout(function() { hfNext(5); }, 1800);
 }
 
 function hfPhone(btn, correct) {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>13.1 Why LLM Projects Are Different - AI Unpacked</title>
+    <title>How I Built This - AI Unpacked</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -236,8 +236,8 @@
                 </a><a href="chapter-12-09.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">12.9 ROI Estimation Framework</span>
-                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
-                    <span class="material-symbols-outlined text-sm text-accent">school</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 13</div><a href="chapter-13-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">13.1 Why LLM Projects Are Different</span>
                 </a><a href="chapter-13-02.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
@@ -257,8 +257,8 @@
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
-                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">SPECIAL</div><a href="special-how-i-built-this-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">SPECIAL</div><a href="special-how-i-built-this-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
+                    <span class="material-symbols-outlined text-sm text-accent">school</span>
                     <span class="text-sm font-medium">How I Built This</span>
                 </a>
             </nav>
@@ -270,265 +270,106 @@
                 <nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
                     <a href="../index.html" class="hover:underline">Overview</a>
                     <span class="material-symbols-outlined text-xs">chevron_right</span>
-                    <span>Chapter 13</span>
+                    <span>Special</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    13.1 Why LLM Projects Are Different
+                    How I Built This
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    LLMs don't remove the need for project management — they amplify the consequences of skipping it.
+                    The story of building this tutorial — from curriculum to code, with AI as a collaborator.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
-                <h2>🎯 Core Goals</h2>
-<ul>
-<li>Explain how LLM-assisted projects create a velocity trap that obscures missing project foundations.</li>
-<li>Show that complacency — accepting without reviewing — is where most debt accumulates.</li>
-<li>Introduce why breaking down tasks matters for both humans and LLMs.</li>
-</ul>
+                <h2>🎯 Why This Exists</h2>
 <div class="callout callout-tldr">
-    LLMs don&#39;t remove the need for project management — they amplify the cost of skipping it. The same real-world concerns exist in every project: who is the user, what are the requirements, how does it handle edge cases. LLMs just move fast enough that you might not notice those questions were never answered.
+    Friends and colleagues kept asking me the same thing: &quot;Why isn&#39;t AI doing what I asked?&quot; After years working across data analytics, automotive software, computer vision, and medical AI — I realized the gap was never about intelligence. It was about intuition. So I built this.
 </div>
 
 
-<h2>⚡ The Velocity Trap: The Illusion of Completeness</h2>
-<p>Imagine you say to an LLM: &quot;Build me a website where I can learn to solve chess puzzles.&quot;</p>
-<p>Within hours, something appears. It has a UI. It shows puzzles. It might even have a hint system. It looks done.</p>
-<p>But step back. Who exactly is the user? Beginners or advanced players? Is there a login system, or is everything anonymous? How do you track which puzzles a user has solved? What happens on mobile? What if someone wants to share a puzzle? If this were a paid product, how does billing work? What&#39;s the data model? Where are the puzzles stored?</p>
-<p>None of these questions disappeared because an LLM generated some HTML. They were simply never asked. The LLM moved fast enough that the gap wasn&#39;t visible yet.</p>
-<p>This is the <strong>velocity trap</strong>: the speed of LLM-assisted work creates the illusion of completeness. A prototype that looks finished can be missing its entire foundation — and you won&#39;t discover that until you try to build on it.</p>
-<p><strong>Velocity without direction is drift, not progress.</strong></p>
-<div class="callout callout-dyk">
-    This is the same problem in every fast-moving project — LLM-assisted or not. The difference is scale. In traditional development, building a week&#39;s worth of code without clear requirements is a recoverable mistake. With LLMs, you can build a month&#39;s worth in a day. The consequences of skipping the foundation accumulate proportionally faster.
+<p>I&#39;ve worn a lot of hats. Project management in data analytics. Automotive software engineering — the compliance side, control theory, sensor fusion. Computer vision and deep learning research. Even medical AI, specializing in uncertainty quantification and vision processing.</p>
+<p>Through all of it, the people around me kept hitting the same wall with AI. Not because they weren&#39;t smart — because nobody had explained <em>how these things actually think</em>. Or more accurately, how they <em>don&#39;t</em> think.</p>
+<h2>💡 The Core Philosophy</h2>
+<p>The most important thing about understanding LLMs is <strong>not</strong> the algebra. It&#39;s not the attention equations or the loss functions. It&#39;s building the right mental model — the kind of intuition that lets you predict when AI will nail it and when it&#39;ll confidently make something up.</p>
+<p>That&#39;s what this course is. Every analogy, every interactive, every chapter — designed to help you <em>conceptualize</em> how these systems work so you can actually use them well.</p>
+<div class="flex justify-center my-12">
+    <div class="equation-banner px-10 py-6 rounded-full inline-flex items-center gap-4 rotate-[-1deg]">
+        <span class="text-2xl md:text-3xl font-extrabold font-headline text-center">Build intuition first — use AI with confidence</span>
+    </div>
 </div>
 
-
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
-    <div class="text-center mb-6">
-        <h3 class="text-xl font-bold font-headline mb-2">The Velocity Trap in Action</h3>
-        <p class="text-sm text-on-surface-variant">Toggle between two approaches and click a week to see what happens.</p>
-    </div>
-
-    <!-- Toggle -->
-    <div class="flex gap-2 justify-center mb-8">
-        <button onclick="setMode('loose', this)" id="apd-btn-loose"
-            class="apd-mode-btn px-5 py-2 rounded-full text-sm font-bold border-2 transition-all border-outline-variant bg-surface-container-lowest">
-            ⚡ Fast &amp; Loose
-        </button>
-        <button onclick="setMode('structured', this)" id="apd-btn-structured"
-            class="apd-mode-btn px-5 py-2 rounded-full text-sm font-bold border-2 transition-all border-outline-variant bg-surface-container-lowest">
-            🏗️ Structured
-        </button>
-    </div>
-
-    <!-- Timeline Nodes -->
-    <div class="relative mb-8">
-        <div class="absolute top-8 left-[16%] right-[16%] h-1 bg-outline-variant/40 rounded-full"></div>
-        <div class="flex justify-around">
-            <button onclick="selectWeek(1, this)" class="apd-week flex flex-col items-center gap-2 group z-10">
-                <div class="apd-circle w-16 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center font-black text-lg transition-all duration-300 shadow-sm group-hover:border-primary">W2</div>
-                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors">Week 2</span>
-            </button>
-            <button onclick="selectWeek(2, this)" class="apd-week flex flex-col items-center gap-2 group z-10">
-                <div class="apd-circle w-16 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center font-black text-lg transition-all duration-300 shadow-sm group-hover:border-primary">W6</div>
-                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors">Week 6</span>
-            </button>
-            <button onclick="selectWeek(3, this)" class="apd-week flex flex-col items-center gap-2 group z-10">
-                <div class="apd-circle w-16 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest flex items-center justify-center font-black text-lg transition-all duration-300 shadow-sm group-hover:border-primary">W12</div>
-                <span class="text-[10px] font-black uppercase tracking-wide text-on-surface-variant group-hover:text-primary transition-colors">Week 12</span>
-            </button>
+<h2>🛠️ How It Actually Got Built</h2>
+<p>Here&#39;s the honest process, step by step:</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 1</span>
         </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Typed the curriculum from scratch</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Key points, analogies, structure — all from my head first. Things like "context poisoning should go... somewhere. Which chapter?"</p>
     </div>
-
-    <!-- Detail Panel -->
-    <div id="apd-detail" class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-6 min-h-[160px] flex items-center justify-center transition-all duration-300">
-        <p class="text-sm text-on-surface-variant italic text-center">Select an approach above, then click a week to see what's happening.</p>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 2</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Used an LLM to refine and organize</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Back-and-forth iterations to check placement, fill gaps, and stress-test the flow. Multiple rounds of "does this make sense here?"</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 3</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">LLM session for the technical plan</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">I wanted this on GitHub Pages — no server, no complexity, just static files anyone can fork. We mapped out the architecture together.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 4</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Generated the first chapter + template</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">I originally used Gemini's Stitch UI/UX tool to scaffold the visual design, then iterated from there.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 5</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Read chapter 1, fixed what wasn't right</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Some content from a lesser model had subtle issues — oversimplifications, wrong emphasis. The kind of thing only a human who <em>knows the material</em> would catch.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 6</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Repeated for all chapters</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Each one followed the same loop: generate a draft, read carefully, fix content, refine visuals. Easier one by one than batching.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 7</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Fixed content chapter by chapter</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">A dedicated pass through every page, checking accuracy, tone, and flow.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Step 8</span>
+        </div>
+        <h4 class="font-headline font-bold text-on-surface mb-1">Used a smarter model to review everything</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Final quality pass across the whole site — catching inconsistencies, checking analogies held up, flagging anything off.</p>
     </div>
 </div>
 
-<script>
-(function() {
-    let currentMode = null;
-    let currentWeek = null;
-
-    const data = {
-        loose: {
-            label: '⚡ Fast & Loose',
-            color: 'border-orange-400',
-            bg: 'bg-orange-50',
-            weeks: {
-                1: {
-                    emoji: '😄',
-                    heading: 'Week 2 — Everything looks great!',
-                    details: [
-                        'Features appearing in hours. The demo is impressive.',
-                        'Stakeholders are excited. The team is energized.',
-                        'Nobody has asked: "What are the requirements?"',
-                        '⚠️ Foundation: code is being generated without a clear architecture or defined success criteria.'
-                    ],
-                    note: 'This is the intoxicating phase. Speed creates a feeling of progress. The problems are invisible.'
-                },
-                2: {
-                    emoji: '😬',
-                    heading: 'Week 6 — Something feels off',
-                    details: [
-                        'Adding a new feature takes longer than expected.',
-                        'Fixing a bug in one place breaks something in another.',
-                        'The codebase feels "sticky" — hard to move through.',
-                        '⚠️ Root cause: 4 weeks of accepted-without-review code has created hidden dependencies.'
-                    ],
-                    note: 'The debt accumulated invisibly. It\'s now starting to slow things down. Most teams push through rather than stopping to address it.'
-                },
-                3: {
-                    emoji: '😰',
-                    heading: 'Week 12 — The reckoning',
-                    details: [
-                        'A one-day change is taking three days of archaeology.',
-                        'Nobody fully understands what was built in weeks 1–4.',
-                        'The same logic exists in 4 different places with slight differences.',
-                        '🚨 The foundation cannot support new floors. Significant rework required.'
-                    ],
-                    note: 'The cost of fixing the foundation grows with each floor built on top of it. What would have taken 2 hours in week 1 now takes 2 days.'
-                }
-            }
-        },
-        structured: {
-            label: '🏗️ Structured',
-            color: 'border-primary',
-            bg: 'bg-primary-fixed',
-            weeks: {
-                1: {
-                    emoji: '🤔',
-                    heading: 'Week 2 — Slightly slower, clearly better',
-                    details: [
-                        'Features taking a bit longer — requirements were defined first.',
-                        'Each chunk reviewed before the next one starts.',
-                        'Architecture decisions documented. Success criteria written.',
-                        '✅ Foundation: solid. Every piece of code traces to a requirement.'
-                    ],
-                    note: 'The investment in structure feels slower in week 1. It pays dividends every week after.'
-                },
-                2: {
-                    emoji: '😊',
-                    heading: 'Week 6 — Steady, predictable progress',
-                    details: [
-                        'New features slot in cleanly because the architecture was designed.',
-                        'Bugs are fixed without creating new ones — code is understood.',
-                        'The team knows where to find things.',
-                        '✅ Progress is sustainable. Velocity is not declining.'
-                    ],
-                    note: 'No debt has accumulated because each phase gate was passed before proceeding.'
-                },
-                3: {
-                    emoji: '🎉',
-                    heading: 'Week 12 — Still productive',
-                    details: [
-                        'New features are added cleanly. One day = one day.',
-                        'The codebase is understandable to someone who wasn\'t there in week 1.',
-                        'Requirements traceability means every feature has a reason.',
-                        '✅ The project is in a healthy state. Iteration continues without increasing cost.'
-                    ],
-                    note: 'Structured development doesn\'t mean slower. It means the velocity is maintained over time rather than declining as debt accumulates.'
-                }
-            }
-        }
-    };
-
-    window.setMode = function(mode, btn) {
-        currentMode = mode;
-        document.querySelectorAll('.apd-mode-btn').forEach(b => {
-            b.classList.remove('border-primary', 'border-orange-400', 'bg-orange-400', 'text-white');
-            b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
-            b.style.backgroundColor = '';
-        });
-        btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-        if (mode === 'loose') {
-            btn.classList.add('border-orange-400', 'bg-orange-400', 'text-white');
-        } else {
-            btn.classList.add('border-primary', 'text-white');
-            btn.style.backgroundColor = 'var(--primary)';
-        }
-        if (currentWeek) updateDetail();
-    };
-
-    window.selectWeek = function(week, btn) {
-        currentWeek = week;
-        document.querySelectorAll('.apd-week').forEach(w => {
-            w.querySelector('.apd-circle').classList.remove('border-primary', 'border-orange-400', 'scale-110', 'shadow-md');
-            w.querySelector('.apd-circle').classList.add('border-outline-variant');
-        });
-        const circle = btn.querySelector('.apd-circle');
-        circle.classList.remove('border-outline-variant');
-        if (currentMode === 'loose') circle.classList.add('border-orange-400', 'scale-110', 'shadow-md');
-        else circle.classList.add('border-primary', 'scale-110', 'shadow-md');
-        if (currentMode) updateDetail();
-    };
-
-    function updateDetail() {
-        if (!currentMode || !currentWeek) return;
-        const mode = data[currentMode];
-        const week = mode.weeks[currentWeek];
-        const detail = document.getElementById('apd-detail');
-        detail.className = 'border-2 rounded-xl p-6 min-h-[160px] transition-all duration-300 ' + mode.color + ' ' + mode.bg;
-
-        let html = '<div>';
-        html += '<div class="flex items-center gap-2 mb-3">';
-        html += '<span class="text-2xl">' + week.emoji + '</span>';
-        html += '<div class="font-bold text-sm">' + week.heading + '</div></div>';
-        html += '<ul class="space-y-1 mb-3">';
-        week.details.forEach(d => {
-            html += '<li class="text-[12px] text-on-surface leading-relaxed">' + d + '</li>';
-        });
-        html += '</ul>';
-        html += '<p class="text-[11px] text-on-surface-variant italic border-t border-outline-variant/50 pt-2">' + week.note + '</p>';
-        html += '</div>';
-
-        detail.innerHTML = html;
-    }
-})();
-</script>
-
-
-<h2>🖱️ The Complacency Problem</h2>
-<p>There is a button in every AI-assisted tool that quietly causes most of the damage: <strong>Accept</strong>.</p>
-<p>When you write 20 lines of code by hand, you think through each line as you write it. When an LLM generates 200 lines in seconds, the instinct is to scan it, see that it looks reasonable, and click Accept.</p>
-<p>That scanning is not the same as understanding. The code may work for the happy path you tested. It may not handle the edge cases that will appear in production. It may have introduced an architectural pattern that will conflict with something you build three weeks from now. None of these problems are visible from a quick scan.</p>
-<p>The compounding effect: each accepted chunk that was not fully understood becomes harder to change when problems emerge later. Fixing an issue in layer 5 of a structure built on layers 1–4 that weren&#39;t reviewed means understanding all five layers first.</p>
-<p>There is a subtler form of complacency too: <strong>false confidence from past success</strong>. The LLM worked yesterday, so you trust it more today. But today&#39;s prompt is harder than yesterday&#39;s — more code has been written, more decisions made, more dependencies created. The complexity the LLM must navigate grows with every session, and so does the difficulty of getting the next output right. What&#39;s more, vigilance tends to decrease exactly as complexity increases. Early in a project, people review every line. Later, when the system feels stable, they stop. This is precisely backwards — later in a project is when context is most complex, inconsistencies are most likely, and review is most critical.</p>
-<p><strong>Technical debt accumulates faster in LLM-assisted projects — not slower.</strong> The correction or fix for something built incorrectly can cost more in time and rework than it would have in a traditional project, precisely because the speed hid how much was built on a shaky foundation.</p>
-<div class="callout callout-error">
-    A common mistake: treating LLM output as finished work because it &quot;seems to work.&quot; Passing a quick test is not the same as being correct, complete, or maintainable. The review step is not optional — it&#39;s where your judgment replaces the LLM&#39;s pattern-matching.
-</div>
-
-
-<h2>⚠️ The Real Risks (In Brief)</h2>
-<p>These risks are real and worth knowing, but they are symptoms of skipping project discipline — not the root cause:</p>
-<ul>
-<li><strong>Hallucination risk</strong> — the LLM confidently states something false. Without clear requirements, you may not know what &quot;correct&quot; looks like to catch it.</li>
-<li><strong>Cost overrun risk</strong> — token usage scales with usage. Poorly designed workflows can generate enormous bills at scale.</li>
-<li><strong>Non-determinism risk</strong> — the same input can produce different outputs. Behavior you validated today may differ tomorrow.</li>
-<li><strong>Silent failure risk</strong> — errors look like plausible-sounding wrong answers, not crashes. They slip past automated checks.</li>
-<li><strong>Security risk</strong> — prompt injection, missing input validation, and hardcoded secrets introduced without anyone looking carefully.</li>
-</ul>
-<p>Managing these risks requires discipline at the project level — not just technical awareness.</p>
-<h2>🔪 Why Breaking Down Tasks Matters</h2>
-<p>Asking an LLM to simultaneously act as product manager, designer, developer, and QA tester produces mediocre results — for the same reason that handing one person five jobs at once does. Context switching is expensive, roles have conflicting priorities, and no one can hold all the requirements in their head at once. LLMs have the same limitation.</p>
-<p>The fix: give each prompt <strong>one role, one phase, and one deliverable</strong>. Bounded tasks produce verifiable output. A prompt asking for everything at once produces something too entangled to review clearly.</p>
+<h2>🤔 What I Learned (Honestly)</h2>
+<p>I still overestimate what AI can do sometimes. It got some definitions subtly wrong — maybe from an earlier knowledge cutoff, maybe from training data quirks. And I&#39;ll be honest: I was sometimes lazy. I didn&#39;t always type out every detail I wanted, hoping the model would fill in the gaps. Sometimes it did. Sometimes it filled them with confident nonsense.</p>
+<p>The biggest lesson: <strong>AI-assisted doesn&#39;t mean AI-authored.</strong> Every page needed human judgment — the kind that comes from actually understanding the subject matter, not just being able to generate text about it.</p>
+<p>Looking back, this whole site took about <strong>5 days</strong>. And if I&#39;d followed my own advice — sat down, wrote more of the course content myself, had the LLM help me with the gaps, and spent more time on the overall flow — it probably would&#39;ve been done faster. Part of the process was me wanting to see how automatic and smart Gemini 3 and the Gemini CLI had become. Curiosity is a valid reason to build things, even if it&#39;s not the most efficient path.</p>
 <div class="callout callout-dyk">
-    Breaking down tasks is important enough that the next page covers it in depth — along with the project management fundamentals that make it work.
+    <strong>Tools I used:</strong> Claude Code and Gemini CLI for development. Claude Opus and Claude Sonnet for content generation and review. A bit of GLM family models for light work and minor edits. I&#39;m just sharing what I used — sticking with one tool is perfectly fine and probably preferred. Use whatever works for you.
 </div>
 
 
-<h2>📝 Key Concepts</h2>
-<ul>
-<li><strong>The velocity trap</strong> — LLMs move fast enough to make a project look complete before it is; missing foundations surface later, more expensively.</li>
-<li><strong>The complacency problem</strong> — clicking Accept without understanding accumulates debt; past success doesn&#39;t guarantee present correctness; complexity grows with every session.</li>
-<li><strong>Technical debt accumulates faster</strong> in LLM-assisted projects; corrections cost more, not less, than in traditional development.</li>
-<li><strong>Break down tasks</strong> — one role, one phase, one deliverable per prompt produces reviewable, verifiable output. (Covered in depth in the next page.)</li>
-<li><strong>The real risks</strong> (hallucination, cost, non-determinism, silent failures) are symptoms of skipped discipline, not standalone surprises.</li>
-</ul>
-<div id="quiz-13-01" class="quiz-container my-12"></div>
+<p>If you want to know more about what I do and how I can help, check out the <a href="about.html" class="text-primary font-bold hover:underline">About &amp; Contact</a> page.</p>
+
             </div>
 
             <!-- Quiz Section (if present) -->
@@ -537,10 +378,10 @@
             <!-- Navigation -->
             <nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
                 <div class="prev-link">
-                    <a href="chapter-12-09.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 12.9 ROI Estimation Framework</a>
+                    <a href="chapter-14-01.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"><span class="material-symbols-outlined">arrow_back</span> 14.1 Using LLMs to Learn</a>
                 </div>
                 <div class="next-link">
-                    <a href="chapter-13-02.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">13.2 Project Management 101 <span class="material-symbols-outlined">arrow_forward</span></a>
+                    <a href="../index.html" class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">Back to Overview <span class="material-symbols-outlined">home</span></a>
                 </div>
             </nav>
         </main>

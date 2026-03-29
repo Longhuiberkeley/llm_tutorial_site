@@ -257,9 +257,9 @@
                 </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 14</div><a href="chapter-14-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">14.1 Using LLMs to Learn</span>
-                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">CHAPTER 15</div><a href="chapter-15-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
+                </a><div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">SPECIAL</div><a href="special-how-i-built-this-01.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">15.1 How I Built This</span>
+                    <span class="text-sm font-medium">How I Built This</span>
                 </a>
             </nav>
         </aside>
@@ -315,7 +315,7 @@ An LLM can describe what&#39;s in a photo accurately, but generating a photoreal
 <p><strong>Old problems persist inside agents.</strong> — Hallucinations, context rot, and prompt injection are still real at every step of the agentic loop. Wrapping an LLM in tools doesn&#39;t fix the LLM.</p>
 <p><strong>RAG reduces but doesn&#39;t eliminate hallucination.</strong> — The LLM can still misread retrieved documents. Good retrieval quality is a new thing you need to monitor.</p>
 <p><strong>Building RAG when your data fits in one file.</strong> — If your knowledge base is small enough to paste into the context window, just paste it. RAG adds complexity you may not need.</p>
-<p><strong>Your data format is your real bottleneck.</strong> — If 80% of your documents are scanned PDFs, expect 80% of your project to be data preparation. Simple formats (Markdown, plain text) win.</p>
+<p><strong>Your data format is your real bottleneck — and the model may not have seen what you uploaded.</strong> — Between your file and the LLM&#39;s response, the platform may run OCR, strip images, flatten layouts, or extract only a transcript from a video. Tables lose structure, multi-column text gets scrambled, diagrams disappear. The LLM answers confidently based on whatever survived that process — and won&#39;t tell you what went missing. Simple formats (Markdown, plain text) always win.</p>
 <p><strong>A memory system that stores wrong info is worse than none.</strong> — Stale or incorrect facts make the LLM confidently wrong. A flawed memory system is more dangerous than starting fresh.</p>
 <hr>
 <h2>💡 Pro Tip</h2>
