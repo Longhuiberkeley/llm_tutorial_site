@@ -10,7 +10,7 @@ pageId: "07-03"
 - Show through a hands-on exercise how distance between coordinates reveals similarity.
 
 :::callout-tldr
-Embeddings turn the meaning of words and sentences into coordinates. Similar meaning = nearby coordinates. That's how RAG finds relevant documents without keyword matching.
+Embeddings turn the meaning of words and sentences into coordinates. Similar meaning = nearby coordinates. That's how one popular type of RAG retrieval — semantic search — finds relevant documents without keyword matching.
 :::
 
 ## Words as Points in Space
@@ -19,7 +19,7 @@ When we explored word distance earlier, we established that some words are "clos
 
 Embeddings make that intuition precise. Every word, sentence, or document gets converted into a list of numbers — its coordinates in a multi-dimensional space. Two documents with similar meaning will have coordinates that are close together.
 
-This is what makes RAG's search work: instead of matching keywords, it finds documents whose coordinates are nearest to your question's coordinates.
+This is what makes semantic RAG retrieval work: instead of matching keywords, it finds documents whose coordinates are nearest to your question's coordinates.
 
 ## 🗺️ Try It: Distance on a Map
 
@@ -41,7 +41,9 @@ The math stays exactly the same (distance between points). The space just gets m
 When you search and find relevant results without using the exact right keywords, that's embeddings at work. "Company vacation policy" finds docs about "PTO" and "annual leave" because they're close in meaning — not because the words match.
 :::
 
-## Why This Enables RAG
+## Why This Enables Semantic RAG Retrieval
+
+RAG is a pattern: retrieve relevant documents, then have the LLM answer from them. The retrieval step can use many methods. This is the one most people picture when they say "RAG" — semantic search powered by embeddings.
 
 Vector databases store embeddings for every document in your knowledge base. When a question arrives:
 
@@ -51,12 +53,14 @@ Vector databases store embeddings for every document in your knowledge base. Whe
 
 Sarah searching for "construction delay cases" finds *all* the relevant cases, even if some used the phrase "contractor failed to meet the deadline."
 
+But the retrieval step could also use keyword search, a SQL query, or a hybrid of multiple methods. The RAG pattern stays the same — only the search engine changes.
+
 ## 📝 Key Concepts
 
 - **Embeddings:** Numbers that capture the meaning of text as coordinates
 - **Similar meaning → close coordinates → small distance**
 - **Vector databases:** Store embeddings for fast similarity lookup at scale
-- **Semantic search:** Find by meaning, not by matching exact words
+- **Semantic search:** Find by meaning, not by matching exact words — one retrieval method within the RAG pattern
 - **Dimensions:** Real embeddings use hundreds of dimensions — same concept, much bigger space
 
 :::quiz{id="07-03"}

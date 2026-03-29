@@ -142,7 +142,7 @@
                     <span class="text-sm font-medium">7.3 Vector Embeddings — Storing Meaning as Coordinates</span>
                 </a><a href="chapter-07-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
-                    <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
+                    <span class="text-sm font-medium">7.4 Beyond Vector Search — Other Ways to Get Knowledge Into Context</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
@@ -317,7 +317,7 @@
         <div class="flex flex-col items-center text-center w-28">
             <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔢</div>
             <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 2</div>
-            <div class="text-xs font-bold">Question embedded into vectors</div>
+            <div class="text-xs font-bold">Question prepared for search</div>
         </div>
         <!-- Arrow -->
         <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
@@ -325,7 +325,7 @@
         <div class="flex flex-col items-center text-center w-28">
             <div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔍</div>
             <div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 3</div>
-            <div class="text-xs font-bold">Vector DB finds closest matches</div>
+            <div class="text-xs font-bold">Knowledge base finds relevant docs</div>
         </div>
         <!-- Arrow -->
         <div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
@@ -344,7 +344,7 @@
             <div class="text-xs font-bold">LLM answers from real documents</div>
         </div>
     </div>
-    <p class="text-center text-xs text-on-surface-variant mt-5 italic">The LLM model itself never changes — only what it reads before answering.</p>
+    <p class="text-center text-xs text-on-surface-variant mt-5 italic">The LLM model itself never changes — only what it reads before answering. Retrieval can use vector search, keyword search, or any method that finds relevant docs.</p>
 </div>
 
 
@@ -367,7 +367,7 @@ LLM: &quot;According to your policy, damaged goods qualify for a full refund wit
 
 
 <div class="callout callout-dyk">
-    Think of RAG like a <strong>smart table of contents</strong>. The vector database doesn&#39;t answer your question — it just identifies <em>which pages</em> might be relevant, the way a book&#39;s index points you to the right chapter. The actual reading and answering is still the LLM&#39;s job.
+    Think of RAG like a <strong>smart table of contents</strong>. The retrieval step doesn&#39;t answer your question — it just identifies <em>which pages</em> might be relevant, the way a book&#39;s index points you to the right chapter. The actual reading and answering is still the LLM&#39;s job. That retrieval could use vector search, keyword matching, or anything else that finds the right pages.
 </div>
 
 

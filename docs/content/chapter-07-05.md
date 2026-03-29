@@ -20,7 +20,7 @@ Every time an LLM answers a question, it works from whatever is inside its conte
 It's not just about RAG. The whole context — from the opening system prompt to the last retrieved document — is yours to engineer:
 
 - **System Prompt** — role, instructions, constraints, tone
-- **Retrieved Documents (RAG)** — relevant chunks fetched at query time
+- **Retrieved Documents (RAG)** — relevant chunks fetched at query time, using whatever search method fits (keyword, semantic, hybrid, etc.)
 - **Conversation History** — prior turns; how much to keep, summarize, or trim
 - **User Query** — the question or task from the user
 
@@ -36,7 +36,7 @@ Picture two piles of information sitting next to each other:
 
 **The Knowledge Pile** — everything in your knowledge base: all 500 cases, every policy document, every manual. Potentially millions of tokens.
 
-RAG's job is to grab the *right pieces* from the Knowledge Pile and move them into the Context Pile — just the right pieces, not everything.
+RAG's job is to grab the *right pieces* from the Knowledge Pile and move them into the Context Pile — just the right pieces, not everything. The "grabbing" can use keyword search, vector similarity, SQL queries, or any other method that finds relevant content.
 
 ## The Goldilocks Problem
 
@@ -101,3 +101,9 @@ None of these are glamorous. But they're the difference between a cool demo and 
 - **Harness Engineering:** The scaffolding around LLM calls — retries, caching, parsing, cost tracking — that turns a demo into a reliable product
 
 :::quiz{id="07-05"}
+What is the relationship between RAG and Context Engineering?
+- [ ] RAG is a broader discipline that includes Context Engineering
+- [ ] They are competing approaches to the same problem
+- [x] Context Engineering is the broader discipline; RAG is one tactic within it
+- [ ] They are unrelated concepts
+:::

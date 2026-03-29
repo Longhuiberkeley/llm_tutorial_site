@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>7.4 Alternatives to RAG — Not Always the Right Tool - AI Unpacked</title>
+    <title>7.4 Beyond Vector Search — Other Ways to Get Knowledge Into Context - AI Unpacked</title>
     <script src="../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -142,7 +142,7 @@
                     <span class="text-sm font-medium">7.3 Vector Embeddings — Storing Meaning as Coordinates</span>
                 </a><a href="chapter-07-04.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent">
                     <span class="material-symbols-outlined text-sm text-accent">school</span>
-                    <span class="text-sm font-medium">7.4 Alternatives to RAG — Not Always the Right Tool</span>
+                    <span class="text-sm font-medium">7.4 Beyond Vector Search — Other Ways to Get Knowledge Into Context</span>
                 </a><a href="chapter-07-05.html" class="page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all">
                     <span class="material-symbols-outlined text-sm opacity-40 group-hover:opacity-100">arrow_right</span>
                     <span class="text-sm font-medium">7.5 Context Engineering — What You Feed the LLM Is Everything</span>
@@ -273,30 +273,36 @@
                     <span>Chapter 7</span>
                 </nav>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6">
-                    7.4 Alternatives to RAG — Not Always the Right Tool
+                    7.4 Beyond Vector Search — Other Ways to Get Knowledge Into Context
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
-                    Keyword search, subagents, and file concatenation each have their place. Know your options before you build.
+                    RAG doesn't require a vector database. Keyword search, subagents, and file concatenation each have their place. Know your options before you build.
                 </p>
             </header>
 
             <div class="content-body space-y-12">
                 <h2>🎯 Core Goals</h2>
 <ul>
-<li>Show that RAG is not the only retrieval approach.</li>
+<li>Clarify that RAG is a pattern (retrieve, augment, generate), not a specific technology.</li>
+<li>Show the different retrieval methods and when each one fits.</li>
 <li>Help readers match the right approach to the right situation.</li>
 </ul>
 <div class="callout callout-tldr">
-    RAG is powerful but comes with setup costs. Sometimes keyword search, concatenation, or a subagent approach is faster and simpler. Treat RAG like a tool — reach for it when the job calls for it, not as a default. Know your options before committing to infrastructure.
+    RAG is a three-step pattern: retrieve documents, augment the prompt, generate the answer. The retrieval step can use vector search, keyword search, SQL, or anything else that finds relevant content. Don&#39;t assume you need a vector database — match the retrieval method to the actual problem.
 </div>
 
 
 <h2>The Lawyer&#39;s Options</h2>
-<p>Let&#39;s return to Sarah&#39;s 500-case problem. RAG isn&#39;t her only path. Here are the realistic alternatives — with honest trade-offs.</p>
+<p>Let&#39;s return to Sarah&#39;s 500-case problem. She needs to get the right cases in front of the LLM. Here are the realistic approaches — each with honest trade-offs. Some are retrieval methods you could plug into a RAG pipeline; others skip retrieval entirely.</p>
+<div class="callout callout-error">
+    <strong>&quot;RAG&quot; and &quot;vector database&quot; are often used interchangeably — but technically, that&#39;s not entirely correct.</strong> RAG describes the pattern: retrieve documents, inject them into the prompt, let the LLM answer from them. The retrieval step can use keyword search, vector search, SQL, or anything else. Vector databases are one popular option — not a requirement.
+</div>
+
+
 <!-- Visual: RAG Alternatives — Strategy comparison cards -->
 <div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
     <div class="text-center mb-5">
-        <h3 class="text-lg font-bold font-headline mb-1">Four Ways to Handle a Large Knowledge Base</h3>
+        <h3 class="text-lg font-bold font-headline mb-1">Approaches to Getting Knowledge Into Context</h3>
         <p class="text-sm text-on-surface-variant">Each approach has a different character — and a different best use case</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -316,7 +322,7 @@
                 <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Misses synonyms, paraphrasing</div>
             </div>
             <div class="bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 text-xs">
-                <span class="font-bold text-yellow-700">Best for:</span> Consistent terminology, exact-match needs
+                <span class="font-bold text-yellow-700">Best for:</span> Consistent terminology — also works as a simple RAG retrieval step
             </div>
         </div>
 
@@ -366,13 +372,13 @@
                 <span class="text-2xl">🔍</span>
                 <div>
                     <div class="font-bold text-sm text-primary">RAG</div>
-                    <div class="text-xs text-on-surface-variant">Find by meaning, answer from docs</div>
+                    <div class="text-xs text-on-surface-variant">Retrieve, augment, generate — any retrieval method</div>
                 </div>
             </div>
             <div class="space-y-1 text-xs mb-3">
-                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Semantic — finds synonyms and paraphrases</div>
+                <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Flexible — works with any retrieval method</div>
                 <div class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Scales to millions of documents</div>
-                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Requires setup (vector DB, embeddings)</div>
+                <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Vector-based RAG requires setup (embeddings, DB)</div>
                 <div class="flex items-center gap-2"><span class="text-red-500 font-bold">✗</span> Retrieval can miss or mis-rank docs</div>
             </div>
             <div class="bg-primary/5 border border-primary/20 rounded-lg px-3 py-2 text-xs">
@@ -383,9 +389,10 @@
 </div>
 
 
-<h2>Option 1 — Keyword Search</h2>
+<h2>Option 1 — Keyword Search (a valid RAG retrieval method)</h2>
 <p>The oldest approach: find documents containing specific words.</p>
 <p>It&#39;s binary — either the word is present or it isn&#39;t. It has no concept of synonyms, paraphrasing, or context. The 2019 case titled &quot;contractor failed to uphold terms&quot; won&#39;t appear when you search for &quot;breach of contract.&quot;</p>
+<p>But keyword search <em>is</em> a legitimate retrieval step inside RAG. You can build a RAG pipeline where the retrieval is just keyword matching — retrieve matching docs, inject them into the prompt, let the LLM answer from them. Same pattern, simpler search engine.</p>
 <p>Its character: <strong>fast, cheap, zero setup</strong> — and surprisingly effective when your organization uses consistent terminology.</p>
 <h2>Option 2 — Subagent / Sequential Read</h2>
 <p>An LLM reads through documents one at a time and decides what&#39;s relevant.</p>
@@ -396,7 +403,7 @@
 <p>This is the simplest possible approach — no infrastructure whatsoever. But it runs into a hard wall: the context window. A handful of short documents? Fine. Sarah&#39;s 500 cases? Never fits.</p>
 <p>Its character: <strong>zero setup, zero retrieval errors</strong> — for datasets small enough to fit.</p>
 <div class="callout callout-dyk">
-    Most production systems don&#39;t pick just one approach — they use a divide-and-conquer strategy: keyword search narrows the candidate pool first, then vector similarity re-ranks the results, and sometimes a subagent does a final read of the top candidates. You get the speed of keyword filtering with the precision of semantic matching. The best systems mix and match based on the problem at hand.
+    Most production RAG systems don&#39;t use just one retrieval method — they combine them. Keyword search narrows the candidate pool first, then vector similarity re-ranks the results, and sometimes a subagent does a final read of the top candidates. This hybrid retrieval <em>is still RAG</em> — the pattern is retrieve, augment, generate. The search engine just happens to use multiple strategies. You get the speed of keyword filtering with the precision of semantic matching.
 </div>
 
 
@@ -407,12 +414,39 @@
 
 <h2>📝 Key Concepts</h2>
 <ul>
-<li><strong>Each approach has real trade-offs</strong> in speed, cost, accuracy, and setup complexity</li>
-<li><strong>Hybrid approaches</strong> (keyword + semantic) often outperform either alone in production</li>
-<li><strong>RAG is a tool, not a default</strong> — match the approach to the actual problem size</li>
+<li><strong>RAG is a pattern, not a product:</strong> Retrieve, augment, generate. The retrieval step can use any method.</li>
+<li><strong>Keyword search is a valid RAG retrieval method</strong> — not an alternative to RAG</li>
+<li><strong>Hybrid retrieval is still RAG</strong> — combining keyword + semantic is the most common production approach</li>
+<li><strong>Concatenation skips retrieval entirely</strong> — it&#39;s genuinely a different approach from RAG</li>
 <li><strong>Concatenation is underrated</strong> for small datasets — don&#39;t over-engineer early</li>
 </ul>
-<div id="quiz-07-04" class="quiz-container my-12"></div>
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-07-04" class="quiz-container bg-[#F9F9F9] border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">Which statement about RAG is most accurate?</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            RAG requires a vector database to store document embeddings
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            RAG is an alternative to keyword search for finding documents
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            RAG is a pattern where any retrieval method can feed documents into the LLM's prompt
+        </div>
+        <div class="quiz-option bg-white border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            RAG only works with semantic search powered by embeddings
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
             </div>
 
             <!-- Quiz Section (if present) -->

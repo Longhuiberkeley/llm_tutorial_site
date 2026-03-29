@@ -42,7 +42,7 @@ RAG dramatically *reduces* hallucination — it does not eliminate it. It trades
 :::
 
 :::callout-dyk
-Think of RAG like a **smart table of contents**. The vector database doesn't answer your question — it just identifies *which pages* might be relevant, the way a book's index points you to the right chapter. The actual reading and answering is still the LLM's job.
+Think of RAG like a **smart table of contents**. The retrieval step doesn't answer your question — it just identifies *which pages* might be relevant, the way a book's index points you to the right chapter. The actual reading and answering is still the LLM's job. That retrieval could use vector search, keyword matching, or anything else that finds the right pages.
 :::
 
 ## When Retrieval Gets It Wrong

@@ -1,29 +1,36 @@
 ---
-title: "7.4 Alternatives to RAG — Not Always the Right Tool"
-description: "Keyword search, subagents, and file concatenation each have their place. Know your options before you build."
+title: "7.4 Beyond Vector Search — Other Ways to Get Knowledge Into Context"
+description: "RAG doesn't require a vector database. Keyword search, subagents, and file concatenation each have their place. Know your options before you build."
 chapter: "Chapter 7"
 pageId: "07-04"
 ---
 
 ## 🎯 Core Goals
-- Show that RAG is not the only retrieval approach.
+- Clarify that RAG is a pattern (retrieve, augment, generate), not a specific technology.
+- Show the different retrieval methods and when each one fits.
 - Help readers match the right approach to the right situation.
 
 :::callout-tldr
-RAG is powerful but comes with setup costs. Sometimes keyword search, concatenation, or a subagent approach is faster and simpler. Treat RAG like a tool — reach for it when the job calls for it, not as a default. Know your options before committing to infrastructure.
+RAG is a three-step pattern: retrieve documents, augment the prompt, generate the answer. The retrieval step can use vector search, keyword search, SQL, or anything else that finds relevant content. Don't assume you need a vector database — match the retrieval method to the actual problem.
 :::
 
 ## The Lawyer's Options
 
-Let's return to Sarah's 500-case problem. RAG isn't her only path. Here are the realistic alternatives — with honest trade-offs.
+Let's return to Sarah's 500-case problem. She needs to get the right cases in front of the LLM. Here are the realistic approaches — each with honest trade-offs. Some are retrieval methods you could plug into a RAG pipeline; others skip retrieval entirely.
+
+:::callout-error
+**"RAG" and "vector database" are often used interchangeably — but technically, that's not entirely correct.** RAG describes the pattern: retrieve documents, inject them into the prompt, let the LLM answer from them. The retrieval step can use keyword search, vector search, SQL, or anything else. Vector databases are one popular option — not a requirement.
+:::
 
 :::visual{name="visual-rag-alternatives"}
 
-## Option 1 — Keyword Search
+## Option 1 — Keyword Search (a valid RAG retrieval method)
 
 The oldest approach: find documents containing specific words.
 
 It's binary — either the word is present or it isn't. It has no concept of synonyms, paraphrasing, or context. The 2019 case titled "contractor failed to uphold terms" won't appear when you search for "breach of contract."
+
+But keyword search *is* a legitimate retrieval step inside RAG. You can build a RAG pipeline where the retrieval is just keyword matching — retrieve matching docs, inject them into the prompt, let the LLM answer from them. Same pattern, simpler search engine.
 
 Its character: **fast, cheap, zero setup** — and surprisingly effective when your organization uses consistent terminology.
 
@@ -44,7 +51,7 @@ This is the simplest possible approach — no infrastructure whatsoever. But it 
 Its character: **zero setup, zero retrieval errors** — for datasets small enough to fit.
 
 :::callout-dyk
-Most production systems don't pick just one approach — they use a divide-and-conquer strategy: keyword search narrows the candidate pool first, then vector similarity re-ranks the results, and sometimes a subagent does a final read of the top candidates. You get the speed of keyword filtering with the precision of semantic matching. The best systems mix and match based on the problem at hand.
+Most production RAG systems don't use just one retrieval method — they combine them. Keyword search narrows the candidate pool first, then vector similarity re-ranks the results, and sometimes a subagent does a final read of the top candidates. This hybrid retrieval *is still RAG* — the pattern is retrieve, augment, generate. The search engine just happens to use multiple strategies. You get the speed of keyword filtering with the precision of semantic matching.
 :::
 
 :::callout-dyk
@@ -53,9 +60,16 @@ When you use ChatGPT or Gemini through their web interfaces, you don't get to ch
 
 ## 📝 Key Concepts
 
-- **Each approach has real trade-offs** in speed, cost, accuracy, and setup complexity
-- **Hybrid approaches** (keyword + semantic) often outperform either alone in production
-- **RAG is a tool, not a default** — match the approach to the actual problem size
+- **RAG is a pattern, not a product:** Retrieve, augment, generate. The retrieval step can use any method.
+- **Keyword search is a valid RAG retrieval method** — not an alternative to RAG
+- **Hybrid retrieval is still RAG** — combining keyword + semantic is the most common production approach
+- **Concatenation skips retrieval entirely** — it's genuinely a different approach from RAG
 - **Concatenation is underrated** for small datasets — don't over-engineer early
 
 :::quiz{id="07-04"}
+Which statement about RAG is most accurate?
+- [ ] RAG requires a vector database to store document embeddings
+- [ ] RAG is an alternative to keyword search for finding documents
+- [x] RAG is a pattern where any retrieval method can feed documents into the LLM's prompt
+- [ ] RAG only works with semantic search powered by embeddings
+:::
