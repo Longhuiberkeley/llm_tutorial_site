@@ -10,7 +10,7 @@ pageId: "14-01"
 - Learn practical strategies for learning more effectively with an LLM.
 
 :::callout-tldr
-LLMs are powerful learning tools because they can connect concepts across domains and explain at any level. You can't do that with a textbook — but raw access isn't enough. How you use them makes all the difference. It can help you conceptualize anything you want to learn!
+LLMs are the most powerful knowledge extrapolation tool ever created. They can take what they know and stretch it to teach you almost anything, at any level, from any angle — connecting ideas across domains in a way no textbook can. But raw access isn't enough. **How you use them makes all the difference.**
 :::
 
 :::visual{name="visual-llm-teacher"}
@@ -26,5 +26,14 @@ LLMs are powerful learning tools because they can connect concepts across domain
 :::callout-tip
 Pro tip: Many LLM platforms have built-in learning features — ChatGPT, Claude, and others let you set context, save preferences, and build on prior conversations. Explore what your platform offers before you build your own workarounds. In fact, any concept in this course — from tokenization to prompt engineering to agent design — can be explored deeper just by asking an LLM to teach you at your level.
 :::
+
+## 🧠 Apply What You've Learned
+
+You now know how LLMs actually work — tokens, context windows, temperature, prompting patterns. That knowledge is your advantage when using LLMs to learn new things. But keep two things in mind:
+
+- **Confident hallucinations:** LLMs sound just as confident when they're wrong as when they're right. A wrong answer doesn't *look* wrong — it looks polished. You know about temperature and sampling — use that understanding to remember that every response is a prediction, not a fact.
+- **The "good enough" trap:** An explanation that's 80% correct can be more dangerous than one that's 0% correct. Why? Because you stop at *"seems right"* instead of digging deeper. Use what you've learned about prompt engineering to probe further — ask "what are the edge cases?" or "where might this be wrong?"
+
+Think of your course knowledge as a quality filter. The LLM is a brilliant study partner, but you bring the judgment.
 
 :::quiz{id="14-01"}
