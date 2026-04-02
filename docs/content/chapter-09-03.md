@@ -25,10 +25,11 @@ Imagine you photograph a handwritten sticky note and send it to a colleague. The
 - Struggles with handwriting, unusual fonts, low-quality scans, or tilted pages
 - Produces raw text — no understanding of what the words actually mean
 
-**AI-based OCR** (dedicated AI document processing services):
+**Modern OCR engines** (purpose-built models, not full LLMs):
 - Much better at handwriting, poor scan quality, mixed layouts
 - Recognizes tables, form fields, and checkboxes — not just raw text
 - Returns structured output (key-value pairs, not just a wall of text)
+- Many are open-source and can run on your own hardware — no cloud service or per-page cost required
 - Still just extraction — it reads but doesn't understand
 
 **LLM-based processing** (modern multimodal LLMs):
@@ -78,7 +79,7 @@ There is no universally "right" answer — it depends on what you need, how ofte
 
 ## 📝 Key Concepts
 
-- **OCR:** Converts images of text into machine-readable text — traditional tools work for clean documents, AI tools handle messier ones
+- **OCR:** Converts images of text into machine-readable text — traditional tools work for clean documents, modern OCR engines handle messier ones
 - **Multimodal LLMs:** Can read images directly — often eliminating the need for a separate OCR step
 - **Beyond extraction:** LLMs can classify, summarize, tag, and reason across documents — not just read them
 - **Sentiment analysis caveat:** For high-volume simple classification, traditional ML can be faster and cheaper — use LLMs when nuance matters

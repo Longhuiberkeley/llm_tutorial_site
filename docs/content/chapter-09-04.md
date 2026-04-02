@@ -10,7 +10,7 @@ pageId: "09-04"
 - Walk away with things you can apply when building or evaluating LLM-powered tools.
 
 :::callout-tldr
-This section covers how to make LLMs actually useful: giving them tools to act on the world, connecting them to your data so they answer from knowledge instead of guessing, and expanding what they can process beyond text. The biggest insight: most "AI failures" are actually failures to manage what you feed the LLM.
+This section covers how to make LLMs actually useful: giving them tools to act on the world, connecting them to your data so they answer from knowledge instead of guessing, and expanding what they can process beyond text. The biggest insight: most "AI failures" are actually failures to manage what you feed the LLM — and sometimes the tool doing the feeding is the real culprit.
 :::
 
 ---
@@ -38,9 +38,12 @@ Personal AI features (ChatGPT Memory, Claude Projects) don't give the LLM actual
 **Understanding media ≠ generating media**
 An LLM can describe what's in a photo accurately, but generating a photorealistic image is a completely different (and harder) skill. Don't assume one capability implies the other.
 
+**The tools an LLM uses have their own limitations**
+An LLM is only as reliable as the tools it depends on. The search engine might return outdated results, the database might have stale records, the file reader might garble a complex spreadsheet, and the transcription tool might mishear words. When you evaluate an LLM-powered system, ask not just "how good is the model?" but "what tools does it rely on, and what are their blind spots?" The chain is only as strong as its weakest link — and that link often isn't the LLM itself.
+
 ---
 
-## 🚨 8 Red Flags
+## 🚨 9 Red Flags
 
 **"The LLM ran a search on its own."** — The LLM output a text instruction; the *software around it* intercepted and executed it. The product you're using is a combination of the model AND the application layer. The model decides what to do; the application decides whether and how to do it. Don't confuse one for the other.
 
@@ -57,6 +60,8 @@ An LLM can describe what's in a photo accurately, but generating a photorealisti
 **Your data format is your real bottleneck — and the model may not have seen what you uploaded.** — Between your file and the LLM's response, the platform may run OCR, strip images, flatten layouts, or extract only a transcript from a video. Tables lose structure, multi-column text gets scrambled, diagrams disappear. The LLM answers confidently based on whatever survived that process — and won't tell you what went missing. Simple formats (Markdown, plain text) always win.
 
 **A memory system that stores wrong info is worse than none.** — Stale or incorrect facts make the LLM confidently wrong. A flawed memory system is more dangerous than starting fresh.
+
+**Blaming the LLM when the tool was the problem.** — When an AI system gives you a wrong answer, the LLM might have been perfectly correct in its reasoning — but it was reasoning from tool output that was wrong, incomplete, or distorted. A search tool returning outdated information, a database with stale records, or a file reader that garbled the formatting — any of these will produce bad LLM output even with a perfect model. Before you switch models or rewrite prompts, check what the tools actually fed the LLM.
 
 ---
 

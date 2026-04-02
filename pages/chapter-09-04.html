@@ -293,7 +293,7 @@
 <li>Walk away with things you can apply when building or evaluating LLM-powered tools.</li>
 </ul>
 <div class="callout callout-tldr">
-    This section covers how to make LLMs actually useful: giving them tools to act on the world, connecting them to your data so they answer from knowledge instead of guessing, and expanding what they can process beyond text. The biggest insight: most &quot;AI failures&quot; are actually failures to manage what you feed the LLM.
+    This section covers how to make LLMs actually useful: giving them tools to act on the world, connecting them to your data so they answer from knowledge instead of guessing, and expanding what they can process beyond text. The biggest insight: most &quot;AI failures&quot; are actually failures to manage what you feed the LLM — and sometimes the tool doing the feeding is the real culprit.
 </div>
 
 
@@ -313,8 +313,10 @@ Most AI failures are failures of context — bad prompts, wrong documents retrie
 Personal AI features (ChatGPT Memory, Claude Projects) don&#39;t give the LLM actual memory — they preload more context. The model still reads everything from scratch every time.</p>
 <p><strong>Understanding media ≠ generating media</strong>
 An LLM can describe what&#39;s in a photo accurately, but generating a photorealistic image is a completely different (and harder) skill. Don&#39;t assume one capability implies the other.</p>
+<p><strong>The tools an LLM uses have their own limitations</strong>
+An LLM is only as reliable as the tools it depends on. The search engine might return outdated results, the database might have stale records, the file reader might garble a complex spreadsheet, and the transcription tool might mishear words. When you evaluate an LLM-powered system, ask not just &quot;how good is the model?&quot; but &quot;what tools does it rely on, and what are their blind spots?&quot; The chain is only as strong as its weakest link — and that link often isn&#39;t the LLM itself.</p>
 <hr>
-<h2>🚨 8 Red Flags</h2>
+<h2>🚨 9 Red Flags</h2>
 <p><strong>&quot;The LLM ran a search on its own.&quot;</strong> — The LLM output a text instruction; the <em>software around it</em> intercepted and executed it. The product you&#39;re using is a combination of the model AND the application layer. The model decides what to do; the application decides whether and how to do it. Don&#39;t confuse one for the other.</p>
 <p><strong>Agents fail from bad planning, not bad tools.</strong> — A confused plan leads to wrong actions. The fix: start with a clearer prompt, not a better tool.</p>
 <p><strong>Leaving autonomous agents unsupervised with sensitive access.</strong> — Always start with high human oversight. Earn autonomy through proven reliability, not promises.</p>
@@ -323,6 +325,7 @@ An LLM can describe what&#39;s in a photo accurately, but generating a photoreal
 <p><strong>Building RAG when your data fits in one file.</strong> — If your knowledge base is small enough to paste into the context window, just paste it. RAG adds complexity you may not need.</p>
 <p><strong>Your data format is your real bottleneck — and the model may not have seen what you uploaded.</strong> — Between your file and the LLM&#39;s response, the platform may run OCR, strip images, flatten layouts, or extract only a transcript from a video. Tables lose structure, multi-column text gets scrambled, diagrams disappear. The LLM answers confidently based on whatever survived that process — and won&#39;t tell you what went missing. Simple formats (Markdown, plain text) always win.</p>
 <p><strong>A memory system that stores wrong info is worse than none.</strong> — Stale or incorrect facts make the LLM confidently wrong. A flawed memory system is more dangerous than starting fresh.</p>
+<p><strong>Blaming the LLM when the tool was the problem.</strong> — When an AI system gives you a wrong answer, the LLM might have been perfectly correct in its reasoning — but it was reasoning from tool output that was wrong, incomplete, or distorted. A search tool returning outdated information, a database with stale records, or a file reader that garbled the formatting — any of these will produce bad LLM output even with a perfect model. Before you switch models or rewrite prompts, check what the tools actually fed the LLM.</p>
 <hr>
 <h2>💡 Pro Tip</h2>
 <div class="callout callout-tldr">

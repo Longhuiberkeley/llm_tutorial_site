@@ -17,12 +17,12 @@
             </div>
         </button>
 
-        <!-- Option B: AI-based OCR -->
+        <!-- Option B: Modern OCR Engines -->
         <button onclick="docDecide(1, this)" class="doc-opt-btn text-left p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-accent transition-all active:scale-[0.98] flex items-start gap-3">
-            <div class="text-2xl mt-0.5 flex-shrink-0">🤖</div>
+            <div class="text-2xl mt-0.5 flex-shrink-0">📄</div>
             <div>
-                <div class="font-bold text-sm mb-1">B — AI-based OCR</div>
-                <div class="text-xs text-on-surface/60">Use a specialist AI tool (AWS Textract, Google Document AI).</div>
+                <div class="font-bold text-sm mb-1">B — Modern OCR Engines</div>
+                <div class="text-xs text-on-surface/60">Purpose-built models, not full LLMs. Can run locally.</div>
             </div>
         </button>
 
@@ -100,23 +100,23 @@
             bestfit: 'A first step to digitize clean, typed documents — or to quickly see what you\'re working with before committing to more investment.'
         },
         {
-            icon: '🤖',
-            title: 'AI-based OCR',
-            subtitle: 'Purpose-built for messy real-world documents',
-            how: 'Dedicated AI document processing services use AI models trained specifically on documents. They recognize handwriting, tables, form fields, and checkboxes — returning structured output, not just raw text.',
+            icon: '📄',
+            title: 'Modern OCR Engines',
+            subtitle: 'Purpose-built models for messy real-world documents',
+            how: 'Purpose-built OCR models trained specifically for reading text from images. They recognize handwriting, tables, form fields, and checkboxes — returning structured output, not just raw text. Many are open-source and can run on your own hardware — no cloud service needed.',
             pros: [
                 '✍️ Handles handwriting far better than traditional tools',
                 '📊 Understands tables and form fields',
-                '🎯 Higher accuracy on poor quality or rotated scans',
-                '🏗️ Returns structured data (key-value pairs), not just a wall of text'
+                '🔒 Can run locally — no data leaves your network',
+                '🏗️ Returns structured data (key-value pairs), not just a wall of text',
+                '💰 Often free or low-cost — many open-source options available'
             ],
             cons: [
-                '💸 Costs per page — adds up at 500 reports',
-                '☁️ Data goes to a third-party cloud service',
                 '🧩 Still just extraction — no reasoning, no summarization',
-                '🔧 Needs some integration code to process at scale'
+                '🔧 Needs some integration code to process at scale',
+                '⚙️ Quality varies by tool — some handle certain languages or formats better than others'
             ],
-            bestfit: 'Digitizing a large batch of handwritten or mixed-format documents where you need clean structured output — and don\'t yet need LLM reasoning on top.'
+            bestfit: 'Digitizing a large batch of handwritten or mixed-format documents where you need clean structured output, want to keep data in-house, and don\'t yet need LLM reasoning on top.'
         },
         {
             icon: '🧠',
