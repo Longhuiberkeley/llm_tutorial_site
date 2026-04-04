@@ -1,0 +1,206 @@
+---
+import '../styles/global.css';
+import SidebarTOC from '../components/SidebarTOC.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	chapter?: string;
+	hideHeader?: boolean;
+	activeId?: string;
+}
+
+const { title, description, chapter, hideHeader = false, activeId } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description || "Interactive LLM Tutorial"} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title} - AI Unpacked</title>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+		<link rel="stylesheet" href="/css/animations.css"/>
+
+		<!-- "No Flicker" Dark Mode Script -->
+		<script is:inline>
+			const getThemePreference = () => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			};
+			const isDark = getThemePreference() === 'dark';
+			document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+		</script>
+	</head>
+	<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+		<!-- TopNavBar -->
+		<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_20px_40px_rgba(146,74,49,0.06)] flex justify-between items-center px-4 md:px-8 py-4 max-w-full">
+			<div class="flex items-center gap-3">
+				<!-- Hamburger Menu for Mobile -->
+				<button id="menu-toggle" class="lg:hidden p-2 rounded-md hover:bg-surface-container transition-colors" aria-label="Toggle menu">
+					<span class="material-symbols-outlined text-on-surface">menu</span>
+				</button>
+				<a href="/" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group whitespace-nowrap">
+					<span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity hidden md:inline">home</span>
+					AI Unpacked
+				</a>
+			</div>
+			<div class="flex items-center gap-4 md:gap-6">
+				<button id="theme-toggle" class="p-2 rounded-full hover:bg-surface-container transition-colors" aria-label="Toggle theme">
+					<span class="material-symbols-outlined text-on-surface dark:hidden">dark_mode</span>
+					<span class="material-symbols-outlined text-on-surface hidden dark:block">light_mode</span>
+				</button>
+				<a class="hidden md:block font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="/who-is-this-for">Who is this for?</a>
+				<a class="hidden md:block font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="/about">About & Contact</a>
+			</div>
+		</nav>
+
+		<!-- Mobile Drawer Overlay -->
+		<div id="mobile-drawer-overlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden backdrop-blur-sm"></div>
+
+		<div class="flex pt-16 min-h-screen">
+			<!-- SideNavBar (Desktop & Mobile Drawer) -->
+			<aside id="sidebar" class="sidebar fixed lg:sticky left-0 top-0 pt-20 lg:pt-8 bg-surface-container-low flex flex-col gap-2 p-4 z-50 h-screen w-72 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out border-r border-outline-variant/20 shadow-2xl lg:shadow-none">
+				<div class="flex items-center justify-between lg:hidden mb-6 px-2">
+					<h2 class="text-xl font-bold text-on-surface font-headline whitespace-nowrap">Menu</h2>
+					<button id="menu-close" class="p-2 rounded-md hover:bg-surface-container transition-colors">
+						<span class="material-symbols-outlined text-on-surface">close</span>
+					</button>
+				</div>
+				<div class="mb-6 px-2">
+					<h2 class="text-lg font-bold text-on-surface font-headline">Curriculum</h2>
+					<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">LLM Mastery Series</p>
+				</div>
+				<nav class="flex flex-col gap-1 overflow-y-auto max-h-[calc(100vh-160px)]">
+					<!-- Slot for dynamic Table of Contents or Sidebar Links -->
+					<slot name="sidebar">
+						<SidebarTOC activeId={activeId} />
+					</slot>
+				</nav>
+			</aside>
+
+			<!-- Main Content Canvas -->
+			<main class="w-full px-6 md:px-12 py-16 lg:py-24 max-w-4xl mx-auto pb-32 lg:pb-16">
+				{!hideHeader && (
+					<header class="mb-12">
+						{chapter && (
+							<nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
+								<a href="/" class="hover:underline">Overview</a>
+								<span class="material-symbols-outlined text-xs">chevron_right</span>
+								<span>{chapter}</span>
+							</nav>
+						)}
+						<h1 class="text-3xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface mb-6 leading-tight">
+							{title}
+						</h1>
+						{description && (
+							<p class="text-lg md:text-xl text-on-surface-variant max-w-2xl font-medium leading-relaxed">
+								{description}
+							</p>
+						)}
+					</header>
+				)}
+
+				<div class="content-body prose prose-lg dark:prose-invert max-w-none prose-headings:font-headline prose-a:text-accent hover:prose-a:text-accent-dark">
+					<slot />
+				</div>
+
+				<!-- Navigation Buttons -->
+				<nav class="flex justify-between items-center pt-8 mt-20 border-t border-outline-variant/20">
+					<slot name="prev-link" />
+					<slot name="next-link" />
+				</nav>
+			</main>
+		</div>
+
+		<!-- Sticky Bottom Nav for Mobile -->
+		<div class="lg:hidden fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/20 p-4 z-40 flex justify-between items-center shadow-[0_-10px_20px_rgba(0,0,0,0.05)] safe-area-bottom">
+			<slot name="mobile-prev-link">
+				<div></div>
+			</slot>
+			<slot name="mobile-next-link">
+				<div></div>
+			</slot>
+		</div>
+
+		<!-- Footer -->
+		<footer class="hidden lg:flex w-full py-12 mt-10 bg-background border-t border-outline-variant/10 flex-col items-center justify-center gap-4 text-center">
+			<p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 Long. Made with curiosity.</p>
+		</footer>
+
+		<script src="/js/main.js" is:inline></script>
+		<script src="/js/quizzes.js" is:inline></script>
+		<script is:inline>
+			// Theme Toggle Logic
+			const handleToggleClick = () => {
+				const element = document.documentElement;
+				element.classList.toggle("dark");
+				
+				const isDark = element.classList.contains("dark");
+				localStorage.setItem("theme", isDark ? "dark" : "light");
+			};
+
+			document.getElementById("theme-toggle")?.addEventListener("click", handleToggleClick);
+
+			// Mobile Drawer Logic
+			const sidebar = document.getElementById('sidebar');
+			const overlay = document.getElementById('mobile-drawer-overlay');
+			const menuToggle = document.getElementById('menu-toggle');
+			const menuClose = document.getElementById('menu-close');
+
+			const openMenu = () => {
+				sidebar?.classList.remove('-translate-x-full');
+				overlay?.classList.remove('hidden');
+				// Small delay to allow display block to apply before animating opacity
+				setTimeout(() => {
+					overlay?.classList.remove('opacity-0');
+				}, 10);
+				document.body.style.overflow = 'hidden'; // Prevent background scrolling
+			};
+
+			const closeMenu = () => {
+				sidebar?.classList.add('-translate-x-full');
+				overlay?.classList.add('opacity-0');
+				setTimeout(() => {
+					overlay?.classList.add('hidden');
+				}, 300); // match transition duration
+				document.body.style.overflow = '';
+			};
+
+			menuToggle?.addEventListener('click', openMenu);
+			menuClose?.addEventListener('click', closeMenu);
+			overlay?.addEventListener('click', closeMenu);
+
+			// Dynamically load interactive scripts based on data-interactive attribute
+			document.addEventListener('DOMContentLoaded', () => {
+				const interactives = document.querySelectorAll('[data-interactive]');
+				if (interactives.length > 0) {
+					// Load core.js first
+					const coreScript = document.createElement('script');
+					coreScript.src = '/js/interactives/core.js';
+					document.body.appendChild(coreScript);
+
+					coreScript.onload = () => {
+						// Load individual interactive scripts
+						interactives.forEach(el => {
+							const id = el.getAttribute('data-interactive');
+							if (id) {
+								const script = document.createElement('script');
+								script.src = `/js/interactives/${id}.js`;
+								document.body.appendChild(script);
+							}
+						});
+					};
+				}
+			});
+		</script>
+	</body>
+</html>

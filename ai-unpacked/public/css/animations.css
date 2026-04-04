@@ -1,0 +1,135 @@
+/**
+ * LLM Tutorial Site - CSS Animations
+ * Keyframe animations for interactive elements
+ */
+
+/* Pulse animation for correct quiz answers */
+@keyframes pulse-green {
+    0% {
+        background-color: #E8F5E9;
+        transform: scale(1);
+    }
+    50% {
+        background-color: #C8E6C9;
+        transform: scale(1.02);
+    }
+    100% {
+        background-color: #E8F5E9;
+        transform: scale(1);
+    }
+}
+
+/* Shake animation for wrong quiz answers */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20%, 60% {
+        transform: translateX(-4px);
+    }
+    40%, 80% {
+        transform: translateX(4px);
+    }
+}
+
+/* Fade-in animation for content cards */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fade-in 0.4s ease-out;
+}
+
+/* Attention arrow animation */
+@keyframes arrow-pulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.arrow-animate {
+    animation: arrow-pulse 2s ease-in-out infinite;
+}
+
+/* Loading spinner */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Bounce animation for buttons */
+@keyframes bounce-subtle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+.bounce-subtle:hover {
+    animation: bounce-subtle 0.5s ease-in-out;
+}
+
+/* Slide in from left */
+@keyframes slide-in-left {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.slide-in-left {
+    animation: slide-in-left 0.3s ease-out;
+}
+
+/* Slide in from right */
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+}
+
+/* Scale in */
+@keyframes scale-in {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.scale-in {
+    animation: scale-in 0.3s ease-out;
+}

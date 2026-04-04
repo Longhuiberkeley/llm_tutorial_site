@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Who is this for?" description="Understanding the target audience for AI Unpacked" hideHeader={true}>
+  <div class="space-y-12">
+      <header class="mb-12 mt-8 fade-in">
+          <h1 class="text-5xl md:text-6xl font-headline font-extrabold text-on-surface tracking-tight mb-6">
+              Who is this for?
+          </h1>
+          <p class="text-xl text-on-surface-variant leading-relaxed">
+              An interactive, concept-focused journey to understand Large Language Models — no technical background required.
+          </p>
+      </header>
+
+      <!-- What is this? -->
+      <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+          <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
+              <span class="text-3xl">🎯</span>
+              What is this?
+          </h2>
+          <p class="text-on-surface-variant leading-relaxed">
+              This is a free, interactive tutorial that teaches you how Large Language Models (like ChatGPT, Claude, and Gemini) actually work. We break down complex concepts into bite-sized, interactive lessons that anyone can understand.
+          </p>
+      </section>
+
+      <!-- Who is this for? -->
+      <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+          <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
+              <span class="text-3xl">👥</span>
+              Who is this for?
+          </h2>
+          <ul class="text-on-surface-variant leading-relaxed space-y-2 list-none pl-0">
+              <li class="flex items-start gap-2">
+                  <span class="text-primary font-bold">•</span>
+                  <span><strong>Business professionals</strong> who want to understand AI to make better decisions</span>
+              </li>
+              <li class="flex items-start gap-2">
+                  <span class="text-primary font-bold">•</span>
+                  <span><strong>Curious learners</strong> who want to peek under the hood of LLMs</span>
+              </li>
+              <li class="flex items-start gap-2">
+                  <span class="text-primary font-bold">•</span>
+                  <span><strong>Anyone</strong> who uses ChatGPT but wonders "how does it actually do that?"</span>
+              </li>
+          </ul>
+      </section>
+
+      <!-- How does it work? -->
+      <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+          <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
+              <span class="text-3xl">⚡</span>
+              How does it work?
+          </h2>
+          <p class="text-on-surface-variant leading-relaxed mb-4">
+              Each chapter contains short pages with:
+          </p>
+          <ul class="text-on-surface-variant leading-relaxed space-y-2 list-none pl-0">
+              <li class="flex items-start gap-2">
+                  <span class="text-primary font-bold">•</span>
+                  <span><strong>Clear explanations</strong> with real-world examples</span>
+              </li>
+              <li class="flex items-start gap-2">
+                  <span class="text-primary font-bold">•</span>
+                  <span><strong>Interactive demos</strong> that let you see concepts in action</span>
+              </li>
+          </ul>
+      </section>
+  </div>
+</BaseLayout>

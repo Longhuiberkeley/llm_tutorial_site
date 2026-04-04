@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  activeId?: string;
+}
+
+const { activeId } = Astro.props;
+
+const allDocs = await getCollection('docs');
+
+const pages = allDocs.map(doc => {
+    // Remove 'en/' or 'zh-hant-hk/' from the start of the ID to get the slug
+    const slug = doc.id.replace(/^(en|zh-hant-hk)\//, '');
+    const lang = doc.id.startsWith('zh-hant-hk') ? 'zh-hant-hk' : 'en';
+    
+    return {
+        id: doc.data.pageId || doc.id,
+        title: doc.data.title,
+        chapter: doc.data.chapter || 'Overview',
+        file: `/${lang}/${slug}`,
+        isSpecial: (doc.data.chapter || '').toLowerCase() === 'special'
+    };
+});
+
+pages.sort((a, b) => {
+    if (a.isSpecial && !b.isSpecial) return 1;
+    if (!a.isSpecial && b.isSpecial) return -1;
+    if (a.chapter !== b.chapter) return a.chapter.localeCompare(b.chapter, undefined, { numeric: true, sensitivity: 'base' });
+    return a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' });
+});
+
+const toc = [];
+pages.forEach(page => {
+    const chapterName = page.chapter.toUpperCase();
+    let chapter = toc.find(c => c.title === chapterName);
+    if (!chapter) {
+        chapter = { title: chapterName, pages: [] };
+        toc.push(chapter);
+    }
+    chapter.pages.push(page);
+});
+---
+
+{toc.map(chapter => (
+    <>
+        <div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">
+            {chapter.title}
+        </div>
+        {chapter.pages.map(page => {
+            const isActive = page.id === activeId;
+            const activeClass = isActive 
+                ? 'bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent' 
+                : 'text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all';
+            const icon = isActive ? 'school' : 'arrow_right';
+            
+            return (
+                <a href={page.file} class={`page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group ${activeClass} no-underline`}>
+                    <span class={`material-symbols-outlined text-sm ${isActive ? 'text-accent' : 'opacity-40 group-hover:opacity-100'}`}>
+                        {icon}
+                    </span>
+                    <span class="text-sm font-medium">{page.title}</span>
+                </a>
+            );
+        })}
+    </>
+))}
