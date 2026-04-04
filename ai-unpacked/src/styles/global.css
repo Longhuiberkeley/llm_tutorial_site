@@ -186,13 +186,13 @@ a:focus-visible {
 }
 
 .callout-tldr {
-    background: var(--surface-container-low);
+    background: var(--surface-container-highest);
     border-left-color: var(--accent);
 }
 .callout-tldr::before { content: "📖 TL;DR"; font-weight: 600; color: var(--accent); display: block; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
 
 .callout-dyk {
-    background: var(--surface-container-low);
+    background: var(--surface-container-highest);
     border-left-color: #5C94CC;
 }
 .callout-dyk::before { content: "💡 Did You Know?"; font-weight: 600; color: #5C94CC; display: block; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -200,12 +200,14 @@ a:focus-visible {
 .callout-error {
     background: var(--error-container);
     border-left-color: var(--error);
+    color: var(--on-error-container);
 }
 .callout-error::before { content: "⚠️ Common Error"; font-weight: 600; color: var(--error); display: block; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
 
 .callout-tip {
     background: var(--success-container);
     border-left-color: var(--success);
+    color: var(--on-success-container);
 }
 .callout-tip::before { content: "✅ Pro Tip"; font-weight: 600; color: var(--success); display: block; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
 
@@ -294,3 +296,24 @@ a:focus-visible {
     0%, 100% { filter: drop-shadow(0 0 2px var(--accent-light)); }
     50% { filter: drop-shadow(0 0 8px var(--accent)); }
 }
+
+/* Improved Bullet Point Readability */
+.content-body ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.content-body li {
+    line-height: 1.7;
+    margin-bottom: 0.25rem;
+}
+
+.content-body li::marker {
+    color: var(--accent);
+}
+
