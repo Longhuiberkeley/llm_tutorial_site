@@ -1,0 +1,157 @@
+---
+title: "7.2 什麼是 RAG？ —— 搜尋 + LLM"
+description: "檢索增強生成 (Retrieval-Augmented Generation) 的運作方式：先檢索相關文件，然後根據文件生成答案。"
+chapter: "第 7 章"
+pageId: "07-02"
+---
+
+## 🎯 核心目標
+- 將 RAG 解釋為兩步過程：先檢索，後生成。
+- 展示「幻覺 LLM」與「基於 RAG 的 LLM」之間的具體區別。
+
+<div class="not-prose callout callout-tldr">
+
+RAG 將搜尋引擎與 LLM 結合在一起。首先找到正確的文件，然後讓 LLM 根據這些文件回答問題——而不是憑記憶。
+
+</div>
+
+## 三個字母，一個大概念
+
+**R**etrieval (檢索) —— **A**ugmented (增強) —— **G**eneration (生成)
+
+- **檢索 (Retrieve)：** 在你的知識庫中搜尋最相關的文件。
+- **增強 (Augment)：** 將這些文件加入提示 (Prompt) 中（將它們放入「三明治」結構中）。
+- **生成 (Generate)：** LLM 根據這些文件編寫答案——而不是根據訓練數據進行猜測。
+
+
+<div class="not-prose">
+<!-- Visual: RAG Flow — 5-step pipeline -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-3xl mx-auto shadow-sm">
+<div class="text-center mb-6">
+<h3 class="text-lg font-bold font-headline mb-1">The RAG Pipeline</h3>
+<p class="text-sm text-on-surface-variant">From question to grounded answer</p>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center w-28">
+<div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🙋</div>
+<div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 1</div>
+<div class="text-xs font-bold">User asks a question</div>
+</div>
+<!-- Arrow -->
+<div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center w-28">
+<div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔢</div>
+<div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 2</div>
+<div class="text-xs font-bold">Question prepared for search</div>
+</div>
+<!-- Arrow -->
+<div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center w-28">
+<div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">🔍</div>
+<div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 3</div>
+<div class="text-xs font-bold">Knowledge base finds relevant docs</div>
+</div>
+<!-- Arrow -->
+<div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center w-28">
+<div class="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-2xl mb-2">📄</div>
+<div class="text-xs font-black text-primary uppercase tracking-wide mb-1">Step 4</div>
+<div class="text-xs font-bold">Top docs injected into prompt</div>
+</div>
+<!-- Arrow -->
+<div class="text-on-surface/25 font-bold text-2xl mx-1 rotate-90 md:rotate-0">→</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center text-center w-28">
+<div class="w-14 h-14 rounded-full bg-accent/15 border-2 border-accent/40 flex items-center justify-center text-2xl mb-2">🤖</div>
+<div class="text-xs font-black text-accent uppercase tracking-wide mb-1">Step 5</div>
+<div class="text-xs font-bold">LLM answers from real documents</div>
+</div>
+</div>
+<p class="text-center text-xs text-on-surface-variant mt-5 italic">The LLM model itself never changes — only what it reads before answering. Retrieval can use vector search, keyword search, or any method that finds relevant docs.</p>
+</div>
+
+</div>
+
+
+## 之前與之後
+
+區別是巨大的：
+
+**沒有 RAG：**
+> 你：「我們公司對於損壞商品的退款政策是什麼？」
+> LLM：「大多數公司為損壞物品提供 30 天的退貨窗口……」 *（完全是幻覺——它根本不知道「你的」政策是怎麼說的）*
+
+**有了 RAG：**
+> 系統從知識庫中檢索出你真實的退款政策文件。
+> LLM：「根據您的政策，損壞商品在提供照片證明的情況下，可在 60 天內獲得全額退款。」 *（基於你的真實文件）*
+
+LLM 本身完全沒有改變。改變的是它面前擺放了 *正確的文件*。
+
+<div class="not-prose callout callout-error">
+
+RAG 顯著 *減少* 了幻覺 (Hallucination) —— 但並未消除它。它只是用一種錯誤換取了另一種：LLM 不再根據訓練數據虛構事實，而是可能自信地根據 *錯誤檢索* 的文件進行回答。LLM 仍然可能誤讀或誤解它所檢索到的文件。但將答案建立在真實文件之上，遠比僅憑訓練記憶猜測要好得多。
+
+</div>
+
+<div class="not-prose callout callout-dyk">
+
+可以把 RAG 想像成一個 **智慧目錄**。檢索步驟本身並不回答你的問題——它只是識別出 *哪些頁面* 可能相關，就像書本的索引指向正確的章節一樣。實際的閱讀和回答仍然是 LLM 的工作。這種檢索可以使用向量搜尋 (Vector search)、關鍵字匹配或任何其他能找到正確頁面的方法。
+
+</div>
+
+## 當檢索出錯時
+
+RAG 顯著改善了資訊的準確性——但檢索步驟也有其自身的失敗模式：
+
+- **漏報 (False negatives)：** 相關文件使用了不同的措辭，因此未能進入檢索結果集。LLM 無法挽救它從未收到的內容。
+- **誤報 (False positives)：** 檢索到了不相關的文件——這會稀釋上下文並可能誤導答案。
+- **錯誤分塊 (Wrong chunk)：** 知識庫中存在正確的文件，但檢索到的是錯誤的 *章節*。
+
+結論：RAG 減少了幻覺，但引入了一個新的失敗維度——檢索質量。一個優秀的 LLM 搭配糟糕的檢索，仍然會給出糟糕的答案。
+
+## 為什麼這很強大
+
+RAG 意味著你的 LLM 永遠不會受限於訓練期間所學到的知識。你可以：
+
+- 今天加入新的公司文件——LLM 立即就能「知道」它們。
+- 將私有數據保留在自己的伺服器上——LLM 只看到你檢索到的內容。
+- 在不重新訓練模型的情況下更新你的知識庫。
+
+## 📝 關鍵概念
+
+- **先檢索，後生成：** 順序很重要；搜尋發生在 LLM 發言之前。
+- **有據可查的答案 (Grounded answers)：** LLM 根據檢索到的內容進行回應，而非訓練記憶。
+- **動態知識：** 新文件無需重新訓練模型即可立即使用。
+- **RAG ≠ 微調 (Fine-tuning)：** 模型本身沒有改變——改變的只是它接收到的上下文。
+- **減少幻覺：** 並非消除，但有重大改進。
+
+<div class="not-prose my-12">
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-07-02" class="quiz-container bg-surface-container border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">RAG (檢索增強生成) 的主要好處是什麼？</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            它讓 LLM 回應更快
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            它完全消除了幻覺
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            它將 LLM 的答案建立在實際檢索到的文件之上，而不是根據訓練數據進行猜測
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+</div>

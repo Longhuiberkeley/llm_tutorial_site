@@ -1,0 +1,421 @@
+---
+title: "13.5 審核、有目的的提示與常見陷阱"
+description: "如何很好地審核 LLM 產出、要注意的失敗模式，以及植根於良好軟件紀律的五種有目的的提示實踐 —— 適用於任何類型的項目。"
+chapter: "第 13 章"
+pageId: "13-05"
+---
+
+## 🎯 核心目標
+- 歸納任何項目類型中，由 LLM 生成產出可能出現的失敗模式。
+- 介紹「LLM 作為裁判 (LLM-as-judge)」以及分層審核框架。
+- 介紹五種植根於成熟軟件紀律的有目的的提示實踐 —— 適用於代碼、報告及任何複雜文件。
+
+<div class="not-prose callout callout-tldr">
+
+LLM 的產出始終需要審核 —— 始終如此。本頁涵蓋了要注意的失敗模式、三層審核框架，以及五種植根於成熟軟件開發紀律的有目的的提示實踐 —— 無論你是在構建軟件、撰寫 50 頁的行業報告，還是製作任何複雜文件，這些實踐都適用。這不僅僅是 LLM 技巧，它們是行之有效的軟體開發紀律，而 LLM 讓它們變得更加重要。
+
+</div>
+
+## 🚨 失敗模式 (Failure Patterns)（泛化版）
+
+當由 LLM 輔助的項目在缺乏結構的情況下發展到一定規模時，就會出現公認的失敗模式。這些模式適用於代碼、報告、研究文件以及任何多部分的產出：
+
+**幻影重覆 (Phantom duplicates)：** 同樣的內容以略有不同的形式出現在多個地方。在代碼中：同樣的函數出現在三個文件中，因為 LLM 選擇重新生成而不是復用。在報告中：同樣的分析出現在兩個章節，且結論略有不同 —— 兩者都未意識到其中的矛盾。
+
+**分散邏輯 (Scattered logic)：** 重要的內容出現在錯誤的地方。在代碼中：業務規則埋在 UI 層中。在報告中：結論埋在中間，引言部分充斥著本應放在後面的細節。因為從未定義結構，所以結構從未被強制執行。
+
+**覆蓋不全 (Incomplete coverage)：** 產出的不同部分對邊緣案例的處理方式不同。報告的一個章節探討了反面論點，而另一個章節則完全忽略了。一個執行某項任務的代碼模組驗證了輸入，而另一個執行相同任務的模組則沒有。因為標準從未被定義，所以沒有統一的標準。
+
+**虛假驗證 (False verification)：** 測試始終通過。審核標準只驗證了格式而非實質內容。報告審核了語法但忽略了論點的一致性。代碼測試了理想路徑 (Happy path) 但忽略了邊緣案例。檢查確實存在且顯示通過 —— 但它們並沒有檢查關鍵所在。
+
+<div class="not-prose callout callout-error">
+
+始終通過的驗證比沒有驗證更糟 —— 它會產生虛假的信心。在信任任何檢查之前，請確認它是否真的能檢測出失敗。一個無法失敗的測試不是測試。一個不檢查需求的審核不是審核。
+
+</div>
+
+## 🔄 LLM 審核 LLM
+
+一個 LLM 可以審核另一個 LLM 的產出 —— 這比聽起來更有用。
+
+「生成」與「審核」是不同的任務。生成內容的模型在嘗試滿足規範；而審核內容的模型在詢問：「這裡可能出什麼問題？漏了什麼？哪裡看起來不一致？」這是全新的模式識別，不帶有原始上下文的盲點。
+
+這被稱為 **LLM 作為裁判 (LLM-as-judge)**。實踐中：在 LLM 生成一個章節、報告或模組後，你提示第二個 LLM 來審核它 —— 尋找生成模型遺漏的問題。
+
+對於文件：*「你是一位嚴厲的編輯。審核這個章節，尋找：未經證實的主張、論證缺口、與前文自相矛盾之處，以及表述不清的地方。」*
+
+對於代碼：*「審核這個模組，尋找：安全漏洞、硬編碼數值、缺失的輸入驗證、被禁用的 Linting，以及僅測試理想路徑的代碼。」*
+
+為什麼有效：每次調用 LLM 都會帶來全新的模式識別。審核者不知道生成者「原本打算」做什麼 —— 它只看產出了什麼。這通常正是捕捉生成者疏忽所需的視角。
+
+即便如此，LLM 作為裁判也有其侷限性。它不是萬無一失的 —— 正如一個人類校對員不能保證文件毫無錯誤，一次 LLM 審核也不能保證產出完全正確。生成和審核的 LLM 可能擁有相同的訓練盲點，並得出相同的錯誤結論。這就是為什麼 LLM 審核只是「第二層」，而不是定論。人類判斷對於任何重要的事情仍然至關重要。
+
+<div class="not-prose callout callout-dyk">
+
+當我們探討代理模式時，提到了「自我糾錯循環」 —— 一個代理生成，另一個審核，循環持續直到通過。LLM 作為裁判正是將這種模式應用於項目級別的審核。讓自我糾錯在代理工作流中發揮作用的邏輯，同樣也能在你的審核流程中發揮作用。
+
+</div>
+
+<div class="not-prose callout callout-tip">
+
+**通過「全新開始」獲得更好的 LLM 審核結果。** 為審核步驟開啟一個新的對話會話 —— 讓上下文不被生成內容時的對話所影響。然後賦予它一個特定的對抗性角色：「扮演魔鬼代言人 (Devil's advocate)，找出這個論點中的所有弱點。」或「作為一名紅隊人員 (Red-teamer) —— 識別所有可能失敗或被利用的方式。」或「作為一名持懷疑態度的編輯 —— 尋找未經證實的主張、邏輯缺口和矛盾之處。」這些角色會引導 LLM 遠離「這看起來對了」的直覺，轉而主動尋找問題。這種技術可以應用在任何階段：開始構建前（壓力測試你的設計）、每個章節後（儘早發現問題），或交付前的最後階段。
+
+</div>
+
+## 🛡️ 分層審核框架 (Layered Review Framework)
+
+沒有單一的審核層能捕捉所有問題。最佳實踐是分三層，每層針對不同類型的問題：
+
+**第一層 — 自動化檢查**
+- 代碼類：Linting、安全掃描、類型檢查、單元測試。
+- 文件類：拼寫檢查、格式一致性檢查、引用驗證。
+- 自動運行，一致且快速地捕捉機械性問題。
+
+**第二層 — LLM 審核**
+提示第二個 LLM 根據你的驗收標準和上述失敗模式進行審核。為它提供上下文：原本打算產出什麼？有哪些約束？成功是什麼樣子的？
+
+這一層速度很快，能捕捉到人類在常規審核中容易忽略的模式匹配問題 —— 尤其是在審核大量生成的內容時。
+
+**第三層 — 人類審核**
+你審核 LLM 裁判發現的問題，進行驗證、做出判斷並簽核。這一層對於邏輯、業務規則和正確性尤為重要 —— 這些領域是生成 LLM 和審核 LLM 都可能存在共同盲點的地方。
+
+核心原則：**LLM 審核是一個額外的層次，絕非唯一的層次。** 目標是用不同類型的審核來涵蓋不同類型的問題。人類判斷始終是最後的閘門。
+
+## ✅ 有目的的提示 (Prompting with Purpose)
+
+這五項實踐並非 LLM 特有的技巧。它們是將自律的軟件項目與混亂項目區分開來的習慣 —— 早在語言模型出現之前就是如此。先計劃後構建、提供清晰上下文、為階段設閘、根據需求驗證、儘早修復問題。如果你能這樣提示，無論是否使用 LLM，你都能很好地運行軟體開發項目。
+
+LLM 改變的是跳過這些實踐的代價。當人類緩慢編寫代碼時，走捷徑的後果是可見且可控的。而當 LLM 在幾分鐘內生成數千行代碼時，缺失的紀律會以你難以追蹤的速度轉化為問題。遵循這些實踐，你的 LLM 輔助流程將更具質量和可擴展性。跳過它們，當初感覺是優勢的速度將成為你技術債務的源頭。
+
+一個實用的建議：不要嘗試在單個對話會話中完成所有事情。漫長的對話會累積上下文偏移 —— LLM 開始忘記先前的決策，你也開始失去對已驗證內容的掌握。將你的工作分解為專注的會話：一個用於設計，一個用於構建特定模組，一個用於審核。每個會話都有明確的目的、乾淨的上下文和定義的交付物。這不僅僅是為了應對 LLM 的限制 —— 也是自律項目一貫的運作方式。
+
+---
+
+**實踐 1 — 計劃先行 (Plan First)**
+
+在打開 Prompt 窗口前，回答三個問題：我處於哪個階段（定義、設計、構建、驗證）？我現在具體想產出什麼？對於這項特定的交付物，好的產出是什麼樣子的？
+
+代價最高昂的 Prompt 是在錯誤階段運行的那些。在設計完成前就生成實施內容，產出的東西會被扔掉。在第 2 節的論證解決前就寫第 5 節，會產生你以後必須理清的矛盾。在輸入前先明確你處於哪個階段。
+
+---
+
+**實踐 2 — 給予 LLM 清晰的上下文**
+
+每個 Prompt 都應該告訴 LLM：
+- 整體項目或文件的內容及其目的
+- 當前的工作階段
+- 這個特定 Prompt 試圖產出什麼
+- 預期的輸入格式
+- 預期的輸出格式
+- 相關的先前工作（先前的章節、決策、相關產物）
+- 來自先前階段的約束條件
+
+你跳過的上下文，LLM 會自行發明。LLM 發明的上下文聽起來很合理，但往往是錯的。如果你不告訴它第 3 節論證了 X，它就不會知道第 5 節要與 X 保持一致。如果你不告訴它代碼庫使用的是模式 Y，它就會發明一個不同的模式。
+
+---
+
+**實踐 3 — 進入下一階段前的階段閘門**
+
+在進入下一個章節、模組或功能前，你對以下兩個問題的回答是否都是「是」？
+
+1. 這個產出是否符合「定義」階段的驗收標準？
+2. 這個產出是否能追溯到一個已定義的需求？
+
+如果任一答案為「否」，請不要繼續。在代碼、報告或任何複雜產出中，技術債務最常見的來源就是在閘門未通過時繼續前行，直到三階段後才發現問題，而那時修復代價已非常昂貴。
+
+---
+
+**實踐 4 — 驗證，而非接受 (Verify, Don't Accept)**
+
+在審核前定義你要檢查的內容。這個產出服務於哪些需求？它必須滿足哪些約束？在這個上下文中，不一致看起來是什麼樣的？
+
+在沒有定義標準的情況下檢查產出只是「閱讀」而非「審核」。你會憑直覺注意到明顯的錯誤，但會漏掉只有對照需求衡量時才會顯現的結構性問題。
+
+在 LLM 產出中要尋找的具體內容：
+- 被禁用的 Lint 規則或被抑制的警告（代碼）。
+- 僅驗證理想路徑的測試或檢查。
+- 本應是可配置但被硬編碼的數值。
+- 缺失的輸入驗證或安全檢查（代碼）/ 未經證實的主張（文件）。
+- 存在但從未被調用或從未服務於論點的函數或段落。
+- 在不同地方以不同方式解決同一個問題 —— 你以後必須為這種不一致性付出維護代價。
+
+---
+
+**實踐 5 — 儘早修正航向 (Correct Course Early)**
+
+LLM 輔助的債務累積比傳統債務更快。修復問題的成本隨其上層構建的每一層而增長。
+
+當你在審核中發現問題時，請在進入下一階段前修復它。不要接受並繼續。不要指望「最後再清理」。最後是清理代價最高的時候。
+
+實踐中：如果第 3 階段的審核發現第 2 階段的設計錯了，回到第 2 階段修復它。如果生成的章節與前文矛盾，在寫下一章節前先解決矛盾。儘早修正的紀律是讓項目累積產出在增長過程中保持一致性的關鍵。
+
+<div class="not-prose callout callout-dyk">
+
+這些實踐明確地可以推廣到非編程項目。撰寫一份 30 頁的行業報告：第 1 階段（定義）= 這個問題是為誰回答的？第 2 階段（設計）= 大綱、論證結構、章節計劃。第 3 階段（構建）= 一次一個章節，在進入下一章前進行審核。第 4 階段（驗證）= 每個章節是否服務於論證並回答了第 1 階段的問題？同樣的閘門適用，同樣的紀律會帶來回報。
+
+</div>
+
+
+<div class="not-prose">
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+<div class="text-center mb-6">
+<h3 class="text-xl font-bold font-headline mb-2">Prompting with Purpose</h3>
+<p class="text-sm text-on-surface-variant">Work through the four phases for any LLM-assisted project. Check each item as you confirm it — and don't try to do it all in one chat session.</p>
+</div>
+<!-- Progress Bar -->
+<div class="mb-6">
+<div class="flex justify-between items-center mb-2">
+<span id="rg-progress-text" class="text-sm font-bold text-on-surface">0 of 14 complete</span>
+<span id="rg-progress-pct" class="text-xs font-bold text-on-surface-variant">0%</span>
+</div>
+<div class="w-full h-3 bg-surface-container-lowest rounded-full border border-outline-variant overflow-hidden">
+<div id="rg-progress-bar" class="h-full rounded-full transition-all duration-500 ease-out" style="width: 0%; background: var(--accent);"></div>
+</div>
+</div>
+<!-- Phase Sections -->
+<div class="space-y-4" id="rg-phases">
+<!-- Phase 1: Define -->
+<div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+<button onclick="togglePhase(0, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+<div class="flex items-center gap-3">
+<span id="rg-phase-icon-0" class="text-xl">📋</span>
+<div>
+<div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 1 — Define</div>
+<div class="text-xs text-on-surface-variant">What are you building? For whom? How will you know it's done?</div>
+</div>
+</div>
+<span id="rg-phase-toggle-0" class="text-on-surface-variant text-lg">▼</span>
+</button>
+<div id="rg-phase-body-0" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+<button onclick="toggleCheck(0, this)" id="rg-item-0" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-0" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Purpose is defined</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">I can state in one sentence what this project/document does and who it's for.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: "This is a chess puzzle site for beginner players." 📄 Report: "This analyzes EV adoption trends for a non-technical executive."</div>
+</div>
+</button>
+<button onclick="toggleCheck(1, this)" id="rg-item-1" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-1" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Success criteria are written</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">I have a measurable definition of "done" — not a feeling but a number or observable outcome.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: "70% of users solve the first puzzle." 📄 Report: "Answers all 3 research questions within 20 pages."</div>
+</div>
+</button>
+<button onclick="toggleCheck(2, this)" id="rg-item-2" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-2" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Constraints are listed</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">I know what this must never do, what limits apply, and what approvals are needed.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: "No hints visible by default; mobile-first." 📄 Report: "No proprietary client data included; verified sources only."</div>
+</div>
+</button>
+<button onclick="toggleCheck(3, this)" id="rg-item-3" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-3" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Requirements are written down</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Requirements are externalized (not in my head) and numbered so I can trace work back to them.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Even a numbered bullet list counts. The key is: written, numbered, consulted before accepting output.</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Phase 2: Design -->
+<div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+<button onclick="togglePhase(1, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+<div class="flex items-center gap-3">
+<span id="rg-phase-icon-1" class="text-xl">🗺️</span>
+<div>
+<div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 2 — Design</div>
+<div class="text-xs text-on-surface-variant">How is it structured? Could someone else build from this?</div>
+</div>
+</div>
+<span id="rg-phase-toggle-1" class="text-on-surface-variant text-lg">▼</span>
+</button>
+<div id="rg-phase-body-1" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+<button onclick="toggleCheck(4, this)" id="rg-item-4" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-4" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Structure is defined</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Modules, sections, or components are planned. Each piece has a clear purpose and place.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: Architecture diagram, module list. 📄 Report: Detailed outline with each section's purpose.</div>
+</div>
+</button>
+<button onclick="toggleCheck(5, this)" id="rg-item-5" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-5" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Tasks are broken down</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Work is broken into small, reviewable chunks — one per prompt session. No megaprompts.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Each chunk = one role + one phase + one deliverable. If a chunk can't be reviewed in 5 minutes, it's too large.</div>
+</div>
+</button>
+<button onclick="toggleCheck(6, this)" id="rg-item-6" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-6" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Design is externalized</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">The design is written down, not held in my head. Someone else could build from it.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Gate: "If I left today, could someone else pick this up?" If no, the design needs more work.</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Phase 3: Build -->
+<div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+<button onclick="togglePhase(2, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+<div class="flex items-center gap-3">
+<span id="rg-phase-icon-2" class="text-xl">🔨</span>
+<div>
+<div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 3 — Build</div>
+<div class="text-xs text-on-surface-variant">Give the LLM clear context. Review before proceeding.</div>
+</div>
+</div>
+<span id="rg-phase-toggle-2" class="text-on-surface-variant text-lg">▼</span>
+</button>
+<div id="rg-phase-body-2" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+<button onclick="toggleCheck(7, this)" id="rg-item-7" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-7" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Each prompt has clear context</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">The prompt includes: project purpose, current phase, what this prompt produces, input/output format, constraints, and where related work lives.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Context you skip, the LLM invents. Invented context is plausible but often wrong.</div>
+</div>
+</button>
+<button onclick="toggleCheck(8, this)" id="rg-item-8" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-8" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">One chunk at a time</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">I'm generating one module/section at a time, not the whole thing at once.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Small chunks = verifiable checkpoints. Large chunks = accumulated unreviewed debt.</div>
+</div>
+</button>
+<button onclick="toggleCheck(9, this)" id="rg-item-9" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-9" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Review before proceeding</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Each chunk is reviewed against its requirements before the next chunk is started.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Gate: "Has this been reviewed?" If no, don't start the next chunk yet.</div>
+</div>
+</button>
+<button onclick="toggleCheck(10, this)" id="rg-item-10" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-10" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Issues corrected immediately</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Problems found in review are fixed now, not deferred to "clean up at the end."</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Debt cost grows with each layer built on top of an unfixed problem.</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Phase 4: Verify -->
+<div class="border-2 border-outline-variant rounded-xl overflow-hidden">
+<button onclick="togglePhase(3, this)" class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors text-left group">
+<div class="flex items-center gap-3">
+<span id="rg-phase-icon-3" class="text-xl">🔍</span>
+<div>
+<div class="font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Phase 4 — Verify</div>
+<div class="text-xs text-on-surface-variant">Does the output meet the requirements from Phase 1?</div>
+</div>
+</div>
+<span id="rg-phase-toggle-3" class="text-on-surface-variant text-lg">▼</span>
+</button>
+<div id="rg-phase-body-3" class="border-t border-outline-variant divide-y divide-outline-variant/50">
+<button onclick="toggleCheck(11, this)" id="rg-item-11" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-11" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Output verified against success criteria</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">The output is checked against the measurable success criteria written in Phase 1 — not just "does it look right."</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">💻 Code: Does the feature meet its acceptance criteria? 📄 Report: Does it answer all stated research questions?</div>
+</div>
+</button>
+<button onclick="toggleCheck(12, this)" id="rg-item-12" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-12" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Requirements traceability confirmed</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Every piece of work in the output traces back to a stated requirement. Nothing was added without a requirement.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">Gate: Can you answer "which requirement does this serve?" for every part of the output?</div>
+</div>
+</button>
+<button onclick="toggleCheck(13, this)" id="rg-item-13" class="rg-item w-full flex items-start gap-3 p-4 bg-surface-container-lowest text-left hover:bg-surface-container-low transition-colors">
+<div id="rg-box-13" class="w-6 h-6 min-w-[1.5rem] rounded-md border-2 border-outline-variant flex items-center justify-center text-xs transition-all duration-200 mt-0.5">✓</div>
+<div>
+<div class="font-bold text-xs text-on-surface mb-0.5">Failure patterns checked</div>
+<div class="text-[10px] text-on-surface-variant leading-relaxed">Reviewed for: duplicate content/logic, scattered structure, inconsistent coverage, always-passing checks.</div>
+<div class="text-[10px] text-primary/70 mt-1 italic">These patterns are easy to miss on a quick read. Set aside time for a structured review against this list.</div>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div id="rg-status" class="mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-surface-container-lowest border border-outline-variant text-on-surface-variant">
+📝 Work through all four phases before starting. Check each item as you confirm it.
+</div>
+</div>
+<script>
+(function() {
+const TOTAL = 14;
+const checked = new Array(TOTAL).fill(false);
+const phaseOpen = [true, true, true, true];
+window.togglePhase = function(index, btn) {
+phaseOpen[index] = !phaseOpen[index];
+const body = document.getElementById('rg-phase-body-' + index);
+const toggle = document.getElementById('rg-phase-toggle-' + index);
+body.classList.toggle('hidden', !phaseOpen[index]);
+toggle.textContent = phaseOpen[index] ? '▼' : '▶';
+};
+window.toggleCheck = function(index, btn) {
+checked[index] = !checked[index];
+const box = document.getElementById('rg-box-' + index);
+const item = document.getElementById('rg-item-' + index);
+const checkmark = box;
+if (checked[index]) {
+box.style.backgroundColor = '#4CAF50';
+box.style.borderColor = '#4CAF50';
+box.style.color = 'white';
+item.classList.add('opacity-70');
+} else {
+box.style.backgroundColor = '';
+box.style.borderColor = '';
+box.style.color = '';
+item.classList.remove('opacity-70');
+}
+const count = checked.filter(Boolean).length;
+const pct = Math.round((count / TOTAL) * 100);
+const bar = document.getElementById('rg-progress-bar');
+bar.style.width = pct + '%';
+document.getElementById('rg-progress-text').textContent = count + ' of ' + TOTAL + ' complete';
+document.getElementById('rg-progress-pct').textContent = pct + '%';
+if (count === TOTAL) bar.style.background = '#4CAF50';
+else bar.style.background = 'var(--accent)';
+const status = document.getElementById('rg-status');
+if (count === 0) {
+status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-surface-container-lowest border border-outline-variant text-on-surface-variant';
+status.textContent = '📝 Work through all four phases before starting. Check each item as you confirm it.';
+} else if (count === TOTAL) {
+status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-green-50 text-green-700 border border-green-200';
+status.textContent = '🎉 All phases complete. Your foundation is solid — proceed with confidence.';
+} else if (pct >= 75) {
+status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-primary/5 border border-primary/30 text-primary';
+status.textContent = '✅ Good progress — ' + (TOTAL - count) + ' item' + (TOTAL - count > 1 ? 's' : '') + ' remaining before you proceed.';
+} else {
+const gaps = TOTAL - count;
+status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-amber-50 text-amber-700 border border-amber-200';
+status.textContent = '⚠️ ' + gaps + ' item' + (gaps > 1 ? 's' : '') + ' remaining — don\'t skip ahead. The phase gates exist for a reason.';
+}
+};
+})();
+</script>
+
+</div>
+
+
+## 📝 核心概念
+
+- **失敗模式** —— 幻影重覆、分散邏輯、覆蓋不全、虛假驗證。適用於代碼、報告及任何 LLM 產出。
+- **LLM 作為裁判** —— 使用第二個 LLM 以全新的模式識別來審核第一個 LLM 的產出。能有效捕捉一致性和模式問題，但不能替代人類判斷。
+- **三層審核** —— 自動化檢查 + LLM 審核 + 人類審核。每層捕捉不同的問題。
+- **有目的的提示 (Prompting with Purpose)** —— 計劃先行 → 提供清晰上下文 → 階段閘門 → 驗證而非接受 → 儘早修正航向。這些是成熟的軟件紀律實踐，LLM 只是提高了賭注。
+- **推廣到所有項目** —— 無論你是構建軟件、撰寫長篇文件，還是產出任何多部分的 LLM 內容，這些實踐都適用。
+
+<div id="quiz-13-05" class="not-prose quiz-container my-12" data-quiz="13-05"></div>

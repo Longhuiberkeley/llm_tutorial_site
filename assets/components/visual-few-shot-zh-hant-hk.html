@@ -1,0 +1,57 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+<div class="text-center mb-8">
+<h3 class="text-xl font-bold font-headline mb-2">示範勝於空談</h3>
+<p class="text-sm text-on-surface-variant">看看添加範例（少樣本 Few-Shot）如何立即修復混亂的格式。</p>
+</div>
+<div class="flex flex-col md:flex-row gap-6">
+<!-- Zero-Shot -->
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-bold uppercase tracking-widest opacity-60">零樣本 (Zero-Shot)</span>
+</div>
+<div class="text-xs font-mono p-3 bg-surface-container rounded mb-4 flex-grow">
+<strong>提示詞 (Prompt)：</strong><br>
+將這些日期轉換為 MM/DD/YYYY 格式：<br>
+- 1 月 5 日<br>
+- 3 月 21 日
+</div>
+<div class="p-3 bg-red-50 border border-red-200 rounded text-xs leading-relaxed italic text-red-700">
+<strong>AI 輸出：</strong><br>
+- 01/05/2024<br>
+- 03/21/24 (不一致！)
+</div>
+</div>
+<!-- Arrow -->
+<div class="hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-accent text-3xl">double_arrow</span>
+</div>
+<!-- Few-Shot -->
+<div class="flex-1 bg-surface-container-lowest border-2 border-primary rounded-xl p-6 flex flex-col shadow-md">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2 py-0.5 rounded bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest">少樣本 (Few-Shot)</span>
+<span class="text-[10px] font-bold text-primary uppercase animate-pulse">✨ 可靠度提升 10 倍</span>
+</div>
+<div class="text-xs font-mono p-3 bg-surface-container rounded mb-4 flex-grow">
+<strong>提示詞 (Prompt)：</strong><br>
+將日期轉換為 MM/DD/YYYY 格式：<br>
+- 1 月 5 日 -> 01/05/2024<br>
+- 3 月 21 日 -> 03/21/2024<br>
+- 12 月 1 日 ->
+</div>
+<div class="p-3 bg-green-50 border border-green-200 rounded text-xs leading-relaxed italic text-green-700">
+<strong>AI 輸出：</strong><br>
+- 12/01/2024 (完美！)
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl">
+<div class="flex items-center gap-3 text-sm">
+<div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+<span class="material-symbols-outlined text-sm">lightbulb</span>
+</div>
+<p class="text-xs italic text-on-surface-variant">
+<strong>為什麼有效：</strong>大型語言模型 (LLMs) 是模式匹配引擎。透過給予 2-3 個範例，你為 AI 建立了一個可以遵循的模式，這比長篇累牘的文字說明有效得多。
+</p>
+</div>
+</div>
+</div>

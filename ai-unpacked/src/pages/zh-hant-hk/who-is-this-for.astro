@@ -1,26 +1,39 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Who is this for?" description="Understanding the target audience for AI Unpacked" hideHeader={true}>
+<BaseLayout title="這門課程適合誰？" description="了解 AI Unpacked 的目標受眾" hideHeader={true}>
   <div class="space-y-12">
       <header class="mb-12 mt-8 fade-in">
           <h1 class="text-5xl md:text-6xl font-headline font-extrabold text-on-surface tracking-tight mb-6">
-              Who is this for?
+              這門課程適合誰？
           </h1>
           <p class="text-xl text-on-surface-variant leading-relaxed">
-              An interactive, concept-focused journey to understand Large Language Models — no technical background required.
+              一場以概念為核心的互動之旅，旨在讓您理解大型語言模型 —— 無需任何技術背景。
           </p>
       </header>
+
+      <!-- Translation Disclaimer -->
+      <section class="bg-primary/5 border border-primary/20 rounded-xl p-6 shadow-sm">
+          <div class="flex gap-4 items-start">
+              <span class="text-2xl">🌐</span>
+              <div>
+                  <h3 class="font-bold text-primary mb-1">關於中文翻譯</h3>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">
+                      本網站的中文內容是由大型語言模型 (LLM) 輔助翻譯而成。雖然我們已盡力確保準確性，但翻譯內容可能並非 100% 完美。如有任何疑義，請以英文原版為準。
+                  </p>
+              </div>
+          </div>
+      </section>
 
       <!-- What is this? -->
       <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
           <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
               <span class="text-3xl">🎯</span>
-              What is this?
+              這是什麼？
           </h2>
           <p class="text-on-surface-variant leading-relaxed">
-              This is a free, interactive tutorial that teaches you how Large Language Models (like ChatGPT, Claude, and Gemini) actually work. We break down complex concepts into bite-sized, interactive lessons that anyone can understand.
+              這是一個免費的互動式教程，旨在教您大型語言模型（如 ChatGPT、Claude 和 Gemini）到底是如何運作的。我們將複雜的概念拆解為任何人都能理解的小型互動課程。
           </p>
       </section>
 
@@ -28,20 +41,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
           <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
               <span class="text-3xl">👥</span>
-              Who is this for?
+              這門課程適合誰？
           </h2>
           <ul class="text-on-surface-variant leading-relaxed space-y-2 list-none pl-0">
               <li class="flex items-start gap-2">
                   <span class="text-primary font-bold">•</span>
-                  <span><strong>Business professionals</strong> who want to understand AI to make better decisions</span>
+                  <span>希望了解 AI 以做出更好決策的<strong>商務專業人士</strong></span>
               </li>
               <li class="flex items-start gap-2">
                   <span class="text-primary font-bold">•</span>
-                  <span><strong>Curious learners</strong> who want to peek under the hood of LLMs</span>
+                  <span>想要窺探 LLM 底層運作原理的<strong>好奇學習者</strong></span>
               </li>
               <li class="flex items-start gap-2">
                   <span class="text-primary font-bold">•</span>
-                  <span><strong>Anyone</strong> who uses ChatGPT but wonders "how does it actually do that?"</span>
+                  <span>任何在使用 ChatGPT 的同時，好奇「它到底是如何辦到的？」的<strong>使用者</strong></span>
               </li>
           </ul>
       </section>
@@ -50,19 +63,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
           <h2 class="text-2xl font-headline font-bold mb-4 flex items-center gap-3 text-on-surface">
               <span class="text-3xl">⚡</span>
-              How does it work?
+              它是如何運作的？
           </h2>
           <p class="text-on-surface-variant leading-relaxed mb-4">
-              Each chapter contains short pages with:
+              每個章節都包含簡短的頁面，提供：
           </p>
           <ul class="text-on-surface-variant leading-relaxed space-y-2 list-none pl-0">
               <li class="flex items-start gap-2">
                   <span class="text-primary font-bold">•</span>
-                  <span><strong>Clear explanations</strong> with real-world examples</span>
+                  <span>結合現實世界範例的<strong>清晰解釋</strong></span>
               </li>
               <li class="flex items-start gap-2">
                   <span class="text-primary font-bold">•</span>
-                  <span><strong>Interactive demos</strong> that let you see concepts in action</span>
+                  <span>讓您親眼目睹概念運作過程的<strong>互動演示</strong></span>
               </li>
           </ul>
       </section>

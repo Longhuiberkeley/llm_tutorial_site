@@ -1,0 +1,63 @@
+---
+title: "1.3 上下文很重要 - 距離會改變"
+description: "了解含義 (以及距離) 是如何根據上下文發生改變的。"
+chapter: "第 1 章"
+pageId: "01-03"
+---
+
+## 🎯 核心目標
+- 了解含義 (以及距離) 會根據上下文發生改變。
+- 看看同一個詞在不同情況下如何與不同的詞「接近」。
+- 了解為什麼 LLM 需要「注意力 (Attention)」機制來弄清楚應該應用哪個上下文。
+
+<div class="not-prose callout callout-tldr">
+
+同一個詞根據上下文可能意味著不同的東西。「Bank (銀行/河岸)」在一個句子中接近「river (河流)」，但在另一個句子中可能接近「money (金錢)」。
+
+</div>
+
+## 👁️ 視覺與互動
+
+
+
+<div class="not-prose">
+<div class="bg-surface-container-low rounded-xl p-8 mb-8">
+<div class="flex justify-center gap-4 mb-8">
+<button class="px-8 py-3 rounded-full font-bold transition-all bg-primary text-on-primary shadow-lg hover:scale-105 active:scale-95" id="btn-scene1" onclick="document.getElementById('scene1').style.display='flex'; document.getElementById('scene2').style.display='none'; this.classList.add('bg-primary', 'text-on-primary', 'shadow-lg'); this.classList.remove('bg-surface-container-highest', 'text-on-surface'); document.getElementById('btn-scene2').classList.add('bg-surface-container-highest', 'text-on-surface'); document.getElementById('btn-scene2').classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');">場景 1: 自然</button>
+<button class="px-8 py-3 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95" id="btn-scene2" onclick="document.getElementById('scene2').style.display='flex'; document.getElementById('scene1').style.display='none'; this.classList.add('bg-primary', 'text-on-primary', 'shadow-lg'); this.classList.remove('bg-surface-container-highest', 'text-on-surface'); document.getElementById('btn-scene1').classList.add('bg-surface-container-highest', 'text-on-surface'); document.getElementById('btn-scene1').classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');">場景 2: 金融</button>
+</div>
+<!-- Scene 1 -->
+<div id="scene1" class="flex flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-xl border border-primary/20 animate-fade-in min-h-[250px]">
+<div class="flex items-center gap-8 text-6xl mb-6">
+<div class="text-center"><span class="block">🌊</span><span class="text-lg font-bold mt-2 text-on-surface block">River (河流)</span></div>
+<div class="text-center"><span class="block">🚣</span><span class="text-lg font-bold mt-2 text-on-surface block">Canoe (獨木舟)</span></div>
+<div class="text-center p-4 bg-primary/10 rounded-xl border-2 border-primary animate-pulse"><span class="block">🏞️</span><span class="text-lg font-bold mt-2 text-primary block">Bank (河岸)</span></div>
+</div>
+<p class="text-xl font-medium">在這個上下文中，「bank」被拉得更靠近 <strong class="text-primary">自然 (Nature)</strong>。</p>
+</div>
+<!-- Scene 2 -->
+<div id="scene2" class="flex flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-xl border border-primary/20 animate-fade-in min-h-[250px]" style="display: none;">
+<div class="flex items-center gap-8 text-6xl mb-6">
+<div class="text-center"><span class="block">💰</span><span class="text-lg font-bold mt-2 text-on-surface block">Money (金錢)</span></div>
+<div class="text-center"><span class="block">💳</span><span class="text-lg font-bold mt-2 text-on-surface block">Credit (信用)</span></div>
+<div class="text-center p-4 bg-primary/10 rounded-xl border-2 border-primary animate-pulse"><span class="block">🏦</span><span class="text-lg font-bold mt-2 text-primary block">Bank (銀行)</span></div>
+</div>
+<p class="text-xl font-medium">在這個上下文中，「bank」被拉得更靠近 <strong class="text-primary">金融 (Finance)</strong>。</p>
+</div>
+</div>
+</div>
+
+
+
+## 📝 核心概念
+
+- **多重含義：** 沒有上下文的詞語是模糊的。「Apple」可能是一種水果或一家科技公司。
+- **改變距離：** 周圍的字詞確確實實地改變了歧義詞在 LLM 「大腦」中距離正確含義的距離。
+
+<div class="not-prose callout callout-dyk">
+
+還有哪些詞有多重含義？你的大腦是怎麼知道打算表達哪種含義的？ (提示：你會觀察上下文 - LLM 也是這樣做的！)
+
+</div>
+
+<div id="quiz-01-03" class="not-prose quiz-container my-12" data-quiz="01-03"></div>

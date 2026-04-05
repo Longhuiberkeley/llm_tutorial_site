@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import courseData from '../../data/course-structure.json';
+---
+
+<BaseLayout title="課程概覽" description="一場了解大型語言模型背後概念的互動之旅。" hideHeader={true}>
+  <header class="mb-16 fade-in">
+      <h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface tracking-tight mb-4">
+          課程概覽
+      </h1>
+      <p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+          一場了解大型語言模型背後概念的互動之旅。無需數學，無需程式碼 —— 只需動手操作互動組件和清晰的類比，即可建立真正的直覺。從詞元化到董事會戰略，應有盡有。
+      </p>
+  </header>
+
+  <!-- Chapter Groups -->
+  <div class="space-y-20">
+      {courseData.groups.map(group => {
+          const groupTitle = group.name.includes(':') ? group.name.split(':')[1].trim() : group.name;
+          // Basic localization for group titles if needed, but keeping them consistent with structure
+          const localizedGroupTitle = groupTitle === "Basics" ? "基礎概念" : 
+                                     groupTitle === "Advanced" ? "進階技術" : 
+                                     groupTitle === "Business" ? "業務應用" : groupTitle;
+          
+          return (
+              <section>
+                  <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-4 mb-8">
+                      <h2 class="text-3xl font-headline font-bold text-primary uppercase">{localizedGroupTitle}</h2>
+                      <span class="hidden md:block h-px flex-1 bg-outline-variant opacity-15"></span>
+                      <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant opacity-60">{group.subtitle}</span>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {group.chapters.map(chapter => {
+                          const isComingSoon = chapter.status !== 'active';
+                          const chapterLabel = chapter.special ? '特別章節' : `第 ${chapter.id} 章`;
+                          
+                          // chapter.firstPage is like "chapter-01-01.html"
+                          const slug = chapter.firstPage.replace('.html', '');
+                          const linkHref = isComingSoon ? null : `/zh-hant-hk/${slug}`;
+                          const opacityClass = isComingSoon ? 'opacity-60' : '';
+                          
+                          return (
+                              <a href={linkHref} class={`group cursor-pointer bg-surface-container-low p-8 rounded-xl transition-all hover:bg-surface-container hover:shadow-[0_20px_40px_rgba(146,74,49,0.06)] relative overflow-hidden block no-underline ${opacityClass}`}>
+                                  <span class={`absolute top-4 right-6 text-4xl opacity-20 ${!isComingSoon ? 'group-hover:opacity-100 transition-opacity' : ''}`}>{chapter.icon}</span>
+                                  <p class="text-xs font-label font-bold text-primary mb-2 uppercase tracking-widest m-0">{chapterLabel}</p>
+                                  <h3 class="text-xl font-headline font-bold text-on-surface mb-4 mt-0">{chapter.title}</h3>
+                                  <p class="text-sm text-on-surface-variant leading-relaxed mb-6 m-0">{chapter.description}</p>
+                                  <div class="flex items-center gap-2 text-primary font-bold text-sm mt-auto">
+                                      {isComingSoon ? (
+                                          <span>即將推出</span>
+                                      ) : (
+                                          <>
+                                              <span>開始學習</span>
+                                              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                          </>
+                                      )}
+                                  </div>
+                              </a>
+                          );
+                      })}
+                  </div>
+              </section>
+          );
+      })}
+  </div>
+
+  <p class="text-center text-on-surface-variant text-sm mt-16 pb-8">更多章節即將推出。本課程正在積極更新中。</p>
+</BaseLayout>

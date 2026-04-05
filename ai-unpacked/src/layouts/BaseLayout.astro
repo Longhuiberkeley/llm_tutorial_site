@@ -11,10 +11,38 @@ interface Props {
 }
 
 const { title, description, chapter, hideHeader = false, activeId } = Astro.props;
+
+// Determine current language from URL
+const path = Astro.url.pathname;
+const isZh = path.startsWith('/zh-hant-hk');
+const currentLang = isZh ? 'zh-hant-hk' : 'en';
+const langPrefix = `/${currentLang}`;
+
+// Localized Strings
+const t = {
+	en: {
+		overview: "Overview",
+		who: "Who is this for?",
+		about: "About & Contact",
+		curriculum: "Curriculum",
+		mastery: "LLM Mastery Series",
+		menu: "Menu"
+	},
+	zh: {
+		overview: "概覽",
+		who: "這門課程適合誰？",
+		about: "關於與聯繫",
+		curriculum: "課程大綱",
+		mastery: "LLM 精通系列",
+		menu: "選單"
+	}
+};
+
+const i18n = isZh ? t.zh : t.en;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={currentLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description || "Interactive LLM Tutorial"} />
@@ -48,18 +76,37 @@ const { title, description, chapter, hideHeader = false, activeId } = Astro.prop
 				<button id="menu-toggle" class="lg:hidden p-2 rounded-md hover:bg-surface-container transition-colors" aria-label="Toggle menu">
 					<span class="material-symbols-outlined text-on-surface">menu</span>
 				</button>
-				<a href="/" class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group whitespace-nowrap">
+				<a href={langPrefix + "/"} class="flex items-center gap-2 text-xl font-bold text-on-surface tracking-tighter font-headline hover:text-accent transition-colors group whitespace-nowrap">
 					<span class="material-symbols-outlined text-accent opacity-0 group-hover:opacity-100 transition-opacity hidden md:inline">home</span>
 					AI Unpacked
 				</a>
 			</div>
 			<div class="flex items-center gap-4 md:gap-6">
+				<!-- Language Switcher -->
+				<div class="relative">
+					<button id="lang-toggle" class="p-2 rounded-full hover:bg-surface-container transition-colors flex items-center gap-1 text-sm font-semibold text-on-surface" aria-label="Language Selector">
+						<span class="material-symbols-outlined text-base">language</span>
+						<span class="lang-label font-bold tracking-widest text-xs uppercase ml-0.5">{isZh ? '繁' : 'EN'}</span>
+						<span class="material-symbols-outlined text-sm ml-[-2px]">arrow_drop_down</span>
+					</button>
+					<div id="lang-dropdown" class="absolute right-0 mt-2 w-36 bg-surface-container rounded-xl shadow-xl hidden transition-all duration-200 z-50 overflow-hidden border border-outline-variant/30 py-1">
+						<button data-lang="en" class="lang-option w-full text-left block px-5 py-2.5 text-sm font-medium text-on-surface hover:bg-accent/10 hover:text-accent transition-colors flex items-center justify-between">
+							English
+							<span class={`material-symbols-outlined text-xs ${!isZh ? 'opacity-100' : 'opacity-0'}`}>check</span>
+						</button>
+						<button data-lang="zh-hant-hk" class="lang-option w-full text-left block px-5 py-2.5 text-sm font-medium text-on-surface hover:bg-accent/10 hover:text-accent transition-colors flex items-center justify-between">
+							繁體中文
+							<span class={`material-symbols-outlined text-xs ${isZh ? 'opacity-100' : 'opacity-0'}`}>check</span>
+						</button>
+					</div>
+				</div>
+
 				<button id="theme-toggle" class="p-2 rounded-full hover:bg-surface-container transition-colors" aria-label="Toggle theme">
 					<span class="material-symbols-outlined text-on-surface dark:hidden">dark_mode</span>
 					<span class="material-symbols-outlined text-on-surface hidden dark:block">light_mode</span>
 				</button>
-				<a class="hidden md:block font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="/who-is-this-for">Who is this for?</a>
-				<a class="hidden md:block font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href="/about">About & Contact</a>
+				<a class="hidden md:block font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href={langPrefix + "/who-is-this-for"}>{i18n.who}</a>
+				<a class="hidden md:block font-headline font-semibold text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 hover:text-accent transition-all" href={langPrefix + "/about"}>{i18n.about}</a>
 			</div>
 		</nav>
 
@@ -70,14 +117,14 @@ const { title, description, chapter, hideHeader = false, activeId } = Astro.prop
 			<!-- SideNavBar (Desktop & Mobile Drawer) -->
 			<aside id="sidebar" class="sidebar fixed lg:sticky left-0 top-0 pt-20 lg:pt-8 bg-surface-container-low flex flex-col gap-2 p-4 z-50 h-screen w-72 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out border-r border-outline-variant/20 shadow-2xl lg:shadow-none">
 				<div class="flex items-center justify-between lg:hidden mb-6 px-2">
-					<h2 class="text-xl font-bold text-on-surface font-headline whitespace-nowrap">Menu</h2>
+					<h2 class="text-xl font-bold text-on-surface font-headline whitespace-nowrap">{i18n.menu}</h2>
 					<button id="menu-close" class="p-2 rounded-md hover:bg-surface-container transition-colors">
 						<span class="material-symbols-outlined text-on-surface">close</span>
 					</button>
 				</div>
 				<div class="mb-6 px-2">
-					<h2 class="text-lg font-bold text-on-surface font-headline">Curriculum</h2>
-					<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">LLM Mastery Series</p>
+					<h2 class="text-lg font-bold text-on-surface font-headline">{i18n.curriculum}</h2>
+					<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">{i18n.mastery}</p>
 				</div>
 				<nav class="flex flex-col gap-1 overflow-y-auto max-h-[calc(100vh-160px)]">
 					<!-- Slot for dynamic Table of Contents or Sidebar Links -->
@@ -93,7 +140,7 @@ const { title, description, chapter, hideHeader = false, activeId } = Astro.prop
 					<header class="mb-12">
 						{chapter && (
 							<nav class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
-								<a href="/" class="hover:underline">Overview</a>
+								<a href={langPrefix + "/"} class="hover:underline">{i18n.overview}</a>
 								<span class="material-symbols-outlined text-xs">chevron_right</span>
 								<span>{chapter}</span>
 							</nav>
@@ -149,6 +196,57 @@ const { title, description, chapter, hideHeader = false, activeId } = Astro.prop
 			};
 
 			document.getElementById("theme-toggle")?.addEventListener("click", handleToggleClick);
+
+			// Language Switcher Logic
+			const updateLangLabel = () => {
+				const path = window.location.pathname.toLowerCase();
+				const label = document.querySelector('.lang-label');
+				if (label) {
+					label.textContent = path.startsWith('/zh-hant-hk') ? '繁' : 'EN';
+				}
+			};
+			updateLangLabel();
+
+			document.getElementById('lang-toggle')?.addEventListener('click', () => {
+				document.getElementById('lang-dropdown')?.classList.toggle('hidden');
+			});
+			document.addEventListener('click', (e) => {
+				if (!e.target.closest('#lang-toggle') && !e.target.closest('#lang-dropdown')) {
+					document.getElementById('lang-dropdown')?.classList.add('hidden');
+				}
+			});
+
+			document.querySelectorAll('.lang-option').forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					const targetLang = e.currentTarget.getAttribute('data-lang').toLowerCase();
+					const currentPath = window.location.pathname;
+					const lowerPath = currentPath.toLowerCase();
+					
+					let newPath = currentPath;
+
+					// Handle root and localized roots
+					if (lowerPath === '/' || lowerPath === '/en' || lowerPath === '/en/' || lowerPath === '/zh-hant-hk' || lowerPath === '/zh-hant-hk/') {
+						window.location.href = targetLang === 'zh-hant-hk' ? '/zh-hant-hk/' : '/en/';
+						return;
+					}
+
+					if (targetLang === 'zh-hant-hk') {
+						if (lowerPath.startsWith('/en/')) {
+							newPath = currentPath.replace(/^\/en\//i, '/zh-hant-hk/');
+						} else if (!lowerPath.startsWith('/zh-hant-hk/')) {
+							newPath = '/zh-hant-hk' + currentPath;
+						}
+					} else {
+						if (lowerPath.startsWith('/zh-hant-hk/')) {
+							newPath = currentPath.replace(/^\/zh-hant-hk\//i, '/en/');
+						} else if (!lowerPath.startsWith('/en/')) {
+							newPath = '/en' + currentPath;
+						}
+					}
+
+					window.location.pathname = newPath;
+				});
+			});
 
 			// Mobile Drawer Logic
 			const sidebar = document.getElementById('sidebar');

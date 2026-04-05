@@ -1,0 +1,77 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-4xl mx-auto shadow-sm">
+<div class="text-center mb-8">
+<h3 class="text-xl font-bold font-headline mb-2">AI 隱私過濾器</h3>
+<p class="text-sm text-on-surface-variant">以下哪些內容可以安全地貼到大型語言模型 (LLM) 的對話框中？</p>
+</div>
+<div class="grid sm:grid-cols-2 gap-4">
+<button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔑</div>
+<div class="flex-grow">
+<div class="font-bold text-sm">內部 API 金鑰 (API Keys)</div>
+<div class="text-[10px] opacity-60 uppercase tracking-widest">技術數據</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+</button>
+<button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📝</div>
+<div class="flex-grow">
+<div class="font-bold text-sm">網誌文章草稿</div>
+<div class="text-[10px] opacity-60 uppercase tracking-widest">公開內容</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
+</button>
+<button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏥</div>
+<div class="flex-grow">
+<div class="font-bold text-sm">醫療記錄</div>
+<div class="text-[10px] opacity-60 uppercase tracking-widest">個人資料</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+</button>
+<button onclick="checkPrivacy(true, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-green-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💻</div>
+<div class="flex-grow">
+<div class="font-bold text-sm">通用程式碼片段</div>
+<div class="text-[10px] opacity-60 uppercase tracking-widest">開源內容</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-green-500">check_circle</span>
+</button>
+<button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💳</div>
+<div class="flex-grow">
+<div class="font-bold text-sm">客戶信用卡資料</div>
+<div class="text-[10px] opacity-60 uppercase tracking-widest">財務數據</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+</button>
+<button onclick="checkPrivacy(false, this)" class="p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest hover:border-red-500 transition-all text-left flex items-center gap-4 group active:scale-95">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🏗️</div>
+<div class="flex-grow">
+<div class="font-bold text-sm">未發佈的藍圖</div>
+<div class="text-[10px] opacity-60 uppercase tracking-widest">商業秘密</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-red-500">cancel</span>
+</button>
+</div>
+<div id="privacy-feedback" class="mt-8 p-4 rounded-xl text-center font-bold text-sm opacity-0 transition-all duration-300">
+<!-- 此處顯示反饋 -->
+</div>
+</div>
+<script>
+function checkPrivacy(isSafe, btn) {
+const feedback = document.getElementById('privacy-feedback');
+// 重置按鈕
+btn.parentElement.querySelectorAll('button').forEach(b => {
+b.classList.remove('border-red-500', 'border-green-500', 'bg-red-50', 'bg-green-50');
+});
+if (isSafe) {
+btn.classList.add('border-green-500', 'bg-green-50');
+feedback.textContent = "✅ 正確！公開或通用的資訊通常可以安全分享。";
+feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-green-100 text-green-800 opacity-100";
+} else {
+btn.classList.add('border-red-500', 'bg-red-50');
+feedback.textContent = "❌ 危險！切勿將敏感、私密或專有數據貼到大型語言模型 (LLM) 中。";
+feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-red-100 text-red-800 opacity-100";
+}
+}
+</script>

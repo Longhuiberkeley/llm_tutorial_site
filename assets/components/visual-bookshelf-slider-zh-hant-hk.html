@@ -1,0 +1,84 @@
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+<div class="text-center mb-10">
+<h3 class="text-3xl font-bold font-headline mb-2 text-primary">上下文容量 (Context Capacity)</h3>
+<p class="text-lg text-on-surface-variant font-medium">模型的大腦一次能容納多少個「詞元」(Tokens)？</p>
+</div>
+<div class="space-y-8">
+<!-- Scale Buttons -->
+<div class="flex flex-wrap justify-center gap-3">
+<button class="px-5 py-2 rounded-full font-bold transition-all bg-primary text-on-primary shadow-lg hover:scale-105 active:scale-95 cap-btn" id="btn-cap-0" onclick="updateCapacity(0)">小型 (2K)</button>
+<button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-1" onclick="updateCapacity(1)">中型 (32K)</button>
+<button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-2" onclick="updateCapacity(2)">大型 (200K)</button>
+<button class="px-5 py-2 rounded-full font-bold transition-all bg-surface-container-highest text-on-surface hover:scale-105 active:scale-95 cap-btn" id="btn-cap-3" onclick="updateCapacity(3)">巨型 (1M+)</button>
+</div>
+<!-- Result Card -->
+<div id="capacity-card" class="bg-surface-container-lowest rounded-2xl p-8 border-2 border-outline-variant/30 shadow-inner min-h-[280px] flex flex-col items-center justify-center transition-all duration-300">
+<div id="capacity-visual" class="text-6xl mb-6 animate-fade-in drop-shadow-sm">📄</div>
+<div class="text-center">
+<h4 id="capacity-title" class="text-2xl font-bold font-headline text-primary mb-2">2,000 個詞元 (Tokens)</h4>
+<p id="capacity-desc" class="text-on-surface-variant font-medium leading-relaxed max-w-sm mx-auto">
+早期的 LLM：相當於大約 <strong>4 頁</strong> 文本。非常適合快速回覆電郵或閱讀短文。
+</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+const capacityData = [
+{
+title: "2,000 個詞元 (Tokens)",
+visual: "📄",
+desc: "<strong>短篇文章。</strong>大約 4 頁文本。剛好足夠處理幾封電郵或一份食譜。",
+color: "var(--primary)"
+},
+{
+title: "32,000 個詞元 (Tokens)",
+visual: "📑",
+desc: "<strong>產品說明書。</strong>大約 60 頁。足以容納一份技術指南或長篇法律文件。",
+color: "var(--primary)"
+},
+{
+title: "200,000 個詞元 (Tokens)",
+visual: "📚📚",
+desc: "<strong>約 2 本小說。</strong>極大的空間。你可以餵給它幾本完整的小說或一個大型程式碼庫。",
+color: "var(--accent)"
+},
+{
+title: "1,000,000+ 個詞元 (Tokens)",
+visual: "📚📚📚📚📚📚📚📚📚📚",
+desc: "<strong>約 10 本小說。</strong>驚人的空間 —— 相當於同時堆疊約 10 本小說。模型可以跨越整部《魔戒》(Lord of the Rings) 三部曲甚至更多內容來交叉比對概念。",
+color: "var(--on-surface-variant)"
+}
+];
+function updateCapacity(val) {
+// Update button styles
+document.querySelectorAll('.cap-btn').forEach((btn, idx) => {
+if (idx === val) {
+btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
+btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+} else {
+btn.classList.add('bg-surface-container-highest', 'text-on-surface');
+btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
+}
+});
+const data = capacityData[val];
+const visual = document.getElementById('capacity-visual');
+const title = document.getElementById('capacity-title');
+const desc = document.getElementById('capacity-desc');
+// Animate out
+visual.style.transform = 'scale(0.8)';
+visual.style.opacity = '0';
+setTimeout(() => {
+visual.innerHTML = data.visual;
+title.innerHTML = data.title;
+desc.innerHTML = data.desc;
+title.style.color = data.color;
+// Animate in
+visual.style.transform = 'scale(1.1)';
+visual.style.opacity = '1';
+setTimeout(() => {
+visual.style.transform = 'scale(1)';
+}, 150);
+}, 150);
+}
+</script>
