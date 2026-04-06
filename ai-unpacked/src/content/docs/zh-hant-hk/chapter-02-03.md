@@ -21,14 +21,25 @@ pageId: "02-03"
 
 
 <div class="not-prose">
-<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
-<div class="text-center mb-8">
+<div id="aw-wrap" class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm" style="position: relative;">
+<!-- SVG overlay — arrows drawn here dynamically -->
+<svg id="aw-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:15;">
+<defs>
+<marker id="aw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#8f482f"/>
+</marker>
+<marker id="aw-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#CC785C"/>
+</marker>
+</defs>
+</svg>
+<div class="text-center mb-8" style="position:relative;z-index:10;">
 <span class="text-3xl block mb-2">⚖️</span>
 <h3 class="text-xl font-bold font-headline">使用注意力進行代名詞解析</h3>
 <p class="text-sm text-on-surface-variant italic">點擊 「it (牠)」 以查看 LLM 正在關注什麼</p>
 <p class="text-xs text-on-surface-variant mt-1 opacity-70">💡 在這個例子中，假設每個單詞都是一個詞元 (Token)。</p>
 </div>
-<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant">
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant" style="position:relative;z-index:10;">
 <div class="flex flex-wrap justify-center gap-2 text-xl font-bold mb-10">
 <span class="px-2 py-1 rounded" id="aw-The">The</span>
 <span class="px-2 py-1 rounded" id="aw-cat">cat</span>
@@ -101,6 +112,16 @@ pageId: "02-03"
 </div>
 </div>
 <script>
+(function() {
+function getCenter(el) {
+var container = document.getElementById('aw-wrap');
+var cr = container.getBoundingClientRect();
+var er = el.getBoundingClientRect();
+return {
+x: er.left + er.width / 2 - cr.left,
+y: er.top + er.height / 2 - cr.top
+};
+}
 window.showAw = function(btn) {
 btn.style.borderColor = 'var(--primary)';
 // Highlight key words in sentence
@@ -109,6 +130,41 @@ document.getElementById('aw-cat').style.fontWeight = '900';
 document.getElementById('aw-tired').style.color = 'var(--accent)';
 // Show bars
 document.getElementById('aw-bars').style.opacity = '1';
+// Draw arrows
+var svg = document.getElementById('aw-svg');
+// Clear old arrows (preserve <defs>)
+Array.from(svg.children).forEach(function(el) { if (el.tagName.toLowerCase() !== 'defs') el.remove(); });
+var from = getCenter(btn);
+var targets = [
+{ id: 'aw-cat', weight: 0.84, color: 'var(--primary)' },
+{ id: 'aw-tired', weight: 0.10, color: 'var(--accent)' },
+{ id: 'aw-mat', weight: 0.04, color: 'var(--outline)' }
+];
+targets.forEach(function(t) {
+var targetEl = document.getElementById(t.id);
+if (!targetEl) return;
+var to = getCenter(targetEl);
+var mx = (from.x + to.x) / 2;
+var lift = 20 + t.weight * 40;
+var my = Math.min(from.y, to.y) - lift;
+var strokeWidth = Math.max(1, t.weight * 10);
+var opacity = Math.max(0.1, t.weight * 1.1);
+var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+path.setAttribute('d', 'M ' + from.x + ' ' + from.y + ' Q ' + mx + ' ' + my + ' ' + to.x + ' ' + to.y);
+path.setAttribute('fill', 'none');
+path.setAttribute('stroke', t.color);
+path.setAttribute('stroke-width', strokeWidth);
+path.setAttribute('stroke-linecap', 'round');
+path.setAttribute('opacity', opacity);
+if (t.weight >= 0.1) {
+var markerId = t.color.includes('accent') ? 'aw-arrow-accent' : 'aw-arrow';
+path.setAttribute('marker-end', 'url(#' + markerId + ')');
+}
+svg.appendChild(path);
+});
+// Sync SVG viewBox to container dimensions
+var containerRect = document.getElementById('aw-wrap').getBoundingClientRect();
+svg.setAttribute('viewBox', '0 0 ' + containerRect.width + ' ' + containerRect.height);
 // Animate bars — delay lets browser register width:0 before transition fires
 setTimeout(function() {
 document.getElementById('aw-bar-cat').style.width = '84%';
@@ -119,6 +175,7 @@ document.getElementById('aw-bar-warm').style.width = '1%';
 document.getElementById('aw-bar-others').style.width = '0.5%';
 }, 60);
 };
+})();
 </script>
 </div>
 

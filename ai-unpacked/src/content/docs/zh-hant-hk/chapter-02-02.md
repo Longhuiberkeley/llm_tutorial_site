@@ -22,11 +22,10 @@ pageId: "02-02"
 <div class="not-prose">
 <div id="attn-wrap-all" class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm" style="position: relative;">
 <!-- SVG overlay — arrows drawn here dynamically -->
-<svg id="attn-svg-all" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5;">
+<svg id="attn-svg-all" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:15;">
 <defs>
 <marker id="attn-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-<marker id="attn-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-<path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)" opacity="0.6"/>
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#CC785C"/>
 </marker>
 </defs>
 </svg>
@@ -80,7 +79,7 @@ focusEl.style.borderColor = 'var(--accent)';
 var container = document.getElementById('attn-wrap-all');
 var svg = document.getElementById('attn-svg-all');
 // Remove old paths only (keep <defs>)
-Array.from(svg.querySelectorAll('path, line')).forEach(function(el) { el.remove(); });
+Array.from(svg.children).forEach(function(el) { if (el.tagName.toLowerCase() !== 'defs') el.remove(); });
 var from = getCenter(focusEl);
 var topTarget = '';
 var maxWeight = -1;
@@ -111,6 +110,9 @@ path.setAttribute('marker-end', 'url(#attn-arrow)');
 }
 svg.appendChild(path);
 });
+// Sync SVG viewBox to container dimensions
+var cr2 = container.getBoundingClientRect();
+svg.setAttribute('viewBox', '0 0 ' + cr2.width + ' ' + cr2.height);
 var hint = document.getElementById('attn-hint-all');
 if (topTarget) {
 hint.textContent = '從 「' + focusWord + '」 到 「' + topTarget + '」 的線最粗 —— 表示注意力最強。細線則表示注意力較弱。';
