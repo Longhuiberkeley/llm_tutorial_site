@@ -83,47 +83,36 @@ These four aren't the only ways agents fail. Can you think of others? What if th
 </p>
 </div>
 </div>
-<script>
-const bugData = [
-{
-title: "Impossible Task",
-icon: "🏔️",
-problem: "The goal itself is unrealistic — no tool can help. The agent should recognize this in the <strong>planning phase</strong>, before it ever tries a tool call. A good LLM asks: 'Is this even achievable?' before acting.",
-fix: "Improve the underlying LLM quality and system prompt to encourage <strong>feasibility checks</strong> before execution. The agent should surface 'This goal is not achievable' as a valid response."
-},
-{
-title: "Wrong Trigger",
-icon: "📢",
-problem: "The agent used <em>told</em> instead of <em>says</em> — the trigger word was wrong. In real terms: the tool call was malformed or missing the required format, so the executor never detected it and nothing happened.",
-fix: "The system prompt should clearly specify the <strong>exact tool call format</strong>. Validate outputs before sending them to the executor, and return a format error if the pattern doesn't match."
-},
-{
-title: "Missing Tool (Hallucination)",
-icon: "🏎️",
-problem: "The command was perfectly formed, but there's no Ferrari — the tool doesn't exist. Imagine the LLM wants to open a Chrome browser, but you're a Firefox user. The call fails because the tool simply isn't there, even though the instruction was correct.",
-fix: "List only <strong>available tools explicitly</strong> in the system prompt. If the agent calls a tool not on the list, return a 404-style error and force it to re-plan using only what's available."
-},
-{
-title: "Harmful Behavior",
-icon: "🚨",
-problem: "The command is syntactically correct and technically executable — but it should never be carried out. The agent followed instructions without checking whether the action was safe or ethical.",
-fix: "Implement <strong>safety guardrails</strong> at the executor level — a separate layer that reviews actions before running them. Never rely solely on the LLM to self-police harmful commands."
-}
-];
-function revealBug(index, btn) {
-const data = bugData[index];
-const display = document.getElementById('bug-display');
-document.querySelectorAll('.bug-btn').forEach(b => b.classList.remove('border-red-400', 'bg-red-50'));
-btn.classList.add('border-red-400', 'bg-red-50');
-display.classList.remove('animate-fade-in');
-void display.offsetWidth;
-display.classList.add('animate-fade-in');
-display.style.opacity = "1";
-document.getElementById('bug-icon').textContent = data.icon;
-document.getElementById('bug-title').textContent = data.title;
-document.getElementById('bug-problem').innerHTML = data.problem;
-document.getElementById('bug-fix').innerHTML = data.fix;
-}
+<script type="module">
+import { init } from '/js/interactives/simon-says-failure.js';
+init({
+  bugData: [
+    {
+      title: "Impossible Task",
+      icon: "\uD83C\uDFD4\uFE0F",
+      problem: "The goal itself is unrealistic \u2014 no tool can help. The agent should recognize this in the <strong>planning phase</strong>, before it ever tries a tool call. A good LLM asks: 'Is this even achievable?' before acting.",
+      fix: "Improve the underlying LLM quality and system prompt to encourage <strong>feasibility checks</strong> before execution. The agent should surface 'This goal is not achievable' as a valid response."
+    },
+    {
+      title: "Wrong Trigger",
+      icon: "\uD83D\uDCD2",
+      problem: "The agent used <em>told</em> instead of <em>says</em> \u2014 the trigger word was wrong. In real terms: the tool call was malformed or missing the required format, so the executor never detected it and nothing happened.",
+      fix: "The system prompt should clearly specify the <strong>exact tool call format</strong>. Validate outputs before sending them to the executor, and return a format error if the pattern doesn't match."
+    },
+    {
+      title: "Missing Tool (Hallucination)",
+      icon: "\uD83C\uDFCE\uFE0F",
+      problem: "The command was perfectly formed, but there's no Ferrari \u2014 the tool doesn't exist. Imagine the LLM wants to open a Chrome browser, but you're a Firefox user. The call fails because the tool simply isn't there, even though the instruction was correct.",
+      fix: "List only <strong>available tools explicitly</strong> in the system prompt. If the agent calls a tool not on the list, return a 404-style error and force it to re-plan using only what's available."
+    },
+    {
+      title: "Harmful Behavior",
+      icon: "\uD83D\uDEA8",
+      problem: "The command is syntactically correct and technically executable \u2014 but it should never be carried out. The agent followed instructions without checking whether the action was safe or ethical.",
+      fix: "Implement <strong>safety guardrails</strong> at the executor level \u2014 a separate layer that reviews actions before running them. Never rely solely on the LLM to self-police harmful commands."
+    }
+  ]
+});
 </script>
 
 </div>

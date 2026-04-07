@@ -126,161 +126,44 @@ Truncation: The oldest messages simply fall off the top and are permanently forg
 </p>
 </div>
 </div>
-<script>
-function hfNext(step) {
-[1,2,3,4,5].forEach(function(s) {
-document.getElementById('hf-step-' + s).classList.add('hidden');
+<script type="module">
+import { init } from '/js/interactives/head-full-memory.js';
+init({
+  math1Correct: '\u2705 Correct! 17 \u00D7 23 = 391.',
+  math1Wrong: '\u274C Not quite \u2014 it\'s 391.',
+  math2Correct: '\u2705 Correct! 156 \u00F7 12 = 13.',
+  math2Wrong: '\u274C Not quite \u2014 it\'s 13.',
+  math3Correct: '\u2705 Correct! 8 \u00D7 17 = 136. Now\u2026 let\'s test that memory.',
+  math3Wrong: '\u274C Not quite \u2014 it\'s 136. Now\u2026 let\'s test that memory.',
+  phoneCorrect: '\u2705 Nice memory! You remembered 555-0142.',
+  phoneWrong: '\u274C It was 555-0142. Easy to mix up after a distraction!',
+  humanCaption: 'Most humans mix up the digits! Distraction pushes earlier memories out \u2014 just like it does to an LLM\'s context window.',
+  baseConvo: [
+    { role: 'user', text: 'Hi! My name is Peter. Call me Pete.' },
+    { role: 'llm',  text: 'Hi Pete! Great to meet you.' },
+    { role: 'user', text: 'I\'m working on a marketing brief for Q3.' },
+    { role: 'llm',  text: 'Happy to help! What\'s the target audience?' },
+    { role: 'user', text: 'Millennials in urban areas, age 28-40.' },
+    { role: 'llm',  text: 'Got it. I\'ll keep that in mind.' },
+    { role: 'user', text: 'Also, our budget is $50K for the quarter.' },
+    { role: 'llm',  text: 'Understood \u2014 $50K, urban millennials, Q3.' },
+    { role: 'user', text: 'Draft a headline for a social media campaign.' },
+    { role: 'llm',  text: '(Current message \u2014 generating now...)' }
+  ],
+  truncRows: [
+    '\uD83D\uDC64 Hi! My name is Peter. Call me Pete.',
+    '\uD83E\uDD16 Hi Pete! Great to meet you.',
+    '\uD83D\uDC64 I\'m working on a marketing brief for Q3.'
+  ],
+  sumRow: '\uD83D\uDCDD SUMMARY: User is Pete. Working on Q3 marketing brief. Audience: urban millennials 28-40. Budget: $50K.',
+  slideRow: '[System prompt always pinned at top]',
+  currentGenerating: '\uD83E\uDD16 (Current \u2014 generating...)',
+  strategyDescs: {
+    trunc: '\u2702\uFE0F Truncation: Oldest messages are cut off. "Pete" is gone \u2014 the LLM no longer knows the user\'s name.',
+    sum: '\uD83D\uDCDD Summarization: Old messages are compressed into a brief note. Core context preserved, exact wording lost.',
+    slide: '\uD83E\uDE77 Sliding Window: System prompt stays pinned; only recent messages kept. Early context like "Pete\'s name" falls away.'
+  }
 });
-document.getElementById('hf-step-' + step).classList.remove('hidden');
-}
-function hfMath(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-math-feedback');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ Correct! 17 × 23 = 391.';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ Not quite — it\'s 391.';
-}
-fb.classList.remove('hidden');
-setTimeout(function() { hfNext(3); }, 1800);
-}
-function hfMath2(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-math2-feedback');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ Correct! 156 ÷ 12 = 13.';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ Not quite — it\'s 13.';
-}
-fb.classList.remove('hidden');
-setTimeout(function() { hfNext(4); }, 1800);
-}
-function hfMath3(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-math3-feedback');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ Correct! 8 × 17 = 136. Now… let\'s test that memory.';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ Not quite — it\'s 136. Now… let\'s test that memory.';
-}
-fb.classList.remove('hidden');
-setTimeout(function() { hfNext(5); }, 1800);
-}
-function hfPhone(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-phone-feedback');
-var caption = document.getElementById('hf-human-caption');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ Nice memory! You remembered 555-0142.';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ It was 555-0142. Easy to mix up after a distraction!';
-}
-fb.classList.remove('hidden');
-caption.classList.remove('hidden');
-}
-// Full conversation (same base for all 3 strategies)
-var baseConvo = [
-{ role: 'user', text: 'Hi! My name is Peter. Call me Pete.' },
-{ role: 'llm',  text: 'Hi Pete! Great to meet you.' },
-{ role: 'user', text: 'I\'m working on a marketing brief for Q3.' },
-{ role: 'llm',  text: 'Happy to help! What\'s the target audience?' },
-{ role: 'user', text: 'Millennials in urban areas, age 28-40.' },
-{ role: 'llm',  text: 'Got it. I\'ll keep that in mind.' },
-{ role: 'user', text: 'Also, our budget is $50K for the quarter.' },
-{ role: 'llm',  text: 'Understood — $50K, urban millennials, Q3.' },
-{ role: 'user', text: 'Draft a headline for a social media campaign.' },
-{ role: 'llm',  text: '(Current message — generating now...)' }
-];
-function makeRow(role, text, style) {
-var prefix = role === 'user' ? '👤 ' : '🤖 ';
-var base = 'rounded px-2 py-1 text-on-surface-variant';
-var extra = style || '';
-return '<div class="' + base + ' ' + extra + '">' + prefix + text + '</div>';
-}
-var hfContent = {
-trunc: {
-build: function() {
-var rows = [];
-rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-30 line-through">' + '👤 Hi! My name is Peter. Call me Pete.' + '</div>');
-rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-30 line-through">' + '🤖 Hi Pete! Great to meet you.' + '</div>');
-rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-40 line-through">' + '👤 I\'m working on a marketing brief for Q3.' + '</div>');
-for (var i = 3; i < 9; i++) {
-rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
-}
-rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating...)</div>');
-return rows;
-},
-desc: '✂️ Truncation: Oldest messages are cut off. "Pete" is gone — the LLM no longer knows the user\'s name.'
-},
-sum: {
-build: function() {
-var rows = [];
-rows.push('<div class="rounded px-2 py-1 bg-primary/10 border border-primary/20 text-primary font-bold">📝 SUMMARY: User is Pete. Working on Q3 marketing brief. Audience: urban millennials 28-40. Budget: $50K.</div>');
-for (var i = 4; i < 9; i++) {
-rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
-}
-rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating...)</div>');
-return rows;
-},
-desc: '📝 Summarization: Old messages are compressed into a brief note. Core context preserved, exact wording lost.'
-},
-slide: {
-build: function() {
-var rows = [];
-rows.push('<div class="rounded px-2 py-1 bg-primary/5 border border-primary/10 text-xs font-bold opacity-60 text-on-surface-variant">[System prompt always pinned at top]</div>');
-for (var i = 3; i < 9; i++) {
-rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
-}
-rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 (Current — generating...)</div>');
-return rows;
-},
-desc: '🪟 Sliding Window: System prompt stays pinned; only recent messages kept. Early context like "Pete\'s name" falls away.'
-}
-};
-function hfSwitch(type) {
-['trunc', 'sum', 'slide'].forEach(function(t) {
-var btn = document.getElementById('hf-btn-' + t);
-if (t === type) {
-btn.classList.add('bg-primary', 'text-on-primary');
-btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-} else {
-btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-btn.classList.remove('bg-primary', 'text-on-primary');
-}
-});
-var data = hfContent[type];
-document.getElementById('hf-tape').innerHTML = data.build().join('');
-document.getElementById('hf-tape-desc').textContent = data.desc;
-}
-hfSwitch('trunc');
 </script>
 
 </div>

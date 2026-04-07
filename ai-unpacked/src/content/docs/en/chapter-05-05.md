@@ -78,23 +78,12 @@ LLMs are remarkably useful, and that usefulness is exactly what makes privacy ha
 <!-- Feedback here -->
 </div>
 </div>
-<script>
-function checkPrivacy(isSafe, btn) {
-const feedback = document.getElementById('privacy-feedback');
-// Reset buttons
-btn.parentElement.querySelectorAll('button').forEach(b => {
-b.classList.remove('border-red-500', 'border-green-500', 'bg-red-50', 'bg-green-50');
+<script type="module">
+import { init } from '/js/interactives/privacy-filter.js';
+init({
+  safeMessage: "\u2705 Correct! Public or generic information is generally safe to share.",
+  dangerMessage: "\u274C DANGER! Never paste sensitive, private, or proprietary data into an LLM."
 });
-if (isSafe) {
-btn.classList.add('border-green-500', 'bg-green-50');
-feedback.textContent = "✅ Correct! Public or generic information is generally safe to share.";
-feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-green-100 text-green-800 opacity-100";
-} else {
-btn.classList.add('border-red-500', 'bg-red-50');
-feedback.textContent = "❌ DANGER! Never paste sensitive, private, or proprietary data into an LLM.";
-feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-red-100 text-red-800 opacity-100";
-}
-}
 </script>
 
 </div>

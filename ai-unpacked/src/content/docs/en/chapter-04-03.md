@@ -99,25 +99,16 @@ The cat sat on the mat. It was a very good cat. Every day, the cat slept.
 </div>
 </div>
 </div>
-<script>
-function tempSelect(word, pct, btn) {
-document.getElementById('temp-target').textContent = word;
-document.getElementById('temp-target').classList.remove('animate-pulse');
-document.getElementById('temp-warmup-feedback').classList.remove('hidden');
-}
-var tempLevels = [
-"The cat sat on the mat. It was a very good cat. Every day, the cat slept. The cat was happy.",
-"Whiskers prowled the velvet sofa, dreaming of the tuna can opening in the kitchen later that evening.",
-"Neon whiskers glitching through the purple fog, the feline entity calculated the distance to the cheese moon. Meow? Bleep."
-];
-function updateTemp(val) {
-var text = document.getElementById('temp-text');
-text.classList.add('opacity-0');
-setTimeout(() => {
-text.textContent = tempLevels[val];
-text.classList.remove('opacity-0');
-}, 200);
-}
+<script type="module">
+import { init } from '/js/interactives/temperature-slider.js';
+init({
+  tempLevels: [
+    "The cat sat on the mat. It was a very good cat. Every day, the cat slept. The cat was happy.",
+    "Whiskers prowled the velvet sofa, dreaming of the tuna can opening in the kitchen later that evening.",
+    "Neon whiskers glitching through the purple fog, the feline entity calculated the distance to the cheese moon. Meow? Bleep."
+  ],
+  warmupFeedback: "✅ All of these work! There's no single \"right\" answer. The AI just picks one."
+});
 </script>
 
 </div>

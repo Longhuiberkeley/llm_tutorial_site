@@ -57,22 +57,14 @@ Text goes in. Text comes out. That's the whole interface — but what's actually
 </div>
 </div>
 </div>
-<script>
-function bbGuess(btn, isCorrect) {
-var opts = document.querySelectorAll('#bb-options .quiz-option');
-opts.forEach(function(o) { o.disabled = true; o.onclick = null; });
-if (isCorrect) {
-btn.classList.add('correct');
-document.getElementById('bb-fb-text').innerHTML = '✅ <strong>Exactly right!</strong> Every time you send a message, the LLM predicts one word (token) at a time — picking the statistically most likely next token given everything before it — and repeats until the reply is complete. It\'s not searching or looking things up. It\'s pure next-token prediction, built from patterns seen in training data.';
-} else {
-btn.classList.add('wrong');
-opts.forEach(function(o) {
-if (o.textContent.trim().startsWith('🎯')) o.classList.add('correct');
+<script type="module">
+import { init } from '/js/interactives/black-box.js';
+init({
+  strings: {
+    correctFeedback: '✅ <strong>Exactly right!</strong> Every time you send a message, the LLM predicts one word (token) at a time — picking the statistically most likely next token given everything before it — and repeats until the reply is complete. It\'s not searching or looking things up. It\'s pure next-token prediction, built from patterns seen in training data.',
+    wrongFeedback: '❌ <strong>Not quite.</strong> The LLM is actually predicting the next word (token) at a time, repeatedly. It doesn\'t search the internet or look things up in real-time — it generates from patterns learned during training. This is also why it can confidently say things that are wrong.'
+  }
 });
-document.getElementById('bb-fb-text').innerHTML = '❌ <strong>Not quite.</strong> The LLM is actually predicting the next word (token) at a time, repeatedly. It doesn\'t search the internet or look things up in real-time — it generates from patterns learned during training. This is also why it can confidently say things that are wrong.';
-}
-document.getElementById('bb-feedback').classList.remove('hidden');
-}
 </script>
 
 </div>

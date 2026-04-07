@@ -100,25 +100,16 @@ oninput="updateTemp(this.value)">
 </div>
 </div>
 </div>
-<script>
-function tempSelect(word, pct, btn) {
-document.getElementById('temp-target').textContent = word;
-document.getElementById('temp-target').classList.remove('animate-pulse');
-document.getElementById('temp-warmup-feedback').classList.remove('hidden');
-}
-var tempLevels = [
-"貓坐在地毯上。它是一隻非常乖的貓。每天，貓都在睡覺。貓很開心。",
-"小貓 Whiskers 在天鵝絨沙發上巡視，夢想著傍晚廚房裡打開的金槍魚罐頭。",
-"霓虹鬍鬚在紫色霧氣中閃爍，這隻貓實體計算著前往芝士月球的距離。喵？嗶嗶。"
-];
-function updateTemp(val) {
-var text = document.getElementById('temp-text');
-text.classList.add('opacity-0');
-setTimeout(() => {
-text.textContent = tempLevels[val];
-text.classList.remove('opacity-0');
-}, 200);
-}
+<script type="module">
+import { init } from '/js/interactives/temperature-slider.js';
+init({
+  tempLevels: [
+    "貓坐在地毯上。它是一隻非常乖的貓。每天，貓都在睡覺。貓很開心。",
+    "小貓 Whiskers 在天鵝絨沙發上巡視，夢想著傍晚廚房裡打開的金槍魚罐頭。",
+    "霓虹鬍鬚在紫色霧氣中閃爍，這隻貓實體計算著前往芝士月球的距離。喵？嗶嗶。"
+  ],
+  warmupFeedback: "✅ 這些都行得通！沒有單一的「正確」答案。AI 只是從中挑選一個。"
+});
 </script>
 </div>
 

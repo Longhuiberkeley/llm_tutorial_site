@@ -89,30 +89,15 @@ The ceiling of any digital transformation isn't technology — it's the combinat
 </div>
 </div>
 </div>
-<script>
-(function() {
-const pillarState = [true, true, true];
-const pillarData = [
-{
-name: "Communication",
-emoji: "💬",
-desc: "Without clear communication, even the best technology fails. Stakeholders resist what they don't understand. Teams build the wrong thing. Users ignore the tool. Communication means explaining the 'why,' training people, and listening to feedback throughout the process.",
-examples: "Change management plans, stakeholder presentations, training programs, feedback loops, internal champions"
-},
-{
-name: "Business Insight",
-emoji: "📊",
-desc: "Technology for technology's sake wastes money. Business insight means knowing which processes are worth automating, where the bottlenecks are, and what 'success' actually looks like in measurable terms. It's the difference between automating the right thing and automating the wrong thing faster.",
-examples: "Process mapping, ROI analysis, KPI definition, workflow audits, identifying pain points vs. nice-to-haves"
-},
-{
-name: "Technical Ability",
-emoji: "🔧",
-desc: "Ideas without execution are just wishes. Technical ability means being able to build, integrate, and maintain the actual tools — whether that's configuring an LLM, connecting APIs, or writing automation scripts. Someone on the team needs to make it real.",
-examples: "API integration, prompt engineering, system architecture, data pipelines, security implementation, testing"
-}
-];
-const warningMessages = {
+<script type="module">
+import { init } from '/js/interactives/three-pillars.js';
+init({
+pillarData: [
+{ name: "Communication", emoji: "💬", desc: "Without clear communication, even the best technology fails. Stakeholders resist what they don't understand. Teams build the wrong thing. Users ignore the tool. Communication means explaining the 'why,' training people, and listening to feedback throughout the process.", examples: "Change management plans, stakeholder presentations, training programs, feedback loops, internal champions" },
+{ name: "Business Insight", emoji: "📊", desc: "Technology for technology's sake wastes money. Business insight means knowing which processes are worth automating, where the bottlenecks are, and what 'success' actually looks like in measurable terms. It's the difference between automating the right thing and automating the wrong thing faster.", examples: "Process mapping, ROI analysis, KPI definition, workflow audits, identifying pain points vs. nice-to-haves" },
+{ name: "Technical Ability", emoji: "🔧", desc: "Ideas without execution are just wishes. Technical ability means being able to build, integrate, and maintain the actual tools — whether that's configuring an LLM, connecting APIs, or writing automation scripts. Someone on the team needs to make it real.", examples: "API integration, prompt engineering, system architecture, data pipelines, security implementation, testing" }
+],
+warningMessages: {
 "0": "⚠️ Without Communication, teams resist change and tools go unused.",
 "1": "⚠️ Without Business Insight, you automate the wrong things.",
 "2": "⚠️ Without Technical Ability, great ideas stay on whiteboards.",
@@ -120,81 +105,10 @@ const warningMessages = {
 "0,2": "🚨 No communication or technical ability — transformation stalls completely.",
 "1,2": "🚨 No business insight or technical ability — just talk, no action.",
 "0,1,2": "🛑 All three pillars are down — there is no transformation happening."
-};
-window.togglePillar = function(index) {
-pillarState[index] = !pillarState[index];
-updatePillars();
-};
-window.togglePillarDetail = function(index) {
-const detail = document.getElementById('dt-detail');
-const data = pillarData[index];
-if (!detail.classList.contains('hidden') && document.getElementById('dt-detail-title').textContent.includes(data.name)) {
-detail.classList.add('hidden');
-return;
-}
-document.getElementById('dt-detail-title').textContent = data.emoji + ' ' + data.name;
-document.getElementById('dt-detail-desc').textContent = data.desc;
-document.getElementById('dt-detail-examples').textContent = data.examples;
-detail.classList.remove('hidden');
-detail.classList.remove('animate-fade-in');
-void detail.offsetWidth;
-detail.classList.add('animate-fade-in');
-};
-function updatePillars() {
-const activeCount = pillarState.filter(Boolean).length;
-const missingIndices = pillarState.map((v, i) => v ? null : i).filter(v => v !== null);
-// Update pillar visuals
-pillarState.forEach((active, i) => {
-const pillar = document.getElementById('dt-pillar-' + i);
-const toggle = document.getElementById('dt-toggle-' + i);
-const data = pillarData[i];
-if (active) {
-pillar.style.opacity = '1';
-pillar.style.transform = 'scale(1)';
-toggle.textContent = data.emoji + ' ' + data.name + ': ON';
-toggle.classList.remove('bg-surface-container-low', 'text-on-surface-variant', 'border-outline-variant');
-toggle.classList.add('border-primary', 'text-primary', 'bg-primary/5');
-} else {
-pillar.style.opacity = '0.25';
-pillar.style.transform = 'scale(0.95)';
-toggle.textContent = data.emoji + ' ' + data.name + ': OFF';
-toggle.classList.add('bg-surface-container-low', 'text-on-surface-variant', 'border-outline-variant');
-toggle.classList.remove('border-primary', 'text-primary', 'bg-primary/5');
-}
+},
+roofLabels: { all: '🏛️ Digital Transformation Success', two: '⚠️ Unstable Foundation', one: '🚨 Collapsing Structure', none: '🛑 No Foundation' },
+statusMessages: { success: '✅ All three pillars are strong — transformation is on track!' }
 });
-// Update roof
-const roof = document.getElementById('dt-roof');
-const roofLabel = document.getElementById('dt-roof-label');
-if (activeCount === 3) {
-roof.classList.remove('opacity-60');
-roof.classList.add('bg-primary');
-roof.style.transform = 'rotate(0deg)';
-roofLabel.textContent = '🏛️ Digital Transformation Success';
-} else if (activeCount === 2) {
-roof.classList.add('opacity-60');
-roof.style.transform = 'rotate(-1deg)';
-roofLabel.textContent = '⚠️ Unstable Foundation';
-} else if (activeCount === 1) {
-roof.classList.add('opacity-60');
-roof.style.transform = 'rotate(-2.5deg)';
-roofLabel.textContent = '🚨 Collapsing Structure';
-} else {
-roof.classList.add('opacity-60');
-roof.style.transform = 'rotate(-4deg)';
-roofLabel.textContent = '🛑 No Foundation';
-}
-// Update status message
-const status = document.getElementById('dt-status');
-if (activeCount === 3) {
-status.className = 'rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-green-50 text-green-700 border border-green-200';
-status.textContent = '✅ All three pillars are strong — transformation is on track!';
-} else {
-status.className = 'rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-red-50 text-red-700 border border-red-200';
-const key = missingIndices.join(',');
-status.textContent = warningMessages[key] || '⚠️ Missing pillars weaken the foundation.';
-}
-}
-})();
 </script>
 
 </div>
@@ -333,60 +247,15 @@ The fastest path to a reliable automation is counterintuitively slow at the star
 📝 Click each item as you confirm you can answer it.
 </div>
 </div>
-<script>
-(function() {
-const checked = [false, false, false, false, false, false, false, false];
-window.toggleCheck = function(index) {
-checked[index] = !checked[index];
-updateChecklist();
-};
-function updateChecklist() {
-const count = checked.filter(Boolean).length;
-// Update each checkbox visual
-checked.forEach((isChecked, i) => {
-const box = document.getElementById('ac-box-' + i);
-const item = document.getElementById('ac-item-' + i);
-const checkmark = box.querySelector('span');
-if (isChecked) {
-box.style.backgroundColor = '#4CAF50';
-box.style.borderColor = '#4CAF50';
-checkmark.style.opacity = '1';
-item.classList.add('border-green-300');
-item.classList.remove('border-outline-variant');
-} else {
-box.style.backgroundColor = '';
-box.style.borderColor = '';
-checkmark.style.opacity = '0';
-item.classList.remove('border-green-300');
-item.classList.add('border-outline-variant');
+<script type="module">
+import { init } from '/js/interactives/automation-readiness-checklist.js';
+init({
+statusTexts: {
+zero: '📝 Click each item as you confirm you can answer it.',
+complete: '🎉 Ready to automate! You understand your process well enough to build a reliable solution.',
+partial: function(gaps) { return '⚠️ You have ' + gaps + ' gap' + (gaps > 1 ? 's' : '') + ' — address ' + (gaps > 1 ? 'these' : 'this') + ' before automating.'; }
 }
 });
-// Update progress bar
-const pct = Math.round((count / 8) * 100);
-const bar = document.getElementById('ac-progress-bar');
-bar.style.width = pct + '%';
-document.getElementById('ac-progress-text').textContent = count + ' of 8 complete';
-document.getElementById('ac-progress-pct').textContent = pct + '%';
-if (count === 8) {
-bar.style.background = '#4CAF50';
-} else {
-bar.style.background = 'var(--accent)';
-}
-// Update status badge
-const status = document.getElementById('ac-status');
-if (count === 0) {
-status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-surface-container-lowest border border-outline-variant text-on-surface-variant';
-status.textContent = '📝 Click each item as you confirm you can answer it.';
-} else if (count === 8) {
-status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-green-50 text-green-700 border border-green-200';
-status.textContent = '🎉 Ready to automate! You understand your process well enough to build a reliable solution.';
-} else {
-const gaps = 8 - count;
-status.className = 'mt-6 rounded-xl p-4 text-center text-sm font-bold transition-all duration-500 bg-amber-50 text-amber-700 border border-amber-200';
-status.textContent = '⚠️ You have ' + gaps + ' gap' + (gaps > 1 ? 's' : '') + ' — address ' + (gaps > 1 ? 'these' : 'this') + ' before automating.';
-}
-}
-})();
 </script>
 
 </div>

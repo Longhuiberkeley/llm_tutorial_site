@@ -46,72 +46,38 @@ LLM 閱讀的不是英文單詞。它們閱讀的是「詞元 (Tokens)」—— 
 <!-- Explanation callout -->
 <div id="tk-note" class="mt-4 p-4 rounded-xl border-l-4 text-sm" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 8%, transparent);"></div>
 </div>
-<script>
-(function() {
-// Token color palette (rotating)
-var palette = [
-{ bg: '#FFE082', text: '#5D4037' }, // amber
-{ bg: '#A5D6A7', text: '#1B5E20' }, // green
-{ bg: '#90CAF9', text: '#0D47A1' }, // blue
-{ bg: '#F48FB1', text: '#880E4F' }, // pink
-{ bg: '#CE93D8', text: '#4A148C' }, // purple
-{ bg: '#FFCC80', text: '#E65100' }, // orange
-{ bg: '#80DEEA', text: '#006064' }, // cyan
-{ bg: '#BCAAA4', text: '#3E2723' }, // brown
-];
-var sentences = [
-{
-original: '"wow, i am learning so much in this tutorial!"',
-tokens: ['wow', ',', ' i', ' am', ' learning', ' so', ' much', ' in', ' this', ' tutorial', '!', '"'],
-note: '這麼短的句子就有 12 個詞元！請注意，空格通常會附著在下一個單詞上，而標點符號本身就是獨立的詞元。這就是 LLM 看待每一句句子的方式 —— 作為一個編了號的區塊列表。'
-},
-{
-original: '"strawberry"',
-tokens: ['straw', 'berry'],
-note: '<strong>等等 —— 只有 2 個詞元？</strong> 「strawberry」被拆分為「straw」和「berry」—— 是完整的區塊，而不是字母。LLM 永遠不會單獨看到 s-t-r-a-w。 「straw」就像一個單獨的樂高積木，它無法看到內部。這正是它數錯「r」的原因 —— 對它來說，單個字母是不可見的！'
-},
-{
-original: '"I need help writing an email to my CEO about Q3 revenue."',
-tokens: ['I', ' need', ' help', ' writing', ' an', ' email', ' to', ' my', ' CEO', ' about', ' Q', '3', ' revenue', '.'],
-note: '14 個詞元。請注意，「Q3」被拆分為「Q」和「3」—— LLM 會分開處理數字。此外，像「writing」和「revenue」這樣較長的常用單詞會變成單個詞元，因為它們在訓練數據中經常出現。'
-}
-];
-function tkShow(idx) {
-// Update buttons
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('tk-btn-' + i);
-if (i === idx) {
-btn.style.backgroundColor = 'var(--primary)';
-btn.style.color = 'var(--on-primary)';
-} else {
-btn.style.backgroundColor = '';
-btn.style.color = '';
-btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-btn.classList.remove('bg-primary', 'text-on-primary');
-}
-}
-var s = sentences[idx];
-document.getElementById('tk-original').textContent = s.original;
-var chips = document.getElementById('tk-chips');
-chips.innerHTML = '';
-s.tokens.forEach(function(tok, i) {
-var color = palette[i % palette.length];
-var chip = document.createElement('span');
-chip.className = 'inline-block rounded-md px-2 py-1 text-sm font-bold border';
-chip.style.backgroundColor = color.bg;
-chip.style.color = color.text;
-chip.style.borderColor = color.text + '33';
-// Show spaces explicitly
-chip.textContent = tok.startsWith(' ') ? '␣' + tok.trim() : tok;
-if (tok === ' ') chip.textContent = '␣';
-chips.appendChild(chip);
+<script type="module">
+import { init } from '/js/interactives/tokenizer.js';
+init({
+  palette: [
+    { bg: '#FFE082', text: '#5D4037' },
+    { bg: '#A5D6A7', text: '#1B5E20' },
+    { bg: '#90CAF9', text: '#0D47A1' },
+    { bg: '#F48FB1', text: '#880E4F' },
+    { bg: '#CE93D8', text: '#4A148C' },
+    { bg: '#FFCC80', text: '#E65100' },
+    { bg: '#80DEEA', text: '#006064' },
+    { bg: '#BCAAA4', text: '#3E2723' }
+  ],
+  sentences: [
+    {
+      original: '"wow, i am learning so much in this tutorial!"',
+      tokens: ['wow', ',', ' i', ' am', ' learning', ' so', ' much', ' in', ' this', ' tutorial', '!', '"'],
+      note: '\u9019\u9ebc\u77ed\u7684\u53e5\u5b50\u5c31\u6709 12 \u500b\u8a5e\u5143\uff01\u8acb\u6ce8\u610f\uff0c\u7a7a\u683c\u901a\u5e38\u6703\u9644\u8457\u5728\u4e0b\u4e00\u500b\u55ae\u8a5e\u4e0a\uff0c\u800c\u6a19\u9ede\u7b26\u865f\u672c\u8eab\u5c31\u662f\u7368\u7acb\u7684\u8a5e\u5143\u3002\u9019\u5c31\u662f LLM \u770b\u5f85\u6bcf\u4e00\u53e5\u53e5\u5b50\u7684\u65b9\u5f0f \u2014\u2014 \u4f5c\u70ba\u4e00\u500b\u7de8\u4e86\u865f\u7684\u5340\u584a\u5217\u8868\u3002'
+    },
+    {
+      original: '"strawberry"',
+      tokens: ['straw', 'berry'],
+      note: '<strong>\u7b49\u7b49 \u2014\u2014 \u53ea\u6709 2 \u500b\u8a5e\u5143\uff1f</strong> \u300cstrawberry\u300d\u88ab\u62c6\u5206\u70ba\u300cstraw\u300d\u548c\u300cberry\u300d\u2014\u2014 \u662f\u5b8c\u6574\u7684\u5340\u584a\uff0c\u800c\u4e0d\u662f\u5b57\u6bcd\u3002LLM \u6c38\u9060\u4e0d\u6703\u55ae\u7368\u770b\u5230 s-t-r-a-w\u3002 \u300cstraw\u300d\u5c31\u50cf\u4e00\u500b\u55ae\u7368\u7684\u6a02\u9ad8\u7a4d\u6728\uff0c\u5b83\u7121\u6cd5\u770b\u5230\u5167\u90e8\u3002\u9019\u6b63\u662f\u5b83\u6578\u932f\u300cr\u300d\u7684\u539f\u56e0 \u2014\u2014 \u5c0d\u5b83\u4f86\u8aaa\uff0c\u55ae\u500b\u5b57\u6bcd\u662f\u4e0d\u53ef\u898b\u7684\uff01'
+    },
+    {
+      original: '"I need help writing an email to my CEO about Q3 revenue."',
+      tokens: ['I', ' need', ' help', ' writing', ' an', ' email', ' to', ' my', ' CEO', ' about', ' Q', '3', ' revenue', '.'],
+      note: '14 \u500b\u8a5e\u5143\u3002\u8acb\u6ce8\u610f\uff0c\u300cQ3\u300d\u88ab\u62c6\u5206\u70ba\u300cQ\u300d\u548c\u300c3\u300d\u2014\u2014 LLM \u6703\u5206\u958b\u8655\u7406\u6578\u5b57\u3002\u6b64\u5916\uff0c\u50cf\u300cwriting\u300d\u548c\u300crevenue\u300d\u9019\u6a23\u8f03\u9577\u7684\u5e38\u7528\u55ae\u8a5e\u6703\u8b8a\u6210\u55ae\u500b\u8a5e\u5143\uff0c\u56e0\u70ba\u5b83\u5011\u5728\u8a13\u7df4\u6578\u64da\u4e2d\u7d93\u5e38\u51fa\u73fe\u3002'
+    }
+  ],
+  tokenLabel: function(n) { return (n !== 1 ? ' \u500b\u8a5e\u5143 (tokens)' : ' \u500b\u8a5e\u5143 (token)'); }
 });
-document.getElementById('tk-count').textContent = s.tokens.length + (s.tokens.length !== 1 ? ' 個詞元 (tokens)' : ' 個詞元 (token)');
-document.getElementById('tk-note').innerHTML = s.note;
-}
-window.tkShow = tkShow;
-tkShow(0);
-})();
 </script>
 </div>
 以上是一個簡化的入門例子 —— 在現實中，LLM 的詞彙表包含 30,000 到 100,000+ 個詞元。根據 OpenAI 提供的一個實用經驗法則：**一個詞元通常對應約 4 個字符**的常見英文文本，或大約 ¾ 個單詞。這意味著 **100 個詞元 ≈ 75 個單詞**。

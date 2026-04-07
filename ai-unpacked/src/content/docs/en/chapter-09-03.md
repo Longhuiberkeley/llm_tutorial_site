@@ -110,52 +110,14 @@ style="background-color: var(--accent); color: white;">
 <span class="font-bold text-blue-700">What just happened:</span> OCR mapped the pixels of each letter to machine-readable characters. The computer now has text it can search, copy, and process — but it still doesn't <em>understand</em> what the report means. That's where LLMs come in.
 </div>
 </div>
-<script>
-(function() {
-var ran = false;
-window.runOCR = function() {
-if (ran) return;
-ran = true;
-var btn = document.getElementById('ocr-btn');
-var paper = document.getElementById('ocr-paper');
-var scanLine = document.getElementById('ocr-scan-line');
-var overlay = document.getElementById('ocr-scanning-overlay');
-var result = document.getElementById('ocr-result');
-var note = document.getElementById('ocr-note');
-btn.textContent = '⏳ Scanning...';
-btn.disabled = true;
-btn.style.opacity = '0.6';
-// Show scan line animation
-scanLine.classList.remove('hidden');
-overlay.classList.remove('hidden');
-// After scan completes, show result
-setTimeout(function() {
-scanLine.classList.add('hidden');
-overlay.classList.add('hidden');
-result.innerHTML = [
-'<div class="font-mono text-xs leading-relaxed text-on-surface w-full space-y-1">',
-'<div class="text-on-surface/50 text-[10px] mb-2 uppercase tracking-widest">Extracted text:</div>',
-'<div><strong>Site Visit — March 15</strong></div>',
-'<div>Facility: Riverside Plant B</div>',
-'<div>Inspector: J. Chen</div>',
-'<div>&nbsp;</div>',
-'<div>Boiler #3 showing minor</div>',
-'<div>corrosion near inlet valve.</div>',
-'<div>Recommend service in</div>',
-'<div>next 30 days.</div>',
-'<div>Pressure readings normal.</div>',
-'<div>&nbsp;</div>',
-'<div class="text-on-surface/50">— J.C. ✓</div>',
-'</div>'
-].join('');
-result.style.borderColor = '#86efac';
-result.style.backgroundColor = '#f0fdf4';
-btn.textContent = '✅ Done';
-btn.style.backgroundColor = '#16a34a';
-note.classList.remove('hidden');
-}, 1600);
-};
-})();
+<script type="module">
+import { init as initOCR } from '/js/interactives/ocr-demo.js';
+initOCR({
+  scanningLabel: '\u23F3 Scanning...',
+  doneLabel: '\u2705 Done',
+  extractedText: '<div class="font-mono text-xs leading-relaxed text-on-surface w-full space-y-1"><div class="text-on-surface/50 text-[10px] mb-2 uppercase tracking-widest">Extracted text:</div><div><strong>Site Visit \u2014 March 15</strong></div><div>Facility: Riverside Plant B</div><div>Inspector: J. Chen</div><div>&nbsp;</div><div>Boiler #3 showing minor</div><div>corrosion near inlet valve.</div><div>Recommend service in</div><div>next 30 days.</div><div>Pressure readings normal.</div><div>&nbsp;</div><div class="text-on-surface/50">\u2014 J.C. \u2713</div></div>',
+  noteContent: '<span class="font-bold text-blue-700">What just happened:</span> OCR mapped the pixels of each letter to machine-readable characters. The computer now has text it can search, copy, and process \u2014 but it still doesn\'t <em>understand</em> what the report means. That\'s where LLMs come in.'
+});
 </script>
 
 </div>
@@ -260,126 +222,49 @@ Your company has 500 handwritten quarterly field reports, photographed on phones
 </div>
 <p class="text-center text-xs text-on-surface/40 mt-4 italic" id="dd-hint">👆 No single right answer — each approach makes sense in a different situation</p>
 </div>
-<script>
-(function() {
-var options = [
-{
-icon: '🖨️',
-title: 'Traditional OCR',
-subtitle: 'The low-cost, no-frills starting point',
-how: 'Standard OCR software converts your images to raw text files by matching pixel patterns to character shapes. Often built into PDF readers and document scanners. No AI involved.',
-pros: [
-'💰 Very cheap or free',
-'⚡ Fast — batch process hundreds at once',
-'🔒 Can run locally — no data sent to the cloud',
-'📁 Outputs clean text files usable anywhere'
-],
-cons: [
-'✍️ Struggles badly with handwriting',
-'📸 Low-quality or tilted photos often fail',
-'🧩 No understanding — just raw characters',
-'🗑️ Output often needs manual cleanup before use'
-],
-bestfit: 'A first step to digitize clean, typed documents — or to quickly see what you\'re working with before committing to more investment.'
-},
-{
-icon: '📄',
-title: 'Modern OCR Engines',
-subtitle: 'Purpose-built models for messy real-world documents',
-how: 'Purpose-built OCR models trained specifically for reading text from images. They recognize handwriting, tables, form fields, and checkboxes — returning structured output, not just raw text. Many are open-source and can run on your own hardware — no cloud service needed.',
-pros: [
-'✍️ Handles handwriting far better than traditional tools',
-'📊 Understands tables and form fields',
-'🔒 Can run locally — no data leaves your network',
-'🏗️ Returns structured data (key-value pairs), not just a wall of text',
-'💰 Often free or low-cost — many open-source options available'
-],
-cons: [
-'🧩 Still just extraction — no reasoning, no summarization',
-'🔧 Needs some integration code to process at scale',
-'⚙️ Quality varies by tool — some handle certain languages or formats better than others'
-],
-bestfit: 'Digitizing a large batch of handwritten or mixed-format documents where you need clean structured output, want to keep data in-house, and don\'t yet need LLM reasoning on top.'
-},
-{
-icon: '🧠',
-title: 'Feed images to a multimodal LLM',
-subtitle: 'OCR and understanding in one step',
-how: 'Upload each photo to a frontier model (GPT-4o, Claude, Gemini) and ask it to extract, summarize, or analyze the content. The LLM reads the image and reasons about it simultaneously — no separate OCR step needed.',
-pros: [
-'🎯 Reads handwriting AND understands meaning in one pass',
-'💬 Can summarize, flag issues, or extract specific fields on the spot',
-'🚀 No setup required — works today in any chat UI',
-'🧩 Handles wildly varied formats without extra configuration'
-],
-cons: [
-'💸 Most expensive per document at scale (500 images × API cost adds up fast)',
-'🐌 Rate limits slow down large batch processing',
-'☁️ All images go to the model provider\'s servers',
-'🔁 One-time analysis only — not set up for future querying'
-],
-bestfit: 'Exploratory analysis, prototyping, or a one-time extraction project. The best place to start before deciding whether to invest in infrastructure.'
-},
-{
-icon: '🔍',
-title: 'Build a multimodal RAG pipeline',
-subtitle: 'Index everything — make it searchable forever',
-how: 'Process all 500 reports, embed both text and visual content into a vector database, and build a query interface. Anyone on your team can ask plain-English questions across all documents and get cited answers.',
-pros: [
-'📚 Scales to thousands of documents',
-'🔎 Anyone can query — no technical expertise required',
-'🔄 Keeps working as you add new reports',
-'🧠 Retrieves visual context (diagrams, charts) alongside text'
-],
-cons: [
-'🏗️ Significant upfront setup — not a weekend project',
-'💸 Ongoing infrastructure costs (vector DB, embeddings, API)',
-'🔧 Requires technical expertise or a vendor solution',
-'⏳ Serious overkill if you only need this analysis once',
-'🔤 Captures meaning, not exact text — not suitable when verbatim accuracy is required'
-],
-bestfit: 'Large, growing archives where multiple people need to query documents over time. The most powerful option — and the most investment to build and maintain.'
-}
-];
-window.docDecide = function(idx, btn) {
-var d = options[idx];
-// Reset all buttons
-document.querySelectorAll('.doc-opt-btn').forEach(function(b) {
-b.style.borderColor = '';
-b.style.backgroundColor = '';
+<script type="module">
+import { init as initDocDecision } from '/js/interactives/doc-processing-decision.js';
+initDocDecision({
+  options: [
+    {
+      icon: '\uD83D\uDDA8\uFE0F',
+      title: 'Traditional OCR',
+      subtitle: 'The low-cost, no-frills starting point',
+      how: 'Standard OCR software converts your images to raw text files by matching pixel patterns to character shapes. Often built into PDF readers and document scanners. No AI involved.',
+      pros: ['\uD83D\uDCB0 Very cheap or free', '\u26A1 Fast \u2014 batch process hundreds at once', '\uD83D\uDD12 Can run locally \u2014 no data sent to the cloud', '\uD83D\uDCC1 Outputs clean text files usable anywhere'],
+      cons: ['\u270D\uFE0F Struggles badly with handwriting', '\uD83D\uDCF8 Low-quality or tilted photos often fail', '\uD83E\uDDE9 No understanding \u2014 just raw characters', '\uD83D\uDDD1 Output often needs manual cleanup before use'],
+      bestfit: 'A first step to digitize clean, typed documents \u2014 or to quickly see what you\'re working with before committing to more investment.'
+    },
+    {
+      icon: '\uD83D\uDCC4',
+      title: 'Modern OCR Engines',
+      subtitle: 'Purpose-built models for messy real-world documents',
+      how: 'Purpose-built OCR models trained specifically for reading text from images. They recognize handwriting, tables, form fields, and checkboxes \u2014 returning structured output, not just raw text. Many are open-source and can run on your own hardware \u2014 no cloud service needed.',
+      pros: ['\u270D\uFE0F Handles handwriting far better than traditional tools', '\uD83D\uDCCA Understands tables and form fields', '\uD83D\uDD12 Can run locally \u2014 no data leaves your network', '\uD83C\uDFD7 Returns structured data (key-value pairs), not just a wall of text', '\uD83D\uDCB0 Often free or low-cost \u2014 many open-source options available'],
+      cons: ['\uD83E\uDDE9 Still just extraction \u2014 no reasoning, no summarization', '\uD83D\uDD27 Needs some integration code to process at scale', '\u2699\uFE0F Quality varies by tool \u2014 some handle certain languages or formats better than others'],
+      bestfit: 'Digitizing a large batch of handwritten or mixed-format documents where you need clean structured output, want to keep data in-house, and don\'t yet need LLM reasoning on top.'
+    },
+    {
+      icon: '\uD83E\uDDE0',
+      title: 'Feed images to a multimodal LLM',
+      subtitle: 'OCR and understanding in one step',
+      how: 'Upload each photo to a frontier model (GPT-4o, Claude, Gemini) and ask it to extract, summarize, or analyze the content. The LLM reads the image and reasons about it simultaneously \u2014 no separate OCR step needed.',
+      pros: ['\uD83C\uDFAF Reads handwriting AND understands meaning in one pass', '\uD83D\uDCAC Can summarize, flag issues, or extract specific fields on the spot', '\uD83D\uDE80 No setup required \u2014 works today in any chat UI', '\uD83E\uDDE9 Handles wildly varied formats without extra configuration'],
+      cons: ['\uD83D\uDCB8 Most expensive per document at scale (500 images \u00D7 API cost adds up fast)', '\uD83D\uDC14 Rate limits slow down large batch processing', '\u2601\uFE0F All images go to the model provider\'s servers', '\uD83D\uDD00 One-time analysis only \u2014 not set up for future querying'],
+      bestfit: 'Exploratory analysis, prototyping, or a one-time extraction project. The best place to start before deciding whether to invest in infrastructure.'
+    },
+    {
+      icon: '\uD83D\uDD0D',
+      title: 'Build a multimodal RAG pipeline',
+      subtitle: 'Index everything \u2014 make it searchable forever',
+      how: 'Process all 500 reports, embed both text and visual content into a vector database, and build a query interface. Anyone on your team can ask plain-English questions across all documents and get cited answers.',
+      pros: ['\uD83D\uDCDA Scales to thousands of documents', '\uD83D\uDD0E Anyone can query \u2014 no technical expertise required', '\uD83D\uDD04 Keeps working as you add new reports', '\uD83E\uDDE0 Retrieves visual context (diagrams, charts) alongside text'],
+      cons: ['\uD83C\uDFD7 Significant upfront setup \u2014 not a weekend project', '\uD83D\uDCB8 Ongoing infrastructure costs (vector DB, embeddings, API)', '\uD83D\uDD27 Requires technical expertise or a vendor solution', '\u23F3 Serious overkill if you only need this analysis once', '\uD83D\uDD0B Captures meaning, not exact text \u2014 not suitable when verbatim accuracy is required'],
+      bestfit: 'Large, growing archives where multiple people need to query documents over time. The most powerful option \u2014 and the most investment to build and maintain.'
+    }
+  ],
+  hintAfter: '\uD83D\uDCA1 Try all four \u2014 they each shine in a different situation'
 });
-// Highlight selected
-btn.style.borderColor = 'var(--accent)';
-btn.style.backgroundColor = 'color-mix(in srgb, var(--accent) 6%, white)';
-// Populate panel
-document.getElementById('dd-icon').textContent = d.icon;
-document.getElementById('dd-title').textContent = d.title;
-document.getElementById('dd-subtitle').textContent = d.subtitle;
-document.getElementById('dd-how').textContent = d.how;
-var prosEl = document.getElementById('dd-pros');
-prosEl.innerHTML = '';
-d.pros.forEach(function(p) {
-var div = document.createElement('div');
-div.textContent = p;
-prosEl.appendChild(div);
-});
-var consEl = document.getElementById('dd-cons');
-consEl.innerHTML = '';
-d.cons.forEach(function(c) {
-var div = document.createElement('div');
-div.textContent = c;
-consEl.appendChild(div);
-});
-document.getElementById('dd-bestfit').textContent = d.bestfit;
-var panel = document.getElementById('doc-detail-panel');
-panel.classList.remove('hidden');
-// Scroll panel into view on mobile
-setTimeout(function() {
-panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}, 50);
-document.getElementById('dd-hint').textContent = '💡 Try all four — they each shine in a different situation';
-};
-})();
 </script>
 
 </div>

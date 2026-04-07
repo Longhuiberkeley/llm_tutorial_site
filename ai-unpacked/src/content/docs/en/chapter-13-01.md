@@ -77,49 +77,18 @@ class="apd-mode-btn px-5 py-2 rounded-full text-sm font-bold border-2 transition
 <p class="text-sm text-on-surface-variant italic text-center">Select an approach above, then click a week to see what's happening.</p>
 </div>
 </div>
-<script>
-(function() {
-let currentMode = null;
-let currentWeek = null;
-const data = {
+<script type="module">
+import { init } from '/js/interactives/velocity-trap.js';
+init({
+data: {
 loose: {
 label: '⚡ Fast & Loose',
 color: 'border-orange-400',
 bg: 'bg-orange-50',
 weeks: {
-1: {
-emoji: '😄',
-heading: 'Week 2 — Everything looks great!',
-details: [
-'Features appearing in hours. The demo is impressive.',
-'Stakeholders are excited. The team is energized.',
-'Nobody has asked: "What are the requirements?"',
-'⚠️ Foundation: code is being generated without a clear architecture or defined success criteria.'
-],
-note: 'This is the intoxicating phase. Speed creates a feeling of progress. The problems are invisible.'
-},
-2: {
-emoji: '😬',
-heading: 'Week 6 — Something feels off',
-details: [
-'Adding a new feature takes longer than expected.',
-'Fixing a bug in one place breaks something in another.',
-'The codebase feels "sticky" — hard to move through.',
-'⚠️ Root cause: 4 weeks of accepted-without-review code has created hidden dependencies.'
-],
-note: 'The debt accumulated invisibly. It\'s now starting to slow things down. Most teams push through rather than stopping to address it.'
-},
-3: {
-emoji: '😰',
-heading: 'Week 12 — The reckoning',
-details: [
-'A one-day change is taking three days of archaeology.',
-'Nobody fully understands what was built in weeks 1–4.',
-'The same logic exists in 4 different places with slight differences.',
-'🚨 The foundation cannot support new floors. Significant rework required.'
-],
-note: 'The cost of fixing the foundation grows with each floor built on top of it. What would have taken 2 hours in week 1 now takes 2 days.'
-}
+1: { emoji: '😄', heading: 'Week 2 — Everything looks great!', details: ['Features appearing in hours. The demo is impressive.','Stakeholders are excited. The team is energized.','Nobody has asked: "What are the requirements?"','⚠️ Foundation: code is being generated without a clear architecture or defined success criteria.'], note: 'This is the intoxicating phase. Speed creates a feeling of progress. The problems are invisible.' },
+2: { emoji: '😬', heading: 'Week 6 — Something feels off', details: ['Adding a new feature takes longer than expected.','Fixing a bug in one place breaks something in another.','The codebase feels "sticky" — hard to move through.','⚠️ Root cause: 4 weeks of accepted-without-review code has created hidden dependencies.'], note: 'The debt accumulated invisibly. It\'s now starting to slow things down. Most teams push through rather than stopping to address it.' },
+3: { emoji: '😰', heading: 'Week 12 — The reckoning', details: ['A one-day change is taking three days of archaeology.','Nobody fully understands what was built in weeks 1–4.','The same logic exists in 4 different places with slight differences.','🚨 The foundation cannot support new floors. Significant rework required.'], note: 'The cost of fixing the foundation grows with each floor built on top of it. What would have taken 2 hours in week 1 now takes 2 days.' }
 }
 },
 structured: {
@@ -127,90 +96,13 @@ label: '🏗️ Structured',
 color: 'border-primary',
 bg: 'bg-primary-fixed',
 weeks: {
-1: {
-emoji: '🤔',
-heading: 'Week 2 — Slightly slower, clearly better',
-details: [
-'Features taking a bit longer — requirements were defined first.',
-'Each chunk reviewed before the next one starts.',
-'Architecture decisions documented. Success criteria written.',
-'✅ Foundation: solid. Every piece of code traces to a requirement.'
-],
-note: 'The investment in structure feels slower in week 1. It pays dividends every week after.'
-},
-2: {
-emoji: '😊',
-heading: 'Week 6 — Steady, predictable progress',
-details: [
-'New features slot in cleanly because the architecture was designed.',
-'Bugs are fixed without creating new ones — code is understood.',
-'The team knows where to find things.',
-'✅ Progress is sustainable. Velocity is not declining.'
-],
-note: 'No debt has accumulated because each phase gate was passed before proceeding.'
-},
-3: {
-emoji: '🎉',
-heading: 'Week 12 — Still productive',
-details: [
-'New features are added cleanly. One day = one day.',
-'The codebase is understandable to someone who wasn\'t there in week 1.',
-'Requirements traceability means every feature has a reason.',
-'✅ The project is in a healthy state. Iteration continues without increasing cost.'
-],
-note: 'Structured development doesn\'t mean slower. It means the velocity is maintained over time rather than declining as debt accumulates.'
+1: { emoji: '🤔', heading: 'Week 2 — Slightly slower, clearly better', details: ['Features taking a bit longer — requirements were defined first.','Each chunk reviewed before the next one starts.','Architecture decisions documented. Success criteria written.','✅ Foundation: solid. Every piece of code traces to a requirement.'], note: 'The investment in structure feels slower in week 1. It pays dividends every week after.' },
+2: { emoji: '😊', heading: 'Week 6 — Steady, predictable progress', details: ['New features slot in cleanly because the architecture was designed.','Bugs are fixed without creating new ones — code is understood.','The team knows where to find things.','✅ Progress is sustainable. Velocity is not declining.'], note: 'No debt has accumulated because each phase gate was passed before proceeding.' },
+3: { emoji: '🎉', heading: 'Week 12 — Still productive', details: ['New features are added cleanly. One day = one day.','The codebase is understandable to someone who wasn\'t there in week 1.','Requirements traceability means every feature has a reason.','✅ The project is in a healthy state. Iteration continues without increasing cost.'], note: 'Structured development doesn\'t mean slower. It means the velocity is maintained over time rather than declining as debt accumulates.' }
 }
 }
 }
-};
-window.setMode = function(mode, btn) {
-currentMode = mode;
-document.querySelectorAll('.apd-mode-btn').forEach(b => {
-b.classList.remove('border-primary', 'border-orange-400', 'bg-orange-400', 'text-white');
-b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
-b.style.backgroundColor = '';
 });
-btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-if (mode === 'loose') {
-btn.classList.add('border-orange-400', 'bg-orange-400', 'text-white');
-} else {
-btn.classList.add('border-primary', 'text-white');
-btn.style.backgroundColor = 'var(--primary)';
-}
-if (currentWeek) updateDetail();
-};
-window.selectWeek = function(week, btn) {
-currentWeek = week;
-document.querySelectorAll('.apd-week').forEach(w => {
-w.querySelector('.apd-circle').classList.remove('border-primary', 'border-orange-400', 'scale-110', 'shadow-md');
-w.querySelector('.apd-circle').classList.add('border-outline-variant');
-});
-const circle = btn.querySelector('.apd-circle');
-circle.classList.remove('border-outline-variant');
-if (currentMode === 'loose') circle.classList.add('border-orange-400', 'scale-110', 'shadow-md');
-else circle.classList.add('border-primary', 'scale-110', 'shadow-md');
-if (currentMode) updateDetail();
-};
-function updateDetail() {
-if (!currentMode || !currentWeek) return;
-const mode = data[currentMode];
-const week = mode.weeks[currentWeek];
-const detail = document.getElementById('apd-detail');
-detail.className = 'border-2 rounded-xl p-6 min-h-[160px] transition-all duration-300 ' + mode.color + ' ' + mode.bg;
-let html = '<div>';
-html += '<div class="flex items-center gap-2 mb-3">';
-html += '<span class="text-2xl">' + week.emoji + '</span>';
-html += '<div class="font-bold text-sm">' + week.heading + '</div></div>';
-html += '<ul class="space-y-1 mb-3">';
-week.details.forEach(d => {
-html += '<li class="text-[12px] text-on-surface leading-relaxed">' + d + '</li>';
-});
-html += '</ul>';
-html += '<p class="text-[11px] text-on-surface-variant italic border-t border-outline-variant/50 pt-2">' + week.note + '</p>';
-html += '</div>';
-detail.innerHTML = html;
-}
-})();
 </script>
 
 </div>

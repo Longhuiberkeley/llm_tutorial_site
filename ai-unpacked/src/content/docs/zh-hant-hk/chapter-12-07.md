@@ -101,72 +101,15 @@ style="background: rgba(255, 152, 0, 0.08);">
 </div>
 </div>
 </div>
-<script>
-const vvQuadrants = [
-{
-emoji: '🤖',
-title: 'RPA / Scripts',
-subtitle: 'High Volume + Low Variance',
-desc: 'Tasks that happen frequently and follow the same pattern every time. These are perfect candidates for traditional automation like scripts, macros, or robotic process automation (RPA).',
-approach: 'Use rule-based automation: scripts, macros, RPA bots, or simple if/then workflows. No AI needed — the predictability is the advantage.',
-examples: ['Invoice data entry', 'Password reset emails', 'File backups & syncing'],
-insight: '💡 Key insight: Don\'t use AI where a simple script will do. Over-engineering with LLMs adds cost and unpredictability to tasks that need neither.'
-},
-{
-emoji: '🧠',
-title: 'Agentic AI',
-subtitle: 'High Volume + High Variance',
-desc: 'Tasks that happen frequently but each instance is slightly different. This is the sweet spot for LLM-powered automation — the volume justifies the investment, and the variance requires intelligence.',
-approach: 'Deploy LLM-based agents or AI-assisted workflows. Use structured prompts with human oversight initially, then gradually increase autonomy as confidence builds.',
-examples: ['Customer support tickets', 'Reviewing job applications', 'Drafting personalized outreach'],
-insight: '💡 Key insight: This is where AI shines brightest. The combination of high volume (ROI) and high variance (needs judgment) makes LLMs the ideal tool.'
-},
-{
-emoji: '📋',
-title: 'Manual / Checklist',
-subtitle: 'Low Volume + Low Variance',
-desc: 'Tasks that are rare and follow a known procedure. The low frequency means automation ROI is poor, and the predictability means a simple checklist or SOP is sufficient.',
-approach: 'Create a documented standard operating procedure (SOP) or checklist. A human follows it step-by-step. The cost of automating exceeds the cost of doing it manually.',
-examples: ['Quarterly compliance filings', 'Annual license renewals', 'Onboarding a new vendor'],
-insight: '💡 Key insight: Not everything needs to be automated. When a task happens rarely and follows a known recipe, a well-written checklist is the best tool.'
-},
-{
-emoji: '👤',
-title: 'Human Judgment',
-subtitle: 'Low Volume + High Variance',
-desc: 'Tasks that are rare and each instance is unique. These require deep expertise, contextual understanding, and nuanced decision-making that only humans can reliably provide.',
-approach: 'Keep these firmly in human hands. AI can assist with research or drafting, but the final decision must rest with an experienced professional.',
-examples: ['Crisis management decisions', 'Strategic partnership negotiations', 'Complex legal disputes'],
-insight: '💡 Key insight: Some decisions are too consequential and too unique to delegate. AI can inform the decision, but a human must make the call.'
-}
-];
-function selectQuadrant(index, btn) {
-const q = vvQuadrants[index];
-// Reset all quadrants
-document.querySelectorAll('.vv-quad').forEach(b => {
-b.classList.remove('border-primary', 'scale-[1.05]', 'shadow-md');
-b.classList.add('border-transparent');
-});
-// Highlight selected
-btn.classList.remove('border-transparent');
-btn.classList.add('border-primary', 'scale-[1.05]', 'shadow-md');
-// Animate detail panel
-const detail = document.getElementById('vv-detail');
-detail.classList.remove('animate-fade-in');
-void detail.offsetWidth;
-detail.classList.add('animate-fade-in');
-// Populate detail
-document.getElementById('vv-detail-title').innerHTML = `${q.emoji} ${q.title} <span class="text-sm font-normal text-on-surface-variant ml-2">${q.subtitle}</span>`;
-document.getElementById('vv-detail-desc').textContent = q.desc;
-document.getElementById('vv-detail-approach').textContent = q.approach;
-document.getElementById('vv-detail-examples').innerHTML = q.examples.map(e =>
-`<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">${e}</span>`
-).join('');
-document.getElementById('vv-detail-insight').textContent = q.insight;
-}
-// Default: select first quadrant (RPA)
-document.addEventListener('DOMContentLoaded', () => {
-selectQuadrant(0, document.getElementById('quad-0'));
+<script type="module">
+import { init } from '/js/interactives/volume-variance-matrix.js';
+init({
+vvQuadrants: [
+{ emoji: '🤖', title: 'RPA / Scripts', subtitle: 'High Volume + Low Variance', desc: 'Tasks that happen frequently and follow the same pattern every time. These are perfect candidates for traditional automation like scripts, macros, or robotic process automation (RPA).', approach: 'Use rule-based automation: scripts, macros, RPA bots, or simple if/then workflows. No AI needed — the predictability is the advantage.', examples: ['Invoice data entry', 'Password reset emails', 'File backups & syncing'], insight: '💡 Key insight: Don\'t use AI where a simple script will do. Over-engineering with LLMs adds cost and unpredictability to tasks that need neither.' },
+{ emoji: '🧠', title: 'Agentic AI', subtitle: 'High Volume + High Variance', desc: 'Tasks that happen frequently but each instance is slightly different. This is the sweet spot for LLM-powered automation — the volume justifies the investment, and the variance requires intelligence.', approach: 'Deploy LLM-based agents or AI-assisted workflows. Use structured prompts with human oversight initially, then gradually increase autonomy as confidence builds.', examples: ['Customer support tickets', 'Reviewing job applications', 'Drafting personalized outreach'], insight: '💡 Key insight: This is where AI shines brightest. The combination of high volume (ROI) and high variance (needs judgment) makes LLMs the ideal tool.' },
+{ emoji: '📋', title: 'Manual / Checklist', subtitle: 'Low Volume + Low Variance', desc: 'Tasks that are rare and follow a known procedure. The low frequency means automation ROI is poor, and the predictability means a simple checklist or SOP is sufficient.', approach: 'Create a documented standard operating procedure (SOP) or checklist. A human follows it step-by-step. The cost of automating exceeds the cost of doing it manually.', examples: ['Quarterly compliance filings', 'Annual license renewals', 'Onboarding a new vendor'], insight: '💡 Key insight: Not everything needs to be automated. When a task happens rarely and follows a known recipe, a well-written checklist is the best tool.' },
+{ emoji: '👤', title: 'Human Judgment', subtitle: 'Low Volume + High Variance', desc: 'Tasks that are rare and each instance is unique. These require deep expertise, contextual understanding, and nuanced decision-making that only humans can reliably provide.', approach: 'Keep these firmly in human hands. AI can assist with research or drafting, but the final decision must rest with an experienced professional.', examples: ['Crisis management decisions', 'Strategic partnership negotiations', 'Complex legal disputes'], insight: '💡 Key insight: Some decisions are too consequential and too unique to delegate. AI can inform the decision, but a human must make the call.' }
+]
 });
 </script>
 

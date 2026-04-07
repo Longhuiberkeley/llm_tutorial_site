@@ -44,64 +44,16 @@ Early LLMs: Equivalent to about <strong>4 pages</strong> of text. Perfect for a 
 </div>
 </div>
 </div>
-<script>
-const capacityData = [
-{
-title: "2,000 Tokens",
-visual: "📄",
-desc: "<strong>The Short Article.</strong> About 4 pages of text. Just enough for a few emails or a recipe.",
-color: "var(--primary)"
-},
-{
-title: "32,000 Tokens",
-visual: "📑",
-desc: "<strong>The Product Manual.</strong> Roughly 60 pages. Enough to hold a technical guide or a long legal document.",
-color: "var(--primary)"
-},
-{
-title: "200,000 Tokens",
-visual: "📚📚",
-desc: "<strong>~2 Novels.</strong> A massive amount of space. You can feed it a couple of full-length books or a large codebase.",
-color: "var(--accent)"
-},
-{
-title: "1,000,000+ Tokens",
-visual: "📚📚📚📚📚📚📚📚📚📚",
-desc: "<strong>~10 Novels.</strong> A staggering amount of space — stack up about 10 novels at once. The model can cross-reference ideas across the entire <em>Lord of the Rings</em> trilogy and then some.",
-color: "var(--on-surface-variant)"
-}
-];
-function updateCapacity(val) {
-// Update button styles
-document.querySelectorAll('.cap-btn').forEach((btn, idx) => {
-if (idx === val) {
-btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
-btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-} else {
-btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
-}
+<script type="module">
+import { init } from '/js/interactives/context-toggle.js';
+init({
+  capacityData: [
+    { title: "2,000 Tokens", visual: "📄", desc: "<strong>The Short Article.</strong> About 4 pages of text. Just enough for a few emails or a recipe.", color: "var(--primary)" },
+    { title: "32,000 Tokens", visual: "📑", desc: "<strong>The Product Manual.</strong> Roughly 60 pages. Enough to hold a technical guide or a long legal document.", color: "var(--primary)" },
+    { title: "200,000 Tokens", visual: "📚📚", desc: "<strong>~2 Novels.</strong> A massive amount of space. You can feed it a couple of full-length books or a large codebase.", color: "var(--accent)" },
+    { title: "1,000,000+ Tokens", visual: "📚📚📚📚📚📚📚📚📚📚", desc: "<strong>~10 Novels.</strong> A staggering amount of space — stack up about 10 novels at once. The model can cross-reference ideas across the entire <em>Lord of the Rings</em> trilogy and then some.", color: "var(--on-surface-variant)" }
+  ]
 });
-const data = capacityData[val];
-const visual = document.getElementById('capacity-visual');
-const title = document.getElementById('capacity-title');
-const desc = document.getElementById('capacity-desc');
-// Animate out
-visual.style.transform = 'scale(0.8)';
-visual.style.opacity = '0';
-setTimeout(() => {
-visual.innerHTML = data.visual;
-title.innerHTML = data.title;
-desc.innerHTML = data.desc;
-title.style.color = data.color;
-// Animate in
-visual.style.transform = 'scale(1.1)';
-visual.style.opacity = '1';
-setTimeout(() => {
-visual.style.transform = 'scale(1)';
-}, 150);
-}, 150);
-}
 </script>
 </div>
 

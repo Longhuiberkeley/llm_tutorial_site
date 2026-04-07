@@ -114,76 +114,17 @@ Most automation failures happen in the middle of this spectrum: tasks that SEEM 
 </div>
 </div>
 </div>
-<script>
-(function() {
-const blZones = [
-{
-title: "Fully Creative",
-subtitle: "Brainstorming, name ideas, creative writing",
-color: "#4CAF50",
-guidance: "LLM can run freely. Variation is a feature, not a bug. Every response being different is the whole point.",
-tags: ["Brainstorming sessions", "Product name ideas", "Creative writing", "Marketing slogans"]
-},
-{
-title: "Mostly Creative",
-subtitle: "Email drafts, meeting summaries, social posts",
-color: "#8BC34A",
-guidance: "LLM with light guidelines. Review occasionally to keep tone consistent, but give the model room to work. A quick scan is usually enough.",
-tags: ["Email drafts", "Meeting summaries", "Blog outlines", "Social media posts"]
-},
-{
-title: "Mixed",
-subtitle: "Customer responses, support tickets, reports",
-color: "#FFC107",
-guidance: "LLM with clear constraints. Set brand guidelines, approved language, and required data points. Review regularly — this is where quality drifts silently.",
-tags: ["Customer responses", "Brand-guided content", "Support ticket replies", "Templated reports"]
-},
-{
-title: "Mostly Strict",
-subtitle: "Invoice formatting, data entry, standard forms",
-color: "#FF9800",
-guidance: "Hardcode the rules. Use traditional logic for the structured parts. LLM only for edge cases or interpreting ambiguous inputs — never for the core calculations.",
-tags: ["Invoice processing", "Data entry validation", "Standard form filling", "Inventory updates"]
-},
-{
-title: "Fully Strict",
-subtitle: "Tax calculations, regulatory filings, compliance",
-color: "#F44336",
-guidance: "No LLM for the core logic. Use traditional code, validated formulas, and rule engines. A creative answer here means a wrong answer — and possibly a legal problem.",
-tags: ["Tax calculations", "Regulatory filings", "Financial reconciliation", "Legal compliance checks"]
-}
-];
-window.showBLZone = function(index, btn) {
-const zone = blZones[index];
-// Update button states
-document.querySelectorAll('.bl-zone-btn').forEach(b => {
-b.classList.remove('border-primary');
-b.classList.add('border-transparent');
+<script type="module">
+import { init } from '/js/interactives/business-logic-spectrum.js';
+init({
+blZones: [
+{ title: "Fully Creative", subtitle: "Brainstorming, name ideas, creative writing", color: "#4CAF50", guidance: "LLM can run freely. Variation is a feature, not a bug. Every response being different is the whole point.", tags: ["Brainstorming sessions", "Product name ideas", "Creative writing", "Marketing slogans"] },
+{ title: "Mostly Creative", subtitle: "Email drafts, meeting summaries, social posts", color: "#8BC34A", guidance: "LLM with light guidelines. Review occasionally to keep tone consistent, but give the model room to work. A quick scan is usually enough.", tags: ["Email drafts", "Meeting summaries", "Blog outlines", "Social media posts"] },
+{ title: "Mixed", subtitle: "Customer responses, support tickets, reports", color: "#FFC107", guidance: "LLM with clear constraints. Set brand guidelines, approved language, and required data points. Review regularly — this is where quality drifts silently.", tags: ["Customer responses", "Brand-guided content", "Support ticket replies", "Templated reports"] },
+{ title: "Mostly Strict", subtitle: "Invoice formatting, data entry, standard forms", color: "#FF9800", guidance: "Hardcode the rules. Use traditional logic for the structured parts. LLM only for edge cases or interpreting ambiguous inputs — never for the core calculations.", tags: ["Invoice processing", "Data entry validation", "Standard form filling", "Inventory updates"] },
+{ title: "Fully Strict", subtitle: "Tax calculations, regulatory filings, compliance", color: "#F44336", guidance: "No LLM for the core logic. Use traditional code, validated formulas, and rule engines. A creative answer here means a wrong answer — and possibly a legal problem.", tags: ["Tax calculations", "Regulatory filings", "Financial reconciliation", "Legal compliance checks"] }
+]
 });
-btn.classList.remove('border-transparent');
-btn.classList.add('border-primary');
-// Animate detail card
-const detail = document.getElementById('bl-detail');
-detail.classList.remove('animate-fade-in');
-void detail.offsetWidth;
-detail.classList.add('animate-fade-in');
-// Update content
-document.getElementById('bl-detail-badge').style.background = zone.color;
-document.getElementById('bl-detail-badge').textContent = index + 1;
-document.getElementById('bl-detail-title').textContent = zone.title;
-document.getElementById('bl-detail-subtitle').textContent = zone.subtitle;
-const guidance = document.getElementById('bl-detail-guidance');
-guidance.style.background = zone.color + '15';
-guidance.style.borderLeftColor = zone.color;
-guidance.innerHTML = '<span class="font-bold">🤖 Automation Guidance:</span> ' + zone.guidance;
-const tagsHtml = zone.tags.map(t => '<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">' + t + '</span>').join('');
-document.getElementById('bl-detail-tags').innerHTML = tagsHtml;
-};
-// Initialize with first zone selected
-document.addEventListener('DOMContentLoaded', function() {
-showBLZone(0, document.getElementById('bl-btn-0'));
-});
-})();
 </script>
 
 </div>

@@ -56,13 +56,9 @@ This data is completely fabricated. The AI recognized the *pattern* of a financi
 </div>
 </div>
 </div>
-<script>
-function hallAsk() {
-document.getElementById('hall-response').classList.remove('hidden');
-setTimeout(() => {
-document.getElementById('hall-truth').classList.remove('hidden');
-}, 1000);
-}
+<script type="module">
+import { init } from '/js/interactives/hallucination.js';
+init({});
 </script>
 
 </div>

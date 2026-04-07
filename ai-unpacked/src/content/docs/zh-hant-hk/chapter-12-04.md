@@ -175,113 +175,17 @@ LLM 並不控制整個流程 —— 它只負責處理 RPA 無法完成的模糊
 <!-- Populated by JS -->
 </div>
 </div>
-<script>
-(function() {
-var stages = [
-{
-emoji: '📋',
-name: 'FAQ Bot',
-desc: 'Simple Q&A from predefined answers. Lowest cost, lowest risk.',
-cost: '💰',
-costLabel: 'Minimal',
-color: '#4CAF50',
-complexity: 'Very Low',
-useCase: 'Support page that answers common questions like store hours, return policy, or pricing — using a fixed knowledge base.',
-risk: 'Almost none. Answers are pre-approved. The only risk is missing questions the bot cannot handle.'
-},
-{
-emoji: '💬',
-name: 'Chat Widget',
-desc: 'LLM-powered chat on your existing site. Moderate cost and risk.',
-cost: '💰💰',
-costLabel: 'Low-Moderate',
-color: '#8BC34A',
-complexity: 'Low',
-useCase: 'A customer-facing chatbot that can answer questions about your product docs, help articles, or knowledge base in natural language.',
-risk: 'May hallucinate answers or misinterpret questions. Needs clear guardrails and fallback to human support.'
-},
-{
-emoji: '⚙️',
-name: 'Workflow Assistant',
-desc: 'LLM integrated into existing business processes. Needs human-in-the-loop.',
-cost: '💰💰💰',
-costLabel: 'Moderate',
-color: '#FFC107',
-complexity: 'Medium',
-useCase: 'An assistant that drafts emails, summarizes meeting notes, or pre-fills forms — with a human reviewing before anything is sent.',
-risk: 'Errors in drafts could slip through if reviewers get complacent. Requires clear review checkpoints.'
-},
-{
-emoji: '🤖',
-name: 'Autonomous Agent',
-desc: 'Full agentic system with tool access and decision-making. Requires monitoring.',
-cost: '💰💰💰💰',
-costLabel: 'Significant',
-color: '#FF9800',
-complexity: 'High',
-useCase: 'An agent that monitors your inbox, triages support tickets, looks up customer history, drafts responses, and escalates complex issues.',
-risk: 'Can take wrong actions with real consequences. Needs robust logging, spending limits, and human escalation paths.'
-},
-{
-emoji: '🏢',
-name: 'Full Agentic Platform',
-desc: 'Multi-agent system running core business processes. Enterprise investment.',
-cost: '💰💰💰💰💰',
-costLabel: 'Enterprise',
-color: '#F44336',
-complexity: 'Very High',
-useCase: 'Multiple specialized agents coordinating to run end-to-end processes — e.g., procurement, vendor management, and invoice processing as a unified system.',
-risk: 'Compounding errors across agents. Requires dedicated engineering team, extensive testing, and governance framework.'
-}
-];
-function render(idx) {
-var s = stages[idx];
-var panel = document.getElementById('spectrum-panel');
-// Update dots
-for (var i = 0; i < 5; i++) {
-var dot = document.getElementById('stage-dot-' + i);
-if (i === idx) {
-dot.style.transform = 'scale(1.4)';
-dot.style.borderColor = stages[i].color;
-dot.style.boxShadow = '0 0 0 4px ' + stages[i].color + '33';
-} else {
-dot.style.transform = 'scale(1)';
-dot.style.borderColor = 'white';
-dot.style.boxShadow = '0 1px 3px rgba(0,0,0,0.2)';
-}
-}
-panel.innerHTML =
-'<div class="flex items-start justify-between mb-4">' +
-'<div>' +
-'<div class="text-xl font-bold mb-1">' + s.emoji + ' ' + s.name + '</div>' +
-'<p class="text-sm text-on-surface-variant">' + s.desc + '</p>' +
-'</div>' +
-'<div class="text-right shrink-0 ml-4">' +
-'<div class="text-xl">' + s.cost + '</div>' +
-'<div class="text-xs text-on-surface/50 mt-0.5">' + s.costLabel + '</div>' +
-'</div>' +
-'</div>' +
-'<div class="flex items-center gap-3 mb-4">' +
-'<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50">Complexity</div>' +
-'<div class="flex-1 bg-surface-container rounded-full h-2.5 overflow-hidden">' +
-'<div class="h-full rounded-full transition-all" style="width: ' + ((idx + 1) * 20) + '%; background: ' + s.color + ';"></div>' +
-'</div>' +
-'<div class="text-xs font-bold" style="color: ' + s.color + ';">' + s.complexity + '</div>' +
-'</div>' +
-'<div class="grid sm:grid-cols-2 gap-4">' +
-'<div class="bg-surface-container rounded-xl p-4">' +
-'<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">📌 Typical use case</div>' +
-'<p class="text-sm leading-relaxed">' + s.useCase + '</p>' +
-'</div>' +
-'<div class="bg-surface-container rounded-xl p-4">' +
-'<div class="text-xs font-bold uppercase tracking-widest mb-2" style="color: ' + s.color + ';">⚠️ Key risk</div>' +
-'<p class="text-sm leading-relaxed">' + s.risk + '</p>' +
-'</div>' +
-'</div>';
-}
-window.selectStage = function(idx) { render(idx); };
-render(0); // Default to first position
-})();
+<script type="module">
+import { init } from '/js/interactives/implementation-spectrum.js';
+init({
+stages: [
+{ emoji: '📋', name: 'FAQ Bot', desc: 'Simple Q&A from predefined answers. Lowest cost, lowest risk.', cost: '💰', costLabel: 'Minimal', color: '#4CAF50', complexity: 'Very Low', useCase: 'Support page that answers common questions like store hours, return policy, or pricing — using a fixed knowledge base.', risk: 'Almost none. Answers are pre-approved. The only risk is missing questions the bot cannot handle.' },
+{ emoji: '💬', name: 'Chat Widget', desc: 'LLM-powered chat on your existing site. Moderate cost and risk.', cost: '💰💰', costLabel: 'Low-Moderate', color: '#8BC34A', complexity: 'Low', useCase: 'A customer-facing chatbot that can answer questions about your product docs, help articles, or knowledge base in natural language.', risk: 'May hallucinate answers or misinterpret questions. Needs clear guardrails and fallback to human support.' },
+{ emoji: '⚙️', name: 'Workflow Assistant', desc: 'LLM integrated into existing business processes. Needs human-in-the-loop.', cost: '💰💰💰', costLabel: 'Moderate', color: '#FFC107', complexity: 'Medium', useCase: 'An assistant that drafts emails, summarizes meeting notes, or pre-fills forms — with a human reviewing before anything is sent.', risk: 'Errors in drafts could slip through if reviewers get complacent. Requires clear review checkpoints.' },
+{ emoji: '🤖', name: 'Autonomous Agent', desc: 'Full agentic system with tool access and decision-making. Requires monitoring.', cost: '💰💰💰💰', costLabel: 'Significant', color: '#FF9800', complexity: 'High', useCase: 'An agent that monitors your inbox, triages support tickets, looks up customer history, drafts responses, and escalates complex issues.', risk: 'Can take wrong actions with real consequences. Needs robust logging, spending limits, and human escalation paths.' },
+{ emoji: '🏢', name: 'Full Agentic Platform', desc: 'Multi-agent system running core business processes. Enterprise investment.', cost: '💰💰💰💰💰', costLabel: 'Enterprise', color: '#F44336', complexity: 'Very High', useCase: 'Multiple specialized agents coordinating to run end-to-end processes — e.g., procurement, vendor management, and invoice processing as a unified system.', risk: 'Compounding errors across agents. Requires dedicated engineering team, extensive testing, and governance framework.' }
+]
+});
 </script>
 
 </div>

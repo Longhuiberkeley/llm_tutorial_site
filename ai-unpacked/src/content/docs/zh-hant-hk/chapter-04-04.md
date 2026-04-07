@@ -71,98 +71,38 @@ pageId: "04-04"
 <strong>為甚麼大型語言模型 (LLM) 還是「記得」？</strong> 因為原始訊息仍然在數據包中。要求「忘記」只是*增加*了另一條訊息 — 它從未刪除第一條。LLM 看得到所有內容。
 </div>
 </div>
-<script>
-(function() {
-var fiTurns = [
-{
-user: '我的年薪是 $85,000。請記住這一點。',
-llm: "收到了！我會記住的。有甚麼我可以幫你嗎？",
-isSecret: false
-},
-{
-user: "事實上，忘記我剛才說的年薪吧。",
-llm: "明白！我會把那個資訊放在一邊。有甚麼我可以幫到你嗎？",
-isSecret: false,
-isForget: true
-},
-{
-user: "你對我有甚麼了解？",
-llm: "根據我們的對話，你提到你的年薪是 $85,000 — 儘管你也要求我把那個資訊放在一邊。",
-isSecret: false
-}
-];
-var fiCurrent = 0;
-// Track which bundle items should show the "still in bundle" badge
-var secretItemRef = null;
-window.fiNext = function() {
-if (fiCurrent >= fiTurns.length) return;
-var turn = fiTurns[fiCurrent];
-fiCurrent++;
-// Update LEFT chat
-var chat = document.getElementById('fi-chat');
-var placeholder = chat.querySelector('p');
-if (placeholder) placeholder.remove();
-var userEl = document.createElement('div');
-userEl.className = 'flex justify-end';
-userEl.innerHTML = '<div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm font-medium shadow-sm max-w-[85%]" style="background-color: var(--primary); color: var(--on-primary);">' + turn.user + '</div>';
-chat.appendChild(userEl);
-var llmEl = document.createElement('div');
-llmEl.className = 'flex justify-start';
-llmEl.innerHTML = '<div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm shadow-sm max-w-[85%]" style="background-color: var(--surface-container); border: 1px solid var(--outline-variant);">' + turn.llm + '</div>';
-chat.appendChild(llmEl);
-// Update RIGHT bundle
-var bundle = document.getElementById('fi-bundle');
-var ph = document.getElementById('fi-bundle-placeholder');
-if (ph) ph.remove();
-var userMsg = document.createElement('div');
-userMsg.className = 'rounded-lg px-3 py-2 text-xs border fi-flash';
-userMsg.style.backgroundColor = 'var(--surface-container-lowest)';
-var labelEl = document.createElement('div');
-labelEl.className = 'flex items-center flex-wrap gap-1 fi-msg-label';
-labelEl.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">回合 ' + fiCurrent + ' — 用戶</span>';
-var textEl = document.createElement('div');
-textEl.className = 'mt-0.5';
-textEl.textContent = turn.user;
-userMsg.appendChild(labelEl);
-userMsg.appendChild(textEl);
-bundle.appendChild(userMsg);
-// Save reference to the first message (the secret)
-if (fiCurrent === 1) {
-secretItemRef = userMsg;
-}
-// On the forget turn, badge the secret message to show it's still in the bundle
-if (turn.isForget && secretItemRef) {
-var badge = document.createElement('span');
-badge.className = 'ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full';
-badge.style.backgroundColor = 'var(--error)';
-badge.style.color = 'white';
-badge.textContent = '⚠️ 仍留在數據包中！';
-secretItemRef.querySelector('.fi-msg-label').appendChild(badge);
-}
-var llmMsg = document.createElement('div');
-llmMsg.className = 'rounded-lg px-3 py-2 text-xs border fi-flash';
-llmMsg.style.backgroundColor = 'var(--surface-container-lowest)';
-llmMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">回合 ' + fiCurrent + ' — LLM</span><div class="mt-0.5 opacity-70">' + turn.llm + '</div>';
-bundle.appendChild(llmMsg);
-// Show LLM section
-document.getElementById('fi-llm-section').classList.remove('hidden');
-document.getElementById('fi-output').textContent = '⬅️ 已產生回應 → 請看聊天室';
-// Show explainer note on Turn 3
-if (fiCurrent === 3) {
-document.getElementById('fi-note').classList.remove('hidden');
-}
-// Update controls
-document.getElementById('fi-counter').textContent = '回合 ' + fiCurrent + ' / 3';
-var btn = document.getElementById('fi-btn');
-if (fiCurrent >= fiTurns.length) {
-btn.textContent = '已完成所有 3 個回合 ✓';
-btn.disabled = true;
-btn.style.opacity = '0.5';
-} else {
-btn.textContent = '發送 → 回合 ' + (fiCurrent + 1);
-}
-};
-})();
+<script type="module">
+import { init } from '/js/interactives/context-poisoning.js';
+init({
+  turns: [
+    {
+      user: '我的年薪是 $85,000。請記住這一點。',
+      llm: '收到了！我會記住的。有甚麼我可以幫你嗎？',
+      isSecret: false
+    },
+    {
+      user: '事實上，忘記我剛才說的年薪吧。',
+      llm: '明白！我會把那個資訊放在一邊。有甚麼我可以幫到你嗎？',
+      isSecret: false,
+      isForget: true
+    },
+    {
+      user: '你對我有甚麼了解？',
+      llm: '根據我們的對話，你提到你的年薪是 $85,000 — 儘管你也要求我把那個資訊放在一邊。',
+      isSecret: false
+    }
+  ],
+  totalTurns: 3,
+  strings: {
+    turnLabel: function(n) { return '回合 ' + n; },
+    userLabel: '用戶',
+    outputLabel: '⬅️ 已產生回應 → 請看聊天室',
+    counterLabel: function(c, t) { return '回合 ' + c + ' / ' + t; },
+    allDoneLabel: function(t) { return '已完成所有 ' + t + ' 個回合 ✓'; },
+    sendLabel: function(n) { return '發送 → 回合 ' + n; },
+    stillInBundle: '⚠️ 仍留在數據包中！'
+  }
+});
 </script>
 </div>
 

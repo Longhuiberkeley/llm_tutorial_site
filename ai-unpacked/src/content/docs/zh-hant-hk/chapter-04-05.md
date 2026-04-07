@@ -127,161 +127,44 @@ pageId: "04-05"
 </p>
 </div>
 </div>
-<script>
-function hfNext(step) {
-[1,2,3,4,5].forEach(function(s) {
-document.getElementById('hf-step-' + s).classList.add('hidden');
+<script type="module">
+import { init } from '/js/interactives/head-full-memory.js';
+init({
+  math1Correct: '✅ 正確！17 × 23 = 391。',
+  math1Wrong: '❌ 不太對——是 391。',
+  math2Correct: '✅ 正確！156 ÷ 12 = 13。',
+  math2Wrong: '❌ 不太對——是 13。',
+  math3Correct: '✅ 正確！8 × 17 = 136。現在……讓我們測試一下記憶力。',
+  math3Wrong: '❌ 不太對——是 136。現在……讓我們測試一下記憶力。',
+  phoneCorrect: '✅ 記憶力不錯！你記住了 555-0142。',
+  phoneWrong: '❌ 是 555-0142。分心後很容易混淆！',
+  humanCaption: '大多數人都會混淆數字！分心會把較早的記憶擠出去——就像大型語言模型 (LLM) 的上下文窗口 (Context Window) 一樣。',
+  baseConvo: [
+    { role: 'user', text: '嗨！我叫 Peter，叫我 Pete 吧。' },
+    { role: 'llm',  text: '嗨 Pete！很高興見到你。' },
+    { role: 'user', text: '我正在編寫第三季度的營銷簡報。' },
+    { role: 'llm',  text: '我很樂意幫忙！目標受眾是誰？' },
+    { role: 'user', text: '居住在城市的千禧世代，年齡介於 28-40 歲。' },
+    { role: 'llm',  text: '明白。我會記住的。' },
+    { role: 'user', text: '此外，我們該季度的預算為 5 萬美元。' },
+    { role: 'llm',  text: '明白——5 萬美元，城市千禧世代，第三季度。' },
+    { role: 'user', text: '為社交媒體活動起草一個標題。' },
+    { role: 'llm',  text: '（目前訊息——正在生成中……）' }
+  ],
+  truncRows: [
+    '👤 嗨！我叫 Peter，叫我 Pete 吧。',
+    '🤖 嗨 Pete！很高興見到你。',
+    '👤 我正在編寫第三季度的營銷簡報。'
+  ],
+  sumRow: '📝 摘要 (SUMMARY)：用戶叫 Pete。正在編寫第三季度營銷簡報。受眾：28-40 歲城市千禧世代。預算：5 萬美元。',
+  slideRow: '[系統提示詞 (System prompt) 始終固定在頂部]',
+  currentGenerating: '🤖 （目前——正在生成……）',
+  strategyDescs: {
+    trunc: '✂️ 截斷 (Truncation)：最舊的訊息被切掉。「Pete」不見了——LLM 不再知道用戶的名字。',
+    sum: '📝 摘要 (Summarization)：舊訊息被壓縮成簡短的筆記。保留了核心上下文，但丟失了確切的措辭。',
+    slide: '🪟 滑動窗口 (Sliding Window)：系統提示詞 (System prompt) 保持固定；僅保留最近的訊息。早期的上下文如「Pete 的名字」會掉失。'
+  }
 });
-document.getElementById('hf-step-' + step).classList.remove('hidden');
-}
-function hfMath(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-math-feedback');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ 正確！17 × 23 = 391。';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ 不太對——是 391。';
-}
-fb.classList.remove('hidden');
-setTimeout(function() { hfNext(3); }, 1800);
-}
-function hfMath2(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-math2-feedback');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ 正確！156 ÷ 12 = 13。';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ 不太對——是 13。';
-}
-fb.classList.remove('hidden');
-setTimeout(function() { hfNext(4); }, 1800);
-}
-function hfMath3(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-math3-feedback');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ 正確！8 × 17 = 136。現在……讓我們測試一下記憶力。';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ 不太對——是 136。現在……讓我們測試一下記憶力。';
-}
-fb.classList.remove('hidden');
-setTimeout(function() { hfNext(5); }, 1800);
-}
-function hfPhone(btn, correct) {
-var allBtns = btn.closest('.grid').querySelectorAll('button');
-allBtns.forEach(function(b) { b.disabled = true; });
-var fb = document.getElementById('hf-phone-feedback');
-var caption = document.getElementById('hf-human-caption');
-if (correct) {
-btn.style.borderColor = 'var(--success, #388E3C)';
-btn.style.color = 'var(--success, #388E3C)';
-fb.style.color = 'var(--success, #388E3C)';
-fb.textContent = '✅ 記憶力不錯！你記住了 555-0142。';
-} else {
-btn.style.borderColor = 'var(--error)';
-btn.style.color = 'var(--error)';
-fb.style.color = 'var(--error)';
-fb.textContent = '❌ 是 555-0142。分心後很容易混淆！';
-}
-fb.classList.remove('hidden');
-caption.classList.remove('hidden');
-}
-// Full conversation (same base for all 3 strategies)
-var baseConvo = [
-{ role: 'user', text: '嗨！我叫 Peter，叫我 Pete 吧。' },
-{ role: 'llm',  text: '嗨 Pete！很高興見到你。' },
-{ role: 'user', text: '我正在編寫第三季度的營銷簡報。' },
-{ role: 'llm',  text: '我很樂意幫忙！目標受眾是誰？' },
-{ role: 'user', text: '居住在城市的千禧世代，年齡介於 28-40 歲。' },
-{ role: 'llm',  text: '明白。我會記住的。' },
-{ role: 'user', text: '此外，我們該季度的預算為 5 萬美元。' },
-{ role: 'llm',  text: '明白——5 萬美元，城市千禧世代，第三季度。' },
-{ role: 'user', text: '為社交媒體活動起草一個標題。' },
-{ role: 'llm',  text: '（目前訊息——正在生成中……）' }
-];
-function makeRow(role, text, style) {
-var prefix = role === 'user' ? '👤 ' : '🤖 ';
-var base = 'rounded px-2 py-1 text-on-surface-variant';
-var extra = style || '';
-return '<div class="' + base + ' ' + extra + '">' + prefix + text + '</div>';
-}
-var hfContent = {
-trunc: {
-build: function() {
-var rows = [];
-rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-30 line-through">' + '👤 嗨！我叫 Peter，叫我 Pete 吧。' + '</div>');
-rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-30 line-through">' + '🤖 嗨 Pete！很高興見到你。' + '</div>');
-rows.push('<div class="px-2 py-1 text-on-surface-variant opacity-40 line-through">' + '👤 我正在編寫第三季度的營銷簡報。' + '</div>');
-for (var i = 3; i < 9; i++) {
-rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
-}
-rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 （目前——正在生成……）</div>');
-return rows;
-},
-desc: '✂️ 截斷 (Truncation)：最舊的訊息被切掉。「Pete」不見了——LLM 不再知道用戶的名字。'
-},
-sum: {
-build: function() {
-var rows = [];
-rows.push('<div class="rounded px-2 py-1 bg-primary/10 border border-primary/20 text-primary font-bold">📝 摘要 (SUMMARY)：用戶叫 Pete。正在編寫第三季度營銷簡報。受眾：28-40 歲城市千禧世代。預算：5 萬美元。</div>');
-for (var i = 4; i < 9; i++) {
-rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
-}
-rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 （目前——正在生成……）</div>');
-return rows;
-},
-desc: '📝 摘要 (Summarization)：舊訊息被壓縮成簡短的筆記。保留了核心上下文，但丟失了確切的措辭。'
-},
-slide: {
-build: function() {
-var rows = [];
-rows.push('<div class="rounded px-2 py-1 bg-primary/5 border border-primary/10 text-xs font-bold opacity-60 text-on-surface-variant">[系統提示詞 (System prompt) 始終固定在頂部]</div>');
-for (var i = 3; i < 9; i++) {
-rows.push(makeRow(baseConvo[i].role, baseConvo[i].text));
-}
-rows.push('<div class="rounded px-2 py-1 font-bold text-primary border border-primary/20 bg-primary/5">🤖 （目前——正在生成……）</div>');
-return rows;
-},
-desc: '🪟 滑動窗口 (Sliding Window)：系統提示詞 (System prompt) 保持固定；僅保留最近的訊息。早期的上下文如「Pete 的名字」會掉失。'
-}
-};
-function hfSwitch(type) {
-['trunc', 'sum', 'slide'].forEach(function(t) {
-var btn = document.getElementById('hf-btn-' + t);
-if (t === type) {
-btn.classList.add('bg-primary', 'text-on-primary');
-btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-} else {
-btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-btn.classList.remove('bg-primary', 'text-on-primary');
-}
-});
-var data = hfContent[type];
-document.getElementById('hf-tape').innerHTML = data.build().join('');
-document.getElementById('hf-tape-desc').textContent = data.desc;
-}
-hfSwitch('trunc');
 </script>
 </div>
 

@@ -70,58 +70,31 @@ If you don't specify it, the LLM will guess — and it will guess based on the m
 </div>
 </div>
 </div>
-<script>
-const promptSteps = [
-{
-prompt: '"Write an email."',
-quality: 10,
-label: "Poor (Generic)"
-},
-{
-prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report."',
-quality: 40,
-label: "Better (Focused)"
-},
-{
-prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report. Keep it under 100 words. Do not apologize profusely."',
-quality: 75,
-label: "Strong (Controlled)"
-},
-{
-prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report. Keep it under 100 words. Do not apologize profusely. Provide 3 different subject line options in bullet points."',
-quality: 100,
-label: "Excellent (Surgical)"
-}
-];
-function toggleStep(step, btn) {
-// Enable all buttons up to this step
-document.querySelectorAll('.step-btn').forEach((b, i) => {
-if (i < step) {
-b.classList.remove('opacity-50');
-if (i === step - 1) {
-b.classList.add('border-primary', 'bg-surface-container-lowest');
-} else {
-b.classList.remove('border-primary');
-}
-} else {
-b.classList.add('opacity-50');
-b.classList.remove('border-primary');
-}
-});
-const data = promptSteps[step - 1];
-const preview = document.getElementById('prompt-preview');
-const bar = document.getElementById('quality-bar');
-const label = document.getElementById('quality-label');
-preview.classList.remove('animate-pulse');
-void preview.offsetWidth; // trigger reflow
-preview.classList.add('animate-pulse');
-preview.textContent = data.prompt;
-bar.style.width = data.quality + '%';
-label.textContent = data.label;
-}
-// Init first step
-document.addEventListener('DOMContentLoaded', () => {
-toggleStep(1, document.querySelector('.step-btn'));
+<script type="module">
+import { init } from '/js/interactives/specificity-stack.js';
+init({
+  promptSteps: [
+    {
+      prompt: '"Write an email."',
+      quality: 10,
+      label: "Poor (Generic)"
+    },
+    {
+      prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report."',
+      quality: 40,
+      label: "Better (Focused)"
+    },
+    {
+      prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report. Keep it under 100 words. Do not apologize profusely."',
+      quality: 75,
+      label: "Strong (Controlled)"
+    },
+    {
+      prompt: '"Write an email to my boss asking for a deadline extension on the Q3 report. Keep it under 100 words. Do not apologize profusely. Provide 3 different subject line options in bullet points."',
+      quality: 100,
+      label: "Excellent (Surgical)"
+    }
+  ]
 });
 </script>
 

@@ -79,25 +79,13 @@ pageId: "05-05"
 <!-- 此處顯示反饋 -->
 </div>
 </div>
-<script>
-function checkPrivacy(isSafe, btn) {
-const feedback = document.getElementById('privacy-feedback');
-// 重置按鈕
-btn.parentElement.querySelectorAll('button').forEach(b => {
-b.classList.remove('border-red-500', 'border-green-500', 'bg-red-50', 'bg-green-50');
+<script type="module">
+import { init } from '/js/interactives/privacy-filter.js';
+init({
+  safeMessage: "✅ 正確！公開或通用的資訊通常可以安全分享。",
+  dangerMessage: "❌ 危險！切勿將敏感、私密或專有數據貼到大型語言模型 (LLM) 中。"
 });
-if (isSafe) {
-btn.classList.add('border-green-500', 'bg-green-50');
-feedback.textContent = "✅ 正確！公開或通用的資訊通常可以安全分享。";
-feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-green-100 text-green-800 opacity-100";
-} else {
-btn.classList.add('border-red-500', 'bg-red-50');
-feedback.textContent = "❌ 危險！切勿將敏感、私密或專有數據貼到大型語言模型 (LLM) 中。";
-feedback.className = "mt-8 p-4 rounded-xl text-center font-bold text-sm bg-red-100 text-red-800 opacity-100";
-}
-}
 </script>
-</div>
 
 
 

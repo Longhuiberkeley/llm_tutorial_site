@@ -90,53 +90,39 @@ style="background: linear-gradient(to right, #4CAF50, #FFC107, #FF9800, #F44336)
 </div>
 </div>
 </div>
-<script>
-const zones = [
-{
-title: "可直接使用",
-icon: "check_circle",
-color: "text-green-500",
-desc: "創意任務，多樣性是其特色而非缺陷。AI 在這方面表現出色，因為沒有唯一的「正確」答案。",
-tags: ["創意寫作", "腦力激盪", "郵件草稿", "內容總結"]
-},
-{
-title: "使用前需審核",
-icon: "visibility",
-color: "text-yellow-500",
-desc: "AI 負責大部分繁重工作，但人類必須檢查其邏輯和語氣。對提升生產力非常有幫助。",
-tags: ["編程", "商業報告", "產品描述", "社交媒體"]
-},
-{
-title: "需要嚴格核實",
-icon: "rule",
-color: "text-orange-500",
-desc: "AI 可以輔助研究，但每一項主張和引用都必須與權威來源進行交叉核對。",
-tags: ["法律研究", "醫療信息", "金融計算", "歷史事實"]
-},
-{
-title: "（暫時）不要信任",
-icon: "error",
-color: "text-red-500",
-desc: "關鍵操作，單次幻覺 (Hallucination) 就可能導致立即的傷害或安全漏洞。",
-tags: ["即時安全系統", "自動化銀行業務", "關鍵數學計算", "法律文件申報"]
-}
-];
-function showZone(index, btn) {
-const zone = zones[index];
-document.querySelectorAll('.zone-btn').forEach(b => b.classList.remove('border-primary', 'bg-surface-container'));
-btn.classList.add('border-primary', 'bg-surface-container');
-const display = document.getElementById('zone-display');
-display.classList.remove('animate-fade-in');
-void display.offsetWidth; // trigger reflow
-display.classList.add('animate-fade-in');
-document.getElementById('zone-title').innerHTML = `<span class="material-symbols-outlined ${zone.color}">${zone.icon}</span> ${zone.title}`;
-document.getElementById('zone-desc').textContent = zone.desc;
-const tagsHtml = zone.tags.map(t => `<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">${t}</span>`).join('');
-display.querySelector('.flex-wrap').innerHTML = tagsHtml;
-}
-// Init first zone
-document.addEventListener('DOMContentLoaded', () => {
-showZone(0, document.querySelector('.zone-btn'));
+<script type="module">
+import { init } from '/js/interactives/trust-spectrum.js';
+init({
+  zones: [
+    {
+      title: "可直接使用",
+      icon: "check_circle",
+      color: "text-green-500",
+      desc: "創意任務，多樣性是其特色而非缺陷。AI 在這方面表現出色，因為沒有唯一的「正確」答案。",
+      tags: ["創意寫作", "腦力激盪", "郵件草稿", "內容總結"]
+    },
+    {
+      title: "使用前需審核",
+      icon: "visibility",
+      color: "text-yellow-500",
+      desc: "AI 負責大部分繁重工作，但人類必須檢查其邏輯和語氣。對提升生產力非常有幫助。",
+      tags: ["編程", "商業報告", "產品描述", "社交媒體"]
+    },
+    {
+      title: "需要嚴格核實",
+      icon: "rule",
+      color: "text-orange-500",
+      desc: "AI 可以輔助研究，但每一項主張和引用都必須與權威來源進行交叉核對。",
+      tags: ["法律研究", "醫療信息", "金融計算", "歷史事實"]
+    },
+    {
+      title: "（暫時）不要信任",
+      icon: "error",
+      color: "text-red-500",
+      desc: "關鍵操作，單次幻覺 (Hallucination) 就可能導致立即的傷害或安全漏洞。",
+      tags: ["即時安全系統", "自動化銀行業務", "關鍵數學計算", "法律文件申報"]
+    }
+  ]
 });
 </script>
 </div>

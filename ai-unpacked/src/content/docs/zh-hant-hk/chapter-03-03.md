@@ -102,73 +102,26 @@ pageId: "03-03"
 </div>
 </div>
 </div>
-<script>
-var fsdvPeeking = false;
-function fsdvTogglePeek() {
-fsdvPeeking = !fsdvPeeking;
-var btn = document.getElementById('fsdv-peek-btn');
-['fsdv-layer1-hidden', 'fsdv-layer2-hidden'].forEach(function(id) {
-document.getElementById(id).classList.toggle('hidden', fsdvPeeking);
+<script type="module">
+import { init } from '/js/interactives/full-sandwich.js';
+init({
+  turns: [
+    { user: '你們賣甚麼產品？', llm: '我們提供兩款產品：TechPad Pro ($999) — 我們的旗艦平板電腦，以及 TechBuds ($149) — 我們的無線耳機。有甚麼我可以幫到你的嗎？' },
+    { user: 'TechPad Pro 多少錢？', llm: 'TechPad Pro 售價為 $999。它還附帶我們標準的 1 年保養。你想了解更多嗎？' },
+    { user: '為甚麼你這麼了解 TechCorp？', llm: '我是專門被設定為 TechCorp 的支援助手的！在這次對話開始之前，我已經收到了關於我們產品和政策的詳細指令。' }
+  ],
+  totalTurns: 3,
+  strings: {
+    peekShow: '👁 窺探隱藏層',
+    peekHide: '🙈 隱藏各層',
+    turnLabel: function(n) { return '回合 ' + n; },
+    userLabel: '用戶',
+    outputLabel: '⬅️ 已產生回應 → 請看聊天室',
+    counterLabel: function(c, t) { return '回合 ' + c + ' / ' + t; },
+    allDoneLabel: function(t) { return '已完成所有 ' + t + ' 個回合 ✓'; },
+    sendLabel: function(n) { return '發送 → 回合 ' + n; }
+  }
 });
-['fsdv-layer1-text', 'fsdv-layer2-text'].forEach(function(id) {
-document.getElementById(id).classList.toggle('hidden', !fsdvPeeking);
-});
-btn.textContent = fsdvPeeking ? '🙈 隱藏各層' : '👁 窺探隱藏層';
-btn.style.backgroundColor = fsdvPeeking ? 'var(--primary)' : 'var(--surface-container-lowest)';
-btn.style.color = fsdvPeeking ? 'var(--on-primary)' : 'var(--primary)';
-}
-(function() {
-var fsdvTurns = [
-{ user: '你們賣甚麼產品？', llm: '我們提供兩款產品：TechPad Pro ($999) — 我們的旗艦平板電腦，以及 TechBuds ($149) — 我們的無線耳機。有甚麼我可以幫到你的嗎？' },
-{ user: 'TechPad Pro 多少錢？', llm: 'TechPad Pro 售價為 $999。它還附帶我們標準的 1 年保養。你想了解更多嗎？' },
-{ user: '為甚麼你這麼了解 TechCorp？', llm: "我是專門被設定為 TechCorp 的支援助手的！在這次對話開始之前，我已經收到了關於我們產品和政策的詳細指令。" }
-];
-var fsdvCurrent = 0;
-window.fsdvNext = function() {
-if (fsdvCurrent >= fsdvTurns.length) return;
-var turn = fsdvTurns[fsdvCurrent];
-fsdvCurrent++;
-// Update LEFT chat
-var chat = document.getElementById('fsdv-chat');
-var placeholder = chat.querySelector('p');
-if (placeholder) placeholder.remove();
-var userEl = document.createElement('div');
-userEl.className = 'flex justify-end';
-userEl.innerHTML = '<div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm font-medium shadow-sm max-w-[85%]" style="background-color: var(--primary); color: var(--on-primary);">' + turn.user + '</div>';
-chat.appendChild(userEl);
-var llmEl = document.createElement('div');
-llmEl.className = 'flex justify-start';
-llmEl.innerHTML = '<div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm shadow-sm max-w-[85%]" style="background-color: var(--surface-container); border: 1px solid var(--outline-variant);">' + turn.llm + '</div>';
-chat.appendChild(llmEl);
-// Update RIGHT bundle
-var ph = document.getElementById('fsdv-bundle-placeholder');
-if (ph) ph.remove();
-var turns = document.getElementById('fsdv-turns');
-var userMsg = document.createElement('div');
-userMsg.className = 'rounded-lg px-3 py-2 text-xs border fsdv-flash';
-userMsg.style.backgroundColor = 'var(--surface-container-lowest)';
-userMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">回合 ' + fsdvCurrent + ' — 用戶</span><div class="mt-0.5">' + turn.user + '</div>';
-turns.appendChild(userMsg);
-var llmMsg = document.createElement('div');
-llmMsg.className = 'rounded-lg px-3 py-2 text-xs border fsdv-flash';
-llmMsg.style.backgroundColor = 'var(--surface-container-lowest)';
-llmMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">回合 ' + fsdvCurrent + ' — LLM</span><div class="mt-0.5 opacity-70">' + turn.llm + '</div>';
-turns.appendChild(llmMsg);
-// Show LLM section
-document.getElementById('fsdv-llm-section').classList.remove('hidden');
-document.getElementById('fsdv-output').textContent = '⬅️ 已產生回應 → 請看聊天室';
-// Update controls
-document.getElementById('fsdv-counter').textContent = '回合 ' + fsdvCurrent + ' / 3';
-var btn = document.getElementById('fsdv-btn');
-if (fsdvCurrent >= fsdvTurns.length) {
-btn.textContent = '已完成所有 3 個回合 ✓';
-btn.disabled = true;
-btn.style.opacity = '0.5';
-} else {
-btn.textContent = '發送 → 回合 ' + (fsdvCurrent + 1);
-}
-};
-})();
 </script>
 </div>
 

@@ -67,61 +67,25 @@ Send → Turn 1
 </div>
 </div>
 </div>
-<script>
-(function() {
-var sdvTurns = [
-{ user: 'Hi! My name is Alex.', llm: 'Nice to meet you, Alex! 👋 How can I help?' },
-{ user: 'I love Italian food.', llm: 'Great taste! Italy has amazing cuisine. 🍕' },
-{ user: "What's my favorite food?", llm: 'Italian food! You mentioned it just a moment ago. 🍝' },
-{ user: "What's my name?", llm: 'Your name is Alex — you told me that right at the start! 😊' }
-];
-var sdvCurrent = 0;
-window.sdvNext = function() {
-if (sdvCurrent >= sdvTurns.length) return;
-var turn = sdvTurns[sdvCurrent];
-sdvCurrent++;
-// Update LEFT chat panel
-var chat = document.getElementById('sdv-chat');
-var placeholder = chat.querySelector('p');
-if (placeholder) placeholder.remove();
-var userEl = document.createElement('div');
-userEl.className = 'flex justify-end';
-userEl.innerHTML = '<div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm font-medium shadow-sm max-w-[85%]" style="background-color: var(--primary); color: var(--on-primary);">' + turn.user + '</div>';
-chat.appendChild(userEl);
-var llmEl = document.createElement('div');
-llmEl.className = 'flex justify-start';
-llmEl.innerHTML = '<div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm shadow-sm max-w-[85%]" style="background-color: var(--surface-container); border: 1px solid var(--outline-variant);">' + turn.llm + '</div>';
-chat.appendChild(llmEl);
-// Update RIGHT bundle panel
-var bundle = document.getElementById('sdv-bundle');
-var ph = document.getElementById('sdv-bundle-placeholder');
-if (ph) ph.remove();
-var userMsg = document.createElement('div');
-userMsg.className = 'rounded-lg px-3 py-2 text-xs border sdv-flash';
-userMsg.style.backgroundColor = 'var(--surface-container-lowest)';
-userMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">Turn ' + sdvCurrent + ' — User</span><div class="mt-0.5">' + turn.user + '</div>';
-bundle.appendChild(userMsg);
-var llmMsg = document.createElement('div');
-llmMsg.className = 'rounded-lg px-3 py-2 text-xs border sdv-flash';
-llmMsg.style.backgroundColor = 'var(--surface-container-lowest)';
-llmMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">Turn ' + sdvCurrent + ' — LLM</span><div class="mt-0.5 opacity-70">' + turn.llm + '</div>';
-bundle.appendChild(llmMsg);
-// Show LLM section + update output
-document.getElementById('sdv-llm-section').classList.remove('hidden');
-document.getElementById('sdv-output').textContent = '⬅️ Response generated → see chat';
-// Update controls
-var counter = document.getElementById('sdv-counter');
-var btn = document.getElementById('sdv-btn');
-counter.textContent = 'Turn ' + sdvCurrent + ' / 4';
-if (sdvCurrent >= sdvTurns.length) {
-btn.textContent = 'All 4 turns done ✓';
-btn.disabled = true;
-btn.style.opacity = '0.5';
-} else {
-btn.textContent = 'Send → Turn ' + (sdvCurrent + 1);
-}
-};
-})();
+<script type="module">
+import { init } from '/js/interactives/sandwich-view.js';
+init({
+  turns: [
+    { user: 'Hi! My name is Alex.', llm: 'Nice to meet you, Alex! 👋 How can I help?' },
+    { user: 'I love Italian food.', llm: 'Great taste! Italy has amazing cuisine. 🍕' },
+    { user: "What's my favorite food?", llm: 'Italian food! You mentioned it just a moment ago. 🍝' },
+    { user: "What's my name?", llm: 'Your name is Alex — you told me that right at the start! 😊' }
+  ],
+  totalTurns: 4,
+  strings: {
+    turnLabel: function(n) { return 'Turn ' + n; },
+    userLabel: 'User',
+    outputLabel: '⬅️ Response generated → see chat',
+    counterLabel: function(c, t) { return 'Turn ' + c + ' / ' + t; },
+    allDoneLabel: function(t) { return 'All ' + t + ' turns done ✓'; },
+    sendLabel: function(n) { return 'Send → Turn ' + n; }
+  }
+});
 </script>
 
 </div>

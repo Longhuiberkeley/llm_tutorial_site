@@ -137,85 +137,22 @@ class="rt-mode-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outl
 <div id="rt-drift-result" class="mt-4 rounded-xl p-4 text-center text-xs font-bold bg-surface-container-lowest border border-outline-variant text-on-surface-variant hidden"></div>
 </div>
 </div>
-<script>
-(function() {
-const chains = {
-R1: {
-req: { text: 'R1: User Login', desc: 'Users can log in via email or Google OAuth with password reset — on mobile and desktop.' },
-design: { text: 'Auth module', desc: 'Separate authentication service, OAuth integration via provider SDK, JWT session tokens.' },
-impl: { text: 'auth.js + GoogleOAuth', desc: 'Login form, Google OAuth button, password reset flow, session token issuance.' },
-test: { text: 'Auth test suite', desc: 'Login with email, login with Google, password reset, session expiry, mobile/desktop layout tests.' }
+<script type="module">
+import { init } from '/js/interactives/requirements-traceability.js';
+init({
+chains: {
+R1: { req: { text: 'R1: User Login', desc: 'Users can log in via email or Google OAuth with password reset — on mobile and desktop.' }, design: { text: 'Auth module', desc: 'Separate authentication service, OAuth integration via provider SDK, JWT session tokens.' }, impl: { text: 'auth.js + GoogleOAuth', desc: 'Login form, Google OAuth button, password reset flow, session token issuance.' }, test: { text: 'Auth test suite', desc: 'Login with email, login with Google, password reset, session expiry, mobile/desktop layout tests.' } },
+R2: { req: { text: 'R2: Fast Search', desc: 'Search results must appear in under 2 seconds for 95% of queries.' }, design: { text: 'Indexed search + cache', desc: 'Inverted index built at write time. Redis cache for top 1000 queries. Query timeout: 1.8s.' }, impl: { text: 'search.js + RedisCache', desc: 'Index builder, cache warmer, query router, result formatter.' }, test: { text: 'Performance tests', desc: 'Load test: 100 concurrent users. P95 latency < 2s. Edge case: empty query, special chars.' } },
+R3: { req: { text: 'R3: Export to PDF', desc: 'Users can export any search results page to a formatted PDF.' }, design: { text: 'PDF generation service', desc: 'Server-side render to headless browser, template for branded layout, max 10MB output.' }, impl: { text: 'export.js + pdf-template.html', desc: 'Export button on results page, PDF generation API endpoint, download link delivery.' }, test: { text: 'Export tests', desc: 'Export with 10 results, 100 results. Verify layout, verify branding, verify file size limit.' } }
 },
-R2: {
-req: { text: 'R2: Fast Search', desc: 'Search results must appear in under 2 seconds for 95% of queries.' },
-design: { text: 'Indexed search + cache', desc: 'Inverted index built at write time. Redis cache for top 1000 queries. Query timeout: 1.8s.' },
-impl: { text: 'search.js + RedisCache', desc: 'Index builder, cache warmer, query router, result formatter.' },
-test: { text: 'Performance tests', desc: 'Load test: 100 concurrent users. P95 latency < 2s. Edge case: empty query, special chars.' }
-},
-R3: {
-req: { text: 'R3: Export to PDF', desc: 'Users can export any search results page to a formatted PDF.' },
-design: { text: 'PDF generation service', desc: 'Server-side render to headless browser, template for branded layout, max 10MB output.' },
-impl: { text: 'export.js + pdf-template.html', desc: 'Export button on results page, PDF generation API endpoint, download link delivery.' },
-test: { text: 'Export tests', desc: 'Export with 10 results, 100 results. Verify layout, verify branding, verify file size limit.' }
-}
-};
-const driftData = [
+driftData: [
 { traced: true, req: 'R1', note: '✅ Traced to R1: User Login. Stakeholder interviews defined this as a core requirement in the brief.' },
 { traced: false, req: null, note: '❌ No requirement found. This was generated because "it looked cool." It adds bundle size, slows load time, and serves no defined user need.' },
 { traced: true, req: 'R2', note: '✅ Traced to R2: Fast Search. Performance requirement defined before development.' },
 { traced: false, req: null, note: '❌ No requirement found. Dark mode was suggested by the LLM during UI generation. It may be valuable — but it should be added as an explicit requirement (R6?) with success criteria, not absorbed implicitly.' },
 { traced: true, req: 'R3', note: '✅ Traced to R3: Export to PDF. Defined in stakeholder interviews.' }
-];
-let driftChecked = 0;
-window.setRtMode = function(mode, btn) {
-document.querySelectorAll('.rt-mode-btn').forEach(b => {
-b.classList.remove('border-primary', 'bg-primary/10');
-b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+]
 });
-btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-btn.classList.add('border-primary', 'bg-primary/10');
-document.getElementById('rt-trace-view').classList.toggle('hidden', mode !== 'trace');
-document.getElementById('rt-drift-view').classList.toggle('hidden', mode !== 'drift');
-};
-window.traceReq = function(req, btn) {
-const chain = chains[req];
-document.querySelectorAll('.rt-req').forEach(b => {
-b.classList.remove('border-primary', 'bg-primary/10');
-b.classList.add('border-outline-variant', 'bg-surface-container-lowest');
-});
-btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-btn.classList.add('border-primary', 'bg-primary/10');
-['req', 'design', 'impl', 'test'].forEach(key => {
-document.getElementById('rt-c-' + key + '-text').textContent = chain[key].text;
-document.getElementById('rt-c-' + key + '-desc').textContent = chain[key].desc;
-const el = document.getElementById('rt-c-' + key);
-el.classList.remove('border-outline-variant');
-el.classList.add('border-primary', 'bg-primary/5');
-});
-document.getElementById('rt-chain').classList.remove('hidden');
-document.getElementById('rt-chain-prompt').classList.add('hidden');
-};
-window.checkDrift = function(index, btn) {
-const d = driftData[index];
-driftChecked++;
-btn.disabled = true;
-btn.classList.remove('border-outline-variant', 'hover:border-primary');
-if (d.traced) {
-btn.classList.add('border-green-500', 'bg-green-50');
-btn.querySelector('.font-bold').textContent = '✅ ' + btn.querySelector('.font-bold').textContent.replace(/^[^ ]+ /, '');
-} else {
-btn.classList.add('border-red-400', 'bg-red-50');
-}
-const result = document.getElementById('rt-drift-result');
-result.classList.remove('hidden');
-result.textContent = d.note;
-if (d.traced) {
-result.className = 'mt-4 rounded-xl p-4 text-xs font-bold bg-green-50 border border-green-300 text-green-700';
-} else {
-result.className = 'mt-4 rounded-xl p-4 text-xs font-bold bg-red-50 border border-red-300 text-red-700';
-}
-};
-})();
 </script>
 
 </div>

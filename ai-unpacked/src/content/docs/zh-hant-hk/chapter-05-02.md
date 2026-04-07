@@ -71,58 +71,31 @@ pageId: "05-02"
 </div>
 </div>
 </div>
-<script>
-const promptSteps = [
-{
-prompt: '「寫一封郵件。」',
-quality: 10,
-label: "較差（過於籠統）"
-},
-{
-prompt: '「寫一封郵件給我的老闆，申請延長第三季度報告的截止日期。」',
-quality: 40,
-label: "較好（重點明確）"
-},
-{
-prompt: '「寫一封郵件給我的老闆，申請延長第三季度報告的截止日期。字數控制在 100 字以內，不要過度道歉。」',
-quality: 75,
-label: "優秀（控制精確）"
-},
-{
-prompt: '「寫一封郵件給我的老闆，申請延長第三季度報告的截止日期。字數控制在 100 字以內，不要過度道歉。以列表形式提供 3 個不同的郵件主題選項。」',
-quality: 100,
-label: "卓越（精準到位）"
-}
-];
-function toggleStep(step, btn) {
-// Enable all buttons up to this step
-document.querySelectorAll('.step-btn').forEach((b, i) => {
-if (i < step) {
-b.classList.remove('opacity-50');
-if (i === step - 1) {
-b.classList.add('border-primary', 'bg-surface-container-lowest');
-} else {
-b.classList.remove('border-primary');
-}
-} else {
-b.classList.add('opacity-50');
-b.classList.remove('border-primary');
-}
-});
-const data = promptSteps[step - 1];
-const preview = document.getElementById('prompt-preview');
-const bar = document.getElementById('quality-bar');
-const label = document.getElementById('quality-label');
-preview.classList.remove('animate-pulse');
-void preview.offsetWidth; // trigger reflow
-preview.classList.add('animate-pulse');
-preview.textContent = data.prompt;
-bar.style.width = data.quality + '%';
-label.textContent = data.label;
-}
-// Init first step
-document.addEventListener('DOMContentLoaded', () => {
-toggleStep(1, document.querySelector('.step-btn'));
+<script type="module">
+import { init } from '/js/interactives/specificity-stack.js';
+init({
+  promptSteps: [
+    {
+      prompt: '「寫一封郵件。」',
+      quality: 10,
+      label: "較差（過於籠統）"
+    },
+    {
+      prompt: '「寫一封郵件給我的老闆，申請延長第三季度報告的截止日期。」',
+      quality: 40,
+      label: "較好（重點明確）"
+    },
+    {
+      prompt: '「寫一封郵件給我的老闆，申請延長第三季度報告的截止日期。字數控制在 100 字以內，不要過度道歉。」',
+      quality: 75,
+      label: "優秀（控制精確）"
+    },
+    {
+      prompt: '「寫一封郵件給我的老闆，申請延長第三季度報告的截止日期。字數控制在 100 字以內，不要過度道歉。以列表形式提供 3 個不同的郵件主題選項。」',
+      quality: 100,
+      label: "卓越（精準到位）"
+    }
+  ]
 });
 </script>
 </div>

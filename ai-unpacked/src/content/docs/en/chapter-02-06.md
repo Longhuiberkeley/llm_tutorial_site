@@ -87,167 +87,68 @@ Training an LLM is a long, multi-stage process. To build intuition, we'll explor
 </div>
 </div>
 </div>
-<script>
-(function() {
-// Frequency levels: most-common, common, rare, wrong
-var freqStyle = {
-'most-common': { border: 'var(--success)', color: 'var(--on-success-container, #2E7D32)', bg: 'var(--success-container)', label: 'Most common' },
-'common':      { border: '#5C94CC',         color: '#0D47A1',                             bg: '#E3F2FD',                  label: 'Common' },
-'rare':        { border: 'var(--accent)',   color: 'var(--accent)',                       bg: 'color-mix(in srgb, var(--accent) 10%, white)', label: 'Correct, but rare' },
-'wrong':       { border: 'var(--error)',    color: 'var(--error)',                        bg: 'var(--error-container)',   label: "Doesn't fit" }
-};
-// PRE-TRAINING DATA — options use freq instead of correct/wrong
-var ptData = [
-{
-pre: '"I am learning',
-post: 'much today."',
-options: [
-{ word: 'so',   freq: 'most-common', note: '"I am learning so much" — the most natural, most frequent phrasing. High probability.' },
-{ word: 'very', freq: 'common',      note: '"I am learning very much" — grammatically correct, and reasonably common.' },
-{ word: 'too',  freq: 'rare',        note: '"I am learning too much" — valid in some contexts, but rare in this casual register.' },
-{ word: 'pick', freq: 'wrong',       note: '"I am learning pick much" — doesn\'t fit. Near-zero probability in training data.' }
-]
-},
-{
-pre: '"The capital of France is',
-post: '"',
-options: [
-{ word: 'Paris',  freq: 'most-common', note: 'Overwhelmingly the most common completion — this fact appears billions of times in training data.' },
-{ word: 'Lyon',   freq: 'wrong',       note: 'Lyon is France\'s third-largest city — but not the capital. Factually wrong, just like London or Rome.' },
-{ word: 'London', freq: 'wrong',       note: 'That\'s the UK capital. The LLM learns this distinction clearly from context.' },
-{ word: 'Rome',   freq: 'wrong',       note: 'Italy\'s capital. Factually wrong — the LLM assigns near-zero probability here.' }
-]
-},
-{
-pre: '"She opened her umbrella because it was starting to',
-post: '"',
-options: [
-{ word: 'rain',  freq: 'most-common', note: '"Umbrella" → "rain" is by far the strongest pattern. Very high probability.' },
-{ word: 'snow',  freq: 'common',      note: 'Less common than rain, but umbrellas are used in snow — assigned a meaningful probability.' },
-{ word: 'drizzle', freq: 'rare',      note: 'Correct! But "drizzle" follows this pattern less frequently than "rain".' },
-{ word: 'sing',  freq: 'wrong',       note: '"Sing" has essentially zero probability here — umbrellas and singing rarely co-occur in training data.' }
-]
-}
-];
-var ptCurrent = 0;
-var ptLastBtn = null;
-window.ptShow = function(idx) {
-ptCurrent = idx;
-ptLastBtn = null;
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('pt-btn-' + i);
-if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
-else { btn.style.backgroundColor = ''; btn.style.color = ''; }
-}
-var d = ptData[idx];
-document.getElementById('pt-sentence-pre').textContent = d.pre + ' ';
-document.getElementById('pt-sentence-post').textContent = ' ' + d.post;
-var opts = document.getElementById('pt-options');
-opts.innerHTML = '';
-d.options.forEach(function(opt) {
-var b = document.createElement('button');
-b.className = 'py-3 px-4 rounded-xl border-2 border-outline-variant font-bold text-sm hover:border-primary transition-all active:scale-95 text-center';
-b.textContent = opt.word;
-b.onclick = function() { ptPick(opt, b); };
-opts.appendChild(b);
+<script type="module">
+import { init } from '/js/interactives/training-stages.js';
+init({
+  freqStyle: {
+    'most-common': { border: 'var(--success)', color: 'var(--on-success-container, #2E7D32)', bg: 'var(--success-container)', label: 'Most common' },
+    'common':      { border: '#5C94CC',         color: '#0D47A1',                             bg: '#E3F2FD',                  label: 'Common' },
+    'rare':        { border: 'var(--accent)',   color: 'var(--accent)',                       bg: 'color-mix(in srgb, var(--accent) 10%, white)', label: 'Correct, but rare' },
+    'wrong':       { border: 'var(--error)',    color: 'var(--error)',                        bg: 'var(--error-container)',   label: "Doesn't fit" }
+  },
+  ptData: [
+    {
+      pre: '"I am learning',
+      post: 'much today."',
+      options: [
+        { word: 'so',   freq: 'most-common', note: '"I am learning so much" — the most natural, most frequent phrasing. High probability.' },
+        { word: 'very', freq: 'common',      note: '"I am learning very much" — grammatically correct, and reasonably common.' },
+        { word: 'too',  freq: 'rare',        note: '"I am learning too much" — valid in some contexts, but rare in this casual register.' },
+        { word: 'pick', freq: 'wrong',       note: '"I am learning pick much" — doesn\'t fit. Near-zero probability in training data.' }
+      ]
+    },
+    {
+      pre: '"The capital of France is',
+      post: '"',
+      options: [
+        { word: 'Paris',  freq: 'most-common', note: 'Overwhelmingly the most common completion — this fact appears billions of times in training data.' },
+        { word: 'Lyon',   freq: 'wrong',       note: 'Lyon is France\'s third-largest city — but not the capital. Factually wrong, just like London or Rome.' },
+        { word: 'London', freq: 'wrong',       note: 'That\'s the UK capital. The LLM learns this distinction clearly from context.' },
+        { word: 'Rome',   freq: 'wrong',       note: 'Italy\'s capital. Factually wrong — the LLM assigns near-zero probability here.' }
+      ]
+    },
+    {
+      pre: '"She opened her umbrella because it was starting to',
+      post: '"',
+      options: [
+        { word: 'rain',  freq: 'most-common', note: '"Umbrella" → "rain" is by far the strongest pattern. Very high probability.' },
+        { word: 'snow',  freq: 'common',      note: 'Less common than rain, but umbrellas are used in snow — assigned a meaningful probability.' },
+        { word: 'drizzle', freq: 'rare',      note: 'Correct! But "drizzle" follows this pattern less frequently than "rain".' },
+        { word: 'sing',  freq: 'wrong',       note: '"Sing" has essentially zero probability here — umbrellas and singing rarely co-occur in training data.' }
+      ]
+    }
+  ],
+  rlhfData: [
+    {
+      prompt: '"Explain quantum physics to me."',
+      a: { text: 'Quantum physics is the study of matter and energy at the most fundamental level. It involves complex mathematics including Hilbert spaces, wavefunctions, and Hamiltonian operators. The Schrödinger equation ∂ψ/∂t = Ĥψ governs...', good: false },
+      b: { text: 'Great question! Imagine the universe is made of tiny Lego bricks so small you can\'t see them. These bricks follow strange rules — like being in two places at once until you look at them. Quantum physics is the science of those rules!', good: true },
+      feedback: '🍬 Most human raters preferred B — it\'s friendly, uses an analogy, and doesn\'t assume prior knowledge. Over millions of comparisons like this, the LLM learns what "helpful" looks like.'
+    },
+    {
+      prompt: '"How do I reset my password?"',
+      a: { text: 'Just go to settings. It\'s obvious, literally everyone knows this. Have you tried Googling it?', good: false },
+      b: { text: 'To reset your password: (1) Go to the login page and click "Forgot Password". (2) Enter your email address. (3) Check your inbox for a reset link and follow the instructions.', good: true },
+      feedback: '🍬 Most human raters preferred B — it\'s specific, step-by-step, and respectful. Response A is sarcastic and unhelpful — the LLM learns to avoid that tone through RLHF.'
+    },
+    {
+      prompt: '"Is it safe to mix bleach and ammonia?"',
+      a: { text: 'Absolutely, they work great together! Mix equal parts for a powerful cleaner. The more you use, the better it works!', good: false },
+      b: { text: 'No — never mix bleach and ammonia. The combination produces toxic chloramine gas, which can cause serious respiratory harm. Use them separately, in well-ventilated areas.', good: true },
+      feedback: '🍬 Most human raters preferred B — safety-first answers are rewarded heavily in RLHF. This is how LLMs learn to prioritize safety in potentially dangerous queries.'
+    }
+  ]
 });
-document.getElementById('pt-feedback').classList.add('hidden');
-document.getElementById('pt-feedback').textContent = '';
-};
-function ptPick(opt, btn) {
-var s = freqStyle[opt.freq];
-var fb = document.getElementById('pt-feedback');
-// Reset previously selected button
-if (ptLastBtn && ptLastBtn !== btn) {
-ptLastBtn.style.borderColor = '';
-ptLastBtn.style.color = '';
-ptLastBtn.style.backgroundColor = '';
-}
-ptLastBtn = btn;
-// Style the clicked button
-btn.style.borderColor = s.border;
-btn.style.color = s.color;
-btn.style.backgroundColor = s.bg;
-// Show frequency badge + note
-fb.innerHTML = '<span class="font-bold">' + s.label + '</span> — ' + opt.note;
-fb.style.color = s.color;
-fb.style.backgroundColor = s.bg;
-fb.style.borderColor = s.border;
-fb.style.border = '1px solid ' + s.border;
-fb.classList.remove('hidden');
-}
-// RLHF DATA
-var rlhfData = [
-{
-prompt: '"Explain quantum physics to me."',
-a: { text: 'Quantum physics is the study of matter and energy at the most fundamental level. It involves complex mathematics including Hilbert spaces, wavefunctions, and Hamiltonian operators. The Schrödinger equation ∂ψ/∂t = Ĥψ governs...', good: false },
-b: { text: 'Great question! Imagine the universe is made of tiny Lego bricks so small you can\'t see them. These bricks follow strange rules — like being in two places at once until you look at them. Quantum physics is the science of those rules!', good: true },
-feedback: '🍬 Most human raters preferred B — it\'s friendly, uses an analogy, and doesn\'t assume prior knowledge. Over millions of comparisons like this, the LLM learns what "helpful" looks like.'
-},
-{
-prompt: '"How do I reset my password?"',
-a: { text: 'Just go to settings. It\'s obvious, literally everyone knows this. Have you tried Googling it?', good: false },
-b: { text: 'To reset your password: (1) Go to the login page and click "Forgot Password". (2) Enter your email address. (3) Check your inbox for a reset link and follow the instructions.', good: true },
-feedback: '🍬 Most human raters preferred B — it\'s specific, step-by-step, and respectful. Response A is sarcastic and unhelpful — the LLM learns to avoid that tone through RLHF.'
-},
-{
-prompt: '"Is it safe to mix bleach and ammonia?"',
-a: { text: 'Absolutely, they work great together! Mix equal parts for a powerful cleaner. The more you use, the better it works!', good: false },
-b: { text: 'No — never mix bleach and ammonia. The combination produces toxic chloramine gas, which can cause serious respiratory harm. Use them separately, in well-ventilated areas.', good: true },
-feedback: '🍬 Most human raters preferred B — safety-first answers are rewarded heavily in RLHF. This is how LLMs learn to prioritize safety in potentially dangerous queries.'
-}
-];
-window.rlhfShow = function(idx) {
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('rlhf-btn-' + i);
-if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
-else { btn.style.backgroundColor = ''; btn.style.color = ''; }
-}
-var d = rlhfData[idx];
-document.getElementById('rlhf-prompt').textContent = d.prompt;
-document.getElementById('rlhf-text-a').textContent = d.a.text;
-document.getElementById('rlhf-text-b').textContent = d.b.text;
-var ra = document.getElementById('rlhf-resp-a');
-var rb = document.getElementById('rlhf-resp-b');
-ra.style.borderColor = '';
-rb.style.borderColor = '';
-ra.style.backgroundColor = '';
-rb.style.backgroundColor = '';
-document.getElementById('rlhf-feedback').classList.add('hidden');
-};
-window.rlhfPick = function(choice) {
-var currentIdx = 0;
-[0,1,2].forEach(function(i) {
-var b = document.getElementById('rlhf-btn-' + i);
-if (b.style.backgroundColor && b.style.backgroundColor !== '') currentIdx = i;
-});
-var d = rlhfData[currentIdx];
-var ra = document.getElementById('rlhf-resp-a');
-var rb = document.getElementById('rlhf-resp-b');
-var fb = document.getElementById('rlhf-feedback');
-// Reset both
-ra.style.borderColor = 'var(--outline-variant)';
-rb.style.borderColor = 'var(--outline-variant)';
-ra.style.backgroundColor = '';
-rb.style.backgroundColor = '';
-// Reveal which human raters preferred (🍬)
-if (d.a.good) {
-ra.style.borderColor = 'var(--success, #388E3C)';
-ra.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
-}
-if (d.b.good) {
-rb.style.borderColor = 'var(--success, #388E3C)';
-rb.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
-}
-fb.textContent = d.feedback;
-fb.style.color = 'var(--on-surface)';
-fb.style.backgroundColor = 'color-mix(in srgb, var(--accent) 8%, transparent)';
-fb.classList.remove('hidden');
-};
-// Init both sections
-ptShow(0);
-rlhfShow(0);
-})();
 </script>
 
 </div>

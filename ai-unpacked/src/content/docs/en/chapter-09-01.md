@@ -103,25 +103,9 @@ This is called **multimodal** — working with multiple types of media.
 ⚠️ Not every LLM handles every modality — always verify the specific model's capabilities before building a workflow around them.
 </div>
 </div>
-<script>
-(function() {
-window.toggleModality = function(card) {
-var detail = card.querySelector('.mod-detail');
-var isOpen = !detail.classList.contains('hidden');
-// Close all cards
-document.querySelectorAll('.mod-card').forEach(function(c) {
-c.querySelector('.mod-detail').classList.add('hidden');
-c.style.borderColor = '';
-c.style.backgroundColor = '';
-});
-// If it wasn't open, open it
-if (!isOpen) {
-detail.classList.remove('hidden');
-card.style.borderColor = 'var(--accent)';
-card.style.backgroundColor = 'color-mix(in srgb, var(--accent) 6%, white)';
-}
-};
-})();
+<script type="module">
+import { init as initModality } from '/js/interactives/modality-tour.js';
+initModality();
 </script>
 
 </div>
@@ -345,66 +329,12 @@ Line-by-line
 </div>
 </div>
 </div>
-<script>
-(function() {
-var currentMode = null;
-window.vcreSetMode = function(mode) {
-if (currentMode === mode) return;
-currentMode = mode;
-var btnCorrect = document.getElementById('vcre-btn-correct');
-var btnWrong = document.getElementById('vcre-btn-wrong');
-var criticalRow = document.getElementById('vcre-critical-row');
-var result = document.getElementById('vcre-result');
-var badge1 = document.getElementById('vcre-badge-1');
-var badge2 = document.getElementById('vcre-badge-2');
-// All left/right column cells
-var leftCells = document.querySelectorAll('.vcre-col-border-left');
-var rightCells = document.querySelectorAll('.vcre-col-border-right');
-if (mode === 'correct') {
-btnCorrect.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
-btnCorrect.classList.remove('bg-surface-container-highest', 'text-on-surface');
-btnWrong.classList.add('bg-surface-container-highest', 'text-on-surface');
-btnWrong.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
-criticalRow.classList.remove('vcre-bad-mode');
-// Show reading order badges
-badge1.style.opacity = '1';
-badge2.style.opacity = '1';
-// Highlight left column first, right column second
-leftCells.forEach(function(el) { el.classList.add('vcre-col-active'); });
-rightCells.forEach(function(el) { el.classList.remove('vcre-col-active'); });
-result.innerHTML =
-'<div class="space-y-1">' +
-'<div class="text-on-surface/60">...the reproductive and <span class="vcre-keyword">vegetative</span></div>' +
-'<div class="text-on-surface/40 text-xs">↓ end of left column — now right column ↓</div>' +
-'<div class="text-on-surface/60"><span class="vcre-keyword">Electron microscopy</span> was used to...</div>' +
-'<div class="mt-3 text-xs text-on-surface/50 border-t border-outline-variant pt-2">Two separate, sensible terms — each in its proper context.</div>' +
-'</div>';
-result.style.borderColor = 'var(--outline-variant)';
-} else {
-btnWrong.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
-btnWrong.classList.remove('bg-surface-container-highest', 'text-on-surface');
-btnCorrect.classList.add('bg-surface-container-highest', 'text-on-surface');
-btnCorrect.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
-criticalRow.classList.add('vcre-bad-mode');
-// Hide reading order badges
-badge1.style.opacity = '0';
-badge2.style.opacity = '0';
-// No column highlights in wrong mode
-leftCells.forEach(function(el) { el.classList.remove('vcre-col-active'); });
-rightCells.forEach(function(el) { el.classList.remove('vcre-col-active'); });
-result.innerHTML =
-'<div class="space-y-1">' +
-'<div class="text-on-surface/60">...the reproductive and <span class="vcre-bad-keyword">vegetative electron microscopy</span> was used to...</div>' +
-'<div class="mt-3 text-xs text-on-surface/50 border-t border-outline-variant pt-2">' +
-'<span class="text-red-500 font-bold">Nonsense!</span> The last word of the left column and the first words of the right column got mashed together — creating a term that doesn\'t exist in science.' +
-'</div>' +
-'</div>';
-result.style.borderColor = 'var(--error)';
-}
-};
-// Auto-select correct mode on load
-window.vcreSetMode('correct');
-})();
+<script type="module">
+import { init as initColumnReading } from '/js/interactives/column-reading-error.js';
+initColumnReading({
+  resultCorrect: '<div class="space-y-1"><div class="text-on-surface/60">...the reproductive and <span class="vcre-keyword">vegetative</span></div><div class="text-on-surface/40 text-xs">\u2193 end of left column \u2014 now right column \u2193</div><div class="text-on-surface/60"><span class="vcre-keyword">Electron microscopy</span> was used to...</div><div class="mt-3 text-xs text-on-surface/50 border-t border-outline-variant pt-2">Two separate, sensible terms \u2014 each in its proper context.</div></div>',
+  resultWrong: '<div class="space-y-1"><div class="text-on-surface/60">...the reproductive and <span class="vcre-bad-keyword">vegetative electron microscopy</span> was used to...</div><div class="mt-3 text-xs text-on-surface/50 border-t border-outline-variant pt-2"><span class="text-red-500 font-bold">Nonsense!</span> The last word of the left column and the first words of the right column got mashed together \u2014 creating a term that doesn\'t exist in science.</div></div>'
+});
 </script>
 
 </div>

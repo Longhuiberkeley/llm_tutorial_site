@@ -11,11 +11,9 @@ pageId: "14-00"
 <span class="text-7xl block mb-4">🎓</span>
 <p class="font-headline font-extrabold text-4xl text-on-surface">You Made It!</p>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<script>
-confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-setTimeout(function() { confetti({ particleCount: 60, angle: 60, spread: 55, origin: { x: 0 } }); }, 300);
-setTimeout(function() { confetti({ particleCount: 60, angle: 120, spread: 55, origin: { x: 1 } }); }, 500);
+<script type="module">
+import { init } from '/js/interactives/confetti.js';
+init();
 </script>
 
 </div>

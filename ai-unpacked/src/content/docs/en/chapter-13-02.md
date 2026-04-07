@@ -119,89 +119,18 @@ Good professionals in any field use this logic without thinking about it. A lawy
 <p class="text-sm text-on-surface-variant italic text-center">Click a phase above to learn what it involves.</p>
 </div>
 </div>
-<script>
-(function() {
-const phases = [
-{
-name: 'Requirements',
-emoji: '📋',
-side: 'Build',
-what: 'Define what the system must do — for whom, under what constraints, with what success criteria. Write it down before building anything.',
-gate: 'Can you describe what "done" looks like in measurable terms? If no, you are not ready to design.',
-example: '💻 Software: "Users can log in via email or Google OAuth, with password reset, on mobile and desktop." 📄 Report: "Answers 3 defined research questions for a non-technical executive audience, max 20 pages."'
-},
-{
-name: 'Design',
-emoji: '🗺️',
-side: 'Build',
-what: 'Define the architecture, structure, and approach. For software: module breakdown, patterns, data model. For documents: outline, argument structure, section plan.',
-gate: 'Could someone else build or write this from your design? If no, the design is not complete.',
-example: '💻 Software: System architecture diagram, module list, API contracts. 📄 Report: Detailed outline with section purpose, argument flow, evidence sources per section.'
-},
-{
-name: 'Implementation',
-emoji: '⚙️',
-side: 'Build',
-what: 'Generate content or code in small, bounded chunks — one module, one section at a time. This is where you use the LLM.',
-gate: 'Has this chunk been reviewed and approved before proceeding to the next? If no, stop and review.',
-example: '💻 Software: Write one function or one component, review it, then the next. 📄 Report: Write one section, review it against the outline and requirements, then the next.'
-},
-{
-name: 'Unit Check',
-emoji: '🧪',
-side: 'Verify',
-what: 'Verify that each individual piece works as specified. Does this function do what it says? Does this section argue what the outline specified?',
-gate: 'Does this piece meet the acceptance criteria for this specific deliverable?',
-example: '💻 Software: Run tests on this function. Does it return the right values for edge cases? 📄 Report: Does this section answer its assigned research question clearly?'
-},
-{
-name: 'Integration',
-emoji: '🔗',
-side: 'Verify',
-what: 'Verify that the pieces work together. Does the system hold together? Does the argument flow coherently across sections?',
-gate: 'Do the parts fit together as designed? Are there contradictions or gaps between pieces?',
-example: '💻 Software: Do modules communicate correctly? Are there unexpected dependencies? 📄 Report: Does section 5 contradict section 2? Does the argument build coherently?'
-},
-{
-name: 'Acceptance',
-emoji: '🎯',
-side: 'Verify',
-what: 'Verify the final output against the original requirements. Did we build what was asked for? Does it meet the success criteria from phase 1?',
-gate: 'Does the complete output pass the acceptance criteria defined in the Requirements phase?',
-example: '💻 Software: Does the login work on mobile and desktop via both methods? Can users reset passwords? 📄 Report: Does it answer all 3 research questions? Is it within 20 pages? Is it readable by a non-technical executive?'
-}
-];
-window.selectPhase = function(index, btn) {
-const phase = phases[index];
-document.querySelectorAll('.pm-node').forEach(n => {
-n.classList.remove('border-primary', 'bg-primary/10');
-n.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+<script type="module">
+import { init } from '/js/interactives/v-model.js';
+init({
+phases: [
+{ name: 'Requirements', emoji: '📋', side: 'Build', what: 'Define what the system must do — for whom, under what constraints, with what success criteria. Write it down before building anything.', gate: 'Can you describe what "done" looks like in measurable terms? If no, you are not ready to design.', example: '💻 Software: "Users can log in via email or Google OAuth, with password reset, on mobile and desktop." 📄 Report: "Answers 3 defined research questions for a non-technical executive audience, max 20 pages."' },
+{ name: 'Design', emoji: '🗺️', side: 'Build', what: 'Define the architecture, structure, and approach. For software: module breakdown, patterns, data model. For documents: outline, argument structure, section plan.', gate: 'Could someone else build or write this from your design? If no, the design is not complete.', example: '💻 Software: System architecture diagram, module list, API contracts. 📄 Report: Detailed outline with section purpose, argument flow, evidence sources per section.' },
+{ name: 'Implementation', emoji: '⚙️', side: 'Build', what: 'Generate content or code in small, bounded chunks — one module, one section at a time. This is where you use the LLM.', gate: 'Has this chunk been reviewed and approved before proceeding to the next? If no, stop and review.', example: '💻 Software: Write one function or one component, review it, then the next. 📄 Report: Write one section, review it against the outline and requirements, then the next.' },
+{ name: 'Unit Check', emoji: '🧪', side: 'Verify', what: 'Verify that each individual piece works as specified. Does this function do what it says? Does this section argue what the outline specified?', gate: 'Does this piece meet the acceptance criteria for this specific deliverable?', example: '💻 Software: Run tests on this function. Does it return the right values for edge cases? 📄 Report: Does this section answer its assigned research question clearly?' },
+{ name: 'Integration', emoji: '🔗', side: 'Verify', what: 'Verify that the pieces work together. Does the system hold together? Does the argument flow coherently across sections?', gate: 'Do the parts fit together as designed? Are there contradictions or gaps between pieces?', example: '💻 Software: Do modules communicate correctly? Are there unexpected dependencies? 📄 Report: Does section 5 contradict section 2? Does the argument build coherently?' },
+{ name: 'Acceptance', emoji: '🎯', side: 'Verify', what: 'Verify the final output against the original requirements. Did we build what was asked for? Does it meet the success criteria from phase 1?', gate: 'Does the complete output pass the acceptance criteria defined in the Requirements phase?', example: '💻 Software: Does the login work on mobile and desktop via both methods? Can users reset passwords? 📄 Report: Does it answer all 3 research questions? Is it within 20 pages? Is it readable by a non-technical executive?' }
+]
 });
-btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-btn.classList.add('border-primary', 'bg-primary/10');
-const detail = document.getElementById('pm-detail');
-detail.className = 'border-2 border-primary bg-primary/5 rounded-xl p-6 min-h-[150px] transition-all duration-300';
-let html = '<div class="w-full">';
-html += '<div class="flex items-center gap-2 mb-3">';
-html += '<span class="text-2xl">' + phase.emoji + '</span>';
-html += '<div>';
-html += '<div class="font-bold text-sm text-on-surface">' + phase.name + '</div>';
-html += '<div class="text-[10px] font-bold uppercase tracking-wide text-on-surface-variant">' + phase.side + ' phase</div>';
-html += '</div></div>';
-html += '<div class="grid gap-2 sm:grid-cols-3 text-[11px]">';
-html += '<div class="bg-surface-container-lowest rounded-lg p-3 border border-outline-variant">';
-html += '<div class="font-black text-[9px] uppercase tracking-wider text-on-surface-variant mb-1">WHAT YOU DO</div>';
-html += '<div class="text-on-surface leading-relaxed">' + phase.what + '</div></div>';
-html += '<div class="bg-amber-50 rounded-lg p-3 border border-amber-200">';
-html += '<div class="font-black text-[9px] uppercase tracking-wider text-amber-600 mb-1">GATE — BEFORE PROCEEDING</div>';
-html += '<div class="text-on-surface leading-relaxed">' + phase.gate + '</div></div>';
-html += '<div class="bg-surface-container-lowest rounded-lg p-3 border border-outline-variant">';
-html += '<div class="font-black text-[9px] uppercase tracking-wider text-on-surface-variant mb-1">EXAMPLES</div>';
-html += '<div class="text-on-surface leading-relaxed">' + phase.example + '</div></div>';
-html += '</div></div>';
-detail.innerHTML = html;
-};
-})();
 </script>
 
 </div>
@@ -271,74 +200,16 @@ The tension between Agile and the V-model is productive: **Agile gives you itera
 </div>
 <p class="text-[11px] text-on-surface-variant text-center mt-4 italic">Each iteration is one sprint. Agile says: don't plan everything upfront — build a slice, learn, adjust, and repeat.</p>
 </div>
-<script>
-(function() {
-const steps = [
-{
-emoji: '📌',
-label: 'Plan',
-color: 'border-primary',
-bg: 'bg-primary/5',
-what: 'Decide what to produce in this session. Write a clear brief: what role is the LLM playing, what is the deliverable, what are the success criteria for this chunk?',
-software: '💻 Software: "This session: write the authentication module. It must handle email login and Google OAuth. Success: both login flows work end-to-end in the test environment."',
-document: '📄 Report: "This session: write Section 3 — Market Analysis. It must answer research question R2 (market size and growth rate). Success: cites at least 3 sources and stays under 600 words."',
-trap: '⚠️ Skip this step and you\'ll generate output in the wrong direction, for the wrong purpose, or at the wrong level of detail — and only find out at the end.'
-},
-{
-emoji: '🔨',
-label: 'Build',
-color: 'border-primary',
-bg: 'bg-primary/5',
-what: 'Generate the deliverable. Keep the scope bounded — one module, one section, one component at a time. Give the LLM the context it needs for this specific task, not the entire project history.',
-software: '💻 Software: Prompt the LLM with the auth module spec. Generate the implementation. Run it. If it fails, fix that specific thing before moving on.',
-document: '📄 Report: Prompt the LLM with the section brief, your research notes, and the argument direction. Generate the section. Read it. If something\'s wrong, fix it now.',
-trap: '⚠️ Building too large a chunk in one go makes review harder and correction more expensive. If you can\'t review it in 5 minutes, the chunk is too big.'
-},
-{
-emoji: '🔍',
-label: 'Review',
-color: 'border-primary',
-bg: 'bg-primary/5',
-what: 'Check the output against the Plan brief you wrote. Does it meet the success criteria? Does it connect to a stated requirement? Look for the failure patterns — duplicates, inconsistencies, false-passing checks.',
-software: '💻 Software: Does the auth module handle both login methods? Does it validate inputs? Are there hardcoded values that should be configurable? Do the tests actually fail when the code is broken?',
-document: '📄 Report: Does the section answer R2? Are the sources cited correctly? Does the argument flow from the previous section? Does anything contradict section 1?',
-trap: '⚠️ Skipping review at this step means problems compound into the next sprint. What would take 5 minutes to fix now may take 3 hours to fix in sprint 4.'
-},
-{
-emoji: '🔁',
-label: 'Adjust',
-color: 'border-primary',
-bg: 'bg-primary/5',
-what: 'Based on the review, update your plan for the next sprint. Did you learn something that changes a requirement? Did the output reveal a gap in the design? Adjust the plan before starting the next build.',
-software: '💻 Software: The auth module revealed that the session token approach needs updating in the design doc. Update the design, then plan the next module.',
-document: '📄 Report: Writing section 3 revealed that the intro needs to mention market segmentation. Note that adjustment, then plan section 4.',
-trap: '⚠️ Adjusting only at the very end turns Agile into a waterfall with extra steps. The value of Agile is that each iteration informs the next one — not that you produce all the output then review.'
-}
-];
-window.selectSprint = function(index, btn) {
-const step = steps[index];
-document.querySelectorAll('.sprint-node').forEach(n => {
-n.classList.remove('border-primary', 'bg-primary/10');
-n.classList.add('border-outline-variant', 'bg-surface-container-lowest');
+<script type="module">
+import { init } from '/js/interactives/agile-sprint.js';
+init({
+steps: [
+{ emoji: '📌', label: 'Plan', color: 'border-primary', bg: 'bg-primary/5', what: 'Decide what to produce in this session. Write a clear brief: what role is the LLM playing, what is the deliverable, what are the success criteria for this chunk?', software: '💻 Software: "This session: write the authentication module. It must handle email login and Google OAuth. Success: both login flows work end-to-end in the test environment."', document: '📄 Report: "This session: write Section 3 — Market Analysis. It must answer research question R2 (market size and growth rate). Success: cites at least 3 sources and stays under 600 words."', trap: '⚠️ Skip this step and you\'ll generate output in the wrong direction, for the wrong purpose, or at the wrong level of detail — and only find out at the end.' },
+{ emoji: '🔨', label: 'Build', color: 'border-primary', bg: 'bg-primary/5', what: 'Generate the deliverable. Keep the scope bounded — one module, one section, one component at a time. Give the LLM the context it needs for this specific task, not the entire project history.', software: '💻 Software: Prompt the LLM with the auth module spec. Generate the implementation. Run it. If it fails, fix that specific thing before moving on.', document: '📄 Report: Prompt the LLM with the section brief, your research notes, and the argument direction. Generate the section. Read it. If something\'s wrong, fix it now.', trap: '⚠️ Building too large a chunk in one go makes review harder and correction more expensive. If you can\'t review it in 5 minutes, the chunk is too big.' },
+{ emoji: '🔍', label: 'Review', color: 'border-primary', bg: 'bg-primary/5', what: 'Check the output against the Plan brief you wrote. Does it meet the success criteria? Does it connect to a stated requirement? Look for the failure patterns — duplicates, inconsistencies, false-passing checks.', software: '💻 Software: Does the auth module handle both login methods? Does it validate inputs? Are there hardcoded values that should be configurable? Do the tests actually fail when the code is broken?', document: '📄 Report: Does the section answer R2? Are the sources cited correctly? Does the argument flow from the previous section? Does anything contradict section 1?', trap: '⚠️ Skipping review at this step means problems compound into the next sprint. What would take 5 minutes to fix now may take 3 hours to fix in sprint 4.' },
+{ emoji: '🔁', label: 'Adjust', color: 'border-primary', bg: 'bg-primary/5', what: 'Based on the review, update your plan for the next sprint. Did you learn something that changes a requirement? Did the output reveal a gap in the design? Adjust the plan before starting the next build.', software: '💻 Software: The auth module revealed that the session token approach needs updating in the design doc. Update the design, then plan the next module.', document: '📄 Report: Writing section 3 revealed that the intro needs to mention market segmentation. Note that adjustment, then plan section 4.', trap: '⚠️ Adjusting only at the very end turns Agile into a waterfall with extra steps. The value of Agile is that each iteration informs the next one — not that you produce all the output then review.' }
+]
 });
-btn.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
-btn.classList.add('border-primary', 'bg-primary/10');
-const detail = document.getElementById('sprint-detail');
-detail.className = 'border-2 rounded-xl p-6 min-h-[140px] transition-all duration-300 ' + step.color + ' ' + step.bg;
-let html = '<div class="w-full">';
-html += '<div class="flex items-center gap-2 mb-3">';
-html += '<span class="text-2xl">' + step.emoji + '</span>';
-html += '<div class="font-bold text-sm">' + step.label + '</div></div>';
-html += '<p class="text-[12px] text-on-surface leading-relaxed mb-3">' + step.what + '</p>';
-html += '<div class="grid gap-2 sm:grid-cols-2 text-[11px] mb-2">';
-html += '<div class="bg-surface-container-lowest rounded-lg p-3 border border-outline-variant leading-relaxed">' + step.software + '</div>';
-html += '<div class="bg-surface-container-lowest rounded-lg p-3 border border-outline-variant leading-relaxed">' + step.document + '</div>';
-html += '</div>';
-html += '<p class="text-[10px] text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">' + step.trap + '</p>';
-html += '</div>';
-detail.innerHTML = html;
-};
-})();
 </script>
 
 </div>

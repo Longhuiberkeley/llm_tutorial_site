@@ -58,22 +58,14 @@ pageId: "03-01"
 </div>
 </div>
 </div>
-<script>
-function bbGuess(btn, isCorrect) {
-var opts = document.querySelectorAll('#bb-options .quiz-option');
-opts.forEach(function(o) { o.disabled = true; o.onclick = null; });
-if (isCorrect) {
-btn.classList.add('correct');
-document.getElementById('bb-fb-text').innerHTML = '✅ <strong>完全正確！</strong>每次你發送訊息時，LLM 都會逐一預測單字（詞元 (Token)） —— 根據之前的所有內容挑選統計上最可能的下一個詞元 —— 並不斷重複直到回覆完成。它並不是在搜尋或查閱資料。這是純粹的<strong>預測下一個詞元 (Next-token prediction)</strong>，建立在訓練數據中看到的模式之上。';
-} else {
-btn.classList.add('wrong');
-opts.forEach(function(o) {
-if (o.textContent.trim().startsWith('🎯')) o.classList.add('correct');
+<script type="module">
+import { init } from '/js/interactives/black-box.js';
+init({
+  strings: {
+    correctFeedback: '✅ <strong>完全正確！</strong>每次你發送訊息時，LLM 都會逐一預測單字（詞元 (Token)） —— 根據之前的所有內容挑選統計上最可能的下一個詞元 —— 並不斷重複直到回覆完成。它並不是在搜尋或查閱資料。這是純粹的<strong>預測下一個詞元 (Next-token prediction)</strong>，建立在訓練數據中看到的模式之上。',
+    wrongFeedback: '❌ <strong>不完全對。</strong>LLM 實際上是在重複地逐一預測下一個單字（詞元 (Token)）。它不會實時搜尋互聯網或查閱資料庫 —— 它是根據訓練期間學到的模式來生成文本。這也是為什麼它會自信地說出錯誤資訊的原因。'
+  }
 });
-document.getElementById('bb-fb-text').innerHTML = '❌ <strong>不完全對。</strong>LLM 實際上是在重複地逐一預測下一個單字（詞元 (Token)）。它不會實時搜尋互聯網或查閱資料庫 —— 它是根據訓練期間學到的模式來生成文本。這也是為什麼它會自信地說出錯誤資訊的原因。';
-}
-document.getElementById('bb-feedback').classList.remove('hidden');
-}
 </script>
 </div>
 

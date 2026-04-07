@@ -88,167 +88,68 @@ pageId: "02-06"
 </div>
 </div>
 </div>
-<script>
-(function() {
-// Frequency levels: most-common, common, rare, wrong
-var freqStyle = {
-'most-common': { border: 'var(--success)', color: 'var(--on-success-container, #2E7D32)', bg: 'var(--success-container)', label: '最常見' },
-'common':      { border: '#5C94CC',         color: '#0D47A1',                             bg: '#E3F2FD',                  label: '常見' },
-'rare':        { border: 'var(--accent)',   color: 'var(--accent)',                       bg: 'color-mix(in srgb, var(--accent) 10%, white)', label: '正確但罕見' },
-'wrong':       { border: 'var(--error)',    color: 'var(--error)',                        bg: 'var(--error-container)',   label: "不符合" }
-};
-// PRE-TRAINING DATA — options use freq instead of correct/wrong
-var ptData = [
-{
-pre: '"I am learning',
-post: 'much today."',
-options: [
-{ word: 'so',   freq: 'most-common', note: '「I am learning so much」 —— 最自然、最頻繁的措辭。機率很高。' },
-{ word: 'very', freq: 'common',      note: '「I am learning very much」 —— 語法正確，且相當常見。' },
-{ word: 'too',  freq: 'rare',        note: '「I am learning too much」 —— 在某些語境下有效，但在這種隨意的語氣中較少見。' },
-{ word: 'pick', freq: 'wrong',       note: '「I am learning pick much」 —— 不符合語法。在訓練數據中機率接近零。' }
-]
-},
-{
-pre: '"The capital of France is',
-post: '"',
-options: [
-{ word: 'Paris',  freq: 'most-common', note: '壓倒性地成為最常見的完成方式 —— 這個事實出現在數十億次的訓練數據中。' },
-{ word: 'Lyon',   freq: 'wrong',       note: '里昂 (Lyon) 是法國第三大城市 —— 但不是首都。事實錯誤，就像倫敦或羅馬一樣。' },
-{ word: 'London', freq: 'wrong',       note: '那是英國首都。LLM 透過語境清晰地學會了這個區別。' },
-{ word: 'Rome',   freq: 'wrong',       note: '意大利首都。事實錯誤 —— LLM 在此分配的機率接近零。' }
-]
-},
-{
-pre: '"She opened her umbrella because it was starting to',
-post: '"',
-options: [
-{ word: 'rain',  freq: 'most-common', note: '「Umbrella」(雨傘) → 「rain」(下雨) 是目前為止最強大的模式。機率極高。' },
-{ word: 'snow',  freq: 'common',      note: '雖然比雨少見，但雪天也會用傘 —— 因此分配了顯著的機率。' },
-{ word: 'drizzle', freq: 'rare',      note: '正確！但「drizzle」(毛毛雨) 出現頻率低於「rain」(下雨)。' },
-{ word: 'sing',  freq: 'wrong',       note: '「Sing」(唱歌) 在此的機率基本上為零 —— 雨傘和唱歌很少在訓練數據中同時出現。' }
-]
-}
-];
-var ptCurrent = 0;
-var ptLastBtn = null;
-window.ptShow = function(idx) {
-ptCurrent = idx;
-ptLastBtn = null;
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('pt-btn-' + i);
-if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
-else { btn.style.backgroundColor = ''; btn.style.color = ''; }
-}
-var d = ptData[idx];
-document.getElementById('pt-sentence-pre').textContent = d.pre + ' ';
-document.getElementById('pt-sentence-post').textContent = ' ' + d.post;
-var opts = document.getElementById('pt-options');
-opts.innerHTML = '';
-d.options.forEach(function(opt) {
-var b = document.createElement('button');
-b.className = 'py-3 px-4 rounded-xl border-2 border-outline-variant font-bold text-sm hover:border-primary transition-all active:scale-95 text-center';
-b.textContent = opt.word;
-b.onclick = function() { ptPick(opt, b); };
-opts.appendChild(b);
+<script type="module">
+import { init } from '/js/interactives/training-stages.js';
+init({
+  freqStyle: {
+    'most-common': { border: 'var(--success)', color: 'var(--on-success-container, #2E7D32)', bg: 'var(--success-container)', label: '最常見' },
+    'common':      { border: '#5C94CC',         color: '#0D47A1',                             bg: '#E3F2FD',                  label: '常見' },
+    'rare':        { border: 'var(--accent)',   color: 'var(--accent)',                       bg: 'color-mix(in srgb, var(--accent) 10%, white)', label: '正確但罕見' },
+    'wrong':       { border: 'var(--error)',    color: 'var(--error)',                        bg: 'var(--error-container)',   label: '不符合' }
+  },
+  ptData: [
+    {
+      pre: '"I am learning',
+      post: 'much today."',
+      options: [
+        { word: 'so',   freq: 'most-common', note: '「I am learning so much」 —— 最自然、最頻繁的措辭。機率很高。' },
+        { word: 'very', freq: 'common',      note: '「I am learning very much」 —— 語法正確，且相當常見。' },
+        { word: 'too',  freq: 'rare',        note: '「I am learning too much」 —— 在某些語境下有效，但在這種隨意的語氣中較少見。' },
+        { word: 'pick', freq: 'wrong',       note: '「I am learning pick much」 —— 不符合語法。在訓練數據中機率接近零。' }
+      ]
+    },
+    {
+      pre: '"The capital of France is',
+      post: '"',
+      options: [
+        { word: 'Paris',  freq: 'most-common', note: '壓倒性地成為最常見的完成方式 —— 這個事實出現在數十億次的訓練數據中。' },
+        { word: 'Lyon',   freq: 'wrong',       note: '里昂 (Lyon) 是法國第三大城市 —— 但不是首都。事實錯誤，就像倫敦或羅馬一樣。' },
+        { word: 'London', freq: 'wrong',       note: '那是英國首都。LLM 透過語境清晰地學會了這個區別。' },
+        { word: 'Rome',   freq: 'wrong',       note: '意大利首都。事實錯誤 —— LLM 在此分配的機率接近零。' }
+      ]
+    },
+    {
+      pre: '"She opened her umbrella because it was starting to',
+      post: '"',
+      options: [
+        { word: 'rain',  freq: 'most-common', note: '「Umbrella」(雨傘) → 「rain」(下雨) 是目前為止最強大的模式。機率極高。' },
+        { word: 'snow',  freq: 'common',      note: '雖然比雨少見，但雪天也會用傘 —— 因此分配了顯著的機率。' },
+        { word: 'drizzle', freq: 'rare',      note: '正確！但「drizzle」(毛毛雨) 出現頻率低於「rain」(下雨)。' },
+        { word: 'sing',  freq: 'wrong',       note: '「Sing」(唱歌) 在此的機率基本上為零 —— 雨傘和唱歌很少在訓練數據中同時出現。' }
+      ]
+    }
+  ],
+  rlhfData: [
+    {
+      prompt: '"向我解釋量子物理學。"',
+      a: { text: '量子物理學是在最基礎層面上對物質和能量的研究。它涉及複雜的數學，包括希爾伯特空間 (Hilbert spaces)、波函數 (wavefunctions) 和哈密頓算符 (Hamiltonian operators)。薛丁格方程式 ∂ψ/∂t = Ĥψ 統治著……', good: false },
+      b: { text: '好問題！想像一下，宇宙是由微小的樂高積木組成的，小到你看不到它們。這些積木遵循著奇怪的規則 —— 比如在你看它們之前，它們可以同時出現在兩個地方。量子物理學就是研究這些規則的科學！', good: true },
+      feedback: '🍬 大多數人類評分員更偏好 B —— 它很友善，使用了類比，且不預設用戶已有先備知識。經過數百萬次這樣的比較，LLM 學會了什麼才是「有幫助」的回應。'
+    },
+    {
+      prompt: '"我該如何重設密碼？"',
+      a: { text: '去設定裡找就好了。這很明顯吧，幾乎每個人都知道。你試過 Google 嗎？', good: false },
+      b: { text: '要重設密碼：(1) 前往登入頁面並點擊「忘記密碼」。(2) 輸入您的電子郵件地址。(3) 查看收件箱中的重設連結並按照說明操作。', good: true },
+      feedback: '🍬 大多數人類評分員更偏好 B —— 它具體、有條理且有禮貌。回應 A 帶有諷刺意味且沒有幫助 —— LLM 透過 RLHF 學會了避免使用這種語氣。'
+    },
+    {
+      prompt: '"將漂白水和氨水混合安全嗎？"',
+      a: { text: '絕對沒問題，它們混合在一起效果很好！等比例混合可以製成強大的清潔劑。用得越多，效果越好！', good: false },
+      b: { text: '不安全 —— 絕不要將漂白水和氨水混合。這種組合會產生有毒的氯胺氣體，可能導致嚴重的呼吸道損傷。請在通風良好的地方分開使用它們。', good: true },
+      feedback: '🍬 大多數人類評分員更偏好 B —— 「安全第一」的答案在 RLHF 中會獲得豐厚的獎勵。這就是 LLM 學會在面對潛在危險查詢時優先考慮安全性的方式。'
+    }
+  ]
 });
-document.getElementById('pt-feedback').classList.add('hidden');
-document.getElementById('pt-feedback').textContent = '';
-};
-function ptPick(opt, btn) {
-var s = freqStyle[opt.freq];
-var fb = document.getElementById('pt-feedback');
-// Reset previously selected button
-if (ptLastBtn && ptLastBtn !== btn) {
-ptLastBtn.style.borderColor = '';
-ptLastBtn.style.color = '';
-ptLastBtn.style.backgroundColor = '';
-}
-ptLastBtn = btn;
-// Style the clicked button
-btn.style.borderColor = s.border;
-btn.style.color = s.color;
-btn.style.backgroundColor = s.bg;
-// Show frequency badge + note
-fb.innerHTML = '<span class="font-bold">' + s.label + '</span> — ' + opt.note;
-fb.style.color = s.color;
-fb.style.backgroundColor = s.bg;
-fb.style.borderColor = s.border;
-fb.style.border = '1px solid ' + s.border;
-fb.classList.remove('hidden');
-}
-// RLHF DATA
-var rlhfData = [
-{
-prompt: '"向我解釋量子物理學。"',
-a: { text: '量子物理學是在最基礎層面上對物質和能量的研究。它涉及複雜的數學，包括希爾伯特空間 (Hilbert spaces)、波函數 (wavefunctions) 和哈密頓算符 (Hamiltonian operators)。薛丁格方程式 ∂ψ/∂t = Ĥψ 統治著……', good: false },
-b: { text: '好問題！想像一下，宇宙是由微小的樂高積木組成的，小到你看不到它們。這些積木遵循著奇怪的規則 —— 比如在你看它們之前，它們可以同時出現在兩個地方。量子物理學就是研究這些規則的科學！', good: true },
-feedback: '🍬 大多數人類評分員更偏好 B —— 它很友善，使用了類比，且不預設用戶已有先備知識。經過數百萬次這樣的比較，LLM 學會了什麼才是「有幫助」的回應。'
-},
-{
-prompt: '"我該如何重設密碼？"',
-a: { text: '去設定裡找就好了。這很明顯吧，幾乎每個人都知道。你試過 Google 嗎？', good: false },
-b: { text: '要重設密碼：(1) 前往登入頁面並點擊「忘記密碼」。(2) 輸入您的電子郵件地址。(3) 查看收件箱中的重設連結並按照說明操作。', good: true },
-feedback: '🍬 大多數人類評分員更偏好 B —— 它具體、有條理且有禮貌。回應 A 帶有諷刺意味且沒有幫助 —— LLM 透過 RLHF 學會了避免使用這種語氣。'
-},
-{
-prompt: '"將漂白水和氨水混合安全嗎？"',
-a: { text: '絕對沒問題，它們混合在一起效果很好！等比例混合可以製成強大的清潔劑。用得越多，效果越好！', good: false },
-b: { text: '不安全 —— 絕不要將漂白水和氨水混合。這種組合會產生有毒的氯胺氣體，可能導致嚴重的呼吸道損傷。請在通風良好的地方分開使用它們。', good: true },
-feedback: '🍬 大多數人類評分員更偏好 B —— 「安全第一」的答案在 RLHF 中會獲得豐厚的獎勵。這就是 LLM 學會在面對潛在危險查詢時優先考慮安全性的方式。'
-}
-];
-window.rlhfShow = function(idx) {
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('rlhf-btn-' + i);
-if (i === idx) { btn.style.backgroundColor = 'var(--primary)'; btn.style.color = 'var(--on-primary)'; }
-else { btn.style.backgroundColor = ''; btn.style.color = ''; }
-}
-var d = rlhfData[idx];
-document.getElementById('rlhf-prompt').textContent = d.prompt;
-document.getElementById('rlhf-text-a').textContent = d.a.text;
-document.getElementById('rlhf-text-b').textContent = d.b.text;
-var ra = document.getElementById('rlhf-resp-a');
-var rb = document.getElementById('rlhf-resp-b');
-ra.style.borderColor = '';
-rb.style.borderColor = '';
-ra.style.backgroundColor = '';
-rb.style.backgroundColor = '';
-document.getElementById('rlhf-feedback').classList.add('hidden');
-};
-window.rlhfPick = function(choice) {
-var currentIdx = 0;
-[0,1,2].forEach(function(i) {
-var b = document.getElementById('rlhf-btn-' + i);
-if (b.style.backgroundColor && b.style.backgroundColor !== '') currentIdx = i;
-});
-var d = rlhfData[currentIdx];
-var ra = document.getElementById('rlhf-resp-a');
-var rb = document.getElementById('rlhf-resp-b');
-var fb = document.getElementById('rlhf-feedback');
-// Reset both
-ra.style.borderColor = 'var(--outline-variant)';
-rb.style.borderColor = 'var(--outline-variant)';
-ra.style.backgroundColor = '';
-rb.style.backgroundColor = '';
-// Reveal which human raters preferred (🍬)
-if (d.a.good) {
-ra.style.borderColor = 'var(--success, #388E3C)';
-ra.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
-}
-if (d.b.good) {
-rb.style.borderColor = 'var(--success, #388E3C)';
-rb.style.backgroundColor = 'color-mix(in srgb, #388E3C 5%, transparent)';
-}
-fb.textContent = d.feedback;
-fb.style.color = 'var(--on-surface)';
-fb.style.backgroundColor = 'color-mix(in srgb, var(--accent) 8%, transparent)';
-fb.classList.remove('hidden');
-};
-// Init both sections
-ptShow(0);
-rlhfShow(0);
-})();
 </script>
 </div>
 ## 📝 關鍵概念

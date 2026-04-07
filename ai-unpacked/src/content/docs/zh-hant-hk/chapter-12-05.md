@@ -112,55 +112,16 @@ class="px-6 py-2.5 bg-primary text-on-primary rounded-full text-sm font-bold hov
 <div id="prim-status-text" class="text-sm font-bold leading-relaxed italic text-on-surface"></div>
 </div>
 </div>
-<script>
-(function() {
-var primitives = [
-{
-emoji: '🧠',
-name: 'Agent (The Brain)',
-desc: 'Reads, thinks, decides. The Agent is the LLM at the core — it receives input, reasons about what to do next, and decides which tools to call or what response to give.',
-details: [
-'Interprets natural language requests',
-'Plans a sequence of actions',
-'Decides when the task is complete'
+<script type="module">
+import { init } from '/js/interactives/agentic-building-blocks.js';
+init({
+primitives: [
+{ emoji: '🧠', name: 'Agent (The Brain)', desc: 'Reads, thinks, decides. The Agent is the LLM at the core — it receives input, reasons about what to do next, and decides which tools to call or what response to give.', details: ['Interprets natural language requests','Plans a sequence of actions','Decides when the task is complete'], analogy: 'Like a project manager who reads the brief, decides the approach, and delegates tasks.' },
+{ emoji: '🔧', name: 'Tools (The Hands)', desc: 'Searches, calls APIs, sends emails. Tools are external functions the agent can invoke to interact with the real world — things the LLM cannot do with text alone.', details: ['Web search, database queries, calculations','API calls (email, calendar, CRM)','File operations (read, write, create)'], analogy: 'Like a worker\'s toolbelt — each tool does one specific job, and the agent picks the right one.' },
+{ emoji: '📝', name: 'Session (The Memory)', desc: 'Remembers the conversation. The Session stores the full history of messages, tool calls, and results so the agent can build on previous steps.', details: ['Tracks the full conversation history','Stores tool call results for reference','Enables multi-step reasoning over time'], analogy: 'Like a notebook where every step is written down — the agent can flip back to check what happened before.' },
+{ emoji: '⚙️', name: 'Runner (The Engine)', desc: 'Orchestrates the loop. The Runner manages the cycle: send messages to the agent, execute tool calls, feed results back, and repeat until the task is done.', details: ['Runs the perceive-plan-act-observe loop','Routes tool calls to the right functions','Decides when to stop (task complete or limit reached)'], analogy: 'Like an assembly line conveyor belt that keeps everything moving in the right order.' }
 ],
-analogy: 'Like a project manager who reads the brief, decides the approach, and delegates tasks.'
-},
-{
-emoji: '🔧',
-name: 'Tools (The Hands)',
-desc: 'Searches, calls APIs, sends emails. Tools are external functions the agent can invoke to interact with the real world — things the LLM cannot do with text alone.',
-details: [
-'Web search, database queries, calculations',
-'API calls (email, calendar, CRM)',
-'File operations (read, write, create)'
-],
-analogy: 'Like a worker\'s toolbelt — each tool does one specific job, and the agent picks the right one.'
-},
-{
-emoji: '📝',
-name: 'Session (The Memory)',
-desc: 'Remembers the conversation. The Session stores the full history of messages, tool calls, and results so the agent can build on previous steps.',
-details: [
-'Tracks the full conversation history',
-'Stores tool call results for reference',
-'Enables multi-step reasoning over time'
-],
-analogy: 'Like a notebook where every step is written down — the agent can flip back to check what happened before.'
-},
-{
-emoji: '⚙️',
-name: 'Runner (The Engine)',
-desc: 'Orchestrates the loop. The Runner manages the cycle: send messages to the agent, execute tool calls, feed results back, and repeat until the task is done.',
-details: [
-'Runs the perceive-plan-act-observe loop',
-'Routes tool calls to the right functions',
-'Decides when to stop (task complete or limit reached)'
-],
-analogy: 'Like an assembly line conveyor belt that keeps everything moving in the right order.'
-}
-];
-var animSteps = [
+animSteps: [
 { highlight: -1, label: 'Input', text: '📨 "Find me the cheapest flight to Tokyo next week"' },
 { highlight: 0,  label: 'Agent (Think)', text: '🧠 Agent reads the request and decides: I need to search flights' },
 { highlight: 1,  label: 'Tools (Act)', text: '🔧 Calling flight_search("Tokyo", "next week")' },
@@ -168,112 +129,8 @@ var animSteps = [
 { highlight: 3,  label: 'Runner (Loop)', text: '⚙️ Agent hasn\'t finished yet → loop continues' },
 { highlight: 0,  label: 'Agent (Think)', text: '🧠 Agent compares prices and picks the cheapest: $420 on ANA' },
 { highlight: -1, label: 'Complete', text: '✅ "The cheapest flight is $420 on ANA, departing Tuesday"' }
-];
-var isPlaying = false;
-var currentAnimStep = 0;
-function renderDetail(idx) {
-var p = primitives[idx];
-var panel = document.getElementById('prim-detail');
-panel.innerHTML =
-'<div class="flex items-start gap-4 mb-4">' +
-'<div class="text-3xl shrink-0">' + p.emoji + '</div>' +
-'<div>' +
-'<div class="text-lg font-bold mb-1">' + p.name + '</div>' +
-'<p class="text-sm text-on-surface-variant leading-relaxed">' + p.desc + '</p>' +
-'</div>' +
-'</div>' +
-'<div class="grid sm:grid-cols-2 gap-4">' +
-'<div class="bg-surface-container rounded-xl p-4">' +
-'<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">What it does</div>' +
-'<ul class="text-sm space-y-1.5">' +
-p.details.map(function(d) {
-return '<li class="flex items-start gap-2"><span class="shrink-0 mt-0.5 text-primary">▸</span>' + d + '</li>';
-}).join('') +
-'</ul>' +
-'</div>' +
-'<div class="bg-surface-container rounded-xl p-4">' +
-'<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">Analogy</div>' +
-'<p class="text-sm leading-relaxed italic">' + p.analogy + '</p>' +
-'</div>' +
-'</div>';
-}
-function highlightCard(idx) {
-var cards = document.querySelectorAll('.prim-card');
-cards.forEach(function(card, i) {
-if (i === idx) {
-card.classList.remove('border-outline-variant');
-card.classList.add('border-primary', 'scale-105');
-card.style.boxShadow = '0 4px 12px rgba(143, 72, 47, 0.15)';
-} else {
-card.classList.remove('border-primary', 'scale-105');
-card.classList.add('border-outline-variant');
-card.style.boxShadow = 'none';
-}
+]
 });
-}
-function clearCardHighlights() {
-var cards = document.querySelectorAll('.prim-card');
-cards.forEach(function(card) {
-card.classList.remove('border-primary', 'scale-105');
-card.classList.add('border-outline-variant');
-card.style.boxShadow = 'none';
-});
-}
-function runAnimStep() {
-if (currentAnimStep >= animSteps.length) {
-isPlaying = false;
-var btn = document.getElementById('prim-play-btn');
-btn.disabled = false;
-btn.textContent = '▶ Replay Demo';
-btn.classList.remove('opacity-50');
-return;
-}
-var step = animSteps[currentAnimStep];
-// Highlight the corresponding card
-if (step.highlight >= 0) {
-highlightCard(step.highlight);
-} else {
-clearCardHighlights();
-}
-// Update status display
-var label = document.getElementById('prim-status-label');
-var text = document.getElementById('prim-status-text');
-label.style.opacity = '0';
-text.style.opacity = '0';
-setTimeout(function() {
-label.textContent = step.label;
-text.textContent = step.text;
-label.style.opacity = '0.6';
-text.style.opacity = '1';
-}, 150);
-currentAnimStep++;
-// Final step stays longer
-var delay = currentAnimStep >= animSteps.length ? 3000 : 2000;
-setTimeout(runAnimStep, delay);
-}
-window.selectPrimitive = function(idx) {
-if (isPlaying) return; // Don't interfere with animation
-highlightCard(idx);
-renderDetail(idx);
-};
-window.startPrimDemo = function() {
-if (isPlaying) return;
-isPlaying = true;
-currentAnimStep = 0;
-var btn = document.getElementById('prim-play-btn');
-btn.disabled = true;
-btn.classList.add('opacity-50');
-btn.textContent = '⏳ Running...';
-// Show status area
-var status = document.getElementById('prim-status');
-status.classList.remove('hidden');
-status.classList.add('flex');
-// Clear detail panel during animation
-document.getElementById('prim-detail').innerHTML =
-'<p class="text-sm text-on-surface-variant text-center italic">Watch the building blocks work together below...</p>';
-runAnimStep();
-};
-})();
 </script>
 
 </div>

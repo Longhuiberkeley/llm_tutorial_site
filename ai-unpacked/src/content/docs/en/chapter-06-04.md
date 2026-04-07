@@ -58,60 +58,22 @@ Task: "Research latest AI safety news and summarize findings."
 <button onclick="startLoop()" id="start-loop-btn" class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-full text-xs font-bold hover:shadow-lg transition-all self-start">Start Loop →</button>
 </div>
 </div>
-<script>
-const loopSteps = [
-{ id: 'perceive', title: 'Perceive', desc: 'Agent reads the request: "Research AI safety news". Recognizes need for web search.' },
-{ id: 'plan', title: 'Plan', desc: 'Strategy: (1) Use Google Search for news, (2) Filter results from last 24h, (3) Extract key points.' },
-{ id: 'act', title: 'Act', desc: 'Calling tool: <strong>web_search("latest AI safety papers March 2026")</strong>' },
-{ id: 'observe', title: 'Observe', desc: 'Found 5 relevant articles. One is behind a paywall—need to adjust plan to find alternative source.' },
-{ id: 'perceive', title: 'Perceive (Cycle 2)', desc: 'Processes search results. Identifies the need for a summary tool.' },
-{ id: 'plan', title: 'Plan (Cycle 2)', desc: 'Analyze the 4 accessible papers and synthesize into 3 bullet points.' },
-{ id: 'act', title: 'Act (Cycle 2)', desc: 'Generating final summary based on retrieved context.' },
-{ id: 'observe', title: 'Observe (Cycle 2)', desc: 'Summary complete. Quality check passed. Delivering to user.' }
-];
-let currentStep = 0;
-let isPlaying = false;
-function startLoop() {
-if (isPlaying) return;
-isPlaying = true;
-document.getElementById('start-loop-btn').disabled = true;
-document.getElementById('start-loop-btn').classList.add('opacity-0');
-currentStep = 0;
-runStep();
-}
-function runStep() {
-if (currentStep >= loopSteps.length) {
-isPlaying = false;
-document.getElementById('start-loop-btn').disabled = false;
-document.getElementById('start-loop-btn').classList.remove('opacity-0');
-document.getElementById('start-loop-btn').textContent = 'Restart Loop →';
-return;
-}
-const step = loopSteps[currentStep];
-const prevStep = loopSteps[currentStep - 1];
-// Reset visual highlight on previous step
-if (prevStep) {
-const prevEl = document.getElementById('step-' + prevStep.id.split(' ')[0]);
-prevEl.querySelector('div').classList.remove('border-primary', 'bg-primary/10', 'scale-110');
-prevEl.querySelector('div').classList.add('border-outline-variant');
-}
-// Highlight current step
-const currEl = document.getElementById('step-' + step.id.split(' ')[0]);
-currEl.querySelector('div').classList.add('border-primary', 'bg-primary/10', 'scale-110');
-currEl.querySelector('div').classList.remove('border-outline-variant');
-// Update status display
-const title = document.getElementById('loop-status-title');
-const desc = document.getElementById('loop-status-desc');
-title.classList.remove('animate-fade-in');
-desc.classList.remove('animate-fade-in');
-void title.offsetWidth; // trigger reflow
-title.classList.add('animate-fade-in');
-desc.classList.add('animate-fade-in');
-title.textContent = step.title;
-desc.innerHTML = step.desc;
-currentStep++;
-setTimeout(runStep, 2000);
-}
+<script type="module">
+import { init } from '/js/interactives/agentic-loop.js';
+init({
+  loopSteps: [
+    { id: 'perceive', title: 'Perceive', desc: 'Agent reads the request: "Research AI safety news". Recognizes need for web search.' },
+    { id: 'plan', title: 'Plan', desc: 'Strategy: (1) Use Google Search for news, (2) Filter results from last 24h, (3) Extract key points.' },
+    { id: 'act', title: 'Act', desc: 'Calling tool: <strong>web_search("latest AI safety papers March 2026")</strong>' },
+    { id: 'observe', title: 'Observe', desc: 'Found 5 relevant articles. One is behind a paywall\u2014need to adjust plan to find alternative source.' },
+    { id: 'perceive', title: 'Perceive (Cycle 2)', desc: 'Processes search results. Identifies the need for a summary tool.' },
+    { id: 'plan', title: 'Plan (Cycle 2)', desc: 'Analyze the 4 accessible papers and synthesize into 3 bullet points.' },
+    { id: 'act', title: 'Act (Cycle 2)', desc: 'Generating final summary based on retrieved context.' },
+    { id: 'observe', title: 'Observe (Cycle 2)', desc: 'Summary complete. Quality check passed. Delivering to user.' }
+  ],
+  startLabel: 'Start Loop \u2192',
+  restartLabel: 'Restart Loop \u2192'
+});
 </script>
 
 </div>

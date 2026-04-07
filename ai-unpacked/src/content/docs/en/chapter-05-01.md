@@ -89,53 +89,39 @@ Creative tasks where variety is a feature, not a bug. The AI excels here.
 </div>
 </div>
 </div>
-<script>
-const zones = [
-{
-title: "Ready to Use",
-icon: "check_circle",
-color: "text-green-500",
-desc: "Creative tasks where variety is a feature, not a bug. The AI excels here because there is no single 'correct' answer.",
-tags: ["Creative Writing", "Brainstorming", "Email Drafts", "Summarizing"]
-},
-{
-title: "Review Before Using",
-icon: "visibility",
-color: "text-yellow-500",
-desc: "AI does the heavy lifting, but a human must check the logic and tone. Great for productivity.",
-tags: ["Coding", "Business Reports", "Product Descriptions", "Social Media"]
-},
-{
-title: "Heavy Verification Needed",
-icon: "rule",
-color: "text-orange-500",
-desc: "AI can assist with research, but every claim and citation must be cross-checked against authoritative sources.",
-tags: ["Legal Research", "Medical Info", "Financial Math", "History Facts"]
-},
-{
-title: "Don't Trust (Yet)",
-icon: "error",
-color: "text-red-500",
-desc: "Critical operations where a single hallucination causes immediate harm or security breaches.",
-tags: ["Live Security", "Autonomous Banking", "Critical Math", "Legal Filings"]
-}
-];
-function showZone(index, btn) {
-const zone = zones[index];
-document.querySelectorAll('.zone-btn').forEach(b => b.classList.remove('border-primary', 'bg-surface-container'));
-btn.classList.add('border-primary', 'bg-surface-container');
-const display = document.getElementById('zone-display');
-display.classList.remove('animate-fade-in');
-void display.offsetWidth; // trigger reflow
-display.classList.add('animate-fade-in');
-document.getElementById('zone-title').innerHTML = `<span class="material-symbols-outlined ${zone.color}">${zone.icon}</span> ${zone.title}`;
-document.getElementById('zone-desc').textContent = zone.desc;
-const tagsHtml = zone.tags.map(t => `<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-bold">${t}</span>`).join('');
-display.querySelector('.flex-wrap').innerHTML = tagsHtml;
-}
-// Init first zone
-document.addEventListener('DOMContentLoaded', () => {
-showZone(0, document.querySelector('.zone-btn'));
+<script type="module">
+import { init } from '/js/interactives/trust-spectrum.js';
+init({
+  zones: [
+    {
+      title: "Ready to Use",
+      icon: "check_circle",
+      color: "text-green-500",
+      desc: "Creative tasks where variety is a feature, not a bug. The AI excels here because there is no single 'correct' answer.",
+      tags: ["Creative Writing", "Brainstorming", "Email Drafts", "Summarizing"]
+    },
+    {
+      title: "Review Before Using",
+      icon: "visibility",
+      color: "text-yellow-500",
+      desc: "AI does the heavy lifting, but a human must check the logic and tone. Great for productivity.",
+      tags: ["Coding", "Business Reports", "Product Descriptions", "Social Media"]
+    },
+    {
+      title: "Heavy Verification Needed",
+      icon: "rule",
+      color: "text-orange-500",
+      desc: "AI can assist with research, but every claim and citation must be cross-checked against authoritative sources.",
+      tags: ["Legal Research", "Medical Info", "Financial Math", "History Facts"]
+    },
+    {
+      title: "Don't Trust (Yet)",
+      icon: "error",
+      color: "text-red-500",
+      desc: "Critical operations where a single hallucination causes immediate harm or security breaches.",
+      tags: ["Live Security", "Autonomous Banking", "Critical Math", "Legal Filings"]
+    }
+  ]
 });
 </script>
 

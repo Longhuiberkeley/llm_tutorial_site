@@ -103,111 +103,22 @@ class="trust-btn px-4 py-2 rounded-full text-xs font-bold border-2 border-outlin
 </div>
 </div>
 </div>
-<script>
-const hitlSteps = [
+<script type="module">
+import { init } from '/js/interactives/human-in-loop-workflow.js';
+init({
+hitlSteps: [
 { title: 'Input', desc: '📥 A customer support email arrives: "I was charged twice for my subscription last month. Please help!"' },
 { title: 'AI Processes', desc: '🧠 The LLM analyzes the email, checks the customer\'s account history, and drafts a response with a refund offer.' },
 { title: 'Human Reviews', desc: '👤 A support agent reviews the AI\'s draft. They verify the double charge in the billing system and check the refund amount.' },
 { title: 'Decision', desc: '✅ The agent approves the response with a small edit — adding a personalized apology and a 10% discount code.' },
 { title: 'Action', desc: '⚡ The final response is sent to the customer, the refund is processed, and the interaction is logged for quality tracking.' }
-];
-const trustLevels = [
-{
-title: '🔍 Review Everything',
-desc: '<strong>Starting phase.</strong> A human reviews every single AI output before it goes out. This is where you begin — it builds understanding of what the AI does well and where it struggles. Expect to review 100% of outputs. Best for: first weeks of deployment, high-stakes domains, or regulated industries.'
-},
-{
-title: '📊 Spot Check',
-desc: '<strong>Building confidence.</strong> The AI handles routine cases autonomously, but a human samples 10–20% of outputs for quality assurance. Flagged or unusual cases still get full review. Best for: after the AI has proven reliable on common patterns, typically after a few weeks of "Review Everything."'
-},
-{
-title: '🚀 Autonomous',
-desc: '<strong>Earned trust.</strong> The AI operates independently for well-understood task types. Humans only intervene on edge cases, escalations, or when the AI signals low confidence. Monitoring dashboards track quality metrics. Best for: mature deployments with strong guardrails, logging, and rollback capabilities.'
-}
-];
-let hitlCurrentStep = 0;
-let hitlIsPlaying = false;
-function startHitl() {
-if (hitlIsPlaying) return;
-hitlIsPlaying = true;
-const btn = document.getElementById('hitl-start-btn');
-btn.disabled = true;
-btn.classList.add('opacity-0');
-// Hide trust section on restart
-document.getElementById('hitl-trust-section').classList.add('hidden');
-// Reset all steps
-for (let i = 0; i < 5; i++) {
-const circle = document.querySelector('#hitl-step-' + i + ' .hitl-circle');
-circle.classList.remove('border-primary', 'scale-110');
-circle.style.background = '';
-circle.classList.add('border-outline-variant');
-}
-hitlCurrentStep = 0;
-runHitlStep();
-}
-function runHitlStep() {
-if (hitlCurrentStep >= hitlSteps.length) {
-hitlIsPlaying = false;
-const btn = document.getElementById('hitl-start-btn');
-btn.disabled = false;
-btn.classList.remove('opacity-0');
-btn.textContent = '▶ Replay';
-// Show gradual trust section
-const trustSection = document.getElementById('hitl-trust-section');
-trustSection.classList.remove('hidden');
-trustSection.classList.remove('animate-fade-in');
-void trustSection.offsetWidth;
-trustSection.classList.add('animate-fade-in');
-// Default select "Review Everything"
-selectTrust(0, document.getElementById('trust-btn-0'));
-return;
-}
-const step = hitlSteps[hitlCurrentStep];
-// Reset previous step highlight (keep it completed but not active)
-if (hitlCurrentStep > 0) {
-const prevCircle = document.querySelector('#hitl-step-' + (hitlCurrentStep - 1) + ' .hitl-circle');
-prevCircle.classList.remove('scale-110');
-prevCircle.style.background = 'var(--accent)';
-prevCircle.style.opacity = '0.15';
-prevCircle.classList.remove('border-primary');
-prevCircle.classList.add('border-outline-variant');
-}
-// Highlight current step
-const circle = document.querySelector('#hitl-step-' + hitlCurrentStep + ' .hitl-circle');
-circle.classList.remove('border-outline-variant');
-circle.classList.add('border-primary', 'scale-110');
-circle.style.background = '';
-circle.style.opacity = '';
-// Update status display
-const title = document.getElementById('hitl-status-title');
-const desc = document.getElementById('hitl-status-desc');
-title.classList.remove('animate-fade-in');
-desc.classList.remove('animate-fade-in');
-void title.offsetWidth;
-title.classList.add('animate-fade-in');
-desc.classList.add('animate-fade-in');
-title.textContent = step.title;
-desc.textContent = step.desc;
-hitlCurrentStep++;
-setTimeout(runHitlStep, 2200);
-}
-function selectTrust(index, btn) {
-const trust = trustLevels[index];
-// Reset all trust buttons
-document.querySelectorAll('.trust-btn').forEach(b => {
-b.classList.remove('border-primary', 'bg-primary/10');
-b.classList.add('border-outline-variant');
+],
+trustLevels: [
+{ title: '🔍 Review Everything', desc: '<strong>Starting phase.</strong> A human reviews every single AI output before it goes out. This is where you begin — it builds understanding of what the AI does well and where it struggles. Expect to review 100% of outputs. Best for: first weeks of deployment, high-stakes domains, or regulated industries.' },
+{ title: '📊 Spot Check', desc: '<strong>Building confidence.</strong> The AI handles routine cases autonomously, but a human samples 10–20% of outputs for quality assurance. Flagged or unusual cases still get full review. Best for: after the AI has proven reliable on common patterns, typically after a few weeks of "Review Everything."' },
+{ title: '🚀 Autonomous', desc: '<strong>Earned trust.</strong> The AI operates independently for well-understood task types. Humans only intervene on edge cases, escalations, or when the AI signals low confidence. Monitoring dashboards track quality metrics. Best for: mature deployments with strong guardrails, logging, and rollback capabilities.' }
+]
 });
-// Highlight selected
-btn.classList.remove('border-outline-variant');
-btn.classList.add('border-primary', 'bg-primary/10');
-// Update detail
-const detail = document.getElementById('trust-detail');
-detail.classList.remove('animate-fade-in');
-void detail.offsetWidth;
-detail.classList.add('animate-fade-in');
-detail.innerHTML = trust.desc;
-}
 </script>
 
 </div>

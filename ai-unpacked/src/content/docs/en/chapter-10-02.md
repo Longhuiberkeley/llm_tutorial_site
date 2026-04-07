@@ -39,99 +39,63 @@ class="flex-1 py-2.5 px-3 rounded-lg text-sm font-bold border-2 transition-all c
 <!-- Populated by JS -->
 </div>
 </div>
-<script>
-(function() {
-var tiers = [
-{
-label: '🚀 Flagship',
-tagline: 'Best quality. Highest cost.',
-cost: '💰💰💰',
-costLabel: 'Most expensive',
-color: 'var(--primary)',
-examples: [
-'Legal document analysis',
-'Complex multi-step reasoning',
-'Nuanced long-form writing',
-'Intricate code generation'
-],
-when: 'Quality is critical and you can\'t afford mistakes. Cost and speed are secondary.',
-models: 'Often labelled: Ultra, Max, Opus, Pro (top tier)'
-},
-{
-label: '⚖️ Mid-Tier',
-tagline: 'Excellent quality. Smart price.',
-cost: '💰💰',
-costLabel: 'Sweet spot',
-color: 'var(--accent)',
-examples: [
-'Summarizing reports and documents',
-'Drafting emails and content',
-'Customer support responses',
-'General Q&A and analysis'
-],
-when: 'The vast majority of business tasks. Start here. Upgrade to flagship only if quality falls short.',
-models: 'Often labelled: Pro, Standard, Sonnet, Balanced'
-},
-{
-label: '⚡ Fast',
-tagline: 'Fastest. Cheapest. Simpler tasks only.',
-cost: '💰',
-costLabel: 'Lowest cost',
-color: '#5B8DB8',
-examples: [
-'Classifying support tickets',
-'Tagging or routing items',
-'Simple yes/no decisions',
-'Very high-volume simple tasks'
-],
-when: 'The task is simple AND volume is high. Makes more mistakes on complex tasks — test carefully before using for anything important.',
-models: 'Often labelled: Lite, Mini, Flash, Haiku, Nano'
-}
-];
-function render(idx) {
-var t = tiers[idx];
-var panel = document.getElementById('tier-panel');
-panel.innerHTML =
-'<div class="flex items-start justify-between mb-3">' +
-'<div>' +
-'<div class="text-xl font-bold mb-0.5">' + t.label + '</div>' +
-'<div class="text-sm text-on-surface/70">' + t.tagline + '</div>' +
-'</div>' +
-'<div class="text-right shrink-0 ml-4">' +
-'<div class="text-xl">' + t.cost + '</div>' +
-'<div class="text-xs text-on-surface/50 mt-0.5">' + t.costLabel + '</div>' +
-'</div>' +
-'</div>' +
-'<div class="border-t border-outline-variant pt-3 mt-3">' +
-'<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-2">Typical use cases</div>' +
-'<ul class="text-sm space-y-1">' +
-t.examples.map(function(e) {
-return '<li class="flex items-start gap-2"><span class="mt-0.5 shrink-0" style="color:' + t.color + '">▸</span>' + e + '</li>';
-}).join('') +
-'</ul>' +
-'</div>' +
-'<div class="border-t border-outline-variant pt-3 mt-3">' +
-'<div class="text-xs font-bold uppercase tracking-widest text-on-surface/50 mb-1">Pick this when...</div>' +
-'<p class="text-sm">' + t.when + '</p>' +
-'</div>' +
-'<div class="mt-3 text-xs text-on-surface/40 italic">e.g. ' + t.models + '</div>';
-// Update tab styles
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('tier-btn-' + i);
-if (i === idx) {
-btn.style.borderColor = tiers[i].color;
-btn.style.color = tiers[i].color;
-btn.style.backgroundColor = 'color-mix(in srgb, ' + tiers[i].color + ' 10%, var(--surface-container-lowest))';
-} else {
-btn.style.borderColor = 'var(--outline-variant)';
-btn.style.color = 'var(--on-surface)';
-btn.style.backgroundColor = 'var(--surface-container-lowest)';
-}
-}
-}
-window.selectTier = function(idx) { render(idx); };
-render(1); // default to mid-tier
-})();
+<script type="module">
+import { init as initTiers } from '/js/interactives/model-tiers.js';
+initTiers({
+  tiers: [
+    {
+      label: '\uD83D\uDE80 Flagship',
+      tagline: 'Best quality. Highest cost.',
+      cost: '\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0',
+      costLabel: 'Most expensive',
+      color: 'var(--primary)',
+      examples: [
+        'Legal document analysis',
+        'Complex multi-step reasoning',
+        'Nuanced long-form writing',
+        'Intricate code generation'
+      ],
+      when: 'Quality is critical and you can\'t afford mistakes. Cost and speed are secondary.',
+      models: 'Often labelled: Ultra, Max, Opus, Pro (top tier)',
+      useCasesLabel: 'Typical use cases',
+      pickWhenLabel: 'Pick this when...'
+    },
+    {
+      label: '\u2696\uFE0F Mid-Tier',
+      tagline: 'Excellent quality. Smart price.',
+      cost: '\uD83D\uDCB0\uD83D\uDCB0',
+      costLabel: 'Sweet spot',
+      color: 'var(--accent)',
+      examples: [
+        'Summarizing reports and documents',
+        'Drafting emails and content',
+        'Customer support responses',
+        'General Q&A and analysis'
+      ],
+      when: 'The vast majority of business tasks. Start here. Upgrade to flagship only if quality falls short.',
+      models: 'Often labelled: Pro, Standard, Sonnet, Balanced',
+      useCasesLabel: 'Typical use cases',
+      pickWhenLabel: 'Pick this when...'
+    },
+    {
+      label: '\u26A1 Fast',
+      tagline: 'Fastest. Cheapest. Simpler tasks only.',
+      cost: '\uD83D\uDCB0',
+      costLabel: 'Lowest cost',
+      color: '#5B8DB8',
+      examples: [
+        'Classifying support tickets',
+        'Tagging or routing items',
+        'Simple yes/no decisions',
+        'Very high-volume simple tasks'
+      ],
+      when: 'The task is simple AND volume is high. Makes more mistakes on complex tasks \u2014 test carefully before using for anything important.',
+      models: 'Often labelled: Lite, Mini, Flash, Haiku, Nano',
+      useCasesLabel: 'Typical use cases',
+      pickWhenLabel: 'Pick this when...'
+    }
+  ]
+});
 </script>
 
 </div>

@@ -45,64 +45,16 @@ pageId: "02-04"
 </div>
 </div>
 </div>
-<script>
-const capacityData = [
-{
-title: "2,000 個詞元 (Tokens)",
-visual: "📄",
-desc: "<strong>短篇文章。</strong>大約 4 頁文本。剛好足夠處理幾封電郵或一份食譜。",
-color: "var(--primary)"
-},
-{
-title: "32,000 個詞元 (Tokens)",
-visual: "📑",
-desc: "<strong>產品說明書。</strong>大約 60 頁。足以容納一份技術指南或長篇法律文件。",
-color: "var(--primary)"
-},
-{
-title: "200,000 個詞元 (Tokens)",
-visual: "📚📚",
-desc: "<strong>約 2 本小說。</strong>極大的空間。你可以餵給它幾本完整的小說或一個大型程式碼庫。",
-color: "var(--accent)"
-},
-{
-title: "1,000,000+ 個詞元 (Tokens)",
-visual: "📚📚📚📚📚📚📚📚📚📚",
-desc: "<strong>約 10 本小說。</strong>驚人的空間 —— 相當於同時堆疊約 10 本小說。模型可以跨越整部《魔戒》(Lord of the Rings) 三部曲甚至更多內容來交叉比對概念。",
-color: "var(--on-surface-variant)"
-}
-];
-function updateCapacity(val) {
-// Update button styles
-document.querySelectorAll('.cap-btn').forEach((btn, idx) => {
-if (idx === val) {
-btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
-btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-} else {
-btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
-}
+<script type="module">
+import { init } from '/js/interactives/context-toggle.js';
+init({
+  capacityData: [
+    { title: "2,000 個詞元 (Tokens)", visual: "📄", desc: "<strong>短篇文章。</strong>大約 4 頁文本。剛好足夠處理幾封電郵或一份食譜。", color: "var(--primary)" },
+    { title: "32,000 個詞元 (Tokens)", visual: "📑", desc: "<strong>產品說明書。</strong>大約 60 頁。足以容納一份技術指南或長篇法律文件。", color: "var(--primary)" },
+    { title: "200,000 個詞元 (Tokens)", visual: "📚📚", desc: "<strong>約 2 本小說。</strong>極大的空間。你可以餵給它幾本完整的小說或一個大型程式碼庫。", color: "var(--accent)" },
+    { title: "1,000,000+ 個詞元 (Tokens)", visual: "📚📚📚📚📚📚📚📚📚📚", desc: "<strong>約 10 本小說。</strong>驚人的空間 —— 相當於同時堆疊約 10 本小說。模型可以跨越整部《魔戒》(Lord of the Rings) 三部曲甚至更多內容來交叉比對概念。", color: "var(--on-surface-variant)" }
+  ]
 });
-const data = capacityData[val];
-const visual = document.getElementById('capacity-visual');
-const title = document.getElementById('capacity-title');
-const desc = document.getElementById('capacity-desc');
-// Animate out
-visual.style.transform = 'scale(0.8)';
-visual.style.opacity = '0';
-setTimeout(() => {
-visual.innerHTML = data.visual;
-title.innerHTML = data.title;
-desc.innerHTML = data.desc;
-title.style.color = data.color;
-// Animate in
-visual.style.transform = 'scale(1.1)';
-visual.style.opacity = '1';
-setTimeout(() => {
-visual.style.transform = 'scale(1)';
-}, 150);
-}, 150);
-}
 </script>
 </div>
 

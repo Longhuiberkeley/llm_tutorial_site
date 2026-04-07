@@ -45,72 +45,38 @@ LLMs don't read English words. They read "tokens"—chunks of letters (usually 3
 <!-- Explanation callout -->
 <div id="tk-note" class="mt-4 p-4 rounded-xl border-l-4 text-sm" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 8%, transparent);"></div>
 </div>
-<script>
-(function() {
-// Token color palette (rotating)
-var palette = [
-{ bg: '#FFE082', text: '#5D4037' }, // amber
-{ bg: '#A5D6A7', text: '#1B5E20' }, // green
-{ bg: '#90CAF9', text: '#0D47A1' }, // blue
-{ bg: '#F48FB1', text: '#880E4F' }, // pink
-{ bg: '#CE93D8', text: '#4A148C' }, // purple
-{ bg: '#FFCC80', text: '#E65100' }, // orange
-{ bg: '#80DEEA', text: '#006064' }, // cyan
-{ bg: '#BCAAA4', text: '#3E2723' }, // brown
-];
-var sentences = [
-{
-original: '"wow, i am learning so much in this tutorial!"',
-tokens: ['wow', ',', ' i', ' am', ' learning', ' so', ' much', ' in', ' this', ' tutorial', '!', '"'],
-note: '12 tokens for a short sentence! Notice that spaces often attach to the <em>next</em> word, and punctuation marks are their own tokens. This is how the LLM sees every sentence — as a list of numbered chunks.'
-},
-{
-original: '"strawberry"',
-tokens: ['straw', 'berry'],
-note: '<strong>Wait — 2 tokens?</strong> "strawberry" splits into "straw" and "berry" — whole chunks, not letters. The LLM never sees s-t-r-a-w separately. "straw" is a single Lego block it can\'t look inside. This is exactly why it gets the \'r\' count wrong — the individual letters are invisible to it!'
-},
-{
-original: '"I need help writing an email to my CEO about Q3 revenue."',
-tokens: ['I', ' need', ' help', ' writing', ' an', ' email', ' to', ' my', ' CEO', ' about', ' Q', '3', ' revenue', '.'],
-note: '14 tokens. Notice that "Q3" split into "Q" and "3" — the LLM treats the number separately. Also, longer common words like "writing" and "revenue" become single tokens because they appear so often in training data.'
-}
-];
-function tkShow(idx) {
-// Update buttons
-for (var i = 0; i < 3; i++) {
-var btn = document.getElementById('tk-btn-' + i);
-if (i === idx) {
-btn.style.backgroundColor = 'var(--primary)';
-btn.style.color = 'var(--on-primary)';
-} else {
-btn.style.backgroundColor = '';
-btn.style.color = '';
-btn.classList.add('bg-surface-container-highest', 'text-on-surface');
-btn.classList.remove('bg-primary', 'text-on-primary');
-}
-}
-var s = sentences[idx];
-document.getElementById('tk-original').textContent = s.original;
-var chips = document.getElementById('tk-chips');
-chips.innerHTML = '';
-s.tokens.forEach(function(tok, i) {
-var color = palette[i % palette.length];
-var chip = document.createElement('span');
-chip.className = 'inline-block rounded-md px-2 py-1 text-sm font-bold border';
-chip.style.backgroundColor = color.bg;
-chip.style.color = color.text;
-chip.style.borderColor = color.text + '33';
-// Show spaces explicitly
-chip.textContent = tok.startsWith(' ') ? '␣' + tok.trim() : tok;
-if (tok === ' ') chip.textContent = '␣';
-chips.appendChild(chip);
+<script type="module">
+import { init } from '/js/interactives/tokenizer.js';
+init({
+  palette: [
+    { bg: '#FFE082', text: '#5D4037' },
+    { bg: '#A5D6A7', text: '#1B5E20' },
+    { bg: '#90CAF9', text: '#0D47A1' },
+    { bg: '#F48FB1', text: '#880E4F' },
+    { bg: '#CE93D8', text: '#4A148C' },
+    { bg: '#FFCC80', text: '#E65100' },
+    { bg: '#80DEEA', text: '#006064' },
+    { bg: '#BCAAA4', text: '#3E2723' }
+  ],
+  sentences: [
+    {
+      original: '"wow, i am learning so much in this tutorial!"',
+      tokens: ['wow', ',', ' i', ' am', ' learning', ' so', ' much', ' in', ' this', ' tutorial', '!', '"'],
+      note: '12 tokens for a short sentence! Notice that spaces often attach to the <em>next</em> word, and punctuation marks are their own tokens. This is how the LLM sees every sentence \u2014 as a list of numbered chunks.'
+    },
+    {
+      original: '"strawberry"',
+      tokens: ['straw', 'berry'],
+      note: '<strong>Wait \u2014 2 tokens?</strong> "strawberry" splits into "straw" and "berry" \u2014 whole chunks, not letters. The LLM never sees s-t-r-a-w separately. "straw" is a single Lego block it can\'t look inside. This is exactly why it gets the \u2018r\u2019 count wrong \u2014 the individual letters are invisible to it!'
+    },
+    {
+      original: '"I need help writing an email to my CEO about Q3 revenue."',
+      tokens: ['I', ' need', ' help', ' writing', ' an', ' email', ' to', ' my', ' CEO', ' about', ' Q', '3', ' revenue', '.'],
+      note: '14 tokens. Notice that "Q3" split into "Q" and "3" \u2014 the LLM treats the number separately. Also, longer common words like "writing" and "revenue" become single tokens because they appear so often in training data.'
+    }
+  ],
+  tokenLabel: function(n) { return 'token' + (n !== 1 ? 's' : ''); }
 });
-document.getElementById('tk-count').textContent = s.tokens.length + ' token' + (s.tokens.length !== 1 ? 's' : '');
-document.getElementById('tk-note').innerHTML = s.note;
-}
-window.tkShow = tkShow;
-tkShow(0);
-})();
 </script>
 
 </div>
