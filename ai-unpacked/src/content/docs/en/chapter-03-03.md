@@ -1,0 +1,187 @@
+---
+title: "3.3 The Full Sandwich — System Prompts & Custom Spaces"
+description: "Every bundle starts with hidden layers — and some of them you can't see or control."
+chapter: "Chapter 3"
+pageId: "03-03"
+---
+
+## 🎯 Core Goals
+- Show the same dual-view as 3.2, but now the bundle always starts with hidden layers.
+- Understand the three prompt layers (Provider / App / Session).
+- Demystify Custom GPTs, Claude Projects, and Gemini Gems as pre-packaged sandwiches.
+
+<div class="not-prose callout callout-tldr">
+
+Before you type your first message, the LLM has already received hidden instructions. Every bundle has invisible layers on top — and some of them you can't touch.
+
+</div>
+
+## 👁️ Visuals & Interactives
+
+
+<div class="not-prose">
+<style>
+@keyframes fsdvFlash {
+0%, 40% { background-color: #FFF9C4; border-color: #FBC02D; }
+100% { background-color: var(--surface-container-lowest); border-color: transparent; }
+}
+.fsdv-flash { animation: fsdvFlash 1.8s ease-out forwards; }
+</style>
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-4xl mx-auto shadow-sm">
+<div class="text-center mb-6">
+<h3 class="text-xl font-bold font-headline mb-1">The Full Sandwich — Hidden Layers</h3>
+<p class="text-sm italic" style="color: var(--on-surface-variant);">Before you type a word, the bundle already has invisible layers on top</p>
+</div>
+<!-- Peek button + Controls -->
+<div class="flex flex-wrap justify-center items-center gap-3 mb-6">
+<button id="fsdv-peek-btn" onclick="fsdvTogglePeek()" class="px-5 py-2 rounded-full font-bold text-sm transition-all border-2" style="border-color: var(--primary); color: var(--primary); background-color: var(--surface-container-lowest);">
+👁 Peek at Hidden Layers
+</button>
+<span id="fsdv-counter" class="text-sm font-medium px-3 py-1 rounded-full" style="background-color: var(--surface-container);">Turn 0 / 3</span>
+<button id="fsdv-btn" onclick="fsdvNext()" class="px-6 py-2 rounded-full font-bold text-sm shadow-md transition-all hover:opacity-90" style="background-color: var(--primary); color: var(--on-primary);">
+Send → Turn 1
+</button>
+</div>
+<!-- Panels -->
+<div class="flex flex-col md:flex-row gap-5">
+<!-- LEFT: TechCorp chat -->
+<div class="flex-1 flex flex-col min-w-0">
+<div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--primary);">👤 TechCorp Support Chat</div>
+<div class="rounded-xl overflow-hidden border" style="border-color: var(--outline-variant);">
+<!-- Chat header -->
+<div class="px-4 py-3 flex items-center gap-3" style="background-color: var(--primary); color: var(--on-primary);">
+<span class="text-xl">🏢</span>
+<div>
+<div class="font-bold text-sm">TechCorp Support</div>
+<div class="text-xs opacity-75">Powered by AI</div>
+</div>
+</div>
+<!-- Chat body -->
+<div id="fsdv-chat" class="p-4 space-y-3" style="background-color: var(--surface-container-lowest); min-height: 240px;">
+<p class="text-xs text-center italic pt-6 opacity-40">Press Send to start...</p>
+</div>
+</div>
+</div>
+<!-- RIGHT: Bundle view -->
+<div class="flex-1 flex flex-col min-w-0">
+<div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--accent);">📦 What's Actually Sent</div>
+<!-- Dashed bundle container -->
+<div id="fsdv-bundle" class="rounded-xl p-3 space-y-2 border-2 border-dashed" style="background-color: var(--surface-container); border-color: var(--outline-variant);">
+<!-- Layer 1: Provider Prompt (always locked) -->
+<div class="rounded-lg px-3 py-2 text-xs border-l-4" style="background-color: color-mix(in srgb, var(--primary) 8%, var(--surface-container-lowest)); border-left-color: var(--primary);">
+<div class="flex items-center justify-between">
+<span class="font-bold text-[10px] uppercase tracking-widest" style="color: var(--primary);">🔒 Layer 1 — Provider Prompt</span>
+<span class="text-[10px] italic opacity-60">Always hidden</span>
+</div>
+<div id="fsdv-layer1-hidden" class="mt-1 text-xs italic opacity-50">[Hidden — set by Anthropic / OpenAI / Google]</div>
+<div id="fsdv-layer1-text" class="hidden mt-1 text-xs" style="color: var(--on-surface-variant);">You are a helpful, harmless AI assistant. Never claim to be human when sincerely asked. Never produce harmful content. Follow all usage policies.</div>
+</div>
+<!-- Layer 2: App Pre-prompt (always locked) -->
+<div class="rounded-lg px-3 py-2 text-xs border-l-4" style="background-color: color-mix(in srgb, #FBC02D 10%, var(--surface-container-lowest)); border-left-color: #FBC02D;">
+<div class="flex items-center justify-between">
+<span class="font-bold text-[10px] uppercase tracking-widest" style="color: #F57F17;">🏢 Layer 2 — App Pre-prompt</span>
+<span class="text-[10px] italic opacity-60">Set by TechCorp</span>
+</div>
+<div id="fsdv-layer2-hidden" class="mt-1 text-xs italic opacity-50">[Hidden — set by TechCorp developers]</div>
+<div id="fsdv-layer2-text" class="hidden mt-1 text-xs" style="color: var(--on-surface-variant);">You are TechCorp's support assistant. Our products: TechPad Pro ($999) — our flagship tablet. TechBuds ($149) — wireless earbuds. Be helpful, concise, and always mention our warranty policy if asked about pricing.</div>
+</div>
+<!-- Conversation turns go here -->
+<div id="fsdv-turns"></div>
+<p id="fsdv-bundle-placeholder" class="text-xs text-center italic pb-2 opacity-40">↑ These two layers are always here, before your first message.</p>
+</div>
+<!-- LLM box + Output -->
+<div id="fsdv-llm-section" class="hidden mt-2 flex flex-col items-center gap-1">
+<div class="text-base font-bold" style="color: var(--on-surface-variant);">↓ entire bundle ↓</div>
+<div class="w-full rounded-xl px-4 py-3 text-center font-bold text-sm" style="background-color: var(--on-surface); color: var(--background);">
+🤖 LLM reads it all from scratch
+</div>
+<div class="text-base font-bold" style="color: var(--on-surface-variant);">↓</div>
+<div id="fsdv-output" class="w-full rounded-xl px-4 py-2 text-center text-sm font-medium border" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest));"></div>
+</div>
+</div>
+</div>
+</div>
+<script type="module">
+import { init } from '/js/interactives/full-sandwich.js';
+init({
+  turns: [
+    { user: 'What products do you sell?', llm: 'We offer two products: the TechPad Pro ($999) — our flagship tablet — and TechBuds ($149), our wireless earbuds. Can I help you with either?' },
+    { user: 'How much is the TechPad Pro?', llm: 'The TechPad Pro is $999. It also comes with our standard 1-year warranty. Would you like to know more?' },
+    { user: 'Why do you know all about TechCorp?', llm: "I was set up specifically as TechCorp's support assistant! I've been given detailed instructions about our products and policies before this conversation started." }
+  ],
+  totalTurns: 3,
+  strings: {
+    peekShow: '👁 Peek at Hidden Layers',
+    peekHide: '🙈 Hide Layers',
+    turnLabel: function(n) { return 'Turn ' + n; },
+    userLabel: 'User',
+    outputLabel: '⬅️ Response generated → see chat',
+    counterLabel: function(c, t) { return 'Turn ' + c + ' / ' + t; },
+    allDoneLabel: function(t) { return 'All ' + t + ' turns done ✓'; },
+    sendLabel: function(n) { return 'Send → Turn ' + n; }
+  }
+});
+</script>
+
+</div>
+
+
+## 📝 Key Concepts
+
+Three layers in every bundle:
+
+- **Layer 1 — Provider Prompt (You can't see or change this):** Set by the AI company (Anthropic, OpenAI, Google). Contains safety rules always active: "Don't produce harmful content," "Never pretend to be human when sincerely asked."
+- **Layer 2 — App / Custom Pre-prompt (Set by the app builder):** Defines the product's personality, tone, and knowledge. "You are TechCorp support." Makes a chatbot feel specialized.
+- **Layer 3 — Your Session Context (Yours to set):** Repeated preferences you inject per session: "Always respond in bullet points," "I'm working in Python 3.12."
+
+<div class="not-prose callout callout-tip">
+
+**The Hidden Cost of Context:** Now that you know sending a message often means sending a "bundled" message, here's the catch: since LLMs don't "remember" previous turns, you re-send the entire history (the bundle) with every new reply. This means the 10th message in a chat costs significantly more to process than the 1st one!
+
+</div>
+
+## 📦 Custom Spaces — Pre-packaged Sandwiches
+
+Features like Custom GPTs, Claude Projects, and Gemini Gems bundle three things:
+1. **System Prompt:** Specialized instructions (personality).
+2. **Knowledge Docs:** Reference files (company policies, product specs).
+3. **Tools:** Specific capabilities (web search, code interpreter).
+
+**Why use them?** Set the instructions once, then just use the chat. No need to re-explain context every session.
+
+**Business use:** Companies build internal Projects pre-loaded with brand voice, legal policies, and private data — so every employee starts with the right context.
+
+
+
+<div class="not-prose callout callout-dyk">
+
+Why does Claude feel different from ChatGPT? Their Provider Prompts (Layer 1) and default pre-prompts are completely different. Same concept, different instructions.
+
+</div>
+
+<div class="not-prose my-12">
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-03-03" class="quiz-container bg-surface-container border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">What allows a Custom GPT or Claude Project to feel specialized without you explaining anything?</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            It downloads the latest info from the internet each session
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            It comes pre-loaded with system prompts, knowledge docs, and tools
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            It uses a separate, more powerful AI model underneath
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+</div>

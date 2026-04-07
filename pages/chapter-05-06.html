@@ -299,32 +299,44 @@
 
 <hr>
 <h2>🧠 8 Things to Remember</h2>
-<p><strong>LLMs predict, they don&#39;t think</strong>
-Treat every response as a first draft, not a final answer. Good at generating options, bad at knowing what&#39;s true.</p>
-<p><strong>They&#39;re great at finding similar words and concepts</strong>
-Want alternatives, related ideas, or rephrasing? This is where LLMs shine — they excel at &quot;things like X.&quot;</p>
-<p><strong>Context matters more than you&#39;d expect</strong>
-The LLM picks up on everything in your conversation. Ambiguous requests get ambiguous answers; specific requests get specific answers. You don&#39;t need to spell everything out — but the more context you give, the better the output.</p>
-<p><strong>They can&#39;t reliably count, spell, or do math</strong>
-LLMs see text in chunks (tokens), not individual letters. Don&#39;t ask them to count r&#39;s in &quot;strawberry&quot; or do precise arithmetic. Use a calculator or spreadsheet for that.</p>
-<p><strong>They can track relationships across long text</strong>
-LLMs are good at connecting ideas across a document — finding themes, resolving pronouns, summarizing. Give them long text and ask them to find patterns.</p>
-<p><strong>They have no memory between conversations</strong>
-Every new chat starts from zero. Repeat important context, and don&#39;t expect the LLM to &quot;remember&quot; what you discussed last week in a different thread.</p>
-<p><strong>Hidden instructions shape behavior</strong>
-Custom GPTs, Claude Projects, and app integrations work by pre-loading instructions. The LLM&#39;s personality and expertise come from context, not from &quot;knowing&quot; things.</p>
-<p><strong>Hallucination cuts both ways</strong>
-The same mechanism that lets an LLM write a creative story also lets it invent a fake legal case. For creative work, that&#39;s a feature. For factual claims, that&#39;s a danger. Always verify facts that matter.</p>
+<ul>
+<li><p><strong>LLMs predict, they don&#39;t think:</strong> Treat every response as a first draft, not a final answer. Good at generating options, bad at knowing what&#39;s true.</p>
+</li>
+<li><p><strong>They&#39;re great at finding similar words and concepts:</strong> Want alternatives, related ideas, or rephrasing? This is where LLMs shine — they excel at &quot;things like X.&quot;</p>
+</li>
+<li><p><strong>Context matters more than you&#39;d expect:</strong> The LLM picks up on everything in your conversation. Ambiguous requests get ambiguous answers; specific requests get specific answers. You don&#39;t need to spell everything out — but the more context you give, the better the output.</p>
+</li>
+<li><p><strong>They can&#39;t reliably count, spell, or do math:</strong> LLMs see text in chunks (tokens), not individual letters. Don&#39;t ask them to count r&#39;s in &quot;strawberry&quot; or do precise arithmetic. Use a calculator or spreadsheet for that.</p>
+</li>
+<li><p><strong>They can track relationships across long text:</strong> LLMs are good at connecting ideas across a document — finding themes, resolving pronouns, summarizing. Give them long text and ask them to find patterns.</p>
+</li>
+<li><p><strong>They have no memory between conversations:</strong> Every new chat starts from zero. Repeat important context, and don&#39;t expect the LLM to &quot;remember&quot; what you discussed last week in a different thread.</p>
+</li>
+<li><p><strong>Hidden instructions shape behavior:</strong> Custom GPTs, Claude Projects, and app integrations work by pre-loading instructions. The LLM&#39;s personality and expertise come from context, not from &quot;knowing&quot; things.</p>
+</li>
+<li><p><strong>Hallucination cuts both ways:</strong> The same mechanism that lets an LLM write a creative story also lets it invent a fake legal case. For creative work, that&#39;s a feature. For factual claims, that&#39;s a danger. Always verify facts that matter.</p>
+</li>
+</ul>
 <hr>
 <h2>🚨 8 Red Flags</h2>
-<p><strong>&quot;The LLM understands what I&#39;m asking.&quot;</strong> — It produces convincing-sounding responses, but it has no actual comprehension. The chat interface creates an illusion of understanding.</p>
-<p><strong>&quot;Just ask it to count the letters.&quot;</strong> — It sees chunks, not letters. Never rely on an LLM for precise counting, arithmetic, or character-level tasks.</p>
-<p><strong>&quot;I told it to forget the wrong thing.&quot;</strong> — Once false information enters the conversation, it&#39;s re-read every turn. Start a fresh conversation instead of trying to correct it in-place.</p>
-<p><strong>&quot;More context = better results.&quot;</strong> — Long conversations degrade in quality (context rot). Start fresh for important work, especially after many back-and-forth turns.</p>
-<p><strong>&quot;This chat thread is my permanent workspace.&quot;</strong> — Long threads accumulate errors through context poisoning and truncation. Use separate threads for separate tasks.</p>
-<p><strong>&quot;LLMs are too unreliable to use seriously.&quot;</strong> — With proper safeguards (verification, human review, not trusting blindly), LLMs power real production systems daily. The risk is using them <em>without</em> safeguards.</p>
-<p><strong>&quot;Enterprise plans keep my data perfectly safe.&quot;</strong> — Data still travels over the internet and is processed on external infrastructure. Treat LLMs like a trusted but external contractor.</p>
-<p><strong>&quot;I&#39;ll just use one long conversation for everything.&quot;</strong> — Context fills up, old messages get truncated or summarized, and quality drops. Shorter, focused conversations produce better results.</p>
+<ul>
+<li><p><strong>&quot;The LLM understands what I&#39;m asking.&quot;</strong> — It produces convincing-sounding responses, but it has no actual comprehension. The chat interface creates an illusion of understanding.</p>
+</li>
+<li><p><strong>&quot;Just ask it to count the letters.&quot;</strong> — It sees chunks, not letters. Never rely on an LLM for precise counting, arithmetic, or character-level tasks.</p>
+</li>
+<li><p><strong>&quot;I told it to forget the wrong thing.&quot;</strong> — Once false information enters the conversation, it&#39;s re-read every turn. Start a fresh conversation instead of trying to correct it in-place.</p>
+</li>
+<li><p><strong>&quot;More context = better results.&quot;</strong> — Long conversations degrade in quality (context rot). Start fresh for important work, especially after many back-and-forth turns.</p>
+</li>
+<li><p><strong>&quot;This chat thread is my permanent workspace.&quot;</strong> — Long threads accumulate errors through context poisoning and truncation. Use separate threads for separate tasks.</p>
+</li>
+<li><p><strong>&quot;LLMs are too unreliable to use seriously.&quot;</strong> — With proper safeguards (verification, human review, not trusting blindly), LLMs power real production systems daily. The risk is using them <em>without</em> safeguards.</p>
+</li>
+<li><p><strong>&quot;Enterprise plans keep my data perfectly safe.&quot;</strong> — Data still travels over the internet and is processed on external infrastructure. Treat LLMs like a trusted but external contractor.</p>
+</li>
+<li><p><strong>&quot;I&#39;ll just use one long conversation for everything.&quot;</strong> — Context fills up, old messages get truncated or summarized, and quality drops. Shorter, focused conversations produce better results.</p>
+</li>
+</ul>
 <hr>
 <h2>💡 Pro Tip</h2>
 <div class="callout callout-tldr">

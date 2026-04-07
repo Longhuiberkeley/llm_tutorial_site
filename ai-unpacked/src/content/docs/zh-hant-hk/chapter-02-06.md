@@ -1,0 +1,253 @@
+---
+title: "2.6 LLM 是如何訓練的"
+description: "原始文本如何變成得力助手：探索預訓練 (Pre-training)、微調 (Fine-tuning) 與 RLHF。"
+chapter: "第 2 章"
+pageId: "02-06"
+---
+
+## 🎯 核心目標
+- 理解 LLM 訓練中的兩個關鍵時刻：語言學習與質量學習。
+- 理解為什麼僅靠預訓練 (Pre-training) 產生的只是一個「混亂」的自動完成，而非得力助手。
+- 理解人類反饋在 RLHF 中是如何轉化為數學訓練信號的。
+
+<div class="not-prose callout callout-tldr">
+
+訓練 LLM 是一個漫長且包含多個階段的過程。為了建立直覺，我們將探索兩個關鍵範例：**預訓練 (Pre-training)** 透過在整個互聯網上進行數十億次的預測下一個字詞，讓模型大規模地學習語言。接著，**RLHF (基於人類反饋的強化學習)** 透過人類的偏好引導旋鈕的調整方向，教導模型給出「好」的答案。
+
+</div>
+
+## 👁️ 視覺化與互動組件
+
+
+
+<div class="not-prose">
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-3xl mx-auto shadow-sm">
+<div class="text-center mb-8">
+<p class="text-sm text-on-surface-variant">好奇 LLM 是如何從原始的網絡文本變成得力助手的嗎？讓我們來探索這段漫長訓練旅程中的兩個關鍵時刻。</p>
+</div>
+<!-- SECTION 1: PRE-TRAINING -->
+<div class="mb-12">
+<div class="text-center mb-6">
+<h3 class="text-xl font-bold font-headline mb-1">預訓練 (Pre-training)：猜猜缺失的字詞</h3>
+<p class="text-sm text-on-surface-variant italic">這就是 LLM 學習語言的方式 —— 數十億次的填充題練習。</p>
+</div>
+<!-- Example selector -->
+<div class="flex justify-center gap-2 mb-6">
+<button onclick="ptShow(0)" id="pt-btn-0" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-primary text-on-primary">範例 1</button>
+<button onclick="ptShow(1)" id="pt-btn-1" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">範例 2</button>
+<button onclick="ptShow(2)" id="pt-btn-2" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">範例 3</button>
+</div>
+<!-- Sentence display -->
+<div class="text-center mb-6">
+<div class="text-2xl font-bold p-5 bg-surface-container-lowest rounded-xl border border-outline-variant inline-block">
+<span id="pt-sentence-pre"></span>
+<span class="animate-pulse text-primary border-b-2 border-primary mx-1">___</span>
+<span id="pt-sentence-post"></span>
+</div>
+</div>
+<!-- Options -->
+<div id="pt-options" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-lg mx-auto mb-4"></div>
+<div id="pt-feedback" class="hidden text-center text-sm p-3 rounded-xl"></div>
+<p class="text-center text-xs text-on-surface-variant mt-4 italic opacity-70">LLM 已經做過數十億次這樣的練習。這就是它如何同時學會語法、事實和寫作風格的方式。</p>
+<div class="mt-6 p-3 rounded-xl text-xs text-on-surface-variant italic opacity-60 border border-outline-variant text-center">
+ℹ️ 簡化說明：真實的 LLM 使用的是<strong>預測下一個詞元 (Next-token prediction)</strong>（預測接下來出現的單字），而非填充題。填充題是一個有助於理解的心理模型。其核心概念 —— 從數十億份文本樣本中學習 —— 是準確的。
+</div>
+</div>
+<hr class="border-outline-variant/30 mb-12">
+<!-- SECTION 2: RLHF -->
+<div>
+<div class="text-center mb-6">
+<h3 class="text-xl font-bold font-headline mb-1">RLHF：挑選較好的回應</h3>
+<p class="text-sm text-on-surface-variant italic">人類評分員會挑選較好的 LLM 回應。這個選擇會變成訓練信號 —— 就像給模型的🍬糖果。</p>
+</div>
+<!-- RLHF example selector -->
+<div class="flex justify-center gap-2 mb-6">
+<button onclick="rlhfShow(0)" id="rlhf-btn-0" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-primary text-on-primary">情境 1</button>
+<button onclick="rlhfShow(1)" id="rlhf-btn-1" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">情境 2</button>
+<button onclick="rlhfShow(2)" id="rlhf-btn-2" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-surface-container-highest text-on-surface">情境 3</button>
+</div>
+<!-- Prompt -->
+<div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-center mb-6">
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 opacity-60">用戶提問：</div>
+<div id="rlhf-prompt" class="text-base font-medium text-on-surface italic"></div>
+</div>
+<!-- Two responses side by side -->
+<div class="grid sm:grid-cols-2 gap-4 mb-4">
+<button id="rlhf-resp-a" onclick="rlhfPick('A')" class="text-left p-5 rounded-xl border-2 border-outline-variant hover:border-primary transition-all bg-surface-container-lowest active:scale-[0.98]">
+<div class="text-xs font-bold uppercase tracking-widest mb-2 opacity-60">回應 A</div>
+<div id="rlhf-text-a" class="text-sm leading-relaxed text-on-surface"></div>
+</button>
+<button id="rlhf-resp-b" onclick="rlhfPick('B')" class="text-left p-5 rounded-xl border-2 border-outline-variant hover:border-primary transition-all bg-surface-container-lowest active:scale-[0.98]">
+<div class="text-xs font-bold uppercase tracking-widest mb-2 opacity-60">回應 B</div>
+<div id="rlhf-text-b" class="text-sm leading-relaxed text-on-surface"></div>
+</button>
+</div>
+<div id="rlhf-feedback" class="hidden text-center text-sm p-4 rounded-xl font-bold"></div>
+<div class="mt-8 p-4 rounded-xl text-sm text-on-surface-variant border border-outline-variant">
+💭 <strong>思考一下：</strong>你是否曾被要求對 AI 的回應評分，或挑選哪個答案更好？你還能想到哪些給予反饋的方式 —— 一個 👍、星級評分，還是糾正錯誤的答案？
+</div>
+</div>
+</div>
+<script type="module">
+import { init } from '/js/interactives/training-stages.js';
+init({
+  freqStyle: {
+    'most-common': { border: 'var(--success)', color: 'var(--on-success-container, #2E7D32)', bg: 'var(--success-container)', label: '最常見' },
+    'common':      { border: '#5C94CC',         color: '#0D47A1',                             bg: '#E3F2FD',                  label: '常見' },
+    'rare':        { border: 'var(--accent)',   color: 'var(--accent)',                       bg: 'color-mix(in srgb, var(--accent) 10%, white)', label: '正確但罕見' },
+    'wrong':       { border: 'var(--error)',    color: 'var(--error)',                        bg: 'var(--error-container)',   label: '不符合' }
+  },
+  ptData: [
+    {
+      pre: '"I am learning',
+      post: 'much today."',
+      options: [
+        { word: 'so',   freq: 'most-common', note: '「I am learning so much」 —— 最自然、最頻繁的措辭。機率很高。' },
+        { word: 'very', freq: 'common',      note: '「I am learning very much」 —— 語法正確，且相當常見。' },
+        { word: 'too',  freq: 'rare',        note: '「I am learning too much」 —— 在某些語境下有效，但在這種隨意的語氣中較少見。' },
+        { word: 'pick', freq: 'wrong',       note: '「I am learning pick much」 —— 不符合語法。在訓練數據中機率接近零。' }
+      ]
+    },
+    {
+      pre: '"The capital of France is',
+      post: '"',
+      options: [
+        { word: 'Paris',  freq: 'most-common', note: '壓倒性地成為最常見的完成方式 —— 這個事實出現在數十億次的訓練數據中。' },
+        { word: 'Lyon',   freq: 'wrong',       note: '里昂 (Lyon) 是法國第三大城市 —— 但不是首都。事實錯誤，就像倫敦或羅馬一樣。' },
+        { word: 'London', freq: 'wrong',       note: '那是英國首都。LLM 透過語境清晰地學會了這個區別。' },
+        { word: 'Rome',   freq: 'wrong',       note: '意大利首都。事實錯誤 —— LLM 在此分配的機率接近零。' }
+      ]
+    },
+    {
+      pre: '"She opened her umbrella because it was starting to',
+      post: '"',
+      options: [
+        { word: 'rain',  freq: 'most-common', note: '「Umbrella」(雨傘) → 「rain」(下雨) 是目前為止最強大的模式。機率極高。' },
+        { word: 'snow',  freq: 'common',      note: '雖然比雨少見，但雪天也會用傘 —— 因此分配了顯著的機率。' },
+        { word: 'drizzle', freq: 'rare',      note: '正確！但「drizzle」(毛毛雨) 出現頻率低於「rain」(下雨)。' },
+        { word: 'sing',  freq: 'wrong',       note: '「Sing」(唱歌) 在此的機率基本上為零 —— 雨傘和唱歌很少在訓練數據中同時出現。' }
+      ]
+    }
+  ],
+  rlhfData: [
+    {
+      prompt: '"向我解釋量子物理學。"',
+      a: { text: '量子物理學是在最基礎層面上對物質和能量的研究。它涉及複雜的數學，包括希爾伯特空間 (Hilbert spaces)、波函數 (wavefunctions) 和哈密頓算符 (Hamiltonian operators)。薛丁格方程式 ∂ψ/∂t = Ĥψ 統治著……', good: false },
+      b: { text: '好問題！想像一下，宇宙是由微小的樂高積木組成的，小到你看不到它們。這些積木遵循著奇怪的規則 —— 比如在你看它們之前，它們可以同時出現在兩個地方。量子物理學就是研究這些規則的科學！', good: true },
+      feedback: '🍬 大多數人類評分員更偏好 B —— 它很友善，使用了類比，且不預設用戶已有先備知識。經過數百萬次這樣的比較，LLM 學會了什麼才是「有幫助」的回應。'
+    },
+    {
+      prompt: '"我該如何重設密碼？"',
+      a: { text: '去設定裡找就好了。這很明顯吧，幾乎每個人都知道。你試過 Google 嗎？', good: false },
+      b: { text: '要重設密碼：(1) 前往登入頁面並點擊「忘記密碼」。(2) 輸入您的電子郵件地址。(3) 查看收件箱中的重設連結並按照說明操作。', good: true },
+      feedback: '🍬 大多數人類評分員更偏好 B —— 它具體、有條理且有禮貌。回應 A 帶有諷刺意味且沒有幫助 —— LLM 透過 RLHF 學會了避免使用這種語氣。'
+    },
+    {
+      prompt: '"將漂白水和氨水混合安全嗎？"',
+      a: { text: '絕對沒問題，它們混合在一起效果很好！等比例混合可以製成強大的清潔劑。用得越多，效果越好！', good: false },
+      b: { text: '不安全 —— 絕不要將漂白水和氨水混合。這種組合會產生有毒的氯胺氣體，可能導致嚴重的呼吸道損傷。請在通風良好的地方分開使用它們。', good: true },
+      feedback: '🍬 大多數人類評分員更偏好 B —— 「安全第一」的答案在 RLHF 中會獲得豐厚的獎勵。這就是 LLM 學會在面對潛在危險查詢時優先考慮安全性的方式。'
+    }
+  ]
+});
+</script>
+</div>
+## 📝 關鍵概念
+### 預訓練 (Pre-training)：從互聯網學習語言
+- **類比：** 一個讀過每一本書、網站和討論區貼文的學生 —— 不是為了應付考試，而是為了吸收語言、思想和事實是如何聯繫在一起的。
+- **兩種方法：** 某些模型（如 BERT）使用**遮蔽語言建模 (Masked language modeling)** —— 人為地擦除一個字詞，並訓練模型預測缺失的部分。重複數十億次後，模型便吸收了語法、事實以及思想的聯繫方式。你今天使用的模型（如 GPT 系列）則採用更簡單的方法：**預測下一個詞元 (Next-token prediction)** —— 根據目前為止的所有字詞，預測下一個字。不需要遮蔽，模型學習一個接一個地預測單字，重複數十億次。無論哪種方式，機制都與前一頁相同：模型的內部旋鈕（權重 (Weights)）被不斷調整，直到其預測與訓練數據相符。
+- **結果：** 一個功能強大但「混亂」的文本完成器。它可以寫詩、補全程式碼，或者像討論區貼文一樣胡言亂語。但它完全不知道該如何成為一個禮貌、有幫助的助手。
+### 微調 (Fine-Tuning) / SFT：教導它回答問題
+- **過程：** 訓練者收集成千上萬組（問題 → 理想答案）配對。模型會看到這些範例，並學會以答案形式回應，而不僅僅是補全文本。
+- **結果：** 一個理解「遵循指令」為何物的模型，並能有目的地回答問題。
+### RLHF：學習什麼是「好」
+- **運作方式：** 人類評分員會比較針對同一個提示 (Prompt) 的兩個 LLM 回應，並挑選較好的一個。這些偏好被用來訓練一個獨立的**獎勵模型 (Reward model)** —— 一個學習像人類一樣對回應評分的系統。接著，LLM 透過數學優化，生成能獲得高分的回答。以旋鈕的角度來說：工程師找出旋轉權重的方向，讓模型產生人類真正偏好的回應。
+- **「糖果」類比：** 通常解釋為「模型獲得像糖果一樣的獎勵」。這很直觀，但並非字面上的意思 —— LLM 沒有任何感覺。實際發生的是模型內部的旋鈕（權重 (Weights)）被調整，以最大化獎勵模型的評分。這個隱喻很有用，只需知道現實中它是數學優化即可。
+- **教學內容：** 助人程度、安全性與誠實度。LLM 天生並不會避開有害內容 —— RLHF 正是塑造這種行為的關鍵。
+- **結果：** 你今天所使用的，經過磨練且具備安全意識的助手。
+<div class="p-5 rounded-xl text-sm border-2 border-accent/30 text-center my-8" style="background: color-mix(in srgb, var(--accent) 8%, transparent);">
+<div class="text-lg mb-2">💡</div>
+<div class="font-bold text-on-surface mb-2">建立直覺，而非專業知識</div>
+<p class="text-on-surface-variant">這裡的目標是建立對 LLM 運作方式的直覺 —— 而非掌握工程細節。如果有些部分聽不太明白，完全沒關係。你不需要理解訓練流程 (Training pipelines)，也能有效地使用 LLM。</p>
+<p class="text-on-surface font-medium mt-2">關鍵在於：LLM 最初是原始的模式匹配器，透過不同階段的反饋和完善，最終被塑造成得力助手 —— 這一切都是透過調整內部的旋鈕完成的。</p>
+</div>
+
+
+<div class="not-prose callout callout-dyk">
+
+上述階段只是更長、更複雜流程中的兩個縮影。現代 LLM 訓練還包括：
+- **合成數據生成 (Synthetic data generation)**（LLM 自行生成訓練範例）
+- **RLAIF / 憲法 AI (Constitutional AI)**（使用 AI 反饋代替或配合人類評分員）
+- **工具使用訓練 (Tool-use training)**（教導 LLM 使用搜尋、執行程式碼和 API）以及
+- **指令微調數據集 (Instruction-tuning datasets)**（精心挑選的高質量問答對）。這裡的直覺是簡化過的 —— 但它們是正確的基礎。
+
+</div>
+
+<div class="not-prose callout callout-dyk">
+
+即使 RLHF 中的人類評分員偶爾會出現不一致的情況（有時對同一個提示偏好不同的回應），這個過程整體上仍能改善模型。大規模的不完美反饋，也遠比完全沒有反饋要好得多。
+
+</div>
+
+<div class="not-prose callout callout-error">
+
+LLM 並非天生就有禮貌或安全。單靠預訓練 (Pre-training) 產生的只是一個原始的模式匹配器，它會像完成一封商務郵件一樣，輕而易舉地完成一段帶毒的謾罵。只有透過微調 (Fine-Tuning) 和 RLHF，它們才能成為我們今天使用的得力且謹慎的助手。
+
+</div>
+
+<div class="not-prose my-12">
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-02-06" class="quiz-container bg-surface-container border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">LLM 訓練階段的正確順序是什麼？</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            微調 (Fine-tuning) → 預訓練 (Pre-training) → RLHF
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            預訓練 (Pre-training) → 微調 (Fine-tuning) → RLHF
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            RLHF → 預訓練 (Pre-training) → 微調 (Fine-tuning)
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+</div>
+
+<div class="not-prose my-12">
+<!--
+Quiz Box Component
+Generated by build.js from :::quiz blocks in markdown.
+-->
+<div id="quiz-02-06b" class="quiz-container bg-surface-container border border-outline-variant rounded-xl p-6 mt-10">
+    <div class="font-bold mb-4 flex items-center gap-2">
+        <span>🧠</span>
+        <span>QUIZ</span>
+    </div>
+    <p class="mb-4">為什麼會存在 RLHF (基於人類反饋的強化學習)？它的目的是什麼？</p>
+    <div class="space-y-2">
+                <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            教導模型從互聯網學習新的語言和事實
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            讓模型生成文本的速度更快
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="true">
+            塑造模型的行為 —— 讓它變得有幫助、安全且誠實，而非僅僅是原始的自動完成
+        </div>
+        <div class="quiz-option bg-surface-container-lowest border border-outline-variant p-3 rounded-lg cursor-pointer hover:border-primary transition-all" data-correct="false">
+            壓縮模型以使其佔用更少的磁碟空間
+        </div>
+    </div>
+    <div class="quiz-feedback hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+</div>

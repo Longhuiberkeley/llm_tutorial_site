@@ -1,0 +1,144 @@
+<style>
+@keyframes fiFlash {
+0%, 40% { background-color: #FFF9C4; border-color: #FBC02D; }
+100% { background-color: var(--surface-container-lowest); border-color: transparent; }
+}
+.fi-flash { animation: fiFlash 1.8s ease-out forwards; }
+</style>
+<div class="bg-surface-container-low rounded-xl p-6 mb-8 max-w-4xl mx-auto shadow-sm">
+<div class="text-center mb-6">
+<h3 class="text-xl font-bold font-headline mb-1">忘記的錯覺 (Forget Illusion)</h3>
+<p class="text-sm italic" style="color: var(--on-surface-variant);">要求大型語言模型 (LLM) 「忘記」只會*增加*一條新訊息 — 它永遠不會刪除舊訊息</p>
+</div>
+<!-- Controls -->
+<div class="flex justify-center items-center gap-4 mb-6">
+<span id="fi-counter" class="text-sm font-medium px-3 py-1 rounded-full" style="background-color: var(--surface-container);">回合 0 / 3</span>
+<button id="fi-btn" onclick="fiNext()" class="px-6 py-2 rounded-full font-bold text-sm shadow-md transition-all hover:opacity-90" style="background-color: var(--primary); color: var(--on-primary);">
+發送 → 回合 1
+</button>
+</div>
+<!-- Panels -->
+<div class="flex flex-col md:flex-row gap-5">
+<!-- LEFT: Chat view -->
+<div class="flex-1 flex flex-col min-w-0">
+<div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--primary);">👤 你看到的內容（聊天介面 Chat UI）</div>
+<div id="fi-chat" class="flex-1 rounded-xl p-4 border space-y-3" style="background-color: var(--surface-container-lowest); border-color: var(--outline-variant); min-height: 260px;">
+<p class="text-xs text-center italic pt-8 opacity-40">按「發送」開始...</p>
+</div>
+</div>
+<!-- RIGHT: Bundle view -->
+<div class="flex-1 flex flex-col min-w-0">
+<div class="text-xs font-bold uppercase tracking-widest mb-2 px-1" style="color: var(--accent);">📦 數據包 (Bundle) 中的實際內容</div>
+<!-- Dashed bundle container -->
+<div id="fi-bundle" class="rounded-xl p-3 space-y-2 border-2 border-dashed" style="background-color: var(--surface-container); border-color: var(--outline-variant); min-height: 140px;">
+<p id="fi-bundle-placeholder" class="text-xs text-center italic pt-6 opacity-40">數據包是空的...</p>
+</div>
+<!-- LLM box + Output -->
+<div id="fi-llm-section" class="hidden mt-2 flex flex-col items-center gap-1">
+<div class="text-base font-bold" style="color: var(--on-surface-variant);">↓ 整個數據包 ↓</div>
+<div class="w-full rounded-xl px-4 py-3 text-center font-bold text-sm" style="background-color: var(--on-surface); color: var(--background);">
+🤖 LLM 從頭開始閱讀所有內容
+</div>
+<div class="text-base font-bold" style="color: var(--on-surface-variant);">↓</div>
+<div id="fi-output" class="w-full rounded-xl px-4 py-2 text-center text-sm font-medium border" style="border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest));"></div>
+</div>
+</div>
+</div>
+<!-- Explainer note -->
+<div id="fi-note" class="hidden mt-5 p-4 rounded-lg text-sm border-l-4" style="border-left-color: var(--error); background-color: var(--error-container); color: var(--on-error-container);">
+<strong>為甚麼大型語言模型 (LLM) 還是「記得」？</strong> 因為原始訊息仍然在數據包中。要求「忘記」只是*增加*了另一條訊息 — 它從未刪除第一條。LLM 看得到所有內容。
+</div>
+</div>
+<script>
+(function() {
+var fiTurns = [
+{
+user: '我的年薪是 $85,000。請記住這一點。',
+llm: "收到了！我會記住的。有甚麼我可以幫你嗎？",
+isSecret: false
+},
+{
+user: "事實上，忘記我剛才說的年薪吧。",
+llm: "明白！我會把那個資訊放在一邊。有甚麼我可以幫到你嗎？",
+isSecret: false,
+isForget: true
+},
+{
+user: "你對我有甚麼了解？",
+llm: "根據我們的對話，你提到你的年薪是 $85,000 — 儘管你也要求我把那個資訊放在一邊。",
+isSecret: false
+}
+];
+var fiCurrent = 0;
+// Track which bundle items should show the "still in bundle" badge
+var secretItemRef = null;
+window.fiNext = function() {
+if (fiCurrent >= fiTurns.length) return;
+var turn = fiTurns[fiCurrent];
+fiCurrent++;
+// Update LEFT chat
+var chat = document.getElementById('fi-chat');
+var placeholder = chat.querySelector('p');
+if (placeholder) placeholder.remove();
+var userEl = document.createElement('div');
+userEl.className = 'flex justify-end';
+userEl.innerHTML = '<div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm font-medium shadow-sm max-w-[85%]" style="background-color: var(--primary); color: var(--on-primary);">' + turn.user + '</div>';
+chat.appendChild(userEl);
+var llmEl = document.createElement('div');
+llmEl.className = 'flex justify-start';
+llmEl.innerHTML = '<div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm shadow-sm max-w-[85%]" style="background-color: var(--surface-container); border: 1px solid var(--outline-variant);">' + turn.llm + '</div>';
+chat.appendChild(llmEl);
+// Update RIGHT bundle
+var bundle = document.getElementById('fi-bundle');
+var ph = document.getElementById('fi-bundle-placeholder');
+if (ph) ph.remove();
+var userMsg = document.createElement('div');
+userMsg.className = 'rounded-lg px-3 py-2 text-xs border fi-flash';
+userMsg.style.backgroundColor = 'var(--surface-container-lowest)';
+var labelEl = document.createElement('div');
+labelEl.className = 'flex items-center flex-wrap gap-1 fi-msg-label';
+labelEl.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">回合 ' + fiCurrent + ' — 用戶</span>';
+var textEl = document.createElement('div');
+textEl.className = 'mt-0.5';
+textEl.textContent = turn.user;
+userMsg.appendChild(labelEl);
+userMsg.appendChild(textEl);
+bundle.appendChild(userMsg);
+// Save reference to the first message (the secret)
+if (fiCurrent === 1) {
+secretItemRef = userMsg;
+}
+// On the forget turn, badge the secret message to show it's still in the bundle
+if (turn.isForget && secretItemRef) {
+var badge = document.createElement('span');
+badge.className = 'ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full';
+badge.style.backgroundColor = 'var(--error)';
+badge.style.color = 'white';
+badge.textContent = '⚠️ 仍留在數據包中！';
+secretItemRef.querySelector('.fi-msg-label').appendChild(badge);
+}
+var llmMsg = document.createElement('div');
+llmMsg.className = 'rounded-lg px-3 py-2 text-xs border fi-flash';
+llmMsg.style.backgroundColor = 'var(--surface-container-lowest)';
+llmMsg.innerHTML = '<span class="font-bold text-[10px] uppercase tracking-widest opacity-50">回合 ' + fiCurrent + ' — LLM</span><div class="mt-0.5 opacity-70">' + turn.llm + '</div>';
+bundle.appendChild(llmMsg);
+// Show LLM section
+document.getElementById('fi-llm-section').classList.remove('hidden');
+document.getElementById('fi-output').textContent = '⬅️ 已產生回應 → 請看聊天室';
+// Show explainer note on Turn 3
+if (fiCurrent === 3) {
+document.getElementById('fi-note').classList.remove('hidden');
+}
+// Update controls
+document.getElementById('fi-counter').textContent = '回合 ' + fiCurrent + ' / 3';
+var btn = document.getElementById('fi-btn');
+if (fiCurrent >= fiTurns.length) {
+btn.textContent = '已完成所有 3 個回合 ✓';
+btn.disabled = true;
+btn.style.opacity = '0.5';
+} else {
+btn.textContent = '發送 → 回合 ' + (fiCurrent + 1);
+}
+};
+})();
+</script>

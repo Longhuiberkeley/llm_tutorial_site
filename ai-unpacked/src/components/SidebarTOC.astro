@@ -1,0 +1,49 @@
+---
+import { getNavPages, getTOC } from '../data/navigation';
+
+interface Props {
+  activeId?: string;
+  lang?: string;
+}
+
+const { activeId, lang: propLang } = Astro.props;
+
+// Determine language: prop > URL > default 'en'
+let currentLang = propLang;
+if (!currentLang && typeof Astro.url !== 'undefined') {
+    const path = Astro.url.pathname;
+    if (path.startsWith('/zh-hant-hk/')) {
+        currentLang = 'zh-hant-hk';
+    } else if (path.startsWith('/en/')) {
+        currentLang = 'en';
+    }
+}
+currentLang = currentLang || 'en';
+
+const pages = await getNavPages(currentLang);
+const toc = getTOC(pages);
+---
+
+{toc.map(chapter => (
+    <>
+        <div class="chapter-heading text-accent font-bold text-xs px-3 py-2 mt-4 uppercase tracking-widest border-l-2 border-accent/20 ml-2">
+            {chapter.title}
+        </div>
+        {chapter.pages.map(page => {
+            const isActive = page.id === activeId;
+            const activeClass = isActive 
+                ? 'bg-accent/10 text-accent font-bold translate-x-1 border-l-4 border-accent' 
+                : 'text-on-surface opacity-60 hover:opacity-100 hover:bg-surface-container transition-all';
+            const icon = isActive ? 'school' : 'arrow_right';
+            
+            return (
+                <a href={page.file} class={`page-item flex items-center gap-3 px-4 py-2.5 rounded-r-lg group ${activeClass} no-underline`}>
+                    <span class={`material-symbols-outlined text-sm ${isActive ? 'text-accent' : 'opacity-40 group-hover:opacity-100'}`}>
+                        {icon}
+                    </span>
+                    <span class="text-sm font-medium">{page.title}</span>
+                </a>
+            );
+        })}
+    </>
+))}

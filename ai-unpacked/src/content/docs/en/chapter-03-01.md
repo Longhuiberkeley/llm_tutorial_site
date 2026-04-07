@@ -1,0 +1,86 @@
+---
+title: "3.1 The Black Box"
+description: "Text goes in, text comes out — but what's actually happening inside?"
+chapter: "Chapter 3"
+pageId: "03-01"
+---
+
+## 🎯 Core Goals
+- Introduce the LLM as an input/output black box.
+- Build curiosity about what happens inside with a predefined guess quiz.
+- Bridge to the sandwich model in 3.2.
+
+<div class="not-prose callout callout-tldr">
+
+Text goes in. Text comes out. That's the whole interface — but what's actually happening inside that box? Let's find out.
+
+</div>
+
+## 👁️ Visuals & Interactives
+
+
+<div class="not-prose">
+<div class="bg-surface-container-low rounded-xl p-8 mb-8 max-w-2xl mx-auto shadow-sm">
+<!-- Diagram -->
+<div class="flex items-center justify-center gap-3 mb-10 flex-wrap">
+<div class="rounded-xl px-5 py-4 text-center shadow-md min-w-[110px]" style="background-color: var(--primary); color: var(--on-primary);">
+<div class="text-2xl mb-1">💬</div>
+<div class="text-xs font-bold uppercase tracking-wider">Your Message</div>
+<div class="text-xs opacity-75 mt-1">Text In</div>
+</div>
+<div class="text-3xl font-bold" style="color: var(--on-surface-variant);">→</div>
+<div class="rounded-xl px-5 py-4 text-center shadow-lg min-w-[130px]" style="background-color: var(--on-surface); color: var(--background);">
+<div class="text-2xl mb-1">📦</div>
+<div class="text-xs font-bold uppercase tracking-wider">LLM</div>
+<div class="text-xs opacity-60 mt-1">??? What's inside?</div>
+</div>
+<div class="text-3xl font-bold" style="color: var(--on-surface-variant);">→</div>
+<div class="rounded-xl px-5 py-4 text-center shadow-md min-w-[110px]" style="background-color: color-mix(in srgb, var(--accent) 15%, var(--surface-container-lowest)); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);">
+<div class="text-2xl mb-1">🤖</div>
+<div class="text-xs font-bold uppercase tracking-wider">Reply</div>
+<div class="text-xs opacity-75 mt-1">Text Out</div>
+</div>
+</div>
+<!-- Quiz -->
+<p class="text-center font-bold font-headline text-lg mb-5">What's actually happening inside that box?</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto" id="bb-options">
+<button class="quiz-option px-4 py-3 rounded-lg text-sm font-medium text-left border border-outline-variant hover:bg-surface-container transition-colors" style="background-color: var(--surface-container-lowest);" onclick="bbGuess(this, false)">🔍 Searches the internet</button>
+<button class="quiz-option px-4 py-3 rounded-lg text-sm font-medium text-left border border-outline-variant hover:bg-surface-container transition-colors" style="background-color: var(--surface-container-lowest);" onclick="bbGuess(this, true)">🎯 Predicts the next word, repeatedly</button>
+<button class="quiz-option px-4 py-3 rounded-lg text-sm font-medium text-left border border-outline-variant hover:bg-surface-container transition-colors" style="background-color: var(--surface-container-lowest);" onclick="bbGuess(this, false)">🗄️ Looks up a database</button>
+<button class="quiz-option px-4 py-3 rounded-lg text-sm font-medium text-left border border-outline-variant hover:bg-surface-container transition-colors" style="background-color: var(--surface-container-lowest);" onclick="bbGuess(this, false)">🧙 Magic — nobody really knows</button>
+</div>
+<!-- Feedback -->
+<div id="bb-feedback" class="hidden mt-6 p-4 rounded-lg text-sm border" style="background-color: var(--surface-container-lowest); border-color: var(--outline-variant);">
+<div id="bb-fb-text"></div>
+<div class="mt-3 pt-3 text-on-surface-variant italic" style="border-top: 1px solid var(--outline-variant);">
+👇 <strong>Next up:</strong> If it just predicts words... how does it "remember" your whole conversation? That's what we explore next.
+</div>
+</div>
+</div>
+<script type="module">
+import { init } from '/js/interactives/black-box.js';
+init({
+  strings: {
+    correctFeedback: '✅ <strong>Exactly right!</strong> Every time you send a message, the LLM predicts one word (token) at a time — picking the statistically most likely next token given everything before it — and repeats until the reply is complete. It\'s not searching or looking things up. It\'s pure next-token prediction, built from patterns seen in training data.',
+    wrongFeedback: '❌ <strong>Not quite.</strong> The LLM is actually predicting the next word (token) at a time, repeatedly. It doesn\'t search the internet or look things up in real-time — it generates from patterns learned during training. This is also why it can confidently say things that are wrong.'
+  }
+});
+</script>
+
+</div>
+
+
+## 📝 Key Concepts
+
+- **The Black Box:** From the outside, an LLM is simple — text in, text out. The chat interface hides all the machinery.
+- **Next-Token Prediction:** The LLM's core job is to predict the most statistically likely next word/token, given everything before it. It does this repeatedly until the reply is complete.
+- **Not a Search Engine:** LLMs don't look things up in real-time. They generate text from learned patterns — powerful, but also why they can confidently say things that are wrong.
+- **The Interface Illusion:** The chat app makes it *look* like a flowing conversation. What actually happens each turn? That's what we explore next.
+
+<div class="not-prose callout callout-dyk">
+
+If it just predicts words... how does it "remember" your whole conversation? That's the trick — every time you hit Send, something surprising happens under the hood. Let's look at it next.
+
+</div>
+
+<div id="quiz-03-01" class="not-prose quiz-container my-12" data-quiz="03-01"></div>
