@@ -17,49 +17,41 @@ LLMs predict the next word based on patterns — they don't think or understand.
 
 ## 🧠 8 Things to Remember
 
-**LLMs predict, they don't think**
-Treat every response as a first draft, not a final answer. Good at generating options, bad at knowing what's true.
+- **LLMs predict, they don't think:** Treat every response as a first draft, not a final answer. Good at generating options, bad at knowing what's true.
 
-**They're great at finding similar words and concepts**
-Want alternatives, related ideas, or rephrasing? This is where LLMs shine — they excel at "things like X."
+- **They're great at finding similar words and concepts:** Want alternatives, related ideas, or rephrasing? This is where LLMs shine — they excel at "things like X."
 
-**Context matters more than you'd expect**
-The LLM picks up on everything in your conversation. Ambiguous requests get ambiguous answers; specific requests get specific answers. You don't need to spell everything out — but the more context you give, the better the output.
+- **Context matters more than you'd expect:** The LLM picks up on everything in your conversation. Ambiguous requests get ambiguous answers; specific requests get specific answers. You don't need to spell everything out — but the more context you give, the better the output.
 
-**They can't reliably count, spell, or do math**
-LLMs see text in chunks (tokens), not individual letters. Don't ask them to count r's in "strawberry" or do precise arithmetic. Use a calculator or spreadsheet for that.
+- **They can't reliably count, spell, or do math:** LLMs see text in chunks (tokens), not individual letters. Don't ask them to count r's in "strawberry" or do precise arithmetic. Use a calculator or spreadsheet for that.
 
-**They can track relationships across long text**
-LLMs are good at connecting ideas across a document — finding themes, resolving pronouns, summarizing. Give them long text and ask them to find patterns.
+- **They can track relationships across long text:** LLMs are good at connecting ideas across a document — finding themes, resolving pronouns, summarizing. Give them long text and ask them to find patterns.
 
-**They have no memory between conversations**
-Every new chat starts from zero. Repeat important context, and don't expect the LLM to "remember" what you discussed last week in a different thread.
+- **They have no memory between conversations:** Every new chat starts from zero. Repeat important context, and don't expect the LLM to "remember" what you discussed last week in a different thread.
 
-**Hidden instructions shape behavior**
-Custom GPTs, Claude Projects, and app integrations work by pre-loading instructions. The LLM's personality and expertise come from context, not from "knowing" things.
+- **Hidden instructions shape behavior:** Custom GPTs, Claude Projects, and app integrations work by pre-loading instructions. The LLM's personality and expertise come from context, not from "knowing" things.
 
-**Hallucination cuts both ways**
-The same mechanism that lets an LLM write a creative story also lets it invent a fake legal case. For creative work, that's a feature. For factual claims, that's a danger. Always verify facts that matter.
+- **Hallucination cuts both ways:** The same mechanism that lets an LLM write a creative story also lets it invent a fake legal case. For creative work, that's a feature. For factual claims, that's a danger. Always verify facts that matter.
 
 ---
 
 ## 🚨 8 Red Flags
 
-**"The LLM understands what I'm asking."** — It produces convincing-sounding responses, but it has no actual comprehension. The chat interface creates an illusion of understanding.
+- **"The LLM understands what I'm asking."** — It produces convincing-sounding responses, but it has no actual comprehension. The chat interface creates an illusion of understanding.
 
-**"Just ask it to count the letters."** — It sees chunks, not letters. Never rely on an LLM for precise counting, arithmetic, or character-level tasks.
+- **"Just ask it to count the letters."** — It sees chunks, not letters. Never rely on an LLM for precise counting, arithmetic, or character-level tasks.
 
-**"I told it to forget the wrong thing."** — Once false information enters the conversation, it's re-read every turn. Start a fresh conversation instead of trying to correct it in-place.
+- **"I told it to forget the wrong thing."** — Once false information enters the conversation, it's re-read every turn. Start a fresh conversation instead of trying to correct it in-place.
 
-**"More context = better results."** — Long conversations degrade in quality (context rot). Start fresh for important work, especially after many back-and-forth turns.
+- **"More context = better results."** — Long conversations degrade in quality (context rot). Start fresh for important work, especially after many back-and-forth turns.
 
-**"This chat thread is my permanent workspace."** — Long threads accumulate errors through context poisoning and truncation. Use separate threads for separate tasks.
+- **"This chat thread is my permanent workspace."** — Long threads accumulate errors through context poisoning and truncation. Use separate threads for separate tasks.
 
-**"LLMs are too unreliable to use seriously."** — With proper safeguards (verification, human review, not trusting blindly), LLMs power real production systems daily. The risk is using them *without* safeguards.
+- **"LLMs are too unreliable to use seriously."** — With proper safeguards (verification, human review, not trusting blindly), LLMs power real production systems daily. The risk is using them *without* safeguards.
 
-**"Enterprise plans keep my data perfectly safe."** — Data still travels over the internet and is processed on external infrastructure. Treat LLMs like a trusted but external contractor.
+- **"Enterprise plans keep my data perfectly safe."** — Data still travels over the internet and is processed on external infrastructure. Treat LLMs like a trusted but external contractor.
 
-**"I'll just use one long conversation for everything."** — Context fills up, old messages get truncated or summarized, and quality drops. Shorter, focused conversations produce better results.
+- **"I'll just use one long conversation for everything."** — Context fills up, old messages get truncated or summarized, and quality drops. Shorter, focused conversations produce better results.
 
 ---
 

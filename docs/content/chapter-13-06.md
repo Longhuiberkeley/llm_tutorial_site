@@ -17,49 +17,27 @@ Using LLMs in business is a people and process problem, not just a technology pr
 
 ## 🧠 8 Things to Remember
 
-**Most businesses transform, not replace**
-AI rarely replaces entire businesses. More often, it changes how existing work gets done — same domain, new execution layer. Focus on transformation, not replacement.
-
-**Technology is only one pillar**
-Successful digital transformation needs three things: technology, communication, and business insight. Projects fail when the non-tech pillars are weak.
-
-**Speed hides missing foundations**
-LLMs move so fast that a prototype can *look* finished while missing its entire foundation. The earlier you skip requirements and planning, the more expensive the fix becomes later.
-
-**For every decision going in, have a way to check it on the way out**
-The V-Model: Requirements → Design → Build → Verify. Each build phase needs a matching verification phase. If you can't describe "done" before you start, you can't know when you've arrived.
-
-**Automate in order: verbalize → flowchart → checklist → automate**
-Every gap in the checklist becomes a failure point at scale. If you can't write down the process, you can't automate it reliably.
-
-**Change happens one person at a time**
-ADKAR: Awareness → Desire → Knowledge → Ability → Reinforcement. Skipping stages — especially Desire and Reinforcement — is why most AI initiatives fail to gain traction.
-
-**Structure beats speed for LLM projects**
-LLM-assisted work ranges from "vibe coding" (accept everything) to structured development (review everything). Most real work falls in the middle. The question is: how much structure and review do you bring?
-
-**No single review catches everything**
-Best practice: automated checks (mechanical issues) → LLM review (pattern issues with fresh eyes) → human review (judgment and correctness). Layer them.
+- **Most businesses transform, not replace:** AI rarely replaces entire businesses. More often, it changes how existing work gets done — same domain, new execution layer. Focus on transformation, not replacement.
+- **Technology is only one pillar:** Successful digital transformation needs three things: technology, communication, and business insight. Projects fail when the non-tech pillars are weak.
+- **Speed hides missing foundations:** LLMs move so fast that a prototype can *look* finished while missing its entire foundation. The earlier you skip requirements and planning, the more expensive the fix becomes later.
+- **For every decision going in, have a way to check it on the way out:** The V-Model: Requirements → Design → Build → Verify. Each build phase needs a matching verification phase. If you can't describe "done" before you start, you can't know when you've arrived.
+- **Automate in order: verbalize → flowchart → checklist → automate:** Every gap in the checklist becomes a failure point at scale. If you can't write down the process, you can't automate it reliably.
+- **Change happens one person at a time:** ADKAR: Awareness → Desire → Knowledge → Ability → Reinforcement. Skipping stages — especially Desire and Reinforcement — is why most AI initiatives fail to gain traction.
+- **Structure beats speed for LLM projects:** LLM-assisted work ranges from "vibe coding" (accept everything) to structured development (review everything). Most real work falls in the middle. The question is: how much structure and review do you bring?
+- **No single review catches everything:** Best practice: automated checks (mechanical issues) → LLM review (pattern issues with fresh eyes) → human review (judgment and correctness). Layer them.
 
 ---
 
 ## 🚨 8 Red Flags
 
-**Automating a process you don't fully understand** — You'll get a broken process running faster, at scale. Hidden rules that live only in employees' heads are the biggest risk.
-
-**Feature drift** — LLMs generate plausible extensions that look useful. Without requirements, you accumulate well-executed work that serves no stated need. Ask: "Which requirement does this serve?"
-
-**Launching with full autonomy on day one** — Demos use curated examples; production has edge cases and adversarial users. Start with human-in-the-loop; earn autonomy through performance data.
-
-**The hammer-and-nail trap** — After learning about AI, every problem looks like it needs AI. Start with the problem, not the tool. Sometimes the answer is a process change, better training, or a spreadsheet.
-
-**Customer-facing systems without adversarial design** — Bad actors will test your chatbot. Real cases: a dealership bot that agreed to any price, an airline bot that invented policy and was held legally liable.
-
-**Treating LLM output as finished work** — Clicking Accept without understanding accumulates technical debt fast. The same input can produce different outputs, and silent failures look like plausible wrong answers.
-
-**Measuring success by token usage** — Tracking API call volume incentivizes generating low-quality output to hit a number. Measure outcomes, not volume.
-
-**Skipping the pilot** — Going straight from demo to full rollout without a controlled pilot. Pilots catch the edge cases, integration issues, and user adoption problems that demos can't. Start small, measure, then scale.
+- **Automating a process you don't fully understand:** You'll get a broken process running faster, at scale. Hidden rules that live only in employees' heads are the biggest risk.
+- **Feature drift:** LLMs generate plausible extensions that look useful. Without requirements, you accumulate well-executed work that serves no stated need. Ask: "Which requirement does this serve?"
+- **Launching with full autonomy on day one:** Demos use curated examples; production has edge cases and adversarial users. Start with human-in-the-loop; earn autonomy through performance data.
+- **The hammer-and-nail trap:** After learning about AI, every problem looks like it needs AI. Start with the problem, not the tool. Sometimes the answer is a process change, better training, or a spreadsheet.
+- **Customer-facing systems without adversarial design:** Bad actors will test your chatbot. Real cases: a dealership bot that agreed to any price, an airline bot that invented policy and was held legally liable.
+- **Treating LLM output as finished work:** Clicking Accept without understanding accumulates technical debt fast. The same input can produce different outputs, and silent failures look like plausible wrong answers.
+- **Measuring success by token usage:** Tracking API call volume incentivizes generating low-quality output to hit a number. Measure outcomes, not volume.
+- **Skipping the pilot:** Going straight from demo to full rollout without a controlled pilot. Pilots catch the edge cases, integration issues, and user adoption problems that demos can't. Start small, measure, then scale.
 
 ---
 

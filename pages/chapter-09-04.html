@@ -299,33 +299,29 @@
 
 <hr>
 <h2>🧠 7 Things to Remember</h2>
-<p><strong>The LLM only outputs text — something else does the work</strong>
-When an LLM &quot;sends an email&quot; or &quot;runs a search,&quot; it&#39;s actually outputting a formatted instruction that a surrounding system intercepts and executes. The LLM is the brain; you still need hands.</p>
-<p><strong>MCP is the USB-C for AI tools</strong>
-MCP (Model Context Protocol) standardizes how LLMs connect to external tools and data. Instead of custom integrations for every tool, one protocol connects them all — like USB-C replacing dozens of proprietary chargers.</p>
-<p><strong>Agents work in loops, not scripts</strong>
-Good agents cycle through: perceive the situation → plan what to do → act with a tool → observe the result → repeat. Bad agents follow a rigid script and fall apart when something unexpected happens.</p>
-<p><strong>RAG = search first, answer second</strong>
-Instead of asking the LLM to answer from memory (which hallucinates), RAG first searches your documents for relevant info, then has the LLM answer grounded in what it found. The quality of the search matters as much as the LLM.</p>
-<p><strong>Context engineering is just as important as model selection — and more often the problem</strong>
-Most AI failures are failures of context — bad prompts, wrong documents retrieved, too much or too little information. Before you blame the model, check what you&#39;re feeding it.</p>
-<p><strong>&quot;Memory&quot; is just better context</strong>
-Personal AI features (ChatGPT Memory, Claude Projects) don&#39;t give the LLM actual memory — they preload more context. The model still reads everything from scratch every time.</p>
-<p><strong>Understanding media ≠ generating media</strong>
-An LLM can describe what&#39;s in a photo accurately, but generating a photorealistic image is a completely different (and harder) skill. Don&#39;t assume one capability implies the other.</p>
-<p><strong>The tools an LLM uses have their own limitations</strong>
-An LLM is only as reliable as the tools it depends on. The search engine might return outdated results, the database might have stale records, the file reader might garble a complex spreadsheet, and the transcription tool might mishear words. When you evaluate an LLM-powered system, ask not just &quot;how good is the model?&quot; but &quot;what tools does it rely on, and what are their blind spots?&quot; The chain is only as strong as its weakest link — and that link often isn&#39;t the LLM itself.</p>
+<ul>
+<li><strong>The LLM only outputs text — something else does the work:</strong> When an LLM &quot;sends an email&quot; or &quot;runs a search,&quot; it&#39;s actually outputting a formatted instruction that a surrounding system intercepts and executes. The LLM is the brain; you still need hands.</li>
+<li><strong>MCP is the USB-C for AI tools:</strong> MCP (Model Context Protocol) standardizes how LLMs connect to external tools and data. Instead of custom integrations for every tool, one protocol connects them all — like USB-C replacing dozens of proprietary chargers.</li>
+<li><strong>Agents work in loops, not scripts:</strong> Good agents cycle through: perceive the situation → plan what to do → act with a tool → observe the result → repeat. Bad agents follow a rigid script and fall apart when something unexpected happens.</li>
+<li><strong>RAG = search first, answer second:</strong> Instead of asking the LLM to answer from memory (which hallucinates), RAG first searches your documents for relevant info, then has the LLM answer grounded in what it found. The quality of the search matters as much as the LLM.</li>
+<li><strong>Context engineering is just as important as model selection — and more often the problem:</strong> Most AI failures are failures of context — bad prompts, wrong documents retrieved, too much or too little information. Before you blame the model, check what you&#39;re feeding it.</li>
+<li><strong>&quot;Memory&quot; is just better context:</strong> Personal AI features (ChatGPT Memory, Claude Projects) don&#39;t give the LLM actual memory — they preload more context. The model still reads everything from scratch every time.</li>
+<li><strong>Understanding media ≠ generating media:</strong> An LLM can describe what&#39;s in a photo accurately, but generating a photorealistic image is a completely different (and harder) skill. Don&#39;t assume one capability implies the other.</li>
+<li><strong>The tools an LLM uses have their own limitations:</strong> An LLM is only as reliable as the tools it depends on. The search engine might return outdated results, the database might have stale records, the file reader might garble a complex spreadsheet, and the transcription tool might mishear words. When you evaluate an LLM-powered system, ask not just &quot;how good is the model?&quot; but &quot;what tools does it rely on, and what are their blind spots?&quot; The chain is only as strong as its weakest link — and that link often isn&#39;t the LLM itself.</li>
+</ul>
 <hr>
 <h2>🚨 9 Red Flags</h2>
-<p><strong>&quot;The LLM ran a search on its own.&quot;</strong> — The LLM output a text instruction; the <em>software around it</em> intercepted and executed it. The product you&#39;re using is a combination of the model AND the application layer. The model decides what to do; the application decides whether and how to do it. Don&#39;t confuse one for the other.</p>
-<p><strong>Agents fail from bad planning, not bad tools.</strong> — A confused plan leads to wrong actions. The fix: start with a clearer prompt, not a better tool.</p>
-<p><strong>Leaving autonomous agents unsupervised with sensitive access.</strong> — Always start with high human oversight. Earn autonomy through proven reliability, not promises.</p>
-<p><strong>Old problems persist inside agents.</strong> — Hallucinations, context rot, and prompt injection are still real at every step of the agentic loop. Wrapping an LLM in tools doesn&#39;t fix the LLM.</p>
-<p><strong>RAG reduces but doesn&#39;t eliminate hallucination.</strong> — The LLM can still misread retrieved documents. Good retrieval quality is a new thing you need to monitor.</p>
-<p><strong>Building RAG when your data fits in one file.</strong> — If your knowledge base is small enough to paste into the context window, just paste it. RAG adds complexity you may not need.</p>
-<p><strong>Your data format is your real bottleneck — and the model may not have seen what you uploaded.</strong> — Between your file and the LLM&#39;s response, the platform may run OCR, strip images, flatten layouts, or extract only a transcript from a video. Tables lose structure, multi-column text gets scrambled, diagrams disappear. The LLM answers confidently based on whatever survived that process — and won&#39;t tell you what went missing. Simple formats (Markdown, plain text) always win.</p>
-<p><strong>A memory system that stores wrong info is worse than none.</strong> — Stale or incorrect facts make the LLM confidently wrong. A flawed memory system is more dangerous than starting fresh.</p>
-<p><strong>Blaming the LLM when the tool was the problem.</strong> — When an AI system gives you a wrong answer, the LLM might have been perfectly correct in its reasoning — but it was reasoning from tool output that was wrong, incomplete, or distorted. A search tool returning outdated information, a database with stale records, or a file reader that garbled the formatting — any of these will produce bad LLM output even with a perfect model. Before you switch models or rewrite prompts, check what the tools actually fed the LLM.</p>
+<ul>
+<li><strong>&quot;The LLM ran a search on its own.&quot;</strong> — The LLM output a text instruction; the <em>software around it</em> intercepted and executed it. The product you&#39;re using is a combination of the model AND the application layer. The model decides what to do; the application decides whether and how to do it. Don&#39;t confuse one for the other.</li>
+<li><strong>Agents fail from bad planning, not bad tools.</strong> — A confused plan leads to wrong actions. The fix: start with a clearer prompt, not a better tool.</li>
+<li><strong>Leaving autonomous agents unsupervised with sensitive access.</strong> — Always start with high human oversight. Earn autonomy through proven reliability, not promises.</li>
+<li><strong>Old problems persist inside agents.</strong> — Hallucinations, context rot, and prompt injection are still real at every step of the agentic loop. Wrapping an LLM in tools doesn&#39;t fix the LLM.</li>
+<li><strong>RAG reduces but doesn&#39;t eliminate hallucination.</strong> — The LLM can still misread retrieved documents. Good retrieval quality is a new thing you need to monitor.</li>
+<li><strong>Building RAG when your data fits in one file.</strong> — If your knowledge base is small enough to paste into the context window, just paste it. RAG adds complexity you may not need.</li>
+<li><strong>Your data format is your real bottleneck — and the model may not have seen what you uploaded.</strong> — Between your file and the LLM&#39;s response, the platform may run OCR, strip images, flatten layouts, or extract only a transcript from a video. Tables lose structure, multi-column text gets scrambled, diagrams disappear. The LLM answers confidently based on whatever survived that process — and won&#39;t tell you what went missing. Simple formats (Markdown, plain text) always win.</li>
+<li><strong>A memory system that stores wrong info is worse than none.</strong> — Stale or incorrect facts make the LLM confidently wrong. A flawed memory system is more dangerous than starting fresh.</li>
+<li><strong>Blaming the LLM when the tool was the problem.</strong> — When an AI system gives you a wrong answer, the LLM might have been perfectly correct in its reasoning — but it was reasoning from tool output that was wrong, incomplete, or distorted. A search tool returning outdated information, a database with stale records, or a file reader that garbled the formatting — any of these will produce bad LLM output even with a perfect model. Before you switch models or rewrite prompts, check what the tools actually fed the LLM.</li>
+</ul>
 <hr>
 <h2>💡 Pro Tip</h2>
 <div class="callout callout-tldr">
