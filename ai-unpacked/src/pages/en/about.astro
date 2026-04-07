@@ -101,7 +101,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- How I Built This link -->
   <div class="mt-12 mb-16">
-      <a href="/en/special-how-i-built-this-01" class="group bg-surface-container-low rounded-xl p-6 flex items-center gap-4 hover:bg-surface-container hover:shadow-md transition-all no-underline">
+      <a href={`${(import.meta.env.BASE_URL + '/').replace(/\/+$/, '/')}en/special-how-i-built-this-01`} class="group bg-surface-container-low rounded-xl p-6 flex items-center gap-4 hover:bg-surface-container hover:shadow-md transition-all no-underline">
           <span class="text-3xl hidden md:block">🏗️</span>
           <div>
               <p class="font-headline font-bold text-on-surface group-hover:text-accent transition-colors m-0">Want to see how I built this site?</p>

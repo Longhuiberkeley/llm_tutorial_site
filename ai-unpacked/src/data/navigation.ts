@@ -11,7 +11,7 @@ export async function getNavPages(currentLang: string) {
             id: doc.data.pageId || doc.id,
             title: doc.data.title,
             chapter: doc.data.chapter || 'Overview',
-            file: `/${currentLang}/${slug}`,
+            file: `${(import.meta.env.BASE_URL + '/').replace(/\/+$/, '/')}${currentLang}/${slug}`,
             isSpecial: (doc.data.chapter || '').toLowerCase() === 'special'
         };
     });

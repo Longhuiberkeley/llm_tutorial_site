@@ -32,7 +32,8 @@ import courseData from '../../data/course-structure.json';
                           
                           // chapter.firstPage is like "chapter-01-01.html"
                           const slug = chapter.firstPage.replace('.html', '');
-                          const linkHref = isComingSoon ? null : `/en/${slug}`;
+                          const BASE = (import.meta.env.BASE_URL + '/').replace(/\/+$/, '/');
+                          const linkHref = isComingSoon ? null : `${BASE}en/${slug}`;
                           const opacityClass = isComingSoon ? 'opacity-60' : '';
                           
                           return (

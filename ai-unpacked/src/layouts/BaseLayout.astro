@@ -12,11 +12,15 @@ interface Props {
 
 const { title, description, chapter, hideHeader = false, activeId } = Astro.props;
 
-// Determine current language from URL
-const path = Astro.url.pathname;
+// Normalize BASE_URL to always have a trailing slash (Astro v6 omits it)
+const BASE = (import.meta.env.BASE_URL + '/').replace(/\/+$/, '/'); // '/llm_tutorial_site/'
+// Determine current language from URL, stripping the base path first
+const rawPath = Astro.url.pathname;
+const basePrefix = BASE.slice(0, -1); // '/llm_tutorial_site'
+const path = rawPath.startsWith(basePrefix) ? rawPath.slice(basePrefix.length) || '/' : rawPath;
 const isZh = path.startsWith('/zh-hant-hk');
 const currentLang = isZh ? 'zh-hant-hk' : 'en';
-const langPrefix = `/${currentLang}`;
+const langPrefix = BASE + currentLang;
 
 // Localized Strings
 const t = {
@@ -47,14 +51,15 @@ const i18n = isZh ? t.zh : t.en;
 		<meta charset="UTF-8" />
 		<meta name="description" content={description || "Interactive LLM Tutorial"} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="base-url" content={BASE} />
+		<link rel="icon" type="image/svg+xml" href={BASE + 'favicon.svg'} />
 		<title>{title} - AI Unpacked</title>
-		
+
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-		<link rel="stylesheet" href="/css/animations.css"/>
+		<link rel="stylesheet" href={BASE + 'css/animations.css'}/>
 
 		<!-- "No Flicker" Dark Mode Script -->
 		<script is:inline>
@@ -183,14 +188,23 @@ const i18n = isZh ? t.zh : t.en;
 			<p class="font-label text-xs uppercase tracking-widest text-on-surface opacity-40">© 2026 Long. Made with curiosity.</p>
 		</footer>
 
-		<script src="/js/main.js" is:inline></script>
-		<script src="/js/quizzes.js" is:inline></script>
+		<script is:inline>
+			// Load main.js and quizzes.js using the base URL from the meta tag
+			(function() {
+				const BASE = document.querySelector('meta[name="base-url"]').content;
+				['js/main.js', 'js/quizzes.js'].forEach(function(src) {
+					const s = document.createElement('script');
+					s.src = BASE + src;
+					document.body.appendChild(s);
+				});
+			})();
+		</script>
 		<script is:inline>
 			// Theme Toggle Logic
 			const handleToggleClick = () => {
 				const element = document.documentElement;
 				element.classList.toggle("dark");
-				
+
 				const isDark = element.classList.contains("dark");
 				localStorage.setItem("theme", isDark ? "dark" : "light");
 			};
@@ -198,11 +212,21 @@ const i18n = isZh ? t.zh : t.en;
 			document.getElementById("theme-toggle")?.addEventListener("click", handleToggleClick);
 
 			// Language Switcher Logic
+			const BASE = document.querySelector('meta[name="base-url"]').content;
+			// BASE ends with '/', e.g. '/llm_tutorial_site/'
+			const BASE_NO_SLASH = BASE.slice(0, -1); // '/llm_tutorial_site'
+
+			const stripBase = (p) => {
+				const lower = p.toLowerCase();
+				const lowerBase = BASE_NO_SLASH.toLowerCase();
+				return lower.startsWith(lowerBase) ? p.slice(BASE_NO_SLASH.length) : p;
+			};
+
 			const updateLangLabel = () => {
-				const path = window.location.pathname.toLowerCase();
+				const stripped = stripBase(window.location.pathname).toLowerCase();
 				const label = document.querySelector('.lang-label');
 				if (label) {
-					label.textContent = path.startsWith('/zh-hant-hk') ? '繁' : 'EN';
+					label.textContent = stripped.startsWith('/zh-hant-hk') ? '繁' : 'EN';
 				}
 			};
 			updateLangLabel();
@@ -220,31 +244,31 @@ const i18n = isZh ? t.zh : t.en;
 				btn.addEventListener('click', (e) => {
 					const targetLang = e.currentTarget.getAttribute('data-lang').toLowerCase();
 					const currentPath = window.location.pathname;
-					const lowerPath = currentPath.toLowerCase();
-					
-					let newPath = currentPath;
+					const strippedPath = stripBase(currentPath);
+					const lowerStripped = strippedPath.toLowerCase();
 
 					// Handle root and localized roots
-					if (lowerPath === '/' || lowerPath === '/en' || lowerPath === '/en/' || lowerPath === '/zh-hant-hk' || lowerPath === '/zh-hant-hk/') {
-						window.location.href = targetLang === 'zh-hant-hk' ? '/zh-hant-hk/' : '/en/';
+					if (lowerStripped === '/' || lowerStripped === '/en' || lowerStripped === '/en/' || lowerStripped === '/zh-hant-hk' || lowerStripped === '/zh-hant-hk/') {
+						window.location.href = targetLang === 'zh-hant-hk' ? BASE + 'zh-hant-hk/' : BASE + 'en/';
 						return;
 					}
 
+					let newStripped = strippedPath;
 					if (targetLang === 'zh-hant-hk') {
-						if (lowerPath.startsWith('/en/')) {
-							newPath = currentPath.replace(/^\/en\//i, '/zh-hant-hk/');
-						} else if (!lowerPath.startsWith('/zh-hant-hk/')) {
-							newPath = '/zh-hant-hk' + currentPath;
+						if (lowerStripped.startsWith('/en/')) {
+							newStripped = strippedPath.replace(/^\/en\//i, '/zh-hant-hk/');
+						} else if (!lowerStripped.startsWith('/zh-hant-hk/')) {
+							newStripped = '/zh-hant-hk' + strippedPath;
 						}
 					} else {
-						if (lowerPath.startsWith('/zh-hant-hk/')) {
-							newPath = currentPath.replace(/^\/zh-hant-hk\//i, '/en/');
-						} else if (!lowerPath.startsWith('/en/')) {
-							newPath = '/en' + currentPath;
+						if (lowerStripped.startsWith('/zh-hant-hk/')) {
+							newStripped = strippedPath.replace(/^\/zh-hant-hk\//i, '/en/');
+						} else if (!lowerStripped.startsWith('/en/')) {
+							newStripped = '/en' + strippedPath;
 						}
 					}
 
-					window.location.pathname = newPath;
+					window.location.pathname = BASE_NO_SLASH + newStripped;
 				});
 			});
 
@@ -283,7 +307,7 @@ const i18n = isZh ? t.zh : t.en;
 				if (interactives.length > 0) {
 					// Load core.js first
 					const coreScript = document.createElement('script');
-					coreScript.src = '/js/interactives/core.js';
+					coreScript.src = BASE + 'js/interactives/core.js';
 					document.body.appendChild(coreScript);
 
 					coreScript.onload = () => {
@@ -292,7 +316,7 @@ const i18n = isZh ? t.zh : t.en;
 							const id = el.getAttribute('data-interactive');
 							if (id) {
 								const script = document.createElement('script');
-								script.src = `/js/interactives/${id}.js`;
+								script.src = BASE + `js/interactives/${id}.js`;
 								document.body.appendChild(script);
 							}
 						});
