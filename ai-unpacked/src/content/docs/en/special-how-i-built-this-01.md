@@ -98,7 +98,9 @@ I still overestimate what AI can do sometimes. It got some definitions subtly wr
 
 The biggest lesson: **AI-assisted doesn't mean AI-authored.** Every page needed human judgment — the kind that comes from actually understanding the subject matter, not just being able to generate text about it.
 
-Looking back, this whole site took about **5 days**. And if I'd followed my own advice — sat down, wrote more of the course content myself, had the LLM help me with the gaps, and spent more time on the overall flow — it probably would've been done faster. Part of the process was me wanting to see how automatic and smart Gemini 3 and the Gemini CLI had become. Curiosity is a valid reason to build things, even if it's not the most efficient path.
+I'll also admit that switching to the Astro framework, adding the Chinese/English toggle, and supporting dark/light mode should have been planned from the beginning. My initial goal was just to get something out ASAP, which inevitably led to a late refactoring route. But honestly, taking this path proved exactly how powerful LLMs can be—migrating and refactoring an entire codebase took surprisingly little effort.
+
+Looking back, the core site took about **7 days** in total (5 days for the initial build, plus another 2 days for the Astro migration and extra features). Since I'll be adding more content over time, this foundation was definitely worth the refactor. And if I'd followed my own advice initially — sat down, wrote more of the course content myself, had the LLM help me with the gaps, and spent more time on the overall flow — it probably would've been done faster. Part of the process was me wanting to see how automatic and smart Gemini 3 and the Gemini CLI had become. Curiosity is a valid reason to build things, even if it's not the most efficient path.
 
 <div class="not-prose callout callout-dyk">
 

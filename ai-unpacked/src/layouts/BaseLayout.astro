@@ -52,6 +52,7 @@ const i18n = isZh ? t.zh : t.en;
 		<meta name="description" content={description || "Interactive LLM Tutorial"} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="base-url" content={BASE} />
+		<Fragment set:html={`<script type="importmap">{"imports":{"/js/interactives/":"${BASE}js/interactives/"}}</script>`} />
 		<link rel="icon" type="image/svg+xml" href={BASE + 'favicon.svg'} />
 		<title>{title} - AI Unpacked</title>
 
