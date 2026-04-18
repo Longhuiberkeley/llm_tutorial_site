@@ -1,16 +1,32 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import courseData from '../../data/course-structure.json';
+import QRCode from 'qrcode';
+
+const SITE_URL = 'https://longhuiberkeley.github.io/llm_tutorial_site/';
+const qrDataUrl = await QRCode.toDataURL(SITE_URL, {
+  width: 160,
+  margin: 2,
+  color: { dark: '#5D4037', light: '#FFF8F0' },
+});
 ---
 
 <BaseLayout title="Course Overview" description="An interactive journey through the concepts behind Large Language Models." hideHeader={true}>
   <header class="mb-16 fade-in">
-      <h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface tracking-tight mb-4">
-          Course Overview
-      </h1>
-      <p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
-          An interactive journey through the concepts behind Large Language Models. No math, no code — just hands-on interactives and clear analogies to build real intuition. From tokenization to boardroom strategy.
-      </p>
+      <div class="flex flex-col md:flex-row md:items-start gap-8">
+          <div class="flex-1">
+              <h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface tracking-tight mb-4">
+                  Course Overview
+              </h1>
+              <p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                  An interactive journey through the concepts behind Large Language Models. No math, no code — just hands-on interactives and clear analogies to build real intuition. From tokenization to boardroom strategy.
+              </p>
+          </div>
+          <div class="flex flex-col items-center gap-2 shrink-0">
+              <img src={qrDataUrl} alt="QR Code" class="w-28 h-28 rounded-xl" />
+              <span class="text-xs text-on-surface-variant text-center">Scan to view<br/>on your phone</span>
+          </div>
+      </div>
   </header>
 
   <!-- Chapter Groups -->
@@ -62,4 +78,14 @@ import courseData from '../../data/course-structure.json';
   </div>
 
   <p class="text-center text-on-surface-variant text-sm mt-16 pb-8">More chapters coming soon. This course is actively being updated.</p>
+
+  <section class="mt-8 mb-16 border-t border-outline-variant/20 pt-8">
+      <h2 class="text-2xl font-headline font-bold text-on-surface mb-6">Recent Changes</h2>
+      <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm">
+              <span class="text-on-surface-variant shrink-0 font-mono">2026-04-19</span>
+              <span class="text-on-surface">Added QR code for easy mobile access; fixed quiz interaction bug; added this Recent Changes section.</span>
+          </li>
+      </ul>
+  </section>
 </BaseLayout>
