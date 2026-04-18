@@ -3,9 +3,11 @@
  * Instant feedback for quiz interactions using CSS-driven styling
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllQuizzes);
+} else {
     initAllQuizzes();
-});
+}
 
 /**
  * Initialize all quiz boxes on the page

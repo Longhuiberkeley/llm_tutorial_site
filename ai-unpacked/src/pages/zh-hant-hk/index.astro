@@ -1,16 +1,32 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import courseData from '../../data/course-structure.json';
+import QRCode from 'qrcode';
+
+const SITE_URL = 'https://longhuiberkeley.github.io/llm_tutorial_site/';
+const qrDataUrl = await QRCode.toDataURL(SITE_URL, {
+  width: 160,
+  margin: 2,
+  color: { dark: '#5D4037', light: '#FFF8F0' },
+});
 ---
 
 <BaseLayout title="課程概覽" description="一場了解大型語言模型背後概念的互動之旅。" hideHeader={true}>
   <header class="mb-16 fade-in">
-      <h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface tracking-tight mb-4">
-          課程概覽
-      </h1>
-      <p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
-          一場了解大型語言模型背後概念的互動之旅。無需數學，無需程式碼 —— 只需動手操作互動組件和清晰的類比，即可建立真正的直覺。從詞元化到董事會戰略，應有盡有。
-      </p>
+      <div class="flex flex-col md:flex-row md:items-start gap-8">
+          <div class="flex-1">
+              <h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface tracking-tight mb-4">
+                  課程概覽
+              </h1>
+              <p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                  一場了解大型語言模型背後概念的互動之旅。無需數學，無需程式碼 —— 只需動手操作互動組件和清晰的類比，即可建立真正的直覺。從詞元化到董事會戰略，應有盡有。
+              </p>
+          </div>
+          <div class="flex flex-col items-center gap-2 shrink-0">
+              <img src={qrDataUrl} alt="QR Code" class="w-28 h-28 rounded-xl" />
+              <span class="text-xs text-on-surface-variant text-center">掃描以在手機上<br/>查看此頁面</span>
+          </div>
+      </div>
   </header>
 
   <!-- Chapter Groups -->
@@ -66,4 +82,14 @@ import courseData from '../../data/course-structure.json';
   </div>
 
   <p class="text-center text-on-surface-variant text-sm mt-16 pb-8">更多章節即將推出。本課程正在積極更新中。</p>
+
+  <section class="mt-8 mb-16 border-t border-outline-variant/20 pt-8">
+      <h2 class="text-2xl font-headline font-bold text-on-surface mb-6">最近更新</h2>
+      <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm">
+              <span class="text-on-surface-variant shrink-0 font-mono">2026-04-19</span>
+              <span class="text-on-surface">新增 QR Code 方便手機掃描瀏覽；修復測驗互動問題；新增此「最近更新」區塊。</span>
+          </li>
+      </ul>
+  </section>
 </BaseLayout>
